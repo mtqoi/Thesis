@@ -1,0 +1,64 @@
+\documentclass{article}
+
+\usepackage[noBBpl]{mathpazo}
+\usepackage{color}
+\usepackage{geometry} \geometry{ a4paper, total={170mm,257mm}, left=20mm, top=20mm,}
+\def\MT #1{\textcolor{magenta}{#1}}
+\title{Quantum digital signatures and coherent signal transfer in quantum networks \\ \vspace{0.2in}  \Large Thesis plan}
+\author{Matthew Thornton}
+\date{\today}
+\begin{document}
+\maketitle 
+
+\section*{Part one: secure quantum networks}
+Short introduction (/abstract) to section, briefly mentioning what my contributions are. This whole section is flowing towards agility.
+
+\subsection*{1 Cryptography literature review}
+Historical overview of development of quantum cryptography. Lead up to a thorough literature review for QDS and QSS.
+\begin{itemize}
+\item what are the developments over the field's history?
+\item what are the methods which people use?
+\item what are the open questions?
+\end{itemize}
+
+\subsection*{2 Quantum digital signatures}
+Goal of chapter: introduce our QDS protocol and prove its security in different contexts using several methods.
+
+Key results which I want to present:
+\begin{itemize}
+\item pedagogical explanation of our QDS protocol (with appropriate historical background, introduction, literature review and motivation). Include many diagrams and take time to explain and motivate things clearly (especially eliminated signatures)
+\item security proof with Gaussian assumption (both asymptotic and finite) using covariance matrix methods and (loose) bounds for the smooth min-entropy
+\item security proof without Gaussian assumption (asymptotic) using our Fano inequality and the beamsplitter relations
+\item analyse the two proofs in various settings (heterodyne \& homodyne, different alphabets, different types of attack, parameter scans)
+\item postselection in QDS
+\end{itemize}
+
+\subsection*{3 Quantum secret sharing}
+Goal of chapter: introduce our QSS protocol and prove its security in different contexts
+
+Key results which I want to present:
+\begin{itemize}
+\item Our secret sharing protocol (with appropriate historical background, introduction, literature review and motivation). 
+\item Full security proof (asymptotic) starting with DW formula.
+\item Analyse our security in various settings (heterodyne \& homodyne, different alphabets, different types of attack, parameter scans)
+\end{itemize}
+
+\subsection*{4 Agile quantum cryptography}
+Goal of chapter: discuss and motivate concept of agility as it applies to quantum cryptography
+
+Key results which I want to present:
+\begin{itemize}
+\item Discussion of agility and why it might be desirable
+\item Modification of the above QDS protocol to run in the same setup as QSS
+\item Quick explanation of experiment (with empahsis that it was not my work)
+\item Analysis of data (including discussion of how we change results from previous chapters to make things more realistic to the experiment). 
+\item Introduce QPSK QKD protocol (security analysis based on Weedbrook/Pirandola 2018 paper)
+\item Analysis of QKD protocol in the context of agility (also chat about QDS-f here)
+\item Discussion of precisely how our analysis motivates agility
+\end{itemize}
+
+
+\section*{Part two: coherent signal transfer in quantum networks}
+\MT{TODO: plan this section (probably do it at the end of January / start of february. It makes sense to spend January focusing on cryptography}
+
+\end{document}
