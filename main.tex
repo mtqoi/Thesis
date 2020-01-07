@@ -1,4 +1,5 @@
-\documentclass[12pt]{report}
+%\documentclass[12pt]{report}
+\documentclass{report}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{amsmath}
@@ -8,6 +9,20 @@
 \usepackage[space]{grffile}
 \usepackage{amssymb}
 \usepackage{hyperref}	
+\usepackage[stable]{footmisc}
+\usepackage{amssymb}
+\usepackage[nottoc,numbib]{tocbibind}
+\usepackage{dsfont}
+\usepackage{framed}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage{bm}
+
+
+
+\includeonly{chapters/crypto_intro}
+
 
 
 \DeclareGraphicsExtensions{.pdf,.png,.jpg}
@@ -16,12 +31,12 @@
 \usepackage{color} 
 \def\red#1{\textcolor{red}{#1}}
 \def\blue#1{\textcolor{blue}{#1}}
-\def\magenta#1{\textcolor{magenta}{#1}}
+\def\MT#1{\textcolor{magenta}{#1}}
 \def\cyan#1{\textcolor{cyan}{#1}}
 
 \graphicspath{ {images/} }
 
-\includeonly{chapters/qds}
+
 
 \begin{document}
 \include{chapters/crypto_intro}
