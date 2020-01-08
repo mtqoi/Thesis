@@ -5,7 +5,8 @@
 \usepackage{amsmath}
 \usepackage{physics}
 \usepackage[noBBpl]{mathpazo}
-\usepackage{geometry} \geometry{ a4paper, total={170mm,257mm}, left=20mm, top=20mm,}
+%\usepackage{geometry} \geometry{ a4paper, total={170mm,257mm}, left=20mm, top=20mm,}
+\usepackage{geometry} \geometry{ a4paper, total={170mm,257mm}, left=30mm, right=30mm,}
 \usepackage[space]{grffile}
 \usepackage{amssymb}
 \usepackage{hyperref}	
@@ -21,7 +22,10 @@
 
 
 
-\includeonly{chapters/crypto_intro, chapters/qds}
+\includeonly{
+	chapters/crypto_intro,
+	chapters/qds
+}
 
 
 
@@ -39,7 +43,7 @@
 
 
 \begin{document}
-\part{Secure quantum networks}
+%\part{Secure quantum networks}
 \include{chapters/crypto_intro}
 \include{chapters/qds}
 \include{chapters/qss}

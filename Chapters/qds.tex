@@ -105,15 +105,21 @@ Messaging may occur at any time after Distribution. \MT{chat about quantum memor
 \begin{framed}
 \noindent \underline{Counting mismatches:} a mismatch occurs if the state which Alice claims to have sent has been eliminated. To be concrete, a mismatch at position $j$ occurs when
 \begin{equation}
-\phi_{j, m}^B \in Y_{j, m}^B \qq{or} \phi_{j, m}^C \in Z_{j, m}^B.
+\phi_{j, m}^B \in Y_{j, m}^B \qq{or} \phi_{j, m}^C \in Z_{j, m}^B, 
 \end{equation}
+and we let
+\begin{equation}
+\mathcal{M}\left(F, G\right)
+\end{equation}
+denote the mismatch rate between arbitrary declared signature $F$ and arbitrary eliminated signature $G$.
+
 \MT{Add an explatory figure in here}
 \end{framed}
 \end{figure}
 
-If Bob measures fewer than $s_B L/2$ mismatches on \emph{both} $Y_m^B$ and $Z_m^B$, then he accepts Alice's declaration $m$ as genuine, otherwise the protocol aborts. The threshold $0 \le s_B \le 1$ is related to the security of the protocol and will be discussed later.
+If Bob measures sufficiently few mismatches on both of his eliminated signature halves, i.e. if $\mathcal{M}\left(\Phi_m^B, Y_m^B\right) < s_B L/2$ and $\mathcal{M}\left(\Phi_m^C, Z_m^B\right) < s_B L/2$ then he accepts Alice's declaration $m$ as genuine, otherwise the protocol aborts. The threshold $0 \le s_B \le 1$ is related to the security of the protocol and will be discussed later.
 
-\noindent \underline{Step $7$.} If Bob has accepted $m$, then he forwards $\Sigma$ to Charlie, who similarly checks for mismatches between $sigma_m$ and $Y_m^C, Z_m^C$. Charlie accepts the message if there are fewer than $s_C L/2$ mismatches, with security threshold $0 \le s_c \le 1$ to be discussed later. If Charlie also accepts $m$ then the protocol has succeeded, otherwise it aborts. 
+\noindent \underline{Step $7$.} If Bob has accepted $m$, then he forwards $\Sigma$ to Charlie, who similarly checks for mismatches between Alice's signature and his eliminated signature. Charlie accepts the message if $\mathcal{M}\left(\Phi_m^B, Z_m^C\right) < s_C L/2$ and $\mathcal{M}\left(\Phi_m^C, Y_m^C\right) < s_C L/2$, with security threshold $0 \le s_c \le 1$ to be discussed later. If Charlie also accepts $m$ then the protocol has succeeded, otherwise it aborts. 
 
 The key parameters for the Messaging stage are $s_B, s_C$ which may be freely chosen by Bob and Charlie in order to optimize security.
 
@@ -133,7 +139,56 @@ Our proof will proceed by demonstrating that an attempted repudiation or forgery
 We assume that in our $3$~party setting at most \emph{one} of the players $A, B, C$ may behave dishonestly. For simplicity of notation we give a dishonest player the power to eavesdrop on the distribution of quantum states, and so the label $E$ is not required as an internal eavesdropper is at least as powerful as an external Eve. If two or more players are dishonest then we assume that they will collaborate, which allows them to trivially break the protocol. We note that a collaboration of multiple dishonest players must be considered for an $n$~party QDS protocol, as discussed in Ref.~\MT{Arrazola}, but we will not discuss it further here.
 
 \subsection{Security against repudiation}
-\MT{Discussion of a repudiation attack}
+To succeed in a repudiation attack, a dishonest Alice is able to convince Bob that the message $m$ is genuine, while Charlie that $m$ is fake. Security against repudiation is guaranteed by the Symmetrization procedure (Step $4$ of the protocol) which ensures that Alice does not know which recipient holds the eliminated signature element corresponding to a particular state which she sent. The security against repudiation follows along similar lines to \MT{cite some stuff}.
+
+We assume that Alice is free to manipulate her declared $\sigma_m = \left(\Phi_m^B, \Phi_m^C\right)$. We also assume that she may freely manipulate the number of mismatches $\mathcal{M}\left(\Phi_m^{B, C}, X_m^{\left(B, C\right)}\right)$ between her signature and the eliminated signatures $X_m^{\left(B, C\right)}$ which Bob or Charlie held before Symmetrization. We denote these mismatch rates as $p_B$ and $p_C$, respectively, and Alice may even choose them to be zero.
+
+After Symmetrization, Bob and Charlie each possess an eliminated signature in two halves, each of length $L/2$, consisting either of elements which they received directly from Alice, or of elements which they received during this step. 
+
+Alice succeeds in her repudiation attack if Bob accepts both of his halves as genuine, while Charlie rejects at least one of his halves as fake. That is to say, a successful repudiation attack occurs when
+
+\begin{align}
+&\left(\mathcal{M}\left(\Phi_m^B, Y_m^B\right) < s_B L/2 \right. \notag\\
+&\qq{and} \notag \\
+&\left.\mathcal{M}\left(\Phi_m^C, Z_m^B\right) < s_B L/2 \right) \notag \\
+&\qq{and} \notag \\
+&\left(\mathcal{M}\left(\Phi_m^B, Z_m^C\right) \ge s_C L/2 \right. \notag \\
+&\qq{or} \notag \\
+&\left.\mathcal{M}\left(\Phi_m^C, Y_m^C\right) \ge s_C L/2 \right) \qq{\MT{TODO: fix appearance}}
+\end{align}
+
+\noindent which we denote as events $E_A$, $E_B$, $E_C$, $E_D$, respectively. 
+Thus, the probability of a successful repudiation attack is given by
+
+\begin{equation}
+\varepsilon_{\text{repudiation}} = \text{P}\left[\left(E_A \cap E_B\right) \cap \left(E_C \cup E_D\right)\right].
+\end{equation}
+
+\noindent We may now use the probability inequality Eq.~\MT{X} and observe that 
+
+\begin{equation}
+\varepsilon_{\text{repudation}} \le \text{min}\left\{\text{P}\left(E_A \cap E_B\right), \text{P}\left(E_C \cup E_D\right)\right\}.
+\end{equation}
+
+\noindent Using inequalities Eq.~\MT{X}, we arrive at
+
+\begin{equation}\label{eqn:rep_prob_working}
+\varepsilon_{\text{repudiation}} \le \text{min}\left\{
+\text{min}\left\{\text{P}\left(E_A\right), \text{P}\left(E_B\right) \right\}, \text{P}\left(E_C\right) + \text{P}\left(E_D\right)\right\}
+\end{equation}
+
+\subsubsection{Bounding repudation probabilities}
+We now wish to bound each of the probabilities appearing in Eq.~\ref{eqn:rep_prob_working}. \MT{Assume that Hoeffding's inequalities have been introduced and defined somewhere previously.} Let $\mathcal{F}$ be a string of declared phases, and $\mathcal{G}$ be an eliminated signature. We define a string $\mathcal{E}$ such that
+
+\begin{equation*}\label{eqn:error}
+\mathcal{E}_j = 
+\begin{cases}
+1 & \text{if $\mathcal{F}_j$ is eliminated in $\mathcal{G}_j$} \\
+0 & \text{otherwise}
+\end{cases}
+\end{equation*}
+which measures whether a mismatch has occurred between the $j^\text{th}$ elements of $\mathcal{F}$ and $\mathcal{G}$\footnote{Notice therefore that $\Sigma_{j=1}^L \mathcal{E}_j = \mathcal{M}\left(\mathcal{F}, \mathcal{G}\right)$ via the mismatch function defined earlier.} 
+\MT{Note that I may run into problems with notation here, since the phases string and the eliminated signature have different lengths. TODO: fix the notation}
 
 
 
