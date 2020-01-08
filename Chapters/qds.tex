@@ -77,9 +77,69 @@ and recording the $\alpha_j$ giving rise to the smallest of these conditional pr
 \par
 \noindent \underline{Step 4.} \emph{Symmetrization:} Bob and Charlie now swap a random $L/2$ elements of their $X_m^{\left(B, C\right)}$ over their secure classical channel. \MT{make sure I introduce this channel earlier}, and signature elements which have been forwarded by a player will no longer be used by him in the protocol. We denote these resulting strings as $Y_m^{\left(B, C\right)}$. Both the positions and the values of the swapped elements must be kept secret from Alice, which will ensure that the information which Bob and Charlie each hold is symmetric from Alice's point of view. 
 
-In other words at the end of Step~$3$, having sent the state $\ket{\phi_{j, m}^B}\bra{\phi_{j, m}^B}$ to Bob, even though Alice does not know its value Alice knows that Bob holds the corresponding eliminated signature element $X_{j, m}^B$. At the end of Step~$4$ however, Alice does not know whether it is Bob or Charlie who holds $X_{j, m}^B$. This uncertainty will prove crucial for preventing her from successfully repudiating (Requirement~$3$). Bob and Charlie each now possess an eliminated signature $Y_m^{\left(B, C\right)}$ in two halves: one half containing those elements received directly from Alice, and one half containing elements received during this Symmetrization step.
+In other words at the end of Step~$3$, having sent the state $\ket{\phi_{j, m}^B}\bra{\phi_{j, m}^B}$ to Bob, even though Alice does not know its value Alice knows that Bob holds the corresponding eliminated signature element $X_{j, m}^B$. At the end of Step~$4$ however, Alice does not know whether it is Bob or Charlie who holds $X_{j, m}^B$. This uncertainty will prove crucial for preventing her from successfully repudiating (Requirement~$3$). Bob (and Charlie) now possesses an eliminated signature $\tilde{X}_m^{\left(B\right)}$ in two halves: one half ($Y_m^{\left(B\right)}$) containing those elements received directly from Alice, and one half ($Z_m^{\left(B\right)}$)containing elements received during this Symmetrization step from Charlie.
+
+The key parameters for the Distribution stage are the signature length $L$, which directly measures the quantum resources required for the protocol, and the alphabet parameter $\alpha$ denoting the average photon number of the distributed coherent states. Channel parameters such as loss and thermal noise will be discussed later.\footnote{We will also later discuss an extension to the protocol, and allow it to run with an $N$~PSK alphabet $\mathcal{A}_N$ of coherent states, where $N$ is an even integer.}
 
 \subsubsection{Messaging stage}
+
+Messaging may occur at any time after Distribution. \MT{chat about quantum memories}.
+
+\noindent \underline{Step $5$.} To sign $m$, Alice sends to Bob the classical triplet $\Sigma = \left(m, \sigma_m\right)$, consisting of the message which she would like to convey, and her private key $\sigma_m = \left(\Phi_m^B, \Phi_m^C\right)$ which acts as $m$'s signature. 
+
+\noindent \underline{Step $6$.} Bob compares elements of $\left(\Phi_m^B, \Phi_m^C\right)$ to his $\tilde{X}_m^{B}$, choosing which half of $\tilde{X}_m^B$ to compare to based on whether he kept or swapped the eliminated signature element. It is as this stage that Bob makes a decision about whether to accept $m$ as genuine. His decision will be based on Alice's declared $\sigma_m$, and the number of mismatches between Alice's signature and his own eliminated signatures (see the box, ``counting mismatches").
+
+\begin{figure}[htp]
+%\centering 
+\captionsetup{width=0.8\linewidth}
+\begin{framed}
+\noindent \underline{Counting mismatches:} a mismatch occurs if the state which Alice claims to have sent has been eliminated. To be concrete, a mismatch at position $j$ occurs when
+\begin{equation}
+\phi_{j, m}^B \in Y_{j, m}^B \qq{or} \phi_{j, m}^C \in Z_{j, m}^B.
+\end{equation}
+\MT{Add an explatory figure in here}
+\end{framed}
+\end{figure}
+
+If Bob measures fewer than $s_B L/2$ mismatches on \emph{both} $Y_m^B$ and $Z_m^B$, then he accepts Alice's declaration $m$ as genuine, otherwise the protocol aborts. The threshold $0 \le s_B \le 1$ is related to the security of the protocol and will be discussed later.
+
+\noindent \underline{Step $7$.} If Bob has accepted $m$, then he forwards $\Sigma$ to Charlie, who similarly checks for mismatches between $sigma_m$ and $Y_m^C, Z_m^C$. Charlie accepts the message if there are fewer than $s_C L/2$ mismatches, with security threshold $0 \le s_c \le 1$ to be discussed later. If Charlie also accepts $m$ then the protocol has succeeded, otherwise it aborts. 
+
+The key parameters for the Messaging stage are $s_B, s_C$ which may be freely chosen by Bob and Charlie in order to optimize security.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
