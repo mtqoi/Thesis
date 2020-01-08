@@ -1,2 +1,61 @@
 \chapter{Quantum digital signatures}
 Goal of chapter: introduce our QDS protocol and prove its security in different contexts using several methods.
+
+\section{QDS protocol description}
+
+In the simplest instance we may consider the signaure scheme involving only three parties: a sender, Alice ($A$), and recipients Bob ($B$) and Charlie ($C$). Alice wishes to send a classical message $m$ to $B$ and $C$, such that $B$ and $C$ can correctly determine whether $m$ was indeed sent by $A$. Furthermore the recipients should be able to check whether $m$ has been altered.
+
+\subsection{Goals of a signature scheme}
+\MT{Add introduction, and chat about how the multipartite setting is actually quite interesting}
+
+A digital signature scheme must ensure that the following requirements are fulfilled:
+
+\noindent \emph{$1$. Security against forgery}: Neither a dishonest recipient ($B$ or $C$), nor an external fourth party (Eve, $E$), should be able to alter $m$ and have it accepted as genuine by an honest recipient. That is, the signature scheme should ensure that $m$ is the message which Alice sent.
+
+\noindent \emph{$2$. Genuine sender}: Neither a dishonest recipient ($B$ or $C$), nor an external fourth party (Eve, $E$), should be able to impersonate $A$. A message which falsely claims to have originated with Alice should be rejected.
+
+\noindent \emph{$3$. Security against repudiation}: A dishonest sender $A$ should not be able to cause disagreement between $B$, $C$ about the previous two requirements. That is, after genuinely sending $m$ she should not later be able to deny it. If Bob accepts the message as genuine then so too should Charlie. 
+
+\noindent \emph{$4$. Message transferability}: If $B$ accepts a message as genuine, then so too should $C$. In the simple $3$~party signatures protocol considered here, this requirement is equivalent to requirement $3$, while when more recipients are involved one may define a message $m^{\left(k\right)}$ as $k$-transferable if it can be successfully forwarded up to $k$ times. That is, if recipient $B_0$ accepts $m^{\left(k\right)}$, then recipients $B_1 \dots B_k$ should also accept.
+
+For our scheme involving three parties (only two recipients), requirements $3$ and $4$ are equivalent, and so in what follows we will talk about repudiation only. Requirements $1$ and $2$ are fulfilled in our scheme by the same security process, and so we will focus on $1$ and simply note where $2$ arises.
+
+\MT{Let's have a nice figure explaining each of these attacks, similar to the one from my CEWQO2018 poster, but without proprietary content}
+
+A digital signature scheme which rejects all messages trivially fulfills requirements $1-4$, and so in order to get a useful digital signature scheme we impose:
+
+\noindent \emph{$5$. Robustness}: In the absence of $E$, the message $m$ should be accepted if $A, B, C$ behave honestly.
+
+\subsection{Our QDS scheme}
+
+We here present a continuous-variable (CV) QDS protocol based on the quadrature phase-shift keying (QPSK) alphabet of coherent states. %this will be defined earlier, I am sure
+Our protocol allows us to take into account quantum distribution channels which will in general be insecure, and this scheme is the first in the CV setting to be secure against eavesdropping. \MT{I should motivate the CV setting somewhere, probably in ch1}
+
+Our QDS scheme is split into two stages, Distribution and Messaging, which can occur with significant time delay. The quantum states are sent and measured during Distribution, while during Messaging Alice will send her message and classical signature, and Bob and Charlie will try to determine its validity.\footnote{Note the intrinsic separation between the Distribution (quantum) and Messaging (classical) stages of the protocol. We will take further advantage of this separation between quantum and classical steps in Chapter~\MT{X}} Our protocol setup is outlined in Fig.~\MT{X}, while the protocol is described in Fig.~\MT{X} % I want a flowchart-style figure to outline the steps of the protocol
+
+\MT{mention somewhere why we consider just a $1$ bit message}
+
+\MT{I'll do everything for QPSK, but I should have a section where I generalize to NPSK}
+
+\subsubsection{Distribution stage}
+\noindent Step $1$. Alice wishes to send a signed $1$ bit message $m$ to Bob and Charlie. For each possible future $m$, and for each recipient, Alice creates the following classical strings
+\begin{equation}
+\Phi_m^{\left(B, C\right)} = \left\{ \phi_{j, m}^{\left(B, C\right)\right\}_{j=1}^{L}
+\end{equation}
+where the $phi_{j}$ are complex phases chosen from alphabet $\mathcal{A}_4$. The signature length $L$ is an integer suitably chosen to ensure the desired level of security.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
