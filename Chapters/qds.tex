@@ -196,7 +196,7 @@ After Symmetrization, Bob and Charlie each possess an eliminated signature in tw
 
 Alice succeeds in her repudiation attack if Bob accepts both of his halves as genuine, while Charlie rejects at least one of his halves as fake. That is to say, a successful repudiation attack occurs when
 
-\begin{align}
+\begin{align}\label{eqn:repudiation_events}
 &\left(\mathcal{M}\left(\tilde{\Phi}_{Y, m}^B, Y_m^B\right) < s_B L/2 \right. \notag\\
 &\qq{and} \notag \\
 &\left.\mathcal{M}\left(\tilde{\Phi}_{Z, m}^B, Z_m^B\right) < s_B L/2 \right) \notag \\
@@ -207,19 +207,26 @@ Alice succeeds in her repudiation attack if Bob accepts both of his halves as ge
 \end{align}
 
 \noindent which we denote as events $E_A$, $E_B$, $E_C$, $E_D$, respectively. 
-Thus, the probability of a successful repudiation attack is given by
+Thus, the probability $\varepsilon_{\text{repudiation}}$ of a successful repudiation attack is given by
 
 \begin{equation}
 \varepsilon_{\text{repudiation}} = \text{P}\left[\left(E_A \cap E_B\right) \cap \left(E_C \cup E_D\right)\right].
 \end{equation}
+To proceed, we require the following two probability inequalities for arbitrary events $x, y$
 
-\noindent We may now use the probability inequality Eq.~\MT{X} and observe that 
+\begin{align}
+\label{eqn:prob_inequality_1}
+\text{P}\left(x \cap y\right) &\le \text{min}\left\{\text{P}\left(x\right), \text{P}\left(y\right)\right\} \\
+\label{eqn:prob_inequality_2}
+\text{P}\left(x \cup y\right) &\le \text{P}\left(x\right) + \text{P}\left(y\right)
+\end{align}
+\noindent We may now use the probability inequality Eq.~\ref{eqn:prob_inequality_1} and observe that 
 
 \begin{equation}
 \varepsilon_{\text{repudation}} \le \text{min}\left\{\text{P}\left(E_A \cap E_B\right), \text{P}\left(E_C \cup E_D\right)\right\}.
 \end{equation}
 
-\noindent Using inequalities Eq.~\MT{X}, we arrive at
+\noindent Again using Eqs.~\ref{eqn:prob_inequality_1},~\ref{eqn:prob_inequality_2}, we arrive at
 
 \begin{equation}\label{eqn:rep_prob_working}
 \varepsilon_{\text{repudiation}} \le \text{min}\left\{
@@ -228,8 +235,10 @@ Thus, the probability of a successful repudiation attack is given by
 which provides an upper bound for the probability of successful repudiation attack in terms of the individual probabilities for distinct events. We now wish to demonstrate that the probability for each event may be made arbitrarily small by suitable choice of $L$, and thus that $\varepsilon_{\text{repudiation}}$ may also be made arbitrarily small.
 
 
-\subsubsection{Bounding repudation probabilities}
-We now wish to bound each of the probabilities appearing in Eq.~\ref{eqn:rep_prob_working}. \MT{Assume that Hoeffding's inequalities have been introduced and defined somewhere previously.} Let $\mathcal{F}$ be a string of declared phases, and $\mathcal{G}$ be an eliminated signature. We define a string $\mathcal{E}$ such that
+%\subsubsection{Bounding repudation probabilities}
+We now wish to bound each of the probabilities appearing in Eq.~\ref{eqn:rep_prob_working}. We will rely on Hoeffding's inequalities Eqs.~\ref{eqn:hoeffding1},~\ref{eqn:hoeffding2} which we will use to find an upper bound for the probability that sufficiently few mismatches are observed.
+
+We let $\mathcal{F}$ be an arbitrary string of declared phases, and $\mathcal{G}$ be an eliminated signature. We define a string $\mathcal{E}$ such that
 
 \begin{equation*}\label{eqn:error}
 \mathcal{E}_j = 
@@ -238,9 +247,55 @@ We now wish to bound each of the probabilities appearing in Eq.~\ref{eqn:rep_pro
 0 & \text{otherwise}
 \end{cases}
 \end{equation*}
-which measures whether a mismatch has occurred between the $j^\text{th}$ elements of $\mathcal{F}$ and $\mathcal{G}$\footnote{Notice therefore that $(2/L)\Sigma_{j=1}^(L/2) \mathcal{E}_j = \mathcal{M}\left(\mathcal{F}, \mathcal{G}\right)$ via the mismatch function defined earlier, when $\mathcal{F}, \mathcal{G}$ each have length $L/2$} 
-\MT{Note that I may run into problems with notation here, since the phases string and the eliminated signature have different lengths. TODO: fix the notation}
+which measures whether a mismatch has occurred between the $j^\text{th}$ elements of $\mathcal{F}$ and $\mathcal{G}$ %\footnote{Notice therefore that $(2/L)\Sigma_{j=1}^(L/2) \mathcal{E}_j = \mathcal{M}\left(\mathcal{F}, \mathcal{G}\right)$ via the mismatch function defined earlier, when $\mathcal{F}, \mathcal{G}$ each have length $L/2$.} Assume that $\mathcal{F}$ and $\mathcal{G}$ each have length $n$. Then we will bound the probability that the number of mismatches is below a threshold $s n$. 
 
+It is easy to see that the observed mismatch rate is equivalent to the empirical mean of $\mathcal{E}$. In other words
+
+\begin{equation}
+\bar{\mathcal{E}} = \frac{1}{n} \sum_{j=1}^n \mathcal{E}_j = \mathcal{M}\left(\mathcal{F}, \mathcal{G}\right)
+\end{equation}
+and so we wish to bound $\text{P}\left(\bar{\mathcal{E}} \le s\right)$. Thus, we have
+
+\begin{align}\label{eqn:qds_hoeffding1}
+\text{P}\left(\bar{\mathcal{E}} \le s \right) &= \text{P}\left[\mathbb{E}\left(\bar{\mathcal{E}}\right) - \bar{\mathcal{E}} \ge \mathbb{E}\left(\bar{\mathcal{E}}\right) - s\right] \notag \\
+&\le \text{exp}\left(- 2 \left[\mathbb{E}\left(\bar{\mathcal{E}}\right) - s\right]^2 n \right)
+\end{align}
+where the inequality follows from Hoeffding inequality Eq.~\ref{eqn:hoeffding1} provided that $\mathbb{E}\left(\bar{\mathcal{E}}\right) - s \ge 0$.
+
+Similarly, we derive
+\begin{equation}\label{eqn:qds_hoeffding2}
+\text{P}\left(s \le \bar{\mathcal{E}}\right) \le \text{exp}\left( - 2 \left[s - \mathbb{E}\left(\bar{\mathcal{E}}\right)\right]^2 n\right)
+\end{equation}
+by applying Eq.~\ref{eqn:hoeffding2}, and again we require that \MT{condition}.
+
+Using Eqs.~\ref{eqn:qds_hoeffding1},~\ref{eqn:qds_hoeffding2} we may now bound the probabilities for events Eq.~\ref{eqn:repudiation_events}
+
+\begin{align}\label{eqn:qds_repudiation_events_probs}
+\text{P}\left(E_A\right) \le \text{exp}\left( -\left[p_B - s_B\right]^2 L \right) \qq{provided that} p_B > s_B \notag \\
+\text{P}\left(E_B\right) \le \text{exp}\left( -\left[p_C - s_B\right]^2 L \right) \qq{provided that} p_C > s_B \notag \\
+\text{P}\left(E_C\right) \le \text{exp}\left( -\left[s_C - p_C\right]^2 L \right) \qq{provided that} p_C < s_C \notag \\
+\text{P}\left(E_D\right) \le \text{exp}\left( -\left[s_C - p_B\right]^2 L \right) \qq{provided that} p_B < s_C
+\end{align}
+
+\noindent where in the first two inequalities we have applied Eq.~\ref{eqn:qds_hoeffding1} and in the second two inequalities we have applied Eq.~\ref{eqn:hoeffding2}.
+
+Now, defining $p := \text{max}\left\{p_B, p_c\right\}$ we have
+
+\begin{equation}
+\text{min}\left\{\text{P}\left(E_A\right), \text{P}\left(E_B\right)\right\} \le \text{exp}\left(- \left[ p - s_B\right]^2 L\right)
+\end{equation}
+and
+\begin{equation}
+\text{P}\left(E_C\right) + \text{P}\left(E_D\right) \le 2 \text{exp}\left(-\left[s_C - p\right]^2 L\right).
+\end{equation}
+
+So finally we arrive at 
+
+\begin{equation}
+\varepsilon_{\text{repudiation}} \le \text{min}\left\{ 2 \text{exp}\left( - \left[p - s_B\right]^2 L \right), \text{exp}\left( - \left[s_C - p\right]^2 L \right) \right\}
+\end{equation}
+
+where we have doubled the first entry for convenience. 
 
 
 

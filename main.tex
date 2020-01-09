@@ -1,12 +1,12 @@
 %\documentclass[12pt]{report}
-\documentclass{report}
+\documentclass{book}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{physics}
 \usepackage[noBBpl]{mathpazo}
 %\usepackage{geometry} \geometry{ a4paper, total={170mm,257mm}, left=20mm, top=20mm,}
-\usepackage{geometry} \geometry{ a4paper, total={170mm,257mm}, left=30mm, right=30mm,}
+%\usepackage{geometry} \geometry{ a4paper, total={170mm,257mm}, left=30mm, right=30mm,}
 \usepackage[space]{grffile}
 \usepackage{amssymb}
 \usepackage{hyperref}	
@@ -23,6 +23,7 @@
 
 
 \includeonly{
+	chapters/introduction,
 %	chapters/crypto_intro,
 	chapters/qds
 }
@@ -40,11 +41,18 @@
 
 \graphicspath{ {images/} }
 
+%\setcounter{tocdepth}{1} % Show sections
+%\setcounter{tocdepth}{2} % + subsections
+\setcounter{tocdepth}{3} % + subsubsections
+%\setcounter{tocdepth}{4} % + paragraphs
+%\setcounter{tocdepth}{5} % + subparagraphs
 
 
 \begin{document}
 %\part{Secure quantum networks}
 %\include{chapters/crypto_intro}
+\tableofcontents
+%\listoffigures
 \include{chapters/introduction}
 \include{chapters/qds}
 \include{chapters/qss}
