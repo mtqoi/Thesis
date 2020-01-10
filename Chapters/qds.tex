@@ -172,7 +172,10 @@ If Bob measures sufficiently few mismatches on both of his eliminated signature 
 
 The key parameters for the Messaging stage are $s_B, s_C$ which may be freely chosen by Bob and Charlie in order to optimize security.
 
-\section{Security proof}
+%\section{Security proof}
+
+
+\section{Security against repudiation}
 We now turn to consider the security of the QDS protocol discussed in Sec.~\MT{X}. Recall that of the five requirements for a digital signatures protocol, requirements $3$ and $4$ are equivalent in a $3$~party setting. 
 
 In what follows we will prove that our protocol is:
@@ -187,7 +190,6 @@ Our proof will proceed by demonstrating that an attempted repudiation or forgery
 
 We assume that in our $3$~party setting at most \emph{one} of the players $A, B, C$ may behave dishonestly. For simplicity of notation we give a dishonest player the power to eavesdrop on the distribution of quantum states, and so the label $E$ is not required as an internal eavesdropper is at least as powerful as an external Eve. If two or more players are dishonest then we assume that they will collaborate, which allows them to trivially break the protocol. We note that a collaboration of multiple dishonest players must be considered for an $n$~party QDS protocol, as discussed in Ref.~\MT{Arrazola}, but we will not discuss it further here.
 
-\subsection{Security against repudiation}
 To succeed in a repudiation attack, a dishonest Alice is able to convince Bob that the message $m$ is genuine, while Charlie that $m$ is fake. Security against repudiation is guaranteed by the Symmetrization procedure (Step $4$ of the protocol) which ensures that Alice does not know which recipient holds the eliminated signature element corresponding to a particular state which she sent. The security against repudiation follows along similar lines to \MT{cite some stuff}.
 
 We assume that Alice is free to manipulate her declared $\sigma_m = \left(\Phi_m^B, \Phi_m^C\right)$. We also assume that she may freely manipulate the number of mismatches $\mathcal{M}\left(\Phi_m^{B, C}, X_m^{\left(B, C\right)}\right)$ between her signature and the eliminated signatures $X_m^{\left(B, C\right)}$ which Bob or Charlie held before Symmetrization. We denote these mismatch rates as $p_B$ and $p_C$, respectively, and Alice may even choose them to be zero.
@@ -318,7 +320,7 @@ Finally, we reach
 as our useful bound for the probability that Alice succeeds in her repudiation attack. Since Eq.~\ref{eqn:erep} is exponentially decaying, $\forall \epsilon > 0,  \exists L$ such that $\varepsilon_{\text{repudiation}} < \epsilon$, and thus the probability can be made arbitrarily small. We are thus secure against repudiation attack.
 
 
-\subsection{Robustness}
+\section{Robustness}
 
 
 
