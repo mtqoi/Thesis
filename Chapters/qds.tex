@@ -279,11 +279,7 @@ Using Eqs.~\ref{eqn:qds_hoeffding1},~\ref{eqn:qds_hoeffding2} we may now bound t
 \text{P}\left(E_D\right) \le \text{exp}\left( -\left[s_C - p_B\right]^2 L \right) \qq{provided that} p_B < s_C
 \end{align}
 
-\noindent where in the first two inequalities we have applied Eq.~\ref{eqn:qds_hoeffding1} and in the second two inequalities we have applied Eq.~\ref{eqn:hoeffding2}. So we arrive at
-
-%eqn:rep_prob_working
-
-We recall that Alice has the power to choose any $0 \le p_B, p_C \le 1$. We will consider some cases:
+\noindent where in the first two inequalities we have applied Eq.~\ref{eqn:qds_hoeffding1} and in the second two inequalities we have applied Eq.~\ref{eqn:hoeffding2}. We now recall that Alice has the power to choose any $0 \le p_B, p_C \le 1$. We will consider some cases:
 
 \noindent Assume that $p_B \ge s_B$. Then by the first inequality of Eq.~\ref{eqn:qds_repudiation_events_probs} the probability Eq.~\ref{eqn:rep_prob_working} must decay exponentially %must it? Could we decay faster? 
 and so we are secure against repudiation. An analogous argument holds for the choice $p_C \ge s_B$ using the second inequality of Eq.~\ref{eqn:qds_repudiation_events_probs}.
@@ -324,22 +320,51 @@ The QDS protocol must be robust (Requirement~$5$, Fig.~\MT{X}) and allow the mes
 
 The protocol fails in the absence of attack if either Bob or Charlie rejects a message which Alice did in fact send, i.e. if Bob or Charlie detect too many mismatches on Alice's declaration $\sigma_m$. Since we have above derived that $s_B \le s_C$, it will always be more likely that Bob rejects than Charlie so we will seek to bound the probability that Bob measures more than $s_B L/2$ mismatches on either of his signature halves, and we note that this will also provide a bound for the equivalent probability at Charlie.
 
-Let $p_{\text{err}}$ be the probability of honest mismatch between Alice's declaration and either of Bob's eliminated signature halves. Because of the non-orthogonality of coherent states, $p_{\text{err}} > 0$, which we will model later. Using probability inequality Eq.~\ref{eqn:prob_inequality_2}, the probability that Bob rejects either of his halves is given by
+Let $\perr$ be the probability of honest mismatch between Alice's declaration and either of Bob's eliminated signature halves. Because of the non-orthogonality of coherent states, $p_{\text{err}} > 0$, which we will model later. Using probability inequality Eq.~\ref{eqn:prob_inequality_2}, the probability that Bob rejects either of his halves is given by
 
 \begin{equation}
 \varepsilon_{\text{Bob rejects}} \le 2 \text{P}\left(E_A\right)
 \end{equation}
-where $E_A$ is the event that Bob measures more than $s_B L/2$ mismatches on either of his halves. We have implicitly assumed that $p_{\text{err}}$ is identical between states originally sent to Bob and those originally sent to Charlie, but this is easy to relax if desired.
+where $E_A$ is the event that Bob measures more than $s_B L/2$ mismatches on either of his halves. We have implicitly assumed that $\perr$ is identical between states originally sent to Bob and those originally sent to Charlie, but this is easy to relax if desired.
 
 Using Hoeffding inequality Eq.~\ref{eqn:qds_hoeffding2} identially to the derivation of Eq.~\ref{eqn:qds_repudiation_events_probs} we see that
 \begin{equation}\label{eqn:ehonabort}
-\varepsilon_{\text{honest abort}} = \varepsilon_{\text{Bob rejects}} \le 2 \text{exp}\left( - \left[s_B - p_{\text{err}}\right]^2 L\right)
+\varepsilon_{\text{honest abort}} = \varepsilon_{\text{Bob rejects}} \le 2 \text{exp}\left( - \left[s_B -\perr\right]^2 L\right)
 \end{equation}
-which is our useful bound for the probability that the protocol aborts even though everyone is behaving honestly. Since Eq.~\ref{eqn:ehonabort} is exponentially decaying the probability that this happens can be made arbitrarily small, and so we have fulfilled Requirement~$5$.
+provided that $\perr < s_B$. Equation~\ref{eqn:ehonabort} is our useful bound for the probability that the protocol aborts even though everyone is behaving honestly. Since it is exponentially decaying the probability that this happens can be made arbitrarily small, and so we have fulfilled Requirement~$5$.
 
 \subsection{Modelling $p_{\text{err}}$}
+\MT{let's have a figure somewhere which illustrates this}
 
+The probability $\perr$ corresponds to the probability that a heterodyne measurement outcome $z$ has $\text{Re}\left(z\right) < 0$ when Alice distributed the coherent state $\ket{\alpha}$. In the absence of thermal noise the channel simply acts as a beamsplitter with vacuum at the fourth port, and so
 
+\begin{equation}
+|\alpha\rangle\langle\alpha| \rightarrow |\sqrt{T}\alpha\rangle\langle\sqrt{T}\alpha|
+\end{equation}
+
+\noindent when the channel has transmittivity $T$. \MT{show a derivation of this formula somewhere (either here, or in chapter~$1$.)} A heterodyne measurement on the output state gives outcome $z \in \mathbb{C}$ with probability
+\begin{align}
+\text{P}\left(z\right) = \langle z | \sqrt{T}\alpha\rangle\langle\sqrt{T}\alpha|z\rangle = |\langle z | \sqrt{T} \alpha \rangle |^2& \notag \\
+= \frac{1}{\pi}\text{exp}\left( - | z - \sqrt{T}\alpha |^2 \right)&
+\end{align}
+where ket vector $|z\rangle$ denotes the coherent state centred on $z$. Then,
+
+\begin{align}
+\perr &= \text{P}\left(\text{Re}\left(z\right)<0\right) = \int\limits_{\text{Re}\left(z\right)<0}\Diff2 z \, \text{P}\left(z\right) \notag \\
+&= \int\limits_{-\infty}^{\infty} \mathrm{d} y \, \text{exp}\left(-y^2\right) \int\limits_{-\infty}^{0} \mathrm{d} x \, \text{exp}\left(-\left[x - \sqrt{\frac{T}{2}}\alpha_x\right]^2\right)
+\end{align}
+where the factor $1/\sqrt{2}$ arises from Eq.~\MT{X} %the one relating quadratures and complex phase
+and where $x = \text{Re}\left(z\right), y = \text{Im}\left(z\right)$ and $\alpha_x = \text{Re}\left(\alpha\right)$. 
+
+Integrating, we arrive at
+
+\begin{equation}\label{eqn:perr}
+\perr = \frac{1}{2}\text{erfc}\left(\sqrt{\frac{T}{2}}\alpha\right)
+\end{equation}
+
+\noindent which models the probability of honest mismatch over a lossy channel with transmittivity $T$. The $\perr$ when the channel contains thermal noise, Fig.~\MT{X}, is given by \MT{put it here, and then talk about how it is derived and what it means.}
+
+\section{Security against forgery}
 
 
 
