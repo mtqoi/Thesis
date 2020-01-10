@@ -142,7 +142,7 @@ Messaging may occur at any time after Distribution. \MT{chat about quantum memor
 
 \noindent \underline{Step $5$.} To sign $m$, Alice sends to Bob the classical triplet $\Sigma = \left(m, \sigma_m\right)$, consisting of the message which she would like to convey, and her private key $\sigma_m = \left(\Phi_m^B, \Phi_m^C\right)$ which acts as $m$'s signature. 
 
-\noindent \underline{Step $6$.} Bob rearranges $\sigma_m \rightarrow \tilde{\sigma}_m^B := \leftarrow(\tilde{\Phi}_{Y, m}^B, \tilde{\Phi}_{Z, m}^B$ by selecting elements from Alice's declaration which correspond to the two halves of his eliminated signature. The original $\sigma_m$ has length $2 L$, while $\tilde{\sigma}_m^B$ has length $L$.
+\noindent \underline{Step $6$.} Bob rearranges $\sigma_m \rightarrow \tilde{\sigma}_m^B := \left(\tilde{\Phi}_{Y, m}^B, \tilde{\Phi}_{Z, m}^B\right)$ by selecting elements from Alice's declaration which correspond to the two halves of his eliminated signature. The original $\sigma_m$ has length $2 L$, while $\tilde{\sigma}_m^B$ has length $L$.
 
 Bob compares elements of $\tilde{\sigma}_m^B$ to his $\tilde{X}_m^{B}$, choosing which half of $\tilde{X}_m^B$ to compare to based on whether he kept or swapped the eliminated signature element. It is as this stage that Bob makes a decision about whether to accept $m$ as genuine. His decision will be based on Alice's declared $\tilde{\sigma}_m^B$, and the number of mismatches between Alice's signature and his own eliminated signatures (see the box, ``counting mismatches").
 
@@ -184,7 +184,7 @@ In what follows we will prove that our protocol is:
 \item robust (Requirement $5$, Fig.~\MT{X}),
 \item secure against a forgery attack (Requirement $1$, Fig.~\MT{X})
 \end{itemize}
-and we will additionally demonstrate that fulfilment of requirement $1$ implies fulfilment of requirement $2$.
+and we will additionally demonstrate that fulfilment of requirement $1$ implies fulfilment of requirement $2$. \MT{Make sure that I actually do this.}
 
 Our proof will proceed by demonstrating that an attempted repudiation or forgery will induce a large mismatch rate, while a small mismatch rate is obtained when no attack is attempted. Thus, by appropriate choice of security parameters $s_B, s_C$ and signature length $L$, the probability of a \emph{successful} attack may be made arbitrarily small.
 
@@ -320,8 +320,24 @@ as our useful bound for the probability that Alice succeeds in her repudiation a
 
 
 \section{Robustness}
+The QDS protocol must be robust (Requirement~$5$, Fig.~\MT{X}) and allow the message $m$ to be accepted provided that all parties behave honestly. We would like to calculate the probability that the protocol fails in the absence of attack.
 
+The protocol fails in the absence of attack if either Bob or Charlie rejects a message which Alice did in fact send, i.e. if Bob or Charlie detect too many mismatches on Alice's declaration $\sigma_m$. Since we have above derived that $s_B \le s_C$, it will always be more likely that Bob rejects than Charlie so we will seek to bound the probability that Bob measures more than $s_B L/2$ mismatches on either of his signature halves, and we note that this will also provide a bound for the equivalent probability at Charlie.
 
+Let $p_{\text{err}}$ be the probability of honest mismatch between Alice's declaration and either of Bob's eliminated signature halves. Because of the non-orthogonality of coherent states, $p_{\text{err}} > 0$, which we will model later. Using probability inequality Eq.~\ref{eqn:prob_inequality_2}, the probability that Bob rejects either of his halves is given by
+
+\begin{equation}
+\varepsilon_{\text{Bob rejects}} \le 2 \text{P}\left(E_A\right)
+\end{equation}
+where $E_A$ is the event that Bob measures more than $s_B L/2$ mismatches on either of his halves. We have implicitly assumed that $p_{\text{err}}$ is identical between states originally sent to Bob and those originally sent to Charlie, but this is easy to relax if desired.
+
+Using Hoeffding inequality Eq.~\ref{eqn:qds_hoeffding2} identially to the derivation of Eq.~\ref{eqn:qds_repudiation_events_probs} we see that
+\begin{equation}\label{eqn:ehonabort}
+\varepsilon_{\text{honest abort}} = \varepsilon_{\text{Bob rejects}} \le 2 \text{exp}\left( - \left[s_B - p_{\text{err}}\right]^2 L\right)
+\end{equation}
+which is our useful bound for the probability that the protocol aborts even though everyone is behaving honestly. Since Eq.~\ref{eqn:ehonabort} is exponentially decaying the probability that this happens can be made arbitrarily small, and so we have fulfilled Requirement~$5$.
+
+\subsection{Modelling $p_{\text{err}}$}
 
 
 
