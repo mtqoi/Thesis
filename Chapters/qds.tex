@@ -178,8 +178,8 @@ We now turn to consider the security of the QDS protocol discussed in Sec.~\MT{X
 In what follows we will prove that our protocol is:
 \begin{itemize}
 \item secure against a repudiation attack (Requirement $3$, Fig.~\MT{X}), 
-\item secure against a forgery attack (Requirement $1$, Fig.~\MT{X}),
-\item robust (Requirement $5$, Fig.~\MT{X})
+\item robust (Requirement $5$, Fig.~\MT{X}),
+\item secure against a forgery attack (Requirement $1$, Fig.~\MT{X})
 \end{itemize}
 and we will additionally demonstrate that fulfilment of requirement $1$ implies fulfilment of requirement $2$.
 
@@ -277,27 +277,48 @@ Using Eqs.~\ref{eqn:qds_hoeffding1},~\ref{eqn:qds_hoeffding2} we may now bound t
 \text{P}\left(E_D\right) \le \text{exp}\left( -\left[s_C - p_B\right]^2 L \right) \qq{provided that} p_B < s_C
 \end{align}
 
-\noindent where in the first two inequalities we have applied Eq.~\ref{eqn:qds_hoeffding1} and in the second two inequalities we have applied Eq.~\ref{eqn:hoeffding2}.
+\noindent where in the first two inequalities we have applied Eq.~\ref{eqn:qds_hoeffding1} and in the second two inequalities we have applied Eq.~\ref{eqn:hoeffding2}. So we arrive at
 
-Now, defining $p := \text{max}\left\{p_B, p_c\right\}$ we have
+%eqn:rep_prob_working
+
+We recall that Alice has the power to choose any $0 \le p_B, p_C \le 1$. We will consider some cases:
+
+\noindent Assume that $p_B \ge s_B$. Then by the first inequality of Eq.~\ref{eqn:qds_repudiation_events_probs} the probability Eq.~\ref{eqn:rep_prob_working} must decay exponentially %must it? Could we decay faster? 
+and so we are secure against repudiation. An analogous argument holds for the choice $p_C \ge s_B$ using the second inequality of Eq.~\ref{eqn:qds_repudiation_events_probs}.
+
+\noindent Assume instead that $p_B < s_B$ and $p_C < s_B$. It follows that if we choose $s_B \le s_C$, then $p_B < s_C$ and $p_C < s_C$, and therefore Eq.~\ref{eqn:rep_prob_working} decays exponentially via the third and fourth inequalities of Eq.~\ref{eqn:qds_repudiation_events_probs}.
+
+Thus, we have demonstrated the intuitive result that the choice $s_B \le s_C$ ensures that $\forall p_{B, C}$ the probability for successful repudiation is exponentially decaying. In other words, Bob's threshold for accepting the message should be stricter than Charlie's.
+
+Let us simplify Eq.~\ref{eqn:rep_prob_working}. Clearly, increasing $p_B$ or $p_C$ will cause both of the exponentials in the first term to decrease. Because of the inner minimum, we will only care about $\text{max}\left\{p_B, p_C\right\}$, and so we define $p := \text{max}\left\{p_B, p_C\right\}$ and write
 
 \begin{equation}
-\text{min}\left\{\text{P}\left(E_A\right), \text{P}\left(E_B\right)\right\} \le \text{exp}\left(- \left[ p - s_B\right]^2 L\right)
+\text{min}\left\{\text{exp}\left(- \left[p_B - s_B\right]^2L\right), \text{exp}\left(- \left[p_C - s_B\right]^2L\right)\right\} = \text{exp}\left(-\left[p - s_B\right]^2L\right).
 \end{equation}
-and
-\begin{equation}
-\text{P}\left(E_C\right) + \text{P}\left(E_D\right) \le 2 \text{exp}\left(-\left[s_C - p\right]^2 L\right).
-\end{equation}
-
-So finally we arrive at 
+We may maximise the second term of Eq.~\ref{eqn:rep_prob_working} 
 
 \begin{equation}
-\varepsilon_{\text{repudiation}} \le \text{min}\left\{ 2 \text{exp}\left( - \left[p - s_B\right]^2 L \right), \text{exp}\left( - \left[s_C - p\right]^2 L \right) \right\}
+\text{exp}\left(- \left[s_C - p_C\right]^2 L \right) + \text{exp}\left(- \left[s_C - p_B\right]^2 L \right) \le 2 \text{exp}\left( - \left[s_C - p\right]^2 L\right)
+\end{equation}
+and so
+
+\begin{equation}
+\varepsilon_{\text{repudiation}} \le \text{min}\left\{ 2 \text{exp}\left( - \left[p - s_B\right]^2 L \right), 2 \text{exp}\left( - \left[s_C - p\right]^2 L \right) \right\}.
 \end{equation}
 
-where we have doubled the first entry for convenience. 
+Since the minimum over two distinct Gaussians is maximized when the Gaussians have equal arguments, the probability $\varepsilon_{\text{repudiation}}$ is maximized when 
+\begin{equation}
+p = \frac{s_B + s_C}{2}.
+\end{equation}
+
+Finally, we reach
+\begin{equation}\label{eqn:erep}
+\varepsilon_{\text{repudiation}} \le 2 \text{exp}\left( - \frac{\left[s_C - s_B\right]^2}{4} L\right)
+\end{equation}
+as our useful bound for the probability that Alice succeeds in her repudiation attack. Since Eq.~\ref{eqn:erep} is exponentially decaying, $\forall \epsilon > 0,  \exists L$ such that $\varepsilon_{\text{repudiation}} < \epsilon$, and thus the probability can be made arbitrarily small. We are thus secure against repudiation attack.
 
 
+\subsection{Robustness}
 
 
 
