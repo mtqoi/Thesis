@@ -365,6 +365,38 @@ Integrating, we arrive at
 \noindent which models the probability of honest mismatch over a lossy channel with transmittivity $T$. The $\perr$ when the channel contains thermal noise, Fig.~\MT{X}, is given by \MT{put it here, and then talk about how it is derived and what it means.}
 
 \section{Security against forgery}
+We now turn to consider Requirement~$1$, Fig.~\MT{X}, that a QDS protocol should provide security against a forging attack. In this attack, a dishonest player (or fourth party, Eve) will declare a fake $m^\prime$ with the aim that it should be accepted by honest players as being genuine and from Alice. 
+
+The message $m^\prime$ will have an appended signature $\tau_{m^\prime}$ consisting of declared coherent state phases, and $m^\prime$ will be accepted if $\tau_{m^\prime}$ has sufficiently few mismatches with respect to an honest player's eliminated signature. 
+
+%Since Bob already knows $L/2$ of Charlie's elements, precisely those $Z_m^C$ which originated with Bob,
+
+Since Bob and Charlie already know $L/2$ of each other's eliminated signature elements--those which were forwarded during the Symmetrization step of the protocol--a dishonest player who is internal to the signature scheme will have an advantage over an external Eve. Additionally, since $s_B < s_C$ it is more likely that Charlie accepts a spurious $m^\prime$ and fake signature, and so the most dangerous forger will be a dishonest Bob. We thus proceed with the mantra ``Bob is Eve'' and take Bob as our dishonest, forging party. 
+
+Specifically, Bob's goal is to declare a string $\tilde{\Phi}^C_{Y, m^\prime}$, length $L/2$ such that 
+\begin{equation}\label{eqn:forging_condition}
+\mathcal{M}\left(\tilde{\Phi}^C_{Y, m^\prime}, Y_{m^\prime}^C\right) \le s_C \frac{L}{2}
+\end{equation}
+which will be accepted by Charlie. Bob has full control over the number of mismatches with to respect Charlie's other half signature, and can even cause there to be no mismatches if he desires.
+
+The only way that Bob can gain information about the $Y_{m^\prime}^C$ is by eavesdropping on the distribution of states from Alice to Charlie during steps~$2$ and $3$ of the protocol, and Bob's eavesdropping attack will be fully considered in Sec.~\MT{X}, below.
+
+Defining $\text{p}_e$ as the probability that Bob will induce a mismatch on an individual given signature element, the probability $\varepsilon_{\text{forgery}}$ that Bob succeeds in his forging attack is
+\begin{equation}\label{eqn:eforg}
+\varepsilon_{\text{forgery}} \le 2 \text{exp}\left( - \left[\text{p}_e - s_C\right]^2 L\right), 
+\end{equation}
+provided that $s_C \le \text{p}_e$. Equation~\ref{eqn:eforg} is derived using Eq.~\ref{eqn:qds_hoeffding1} similarly to Eqs.~\ref{eqn:erep},~\ref{eqn:ehonabort}. Charlie's threshold $s_C$ may be freely chosen, and by combining it with the analogous conditions required for Eqs.~\ref{eqn:erep},~\ref{eqn:ehonabort} we arrive at
+\begin{equation}\label{eqn:qds_security_condition}
+\perr \le s_B \le s_C \le \pe 
+\end{equation}
+where threshold parameters $s_B, s_C$ may be freely chosen to optimize security. 
+
+Equation~\ref{eqn:qds_security_condition} encodes the intuitive condition that the QDS protocol is secure provided that $\pe \ge \perr$, or, in other words, that a dishonest forger will cause more mismatches than an honest player. The protocol security analysis thus relies on finding parameters and channels for which a forger is guaranteed to make too many errors, and thus for which a forging attack will be detectable. In Sec.~\MT{X} will analyse several types of eavesdropping attack which a forger can attempt, and we will derive a bound for $\pe$, allowing us to analyse protocol security.
+
+\MT{Make a statement comparing this $\pe \ge \perr$ condition to QKD, where an eavesdropper can hide an attack below channel noise.}
+
+\section{Signature length $L$}
+
 
 
 
