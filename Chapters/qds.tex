@@ -396,7 +396,27 @@ Equation~\ref{eqn:qds_security_condition} encodes the intuitive condition that t
 \MT{Make a statement comparing this $\pe \ge \perr$ condition to QKD, where an eavesdropper can hide an attack below channel noise.}
 
 \section{Signature length $L$}
+\MT{Not sure yet whether I want to calculate $L$ first, or to discuss calculation of $\pe$ first. I'll write $L$ calculation just now so it is here, but I might move it later.}
 
+We now wish to calculate the total probability $\varepsilon_{\text{fail}}$ that our QDS protocol fails by any of the routes discussed earlier: by allowing Alice to repudiate, by allowing Bob to forge, or by aborting even in the absence of attack.
+
+For a figure of merit, we will assume that the protocol will fail in any of these ways with equal probability, and so we set
+\begin{equation}
+\varepsilon_{\text{fail}} = \varepsilon_{\text{honest abort}} = \varepsilon_{\text{repudiation}} = \varepsilon_{\text{forgery}},
+\end{equation}
+though we note that alternative combinations could be considered. Let us eliminate free parameters $s_B, s_C$ by equating the arguments of Eqs.~\ref{eqn:erep},~\ref{eqn:ehonabort},~\ref{eqn:eforg}
+\begin{equation}
+\left(\pe - s_C\right)^2  = \frac{1}{4}\left(s_C - s_B\right)^2 = \left(s_B - \perr\right)^2
+\end{equation}
+from which we may derive
+\begin{equation}
+s_B = \frac{3}{4} \perr + \frac{1}{4}\pe \qq{and} s_C = \frac{1}{4}\perr + \frac{3}{4}\pe
+\end{equation}
+as our choices of security thresholds. Notice that since $\perr \le \pe$ we automatically fulfil $s_B \le s_C$. The overall probability of failure becomes
+
+\begin{equation}\label{eqn:efail}
+\varepsilon_{\text{fail}} \le 2 \text{exp}\left( - \left[\pe - \perr\right]^2 \frac{L}{16}\right).
+\end{equation}
 
 
 
