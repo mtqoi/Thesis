@@ -515,8 +515,29 @@ which is one of our key results. The Holevo information automatically includes a
 
 Since binary entropy $\text{h}\left(\pe\right)$ is monotonic for $\pe \le 1/2$, Fig.~\MT{X}, we conclude that a lower bound for $\text{h}\left(\pe\right)$ also gives us a lower bound for $\pe$. \MT{Mention/show somewhere that $\pe$ is always less than $1/2$.} The inequality~\ref{eqn:qds_hpe} may be numerically solved for Bob's mismatch rate $\pe$, which can be combined with $\perr$ in to calculate $\varepsilon_{\text{fail}}$ and provide security against collective attacks \MT{define} provided that Bob's Holevo information $\chi$ can be estimated.
 
+\section{Attack analysis}
+Let us consider several different models of Bob's eavesdropping attack. Different models will affect both the parameter regimes over which our protocol can be made secure, and the level of resources required for that security. As in the QKD literature we define the following three types of quantum attack
+\begin{itemize}
+\item individual: \MT{X}
+\item collective: \MT{X}
+\item coherent: \MT{X}
+\end{itemize}
+\MT{TODO: also create a figure to illustrate all of these, and provide sufficient references to the literature.}
 
+In this Thesis we will focus on individual and collective forging attacks. Full security against coherent quantum attacks in the QKD literature has only recently been proven for the relatively simple case of the gPSK alphabet \MT{cite}, and a security proof remains tricky for the discrete modulation of coherent states. %what about Lutkenhaus papers from around 2006? What type of security do they provide?
 
+In the QKD literature it was demonstrated \MT{cite} that under \MT{conditions}, security against the collective attack may be proven in terms of security against individual attack. \MT{demonstrate (or motivate) that the same should be true here.}
+
+In keeping with recent trends in the QKD literature for the discrete modulation of coherent states, we will focus on bounding the attack strength of individual attack, and then use \MT{conditions} to reach security against collective attack. 
+
+\MT{Dicuss fully the state of CV QKD security proofs, and provide a short literature review of recent developments.}
+
+In particular, we will study both the beamsplitter attack and the entangling cloner attack for our protocol. In both of these attacks the quantum distribution channel will be replaced, by Bob and unbeknownst to Alice and Charlie, with a beamsplitter intended to mimic the effect of the channel on Charlie's measurement outcomes. In particular, Bob will either input into the channel the vacuum state, a thermal state Eq.~\MT{X}, or one arm of his two-mode entangled state Eq.~\MT{X}.
+
+\subsection{Beamsplitter attack}
+In its canonical form, the beamsplitter attack--as depicted in Fig.~\MT{X}--allows Bob to replace a lossy channel with a corresponding beamsplitter with vacuum input into the fourth port. Bob receives his quantum system from the reflected output port, and from his system he will attempt to gain information about Charlie's output. Crucially, to honest players Alice and Charlie this attack is indistinguishable from simply having a lossy transmission channel, and so all channel loss must be attributed to the action of the dishonest Bob. 
+
+Since in the beamsplitter attack Bob inputs only vacuum into the beamsplitter's fourth port, this form of the beamsplitter attack cannot model any excess noise $\xi$ and it should therefore be ignored in the analysis. However, to include excess noise in our analysis, we will examine two modifications to the standard beamsplitter attack. \MT{discuss them, and come up with some names for the types of attack.}
 
 
 
