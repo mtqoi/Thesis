@@ -537,17 +537,56 @@ In particular, we will study both the beamsplitter attack and the entangling clo
 \subsection{Beamsplitter attack}
 In its canonical form, the beamsplitter attack--as depicted in Fig.~\MT{X}--allows Bob to replace a lossy channel with a corresponding beamsplitter with vacuum input into the fourth port. Bob receives his quantum system from the reflected output port, and from his system he will attempt to gain information about Charlie's output. Crucially, to honest players Alice and Charlie this attack is indistinguishable from simply having a lossy transmission channel, and so all channel loss must be attributed to the action of the dishonest Bob. 
 
-Since in the beamsplitter attack Bob inputs only vacuum into the beamsplitter's fourth port, this form of the beamsplitter attack cannot model any excess noise $\xi$ and it should therefore be ignored in the analysis. However, to include excess noise in our analysis, we will examine two modifications to the standard beamsplitter attack. \MT{discuss them, and come up with some names for the types of attack.}
+Since in the beamsplitter attack Bob inputs only vacuum into the beamsplitter's fourth port, this form of the beamsplitter attack cannot model any excess noise $\xi$ and it should therefore be ignored in the analysis. However, in order to include excess noise in our analysis, we will examine two modifications to the standard beamsplitter attack. \MT{discuss them, and come up with some names for the types of attack.}
 
+\subsubsection{\underline{$\xi = 0$}}
+We will calculate the Holevo information $\chi$ of Bob's state after performing attack $BS0$ on the quantum channel. \MT{Make sure these attacks are defined somewhere.} In this attack, Bob will replace the channel with a beamsplitter and take possession of the output of the reflected port. Crucially, the beamsplitter should be chosen such that it mimics the channel exactly, and Charlie should be unable to tell whether an attack has taken place - rather, \emph{all} loss should be attributed to Bob.
 
+Let Alice send state $\dyad{\alpha_k}$, with the $\alpha_k \in \mathcal{A}_4$. Bob inputs the vacuum state $\dyad{0}$ into the fourth port of the beamsplitter. We will calculate the Holevo information of Bob's state $\rho_{B | C}$, which is conditioned on Charlie measuring a particular eliminated signature element.
 
+Using beamsplitter relation Eq.~\MT{X}, we see that a beamsplitter with transmittivity $T$ enacts the following transformation on the input state
+\begin{equation}
+\dyad{\alpha_k}_A \otimes \dyad{0}_B \rightarrow \dyad{\sqrt{T} \alpha_k}_C \otimes \dyad{\sqrt{1-T}\alpha_k}_{B},
+\end{equation}
+and so Charlie holds state $\dyad{\sqrt{T}\alpha_k}$ as in the derivation of $\perr$ above, while Bob holds $\dyad{\sqrt{1-T}\alpha_k}$.
 
+Similarly, when an arbitrary $\alpha_k \in \mathcal{A}_4$ is sent uniformly at random, we must mix over the alphabet and thus the mixed two-mode output state is
+\begin{align}
+\left(\frac{1}{4}\sum_{\alpha_k \in \mathcal{A}_4} \dyad{\alpha_k}_A\right) &\otimes \dyad{0}_B \rightarrow \notag \\
+&\frac{1}{4}\sum_{\alpha_k \in \mathcal{A}_4} \left(\dyad{\sqrt{T}\alpha_k}_C \otimes \dyad{\sqrt{1-T}\alpha_k}_B\right).
+\end{align}
 
+\noindent Charlie heterodynes on his mode and receives outcome $c \in \mathbb{C}$, and so Bob now holds
+\begin{equation}
+\rho_{B | c} = \frac{1}{4}\frac{1}{\text{P}\left(c\right)}\sum_{\alpha_k \in \mathcal{A}_4} \left| \langle c | \sqrt{T}\alpha_k\rangle \right|^2 \times \dyad{\sqrt{1-T}\alpha_k}_B
+\end{equation}
+where $\text{P}\left(c \given \alpha_k, T\right) = \left| \langle c | \sqrt{T}\alpha_k\rangle \right|^2$ corresponds to the probability that Charlie measures $c$ on his mode given that he received state $\dyad{\sqrt{T}\alpha_k}$, while $\text{P}\left(c\right) = \sum_{\alpha_k} \text{P}\left(c | \alpha_k, T\right)$ corresponds to the total unconditional probability that he measures $c$.
 
+Recall that the eliminated signature element held by Charlie is determined entirely by his heterodyne outcome $c$, Table.~\MT{X}. Since $\chi$ is defined in terms of eliminated signature element rather than heterodyne measurement outcome, and since many $c$ will return the same eliminated signature element, we must now mix $\rho_{B | c}$ over phase-space quadrants.
 
+\MT{Assume I have introduced some notation for eliminated signature elements before now}
 
+Let us consider the first eliminated signature element $e_1$. We integrate $\rho_{B | c}$
 
+\begin{equation}
+\rho_{B | e_1} = \mathcal{N}\left(e_1\right) \int\limits_{\text{Re}\left(c\right) > 0, \; \text{Im}\left(c\right)>0} \Diff2 c \; \text{P}\left(c\right) \; \rho_{B | c},
+\end{equation}
+with the normalization factor defined as 
+\begin{equation}
+\frac{1}{\mathcal{N}\left(e_1\right)} = \int\limits_{\text{Re}\left(c\right) > 0, \; \text{Im}\left(c\right)>0} \Diff2 c \; \text{P}\left(c\right).
+\end{equation}
 
+\noindent The state $\rho_{B|e_1}$ is Bob's state when Charlie holds eliminated signature element $e_1$. Bob's states conditioned on eliminated signature elements $e_2, e_3, e_4$ are calculated likewise by varying the limits of integration.
+
+Bob's \emph{a posteriori} entropy thus reads
+\begin{equation}
+S_{\text{aposteriori}} = \sum_{e_k} \text{P}\left(e_k\right) S\left(\rho_{B | e_k}\right)
+\end{equation}
+in terms of Von Neumann entropy $S$. In this chapter we will work in the ideal case where each eliminated signature element is equally likely, and where the entropies of each of the $\rho_{B | e_k}$ are equal, and so we simply write Bob's \emph{a posteriori} entropy as
+
+\begin{equation}\label{eqn:aposteriori_entropy}
+S_{\text{aposteriori}} = S\left(\rho_{B | e_1}\right).
+\end{equation}
 
 
 
