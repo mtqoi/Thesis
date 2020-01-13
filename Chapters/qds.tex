@@ -344,8 +344,8 @@ The probability $\perr$ corresponds to the probability that a heterodyne measure
 
 \noindent when the channel has transmittivity $T$. \MT{show a derivation of this formula somewhere (either here, or in chapter~$1$.)} A heterodyne measurement on the output state gives outcome $z \in \mathbb{C}$ with probability
 \begin{align}
-\text{P}\left(z\right) = \langle z | \sqrt{T}\alpha\rangle\langle\sqrt{T}\alpha|z\rangle = |\langle z | \sqrt{T} \alpha \rangle |^2& \notag \\
-= \frac{1}{\pi}\text{exp}\left( - | z - \sqrt{T}\alpha |^2 \right)&
+\text{P}\left(z\right) = \langle z | \sqrt{T}\alpha\rangle\langle\sqrt{T}\alpha|z\rangle = \left|\langle z | \sqrt{T} \alpha \rangle \right|^2& \notag \\
+= \frac{1}{\pi}\text{exp}\left( - \left| z - \sqrt{T}\alpha \right|^2 \right)&
 \end{align}
 where ket vector $|z\rangle$ denotes the coherent state centred on $z$. Then,
 
@@ -441,34 +441,34 @@ Because $\mathcal{E}_j$ can take one of two values, the Shannon entropy $\text{H
 
 Now, consider the conditional entropy
 \begin{equation}
-\text{H}\left(\mathcal{E}_j, y_1^j, y_2^j | \phi_j\right)
+\text{H}\left(\mathcal{E}_j, y_1^j, y_2^j \given \phi_j\right)
 \end{equation}
 which is related to the uncertainty about whether a mismatch has occurred under Bob's declaration $\phi_j$. Using the chain rule for conditional entropies, Eq.~\MT{X}, we write
 \begin{equation}\label{eqn:qds_pe_deriv_1}
-\text{H}\left( \mathcal{E}_j, y_1^j, y_2^j | \phi_j \right) = 
-\text{H}\left( \mathcal{E}_j | y_1^j, y_2^j, \phi_j\right) + 
-\text{H}\left( y_1^j, y_2^j | \phi_j\right).
+\text{H}\left( \mathcal{E}_j, y_1^j, y_2^j \given \phi_j \right) = 
+\text{H}\left( \mathcal{E}_j \given y_1^j, y_2^j, \phi_j\right) + 
+\text{H}\left( y_1^j, y_2^j \given \phi_j\right).
 \end{equation}
 Since an element $\mathcal{E}_j$ is uniquely determined once $\phi_j, y_1^j, y_2^j$ are known, we may immediately write
 \begin{equation}
-\text{H}\left( \mathcal{E}_j | y_1^j, y_2^j, \phi_j\right) = 0.
+\text{H}\left( \mathcal{E}_j \given y_1^j, y_2^j, \phi_j\right) = 0.
 \end{equation}
 
 \noindent Using chain rule Eq.~\MT{X} once again on the left hand side of Eq.~\MT{X}, but this time expanding over variable $y_1^j, y_2^j$,
 \begin{align}\label{eqn:qds_pe_deriv_2}
-\text{H}\left( \mathcal{E}_j, y_1^j, y_2^j | \phi_j \right) &=
-\text{H}\left(y_1^j, y_2^j | \mathcal{E}_j, \phi_j\right) + \text{H}\left(\mathcal{E}_j | \phi_j\right) \notag \\
-&\le \text{H}\left(y_1^j, y_2^j | \mathcal{E}_j, \phi_j\right) + \text{H}\left(\mathcal{E}_j\right) \notag \\
-&= \text{H}\left(y_1^j, y_2^j | \mathcal{E}_j, \phi_j\right) + \text{h}\left(\pe\right)
+\text{H}\left( \mathcal{E}_j, y_1^j, y_2^j \given \phi_j \right) &=
+\text{H}\left(y_1^j, y_2^j \given \mathcal{E}_j, \phi_j\right) + \text{H}\left(\mathcal{E}_j \given \phi_j\right) \notag \\
+&\le \text{H}\left(y_1^j, y_2^j \given \mathcal{E}_j, \phi_j\right) + \text{H}\left(\mathcal{E}_j\right) \notag \\
+&= \text{H}\left(y_1^j, y_2^j \given \mathcal{E}_j, \phi_j\right) + \text{h}\left(\pe\right)
 \end{align}
 where the inequality follows because conditioning cannot increase entropy, Eq.~\MT{X}.
 
 Combining Eqs.~\ref{eqn:qds_pe_deriv_1} and \ref{eqn:qds_pe_deriv_2},
 
 \begin{align}\label{eqn:qds_pe_deriv_3}
-\text{H}\left(y_1^j, y_2^j | \phi_j\right) &\le \text{H}\left(y_1^j, y_2^j | \mathcal{E}_j, \phi_j\right) + \text{h}\left(\pe\right) \notag \\
-&= \text{P}\left(\mathcal{E}_j=0\right) \text{H}\left(y_1^j, y_2^j | \mathcal{E}_j=0, \phi_j\right) \notag \\
-&+ \text{P}\left(\mathcal{E}_j=1\right) \text{H}\left(y_1^j, y_2^j | \mathcal{E}_j=1, \phi_j\right) + \text{h}\left(\pe\right)
+\text{H}\left(y_1^j, y_2^j \given \phi_j\right) &\le \text{H}\left(y_1^j, y_2^j \given \mathcal{E}_j, \phi_j\right) + \text{h}\left(\pe\right) \notag \\
+&= \text{P}\left(\mathcal{E}_j=0\right) \text{H}\left(y_1^j, y_2^j \given \mathcal{E}_j=0, \phi_j\right) \notag \\
+&+ \text{P}\left(\mathcal{E}_j=1\right) \text{H}\left(y_1^j, y_2^j \given \mathcal{E}_j=1, \phi_j\right) + \text{h}\left(\pe\right)
 \end{align}
 with
 \begin{equation}
@@ -477,24 +477,24 @@ with
 
 \noindent Now, because of the ambiguity in Bob's declaration, ie. because there are two eliminated signature elements consistent with a given $\mathcal{E}_j=0$ and $\phi_j$, and since we are free to permute and relabel $y_1^j \leftrightarrow y_2^j$, we have four choices for the variable $y_1^j, y_2^j$ once $\mathcal{E}_j$ and $\phi_j$ are chosen. Thus,
 \begin{equation}
-\text{H}\left(y_1^j, y_2^j | \mathcal{E}_j=0, \phi_j\right) \le \log_2 4 = 2.
+\text{H}\left(y_1^j, y_2^j \given \mathcal{E}_j=0, \phi_j\right) \le \log_2 4 = 2.
 \end{equation}
 
 \noindent Additionally, since Charlie eliminates precisely half of $\mathcal{A}_4$ to form his eliminated signature, we see that
 \begin{equation}
-\text{H}\left(y_1^j, y_2^j | \mathcal{E}_j=0, \phi_j\right) = \text{H}\left(y_1^j, y_2^j | \mathcal{E}_j=1, \phi_j\right),
+\text{H}\left(y_1^j, y_2^j \given \mathcal{E}_j=0, \phi_j\right) = \text{H}\left(y_1^j, y_2^j \given \mathcal{E}_j=1, \phi_j\right),
 \end{equation}
 and so Eq.~\ref{eqn:qds_pe_deriv_3} becomes
 \begin{equation}\label{eqn:qds_pe_deriv_4}
-\text{H}\left(y_1^j, y_2^j | \phi_j\right) \le 2 + \text{h}\left(\pe\right).
+\text{H}\left(y_1^j, y_2^j \given \phi_j\right) \le 2 + \text{h}\left(\pe\right).
 \end{equation}
 
 \noindent Let us expand the left hand side of Eq.~\ref{eqn:qds_pe_deriv_4} using the definition of mutual information, Eq.~\MT{X}:
 \begin{equation}\label{eqn:qds_pe_deriv_5}
-\text{H}\left(y_1^j, y_2^j | \phi_j\right) = \text{H}\left(y_1^j, y_2^j\right) - \text{I}\left(y_1^j, y_2^j : \phi_j\right).
+\text{H}\left(y_1^j, y_2^j \given \phi_j\right) = \text{H}\left(y_1^j, y_2^j\right) - \text{I}\left(y_1^j, y_2^j : \phi_j\right).
 \end{equation}
 
-\noindent There are four possible eliminated signature elements, therefore $8$ possible choices for $y_1^j, y_2^j$ including relabeling $y_1^j \leftrightarrow y_2^j$, and so 
+\noindent There are four possible eliminated signature elements, therefore eight possible choices for $y_1^j, y_2^j$ including relabeling $y_1^j \leftrightarrow y_2^j$, and so 
 \begin{equation}
 \text{H}\left(y_1^j, y_2^j\right) = \log_2 8 = 3.
 \end{equation}
@@ -503,7 +503,7 @@ and so Eq.~\ref{eqn:qds_pe_deriv_3} becomes
 \MT{prove this fact in ch1} 
 and so
 \begin{equation}\label{eqn:qds_pe_deriv_6}
-\text{H}\left(y_1^j, y_2^j \;\middle|\; \phi_j \right) = 3 - \chi\left(y_1^j, y_2^j : \phi_j\right).
+\text{H}\left(y_1^j, y_2^j \given \phi_j \right) = 3 - \chi\left(y_1^j, y_2^j : \phi_j\right).
 \end{equation}
 
 \noindent Finally, combining Eqs.~\ref{eqn:qds_pe_deriv_4} and \ref{eqn:qds_pe_deriv_6} we arrive at
