@@ -418,9 +418,102 @@ as our choices of security thresholds. Notice that since $\perr \le \pe$ we auto
 \varepsilon_{\text{fail}} \le 2 \text{exp}\left( - \left[\pe - \perr\right]^2 \frac{L}{16}\right).
 \end{equation}
 
+\section{Bounding $\pe$}
+To complete the security analysis of our protocol, and in order to compute an upper bound for $\varepsilon_{\text{fail}}$ Eq.~\ref{eqn:efail}, we must find an upper bound for $\pe$, the rate at which a forging Bob will induce a mismatch with respect to Charlie's signature. We will be secure provided that $\pe > \perr$. The key contribution of this section will be an upper bound for $\pe$ under two different types of forging attack
 
+%, while fully taking into account the ambiguity in Bob's declaration.
 
+%This ambiguity stems from the following. Because Charlie eliminates two states from $\mathcal{A}_4$, Fig.~\ref{fig:elimsig}, there are
 
+Bob will declare a string $\tilde{\Phi}_{Y, m^\prime}^C$, length $L/2$,  which causes sufficiently few mismatches with respect to Charlie. For convenience we will abbreviate Bob's declared string as $\tilde{\Phi}^{Bob}$. Our security analysis must fully take into account the ambiguity in Bob's declarations. This ambiguity stems from the following, and is illustrated in Fig.~\MT{X}.
+
+Because Charlie eliminates two states from $\mathcal{A}_4$, Fig.~\ref{fig:elimsig}, there are a remaining two states in $\mathcal{A}_4$ which Bob can declare without introducing a mismatch. Each of the potential two states is shared with another possible eliminated signature element, and so the probability that Bob induces a mismatch is \emph{not equivalent} to the probability that Bob misidentifies an element of Charlie's eliminated signature\footnote{And so a Helstrom-like approach \MT{define} will not work.}
+
+This forces us to work directly in terms of mismatch probability $\pe$, which we do via our error variable $\mathcal{E}$, Eq.~\ref{eqn:error}, the $j^{\text{th}}$ element of which is $1$ if Bob induces a mismatch, and $0$ if there is no mismatch. We will continue to work in terms of QPSK alphabet $\mathcal{A}_4$, though in Sec.~\MT{X} we will show how the proof may be generalized to $\mathcal{A}_N$.
+
+To proceed, we let $Y_j$ be the $j^{\text{th}}$ element of $Y_{m^\prime}^C$, the half of Charlie's eliminated signature based on states received directly from Alice. Bob will attempt to gain information about the $Y_j$. We write $Y_j = \left\{y_1^j, y_2^j\right\}$, with $y_1^j, y_2^j \in \mathcal{A}_4$ denoting the states which Charlie has eliminated. We note that $y_1^j$ and $y_2^j$ must be adjacent to each other in phase-space, that is, if $y_1^j = \alpha$ then $y_2^j$ must be either $i \alpha$ or $- i \alpha$. The string $\tilde{\Phi}^{Bob} = \left\{\phi_j\right\}_{j=1}^{L/2}$ is Bob's declaration, which is the result of an unspecified but optimal POVM and classical strategy.
+
+A mismatch occurs when $\phi_j = y_1^j$ or $\phi_j = y_2^j$. Bob's average mismatch rate $\pe$ may be written in terms of $\mathcal{E}$
+\begin{equation}
+\pe = \text{P}\left(\mathcal{E}_j = 1\right).
+\end{equation}
+Because $\mathcal{E}_j$ can take one of two values, the Shannon entropy $\text{H}\left(\mathcal{E}_j\right)$ is equivalent to the binary entropy $\text{h}\left(\pe\right)$, which is defined in Eq.~\MT{X}. %define this equation in introduction chapter.
+
+Now, consider the conditional entropy
+\begin{equation}
+\text{H}\left(\mathcal{E}_j, y_1^j, y_2^j | \phi_j\right)
+\end{equation}
+which is related to the uncertainty about whether a mismatch has occurred under Bob's declaration $\phi_j$. Using the chain rule for conditional entropies, Eq.~\MT{X}, we write
+\begin{equation}\label{eqn:qds_pe_deriv_1}
+\text{H}\left( \mathcal{E}_j, y_1^j, y_2^j | \phi_j \right) = 
+\text{H}\left( \mathcal{E}_j | y_1^j, y_2^j, \phi_j\right) + 
+\text{H}\left( y_1^j, y_2^j | \phi_j\right).
+\end{equation}
+Since an element $\mathcal{E}_j$ is uniquely determined once $\phi_j, y_1^j, y_2^j$ are known, we may immediately write
+\begin{equation}
+\text{H}\left( \mathcal{E}_j | y_1^j, y_2^j, \phi_j\right) = 0.
+\end{equation}
+
+\noindent Using chain rule Eq.~\MT{X} once again on the left hand side of Eq.~\MT{X}, but this time expanding over variable $y_1^j, y_2^j$,
+\begin{align}\label{eqn:qds_pe_deriv_2}
+\text{H}\left( \mathcal{E}_j, y_1^j, y_2^j | \phi_j \right) &=
+\text{H}\left(y_1^j, y_2^j | \mathcal{E}_j, \phi_j\right) + \text{H}\left(\mathcal{E}_j | \phi_j\right) \notag \\
+&\le \text{H}\left(y_1^j, y_2^j | \mathcal{E}_j, \phi_j\right) + \text{H}\left(\mathcal{E}_j\right) \notag \\
+&= \text{H}\left(y_1^j, y_2^j | \mathcal{E}_j, \phi_j\right) + \text{h}\left(\pe\right)
+\end{align}
+where the inequality follows because conditioning cannot increase entropy, Eq.~\MT{X}.
+
+Combining Eqs.~\ref{eqn:qds_pe_deriv_1} and \ref{eqn:qds_pe_deriv_2},
+
+\begin{align}\label{eqn:qds_pe_deriv_3}
+\text{H}\left(y_1^j, y_2^j | \phi_j\right) &\le \text{H}\left(y_1^j, y_2^j | \mathcal{E}_j, \phi_j\right) + \text{h}\left(\pe\right) \notag \\
+&= \text{P}\left(\mathcal{E}_j=0\right) \text{H}\left(y_1^j, y_2^j | \mathcal{E}_j=0, \phi_j\right) \notag \\
+&+ \text{P}\left(\mathcal{E}_j=1\right) \text{H}\left(y_1^j, y_2^j | \mathcal{E}_j=1, \phi_j\right) + \text{h}\left(\pe\right)
+\end{align}
+with
+\begin{equation}
+\text{P}\left(\mathcal{E}_j=0\right) = 1 - \pe \qq{and} \text{P}\left(\mathcal{E}_j=1\right) = \pe.
+\end{equation}
+
+\noindent Now, because of the ambiguity in Bob's declaration, ie. because there are two eliminated signature elements consistent with a given $\mathcal{E}_j=0$ and $\phi_j$, and since we are free to permute and relabel $y_1^j \leftrightarrow y_2^j$, we have four choices for the variable $y_1^j, y_2^j$ once $\mathcal{E}_j$ and $\phi_j$ are chosen. Thus,
+\begin{equation}
+\text{H}\left(y_1^j, y_2^j | \mathcal{E}_j=0, \phi_j\right) \le \log_2 4 = 2.
+\end{equation}
+
+\noindent Additionally, since Charlie eliminates precisely half of $\mathcal{A}_4$ to form his eliminated signature, we see that
+\begin{equation}
+\text{H}\left(y_1^j, y_2^j | \mathcal{E}_j=0, \phi_j\right) = \text{H}\left(y_1^j, y_2^j | \mathcal{E}_j=1, \phi_j\right),
+\end{equation}
+and so Eq.~\ref{eqn:qds_pe_deriv_3} becomes
+\begin{equation}\label{eqn:qds_pe_deriv_4}
+\text{H}\left(y_1^j, y_2^j | \phi_j\right) \le 2 + \text{h}\left(\pe\right).
+\end{equation}
+
+\noindent Let us expand the left hand side of Eq.~\ref{eqn:qds_pe_deriv_4} using the definition of mutual information, Eq.~\MT{X}:
+\begin{equation}\label{eqn:qds_pe_deriv_5}
+\text{H}\left(y_1^j, y_2^j | \phi_j\right) = \text{H}\left(y_1^j, y_2^j\right) - \text{I}\left(y_1^j, y_2^j : \phi_j\right).
+\end{equation}
+
+\noindent There are four possible eliminated signature elements, therefore $8$ possible choices for $y_1^j, y_2^j$ including relabeling $y_1^j \leftrightarrow y_2^j$, and so 
+\begin{equation}
+\text{H}\left(y_1^j, y_2^j\right) = \log_2 8 = 3.
+\end{equation}
+
+\noindent Additionally, we lower bound Eq.~\ref{eqn:qds_pe_deriv_5} by using the fact that the Holevo information maximizes the mutual information over all POVMs 
+\MT{prove this fact in ch1} 
+and so
+\begin{equation}\label{eqn:qds_pe_deriv_6}
+\text{H}\left(y_1^j, y_2^j \;\middle|\; \phi_j \right) = 3 - \chi\left(y_1^j, y_2^j : \phi_j\right).
+\end{equation}
+
+\noindent Finally, combining Eqs.~\ref{eqn:qds_pe_deriv_4} and \ref{eqn:qds_pe_deriv_6} we arrive at
+\begin{equation}\label{eqn:qds_hpe}
+\text{h}\left(\pe\right) \ge 1 - \chi \left(y_1^j, y_2^j : \phi_j\right)
+\end{equation}
+which is one of our key results. The Holevo information automatically includes a dishonest Bob's optimal POVM and classical strategy.
+%and so Eq.~\ref{eqn:qds_hpe} provides a good lower bound for
+
+Since binary entropy $\text{h}\left(\pe\right)$ is monotonic for $\pe \le 1/2$, Fig.~\MT{X}, we conclude that a lower bound for $\text{h}\left(\pe\right)$ also gives us a lower bound for $\pe$. \MT{Mention/show somewhere that $\pe$ is always less than $1/2$.} The inequality~\ref{eqn:qds_hpe} may be numerically solved for Bob's mismatch rate $\pe$, which can be combined with $\perr$ in to calculate $\varepsilon_{\text{fail}}$ and provide security against collective attacks \MT{define} provided that Bob's Holevo information $\chi$ can be estimated.
 
 
 
