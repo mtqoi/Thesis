@@ -613,31 +613,72 @@ We wish to mix a coherent state $\rho_{\alpha_k} = \dyad{\alpha_k}$ and a therma
 \rho_{\text{input}} = \rho_{\alpha_k} \otimes \rho_{\text{thermal}}.
 \end{equation}
 
-\noindent Enacting beamsplitter relation Eq.~\MT{X} on $\rho_{\text{input}}$, we arrive at our two-mode output state shared between Bob and Charlie
-
-\begin{align}
-%
-&\rho_{\text{output}} = \sum_{n, m, p=0}^\infty e^{- \left| \alpha_k \right|^2}\left(1 - e^{- \tilde{\beta}}\right) \frac{\alpha_k^n \overline{\alpha_k}^m}{\sqrt{n! m!}} e^{- p \tilde{\beta}} \sqrt{n! p! m! p!} \notag \\
-%
-&\sum_{k_1, k_2, l_1, l_2=0}^{n, p, m, p} \pmqty{n \\ k_1} \pmqty{p \\ k_2} \pmqty{m \\ l_1} \pmqty{p \\ l_2} \left(\sqrt{T}\right)^{k_1 + l_1} \left(\sqrt{1-T}\right)^{n + m - k_1 - l_1} \notag \\
-%
-&\left(-\sqrt{1-T}\right)^{k_2 + l_2} \left(\sqrt{T}\right)^{2 p - k_2 - l_2} \sqrt{\left(k_1 + k_2\right)! \left(n + p - k_1 - k_2\right)!} \notag \\
-%
-&\sqrt{\left(l_1 + l_2\right)! \left(m + p - l_1 - l_2\right)!}
-%
-\dyad{k_1 + k_2, n + p - k_1 - k_1}{l_1 + l_2, m + p - l_1 - l_2}
-\end{align}
-\MT{make equation prettier. And decide whether I even want to include it.}
-\noindent Heterodyning on Charlie's mode using POVM Eq.~\MT{X}, we see that Bob's sub-normalized conditional state is
+\noindent Enacting beamsplitter relation Eq.~\MT{X} on $\rho_{\text{input}}$, we arrive at our two-mode output state shared between Bob and Charlie.
+%\begin{align}
+%%
+%&\rho_{\text{output}} = \sum_{n, m, p=0}^\infty e^{- \left| \alpha_k \right|^2}\left(1 - e^{- \tilde{\beta}}\right) \frac{\alpha_k^n \overline{\alpha_k}^m}{\sqrt{n! m!}} e^{- p \tilde{\beta}} \sqrt{n! p! m! p!} \notag \\
+%%
+%&\sum_{k_1, k_2, l_1, l_2=0}^{n, p, m, p} \pmqty{n \\ k_1} \pmqty{p \\ k_2} \pmqty{m \\ l_1} \pmqty{p \\ l_2} \left(\sqrt{T}\right)^{k_1 + l_1} \left(\sqrt{1-T}\right)^{n + m - k_1 - l_1} \notag \\
+%%
+%&\left(-\sqrt{1-T}\right)^{k_2 + l_2} \left(\sqrt{T}\right)^{2 p - k_2 - l_2} \sqrt{\left(k_1 + k_2\right)! \left(n + p - k_1 - k_2\right)!} \notag \\
+%%
+%&\sqrt{\left(l_1 + l_2\right)! \left(m + p - l_1 - l_2\right)!}
+%%
+%\dyad{k_1 + k_2, n + p - k_1 - k_1}{l_1 + l_2, m + p - l_1 - l_2}
+%\end{align}
+%\MT{make equation prettier. And decide whether I even want to include it.}
+Heterodyning on Charlie's mode using POVM Eq.~\MT{X}, we see that Bob's sub-normalized conditional state is
 
 \MT{I think I should display Bob's sub-normalized conditional state, since I will then obviously work with it, but perhaps it is a waste of space to display the two-mode state? I can speak to NK about it}
 
+\begin{align}\label{eqn:qds_bs1_deriv_2}
+%
+&\tilde{\rho}_B\left(c\right) = \frac{e^{-\left|\alpha_k\right|^2}}{\pi}\left(1 - e^{-\tilde{\beta}}\right) \sum_{n, m, p=0}^\infty \frac{\alpha_k^n \overline{\alpha_k}^m}{\sqrt{n! m!}} e^{- p \tilde{\beta}} \sqrt{n! p! m! p!} \notag \\
+%
+&\sum_{k_1, k_2, l_1, l_2=0}^{n, p, m, p} \pmqty{n \\ k_1} \pmqty{p \\ k-2} \pmqty{m \\ l_1} \pmqty{p \\ l_2} \left(\sqrt{T}\right)^{k_1 + l_1} \left(\sqrt{1-T}\right)^{n + m - k_1 - l_1} \notag \\
+%
+&\left(-\sqrt{1-T}\right)^{k_2 + l_2} \left(\sqrt{T}\right)^{2 p - k_2 - l_2} \sqrt{\left(n + p - k_1 - k_2\right)!} \notag \\
+%
+&\sqrt{\left(m + p - l_1 - l_2\right)!} \dyad{n + p - k_1 - k_2}{m + p - l_1 - l_2} \delta_{k_1+k_2}^{l_1+l_2} \left[ e^{-\left|c\right|^2} c^{k_1 + k_2} \overline{c}^{l_1 + l_2} \right]
+%
+\end{align}
+\MT{make this equation pretty. Also introduce somewhere the tilde notation to convey a sub-normalized state}
+where $\delta_k^l$ is the Kronecker delta which arises after tracing out Charlie's mode.
+
+Now, to reach the \emph{a posteriori} state under this attack we will integrate this $\tilde{\rho}_B$, as in Eq.~\ref{eqn:qds_aposterioristate}. This will correspond to simply integrating the scalar terms involving $c$, noting that the integration operation will commute with the rest of state Eq.~\ref{eqn:qds_bs1_deriv_2}. Note also that we may neglect the $\text{P}\left(c\right)$ term from the integrand Eq.~\ref{eqn:qds_aposterioristate}, since our state is already sub-normalized by precisely the required factor. 
+
+The integration is best performed in Polar coordinates since radial and azimuthal integrands separate. So we find
+\begin{align}\label{eqn:qds_bs1_deriv_3}
+\int\limits_{\text{Re}\left(c\right)>0, \text{Im}\left(c\right)>0} \Diff2 c \; &e^{-\left|c\right|^2} c^k \overline{c}^l = \notag \\
+&\begin{cases}
+\frac{\pi}{4} \Gamma\left(k+1\right) & \text{if } k = l \\
+\frac{-i}{k-l}\left(-1 + e^{i \frac{\pi}{2}\left(k-l\right)}\right)\frac{1}{2}\Gamma\left(\frac{1}{2}\left(k + l + 2\right) \right) & \text{if } k \ne l
+\end{cases}
+\end{align}
+with $\Gamma$ the gamma function. Indeed, the radial component of the integrand of Eq.~\ref{eqn:qds_bs1_deriv_3} is a standard integral for $\Gamma$. The final \emph{a posteriori} state is now accessible. \MT{still gotta calculate the normalization factor}
+
+The \emph{a posteriori} state is calculated likewise, but the limits of integration should be extended to the entire complex plane. In this case,
+\begin{equation}
+\int\limits_{\mathbb{C}} \Diff2 c \; e^{-\left|c\right|^2}c^k \overline{c}^l = \pi \Gamma\left(k+1\right)
+\end{equation}
+since the polar integral forces $k=l$.
 
 
+\MT{Now let us talk about how $\text{P}\left(c\right)$ is affected by noise. (first, I should understand how the heterodyne povm is derived and where factors of sqrt2 should appear)}
 
 
+\MT{summary paragraph:}
+The Holevo information may now be calculated in the usual way, and we compare Holevo information under different attacks in Fig.~\MT{X}.
+\MT{where do I want to talk about truncating matrices and numerical methods?}
 
+\subsubsection{\underline{$BS2$: $\xi > 0$}}
+We now introduce and consider a second modification to the usual beamsplitter attack, which will allow the excess noise on the channel to be modelled. This attack can be viewed as an unphysical combination of the previous two attacks which advantages Bob and disadvantages honest parties.
 
+As we see in Fig.~\MT{X}, below, Bob performs worse under $BS1$ than $BS0$. This is a consequence of the fact that the input noise also affects his own measurements and so will reduce his information about Charlie's output. So we modify the beamsplitter attack by imposing that the channel excess noise should only affect honest players. That is, the presence of $\xi$ causes $\perr$ to increase, but Holevo information and therefore $\pe$ should both be unaffected. 
+
+While strictly this attack is physically inconsistent, and therefore unphysical, it is more pessimistic than either $BS0$ or $BS1$, and so the security bounds it gives are preferable to either of those attacks. The Holevo information is given by using Eqs.~\ref{eqn:qds_aposterioristate} and \ref{eqn:qds_aprioristate} in the usual way, while $\perr$ is given by Eq.~\MT{X}. The performance of this attack is analysed in Fig.~\MT{X}.
+
+\subsection{Entangling-cloner attack}
 
 
 
