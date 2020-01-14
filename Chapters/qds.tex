@@ -537,10 +537,10 @@ In particular, we will study both the beamsplitter attack and the entangling clo
 \subsection{Beamsplitter attack}
 In its canonical form, the beamsplitter attack--as depicted in Fig.~\MT{X}--allows Bob to replace a lossy channel with a corresponding beamsplitter with vacuum input into the fourth port. Bob receives his quantum system from the reflected output port, and from his system he will attempt to gain information about Charlie's output. Crucially, to honest players Alice and Charlie this attack is indistinguishable from simply having a lossy transmission channel, and so all channel loss must be attributed to the action of the dishonest Bob. 
 
-Since in the beamsplitter attack Bob inputs only vacuum into the beamsplitter's fourth port, this form of the beamsplitter attack cannot model any excess noise $\xi$ and it should therefore be ignored in the analysis. However, in order to include excess noise in our analysis, we will examine two modifications to the standard beamsplitter attack. \MT{discuss them, and come up with some names for the types of attack.}
+Since in the beamsplitter attack Bob inputs only vacuum into the beamsplitter's fourth port, this form of the beamsplitter attack cannot model any excess noise $\xi$ and it should therefore be ignored in the analysis. However, in order to include excess noise in our analysis, we will examine two modifications to the standard beamsplitter attack. Each modification to the standard beamsplitter attack will be discussed in turn, and then we compare all three in Fig.~\MT{X}. 
 
-\subsubsection{\underline{$\xi = 0$}}
-We will calculate the Holevo information $\chi$ of Bob's state after performing attack $BS0$ on the quantum channel. \MT{Make sure these attacks are defined somewhere.} In this attack, Bob will replace the channel with a beamsplitter and take possession of the output of the reflected port. Crucially, the beamsplitter should be chosen such that it mimics the channel exactly, and Charlie should be unable to tell whether an attack has taken place - rather, \emph{all} loss should be attributed to Bob.
+\subsubsection{\underline{$BS0$: $\xi = 0$}}
+We will calculate the Holevo information $\chi$ of Bob's state after performing attack $BS0$ on the quantum channel. Attack $BS0$ is the canonical beamsplitter attack, in which Bob will replace the channel with a beamsplitter and take possession of the output of the reflected port. Crucially, the beamsplitter should be chosen such that it mimics the channel exactly, and Charlie should be unable to tell whether an attack has taken place - rather, \emph{all} loss should be attributed to Bob. Since there is vacuum input into the fourth beamsplitter port, and since no other modifications are made, this attack cannot induce any excess noise $\xi$ in Charlie's measurements, and so attack $BS0$ is useful for modelling purely lossy channels in the absence of thermal noise.
 
 Let Alice send state $\dyad{\alpha_k}$, with the $\alpha_k \in \mathcal{A}_4$. Bob inputs the vacuum state $\dyad{0}$ into the fourth port of the beamsplitter. We will calculate the Holevo information of Bob's state $\rho_{B | C}$, which is conditioned on Charlie measuring a particular eliminated signature element.
 
@@ -568,7 +568,7 @@ Recall that the eliminated signature element held by Charlie is determined entir
 
 Let us consider the first eliminated signature element $e_1$. We integrate $\rho_{B | c}$
 
-\begin{equation}
+\begin{equation}\label{eqn:qds_aposterioristate}
 \rho_{B | e_1} = \mathcal{N}\left(e_1\right) \int\limits_{\text{Re}\left(c\right) > 0, \; \text{Im}\left(c\right)>0} \Diff2 c \; \text{P}\left(c\right) \; \rho_{B | c},
 \end{equation}
 with the normalization factor defined as 
@@ -588,7 +588,15 @@ in terms of Von Neumann entropy $S$. In this chapter we will work in the ideal c
 S_{\text{aposteriori}} = S\left(\rho_{B | e_1}\right).
 \end{equation}
 
-
+Bob's \emph{a priori} state is given by
+\begin{equation}\label{eqn:qds_aprioristate}
+\rho_{\text{apriori}} = \sum_{e_k} \text{P}\left(e_k\right) \rho_{B|e_k}
+\end{equation}
+with corresponding \emph{a priori} entropy simply $S\left(\rho_{\text{apriori}}\right)$. Note that the state Eq.~\ref{eqn:qds_aprioristate} is equivalent to the \emph{a posteriori} state Eq.~\ref{eqn:qds_aposterioristate} when the integration limit is extended over the entire complex plane. Finally, using
+\begin{equation}
+\chi = S_{\text{apriori}} - S_{\text{aposteriori}}.
+\end{equation}
+we calculate and plot $\chi$ under attack $BS0$ in Fig.~\MT{X}.
 
 
 
