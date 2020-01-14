@@ -46,7 +46,7 @@ Usually, given knowledge of $\mathcal{E}$ it should be easy to derive $\mathcal{
 The function $f: \mathcal{E} \mapsto \mathcal{D}$ is sometimes referred to as a ``trapdoor'' or ``one-way'' function, and $f$ is typically based on a mathematical problem which is deemed to be computationally hard, for example \MT{examples} which underly the commonly used \MT{protocols}. \MT{motivate quantum cryptography via breaking of these trapdoors}
 
 
-\section{Our QDS protocol}
+\section{Our QDS protocol}\label{sec:qds_protocol}
 
 In the simplest instance we may consider a signature scheme involving only three parties: a sender, Alice ($A$), and recipients Bob ($B$) and Charlie ($C$). Alice wishes to send a classical message $m$ to $B$ and $C$, such that $B$ and $C$ can correctly determine whether $m$ was indeed sent by $A$. Furthermore the recipients should be able to check whether $m$ has been altered.
 
@@ -73,7 +73,7 @@ A digital signature scheme which rejects all messages trivially fulfills require
 
 \subsection{QDS protocol description}
 
-We here present a continuous-variable (CV) QDS protocol based on the quadrature phase-shift keying (QPSK) alphabet of coherent states, Fig.~\MT{fig}. %this will be defined earlier, I am sure
+We here present a continuous-variable (CV) QDS protocol based on the quadrature phase-shift keying (QPSK) alphabet of coherent states, Fig.~\ref{fig:qpsk}. %this will be defined earlier, I am sure
 Our protocol allows us to take into account quantum distribution channels which will in general be insecure, and this scheme is the first in the CV setting to be secure against eavesdropping. \MT{I should motivate the CV setting somewhere, probably in ch1}
 
 \begin{figure}[htp]
@@ -126,7 +126,7 @@ and recording the $\alpha_j$ giving rise to the smallest of these conditional pr
 \begin{figure}[htp]
 \centering
 \includegraphics[draft=false, width=0.8\linewidth]{qds/elimsig}
-\caption{\label{fig:elimsig} \MT{(Draft)} (a) Bob and Charlie each perform heterodyne outcome on their received coherent states, and get complex outcome $x \in \mathbb{C}$. (b) They then record the two states from $\mathcal{A}_4$ which are least likely to have been sent by Alice.}
+\caption{\label{fig:elimsig} (a) Bob and Charlie each perform heterodyne outcome on their received coherent states, and get complex outcome $x \in \mathbb{C}$. (b) They then record the two states from $\mathcal{A}_4$ which are least likely to have been sent by Alice.}
 \end{figure}
 
 \par
@@ -162,8 +162,13 @@ denote the probability of mismatch between an arbitrary eliminated signature $G$
 
 %denote the probability of mismatch between arbitrary declared signature $F$ and arbitrary eliminated signature $G$.\MT{I think this should be more concrete}
 
-\MT{Add an explatory figure in here}
 \end{framed}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics{mismatches.png}
+\caption{\label{fig:qds_mismatches}}
 \end{figure}
 
 If Bob measures sufficiently few mismatches on both of his eliminated signature halves, i.e. if $\mathcal{M}\left(\tilde{\Phi}_{Y, m}^B, Y_m^B\right) < s_B L/2$ and $\mathcal{M}\left(\tilde{\Phi}_{Z,m}^B, Z_m^B\right) < s_B L/2$ then he accepts Alice's declaration $m$ as genuine, otherwise the protocol aborts. The threshold $0 \le s_B \le 1$ is related to the security of the protocol and will be discussed later.
@@ -176,13 +181,19 @@ The key parameters for the Messaging stage are $s_B, s_C$ which may be freely ch
 
 
 \section{Security against repudiation}
-We now turn to consider the security of the QDS protocol discussed in Sec.~\MT{X}. Recall that of the five requirements for a digital signatures protocol, requirements $3$ and $4$ are equivalent in a $3$~party setting. 
+We now turn to consider the security of the QDS protocol discussed in Sec.~\ref{sec:qds_protocol}. Recall that of the five requirements for a digital signatures protocol, requirements $3$ and $4$ are equivalent in a $3$~party setting. 
+
+\begin{figure}[htp]
+\centering
+\includegraphics{qds_attacks.png}
+\caption{\label{fig:attacks}}
+\end{figure}
 
 In what follows we will prove that our protocol is:
 \begin{itemize}
-\item secure against a repudiation attack (Requirement $3$, Fig.~\MT{X}), 
-\item robust (Requirement $5$, Fig.~\MT{X}),
-\item secure against a forgery attack (Requirement $1$, Fig.~\MT{X})
+\item secure against a repudiation attack (Requirement $3$, Fig.~\ref{fig:attacks}), 
+\item robust (Requirement $5$, Fig.~\ref{fig:attacks}),
+\item secure against a forgery attack (Requirement $1$, Fig.~\ref{fig:attacks})
 \end{itemize}
 and we will additionally demonstrate that fulfilment of requirement $1$ implies fulfilment of requirement $2$. \MT{Make sure that I actually do this.}
 
@@ -291,7 +302,7 @@ Thus, we have demonstrated the intuitive result that the choice $s_B \le s_C$ en
 Let us simplify Eq.~\ref{eqn:rep_prob_working}. Clearly, increasing $p_B$ or $p_C$ will cause both of the exponentials in the first term to decrease. Because of the inner minimum, we will only care about $\text{max}\left\{p_B, p_C\right\}$, and so we define $p := \text{max}\left\{p_B, p_C\right\}$ and write
 
 \begin{equation}
-\text{min}\left\{\text{exp}\left(- \left[p_B - s_B\right]^2L\right), \text{exp}\left(- \left[p_C - s_B\right]^2L\right)\right\} = \text{exp}\left(-\left[p - s_B\right]^2L\right).
+\text{min}\left\{\text{exp}\left(- \left[p_B - s_B\right]^2L\right), \; \text{exp}\left(- \left[p_C - s_B\right]^2L\right)\right\} = \text{exp}\left(-\left[p - s_B\right]^2L\right).
 \end{equation}
 We may maximise the second term of Eq.~\ref{eqn:rep_prob_working} 
 
@@ -316,7 +327,7 @@ as our useful bound for the probability that Alice succeeds in her repudiation a
 
 
 \section{Robustness}
-The QDS protocol must be robust (Requirement~$5$, Fig.~\MT{X}) and allow the message $m$ to be accepted provided that all parties behave honestly. We would like to calculate the probability that the protocol fails in the absence of attack.
+The QDS protocol must be robust (Requirement~$5$, Fig.~\ref{fig:attacks}) and allow the message $m$ to be accepted provided that all parties behave honestly. We would like to calculate the probability that the protocol fails in the absence of attack.
 
 The protocol fails in the absence of attack if either Bob or Charlie rejects a message which Alice did in fact send, i.e. if Bob or Charlie detect too many mismatches on Alice's declaration $\sigma_m$. Since we have above derived that $s_B \le s_C$, it will always be more likely that Bob rejects than Charlie so we will seek to bound the probability that Bob measures more than $s_B L/2$ mismatches on either of his signature halves, and we note that this will also provide a bound for the equivalent probability at Charlie.
 
@@ -335,8 +346,13 @@ provided that $\perr < s_B$. Equation~\ref{eqn:ehonabort} is our useful bound fo
 
 \subsection{Modelling $p_{\text{err}}$}
 \MT{let's have a figure somewhere which illustrates this}
+\begin{figure}[htp]
+\centering
+\includegraphics{perr.png}
+\caption{\label{fig:perr}}
+\end{figure}
 
-The probability $\perr$ corresponds to the probability that a heterodyne measurement outcome $z$ has $\text{Re}\left(z\right) < 0$ when Alice distributed the coherent state $\ket{\alpha}$. In the absence of thermal noise the channel simply acts as a beamsplitter with vacuum at the fourth port, and so
+The probability $\perr$ corresponds to the probability that a heterodyne measurement outcome $z$ has $\text{Re}\left(z\right) < 0$ when Alice distributed the coherent state $\ket{\alpha}$, Fig.~\ref{fig:perr}. In the absence of thermal noise the channel simply acts as a beamsplitter with vacuum at the fourth port, and so
 
 \begin{equation}
 |\alpha\rangle\langle\alpha| \rightarrow |\sqrt{T}\alpha\rangle\langle\sqrt{T}\alpha|
@@ -362,10 +378,10 @@ Integrating, we arrive at
 \perr = \frac{1}{2}\text{erfc}\left(\sqrt{\frac{T}{2}}\alpha\right)
 \end{equation}
 
-\noindent which models the probability of honest mismatch over a lossy channel with transmittivity $T$. The $\perr$ when the channel contains thermal noise, Fig.~\MT{X}, is given by \MT{put it here, and then talk about how it is derived and what it means.}
+\noindent which models the probability of honest mismatch over a lossy channel with transmittivity $T$. The $\perr$ when the channel contains thermal noise is derived in Sec.~\MT{X}.
 
 \section{Security against forgery}
-We now turn to consider Requirement~$1$, Fig.~\MT{X}, that a QDS protocol should provide security against a forging attack. In this attack, a dishonest player (or fourth party, Eve) will declare a fake $m^\prime$ with the aim that it should be accepted by honest players as being genuine and from Alice. 
+We now turn to consider Requirement~$1$, Fig.~\ref{fig:attacks}, that a QDS protocol should provide security against a forging attack. In this attack, a dishonest player (or fourth party, Eve) will declare a fake $m^\prime$ with the aim that it should be accepted by honest players as being genuine and from Alice. 
 
 The message $m^\prime$ will have an appended signature $\tau_{m^\prime}$ consisting of declared coherent state phases, and $m^\prime$ will be accepted if $\tau_{m^\prime}$ has sufficiently few mismatches with respect to an honest player's eliminated signature. 
 
@@ -391,7 +407,7 @@ provided that $s_C \le \text{p}_e$. Equation~\ref{eqn:eforg} is derived using Eq
 \end{equation}
 where threshold parameters $s_B, s_C$ may be freely chosen to optimize security. 
 
-Equation~\ref{eqn:qds_security_condition} encodes the intuitive condition that the QDS protocol is secure provided that $\pe \ge \perr$, or, in other words, that a dishonest forger will cause more mismatches than an honest player. The protocol security analysis thus relies on finding parameters and channels for which a forger is guaranteed to make too many errors, and thus for which a forging attack will be detectable. In Sec.~\MT{X} will analyse several types of eavesdropping attack which a forger can attempt, and we will derive a bound for $\pe$, allowing us to analyse protocol security.
+Equation~\ref{eqn:qds_security_condition} encodes the intuitive condition that the QDS protocol is secure provided that $\pe \ge \perr$, or, in other words, that a dishonest forger will cause more mismatches than an honest player. The protocol security analysis thus relies on finding parameters and channels for which a forger is guaranteed to make too many errors, and thus for which a forging attack will be detectable. In Sec.~\ref{sec:attack_analysis} will analyse several types of eavesdropping attack which a forger can attempt, and we will derive a bound for $\pe$, allowing us to analyse protocol security.
 
 \MT{Make a statement comparing this $\pe \ge \perr$ condition to QKD, where an eavesdropper can hide an attack below channel noise.}
 
@@ -425,7 +441,12 @@ To complete the security analysis of our protocol, and in order to compute an up
 
 %This ambiguity stems from the following. Because Charlie eliminates two states from $\mathcal{A}_4$, Fig.~\ref{fig:elimsig}, there are
 
-Bob will declare a string $\tilde{\Phi}_{Y, m^\prime}^C$, length $L/2$,  which causes sufficiently few mismatches with respect to Charlie. For convenience we will abbreviate Bob's declared string as $\tilde{\Phi}^{Bob}$. Our security analysis must fully take into account the ambiguity in Bob's declarations. This ambiguity stems from the following, and is illustrated in Fig.~\MT{X}.
+\begin{figure}[htp]
+\centering
+\includegraphics{ambiguity.png}
+\end{figure}
+
+Bob will declare a string $\tilde{\Phi}_{Y, m^\prime}^C$, length $L/2$,  which causes sufficiently few mismatches with respect to Charlie. For convenience we will abbreviate Bob's declared string as $\tilde{\Phi}^{Bob}$. Our security analysis must fully take into account the ambiguity in Bob's declarations. This ambiguity stems from the following, and is illustrated in Fig.~\ref{fig:ambiguity}.
 
 Because Charlie eliminates two states from $\mathcal{A}_4$, Fig.~\ref{fig:elimsig}, there are a remaining two states in $\mathcal{A}_4$ which Bob can declare without introducing a mismatch. Each of the potential two states is shared with another possible eliminated signature element, and so the probability that Bob induces a mismatch is \emph{not equivalent} to the probability that Bob misidentifies an element of Charlie's eliminated signature\footnote{And so a Helstrom-like approach \MT{define} will not work.}
 
@@ -454,7 +475,7 @@ Since an element $\mathcal{E}_j$ is uniquely determined once $\phi_j, y_1^j, y_2
 \text{H}\left( \mathcal{E}_j \given y_1^j, y_2^j, \phi_j\right) = 0.
 \end{equation}
 
-\noindent Using chain rule Eq.~\MT{X} once again on the left hand side of Eq.~\MT{X}, but this time expanding over variable $y_1^j, y_2^j$,
+\noindent Using chain rule Eq.~\MT{X} once again on the left hand side of Eq.~\ref{eqn:qds_pe_deriv_1}, but this time expanding over variable $y_1^j, y_2^j$,
 \begin{align}\label{eqn:qds_pe_deriv_2}
 \text{H}\left( \mathcal{E}_j, y_1^j, y_2^j \given \phi_j \right) &=
 \text{H}\left(y_1^j, y_2^j \given \mathcal{E}_j, \phi_j\right) + \text{H}\left(\mathcal{E}_j \given \phi_j\right) \notag \\
@@ -513,16 +534,22 @@ and so
 which is one of our key results. The Holevo information automatically includes a dishonest Bob's optimal POVM and classical strategy.
 %and so Eq.~\ref{eqn:qds_hpe} provides a good lower bound for
 
-Since binary entropy $\text{h}\left(\pe\right)$ is monotonic for $\pe \le 1/2$, Fig.~\MT{X}, we conclude that a lower bound for $\text{h}\left(\pe\right)$ also gives us a lower bound for $\pe$. \MT{Mention/show somewhere that $\pe$ is always less than $1/2$.} The inequality~\ref{eqn:qds_hpe} may be numerically solved for Bob's mismatch rate $\pe$, which can be combined with $\perr$ in to calculate $\varepsilon_{\text{fail}}$ and provide security against collective attacks \MT{define} provided that Bob's Holevo information $\chi$ can be estimated.
+Since binary entropy $\text{h}\left(\pe\right)$ is monotonic for $\pe \le 1/2$, Fig.~\ref{fig:binary_entropy}, we conclude that a lower bound for $\text{h}\left(\pe\right)$ also gives us a lower bound for $\pe$. \MT{Mention/show somewhere that $\pe$ is always less than $1/2$.} The inequality~\ref{eqn:qds_hpe} may be numerically solved for Bob's mismatch rate $\pe$, which can be combined with $\perr$ in to calculate $\varepsilon_{\text{fail}}$ and provide security against collective attacks \MT{define} provided that Bob's Holevo information $\chi$ can be estimated.
 
-\section{Attack analysis}
+\section{Attack analysis}\label{sec:attack_analysis}
 Let us consider several different models of Bob's eavesdropping attack. Different models will affect both the parameter regimes over which our protocol can be made secure, and the level of resources required for that security. As in the QKD literature we define the following three types of quantum attack
 \begin{itemize}
-\item individual: \MT{X}
-\item collective: \MT{X}
-\item coherent: \MT{X}
+\item individual: Fig.~\ref{fig:individual_attacks}
+\item collective: Fig.~\ref{fig:collective_attacks}
+\item coherent: Fig.~\ref{fig:coherent_attacks}
 \end{itemize}
 \MT{TODO: also create a figure to illustrate all of these, and provide sufficient references to the literature.}
+
+\begin{figure}[htp]
+\centering
+\includegraphics{types_of_attack.png}
+\caption{\label{fig:individual_attacks}, \label{fig:collective attacks}, \label{fig:coherent_attacks}
+\end{figure}
 
 In this Thesis we will focus on individual and collective forging attacks. Full security against coherent quantum attacks in the QKD literature has only recently been proven for the relatively simple case of the gPSK alphabet \MT{cite}, and a security proof remains tricky for the discrete modulation of coherent states. %what about Lutkenhaus papers from around 2006? What type of security do they provide?
 
@@ -535,9 +562,15 @@ In keeping with recent trends in the QKD literature for the discrete modulation 
 In particular, we will study both the beamsplitter attack and the entangling cloner attack for our protocol. In both of these attacks the quantum distribution channel will be replaced, by Bob and unbeknownst to Alice and Charlie, with a beamsplitter intended to mimic the effect of the channel on Charlie's measurement outcomes. In particular, Bob will either input into the channel the vacuum state, a thermal state Eq.~\MT{X}, or one arm of his two-mode entangled state Eq.~\MT{X}.
 
 \subsection{Beamsplitter attack}
-In its canonical form, the beamsplitter attack--as depicted in Fig.~\MT{X}--allows Bob to replace a lossy channel with a corresponding beamsplitter with vacuum input into the fourth port. Bob receives his quantum system from the reflected output port, and from his system he will attempt to gain information about Charlie's output. Crucially, to honest players Alice and Charlie this attack is indistinguishable from simply having a lossy transmission channel, and so all channel loss must be attributed to the action of the dishonest Bob. 
 
-Since in the beamsplitter attack Bob inputs only vacuum into the beamsplitter's fourth port, this form of the beamsplitter attack cannot model any excess noise $\xi$ and it should therefore be ignored in the analysis. However, in order to include excess noise in our analysis, we will examine two modifications to the standard beamsplitter attack. Each modification to the standard beamsplitter attack will be discussed in turn, and then we compare all three in Fig.~\MT{X}. 
+\begin{figure}[htp]
+\centering
+\includegraphics{bs_attack.png}
+\caption{\label{fig:bs0_attack}}
+\end{figure}
+In its canonical form, the beamsplitter attack--as depicted in Fig.~\ref{fig:bs0_attack}--allows Bob to replace a lossy channel with a corresponding beamsplitter with vacuum input into the fourth port. Bob receives his quantum system from the reflected output port, and from his system he will attempt to gain information about Charlie's output. Crucially, to honest players Alice and Charlie this attack is indistinguishable from simply having a lossy transmission channel, and so all channel loss must be attributed to the action of the dishonest Bob. 
+
+Since in the beamsplitter attack Bob inputs only vacuum into the beamsplitter's fourth port, this form of the beamsplitter attack cannot model any excess noise $\xi$ and it should therefore be ignored in the analysis. However, in order to include excess noise in our analysis, we will examine two modifications to the standard beamsplitter attack. Each modification to the standard beamsplitter attack will be discussed in turn, and then we compare all three in Fig.~\ref{fig:qds_holevo_comparisons}}. 
 
 \subsubsection{\underline{$BS0$: $\xi = 0$}}
 We will calculate the Holevo information $\chi$ of Bob's state after performing attack $BS0$ on the quantum channel. Attack $BS0$ is the canonical beamsplitter attack, in which Bob will replace the channel with a beamsplitter and take possession of the output of the reflected port. Crucially, the beamsplitter should be chosen such that it mimics the channel exactly, and Charlie should be unable to tell whether an attack has taken place - rather, \emph{all} loss should be attributed to Bob. Since there is vacuum input into the fourth beamsplitter port, and since no other modifications are made, this attack cannot induce any excess noise $\xi$ in Charlie's measurements, and so attack $BS0$ is useful for modelling purely lossy channels in the absence of thermal noise.
@@ -596,10 +629,15 @@ with corresponding \emph{a priori} entropy simply $S\left(\rho_{\text{apriori}}\
 \begin{equation}
 \chi = S_{\text{apriori}} - S_{\text{aposteriori}}.
 \end{equation}
-we calculate and plot $\chi$ under attack $BS0$ in Fig.~\MT{X}.
+we calculate and plot $\chi$ under attack $BS0$ in Fig.~\ref{fig:qds_holevo_comparisons}
 
 \subsubsection{\underline{$BS1$: $\xi > 0$}}
-Next let us consider a modification to canonical attack $BS0$, displayed in Fig.~\MT{X}, which will allow for modelling of channels which induce excess noise at Charlie. In this attack, denoted $BS1$, Eve inputs a thermal state Eq.~\MT{X} into the fourth port of the beamsplitter. Let us analyse its effect on Holevo information. Its effect on Charlie's measurement outcomes is discussed above in Sec.~\MT{X} \MT{Make sure I do this}.
+\begin{figure}[htp]
+\centering
+\includegraphics{bs1_attack.png}
+\caption{\label{fig:bs1_attack}}
+\end{figure}
+Next let us consider a modification to canonical attack $BS0$ which will allow for modelling of channels which induce excess noise at Charlie. In this attack, denoted $BS1$ and displayed in Fig.~\ref{fig:bs1_attack}, Eve inputs a thermal state Eq.~\MT{X} into the fourth port of the beamsplitter. Let us analyse its effect on Holevo information. Its effect on Charlie's measurement outcomes is discussed above in Sec.~\MT{X} \MT{Make sure I do this}.
 
 We wish to mix a coherent state $\rho_{\alpha_k} = \dyad{\alpha_k}$ and a thermal state $\rho_{\text{thermal}}$ on a beamsplitter with transmittivity $T$. In Fock basis our states take the following form
 
@@ -668,18 +706,23 @@ since the polar integral forces $k=l$.
 
 
 \MT{summary paragraph:}
-The Holevo information may now be calculated in the usual way, and we compare Holevo information under different attacks in Fig.~\MT{X}.
+The Holevo information may now be calculated in the usual way, and we compare Holevo information under different attacks in Fig.~\ref{fig:qds_holevo_comparisons}.
 \MT{where do I want to talk about truncating matrices and numerical methods?}
 
 \subsubsection{\underline{$BS2$: $\xi > 0$}}
 We now introduce and consider a second modification to the usual beamsplitter attack, which will allow the excess noise on the channel to be modelled. This attack can be viewed as an unphysical combination of the previous two attacks which advantages Bob and disadvantages honest parties.
 
-As we see in Fig.~\MT{X}, below, Bob performs worse under $BS1$ than $BS0$. This is a consequence of the fact that the input noise also affects his own measurements and so will reduce his information about Charlie's output. So we modify the beamsplitter attack by imposing that the channel excess noise should only affect honest players. That is, the presence of $\xi$ causes $\perr$ to increase, but Holevo information and therefore $\pe$ should both be unaffected. 
+As we see in Fig.~\ref{fig:qds_holevo_comparisons}, below, Bob performs worse under $BS1$ than $BS0$. This is a consequence of the fact that the input noise also affects his own measurements and so will reduce his information about Charlie's output. So we modify the beamsplitter attack by imposing that the channel excess noise should only affect honest players. That is, the presence of $\xi$ causes $\perr$ to increase, but Holevo information and therefore $\pe$ should both be unaffected. 
 
-While strictly this attack is physically inconsistent, and therefore unphysical, it is more pessimistic than either $BS0$ or $BS1$, and so the security bounds it gives are preferable to either of those attacks. The Holevo information is given by using Eqs.~\ref{eqn:qds_aposterioristate} and \ref{eqn:qds_aprioristate} in the usual way, while $\perr$ is given by Eq.~\MT{X}. The performance of this attack is analysed in Fig.~\MT{X}.
+While strictly this attack is physically inconsistent, and therefore unphysical, it is more pessimistic than either $BS0$ or $BS1$, and so the security bounds it gives are preferable to either of those attacks. The Holevo information is given by using Eqs.~\ref{eqn:qds_aposterioristate} and \ref{eqn:qds_aprioristate} in the usual way, while $\perr$ is given by Eq.~\ref{fig:qds_holevo_comparisons}. The performance of this attack is analysed in Fig.~\MT{X}.
 
 \subsection{Entangling-cloner attack}
-The entangling cloner attack, depicted in Fig.~\MT{X}, is ideally suited to consistently incorporate the presence of excess noise $\xi$, and we shall see that it is a much more powerful attack than any of the beamsplitter attacks considered above. The entangling cloner attack, which we shall denote $EC$, may be viewed as a natural extension of attack $BS1$, above. Instead of inputting a thermal state into the beamsplitter's fourth port, Bob will input one arm of his entangled two-mode squeezed vacuum (TMSV) state. The mode which Bob inputs into the channel is locally indistinguishable from $\rho_{\text{thermal}}$, and so honest players cannot tell which of these attacks is being performed. 
+\begin{figure}[htp]
+\centering
+\includegraphics{ec_attack.png}
+\caption{\label{fig:ec_attack}
+\end{figure}
+The entangling cloner attack, depicted in Fig.~\ref{fig:ec_attack}, is ideally suited to consistently incorporate the presence of excess noise $\xi$, and we shall see that it is a much more powerful attack than any of the beamsplitter attacks considered above. The entangling cloner attack, which we shall denote $EC$, may be viewed as a natural extension of attack $BS1$, above. Instead of inputting a thermal state into the beamsplitter's fourth port, Bob will input one arm of his entangled two-mode squeezed vacuum (TMSV) state. The mode which Bob inputs into the channel is locally indistinguishable from $\rho_{\text{thermal}}$, and so honest players cannot tell which of these attacks is being performed. 
 
 The $EC$ attack has a long history, and is known to be the optimal collective attack for gPSK QKD \MT{cite a bunch of stuff}. Since our QPSK alphabet is non-Gaussian we make no claims as to $EC$'s optimality, though we conjecture that $EC$ will be optimal as $\alpha \rightarrow 0$, and close to optimal for $\alpha << 1$. The status of optimal attacks on QDS is an open one and should be the subject of further exploration. The question about optimal attacks on QKD with discrete modulated coherent states is also open, despite a long history of activity on these protocols. In any case, the $EC$ attack is very difficult to perform with today's technology, and so a protocol with security against $EC$ (or even $BSx$) attacks should be expected to be practically secure for a long time.
 
@@ -728,7 +771,8 @@ where we have included excess noise $\xi$ in our probability, as in Eq.~\MT{X}.
 
 
 \begin{figure}
-\includegraphics{yolo.png}
+\includegraphics{qds_holevo_comparisons.png}
+\caption{\label{fig:qds_holevo_comparisons}}
 \end{figure}
 
 
