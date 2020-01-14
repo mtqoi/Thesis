@@ -645,7 +645,7 @@ Heterodyning on Charlie's mode using POVM Eq.~\MT{X}, we see that Bob's sub-norm
 \MT{make this equation pretty. Also introduce somewhere the tilde notation to convey a sub-normalized state}
 where $\delta_k^l$ is the Kronecker delta which arises after tracing out Charlie's mode.
 
-Now, to reach the \emph{a posteriori} state under this attack we will integrate this $\tilde{\rho}_B$, as in Eq.~\ref{eqn:qds_aposterioristate}. This will correspond to simply integrating the scalar terms involving $c$, noting that the integration operation will commute with the rest of state Eq.~\ref{eqn:qds_bs1_deriv_2}. Note also that we may neglect the $\text{P}\left(c\right)$ term from the integrand Eq.~\ref{eqn:qds_aposterioristate}, since our state is already sub-normalized by precisely the required factor. 
+\MT{I've gotta remember to mix it over $\alpha_k$.} Now, to reach the \emph{a posteriori} state under this attack we will integrate this $\tilde{\rho}_B$, as in Eq.~\ref{eqn:qds_aposterioristate}. This will correspond to simply integrating the scalar terms involving $c$, noting that the integration operation will commute with the rest of state Eq.~\ref{eqn:qds_bs1_deriv_2}. Note also that we may neglect the $\text{P}\left(c\right)$ term from the integrand Eq.~\ref{eqn:qds_aposterioristate}, since our state is already sub-normalized by precisely the required factor. 
 
 The integration is best performed in Polar coordinates since radial and azimuthal integrands separate. So we find
 \begin{align}\label{eqn:qds_bs1_deriv_3}
@@ -658,7 +658,7 @@ The integration is best performed in Polar coordinates since radial and azimutha
 with $\Gamma$ the gamma function. Indeed, the radial component of the integrand of Eq.~\ref{eqn:qds_bs1_deriv_3} is a standard integral for $\Gamma$. The final \emph{a posteriori} state is now accessible. \MT{still gotta calculate the normalization factor}
 
 The \emph{a posteriori} state is calculated likewise, but the limits of integration should be extended to the entire complex plane. In this case,
-\begin{equation}
+\begin{equation}\label{eqn:qds_bs1_deriv_4}
 \int\limits_{\mathbb{C}} \Diff2 c \; e^{-\left|c\right|^2}c^k \overline{c}^l = \pi \Gamma\left(k+1\right)
 \end{equation}
 since the polar integral forces $k=l$.
@@ -679,15 +679,50 @@ As we see in Fig.~\MT{X}, below, Bob performs worse under $BS1$ than $BS0$. This
 While strictly this attack is physically inconsistent, and therefore unphysical, it is more pessimistic than either $BS0$ or $BS1$, and so the security bounds it gives are preferable to either of those attacks. The Holevo information is given by using Eqs.~\ref{eqn:qds_aposterioristate} and \ref{eqn:qds_aprioristate} in the usual way, while $\perr$ is given by Eq.~\MT{X}. The performance of this attack is analysed in Fig.~\MT{X}.
 
 \subsection{Entangling-cloner attack}
+The entangling cloner attack, depicted in Fig.~\MT{X}, is ideally suited to consistently incorporate the presence of excess noise $\xi$, and we shall see that it is a much more powerful attack than any of the beamsplitter attacks considered above. The entangling cloner attack, which we shall denote $EC$, may be viewed as a natural extension of attack $BS1$, above. Instead of inputting a thermal state into the beamsplitter's fourth port, Bob will input one arm of his entangled two-mode squeezed vacuum (TMSV) state. The mode which Bob inputs into the channel is locally indistinguishable from $\rho_{\text{thermal}}$, and so honest players cannot tell which of these attacks is being performed. 
 
+The $EC$ attack has a long history, and is known to be the optimal collective attack for gPSK QKD \MT{cite a bunch of stuff}. Since our QPSK alphabet is non-Gaussian we make no claims as to $EC$'s optimality, though we conjecture that $EC$ will be optimal as $\alpha \rightarrow 0$, and close to optimal for $\alpha << 1$. The status of optimal attacks on QDS is an open one and should be the subject of further exploration. The question about optimal attacks on QKD with discrete modulated coherent states is also open, despite a long history of activity on these protocols. In any case, the $EC$ attack is very difficult to perform with today's technology, and so a protocol with security against $EC$ (or even $BSx$) attacks should be expected to be practically secure for a long time.
 
+\MT{Talk somewhere about where the extra power in the EC attack comes from - we allow Bob to exploit also the correlations between his two modes. Also have some figures of histograms of this attack}
 
+Let us analyse the $EC$ attack. Alice creates the coherent state $\rho_{\alpha_k}$ (Eq.~\MT{X}), while Bob creates
+\begin{equation}
+\tmsv = \frac{1}{\cosh^2 \zeta}  \sum_{n, m=0}^\infty \left(\tanh\zeta\right)^{n+m} \dyad{n, n}{m, m}.
+\end{equation}
 
+\noindent Let us write the three-mode input state to the channel as
 
+\begin{align}
+\rho_{\text{input}} &= \frac{e^{-\left|\alpha_k\right|^2}}{\cosh^2 \zeta} \sum_{n_1, m_1=0}^\infty \sum_{n_2, m_2=0}^{\infty} \frac{\alpha_k^{n_1} \overline{\alpha_k}^{m_1}}{\sqrt{n_1! m_1!}} \left(\tanh\zeta\right)^{n_2 + m_2} \notag \\
+&\times \bigg[\dyad{n_1, n_2}{m_1, m_2}\bigg] \otimes \dyad{n_2}{m_2}
+\end{align}
 
+\noindent where we have explicitly separated in square brackets the two modes which will interfere on the beamsplitter.
 
+The beamsplitter mixes $\dyad{n_1, n_2}{m_1, m_2}$ via Eq.~\MT{X}, and gives an entangled three-mode state at the output. Charlie heterodynes on his mode and receives outcome $c$, and we arrive at Bob's sub-normalized two-mode output state:
 
+\begin{align}\label{eqn:qds_ec_deriv_1}
+&\tilde{\rho}_{B}\left(c\right) =  \frac{e^{-\left|\alpha_k\right|^2}}{\cosh^2\zeta} \frac{1}{\pi} \sum_{n_1, m_1, n_2, m_2 = 0}^\infty \alpha_k^{n_1} \overline{\alpha_k}^{m_1} \left(\tanh\zeta\right)^{n_2 + m_2} \sum_{k_1, k_2, l_1, l_2 = 0}^{n_1, n_2, m_1, m_2}  \notag \\
+%
+&\sqrt{n_2! m_2!} \left(\sqrt{T}\right)^{k_1 + l_1} \left(\sqrt{1-T}\right)^{n_1 + m_1 - k_1 - l_1} \left(-\sqrt{1-T}\right)^{k_2 + l_2} \left(\sqrt{T}\right)^{n_2 + m_2 - k_2 - l_2} \notag \\
+%
+&\times \sqrt{\left(n_1 + n_2 - k_1 - k_2\right)! \left(m_1 + m_2 - l_1 - l_2\right)} \notag \\
+%
+&\times \left[k_1! k_2! l_1! l_2! \left(n_1 - k_1\right)! \left(n_2 - k_2\right)! \left(m_1 - l_1\right)! \left(m_2 - l_2\right)! \right]^{-1} \notag \\
+%
+&\times \dyad{n_1 + n_2 - k_1 - k_2}{m-1 + m_2 - l_1 - l_2} \otimes \dyad{n_2}{m_2} \notag \\
+%
+&\times \left[e^{-\left|c\right|^2} c^{k_1 + k_2} \overline{c}^{l_1 + l_2} \right]
+\end{align}
 
+\noindent where we have again separated the terms involving $c$. Once again the state is readily integrated in $c$, either over the entire complex plane or a single quadrant, and we may simply substitute Eqs.~\ref{eqn:qds_bs1_deriv_3},~\ref{eqn:qds_bs1_deriv_4} into Eq.~\ref{eqn:qds_ec_deriv_1} to reach the \emph{a posteriori} and \emph{a priori} states, respectively.
+
+The \emph{a priori} state is automatically normalized by virtue of the integration over $\mathbb{C}$, while the \emph{a posteriori} state is normalized by multiplying by
+
+\begin{equation}
+\frac{1}{\mathcal{N}\left(e_1 \given \xi\right)} = \int\limits_{\text{Re}\left(c\right) > 0, \; \text{Im}\left(c\right)>0} \Diff2 c \; \text{P}\left(c \given \xi \right).
+\end{equation}
+where we have included excess noise $\xi$ in our probability, as in Eq.~\MT{X}.
 
 
 
