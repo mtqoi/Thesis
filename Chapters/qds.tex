@@ -411,28 +411,7 @@ Equation~\ref{eqn:qds_security_condition} encodes the intuitive condition that t
 
 \MT{Make a statement comparing this $\pe \ge \perr$ condition to QKD, where an eavesdropper can hide an attack below channel noise.}
 
-\section{Signature length $L$}
-\MT{Not sure yet whether I want to calculate $L$ first, or to discuss calculation of $\pe$ first. I'll write $L$ calculation just now so it is here, but I might move it later.}
 
-We now wish to calculate the total probability $\varepsilon_{\text{fail}}$ that our QDS protocol fails by any of the routes discussed earlier: by allowing Alice to repudiate, by allowing Bob to forge, or by aborting even in the absence of attack.
-
-For a figure of merit, we will assume that the protocol will fail in any of these ways with equal probability, and so we set
-\begin{equation}
-\varepsilon_{\text{fail}} = \varepsilon_{\text{honest abort}} = \varepsilon_{\text{repudiation}} = \varepsilon_{\text{forgery}},
-\end{equation}
-though we note that alternative combinations could be considered. Let us eliminate free parameters $s_B, s_C$ by equating the arguments of Eqs.~\ref{eqn:erep},~\ref{eqn:ehonabort},~\ref{eqn:eforg}
-\begin{equation}
-\left(\pe - s_C\right)^2  = \frac{1}{4}\left(s_C - s_B\right)^2 = \left(s_B - \perr\right)^2
-\end{equation}
-from which we may derive
-\begin{equation}
-s_B = \frac{3}{4} \perr + \frac{1}{4}\pe \qq{and} s_C = \frac{1}{4}\perr + \frac{3}{4}\pe
-\end{equation}
-as our choices of security thresholds. Notice that since $\perr \le \pe$ we automatically fulfil $s_B \le s_C$. The overall probability of failure becomes
-
-\begin{equation}\label{eqn:efail}
-\varepsilon_{\text{fail}} \le 2 \text{exp}\left( - \left[\pe - \perr\right]^2 \frac{L}{16}\right).
-\end{equation}
 
 \section{Bounding $\pe$}
 To complete the security analysis of our protocol, and in order to compute an upper bound for $\varepsilon_{\text{fail}}$ Eq.~\ref{eqn:efail}, we must find an upper bound for $\pe$, the rate at which a forging Bob will induce a mismatch with respect to Charlie's signature. We will be secure provided that $\pe > \perr$. The key contribution of this section will be an upper bound for $\pe$ under two different types of forging attack
@@ -776,7 +755,94 @@ where we have included excess noise $\xi$ in our probability, as in Eq.~\MT{X}.
 \end{figure}
 
 
+\section{Signature length $L$}
+\MT{better segue}
+We now wish to calculate the total probability $\varepsilon_{\text{fail}}$ that our QDS protocol fails by any of the routes discussed earlier: by allowing Alice to repudiate, by allowing Bob to forge, or by aborting even in the absence of attack.
 
+For a figure of merit, we will assume that the protocol will fail in any of these ways with equal probability, and so we set
+\begin{equation}
+\varepsilon_{\text{fail}} = \varepsilon_{\text{honest abort}} = \varepsilon_{\text{repudiation}} = \varepsilon_{\text{forgery}},
+\end{equation}
+though we note that alternative combinations could be considered. Let us eliminate free parameters $s_B, s_C$ by equating the arguments of Eqs.~\ref{eqn:erep},~\ref{eqn:ehonabort},~\ref{eqn:eforg}
+\begin{equation}
+\left(\pe - s_C\right)^2  = \frac{1}{4}\left(s_C - s_B\right)^2 = \left(s_B - \perr\right)^2
+\end{equation}
+from which we may derive
+\begin{equation}
+s_B = \frac{3}{4} \perr + \frac{1}{4}\pe \qq{and} s_C = \frac{1}{4}\perr + \frac{3}{4}\pe
+\end{equation}
+as our choices of security thresholds. Notice that since $\perr \le \pe$ we automatically fulfil $s_B \le s_C$. The overall probability of failure becomes
+
+\begin{equation}\label{eqn:efail}
+\varepsilon_{\text{fail}} \le 2 \text{exp}\left( - \left[\pe - \perr\right]^2 \frac{L}{16}\right).
+\end{equation}
+
+\section{Protocol performance}
+\MT{Let's look at some results and graphs of the protocol performance under the four above attacks. TODO: make graphs like in the PRA paper}
+
+
+\section{Postselection}
+In the context of QKD it has been known for some time that postselection of measurement outcomes will improve the key rates in the presence of excess noise, and is even a requirement to distill a key below $T \le 1/2$ in the direct reconciliation regime \MT{cite some stuff}. We are thus motivated to apply postselection to our QDS protocol in order to allow a message to be securely signed over a larger range of channel parameters. The results of this section will be useful in Ch.~\MT{X} where--as for DR QKD--we shall see that postselection is a necessity for some QDS protocols.
+
+To apply the postselection technique, recipients Bob and Charlie in the protocol will simply disregard unfavourable measurement outcomes, i.e. outcomes for which a dishonest player is deemed to have too much knowledge, or for which the probability of honest mismatch is too high.
+
+We thus define a region $\rps \in \mathbb{C}$, Fig.~\ref{fig:rps}. Honest recipients will only accept measurement outcomes $x \ne \rps$. We will vary $\rps$ in order to increase the range of channel parameters for which the QDS protocol is secure, and to minimize signature length $L$.
+
+\begin{figure}[htp]
+\centering
+\includegraphics{postselection_region.png}
+\caption{\label{fig:rps}}
+\end{figure}
+
+To be concrete, we allow $\rps$ to be parametrized by two variables $\Delta_r, \Delta_\theta$ in polar coordinates, Fig.~\ref{fig:rps}. This is the same postselection region which was considered in the recent work \MT{cite}, but if desired more general regions may be readily considered. We make no claims as to the optimality of our choice of the shape $\rps$, though once the form of $\rps$ is set, $\Delta_r$ and $\Delta_\theta$ may be readily optimized over.
+
+The crucial quantity which controls the security of our QDS protocol is $g_{\text{sec}} = \pe - \perr$, which describes the performance advantage which an honest player has over a dishonest player. The protocol is secure provided that $g_{\text{sec}} > 0$. We therefore must consider how postselection affects $g_{\text{sec}}$. 
+
+Let us begin with the effect of postselection on $\perr = \perr\left(\Delta_r, \Delta_\theta\right)$. \MT{I don't want to talk yet about calculating $\perr$ from data - that should wait until the agile chapter.} Recall that when Alice sends state $\ket{\alpha}$ through a lossy channel, transmittivity $T$, Charlie receives outcome $x \in \mathbb{C}$ with probability
+
+\begin{equation}
+\text{P}\left(x \given \alpha, T\right) = \frac{1}{\pi} \exp\left( - \left| x - \sqrt{\frac{T}{2}}\alpha\right|^2\right).
+\end{equation}
+
+\noindent Thus the probability of eliminating the state $\ket{\alpha}$ when no postselection is used is, in polar coordinates,
+\begin{align}
+\perr &= \int\limits_{r=0}^\infty \mathrm{d}r \; r \int\limits_{\theta = \pi/2}^{3 \pi/2} \mathrm{d}\theta \; \text{P}\left(r e^{i \theta} \given \alpha, T\right) \notag \\
+%
+&= \frac{1}{2}\erfc\left(\sqrt{\frac{T}{2}}\left|\alpha\right|\right).
+\end{align}
+
+\noindent Ignoring region $\rps$ from our integral, the mismatch probability becomes
+
+\begin{align}\label{eqn:perrps_deriv_2}
+\perr\left(\Delta_r, \Delta_\theta\right) = \frac{1}{\mathcal{N}} \int\limits_{\Delta_r}^{\infty} \mathrm{d}r \; r &\left[ \; \int\limits_{ \pi/2 + \Delta_\theta}^{\pi - \Delta_\theta} \mathrm{d}\theta \; \text{P}\left(r e^{i \theta} \given \alpha, T\right) \right. \notag \\
+%
+&\left. \int\limits_{3 \pi/2 - \Delta_\theta}^{\pi + \Delta_\theta} \mathrm{d}\theta \; \text{P}\left(r e^{i \theta} \given \alpha, T\right) \right],
+\end{align}
+
+\noindent where normalization probability $\mathcal{N}$ is the probability that Charlie will accept his measurement outcome, which is calculated by extending the integration in Eq.~\ref{eqn:perrps_deriv_2} to the entire $\mathbb{C} \setminus \rps$.
+
+The calculation of $\perrps$ follows identically when excess noise $\xi$ is included, simply using the requisite formulae Eqs.~\MT{X} and performing the integrations as above. 
+
+\MT{Remember to talk later about how $L$ should be rescaled.}
+
+Since a dishonest player's declaration will depend on an honest player's heterodyne outcome, the probability $\pe$ must also vary with $\rps$. We will calculate the effect of $\rps$ on Holevo information $\chi$. Probability $\pe$ is then calculated via Eq.~\ref{eqn:qds_hpe} as normal.
+
+Let Bob's $j^{\text{th}}$ \emph{a posteriori} state be $\rho_{B | e_k}^j$, which is conditioned on Charlie holding eliminated signature element $e_k$, and $1\le j \le L/2$. Assume that Bob has performed any one of the attacks examined in Sec.~\ref{sec:attack_analysis}, and let Bob's state after Charlie's heterodyne measurement be denoted $\rho_{B | c}^j$. Again, since Charlie's eliminated signature element is entirely determined by the quadrant in which $c$ lies, the state $\rho_{B | e_k}^j$ is calculated by mixing $\rho_{B | c}^j$ over an entire quadrant of phase-space, as in Eqs.~\ref{eqn:qds_aposterioristate},~\ref{eqn:qds_bs1_deriv_3}. We must therefore update these integrals to include the effect of $\rps$. For example,
+
+\begin{align}\label{eqn:qdsps_aposteriori}
+\tilde{\rho}_{B | e_1}^j &= \frac{1}{\mathcal{N}} \int \Diff2 c \; \rho_{B | c}^j \notag \\
+%
+&=\frac{1}{\mathcal{N}} \int\limits_{\Delta_r}^\infty \mathrm{d}r\; r\int\limits_{\Delta_\theta}^{\pi/2 - \Delta_\theta} \mathrm{d}\theta \rho_{B | r e^{i \theta}},
+\end{align}
+
+\noindent and similarly for $e_2, e_3, e_4$ with updated limits of the $\theta$ integral. The $\mathcal{N}$ is identical to that from Eq.~\ref{eqn:perrps_deriv_2}.
+
+The $\emph{a priori}$ state is likewise found by mixing Eq.~\ref{eqn:qdsps_aposteriori} over all quadrants, and thus $\pe\left(\Delta_r, \Delta_\theta\right)$ may be calculated via Eq.~\ref{eqn:qds_hpe}.
+
+
+\MT{chat here about updating $L$ to include the effects of postselection}
+
+\MT{have a section where I make some remarks about the postselection technique. Note that I have implicitly assumed that Bob knows whether an individual state has been postselected on. This is a sensible assumption for QKD, since it will be declared, but for QDS it does not need to be declared, so I am giving Bob too much power here.}
 
 
 
