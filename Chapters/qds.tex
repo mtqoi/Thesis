@@ -832,15 +832,59 @@ Let Bob's $j^{\text{th}}$ \emph{a posteriori} state be $\rho_{B | e_k}^j$, which
 \begin{align}\label{eqn:qdsps_aposteriori}
 \tilde{\rho}_{B | e_1}^j &= \frac{1}{\mathcal{N}} \int \Diff2 c \; \rho_{B | c}^j \notag \\
 %
-&=\frac{1}{\mathcal{N}} \int\limits_{\Delta_r}^\infty \mathrm{d}r\; r\int\limits_{\Delta_\theta}^{\pi/2 - \Delta_\theta} \mathrm{d}\theta \rho_{B | r e^{i \theta}},
+&=\frac{1}{\mathcal{N}} \int\limits_{\Delta_r}^\infty \mathrm{d}r\; r\int\limits_{\Delta_\theta}^{\pi/2 - \Delta_\theta} \mathrm{d}\theta \; \rho_{B | r e^{i \theta}},
 \end{align}
 
-\noindent and similarly for $e_2, e_3, e_4$ with updated limits of the $\theta$ integral. The $\mathcal{N}$ is identical to that from Eq.~\ref{eqn:perrps_deriv_2}.
+\noindent and similarly for $e_2, e_3, e_4$ with updated limits of the $\theta$ integral. The $\mathcal{N}$ is identical to that from Eq.~\ref{eqn:perrps_deriv_2}. The $\emph{a priori}$ state is likewise found by mixing Eq.~\ref{eqn:qdsps_aposteriori} over all quadrants, and thus $\pe\left(\Delta_r, \Delta_\theta\right)$ may be calculated via Eq.~\ref{eqn:qds_hpe}. \MT{gotta talk about how we actually perform the integration}
 
-The $\emph{a priori}$ state is likewise found by mixing Eq.~\ref{eqn:qdsps_aposteriori} over all quadrants, and thus $\pe\left(\Delta_r, \Delta_\theta\right)$ may be calculated via Eq.~\ref{eqn:qds_hpe}.
+We may again separate out terms involving $c$, and so the integration from Eq.~\ref{eqn:qdsps_aposteriori} becomes
+
+\begin{equation}
+\frac{1}{\mathcal{N}} \int\limits_{\Delta_r}^{\infty} \mathrm{d}r \; r \int\limits_{\Delta_\theta}^{\pi/2 - \Delta_\theta} \mathrm{d}\theta \; r^k r^l e^{-r^2} e^{i \theta \left(k - l\right)}.
+\end{equation}
+
+\noindent To perform the integration, it is helpful to perform the angular integral first, which readily integrates to a sum of exponentials when $k \ne l$, or to $\pi/2 - 2\Delta_\theta$ when $k=l$. The remaining radial term is
+
+\begin{equation}
+\int\limits_{\Delta_r}^\infty \mathrm{d}r \; r^{k + l + 1} e^{-r^2}
+\end{equation}
+
+\noindent which is the definition of an upper incomplete Gamma function \MT{cite mathworld}, which we denote as $\Gamma_\uparrow$. The radial integration is thus identically
+
+\begin{equation}
+\Gamma_{\uparrow}\left(\frac{1}{2}\left[2 + k + l\right], \Delta_r^2\right)  \forall k, l \ge 0
+\end{equation}
+which may be easily calculated.
+
+We have now included the effects of $\rps$ on $g_{\text{sec}}$, and so the performance of the protocol under postselection may be analysed.
+
+\MT{Have some graphs showing effect of postselection on $g_{sec}$ under different attacks.}
+
+Let us turn now to examine our main figure of merit, the number of quantum states $L$ used in the protocol. Howver, directly incorporating $g_{\text{sec}}\left(\Delta_r, \Delta_\theta\right)$ into Eq.~\ref{eqn:efail} will give an erroneous level of security, for the following reason. Our calculations in this section, culminating in $g_{\text{sec}}$ may be used to bound the number of states required to sign a message. However, this is not equivalent to the number of states which Alice has sent. 
+
+For example, choosing $\Delta_r = $\MT{X} and $\Delta_\theta = $\MT{X} gives $g_{\text{sec}} = $\MT{X}. Substituting this into Eq.~\ref{eqn:efail} and solving for $L$ gives $L = $\MT{X} under attack \MT{X}. But in order to have that many states accepted at Charlie, Alice will need to send $\MT{X}$ coherent states in total, since Charlie will reject his measurement outcomes with probability \MT{X}. It follows that $L$, as implicitly defined in Eq.~\ref{eqn:efail} is a poor figure of merit to measure the resource-use of our protocol when postselection is used.
+
+Instead, we will work in terms of $\tilde{L}$, which we define as the total number of states sent by Alice. This is a rescaling of $L$ given by
+\begin{equation}
+L \mapsto \tilde{L} := \frac{L}{\mathcal{N}},
+\end{equation}
+with $\mathcal{N}$ defined as the average probability that Charlie accepts a given state sent by Alice (see the discussion surrounding Eq.~\ref{eqn:perrps_deriv_2}. 
+
+We plot $\mathcal{N}$ in Fig.~\ref{fig:psnorm}, and figure of merit $\tilde{L}$ is plotted in Fig.~\ref{fig:psl}. \MT{add a discussion of how postselection affects $\tilde{L}$.} 
+
+\begin{figure}[htp]
+\centering
+\includegraphics{psnorm.png}
+\caption{\label{fig:psnorm}}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics{psl.png}
+\caption{\label{fig:psl}}
+\end{figure}
 
 
-\MT{chat here about updating $L$ to include the effects of postselection}
 
 \MT{have a section where I make some remarks about the postselection technique. Note that I have implicitly assumed that Bob knows whether an individual state has been postselected on. This is a sensible assumption for QKD, since it will be declared, but for QDS it does not need to be declared, so I am giving Bob too much power here.}
 
