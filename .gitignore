@@ -1,6 +1,9 @@
 # Image related files
 *.pdf
-
+*.png
+# I will ignore the image files, but I will version control
+# the scripts required to generate the files
+*-checkpoint.*
 # LaTeX related files
 *.aux
 *.glo
@@ -28,3 +31,7 @@
 
 # I want to ignore calculations files
 Calculations/*
+
+# Specific folders to ignore
+Images/SciencePlots-master/*
+/Images/introduction/figures_playing.ipynb
