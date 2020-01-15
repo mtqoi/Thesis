@@ -29,14 +29,50 @@ Let $\mathcal{X} = X_1, X_2, \dots, X_n$ be $n$ independent binary random variab
 \text{P}\left(\mathbb{E}\left(\bar{\mathcal{X}}\right) - \bar{\mathcal{X}} \ge \epsilon\right) &\le \text{exp}\left(- 2 \epsilon^2 n\right).
 \end{align}
 
+
+
+
+
+\noindent These inequalities are known as Hoeffding's inequalities \MT{cite} and will provide a necessary tool for analysis of our Quantum Digital Signatures protocol.
+
+
 \subsection{Coherent state alphabets}
 
-\begin{figure}
+\begin{figure}[htp]
 \centering
-\includegraphics{qpsk.png}
-\caption{\label{fig:qpsk}}
+\begin{subfigure}[b]{0.4\linewidth}
+\includegraphics[draft=false, width=\linewidth]{introduction/qpsk_1}
+\caption{}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\linewidth}
+\includegraphics[draft=false, width=\linewidth]{introduction/qpsk_2}
+\caption{}
+\end{subfigure}
+\caption{\label{fig:qpsk} The Wigner function for a mixture over $\mathcal{A}_4$ is a sum of individual Wigner functions for each of the coherent states. QPSK alphabet with (a) $\alpha=1.5$; (b) $\alpha=0.8$}
 \end{figure}
-\noindent These inequalities are known as Hoeffding's inequalities \MT{cite} and will provide a necessary tool for analysis of our Quantum Digital Signatures protocol.
+
+% In a quantum communications protocol, the alphabet states should be chosen with significant overlap.
+
+\subsection{Thermal state}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[draft=false, width=0.4\linewidth]{introduction/thermal_state}
+\caption{\label{fig:thermal_state} The thermal state Wigner function is Gaussian, with variance greater than the vacuum state vacuum, depicted in orange.}
+\end{figure}
+
+\subsection{TMSV state}
+\begin{figure}[htp]
+\centering
+\includegraphics[draft=false, width=0.8\linewidth]{introduction/tmsv_wigner}
+\caption{\label{fig:tmsv_wigner} Plots of the Wigner function for each reduced mode of the TMSV state. Locally the modes look like thermal states, see Fig.~\ref{fig:thermal_state}. The vacuum variance is depicted in orange.}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[draft=false, width=0.8\linewidth]{introduction/tmsv_histogram}
+\caption{\label{fig:tmsv_histogram} \MT{caption for TMSV histogram}}
+\end{figure}
 
 \begin{figure}
 \centering
