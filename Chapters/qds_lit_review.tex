@@ -36,10 +36,34 @@ However, as we shall see, the structure of this protocol is very closely aligned
 %\subsection{Andersson2006 (+ implementation)}
 \subsection*{QDS implementation}
 %Talk about Andersson2006 and Clarke2012
+A step forward to implementation of QDS occurs in Ref.~\cite{Andersson2006}, in which Andersson \emph{et. al.} replace the tricky to perform $SWAP$ test from Ref.~\cite{Gottesman2001} with a practical state comparison method. The qubits required previously are also replaced by coherent states (qumodes). Combined with the new state comparison scheme, the requirements for QDS have been reduced to just generation and distribution of coherent states and linear optics components (beamsplitters).
+
+\begin{figure}[htp]
+\centering
+\includegraphics{andersoon2006_state_comparison.png}
+\caption{\label{fig:andersson2006_state_comparison}}
+\end{figure}
+
+The key step, the comparison of coherent states, is displayed pictorially in Fig.~\ref{fig:andersson2006_state_comparison}. If the photodetector clicks it is a strong indication (a certain indication, in the ideal limit) that $\alpha \ne \beta$. Furthermore this comparison is non-destructive, and simply by placing another beamsplitter in the path of the upper beam, with vacuum input at the fourth port, one recovers $\ket{\alpha}$. Otherwise, for $\alpha \ne \beta$ the output states of the second beamsplitter are identical. This practical state comparison forms the building-block for their QDS protocol. 
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=0.8\linewidth]{multiport.png}
+\caption{\label{fig:andersson2006_multiport}}
+\end{figure}
+
+To allow both parties to perform comparisons, an optical multiport Fig.~\ref{fig:andersson2006_multiport} is used. This allows Bob and Charlie to compare Alice's state declaration with her previously distributed state. It also has the advantage of symmetrizing Bob and Charlie's output states, thus preventing a repudiating Alice. The null ports of the multiport are monitored, since they will click if either Alice is trying to repudiate, or if a malicious party is interacting with the state distribution.
+
+Alice sends coherent states from her alphabet of possible coherent states, both to Bob and to Charlie, and keeps a record of which states she sent. Bob and Charlie feed their states through the shared multiport, thereby ensuring that Alice has sent them identical states (or symmetrizing them if she hasn't), and store their output states in quantum memory. Later, Alice sends the classical message, plus classical information describing which states she had previously sent. Bob and Charlie create the corresponding coherent states, and compare them via the method in Fig.~\ref{fig:andersson2006_state_comparison} with the states retrieved from quantum memory. If no clicks are recorded at the null ports, it is an indication that the message is genuine and the protocol passes.
+
+This protocol was implemented by Clarke \emph{et. al.} in Ref.~\cite{Clarke2012}, where an alphabet with $8$ phase-encoded coherent states was used, and signature lengths $L \sim $\MT{X} were obtained. \MT{I don't think they actually quote one, but I can estimate it from their $g$ value.} To get around the requirement for quantum memory, in Ref.~\cite{Clarke2012} the Messing and Distribution stages occur at the same time so the coherent state corresponding to the chosen private key may be interfered with the distributed quantum signatures. This prevents their scheme from being used in a realistic setting where the Distribution and Messaging stages can typically occur with a delay of days, weeks or even years.
+
+
+
 
 %\subsection{Dunjko2014 (+ implementation}
 \subsection*{Removing quantum memory}
-The requirement that recipients possess long-term and efficient quantum memory, needed for the above protocol, makes it impractical for realization. The removal of this requirement by Dunjko \emph{et. al.} \cite{Dunjko2014} was one of the major milestones towards a practical QDS which can be implemented. 
+The requirement that recipients possess long-term and efficient quantum memory, needed for the above protocols, makes it impractical for realization. The removal of this requirement by Dunjko \emph{et. al.} \cite{Dunjko2014} was one of the major milestones towards a practical QDS which can be implemented. 
 
 The key insight of Ref.~\cite{Dunjko2014} was to effectively replace the quantum public key by a classical one, albeit one which relies on the distribution and measurement of non-orthogonal quantum states. This physical requirement is a practical one, relying on simply linear optics (beamsplitters) and photodetectors capable of distinguishing just between zero and nonzero photon numbers, such as avalanche photodiodes (APDs). The storage of classical public keys is clearly no restriction. 
 
@@ -49,11 +73,7 @@ The main difference then between Refs.~\cite{Dunjko2014} and \cite{Gottesman2001
 
 In the Distribution stage of the protocol, Alice generates classical strings $\left\{k_j^m\right\}_{j=0}^L$, length $L$, corresponding to each future one-bit message $m$. The $k_j^m$ are chosen uniformly at random from the BPSK alphabet of coherent state phases $\left\{- \alpha, \alpha\right\}$. Alice then forms sequences of coherent states $\rho = \otimes_{j=0}^L \ket{k_j^m}$ which she then distributes to Bob and to Charlie. 
 
-\begin{figure}[htp]
-\centering
-\includegraphics[width=0.8\linewidth]{multiport.png}
-\caption{\label{fig:dunjko2014_multiport}}
-\end{figure}
+
 
 Bob and Charlie pass their received coherent states through the shared optical multiport, Fig.~\ref{fig:dunjko2014_multiport}, which serves to symmetrize their individual quantum states. That is, after the multiport Bob and Charlie's reduced density matrices are identical, which guards against Alice's repudiation attack. Each recipient has two outputs of the multiport. One output, the so-called "null-port" should be monitored for clicks of the photodiode which imply that $\alpha \ne \beta$ (Bob and Charlie have different coherent states, Fig.~\ref{fig:dunjko2014_multiport}) which may imply the presence of an attack. Bob and Charlie should also perform unambiguous state discrimination (USD) on the outputs of their signal ports, which will accurately distinguish between non-orthogonal states $\ket{\alpha}, \ket{-\alpha}$ at the expense that it will sometimes fail to give an answer. 
 
@@ -69,10 +89,10 @@ An implementation of a variation of Dunjko's scheme is described in Ref.~\cite{C
 \caption{\label{fig:USE}}
 \end{figure}
 
-Collins \emph{et. al.} estimate a signature length $L = 5.1 \times 10^{13}$ in order to sign a message. Notice the subtle shift between Refs.~\cite{Gottesman2001} and \cite{Dunjko2014, Collins2014}. While previously the number of recipients did not need to be determined until the Messaging stage, here it must be determined before Distribution. After the coherent states have passed through the multiport the number of recipients cannot be changed. 
-\MT{I should note later that removing the multiport removes this restriction.} Because of the physical requirement for the optical multiport, it will also be challenging (though possible) to generalize to more recipients, though note that for more than two recipients one may not use $USD$ measurement. \MT{why?}. Realistic implementation of the multiport also introduces noise and losses due to misalignment and instability, further reducing the efficiency of the protocol, and requires Bob and Charlie to be physically connected. In Ref.~\cite{Collins2014}, for example Bob and Charlie are separated by $5$~m of optical fibre. 
+Collins \emph{et. al.} estimate a signature length $L = 5.1 \times 10^{13}$ in order to sign a message. Notice the subtle shift between Refs.~\cite{Gottesman2001} and \cite{Andersson2006, Clarke2012, Dunjko2014, Collins2014}. While previously the number of recipients did not need to be determined until the Messaging stage, here it must be determined before Distribution. After the coherent states have passed through the multiport the number of recipients cannot be changed. 
+\MT{I should note later that removing the multiport removes this restriction.} Because of the physical requirements for the optical multiport, it will also be challenging (though possible) to generalize to more recipients, though note that for more than two recipients in Ref.~\cite{Dunjko2014} one may not use $USD$ measurement. \MT{why?}. Realistic implementation of the multiport also introduces noise and losses due to misalignment and instability, further reducing the efficiency of the protocol, and requires Bob and Charlie to be physically connected. In Ref.~\cite{Clarke2012, Collins2014}, for example Bob and Charlie are separated by $5$~m of optical fibre. 
 
-The most difficult assumption which Refs.~\cite{Dunjko2014, Collins2014} make, however, is that there should be no eavesdroppers on the quantum channels. This is a strong and impractical assumption, and one which subsequent papers endeavour to remove.
+The most difficult assumption which Refs.~\cite{Clarke2012, Dunjko2014, Collins2014} make, however, is that there should be no eavesdroppers on the quantum channels. This is a strong and impractical assumption, and one which subsequent papers endeavour to remove.
 
 
 
