@@ -1,0 +1,84 @@
+%
+%
+% This document is for testing specific parts of the thesis, e.g. 
+% those that will be included via the \input command.
+%
+%
+%\documentclass[12pt]{report}
+\documentclass{book}
+\usepackage[utf8]{inputenc}
+\usepackage[draft]{graphicx}
+%\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage[noBBpl]{mathpazo}
+%\usepackage{geometry} \geometry{ a4paper, total={170mm,257mm}, left=20mm, top=20mm,}
+%\usepackage{geometry} \geometry{ a4paper, total={170mm,257mm}, left=30mm, right=30mm,}
+\usepackage[space]{grffile}
+\usepackage{amssymb}
+\usepackage{hyperref}	
+\usepackage[stable]{footmisc}
+\usepackage{amssymb}
+\usepackage[nottoc,numbib]{tocbibind}
+\usepackage{dsfont}
+\usepackage{framed}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage{bm}
+
+\newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
+\newcommand*\erfc{\text{erfc}}
+\newcommand{\perr}{\text{p}_{\text{err}}}
+\newcommand{\perrps}{\perr\left(\Delta_r, \Delta_\theta\right)}
+\newcommand{\pe}{\text{p}_{\text{e}}}
+\newcommand{\given}{\; \middle| \;}
+\newcommand{\cond}{\; | \;}
+\newcommand{\tmsv}{\rho_{\text{TMSV}}}
+\newcommand{\rps}{\mathcal{R}_{\text{PS}}}
+
+
+%\includeonly{
+%	chapters/introduction,
+%	chapters/qds
+%}
+
+
+
+%\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\DeclareGraphicsExtensions{.png, .pdf,.jpg}
+
+
+\usepackage{color} 
+\def\red#1{\textcolor{red}{#1}}
+\def\blue#1{\textcolor{blue}{#1}}
+\def\MT#1{\textcolor{magenta}{#1}}
+\def\cyan#1{\textcolor{cyan}{#1}}
+
+\graphicspath{ {images/} }
+
+\setcounter{tocdepth}{1} % Show sections
+%\setcounter{tocdepth}{2} % + subsections
+%\setcounter{tocdepth}{3} % + subsubsections
+%\setcounter{tocdepth}{4} % + paragraphs
+%\setcounter{tocdepth}{5} % + subparagraphs
+
+
+\begin{document}
+%\part{Secure quantum networks}
+%\include{chapters/crypto_intro}
+%\tableofcontents
+%\listoffigures
+%\include{chapters/introduction}
+%\include{chapters/qds}
+%\include{chapters/qss}
+%\include{chapters/aqc}
+
+\include{chapters/qds_lit_review}
+
+\appendix
+%\include{chapters/larger_alphabets}
+%\include{chapters/coherent_noisy_channel}
+
+%\part{Coherent signal transfer}
+\end{document}
