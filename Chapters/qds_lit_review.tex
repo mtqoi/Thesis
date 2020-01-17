@@ -33,10 +33,43 @@ However, as we shall see, the structure of this protocol is very closely aligned
 
 \MT{Perhaps talk about repudiation somewhere in this section?}
 
-\subsection{Dunjko2014 (+ implementation}
-%I know that this paper is not the next one chronologically, but it can be segued-to nicely from the Gottesman discussion.
+%\subsection{Andersson2006 (+ implementation)}
+\subsection*{QDS implementation}
+%Talk about Andersson2006 and Clarke2012
 
-\subsection{Andersson2006 (+ implementation)}
+%\subsection{Dunjko2014 (+ implementation}
+\subsection*{Removing quantum memory}
+The requirement that recipients possess long-term and efficient quantum memory, needed for the above protocol, makes it impractical for realization. The removal of this requirement by Dunjko \emph{et. al.} \cite{Dunjko2014} was one of the major milestones towards a practical QDS which can be implemented. 
+
+The key insight of Ref.~\cite{Dunjko2014} was to effectively replace the quantum public key by a classical one, albeit one which relies on the distribution and measurement of non-orthogonal quantum states. This physical requirement is a practical one, relying on simply linear optics (beamsplitters) and photodetectors capable of distinguishing just between zero and nonzero photon numbers. The storage of classical public keys is clearly no restriction. 
+
+The main difference then between Refs.~\cite{Dunjko2014} and \cite{Gottesman2001}, is that in Dunjko \emph{et. al.}, recipients Bob and Charlie perform photon-number measurement as they receive the quantum states. Remarkably, despite this fundamental change to the nature of the protocol's one-way function, secure QDS is possible. \MT{do I need to revise this sentence? Is it accurate and fair?}
+
+\MT{Include a figure (minipage thing) comparing the one-way functions used by Gottesman2001 and by Dunjko2014.}
+
+In the Distribution stage of the protocol, Alice generates classical strings $\left\{k_j^m\right\}_{j=0}^L$, length $L$, corresponding to each future one-bit message $m$. The $k_j^m$ are chosen uniformly at random from the BPSK alphabet of coherent state phases $\left\{- \alpha, \alpha\right\}$. Alice then forms sequences of coherent states $\rho = \otimes_{j=0}^L \ket{k_j^m}$ which she then distributes to Bob and to Charlie. 
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=0.8\linewidth]{multiport.png}
+\caption{\label{fig:dunjko2014_multiport}}
+\end{figure}
+
+Bob and Charlie pass their received coherent states through the shared optical multiport, Fig.~\ref{fig:dunjko2014_multiport}, which serves to symmetrize their individual quantum states. That is, after the multiport Bob and Charlie's reduced density matrices are identical, which guards against Alice's repudiation attack. Each recipient has two outputs of the multiport. One output, the so-called "null-port" should be monitored for clicks of the photodiode which imply that $\alpha \ne \beta$ (Bob and Charlie have different coherent states, Fig.~\ref{fig:dunjko2014_multiport}) which may imply the presence of an attack. Bob and Charlie should also perform unambiguous state discrimination (USD) on the outputs of their signal ports, which will accurately distinguish between non-orthogonal states $\ket{\alpha}, \ket{-\alpha}$ at the expense that it will sometimes fail to give an answer. 
+
+During Messaging, Alice will declare $\left(m, k_j^m\right)$ which recipients will compare to their USD outcomes. Provided that there are enough matches between Alice's phase declarations $k_j^m$ and Bob/Charlie's USD outcomes, message $m$ is accepted and the protocol has succeeded.
+
+This first protocol avoiding the requirement for quantum memory shows that QDS may be both practical and secure. Furthermore the limited physical requirements--tensor-products of coherent states, beamsplitters and non-photon-number-resolving detectors--are feasible to work with, unlike the large number of superposition qubits required for Ref.~\cite{Gottesman2001}. \MT{Now talk about the implementation paper}.
+
+Notice though the subtle shift between Refs.~\cite{Gottesman2001} and \cite{Dunjko2014}. While previously the number of recipients did not need to be determined until the Messaging stage, here it must be determined before Distribution. After the coherent states have passed through the multiport the number of recipients cannot be changed. 
+\MT{I should note later that removing the multiport removes this restriction.} Because of the physical requirement for the optical multiport, it will also be challenging (though possible) to generalize to more recipients, at the expense of altering the protocol to rely on a measurement scheme other than USD. \MT{why?}. Realistic implementation of the multiport also introduces noise and losses due to misalignment and instability, further reducing the efficiency of the protocol.
+
+
+The most difficult assumption which Ref.~\cite{Dunjko2014} makes, however, is that there should be no eavesdroppers on the quantum channels. This is a strong and impractical assumption, and one which subsequent papers will endeavour to remove.
+
+
+
+
 
 
 
