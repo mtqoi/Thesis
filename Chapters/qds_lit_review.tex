@@ -1,6 +1,3 @@
-
-
-
 \section{Quantum digital signatures protocols}
 %This section will basically be my "literature review" section.
 %I will focus on the main thread of QDS developments initially, but I can supplement it by including some of the asian papers later.
@@ -8,11 +5,40 @@
 %Note: after I have this section I can compare it to the Amiri2015 review paper and to Collins2018 progress report (and to Callum's thesis)
 
 
-\subsection{Gottesman and Chuang}
+\subsection*{Quantum one-way function}
+%Talk about Gottesman and Chuang.
+Gottesman and Chuang \cite{Gottesman2001} generalized Lamport's scheme \MT{cite} in $2001$ to build the first Quantum Digital Signatures protocol. The key contribution of their scheme is to replace the one-way function in \MT{cite} with a so-called \emph{quantum one-way function}, thereby securing the signatures protocol against a quantum adversary.
+
+\MT{TODO: chat more about quantum one-way function. Include the "figure" that I currently have in my historical introduction}
+
+A direct analogue of public-key cryptography, their protocol relies on the difficult task, described in Fig.~\MT{X}, of accurately distinguishing between non-orthogonal quantum states. Their security relies on the fact that performing measurement on a state of $n$~qubits can yield at most $n$~bits of information, and so the protocol in Ref.~\cite{Gottesman2001} is designed such that this is insufficient to distinguish between states.
+
+The key tool in the protocol is a quantum $SWAP$ test, Fig.~\MT{X}, which probabilistically determines whether two states are identical. To perform this test, players prepare $\ket{f_x}, \ket{f_{x^\prime}}$ and an additional ancilla $\left(\ket{0} + \ket{1}\right)/\sqrt{2}$. Players perform a Fredkin gate \MT{cite} using the ancilla as a control, and then perform a Hadamard \MT{cite} on the ancilla. In other words, the $SWAP$ test performs the mapping
+\begin{equation}
+\ket{f_x}\ket{f_{x^\prime}}\frac{\left(\ket{0} + \ket{1}\right)}{\sqrt{2}} \mapsto \frac{\left(\ket{f_x}\ket{f_{x^\prime}} \pm \ket{f_{x^\prime}}\ket{f_x}\right)\ket{y_{\pm}}}{\sqrt{2}}
+\end{equation}
+with $y_+=0$ and $y_-=1$. Finally, the ancilla qubit is measured in the $0, 1$ basis, and since $\ket{0}, \ket{1}$ are orthogonal they can be distinguished.  Therefore if $x = x^\prime$ the coefficient of $\ket{1}$ is identically zero, and so the $SWAP$ test always outputs $\ket{0}$. If $x \ne x^\prime$ outputs either $\ket{1}$ or $\ket{0}$. 
+
+The probabilistic nature of this test will cause participants in the protocol to sometimes mistake distinct states for identical ones, but the probability that this occurs may be estimated. Crucially, the protocol may be proven secure if states are chosen such that this probability of honest failure is smaller than the probability to correctly distinguish between large entangled states of non-orthogonal qubits. 
+
+The protocol is a significant attempt to generalise and translate structures from the field of classical cryptography to the quantum realm, and it sets the pattern for all subsequent QDS protocols, and so it is worth examining the protocol in detail. Alice has a $1$~bit message $b$ which she would like to sign, and send to Bob and Charlie. In the Distribution state, for each $b$ Alice creates $M$ classical strings $k_m^i$, length $L$. Each classical string is mapped to a corresponding quantum state $\ket{k_m^i}$ of $n$~qubits which are chosen to be highly non-orthogonal. Two of each of these quantum states are sent to Bob and Charlie. The quantum states, $4M$ in total, are Alice's public keys which may be freely distributed--and they may even be given to a dishonest external party. The corresponding classical strings $k_m^i$ are Alice's private keys.
+
+Bob and Charlie each receive two of the $\ket{k_m^i}$. They each perform a $SWAP$ test between their two copies of the public key, to check whether individual copies are equivalent. Then, they should perform a $SWAP$ test between one of Bob's keys and one of Charlie's keys, to test whether they received identical keys to each other. If all $SWAP$ tests pass then the protocol continues to the next step, otherwise it aborts. Bob and Charlie should now store the quantum public keys which they hold.
+
+Later, in the Messaging stage, Alice sends $\left(m, k_m^i\right)$. For each of the $M$ strings $k_m^i$, Bob creates $\ket{k_m^i}$ and performs a $SWAP$ test with his corresponding stored quantum state. If his test passes most of the time then he accepts the message as genuine and transferable, and passes $\left(m, k_m^i\right)$ to Charlie who performs similar tests. 
+
+Although laying the groundwork for practical QDS protocols, this original proposal cannot be implemented. The most pressing problem is the requirement for long-term quantum memory. State-of-the-art technology can store a quantum state for \MT{X}, and so long-term storage of many copies of quantum states with many qubits will be technologically challenging. Furthermore, the need for every party to be able to create and distribute the states and the multiple required $SWAP$ tests render this protocol impractical for implementation. 
+
+However, as we shall see, the structure of this protocol is very closely aligned to classical signatures protocols. Since the public keys are truly public (all of them can be handed to Eve). Furthermore, every recipient is given identical quantum public keys and so the number of recipients does not need to be fixed before the start of the protocol. These requirements are subtly changed in later--more practical--QDS protocols. \MT{make sure I talk about this later.}
+
+\MT{Perhaps talk about repudiation somewhere in this section?}
+
+\subsection{Dunjko2014 (+ implementation}
+%I know that this paper is not the next one chronologically, but it can be segued-to nicely from the Gottesman discussion.
 
 \subsection{Andersson2006 (+ implementation)}
 
-\subsection{Dunjko2014 (+ implementation}
+
 
 \subsection{Wallden2015 (+ implementation)}
 
