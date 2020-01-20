@@ -94,21 +94,38 @@ Collins \emph{et. al.} estimate a signature length $L = 5.1 \times 10^{13}$ in o
 
 The most difficult assumption which Refs.~\cite{Clarke2012, Dunjko2014, Collins2014} make, however, is that there should be no eavesdroppers on the quantum channels. This is a strong and impractical assumption, and one which subsequent papers endeavour to remove.
 
+\subsection*{Removing multiport}
+%\subsection{Wallden2015 (+ implementation)}
+
+The fact that the QDS schemes discussed above require dedicated hardware at the receivers--the optical multiport--makes implementation in real-world situations difficult. The multiport introduces losses and noise, and requires tricky synchronisation between Bob and Charlie in order to correctly interfere the states. The experiment in Ref.~\cite{Collins2014} therefore has Bob and Charlie only separated by $5$~m optical fibre. 
+
+To combat this, Wallden \emph{et. al.} \cite{Wallden2015} propose two QDS schemes specifically designed to run over the same hardware platform as QKD. In particular, they get rid of the multiport which was previously use to symmetrize Bob and Charlie's reduced output states. Their key insight is that rather than symmetrizing their states, it is sufficient to symmetrize their measurement outcomes. Therefore, a step is added to the distribution stage in which Bob and Charlie randomly swap half of their measurement outcomes over a secure classical channel. If Alice can gain no information about which outcomes were swapped then she cannot repudiate. 
+
+This protocol was implemented by Donaldson \emph{et. al.} in Ref.~\cite{Donaldson2016} in which a message is securely signed over distances $500$~m, $1000$~m, and $2000$~m, with no requirement on the physical separation between Bob and Charlie. The secure classical link may be realised via QKD, and so Refs.~\cite{Wallden2015, Donaldson2016} begin to explore the close connections between these two different quantum communication protocols. We explore this further in Chapter.~\MT{X}. Donaldson \emph{et. al.} achieve signature length $L = 1.93 \times 10^9$ using QPSK coherent states and USE measurement. This is a vast improvement over the $L = 5 \times 10^{13}$ required in Ref.~\cite{Collins2014} and means that secure quantum signatures may actually be both useful and practical. 
+
+\subsection*{Allowing Eve}
+%\subsection{Amiri2016 (+ implementation)}
+All signature schemes considered so far have made the assumption that the quantum distribution channels are secure, that is, they may not be attacked or monitored by an eavesdropper, Eve. This is clearly an unrealistic and unphysical assumption, but was a sensible one while the pressing impracticalities of early QDS schemes (quantum memory, multiport, tricky state comparison tests) were overcome. The emphasis in earlier papers was on dishonesty internal to the protocol, i.e. which attacks can Bob or Charlie mount when they already hold perfect copies of the quantum public keys. However, in a realistic scenario it is clear that an eavesdropper \emph{could} attack the quantum channels as states are being distributed, and so it is important to consider whether this has any effect on QDS security.
+
+Amiri \emph{et. al.} provide a QDS scheme which allows for an Eve to eavesdrop on the quantum channels. In the worst-case scenario it is assumed that Eve will conspire with a dishonest internal player (Bob or Charlie in the case of a forging attack), and so knowledge which Bob/Charlie hold about their own quantum public key measurements is supplemented by knowledge learned through Eve's attack. For short, we describe Bob or Charlie as performing the eavesdropping attack, so as not to confuse the nomenclature. 
+
+The key modification which Ref.~\cite{Amiri2016} makes is to have Alice use \emph{different} private keys (and so different sequences of quantum coherent states) for each recipient. This means that the dishonest recipient is forced to eavesdrop on the honest recipient's quantum channel if he is to gain any information. This is in contrast to earlier protocols in which the dishonest recipient held a perfect copy of the quantum public key, which was identical to that of the honest recipient. 
+
+Because the dishonest player is forced to eavesdrop, he in fact receives a worst copy of the honest player's public key than in the above protocols, and so somewhat counter-intuitively Ref.~\cite{Amiri2016} requires \emph{shorter} $L$ than previous protocols, despite relaxing a security assumption. The protocol relies on sending weak attenuated coherent states, identically to decoy-state BB$84$ \MT{cite}, and \MT{X} detection at the receiver. Because the security of discrete-variable QKD is so advanced, the QDS protocol proposed in Ref.~\cite{Amiri2016} is secure against coherent eavesdropping attacks.\footnote{We will discuss the hierarchy of eavesdropping attacks in Sec.~\MT{X}}
+
+\subsection{Side-channel attacks}
+%\subsection{Puthoor2016 (+ implementation)}
+%\MT{Though first talk about side-channel attacks}
 
 
 
-
-
-
-\subsection{Wallden2015 (+ implementation)}
 
 \subsection{Tokyo installed fibers scheme}
-\MT{Perhaps the rest of the DPS-based protocols here too?}
+\MT{Perhaps the rest of the DPS-based protocols, or installed-fiber protocols here too?}
 
-\subsection{Amiri2016 (+ implementation)}
 
-\subsection{Puthoor2016 (+ implementation)}
-\MT{Though first talk about side-channel attacks}
+
+
 
 \subsection{The other "almost-agile" ones?}
 
@@ -118,7 +135,10 @@ The most difficult assumption which Refs.~\cite{Clarke2012, Dunjko2014, Collins2
 \MT{Discuss DV vs CV first}
 
 \subsection{Quick chat about my PRA}
+\MT{perhaps I just want to mention this in the "abstract"/introduction of this chapter? I don't want to talk about it too much because it is what the rest of the chapter is about.}
+
 
 \subsection{"Classical" unconditionally secure signatures}
+\MT{Talk about protocol P2 from Wallden2015, and also Amiri's scheme}
 
 \subsection{Extensions to signature schemes}
