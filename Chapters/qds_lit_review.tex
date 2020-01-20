@@ -116,7 +116,19 @@ Because the dishonest player is forced to eavesdrop, he in fact receives a worst
 \subsection{Side-channel attacks}
 %\subsection{Puthoor2016 (+ implementation)}
 %\MT{Though first talk about side-channel attacks}
+It should be noted that "security" of a protocol is a theoretical statement, and not a physical one. A protocol is secure with respect to a model of how it operates in the real world, and whether a so-called unconditionally secure protocol can be broken in practice depends on how realistic or practical its underling modelling assumptions are. For example, although in many QKD protocols Eve is allowed to attack the quantum channels and eavesdrop on all communication, she is prevented from attacking the physical devices which are used to implement the protocol. 
 
+For example, the QDS scheme presented in Ref.~\cite{Amiri2016} relies on distribution and detection of quasi-single photons \MT{make sure I have discussed this earlier} in different polarization bases. Physically, Alice must prepare her states before they are sent. A realistic Eve could attack Alice's device in order to gain information about the polarization of the prepared state and so she might gain enough information to forge without detection, even though the protocol is unconditionally secure against conventional types of eavesdropping attack.
+
+An example of such a side-channel attack \MT{define what is a side-channel attack} is the trojan horse attack presented in Ref.~\cite{Jain2014}. Here, Eve shines a bright laser pulse into Alice's device and measures the few back-reflected photons which are scattered back. These photons have picked up the same polarization as Alice imparted to her prepared state, and so Eve is able to infer the chosen polarization basis choice, which gives her an undetected advantage.
+
+To guard against side-channel attacks, honest parties have several options. One direction is to close known side-channels by additional protocol steps or additional hardware. For example, with the trojan horse attack Alice and Bob could add additional filters to their devices to block out light at Eve's required wavelength. It was shown however that Eve can bypass this by breaking Alice's filters, in a way that is undetectable to honest players \MT{cite the laser damage paper}. Closing side-channels in this way may open up the protocols to additional attack methods, which must then be understood, modelled and reacted-to. This places quantum cryptography into the same "cat-and-mouse" development cycles as conventional cryptography. \MT{expand on this, and make sure I have discussed it earlier in the historical overview.}
+
+To break this cycle, and to provide genuinely unconditional security, guaranteed against all conceivable side-channel attacks, there has been a recent push towards device-independent cryptography. The security of device-independent (DI) protocols makes no trust assumptions about the devices used and it may even be assumed that the  devices are held by the malevolent party. DI cryptography is then based entirely on laws of quantum mechanics, specifically on the violation of a bell inequality. \MT{cite some stuff, and expand this paragraph.}
+
+Full DI cryptography, while secure, is difficult to perform and may offer figures of merit which are too pessimistic for the desired application. One may compromise, then, and instead implement measurement device independent (MDI) cryptographic protocols, in which no trust assumptions are placed on the measurement devices (and they can even be owned by Eve), while the state-preparation and sending devices are held by honest parties and are trusted. \MT{cite some papers}
+
+The first MDI QDS scheme is presented by Puthoor \emph{et. al.} in Ref.~\cite{Puthoor2016}.
 
 
 
