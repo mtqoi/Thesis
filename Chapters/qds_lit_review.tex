@@ -126,6 +126,8 @@ An experimental implementation of a protocol which is similar to Ref.~\cite{Amir
 
 Zhang \emph{et. al.} distribute a secure signature over $200$~km fiber \cite{Zhang2018b} using \MT{comment more on how they do it and what kind of security they reach}
 
+Finally, we note the recent work by An \emph{et. al.} \cite{An2019} which boasts an experiment with GHz clock rate, allowing for \MT{mention their achievements and how they do it.}
+
 
 \subsection*{Side-channel attacks}
 %\subsection{Puthoor2016 (+ implementation)}
@@ -134,9 +136,9 @@ It should be noted that "security" of a protocol is a theoretical statement, and
 
 For example, the QDS scheme presented in Ref.~\cite{Amiri2016} relies on distribution and detection of quasi-single photons \MT{make sure I have discussed this earlier} in different polarization bases. Physically, Alice must prepare her states before they are sent. A realistic Eve could attack Alice's device in order to gain information about the polarization of the prepared state and so she might gain enough information to forge without detection, even though the protocol is unconditionally secure against conventional types of eavesdropping attack.
 
-An example of such a side-channel attack \MT{define what is a side-channel attack} is the trojan horse attack presented in Ref.~\cite{Jain2014}. Here, Eve shines a bright laser pulse into Alice's device and measures the few back-reflected photons which are scattered back. These photons have picked up the same polarization as Alice imparted to her prepared state, and so Eve is able to infer the chosen polarization basis choice, which gives her an undetected advantage.
+An example of such a side-channel attack \MT{define what is a side-channel attack} is the trojan horse attack presented in Ref.~\cite{Jain2014}. Here, Eve shines a bright laser pulse into Alice's device and measures the few back-reflected photons which are scattered back. These photons have picked up the same polarization as Alice imparted to her prepared state, and so Eve is able to infer the chosen polarization basis choice, which gives her an undetected advantage. Another potential side-channel attack is that information about the intensity-modulation of the weak attenuated coherent states in Ref.~\cite{Amiri2016, Yin2016c} may be leaked.
 
-To guard against side-channel attacks, honest parties have several options. One direction is to close known side-channels by additional protocol steps or additional hardware. For example, with the trojan horse attack Alice and Bob could add additional filters to their devices to block out light at Eve's required wavelength. It was shown however that Eve can bypass this by breaking Alice's filters, in a way that is undetectable to honest players \MT{cite the laser damage paper}. Closing side-channels in this way may open up the protocols to additional attack methods, which must then be understood, modelled and reacted-to. This places quantum cryptography into the same "cat-and-mouse" development cycles as conventional cryptography. \MT{expand on this, and make sure I have discussed it earlier in the historical overview.}
+To guard against side-channel attacks, honest parties have several options. One direction is to close known side-channels by additional protocol steps or additional hardware. Leakage of intensity-modulation information may be removed by using a passive decoy-state scheme, as in Ref.~\cite{Zhang2018}, for example, and with the trojan horse attack Alice and Bob could add additional filters to their devices to block out light at Eve's required wavelength. It was shown however that Eve can bypass these filters by breaking Alice's filters, in a way that is undetectable to honest players \MT{cite the laser damage paper}. Closing side-channels in this way may open up the protocols to additional attack methods, which must then be understood, modelled and reacted-to. This places quantum cryptography into the same "cat-and-mouse" development cycles as conventional cryptography. \MT{expand on this, and make sure I have discussed it earlier in the historical overview.}
 
 To break this cycle, and to provide genuinely unconditional security, guaranteed against all conceivable side-channel attacks, there has been a recent push towards device-independent cryptography. The security of device-independent (DI) protocols makes no trust assumptions about the devices used and it may even be assumed that the  devices are held by the malevolent party. DI cryptography is then based entirely on laws of quantum mechanics, specifically on the violation of a bell inequality. \MT{cite some stuff, and expand this paragraph.}
 
@@ -166,7 +168,18 @@ There have been two main implementations of MDI-QDS. One experiment by Roberts \
 
 
 \subsection*{Installed fibers}
-There have been several experiments seeking to move secure QDS from the laboratory setting to a practical network of deployed fibers. For example, H.-L. Yin \emph{et. al.} in a second implementation of MDI-QDS \cite{Yin2017} securely sign a message over a deployed fiber network in approx. $40$~hours using the protocol from Ref.~\cite{Puthoor2016}.Yin \emph{et. al.} note that a full parameter optimization was not performed. Regardless, there has been quick and marked progress from early QDS experiments, assuming quantum memories and tricky detection methods which were unique to QDS, to the recent experiments demonstrating unconditionally secure MDI-QDS over installed metropolitan fiber communication systems.
+There have been several experiments seeking to move secure QDS from the laboratory setting to a practical network of deployed fibers. The first demonstration of QDS over installed fibers allowed for a single-bit to be signed in approximately one second over $90$~km fiber, relying on a differential phase shift (DPS) quantum state distribution, Fig.~\ref{fig:collins2016_dps}.
+
+In this DPS-QDS protocol, \MT{describe how the protocol runs}
+
+\begin{figure}[htp]
+\centering
+\includegraphics{collins2016_dps.png}
+\caption{\label{fig:collins2016_dps}}
+\end{figure}
+
+
+H.-L. Yin \emph{et. al.} in a second implementation of MDI-QDS \cite{Yin2017} securely sign a message over a deployed fiber network in approx. $40$~hours using the protocol from Ref.~\cite{Puthoor2016}.Yin \emph{et. al.} note that a full parameter optimization was not performed. Regardless, there has been quick and marked progress from early QDS experiments, assuming quantum memories and tricky detection methods which were unique to QDS, to the recent experiments demonstrating unconditionally secure MDI-QDS over installed metropolitan fiber communication systems.
 
 
 
