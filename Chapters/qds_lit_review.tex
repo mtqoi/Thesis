@@ -48,7 +48,7 @@ The key step, the comparison of coherent states, is displayed pictorially in Fig
 
 \begin{figure}[htp]
 \centering
-\includegraphics[width=0.8\linewidth]{multiport.png}
+\includegraphics{multiport.png}
 \caption{\label{fig:andersson2006_multiport}}
 \end{figure}
 
@@ -85,7 +85,7 @@ An implementation of a variation of Dunjko's scheme is described in Ref.~\cite{C
 
 \begin{figure}[htp]
 \centering
-\includegraphics[width=0.8\linewidth]{USE.png}
+\includegraphics{USE.png}
 \caption{\label{fig:USE}}
 \end{figure}
 
@@ -93,6 +93,8 @@ Collins \emph{et. al.} estimate a signature length $L = 5.1 \times 10^{13}$ in o
 \MT{I should note later that removing the multiport removes this restriction.} Because of the physical requirements for the optical multiport, it will also be challenging (though possible) to generalize to more recipients, though note that for more than two recipients in Ref.~\cite{Dunjko2014} one may not use $USD$ measurement. \MT{why?}. Realistic implementation of the multiport also introduces noise and losses due to misalignment and instability, further reducing the efficiency of the protocol, and requires Bob and Charlie to be physically connected. In Ref.~\cite{Clarke2012, Collins2014}, for example Bob and Charlie are separated by $5$~m of optical fibre. 
 
 The most difficult assumption which Refs.~\cite{Clarke2012, Dunjko2014, Collins2014} make, however, is that there should be no eavesdroppers on the quantum channels. This is a strong and impractical assumption, and one which subsequent papers endeavour to remove.
+
+\MT{TODO: mention somewhere how Dunjko2014 differs from Andersson2006}
 
 \subsection*{Removing multiport}
 %\subsection{Wallden2015 (+ implementation)}
@@ -111,9 +113,18 @@ Amiri \emph{et. al.} provide a QDS scheme which allows for an Eve to eavesdrop o
 
 The key modification which Ref.~\cite{Amiri2016} makes is to have Alice use \emph{different} private keys (and so different sequences of quantum coherent states) for each recipient. This means that the dishonest recipient is forced to eavesdrop on the honest recipient's quantum channel if he is to gain any information. This is in contrast to earlier protocols in which the dishonest recipient held a perfect copy of the quantum public key, which was identical to that of the honest recipient. 
 
-Because the dishonest player is forced to eavesdrop, he in fact receives a worst copy of the honest player's public key than in the above protocols, and so somewhat counter-intuitively Ref.~\cite{Amiri2016} requires \emph{shorter} $L$ than previous protocols, despite relaxing a security assumption. The protocol relies on sending weak attenuated coherent states, identically to decoy-state BB$84$ \MT{cite}, and \MT{X} detection at the receiver. Because the security of discrete-variable QKD is so advanced, the QDS protocol proposed in Ref.~\cite{Amiri2016} is secure against coherent eavesdropping attacks.\footnote{We will discuss the hierarchy of eavesdropping attacks in Sec.~\MT{X}}
 
-\subsection{Side-channel attacks}
+
+The protocol relies on sending weak attenuated coherent states, identically to decoy-state BB$84$ \MT{cite}, with three different intensities. The coherent states are randomly polarized in one of two orthogonal polarization bases, and single-photon detection in one (randomly chosen) polarization basis is performed at the receiver. Players gain classical binary strings, which are later compared during the Messaging stage. The protocol is secure provided that Bob's (Charlie's) string is closer\footnote{in Hamming distance} to Alice's string than any possible string which a dishonest eavesdropper can hold. 
+
+Because the security of discrete-variable QKD is so advanced, the QDS protocol proposed in Ref.~\cite{Amiri2016} is secured against coherent eavesdropping attacks\footnote{We will discuss the hierarchy of eavesdropping attacks in Sec.~\MT{X}} via an estimation of the smooth-min entropy \MT{cite}, which is the commonly bounded quantity for analysis of quantum cryptographic protocols. Amiri \emph{et. al.} note specifically that the quantum stages of their protocol are identical to the equivalent QKD protocols, with difference only in the classical postprocessing of measurement results. This becomes a common factor of many QDS protocols as they move towards realistic and practical implementation, even in commercial systems and installed fibers, and is a thread which we shall pick up again in Ch.~\MT{X}.
+
+Because the dishonest player is forced to eavesdrop, he in fact receives a worst copy of the honest player's public key than in the above protocols, and so somewhat counter-intuitively Ref.~\cite{Amiri2016} requires only an estimated $L = 6\times 10^8$ over $50$~km fiber. Remarkably, this is \emph{shorter} than previous protocols, despite relaxing a security assumption.
+
+An experimental implementation of a protocol which is similar to Ref.~\cite{Amiri2016} is descried in Ref.~\cite{Yin2017c}. H.-L. Yin \emph{et. al.} sign a $32$~bit message over a distance of $102$~km, making their experiment the longest implemented message to-date. Zhang \emph{et. al.} distribute a secure signature over $200$~km fiber \cite{Zhang2018b} using \MT{comment more on how they do it and what kind of security they reach}
+
+
+\subsection*{Side-channel attacks}
 %\subsection{Puthoor2016 (+ implementation)}
 %\MT{Though first talk about side-channel attacks}
 It should be noted that "security" of a protocol is a theoretical statement, and not a physical one. A protocol is secure with respect to a model of how it operates in the real world, and whether a so-called unconditionally secure protocol can be broken in practice depends on how realistic or practical its underling modelling assumptions are. For example, although in many QKD protocols Eve is allowed to attack the quantum channels and eavesdrop on all communication, she is prevented from attacking the physical devices which are used to implement the protocol. 
@@ -128,26 +139,48 @@ To break this cycle, and to provide genuinely unconditional security, guaranteed
 
 Full DI cryptography, while secure, is difficult to perform and may offer figures of merit which are too pessimistic for the desired application. One may compromise, then, and instead implement measurement device independent (MDI) cryptographic protocols, in which no trust assumptions are placed on the measurement devices (and they can even be owned by Eve), while the state-preparation and sending devices are held by honest parties and are trusted. \MT{cite some papers}
 
-The first MDI QDS scheme is presented by Puthoor \emph{et. al.} in Ref.~\cite{Puthoor2016}.
+The first MDI QDS scheme is presented by Puthoor \emph{et. al.} in Ref.~\cite{Puthoor2016}, which requires only a characterization of the states which are distributed through the quantum channel, and which places no assumptions on the detectors. The setup of Ref.~\cite{Puthoor2016} is depicted in Fig.~\ref{fig:puthoor2016_setup}. Each player shares a quantum channel with Eve, while message recipients Bob and Charlie share an MDI-QKD link which is used to securely symmetrize their measurement results. This protocol runs similarly to Ref.~\cite{Amiri2016} and differs only in the quantum steps used to distribute correlated classical strings between players. 
+
+\begin{figure}[htp]
+\centering
+\includegraphics{puthoor2016_setup.png}
+\caption{\label{fig:puthoor2016_setup}}
+\end{figure}
+
+The correlated strings are shared between Alice and Bob as described in Fig.~\ref{fig:puthoor2016_mdi}, while identical steps are followed to share between Alice and Charlie. Alice and Bob each prepare polarization-encoded Fock states with different intensities, and send them to Eve. If Eve is honest she will perform a Bell measurement \MT{define} on the states which she has received. An honest or dishonest Eve then publicly announces whether the measurement was a success, and the Bell state which she has obtained.
+
+Alice and Bob then communicate to each other their intensity and basis settings (but not the states which they each sent). This allows them to deduce each other's sent state, from Eve's Bell state declaration. Intuitively, since Eve claims to perform a Bell measurement, Alice and Bob \MT{talk about intuitive security of MDI stuff.}
+
+\begin{figure}[htp]
+\centering
+\includegraphics{puthoor2016_mdi.png}
+\caption{\label{fig:puthoor2016_mdi}}
+\end{figure}
+
+
+There have been two main implementations of MDI-QDS. One experiment by Roberts \emph{et. al.} implements either MDI-QDS, MDI-QKD or regular QKD with a switchable setup \cite{Roberts2017}. By handing the untrusted measurement device to Charlie, and allowing Bob and Charlie to additionally share a QKD link, they securely sign a message between Alice and Bob situated $50$~km apart. They also only require two quantum links, between Alice-Charlie and Bob-Charlie (the same as Fig.~\ref{fig:puthoor2016_mid} with Charlie playing the role of Eve), which reduces the resource cost of distributing signatures across a network. Roberts \emph{et. al.} sign a single-bit message in just $74$~ms. 
 
 
 
-\subsection{Tokyo installed fibers scheme}
-\MT{Perhaps the rest of the DPS-based protocols, or installed-fiber protocols here too?}
+\subsection*{Installed fibers}
+There have been several experiments seeking to move secure QDS from the laboratory setting to a practical network of deployed fibers. For example, H.-L. Yin \emph{et. al.} in a second implementation of MDI-QDS \cite{Yin2017} securely sign a message over a deployed fiber network in approx. $40$~hours using the protocol from Ref.~\cite{Puthoor2016}.Yin \emph{et. al.} note that a full parameter optimization was not performed. Regardless, there has been quick and marked progress from early QDS experiments, assuming quantum memories and tricky detection methods which were unique to QDS, to the recent experiments demonstrating unconditionally secure MDI-QDS over installed metropolitan fiber communication systems.
 
 
 
 
 
-\subsection{The other "almost-agile" ones?}
 
-\subsection{An2019 (+ implementation)}
 
-\subsection{Croal2016}
-\MT{Discuss DV vs CV first}
+%\subsection{Tokyo installed fibers scheme}
+%\MT{Perhaps the rest of the DPS-based protocols, or installed-fiber protocols here too?}
 
-\subsection{Quick chat about my PRA}
-\MT{perhaps I just want to mention this in the "abstract"/introduction of this chapter? I don't want to talk about it too much because it is what the rest of the chapter is about.}
+\MT{Talk about other QDS implementations}
+
+\MT{Where shall I talk about An2019?}
+
+\subsection*{Continuous-variables}
+\MT{Motivate CV and then talk about Croal2016}
+
 
 
 \subsection{"Classical" unconditionally secure signatures}
