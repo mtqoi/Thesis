@@ -1,52 +1,7 @@
 \chapter{Quantum digital signatures}
 Goal of chapter: introduce our QDS protocol and prove its security in different contexts using several methods.
 
-\section{Cryptography introduction}
-%introduction and literature review
-Goal of chapter: historical overview of development of quantum cryptography. Lead up to a thorough literature review for QDS, QSS and QKD.
-
-Cryptography is a field probably as old as civilization itself. For as long as communication has existed, so too has the desire to keep information hidden. Both the Greeks and the Romans are known to have used ciphers to encrypt messages \MT{cite}. A cipher, after applied to a message, alows the encrypted message to be freely transmitted and intercepted without an adverse party knowing its meaning. The intended recipients, however, can undo the effects of the cipher and read the original message. \MT{It'd be cool to have an example of e.g. a ceasar cipher}.
-
-Cryptanalysis--the art and science of breaking cryptographic systems--has existed for as long as cryptography. The history of cryptographic development can be viewed as a race between cryptographers and cryptanalysts. The cryptographers, Alice and Bob, continually invent new schemes to perform their secure communication task. The cryptanalyst, Eve, continually tries to break these schemes in order to interfere in Alice and Bob's communication.
-
-\MT{The following segue seems quite abrupt}
-There are two main important strands of cryptography: private-key and public-key crytography, Fig.~\ref{fig:pubpriv}. In private-key cryptography (also known as \emph{symmetric} cryptography), Alice and Bob share some secret information which they will use to perform some task, and without which an eavesdropper cannot break the system. An important example of private-key cryptography is encryption with a cipher $\mathcal{K}$ which is used to encrypt and decrypt messages. Any party with $\mathcal{K}$ can freely encypt or decrypt any piece of information, while any party lacking knowledge of $\mathcal{K}$ cannot. A relevant example of this type of cryptosystem is the one-time pad (OTP) which is discussed above.
-
-\MT{Perhaps some discussion about how $\mathcal{K}$ can be distributed and attacked}
-
-\MT{I should have a discussion at some point about how public- and private- key cryptography relate to each other and how they are both used in modern infrastructure}
-
-The second strand is public-key cryptography (also known as \emph{asymmetric} cryptography). Here, there are several pieces of information required to run a protocol. Alice is assumed to hold a key $\mathcal{E}$ (her ``private key'') while Bob holds a key $\mathcal{D}$ (Alice's ``public-key'') which is assumed to be publicly known. As an example, Alice may encrypt a message using $\mathcal{E}$ and sends it to Bob, who may decrypt it using $\mathcal{D}$.  \MT{Include more examples of this thing actually being used in practice}
-
-\begin{figure}[htp]
-\centering
-\captionsetup{width=0.8\linewidth}
-\begin{framed}
-\begin{subfigure}{0.4\textwidth}
-\begin{align*}
-m \mapsto \text{Encrypt}_\mathcal{K}\left(m\right) \\
-\text{Decrypt}_\mathcal{K}\left[E_\mathcal{K}\left(m\right)\right] \mapsto m
-\end{align*}
-\caption{}
-\end{subfigure}
-\begin{subfigure}{0.4\textwidth}
-\begin{align*}
-m \mapsto \text{Encrypt}_\mathcal{E}\left(m\right) \\
-\text{Decrypt}_\mathcal{D}\left[\text{Encrypt}_\mathcal{E}\left(m\right)\right] \mapsto m
-\end{align*}
-\caption{}
-\end{subfigure}
-\caption{(a) Private-key encryption. The same key $\mathcal{K}$ allows Alice to encrypt and Bob to decrypt message $m$. (b) Public-key encryption. Alice and Bob use different keys, $\mathcal{E}$ and $\mathcal{D}$ to encrypt and decrypt $m$. The decyption key $\mathcal{D}$ can be public knowledge without affecting the security of the encryption key $\mathcal{E}$.}
-\label{fig:pubpriv}
-\end{framed}
-\end{figure}
-
-Usually, given knowledge of $\mathcal{E}$ it should be easy to derive $\mathcal{D}$. The converse should not be true, and the publicly available $\mathcal{D}$ should give no indication of $\mathcal{E}$. If $\mathcal{E}$ is unique to Alice, then a successful decryption using $\mathcal{D}$ proves sufficient to prove Alice's identity.\footnote{One may be tempted to build a digital signatures protocol on this exchange, but \MT{explain why it is a bad idea, with reference to Simmons}.}
-
-The function $f: \mathcal{E} \mapsto \mathcal{D}$ is sometimes referred to as a ``trapdoor'' or ``one-way'' function, and $f$ is typically based on a mathematical problem which is deemed to be computationally hard, for example \MT{examples} which underly the commonly used \MT{protocols}. \MT{motivate quantum cryptography via breaking of these trapdoors}
-
-\input{chapters/qds_lit_review}
-
+\MT{short introduction}
 
 \section{Our QDS protocol}\label{sec:qds_protocol}
 

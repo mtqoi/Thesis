@@ -1,4 +1,6 @@
-\chapter{Cryptography introduction}
+\chapter{Introduction to quantum cryptography}
+
+\section{Conventional (classical) cryptography}
 %introduction and literature review
 Goal of chapter: historical overview of development of quantum cryptography. Lead up to a thorough literature review for QDS, QSS and QKD.
 
@@ -41,3 +43,8 @@ m \mapsto \text{Encrypt}_\mathcal{E}\left(m\right) \\
 Usually, given knowledge of $\mathcal{E}$ it should be easy to derive $\mathcal{D}$. The converse should not be true, and the publicly available $\mathcal{D}$ should give no indication of $\mathcal{E}$. If $\mathcal{E}$ is unique to Alice, then a successful decryption using $\mathcal{D}$ proves sufficient to prove Alice's identity.\footnote{One may be tempted to build a digital signatures protocol on this exchange, but \MT{explain why it is a bad idea, with reference to Simmons}.}
 
 The function $f: \mathcal{E} \mapsto \mathcal{D}$ is sometimes referred to as a ``trapdoor'' or ``one-way'' function, and $f$ is typically based on a mathematical problem which is deemed to be computationally hard, for example \MT{examples} which underly the commonly used \MT{protocols}. \MT{motivate quantum cryptography via breaking of these trapdoors}
+
+
+\input{chapters/qds_lit_review}
+
+\MT{then I can have a section on QSS lit review and introduction, and one for agility. This way the chapters can be shorter and more readable.}
