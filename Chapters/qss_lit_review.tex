@@ -1,0 +1,15 @@
+\section{How to share a secret}
+\MT{introductory remarks}
+Such schemes are regularly employed in \MT{context}, the canonical example being that of a bank. The head of the bank, Alice, wishes to distribute keys to its vault between several deputies, any unknown subset of whom may be dishonest. If the deputies work together and use their keys simultaneously they are able to access the vault, but any nefarious deputies working along should not be able to gain access.
+
+\subsection*{Classical secret sharing}
+Although many existing secret-sharing schemes are already information-theoretically secure while relying only on classical resources \MT{cite}, they may encounter problems when distribution shares of the secret across insecure channels. \MT{talk in more detail about an information-theoretically secure classical scheme} This is analogous to the classical unconditionally secure signature schemes discussed in Sec.~\MT{X}. Secure implementation of a scheme such as \MT{X} requires shared secret keys which, in reality, requires QKD. Thus we may ask whether it is more or less resource-efficient to first run pairwise QKD between players, or to run a "direct"-QSS scheme without first distilling pairwise secret keys.
+
+We should expect interesting parallels between QSS and QKD. As was noted by Simmons \MT{cite}, \MT{quote about secret sharing and key distribution}.
+
+\MT{TODO: work out what papers I want to look at, and in what order}
+
+\MT{The rest of this chapter should take the following structure: 1) introduce task. 2) show how it is done classically (plus give some history). 3) motivate the quantum task. 4) lit review of the quantum task}
+
+\MT{talk somewhere about parallels between QSS and 1sDI}
+\MT{talk somewhere about QSS and steering}

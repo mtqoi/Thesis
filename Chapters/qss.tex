@@ -1,0 +1,59 @@
+\chapter{Quantum secret sharing}
+Goal of chapter: introduce our QSS protocol and prove its security in different contexts.
+
+Key results which I want to present:
+\begin{itemize}
+\item our QSS protocol
+\item security proof (what does it do? what does it not do?)
+\item analysis of security in various settings - heterodyne, $\mathcal{A}_4$, BS0, BS1, BS2, EC, varying $\alpha$, $T$, $\xi$, $g$, $h$ of both channels
+\item show how the protocol performs
+\end{itemize}
+
+\MT{Short introduction to chapter. It can function a bit like an abstract}
+
+%\input{chapters/qss_lit_review}
+% ah, I forgot, the lit review should go in the lit review chapter
+
+\section{Our QSS protocol}
+
+Our quantum secret-sharing scheme allows for a dealer, Alice, to distribute a classical secret between two recipients, Bob and Charlie. Bob and Charlie should be able to exactly reconstruct the secret when they behave honestly, while a dishonest and unauthorised conspiracy of players--including those outside the protocol--should gain no information. Crucially, the scheme should allow for dishonesty among the recipients, but a dishonest player should be forced to collaborate with an honest one.
+
+We propose a QSS protocol which will perform the task of quantum secret sharing without requiring the distribution of highly entangled states between players (in contrast to Ref.~\cite{Kogias2017}) and without requiring a dedicated hardware or network setup (in contrast to Ref.~\MT{cite}). Instead, we rely on the QPSK alphabet \MT{cite} and heterodyne detection \MT{cite} 
+\MT{make sure that this description mirrors what I have put in the QDS chapter}
+
+\MT{I don't want to say too much about compatibility with the QDS protocol or QKD here, since this should wait until the agility chapter}
+
+In our protocol, Bob and Charlie are chosen as the senders of the quantum states. This has the advantage of \MT{something}, and allows us to fully trust Alice's heterodyne detection. We note that allowing Bob or Charlie to perform heterodyne detection places implicit trust in their heterodyning beamsplitter \MT{cite 1sDI paper}. Instead, in our configuration we may trust and characterise Alice's device, and exploit the fact that \emph{at least one} recipient is honest, even though Alice does not know which recipient it is.
+
+\begin{figure}[htp]
+\centering
+\includegraphics{qss_setup.png}
+\caption{\label{fig:qss_setup}}
+\end{figure}
+
+Since Alice is the dealer who will decide on the eventual shared key our protocol is analogous to a reverse-reconciliation (RR) QKD system, and so we may similarly expect the performance benefits of RR QKD at high loss and noise. We note that having potentially untrusted players as the senders may open the protocol up to new classes of attack, e.g. if they are permitted to send a state which is outside the QPSK alphabet, and such attacks should be addressed in future work.
+
+\MT{talk somewhere about the types of attack we allow}
+
+Our QSS protocol runs as follows.
+
+\MT{make sure that the following is in the same style as my qds protocol description}
+
+\noindent \underline{Step $1$.} Bob and Charlie send to Alice sequences of coherent states, which should be independently and randomly chosen from $\mathcal{A}_4$. Alice measures the phases of her received states, and records her outcomes $A_B, A_C \in \mathbb{C}$. Bob and Charlie should also keep a record $X_B, X_C$ of which states they sent.
+
+\noindent \underline{Step $2$.} Alice forms a variable $X_A = F\left(A_B, A_C\right)$ which is a function $F$ of her measurement results. Note that $X_A \in \mathcal{C}$ while $X_B, X_C \in \mathcal{A}_4$. \MT{check whether it makes sense to say that a classical thing is in A4.}
+
+\noindent \underline{Step $3$.} Alice encodes her secret using $X_A$ \MT{make sure I have spoken about the setup earlier.}, and makes the encoded secret freely and publicly available.
+
+\noindent \underline{Step $4$.} Later, when Alice desires Bob and Charlie to be able to reconstruct her secret, she leaks the function $F$ and enough information to perform a reconciliation procedure between $X_A$ and $F\left(X_B, X_C\right)$. This step is analogous to regular QKD.
+
+\noindent \underline{Step $5$.} By working together to reconcile $F\left(X_B, X_C\right)$, Bob and Charlie gain a copy of Alice's key and may now decrypt her message.
+
+Intuitively since Alice forms a key with respect to a degree of freedom which is shared between Bob and Charlie she forces them to work together.
+
+\MT{some more remarks about the running of the protocol}
+
+\MT{I should make these steps more thorough. I can include equations, as I did with QDS.}
+
+\subsection{Security against Eve}
+\MT{talk here about security against an external eavesdropper.}
