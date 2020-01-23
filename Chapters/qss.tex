@@ -75,7 +75,7 @@ Critical to the protocol is the fact that Alice forms a secret key based on a de
 \MT{some more remarks about the running of the protocol}
 
 
-\subsection{Security against Eve}
+\section{Security against Eve}
 \MT{talk here about security against an external eavesdropper.}
 
 The QSS protocol presented above must be secure against both the actions of an external eavesdropper and the actions of a dishonest Bob or Charlie, who may collaborate with Eve. We first consider just an external Eve to illustrate key steps from the security analysis, an a dishonest Bob or Charlie is considered in the next section.
@@ -144,7 +144,7 @@ and thus
 A_C = \frac{X_A - g A_B}{h}.
 \end{equation}
 
-\noindent Since our $F$ is not injective (there are multiple $A_B, A_C$ which will give the same $X_A$) we must average over all of the possible ways to reach a given $X_A$. Therefore
+\noindent Since our $F$ is not injective (there are multiple $A_B, A_C$ which will give the same $X_A$) we must average over all of the possible ways to reach a given $X_A$. Therefore, once $X_A$ is fixed, the choice of $A_B, A_C$ reduces to a one-variable problem and so
 
 \begin{equation}
 \text{P}\left(X_A \given X_B=b, X_C=c\right) = \int\limits_{A_B \in \mathbb{C}} \Diff2 A_B \; \text{P}\left(A_B , \frac{X_A - g A_B}{h} \given X_B=b, X_C=c\right)
@@ -156,7 +156,7 @@ Assuming that the channel Charlie-Alice is independent from the channel Bob-Char
 \text{P}\left(A_B, A_C \given X_b=b, X_C=c\right) = \text{P}\left(A_B \given X_B=b\right) \times \text{P}\left(A_C \given X_C=c\right)
 \end{equation}
 for Alice's heterodyne measurement outcomes $A_B, A_C$. Let us assume for now that each channel is noiseless but lossy. The probability that Alice measures a particular heterodyne outcome $a \in \mathbb{C}$ when a coherent state of complex amplitude $\beta$ is sent through a lossy channel, transmittivity $T$, is 
-\begin{equation}
+\begin{equation}\label{eqn:qss_channel_classical_prob}
 \frac{1}{\pi}\exp\left( - \left| a - \sqrt{T}\beta \right|^2\right)
 \end{equation}
 which we have used previously in Ch.~\MT{X}. The required changes to include thermal noise of the channel can be readily made.
@@ -174,6 +174,95 @@ Finally, the mutual information Eq.~\ref{eqn:qss_deriv_1} may be calculated. \MT
 Let us now explore how the mutual information behaves. \MT{Now let's make some graphs and really have fun exploring how $I$ behaves.}
 
 \subsubsection{Holevo information}
+
+We will now detail how the Holevo information term in Eq.~\ref{eqn:qss_dw_eve} may be calculated. In doing so we will point to areas where future work might strengthen the security analysis to wider classes of attack, which should help to illuminate the contexts to which our security proof may be applied. In this section we consider a dishonest Eve performing attack BS$0$, as detailed above in Sec.~\MT{X}, and more general attacks will be considered later.
+
+Bob and Charlie prepare a state from QPSK alphabet with equal probability. The coherent states should be independently and randomly chosen. Before the channel they hold the joint state
+\begin{equation}
+\rho_{\text{before}} = \rho_B \otimes \rho_C
+\end{equation}
+with
+\begin{equation}
+\rho_B = \frac{1}{4} \sum_{k=0}^3 \dyad{\beta_k}_B \qq{and} \rho_C = \frac{1}{4} \sum_{k^\prime = 0}^3 \dyad{\gamma_{k^\prime}}_C
+\end{equation}
+where $\beta, \gamma$ are the amplitudes of Bob's and Charlie's coherent state alphabets.\footnote{Complex amplitudes $\beta, \gamma$ were denoted $b, c$ in the previous section.}
+
+We assume that the channel acts separately on each mode, and that modes $\rho_B$, $\rho_C$ undergo independent evolution. In other words, we assume that the channel has tensor-product structure
+\begin{equation}
+\Phi\left[\rho\right] = \Phi_B\left[\rho\right] \otimes \Phi_C\left[\rho\right]
+\end{equation}
+where \MT{check this equation}
+\begin{equation}
+\Phi_B\left[\rho\right] = \phi_B\left(\text{Tr}_B \rho\right) \otimes \mathbb{1}\left(\rho\right).
+\end{equation}
+
+\noindent Eve performs separate beamsplitter attacks on each channed and retains two output modes $\mathbb{E}_{B, C}$. The total state after the channel becomes
+\begin{equation}
+\rho_{\text{after}} = \rho_{\mathbb{A}_B, \mathbb{E}_B} \otimes \rho_{\mathbb{A}_C, \mathbb{E}_C}
+\end{equation}
+with $\mathbb{A}_{B, C}$ denoting Alice's two modes and where
+\begin{equation}
+\rho_{\mathbb{A}_B, \mathbb{E}_B} = \frac{1}{4} \sum_{k=0}^3 \dyad{\sqrt{T_B} \beta_k}_{\mathbb{A}_B} \otimes \dyad{\sqrt{1-T_B} \beta_k}_{\mathbb{E}_B}
+\end{equation}
+and similarly for $\rho_{\mathbb{A}_C, \mathbb{E}_C}$. Now, Alice heterodynes and measures $A_B \in \mathbb{C}$ from $\rho_{\mathbb{A}_B, \mathbb{E}_B}$ and $A_C \in \mathbb{C}$ from $\rho_{\mathbb{A}_C, \mathbb{E}_C}$. Eve's total state conditioned on these outcomes becomes 
+\begin{equation}
+\rho_{\left.\mathbb{E} \given A\right.} = \rho_{\left.\mathbb{E}_B \given A_B\right.} \otimes \rho_{\left. \mathbb{E}_C \given A_C\right.}
+\end{equation}
+with
+\begin{equation}
+\rho_{\left.\mathbb{E}_B \given A_B\right.} = \frac{1}{4 \pi} \sum_{k=0}^3 \text{P}_B\left(A_B \given \beta_k, T_B\right) \dyad{\sqrt{1-T_B} \beta_k}_{\mathbb{E}_B}
+\end{equation}
+and similarly for $\rho_{\left.\mathbb{E}_C \given A_C\right.}$. The probability $\text{P}_B\left(A_B \given \beta_k, T_B\right)$ is calculated analogously to Eq.~\ref{eqn:qss_channel_classical_prob}, and similarly for $A_C$.
+
+Take $X_A = g A_B + h A_C$ as usual, with $g, h$ fixed, and write $A_C = \left(X_A - g A_B\right)/h$. Therefore we have
+
+\begin{align}
+\rho_{\left. \mathbb{E} \given X_A, A_B\right.} &= \frac{1}{16 \pi^2} \sum_{k, k^\prime = 0}^3 \text{P}_B\left(A_B \given \beta_k, T_B\right) \text{P}_C\left(\frac{X_A - g A_B}{h} \given \gamma_{k^\prime}, T_C\right) \notag \\
+%
+&\dyad{\sqrt{1-T_B} \beta_k}_{\mathbb{E}_B} \otimes \dyad{\sqrt{1-T_C}\gamma_{k^\prime}}_{\mathbb{E}_C}
+\end{align}
+
+\noindent Once again since Alice's function $F$ is in general not injective, we must mix over outcomes $A_B, A_C$ in order to find Eve's state $\rho_{\left.\mathbb{E} \given X_A\right.}$
+
+\begin{equation}\label{eqn:qss_aposteriori_state}
+\rho_{\left.\mathbb{E} \given X_A\right.} = \int\limits_{A_B \in \mathbb{C}} \Diff2 A_B \; \text{P}\left(A_B\right) \rho_{\left.\mathbb{E} \given X_A, A_B\right.}
+\end{equation}
+
+\noindent and mixing over $X_A$ we finally reach
+
+\begin{equation}\label{eqn:qss_apriori_state}
+\rho_{\mathbb{E}} = \int\limits_{X_A \in \mathbb{C}} \Diff2 X_A \; \text{P}\left(X_A\right) \rho_{\left.\mathbb{E}\given X_A\right.}.
+\end{equation}
+
+\noindent We may identity Eq.~\ref{eqn:qss_aposteriori_state} as Eve's \emph{a prosteriori} state and Eq.~\ref{eqn:qss_apriori_state} as Eve's \emph{a priori} state and so Eve's Holevo information is given by the usual formula
+
+\begin{equation}\label{eqn:qss_holevo}
+\chi = \text{S}\left(\rho_\mathbb{E}\right) - \int\limits_{X_A \in \mathbb{C}} \Diff2 X_A \; \text{P}\left(X_A\right) \text{S}\left(\rho_{\left.\mathbb{E} \given X_A\right.}\right).
+\end{equation}
+
+\noindent Let us explore the behaviour of Eve's Holevo information Eq.~\ref{eqn:qss_holevo}.
+
+\MT{TODO: make some nice graphs of $\chi$ in different scenarios and under different attacks BS1, BS2, EC.}
+
+\section{Security against a dishonest player}
+\MT{Talk about guarding against a dishonest Bob/Charlie.}
+Including a dishonest player, Bob or Charlie, in the above security proof requires us to re-calculate several quantities from the above section. For concreteness we will first assume that Bob is dishonest and Charlie is honest, and we allow Bob to collaborate with Eve. Later we will discuss how to account for the fact that we do not know \emph{which} player is dishonest.
+
+The effect of including a dishonest player is that Bob knows precisely which coherent states he sent to Alice, and so he should have reduced uncertainty (increased Holevo information) about $X_A$. Intuitively it is also possible that Bob could wait and see which coherent states Charlie sent before choosing his own, in order to preference a certain outcome $X_A$. \MT{Make a comment about this. Would it be taken care of by Alice's optimization over $g, h$?} We will also assume that Bob sends states from his QPSK alphabet, though this could be relaxed in future work.
+
+Since Bob knows which coherent states he sent we must re-calculate several expressions from the previous section. \MT{talk about which ones should be changed.}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -200,3 +289,11 @@ Ref.~\cite{Kogias2017} has potentially dishonest players Bob and Charlie perform
 We have assumed that a dishonest Bob or Charlie still sends a state from the QPSK alphabet. It is yet unclear whether they could gain an advantage by sending something exotic and potentially highly entangled, perhaps in order to force Alice to reach a certain key $X_A$. This should be explored and potentially relaxed in future work. We anticipate that applying methods from quantum bit commitment might prove fruitful here. 
 
 Finally, we note that our assumption that the channel between Alice and Bob-Charlie takes a tensor-product structure is perhaps a strong one and should be relaxed. A potential strategy of a dishonest player could be to exploit properties of a general channel which maps a two-mode input state to a two-mode output state at Alice, though potentially allowing a dishonest player many output ancilla modes correlated with Alice. Such a strategy will be restricted by the conditions that the reduced state of an honest player should be a coherent state. Similarly it will require that Alice's measurement outcomes don't look errant, though this should be quantified.
+
+
+
+
+
+
+
+
