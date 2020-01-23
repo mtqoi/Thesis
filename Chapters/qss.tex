@@ -216,7 +216,7 @@ and similarly for $\rho_{\left.\mathbb{E}_C \given A_C\right.}$. The probability
 
 Take $X_A = g A_B + h A_C$ as usual, with $g, h$ fixed, and write $A_C = \left(X_A - g A_B\right)/h$. Therefore we have
 
-\begin{align}
+\begin{align}\label{eqn:qss_deriv_8}
 \rho_{\left. \mathbb{E} \given X_A, A_B\right.} &= \frac{1}{16 \pi^2} \sum_{k, k^\prime = 0}^3 \text{P}_B\left(A_B \given \beta_k, T_B\right) \text{P}_C\left(\frac{X_A - g A_B}{h} \given \gamma_{k^\prime}, T_C\right) \notag \\
 %
 &\dyad{\sqrt{1-T_B} \beta_k}_{\mathbb{E}_B} \otimes \dyad{\sqrt{1-T_C}\gamma_{k^\prime}}_{\mathbb{E}_C}
@@ -250,11 +250,25 @@ Including a dishonest player, Bob or Charlie, in the above security proof requir
 
 The effect of including a dishonest player is that Bob knows precisely which coherent states he sent to Alice, and so he should have reduced uncertainty (increased Holevo information) about $X_A$. Intuitively it is also possible that Bob could wait and see which coherent states Charlie sent before choosing his own, in order to preference a certain outcome $X_A$. \MT{Make a comment about this. Would it be taken care of by Alice's optimization over $g, h$?} We will also assume that Bob sends states from his QPSK alphabet, though this could be relaxed in future work.
 
-Since Bob knows which coherent states he sent we must re-calculate several expressions from the previous section. \MT{talk about which ones should be changed.}
+Since Bob knows which coherent states he sent we must re-calculate several expressions from the previous section. \MT{talk about which ones should be changed.} The key change throughout is that we should no longer mix over Bob's alphabet. This is easily taken into account in the calculation of mutual information, and since the calculation above was left quite general we will not reproduce the steps here.
+
+Holevo information is calculated likewise, with Eve's state conditioned on $X_A, A_B$ given by
+\begin{align}\label{eqn:qss_deriv_9}
+\rho_{\left.\mathbb{E} \given X_A, A_B\right.} = \frac{1}{4 \pi^2} \sum_{k^\prime=0}^3 \text{P}_B\left(A_B \given \beta_k, T_B\right) \text{P}_C\left(\frac{X_A - g A_B}{h} \given \gamma_{k^\prime}, T_C\right) \notag \\
+%
+&\dyad{\sqrt{1-T_B} \beta_k}_{\mathbb{E}_B} \otimes \dyad{\sqrt{1-T_C}\gamma_{k^\prime}}_{\mathbb{E}_C}
+\end{align}
+(c.f. Eq.~\ref{eqn:qss_deriv_8}) and the \emph{a posteriori} and \emph{a priori} states calculated by integrating Eq.~\ref{eqn:qss_deriv_9} identically to Eqs.~\ref{eqn:qss_aposteriori_state},~\ref{eqn:qss_apriori_state}.
+
+\MT{Chat about the fact that we don't actually know which player is dishonest.}
+
+\MT{Make some graphs looking at mutual information and Holevo information}
 
 
+\section{Protocol performance}
+\MT{Make some graphs of key rate and tweak all of the parameters that I can in all of the attacks that I can.}
 
-
+\MT{If I have time, make some graphs with e.g. homodyning instead of heterodyning, or different alphabets.}
 
 
 
