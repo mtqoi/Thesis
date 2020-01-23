@@ -35,25 +35,47 @@ Since Alice is the dealer who will decide on the eventual shared key our protoco
 
 \MT{talk somewhere about the types of attack we allow}
 
-Our QSS protocol runs as follows.
+%OOur QSS protocol runs as follows.
+Our QSS protocol runs in three stages, a Distribution stage, an Encryption stage and, finally, a Decryption stage. The Distribution stage involves distribution and measurement of quantum coherent states chosen from QPSK alphabet. At the end of Distribution Alice will hold classical information which is correlated with Bob and Charlie. In the Encryption stage, Alice will combine her classical information and use it to encode her sensitive classical secret. The encoded secret is distributed to Bob and Charlie. The secret is decoded by Bob and Charlie during Decryption. Our protocol setup is described in Fig.~\ref{fig:qss_setup}, and we describe it in detail below.
 
 \MT{make sure that the following is in the same style as my qds protocol description}
 
-\noindent \underline{Step $1$.} Bob and Charlie send to Alice sequences of coherent states, which should be independently and randomly chosen from $\mathcal{A}_4$. Alice measures the phases of her received states, and records her outcomes $A_B, A_C \in \mathbb{C}$. Bob and Charlie should also keep a record $X_B, X_C$ of which states they sent.
+\subsubsection*{Distribution stage}
+\noindent \underline{Step $1$.} Alice wishes to encrypt a classical secret, $\sigma$. Bob forms a classical sequence $X_B = \left\{x_B^j\right\}_j$ where the $x_B^j$ are complex phases independently chosen from $\mathcal{A}_4$. The $x_B^j$ are assumed to be chosen uniformly at random, but we relax this assumption slightly in Ch.~\MT{X}. Charlie likewise forms $X_C$.
 
-\noindent \underline{Step $2$.} Alice forms a variable $X_A = F\left(A_B, A_C\right)$ which is a function $F$ of her measurement results. Note that $X_A \in \mathcal{C}$ while $X_B, X_C \in \mathcal{A}_4$. \MT{check whether it makes sense to say that a classical thing is in A4.}
+\noindent \underline{Step $2$.} Bob and Charlie form sequences of coherent states
+\begin{equation}
+\rho\left[X_{\left(B, C\right)}\right] := \otimes_j \rho\left[x_{\left(B, C\right)}^j\right]
+\end{equation}
+where $\rho\left[x_{\left(B, C\right)^j}\right]$ denotes a coherent state with phase $x_{\left(B, C\right)}^j$. These sequences of states are sent to Alice through quantum channels. \MT{Talk later about the types of channels which these are.}. Alice performs heterodyne detection on each of her received states and records her complex outcomes. We denote strings of Alice's measurement outcomes as $A_B, A_C \in \mathbb{C}$, where the subscript denotes which player sent the corresponding quantum state. The $A_B$ and $A_C$ are kept separate at this stage, and Bob and Charlie should retain their information $X_{\left(B, C\right)}$.
 
-\noindent \underline{Step $3$.} Alice encodes her secret using $X_A$ \MT{make sure I have spoken about the setup earlier.}, and makes the encoded secret freely and publicly available.
+\subsubsection*{Encryption stage}
 
-\noindent \underline{Step $4$.} Later, when Alice desires Bob and Charlie to be able to reconstruct her secret, she leaks the function $F$ and enough information to perform a reconciliation procedure between $X_A$ and $F\left(X_B, X_C\right)$. This step is analogous to regular QKD.
+\noindent \underline{Step $3$.} Alice creates a new complex variable
+\begin{equation}
+X_A = F\left(A_B, A_C\right)
+\end{equation}
+from her measurement outcomes. The function $F$ is chosen by Alice and should be freely chosen to optimize security. \MT{Where shall I talk about function $F$?} \MT{I can create some nice graphs of different functions $F$, even those requiring a lot of parameters to be optimized over. But when it comes to actually analysing security I should pick simple ones.} 
 
-\noindent \underline{Step $5$.} By working together to reconcile $F\left(X_B, X_C\right)$, Bob and Charlie gain a copy of Alice's key and may now decrypt her message.
+\noindent \underline{Step $4$.} Alice now holds string $X_A$ which depends on both Bob and Charlie's choices of states to send. She then uses $X_A$ to encode $\sigma$
+\begin{equation}
+\tilde{\sigma} = \text{Enc}\left(\sigma, X_A\right)
+\end{equation}
+\MT{Talk briefly about how this might be done, e.g. with reference to QKD}
+and distributes $\tilde{\sigma}$ to Bob and Charlie. Because Bob and Charlie do not have $X_A$ they cannot gain $\sigma$.
 
-Intuitively since Alice forms a key with respect to a degree of freedom which is shared between Bob and Charlie she forces them to work together.
+\subsubsection*{Decryption stage}
+
+\noindent \underline{Step $5$.} Later, when Alice desires to allow Bob and Charlie access to $\sigma$, she broadcasts which function $F$ she used, along with enough classical information to perform a reconciliation procedure between $X_A$ and $F\left(X_B, X_C\right)$. This stage is similar to regular CV QKD. Bob and Charlie, by working together to form and reconcile $F\left(X_B, X_C\right)$ gain a copy of Alice's key, and are now able to access her secret $\sigma$.
+
+Critical to the protocol is the fact that Alice forms a secret key based on a degree of freedom which is shared between Bob and Charlie. This forces them to collaborate. If one of Bob or Charlie is dishonest, they are forced to work with an honest player and so the scheme as succeeded.
+
+
 
 \MT{some more remarks about the running of the protocol}
 
-\MT{I should make these steps more thorough. I can include equations, as I did with QDS.}
 
 \subsection{Security against Eve}
 \MT{talk here about security against an external eavesdropper.}
+
+
