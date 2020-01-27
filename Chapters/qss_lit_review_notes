@@ -1,0 +1,36 @@
+Planning EB QSS lit review. Let's group together papers by key message.
+
+
+
+
+EB QSS is possible:
+Hillery1999, Karlsson1999, Cleve1999, Gottesman1999
+
+
+Generalizing GHZ protocols:
+Markham2008a (generalizes to graph states)
+Keet2010 (generalizes to qudit graph states)
+Lau2013 (generalizes to CV cluster states)
+Armstrong2015 (links with QKD, links with steering)
+Ottaviani2017b (links with quantum confering. Star-network. MDI)
+Kogias2017 (unconditional security. CV)
+	Xiang2017 (links with steering. optimal states)
+	Xiang2018 (might allow the requisite entangled state to be distributed)
+Chen2017b (based on BPB state)
+Choi2017 (allows players to check whether a key has been distilled)
+Xiao2004 (more players than HBB. More efficient)
+Wu2016 (CV GHZ state for conferencing and qss. MDI)
+
+Making EB QSS more practical:
+Chen2005a (allows noisy ghz states)
+Chen2005b (experiment with multipartite entanglement)
+Lau2013 (generalizes to CV cluster states)
+Williams2019 (polarization-entangled photon pairs)
+Zhang2005b (uses bell-pairs instead of multipartite entanglement)
+
+
+Experimental EB QSS:
+Gartner2007 (QSS requiring four-photon entanglement)
+Bell2014 (5-qubit graph state)
+Tittel2001 (PM version of HBB using entangled PDC photons)
+Chen2005b (experiment with multipartite entanglement)
