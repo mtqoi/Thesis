@@ -20,10 +20,51 @@ We should expect interesting parallels between QSS and QKD. As was noted by Simm
 \MT{cite the simmons paper}
 \MT{why might we want quantum secret sharing?}
 
-\subsection*{Early quantum secret sharing}
-\MT{Gottesman1999, Karlsson1999, Hillery1999, Cleve1999}
+%\subsection*{Early quantum secret sharing}
+%\MT{Gottesman1999, Karlsson1999, Hillery1999, Cleve1999}
+%
+%\MT{distinguish between secret sharing and state sharing}
 
-\MT{distinguish between secret sharing and state sharing}
+It is important to notice that the translation from classical secret sharing to quantum secret sharing is not straightforward. There are at least three directions which one can pursue in order to perform a secret sharing task using quantum mechanics:
+
+\begin{itemize}
+\item quantum-assisted classical secret sharing (qCSS): encrypt a classical secret sharing protocol (e.g. Shamir \MT{cite}) using quantum resources. For example, perform pairwise QKD between Alice and each recipient, then encrypt the shares of the classical secret sharing protocol
+\item quantum secret sharing (QSS): use quantum states to securely distribute shares of a classical secret
+\item quantum state sharing (QStS): securely distribute shares of a quantum state
+\end{itemize}
+
+Quantum state sharing is an important and exciting research direction in its own right and helps to establish the close links between quantum secret sharing, QKD and quantum teleportation \MT{cite some stuff}. Despite the fact that both QSS and QStS are natural extensions of classical secret sharing to the quantum realm, , and despite the fact that early work \MT{cite} proposes related protocols for each task, it should be understood that the two are distinct quantum tasks with different goals and hardware requirements, so for the rest of this Thesis we will restrict ourselves to QSS. In what follows we will only refer to the first two options as quantum secret sharing, while the third option we shall refer to as quantum state sharing.
+
+\subsection{Entanglement-based QSS}
+
+
+All three directions are discussed at length in the pioneering work by Hillery \emph{et. al.} \cite{Hillery1999}. They propose the use of a GHZ resource state Eq.~\MT{X} shared between three players, which can be used to distribute shares of a classical secret such that collaborating recipients can recover the secret while a dishonest subset of players cannot. Alternatively, the GHZ resource state may be used to distribute shares of a quantum state, such that collaborating players may reconstruct the original quantum state while a dishonest subset of players can gain no information.
+
+Each player chooses independently and at random to measure their state in either the $x$ or $y$ basis \MT{define these}. If for example \MT{give an example of the type of calculation that lets players recover the state. Just copy it from the HBB paper}.  Crucially, knowledge of the outcomes of two players allows one to infer the outcome of the third player. 
+
+Despite its high resource requirement, and despite the fact that $50\%$ of the resource states are wasted \MT{why?} the HBB protocol has influenced the direction of all subsequent QSS protocols, and the paper was instrumental in demonstrating that multipartite entanglement may be utilized as an important resource for quantum communication protocols. 
+\MT{Should I talk somewhere about qCSS in HBB paper?}
+
+Multipartite entanglement is difficult to create and manipulate, and will degrade quickly as it is distributed over a quantum channel exposed to realistic loss or noise levels. Just as QKD has an equivalence between entanglement-based and prepare-and-measure versions \MT{Talk about ekert and BB92?}, it should be expected that the requirement of large multipartite state in Ref.~\cite{Hillery1999} can likewise be reduced \cite{Karlsson1999, Tittel2001, Zhang2005b, Williams2019}. Karlsson \emph{et. al.} \cite{Karlsson1999} propose an entanglement-based QSS scheme which, rather than relying on creation and distribution of the GHZ state, relies on distribution of \emph{pairs} of entangled qubits in a Bell state. 
+
+This configuration allows for correlations between players to be established identically to HBB with more readily accessible resources. Recipients Bob and Charlie can determine with certainty which Bell state Alice sent, which allows Alice to establish a key with Bob/Charlie, which may subsequently be used to encrypt a message. \MT{demonstrate that it can give the same measurement outcomes as HBB with GHZ.}
+
+This protocol drastically reduces the requirements of practical QSS, but the resulting protocol is still non-trivial to implement. The protocol requires Bell states and superpositions of Bell states which will all be degraded over a realistic channel. 
+
+These protocols also introduces a fundamental asymmetry into QSS at the quantum level. While in the HBB protocol any of the three players can be chosen as dealer \MT{check this}, for Ref.~\cite{Karlsson1999} it is established at the time of quantum state distribution that Alice is dealer, which may make the protocol require bespoke hardware.
+
+Both of these protocols \cite{Hillery1999, Karlsson1999} assume both perfect state creation and noiseless and lossless quantum channels. This is an unrealistic assumption and one which must be relaxed before entanglement-based QSS can be implemented securely. Chen \emph{et. al.} \cite{Chen2005a} modify the HBB protocol to the case when the resource state is a noisy-GHZ state. By proposing a method for distillation of multipartite entangled states which may be used before a communication protocol--such as QSS or quantum conferencing--requiring multiparite entanglement as a resource, their entire protocol allows for successful QSS even when the resource state does not violate a Bell inequality.
+
+
+
+
+
+
+
+
+
+
+
 
 \subsection*{Recent quantum secret sharing}
 \MT{(I should think up better titles for these)}
