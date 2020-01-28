@@ -37,10 +37,10 @@ Quantum state sharing is an important and exciting research direction in its own
 
 \subsection{Entanglement-based QSS}
 
-
+\MT{I can add a fuller explanation of HBB (and the other protocols), since I go into quite some depth in QDS lit review.}
 All three directions are discussed at length in the pioneering work by Hillery \emph{et. al.} \cite{Hillery1999}. They propose the use of a GHZ resource state Eq.~\MT{X} shared between three players, which can be used to distribute shares of a classical secret such that collaborating recipients can recover the secret while a dishonest subset of players cannot. Alternatively, the GHZ resource state may be used to distribute shares of a quantum state, such that collaborating players may reconstruct the original quantum state while a dishonest subset of players can gain no information.
 
-Each player chooses independently and at random to measure their state in either the $x$ or $y$ basis \MT{define these}. If for example \MT{give an example of the type of calculation that lets players recover the state. Just copy it from the HBB paper}.  Crucially, knowledge of the outcomes of two players allows one to infer the outcome of the third player. 
+Each player chooses independently and at random to measure their state in either the $x$ or $y$ basis \MT{define these}. If for example \MT{give an example of the type of calculation that lets players recover the state. Just copy it from the HBB paper}.  Crucially, knowledge of the outcomes of two players allows one to infer the outcome of the third player.  \MT{talk about how this actually helps to distribute a secret.}
 
 Despite its high resource requirement, and despite the fact that $50\%$ of the resource states are wasted \MT{why?} the HBB protocol has influenced the direction of all subsequent QSS protocols, and the paper was instrumental in demonstrating that multipartite entanglement may be utilized as an important resource for quantum communication protocols. 
 \MT{Should I talk somewhere about qCSS in HBB paper?}
@@ -79,6 +79,19 @@ There are strong links between QSS and quantum conferencing \cite{Wu2016, Ottavi
 \MT{Add some more detail to this section. Add some examples of states and the transformations on them, and how they are used for QSS. Add some pictures too.}
 
 \MT{Add some chat about experimental implementations of EBQSS.}
+
+\MT{Still got some papers I need to talk about.}
+
+\subsection{Sequential QSS}
+Although the above protocols which implement QSS using entangled resource states offer an advanced level of security and neatly demonstrate the important role of entanglement in quantum communication, it is hard to see how they will be preferable to qCSS which can offer equivalent levels of security but without the problems associated with generation and distribution of large entangled states. An entanglement-based scheme may even be fine if the number of players is small--for example the schemes \cite{Karlsson1999} \MT{and others} only relying on Bell-pairs--they cannot be easily scaled to many parties. We note that qCSS scales much more favourably as the number of required quantum channels is linear in the total number of players.
+
+It should still be explored whether there are any QSS protocols which outperform qCSS. One promising direction is that of sequential QSS\footnote{This is sometimes referred to as entanglement-free QSS} in which the QSS task is fulfilled by sharing of a single quantum system between multiple players.
+
+In the first sequential QSS protocol \cite{Zhang2005}, Zhang \emph{et. al.} propose a system in which Bob prepares a single photon state with his choice of polarization, and sends it to Charlie. Charlie performs a unitary operation \MT{what does he do?} on the photon and sends it to Alice, who stores the photon in a quantum memory. This process is repeated many times. Later, Alice will sample some of her stored photons for errors \MT{how?}, and on the remaining photons she performs her unitaries \MT{what are they?} and sends them back to Charlie. \MT{how does the rest of the protocol run?}
+
+Just as prepare-and-measure QKD allows Alice and Bob to mimic the measurement outcomes of a shared entangled state \MT{is it only when they measure in the same basis?} under \MT{criterion} the scheme \cite{Zhang2005} allows players to receive the same measurement outcomes they would if they had shared a GHZ state. Secret sharing then may proceed in the usual way. \MT{talk about this.}
+
+Sequential protocols have the obvious advantage that large entangled states are not required. Even though Ref.~\cite{Zhang2005} proposes to use a quantum memory it is ultimately not necessary for the protocol \MT{talk some more about this.}
 
 
 %
