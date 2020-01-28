@@ -56,6 +56,12 @@ These protocols also introduces a fundamental asymmetry into QSS at the quantum 
 Both of these protocols \cite{Hillery1999, Karlsson1999} assume both perfect state creation and noiseless and lossless quantum channels. This is an unrealistic assumption and one which must be relaxed before entanglement-based QSS can be implemented securely. Chen \emph{et. al.} \cite{Chen2005a} modify the HBB protocol to the case when the resource state is a noisy-GHZ state. By proposing a method for distillation of multipartite entangled states which may be used before a communication protocol--such as QSS or quantum conferencing--requiring multiparite entanglement as a resource, their entire protocol allows for successful QSS even when the resource state does not violate a Bell inequality.
 
 
+An important generalization of the HBB scheme allows for analysis of some of the optimal entangled states required to share a secret between more than three players. While one option would be to simply replace the resource state with the N-partite GHZ state
+
+\MT{insert equation}
+\MT{problems with npartite GHZ state}
+
+\noindent another option is to generalize to graph states \cite{Markham2008a, Keet2010} or continuous-variable cluster states \cite{Lau2013, Wu2016} under which the tasks qCSS, QSS, QStS and entanglement-based QKD may be united and described within the same framework. A graph state is \MT{add a description}. One advantage of using such a state is that it can allow fro QSS to be completed without collaboration from all recipients, which may help practical QSS to be robust and prevent against denial-of-service attacks from a dishonest internal player\footnote{Though we note that even QKD is susceptible to denial-of-service attack where Eve simply destroys the quantum (or classical) channels between Alice and Bob.}
 
 
 
@@ -64,11 +70,10 @@ Both of these protocols \cite{Hillery1999, Karlsson1999} assume both perfect sta
 
 
 
-
-
-\subsection*{Recent quantum secret sharing}
-\MT{(I should think up better titles for these)}
-
-\subsubsection*{Using entangled states}
+%
+%\subsection*{Recent quantum secret sharing}
+%\MT{(I should think up better titles for these)}
+%
+%\subsubsection*{Using entangled states}
 \subsubsection*{Using sequential measurements}
 \subsubsection*{Using a QKD-like setup}
