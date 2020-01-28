@@ -63,11 +63,22 @@ An important generalization of the HBB scheme allows for analysis of some of the
 
 \noindent another option is to generalize to graph states \cite{Markham2008a, Keet2010} or continuous-variable cluster states \cite{Lau2013, Wu2016} under which the tasks qCSS, QSS, QStS and entanglement-based QKD may be united and described within the same framework. A graph state is \MT{add a description}. One advantage of using such a state is that it can allow fro QSS to be completed without collaboration from all recipients, which may help practical QSS to be robust and prevent against denial-of-service attacks from a dishonest internal player\footnote{Though we note that even QKD is susceptible to denial-of-service attack where Eve simply destroys the quantum (or classical) channels between Alice and Bob.}
 
+There have been several attempts to prove security of entanglement-based QSS. As we have seen, security proofs based on highly-entangled GHZ states or graph states become insecure once realistic channel parameters are considered, even though they offer unconditional security in the ideal limit. One way to tackle this is to borrow tools from entanglement-based QKD. Kogias \emph{et. al.} use similar analysis to so-called one-sided device-independent ($1$sDI) QKD \cite{Armstrong2015} \MT{check it is this paper} in order to prove QSS security while modelling channel effects on their CV resource state.
+
+Key to Kogias' protocol is the assumption that neither the measurement device of Bob nor of Charlie should be trusted. Rather, each player is assumed to possess a black-box which can output one of two measurement outcomes, corresponding in the honest case to homodyne measurement in either $x$ or $p$ quadrature. Protocol security is based on monogamy of entanglement \MT{cite} and employs an entropic uncertainty relation which makes no assumption about the action of a dishonest player, by analogy with $1$sDI QKD. To our knowledge Ref.~\cite{Kogias2017} marked the first full security proof of QSS. It was later shown that the resource required for entanglement-based QSS is two-way steering of the shared state \cite{Xiang2017, Xiang2018}, and the optimal Gaussian resource states for a given energy were also considered. 
+
+The links between QSS and $1$sDI QKD explored in Ref.~\cite{Kogias2017} hint at an interesting direction for exploration: what is the relationship between QSS and other quantum communication protocols? It was already shown in Ref.~\cite{Markham2008a} that qCSS, QSS and QStS may be united under the same framework using graph states, while even in the original HBB work \cite{Hillery1999} the links between qCSS (classical secret sharing + QKD) and QSS were acknowledged. Additionally it can be shown \MT{cite} that a QStS protocol may be readily constructed from a teleportation protocol plus QSS (or qCSS or QKD) scheme if Alice teleports a quantum state to Bob, but sends the classical information required for state reconstruction to Charlie.
+
+There are strong links between QSS and quantum conferencing \cite{Wu2016, Ottaviani2017b} which is a natural multipartite generalization of QKD in which $N$ players receive identical keys. Indeed, as shown in Refs.~\cite{Wu2016, Ottaviani2017b} the same resource states and network configurations may be readily used for both QSS and quantum conferencing. It is an open question however whether these additional tasks have the same requirements \cite{Kogias2017, Xiang2017} on the resource state as QSS, or whether the optimal resource state for one protocol remains optimal for another protocol. Indeed, perhaps it is unsurprising that there should be such strong links between QSS and QKD since it was acknowledged by Simmons that
+
+\MT{insert quote and cite}.
+
+\MT{I perhaps shouldn't say more here because I can talk about it in the agile section.}
 
 
+\MT{Add some more detail to this section. Add some examples of states and the transformations on them, and how they are used for QSS. Add some pictures too.}
 
-
-
+\MT{Add some chat about experimental implementations of EBQSS.}
 
 
 %
