@@ -55,8 +55,8 @@ One of the main ideas in crypto-agility is the existence of a middleware which i
 
 \begin{figure}[htp]
 \centering
-\includegraphics[width=0.8\linewidth]{figures/agility.png}
-\caption{\label{fig:agility} AQC paper figure 1. Made by Stefan.}
+\includegraphics[draft=false]{aqc/Fig1-qagility}
+\caption{\label{fig:agility} AQC paper figure 1. Made by Stefan. Talk about this figure some more.}
 \end{figure}
 
 The framework of classical crypto-agility seems ideal to help us answer Q1 and Q2. It is natural to separate the application layer (the task to be performed) from the underlying algorithm (which we may call a "quantum crypto-core"). One can envisage a future software library which can select the appropriate underlying algorithm based on the desired task to be performed and the available network resources.
@@ -64,5 +64,80 @@ The framework of classical crypto-agility seems ideal to help us answer Q1 and Q
 \MT{Now, talk about different views of quantum agility, with reference to Fig.1}
 \MT{I think I should only talk about CV+heterodyning and compatibility with infrastructure when I come to talk about the protocols, since it is in a sense a particular instance of the problems I am discussing in this section.}
 
+%The following view of quantum crypto-agility (or quantum agility) can be thought of as analogous to a framework for quantum computing in which (this sentence doesn't really add much)
+
+There are potentially two ways to translate classical crypto-agility into the quantum realm. We describe them both in Fig.~\ref{fig:agility}~(b, c). The first we refer to as QKD-assisted crypto agility which may be seen as a generalization of qCSS and the classical signatures protocols \MT{cite} which implicitly require QKD first in order to remain secure. The QKD system delivers fresh and secure random keys which may be used for many different protocols. This viewpoint is taken by the ETSI QKD ISG $004$ and $014$ standardization efforts \MT{cite} which specify the interface between a QKD system and the key management system. We expect that QKD-assisted crypto agility will form an important cornerstone for future quantum networks. This viewpoint on agility is displayed in Fig.~\ref{fig:agility}~(b).
+
+However, as was shown in Ref.~\cite{Amiri2016} in the context of QDS, it is not always optimal to perform QKD + classical protocol, as there may be channels over which QKD is not possible, or hardware setups over which the costly reconciliation procedures are difficult. The second viewpoint may thus be referred to as a fully quantum crypto agility, Fig.~\ref{fig:agility}~(c). Rather than having an underlying QKD system, the setup has a "quantum network inferface card" (QNIC) which is able to perform multiple quantum communication protocols. This viewpoint is a generalization of the fact that multiple quantum cryptographic protocols differ only in classical postprocessing but share quantum stages. In this case the choice of protocol to perform is reduced simply to a firmware update. 
+
+%\MT{Do I want a statement along the lines of "It is important to relaize that the transfer of the crypto-agility idea to the field of quantum cryptography changes its meaning..." from the paper?}
+
+In Fig.~\ref{fig:big_agile} we present an example of an agile quantum communications stack of the viewpoint of Fig.~\ref{fig:agility}~(c). \MT{chat about this picture.}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[draft=false]{aqc/layers_5}
+\caption{\label{fig:big_agile} Made by Stefan and taken from the agile paper Ref.~\cite{Richter2020}. I should talk about it a lot more.}
+\end{figure}
+
+\clearpage
+\section{CV Agile systems}
+\MT{The text in this section is very close to Richter2020 section 3. I think this is fine, since I wrote it and had very little input or changes from other co-authors. But I should acknowledge this somewhere probably.}
+
+To illustrate the above discussion, in this section we will introduce and analyse two quantum systems which are capable of performing multiple protocols over the same hardware setups, with difference only at the level of classical postprocessing. Our setups are designed with Q$2$ in mind and the desire that they be compatible with currently deployed network architecture. The systems therefore are fully continuous-variable, relying on distribution of phase-modulated QPSK coherent states and their heterodyne phase detection \MT{statement and reference about how this is what we see in networks.} which renders each system highly compatible with deployed telecommunications infrastructure. This paves the way to an integration between our agile systems into deployed communication links which run with up to $100$~GHz sending rate \MT{richer2020 cites some stuff here}. In the next section we will describe and analyse an experimental implementation of the agile systems discussed here, and discuss further how they accomplish quantum agility.
+
+We will consider the following tasks:
+
+\textbf{QDS - quantum digital signatures}: allows for secure authentication of a classical message. It has been explicitly demonstrated that because of its small overhead, QDS may run over channels for which QKD is insecure \cite{Amiri2016}.
+
+\textbf{QSS - quantum secret sharing}: allows for secure distribution of a classical secret among a conspiracy of potentially dishonest recipients.
+
+\textbf{QKD - quantum key distribution}: allows for secure key distribution of identical randomly-generated bits between players. These keys may them be used for encryption via OTP \MT{cite}.
+
+The tasks QDS and QSS are discussed in Chapters \MT{X}, above, while the reader is referred to \MT{cite} for review of QKD. The tasks QDS and QSS are inherently multipartite, while QKD is inherently bipartite\footnote{Though note its multipartite generalization - quantum conferencing \MT{cite}.}. In what follows we will use quantum networks with three players to allow for multipartite tasks, while we explicitly describe how QKD may be performed over them.
+
+\begin{figure}[htp]
+\centering
+\includegraphics{aqc/agile_tasks.png}
+\caption{\label{fig:agile_tasks} This figure should be analogous to Fig.3 from Richter2020.}
+\end{figure}
+
+We denote our two systems as \systemB and \systemF, see Fig.~\ref{fig:agile_tasks}. The labels indicate which of the above cryptographic tasks are supported; the underlying quantum states which they use, and in which direction the quantum states are exchanged ("f" - forward, Alice sends quantum states to Bob and Charlie; or "b" - backward, Bob and Charlie send quantum states to Alice). The forward- or backward- distinction can be seen as analogous to direct- or reverse-reconcilition in QKD \MT{cite some stuff}, in which quantum and classical information flow in the same direction or in opposite directions.
+
+\MT{Perhaps have a table summarizing each system.}
 
 
+
+
+\subsection{Agile system \systemB}
+\MT{I'm not sure whether to discuss systemB or systemF first?}
+The first agile system we consider relies on the $b$-configuration, Fig.~\ref{fig:agile_tasks}, in which Bob and Charlie are the senders of quantum states while Alice is the receiver. We immediately see that the QSS protocol proposed and analysed in Chapter~\MT{X} may be inherited into this agile system. For consistency with notation we will refer to it as QSS-$b$, and we will analyse it further below.
+
+We also propose a second cryptographic protocol which fits into system \systemB, which may perform the QDS task. We refer to the protocol as QDS-$b$, and describe it below. Unlike the QDS protocol analysed in Chapter~\MT{X}, for QDS-$b$ it is Bob and Charlie who are the senders of quantum states, while Alice is the recipient. We will describe the protocol below, and then discuss how its security analysis must differ from Chapter~\MT{X}, and demonstrate how it fulfils QDS requirements $1-5$ from Chapter~\MT{X}.
+
+\MT{I can have a picture about the QDS-b implementation.}
+
+\begin{figure}[htp]
+\centering
+\includegraphics{aqc/qdsb_setup.png}
+\caption{\label{fig:qdsb_setup}}
+\end{figure}
+
+The protocol QDS-$b$ runs as follows:
+\MT{Make sure it written analogously to QDS-$f$ above.}
+
+\subsubsection*{Distribution stage}
+
+\noindent \underline{Step $1$.} For each future message $m in \left\{0, 1\right\}$ which Alice wishes to securely sign, Bob and Charlie create the classical strings
+\begin{equation}
+\Phi_m^{\left(B, C\right)} = \left\{\phi_{j, m}^{\left(B, C\right)}\right\}_{j=1}^L
+\end{equation}
+of length $L$, where the $\phi_j$ are complex phases chosen from QPSK alphabet $\mathcal{A}_4$. The $\phi_j$ are assumed to be drawn uniformly and at random from $\mathcal{A}_4$, but we relax this assumption later. 
+
+%Bob and Charlie both send Alice a sequence, length $L$, of coherent states chosen randomly from the QPSK alphabet. Bob and Charlie each keep a record of which states they have sent.
+
+\noindent \underline{Step $2$.} Bob and Charlie form sequences of quantum coherent states corresponding to elements of $\Phi_m^{\left(B, C\right)}$, analogously to Eqs.~\MT{X}, and distribute them through the quantum channels to Alice. Bob and Charlie each keep a record of $\Phi_m^{\left(B, C\right)}$.
+
+\noindent \underline{Step $3$.} Alice performs heterodyne detection on each received state and receives complex phase outcomes which we denote $x_{B, C}^j \in \mathbb{C}$, with the subscript denoting which player send the coherent state. Since measurement is performed immediately on receipt of the state, Alice does not require quantum memory and the remainder of the protocol is entirely classical.
+
+At the end of the quantum stage of the protocol, Alice possesses two classical strings, each of length $L$, which contain her complex phase measurements. She now forms eliminated signatures $A_{B, C}^m$ by writing down which two states from $\mathcal{A}_4$ are least-compatible with the $x_{B, C}^j$. The eliminated signatures are formed identically to Fig.~\MT{X}.
