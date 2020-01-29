@@ -1,0 +1,52 @@
+\chapter{Agile quantum cryptography}
+Goal of chapter: introduce and make explicit the concept of quantum agility in quantum cryptography. Join together several threads from the previous two chapters. This chapter can be viewed as a "bonus" to the QDS and QSS chapters.
+
+\iffalse
+Key things I want to present, in roughly the order that I want to present them:
+
+\begin{itemize}
+\item Discussion of agility and why it might be desirable. Motivate it in terms of my two literature reviews.
+\item Modification of QDS protocol from earlier to be agile with QSS (i.e. introduce protocol QSS-b and prove its security (inc postselection)). Have some graphs of its behaviour
+\item Bring in QKD from the literature (Papanastasiou2018). Have some graphs of its behaviour and discussion of how it relates to my thesis.
+\item Talk about the experiment (emphasise that it is not my work). I can have some plots of raw data (opendata), and make graphs of data points which I received.
+\item Analysis of the data under each protocol with discussion of how results from previous chapters are modified to make them more realistic
+\item Graphs of performance at different data parameters
+\item Table from the AQC paper $\leftarrow$ this can be the climax of this section
+\item star graph of QDS
+\item Discussion of how our analysis motivates agility
+\item Outlook/next steps
+\end{itemize}
+\fi
+
+\section{Introduction}
+
+% Review some things from my previous two literature reviews
+We have observed over the past two chapters, and in our overviews of quantum cryptography in Chapter~\MT{X}, that several quantum cryptographic protocols are intimately related. As Simmons noted
+
+\MT{insert simmons quote}
+
+and so we have seen close connections between QKD and QSS, and QSS may be interpreted simply as QKD performed between one player (dealer) and several players (recipients of the secret). We have also remarked that the secret sharing task may be performed pseudo-classically, by first encrypting channels using QKD and then using an unconditionally secure classical secret sharing protocol. 
+
+It was noted \MT{cite some papers} that QSS is related to quantum conferencing and often the same hardware setup may be used to perform both tasks. And in Ref.~\MT{cite} it was explicitly demonstrated that a round-robin QSS protocol can also be used to perform QKD between any two players. Moving to the QDS literature, ever since discovery of practical QDS requiring neither quantum memory, entanglement or an optical multiport that there are close links between QDS and QKD. Ref.~\MT{cite} explicitly builds their QDS protocol to use QKD hardware, while Ref.~\MT{cite} realise a setup which can, with minimal hardware modification, perform either QDS or QKD, with additional MDI capabilities. And in Refs.~\MT{cite a bunch of stuff} it was explicitly remarked that QDS differs from QKD \emph{only} in the classical postprocessing. Finally, in Ref.~\MT{cite} the authors design their QSS scheme on the same principles as DPS QKD \MT{define and check}. And many papers build their security proofs on techniques designed for QKD \MT{cite loads of stuff.}
+
+%We therefore might ask 
+
+It should be clear that the field of quantum cryptography is far broader than mere QKD. As we move closer towards practical implementation of diverse quantum cryptographic protocols we must consider not only the unconditional security of the underlying protocol, but also its ease of implementation. As protocols are designed with minimal and often overlapping hardware requirements we may ask the question:
+\\
+\par
+\emph{given a particular hardware setup, which quantum protocols can I perform?}
+\\
+\\
+\noindent Or, desiring a large-scale quantum cryptographic network:
+\\
+\par
+\emph{given a deployed network architecture, which quantum protocols can I perform with minimal disruption?}
+\\
+\\
+\noindent Both of these questions have deep impacts on the success probability of a future large-scale quantum network. \MT{Chat more about the networks. Mention DV over installed fibers results from recent years. (Did they require dedicated hardware?)}
+
+We have already even seen several quantum routes to accomplishment of the same task. By first utilizing QKD between all players it is possible to perform DS \MT{cite} or SS \MT{cite} using unconditionally secure classical algorithms, and indeed this may often be preferable to protocols requiring large entangled states \MT{cite}. Alternatively, in a distributed quantum computing setup which can easily generate and distribute entanglement, a protocol such as Ref.~\MT{cite} may be advantageous if it takes advantage of already accessible hardware. 
+
+
+
+
