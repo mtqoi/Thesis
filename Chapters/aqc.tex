@@ -34,19 +34,35 @@ It was noted \MT{cite some papers} that QSS is related to quantum conferencing a
 It should be clear that the field of quantum cryptography is far broader than mere QKD. As we move closer towards practical implementation of diverse quantum cryptographic protocols we must consider not only the unconditional security of the underlying protocol, but also its ease of implementation. As protocols are designed with minimal and often overlapping hardware requirements we may ask the question:
 \\
 \par
-\emph{given a particular hardware setup, which quantum protocols can I perform?}
+Q1:\emph{ given a particular hardware setup, which quantum protocols can I perform?}
 \\
 \\
 \noindent Or, desiring a large-scale quantum cryptographic network:
 \\
 \par
-\emph{given a deployed network architecture, which quantum protocols can I perform with minimal disruption?}
+Q2:\emph{ given a deployed network architecture, which quantum protocols can I perform with minimal disruption?}
 \\
 \\
 \noindent Both of these questions have deep impacts on the success probability of a future large-scale quantum network. \MT{Chat more about the networks. Mention DV over installed fibers results from recent years. (Did they require dedicated hardware?)}
 
-We have already even seen several quantum routes to accomplishment of the same task. By first utilizing QKD between all players it is possible to perform DS \MT{cite} or SS \MT{cite} using unconditionally secure classical algorithms, and indeed this may often be preferable to protocols requiring large entangled states \MT{cite}. Alternatively, in a distributed quantum computing setup which can easily generate and distribute entanglement, a protocol such as Ref.~\MT{cite} may be advantageous if it takes advantage of already accessible hardware. 
+We have already even seen several quantum routes to accomplishment of the same task. By first utilizing QKD between all players it is possible to perform DS \MT{cite} or SS \MT{cite} using unconditionally secure classical algorithms, and indeed this may often be preferable to protocols requiring large entangled states \MT{cite}. Alternatively, in a distributed quantum computing setup which can easily generate and distribute entanglement, a protocol such as Ref.~\MT{cite} may be advantageous if it takes advantage of already accessible hardware. The comparison between different routes to the same task is rarely straightforward and is often more involved than simply comparing key rates.
 
+In addition to consideration of performance of secure protocols, the questions Q1 and Q2 push us towards a consideration of security of well-performing protocols. Indeed, throughout the history of \emph{classical} cryptography, development of new cryptoystems have often occurred in response to the breaking of a system which was previously believed secure. Cynically, one could even view crpytographic history has a "cat-and-mouse" race between cryptographers and cryptanalysists: cryptographers trying to develop new protocols and harden their security; cryptanalysts endeavouring to secretly break them and intercept their messages. 
+
+The replacement of a newly-insecure cryptosystem is difficult, expensive and time-consuming. In response to this problem in digital cryptography there has recently been a push towards so-called \emph{crypographic aglity} (crypto-agility), \MT{cite some stuff.} with a key motivator being the development of quantum computers. \MT{I want to mention somewhere the google chrome trial.} 
+
+One of the main ideas in crypto-agility is the existence of a middleware which interacts both with the software application layer (user) and the underlying cypto-core (algorithm). This is accomplished in \MT{talk about the microsoft thing with .net and classes}. When the security of the underlying algorithm is weakened it becomes easy to simply replace the algorithm with a new or modified one, without changes to the rest of the computational architecture. Failures to allow a system to respond to new cryptographic threats like this can be at best embarrassing, and at worst costly or life-threatening. \MT{cite some IOT stuff from Bruce's blog.} The key idea of crypto-agility is depicted in Fig.~\ref{fig:agility}~(a).
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=0.8\linewidth]{figures/agility.png}
+\caption{\label{fig:agility} AQC paper figure 1. Made by Stefan.}
+\end{figure}
+
+The framework of classical crypto-agility seems ideal to help us answer Q1 and Q2. It is natural to separate the application layer (the task to be performed) from the underlying algorithm (which we may call a "quantum crypto-core"). One can envisage a future software library which can select the appropriate underlying algorithm based on the desired task to be performed and the available network resources.
+
+\MT{Now, talk about different views of quantum agility, with reference to Fig.1}
+\MT{I think I should only talk about CV+heterodyning and compatibility with infrastructure when I come to talk about the protocols, since it is in a sense a particular instance of the problems I am discussing in this section.}
 
 
 
