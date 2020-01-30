@@ -229,56 +229,72 @@ All that remains to do is to bound $\pe$. This will expose several of the differ
 
 \MT{I am just copying and pasting the following from Richter2020. Which is fine because I wrote it and it hasn't been edited.}
 
-Consider the $j^\text{th}$ signature element. Charlie holds some $c_j$ denoting which state from the QPSK alphabet he sent. Bob will declare an eliminated signature element, $B_j = \left\{b_j^1, b_j^2\right\}$ which is chosen to minimize $p_e$. The $b_j^1, b_j^2$ correspond to adjacent elements of the QPSK alphabet. A mismatch occurs if $b_j^1 = c_j$ or $b_j^2 = c_j$. Additionally, we assume that $B_j$ is the result of some optimal strategy involving Bob's quantum system, $\mathbb{B}_j$.
+Consider the $j^\text{th}$ signature element. Charlie holds some $c_j$ denoting which state from the QPSK alphabet he sent. Bob will declare an eliminated signature element, $B_j = \left\{b_j^1, b_j^2\right\}$ which is chosen to minimize $\pe$. The $b_j^1, b_j^2$ correspond to adjacent elements of the QPSK alphabet. A mismatch occurs if $b_j^1 = c_j$ or $b_j^2 = c_j$. Additionally, we assume that $B_j$ is the result of some optimal strategy involving Bob's quantum system, $\mathbb{B}_j$.
 
-We define an error variable $E_j$ which takes the value $1$ if a mismatch occurs, and $0$ otherwise. Then $p_e \equiv P\left(E_j = 1\right)$, and the Shannon entropy $H\left(E_j\right) = h\left(p_e\right)$ is the binary entropy, since $|E_j| = 2$. Now, consider the conditional entropy $H\left(E_j, b_j^1, b_j^2 | c_j\right)$. Via the chain rule for conditional entropies,
+We define an error variable $\mathcal{E}$ such that 
+
+\begin{equation*}\label{eqn:aqc_error}
+\mathcal{E}_j = 
+\begin{cases}
+1 & \text{if $\mathcal{F}_j$ is eliminated in $\mathcal{G}_j$} \\
+0 & \text{otherwise}
+\end{cases}
+\end{equation*}
+which measures whether a mismatch has occurred between $\mathcal{F}_j$ and $\mathcal{G}_j$. Then $\pe \equiv \text{P}\left(\mathcal{E}_j = 1\right)$, and the Shannon entropy $\text{H}\left(\mathcal{E}_j\right) = \text{h}\left(\pe\right)$ is the binary entropy, since $\left|\mathcal{E}_j\right| = 2$. Now, consider the conditional entropy $\text{H}\left(\mathcal{E}_j, b_j^1, b_j^2 \given c_j\right)$. Via the chain rule for conditional entropies,
 
 \begin{equation*}
-H\left(E_j, b_j^1, b_j^2 | c_j\right) = H\left(b_j^1, b_j^2 | c_j\right)
+\text{H}\left(\mathcal{E}_j, b_j^1, b_j^2 \given c_j\right) = \text{H}\left(b_j^1, b_j^2 \given c_j\right)
 \end{equation*}
 
-\noindent where we have used the fact that once $b_j^1, b_j^2$ and $c_j$ are known, $E_j$ is uniquely determined. Using the chain rule on $H\left(E_j, b_j^1, b_j^2 | c_j\right)$ again, but for a different variable, we get
+\noindent where we have used the fact that once $b_j^1, b_j^2$ and $c_j$ are known, $\mathcal{E}_j$ is uniquely determined. Using the chain rule on $\text{H}\left(\mathcal{E}_j, b_j^1, b_j^2 \given c_j\right)$ again, but for a different variable, we get
 
 \begin{align*}
-H\left(E_j, b_j^1, b_j^2 | c_j\right) &= H\left(b_j^1, b_j^2 | E_j, c_j\right) + H\left(E_j | c_j\right) \notag \\
-&\le H\left(b_j^1, b_j^2 | E_j, c_j\right) + h\left(p_e\right)
+\text{H}\left(\mathcal{E}_j, b_j^1, b_j^2 \given c_j\right) &= \text{H}\left(b_j^1, b_j^2 \given \mathcal{E}_j, c_j\right) + \text{H}\left(\mathcal{E}_j \given c_j\right) \notag \\
+&\le \text{H}\left(b_j^1, b_j^2 \given \mathcal{E}_j, c_j\right) + \text{h}\left(\pe\right)
 \end{align*}
 
-\noindent since conditioning can never increase entropy. Therefore, by expanding the variable $E_j$,
+\noindent since conditioning can never increase entropy. Therefore, by expanding the variable $\mathcal{E}_j$,
 
 \begin{align*}
-H\left(b_j^1, b_j^2 | c_j\right) \le &\left(1 - p_e\right) H\left(b_j^1, b_j^2 | E_j = 0, c_j\right) \\ + &p_e H \left(b_j^1, b_j^2 | E_j=1, c_j\right) + h\left(p_e\right).
+\text{H}\left(b_j^1, b_j^2 \given c_j\right) \le &\left(1 - p_e\right) \text{H}\left(b_j^1, b_j^2 \given \mathcal{E}_j = 0, c_j\right) \\ + &\pe \text{H}\left(b_j^1, b_j^2 \given \mathcal{E}_j=1, c_j\right) + \text{h}\left(\pe\right).
 \end{align*}
 
-\noindent Now, $H\left(b_j^1, b_j^2 | E_j=0, c_j\right) \le \log_2\left(2\right) = 1$, and similarly for $E_j=1$, and so
+\noindent Now, $\text{H}\left(b_j^1, b_j^2 \given \mathcal{E}_j=0, c_j\right) \le \log_2\left(2\right) = 1$, and similarly for $\mathcal{E}_j=1$, and so
 
 \begin{equation}\label{eqn:A7}
-H\left(b_j^1, b_j^2 | c_j\right) \le 1 + h\left(p_e\right).
+\text{H}\left(b_j^1, b_j^2 \given c_j\right) \le 1 + \text{h}\left(p_e\right).
 \end{equation}
 
 \noindent Finally, we expand the conditional entropy in terms of the joint entropy and the mutual information,
 
 \begin{align}\label{eqn:A8}
-H\left(b_j^1, b_j^2 | c_j\right) &= H\left(b_j^1, b_j^2\right) - I\left(b_j^1, b_j^2 : c_j\right) \notag \\
+\text{H}\left(b_j^1, b_j^2 \given c_j\right) &= \text{H}\left(b_j^1, b_j^2\right) - \text{I}\left(b_j^1, b_j^2 : c_j\right) \notag \\
 &\ge 2 - \chi\left(b_j^1, b_j^2 : c_j\right)
 \end{align}
 
-\noindent where we have used the fact that \emph{a priori} there are four choices for the pair $b_j^1, b_j^2$, and where $\chi$ is the Holevo information \cite{Nielsen2010}. Combining Eqs.~(\ref{eqn:A7}),~(\ref{eqn:A8}) we arrive at Eq.~(\ref{eqn:qdsbsecurity}) from the main paper.
+\noindent where we have used the fact that \emph{a priori} there are four choices for the pair $b_j^1, b_j^2$, and where $\chi$ is the Holevo information. Combining Eqs.~\MT{X},~\MT{X} we arrive at
 
+\begin{equation}
+\text{h}\left(\pe\right) \ge 1 - \chi
+\end{equation}
 
-Once $p_e$ and $p_{err}$ are bounded for the protocol, the probability $\varepsilon_{fail}$ that the protocol fails can be found. For concreteness, we assign equal probability to the failure of the protocol either by allowing a forging or repudiation attack, or by aborting when all players are honest, that is
+\noindent \MT{add a comment about how this relates to QDSf}
+
+Once $\pe$ and $\perr$ are bounded for the protocol, the probability $\varepsilon_{fail}$ that the protocol fails can be found. For concreteness, we assign equal probability to the failure of the protocol either by allowing a forging or repudiation attack, or by aborting when all players are honest, that is
 
 \begin{equation*}
 \varepsilon_{fail} = \varepsilon_{forg} = \varepsilon_{rep} = \varepsilon_{reject}
 \end{equation*}
 
-\noindent and by choosing $s_B = p_{err} + \left(p_e + p_{err}\right)/4$; $s_C = p_{err} = 3\left(p_e - p_{err}\right)/4$, in order to satisfy the second two equalities, we arrive at Eq.~(\ref{eqn:QDSbL}) from the main paper
+\noindent and by choosing $s_B = p_{err} + \left(p_e + p_{err}\right)/4$; $s_C = p_{err} = 3\left(p_e - p_{err}\right)/4$, in order to satisfy the second two equalities, we arrive at Eq.~(\ref{eqn:QDSbL}).
 
 \begin{equation}
 \varepsilon_{fail} \le 2 \exp \left[ - \frac{\left( p_e - p_{err} \right)^2}{16} L \right]
 \end{equation}
 
-\noindent when $p_{err} < s_B < s_C < p_e$.
+\noindent when $\perr< s_B < s_C < \pe$.
+
+\subsubsection{Calculating Holevo}
 
 Finally, we note that under a beamsplitter attack, Eve's \emph{a priori} state is
 \begin{equation}
@@ -295,9 +311,7 @@ with $S$ the Von Neumann entropy.
 \MT{perhaps add some closing remarks or extra stuff to this section.}
 \MT{gotta add some postselection stuff.}
 
-%\subsection{QDS-$b$ performance}
-%\MT{Make some graphs and discuss the theoretical performance of this protocol. AHHHH. Nvm, it'll go in the next section}
-
+\subsection{QDS-$b$ postselection}
 
 \section{Agile system \systemF}
 \MT{Let's start talking about the second agile system}
@@ -348,9 +362,18 @@ Outputs from the optical receivers are digitized using a digital sampling oscill
 
 The Tx and Rx modules were connected by either a $2$~km or $20$~km SMF-$28$ optical fiber link which contributes to a total loss of $0.65$~dB or $4.75$~dB, respectively. This implements the realistic metropolitan distances over which the CV platform is expected to be effective. Experiments were performed for several different signal state modulation amplitudes $\alpha$. For each run of the experiment a total of $1.92\times 10^6$ states were sent in frames of $64$ which consisted of four bright reference pulses ($\alpha^\prime$) followed by $60$ signal pulses ($\alpha$). After the DSP step there remained information on $1.54 \times 10^6$ states. 
 
+\begin{figure}[htp]
+\centering
+\includegraphics{aqc/experimental_trace.png}
+\caption{\label{fig:aqc_experimental_trace} Just Fig.5 from Richter2020}
+\end{figure}
+
+An example of some raw output data is displayed in Fig.~\ref{fig:aqc_experimental_trace}. The top of the figure displays raw time trace data, while the bottom displays data after the DSP.
+
 \section{Realistic performance of CV agile systems}
 \MT{Include here what things I need to change for each of the protocols to make them realistic. Include here some analysis of the data.}
 \MT{The starting point for this section should be what I received from MPL.}
+\MT{What do I want to include here?}
 
 
 
