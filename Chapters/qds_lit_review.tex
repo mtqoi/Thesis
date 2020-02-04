@@ -43,16 +43,16 @@ A step forward to implementation of QDS occurs in Ref.~\cite{Andersson2006}, in 
 
 \begin{figure}[htp]
 \centering
-\includegraphics{andersoon2006_state_comparison.png}
-\caption{\label{fig:andersson2006_state_comparison}}
+\includegraphics[draft=false, width=0.8\linewidth]{qds/andersson2006_state_comparison}
+\caption{\label{fig:andersson2006_state_comparison} Non-destructive comparison method from Ref.~\cite{Andersson2006}. The coherent states interfere on a balanced beamsplitter. Assuming an ideal detector, the absence of a detector click implies that $\alpha = \beta$. Otherwise, a click implies $\alpha \ne \beta$. A second balanced beamsplitter may be used to transform $\ket{\left(\alpha+\beta\right)/\sqrt{2}}\otimes\ket{0}\rightarrow\ket{\alpha}\ket{\beta}$ - hence this state comparison is non-destructive.}
 \end{figure}
 
 The key step, the comparison of coherent states, is displayed pictorially in Fig.~\ref{fig:andersson2006_state_comparison}. If the photodetector clicks it is a strong indication (a certain indication, in the ideal limit) that $\alpha \ne \beta$. Furthermore this comparison is non-destructive, and simply by placing another beamsplitter in the path of the upper beam, with vacuum input at the fourth port, one recovers $\ket{\alpha}$. Otherwise, for $\alpha \ne \beta$ the output states of the second beamsplitter are identical. This practical state comparison forms the building-block for their QDS protocol. 
 
 \begin{figure}[htp]
 \centering
-\includegraphics{multiport.png}
-\caption{\label{fig:andersson2006_multiport}}
+\includegraphics[draft=false, width=0.8\linewidth]{qds/andersson2006_multiport}
+\caption{\label{fig:andersson2006_multiport} Multiport used in Ref.~\cite{Andersson2006} which guards against a cheating Alice. The multiport symmetrizes Bob and Charlie's states so they always receive identical $\ket*{\left(\alpha+\beta\right)/\sqrt{2}}$ at their signal outputs. By placing a photodetector at the null-ports Bob and Charlie can test whether $\ket*{\left(\alpha-\beta\right)/\sqrt{2}} = \ket{0}$. In the ideal scenario detector click implies that $\alpha\ne\beta$, while its absence implies that $\alpha = \beta$. }
 \end{figure}
 
 To allow both parties to perform comparisons, an optical multiport Fig.~\ref{fig:andersson2006_multiport} is used. This allows Bob and Charlie to compare Alice's state declaration with her previously distributed state. It also has the advantage of symmetrizing Bob and Charlie's output states, thus preventing a repudiating Alice. The null ports of the multiport are monitored, since they will click if either Alice is trying to repudiate, or if a malicious party is interacting with the state distribution.

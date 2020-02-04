@@ -302,11 +302,10 @@ Using Hoeffding inequality Eq.~\ref{eqn:qds_hoeffding2} identially to the deriva
 provided that $\perr < s_B$. Equation~\ref{eqn:ehonabort} is our useful bound for the probability that the protocol aborts even though everyone is behaving honestly. Since it is exponentially decaying the probability that this happens can be made arbitrarily small, and so we have fulfilled Requirement~$5$.
 
 \subsection{Modelling $p_{\text{err}}$}
-\MT{let's have a figure somewhere which illustrates this}
 \begin{figure}[htp]
 \centering
-\includegraphics{perr.png}
-\caption{\label{fig:perr}}
+\includegraphics[draft=false, width=0.8\linewidth]{qds/perrnonzero}
+\caption{\label{fig:perr} Histogram of possible heterodyne outcomes. A coherent state $\ket{\alpha}, \alpha>0$ always has nonzero probability to give measurement outcome $z \in \mathbb{C}$ with $x = \text{Re}\left(z\right) < 0$. In other words, $\perr > 0$ always. The blue region corresponds to measurement outcomes which will not give a mismatch, while the pink region corresponds to measurement outcomes which will yield a mismatch. $x = \text{Re}\left(z\right), y = \text{Im}\left(z\right)$.}
 \end{figure}
 
 The probability $\perr$ corresponds to the probability that a heterodyne measurement outcome $z$ has $\text{Re}\left(z\right) < 0$ when Alice distributed the coherent state $\ket{\alpha}$, Fig.~\ref{fig:perr}. In the absence of thermal noise the channel simply acts as a beamsplitter with vacuum at the fourth port, and so
@@ -742,12 +741,12 @@ In the context of QKD it has been known for some time that postselection of meas
 
 To apply the postselection technique, recipients Bob and Charlie in the protocol will simply disregard unfavourable measurement outcomes, i.e. outcomes for which a dishonest player is deemed to have too much knowledge, or for which the probability of honest mismatch is too high.
 
-We thus define a region $\rps \in \mathbb{C}$, Fig.~\ref{fig:rps}. Honest recipients will only accept measurement outcomes $x \ne \rps$. We will vary $\rps$ in order to increase the range of channel parameters for which the QDS protocol is secure, and to minimize signature length $L$.
+We thus define a region $\rps \in \mathbb{C}$, Fig.~\ref{fig:rps}. Honest recipients will only accept measurement outcomes $x \in \mathbb{C}\setminus\rps$. We will vary $\rps$ in order to increase the range of channel parameters for which the QDS protocol is secure, and to minimize signature length $L$.
 
 \begin{figure}[htp]
 \centering
-\includegraphics{postselection_region.png}
-\caption{\label{fig:rps}}
+\includegraphics[draft=false, width=0.5\linewidth]{qds/rps}
+\caption{\label{fig:rps} The postselection region $\rps$, gray, is parametrized by $\Delta_r, \Delta_\theta$ in polar coordinates. Participants will only accept measurement outcomes $x \in \mathbb{C} \setminus \rps$. }
 \end{figure}
 
 To be concrete, we allow $\rps$ to be parametrized by two variables $\Delta_r, \Delta_\theta$ in polar coordinates, Fig.~\ref{fig:rps}. This is the same postselection region which was considered in the recent work \MT{cite}, but if desired more general regions may be readily considered. We make no claims as to the optimality of our choice of the shape $\rps$, though once the form of $\rps$ is set, $\Delta_r$ and $\Delta_\theta$ may be readily optimized over.
