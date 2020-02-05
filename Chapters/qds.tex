@@ -124,8 +124,8 @@ denote the probability of mismatch between an arbitrary eliminated signature $G$
 
 \begin{figure}[htp]
 \centering
-\includegraphics{mismatches.png}
-\caption{\label{fig:qds_mismatches}}
+\includegraphics[draft=false, width=\linewidth]{qds/mismatch1}
+\caption{\label{fig:qds_mismatches} A mismatch occurs when an honest party eliminates the state which Alice claims to have sent. (a, d) Alice sends coherent state $\ket{\alpha}$. (b, e) Bob (Charlie) heterodynes and measures $x \in \mathbb{C}$. Even when all players are honest there is some probability of measuring $\text{Re}\left(x\right) < 0$. (c) Eliminated signature element consists of $\ket{- \alpha}, \ket{- i \alpha}$ so there is no mismatch. (f) Eliminated signature element consists of $\ket{\alpha}, \ket{i \alpha}$ and so there is a mismatch.}
 \end{figure}
 
 If Bob measures sufficiently few mismatches on both of his eliminated signature halves, i.e. if $\mathcal{M}\left(\tilde{\Phi}_{Y, m}^B, Y_m^B\right) < s_B L/2$ and $\mathcal{M}\left(\tilde{\Phi}_{Z,m}^B, Z_m^B\right) < s_B L/2$ then he accepts Alice's declaration $m$ as genuine, otherwise the protocol aborts. The threshold $0 \le s_B \le 1$ is related to the security of the protocol and will be discussed later.
@@ -142,15 +142,34 @@ We now turn to consider the security of the QDS protocol discussed in Sec.~\ref{
 
 \begin{figure}[htp]
 \centering
-\includegraphics{qds_attacks.png}
-\caption{\label{fig:attacks}}
+	\begin{subfigure}{\linewidth}
+		\centering
+		\includegraphics[draft=false, width=\linewidth]{qds/qds_cartoon}
+		\caption{\label{fig:attacks_none}}
+	\end{subfigure}
+	\begin{subfigure}{\linewidth}
+		\centering
+		\includegraphics[draft=false, width=\linewidth]{qds/qds_cartoon_forgery}
+		\caption{\label{fig:attacks_forgery}}
+	\end{subfigure}
+	\begin{subfigure}{\linewidth}
+		\centering
+		\includegraphics[draft=false, width=\linewidth]{qds/qds_cartoon_repudiation}
+		\caption{\label{fig:attacks_repudiation}}
+	\end{subfigure}
+	\begin{subfigure}{\linewidth}
+		\centering
+		\includegraphics[draft=false, width=\linewidth]{qds/qds_cartoon_honest_failure}
+		\caption{\label{fig:attacks_robustness}}
+	\end{subfigure}
+\caption{\label{fig:attacks} (a) Setup of $3$-party QDS. Alice (A) wishes to send $\left(m, \sigma_m\right)$ first to Bob (B), and then to Charlie (C), who must determine whether or not the message is genuine. Honest players are depicted in gray and dishonest players are depicted in red. (b) Forging attack with dishonest Bob. Bob will change the message $m \rightarrow n$ with fake signature $sigma_n$. The attack succeeds if Charlie accepts. (c) Repudiation attack with dishonest Alice. Alice tries to convince Bob to accept the message and Charlie to reject it. (d) Honest failure. If all players behave honestly the protocol should succeed and both Bob and Charlie should accept the message.}
 \end{figure}
 
 In what follows we will prove that our protocol is:
 \begin{itemize}
-\item secure against a repudiation attack (Requirement $3$, Fig.~\ref{fig:attacks}), 
-\item robust (Requirement $5$, Fig.~\ref{fig:attacks}),
-\item secure against a forgery attack (Requirement $1$, Fig.~\ref{fig:attacks})
+\item secure against a repudiation attack (Requirement $3$, Fig.~\ref{fig:attacks_repudiation}), 
+\item robust (Requirement $5$, Fig.~\ref{fig:attacks_robustness}),
+\item secure against a forgery attack (Requirement $1$, Fig.~\ref{fig:attacks_forgery})
 \end{itemize}
 and we will additionally demonstrate that fulfilment of requirement $1$ implies fulfilment of requirement $2$. \MT{Make sure that I actually do this.}
 
@@ -376,10 +395,10 @@ To complete the security analysis of our protocol, and in order to compute an up
 
 %This ambiguity stems from the following. Because Charlie eliminates two states from $\mathcal{A}_4$, Fig.~\ref{fig:elimsig}, there are
 
-\begin{figure}[htp]
-\centering
-\includegraphics{ambiguity.png}
-\end{figure}
+%\begin{figure}[htp]
+%\centering
+%\includegraphics{ambiguity.png}
+%\end{figure}
 
 Bob will declare a string $\tilde{\Phi}_{Y, m^\prime}^C$, length $L/2$,  which causes sufficiently few mismatches with respect to Charlie. For convenience we will abbreviate Bob's declared string as $\tilde{\Phi}^{Bob}$. Our security analysis must fully take into account the ambiguity in Bob's declarations. This ambiguity stems from the following, and is illustrated in Fig.~\ref{fig:ambiguity}.
 
@@ -474,16 +493,30 @@ Since binary entropy $\text{h}\left(\pe\right)$ is monotonic for $\pe \le 1/2$, 
 \section{Attack analysis}\label{sec:attack_analysis}
 Let us consider several different models of Bob's eavesdropping attack. Different models will affect both the parameter regimes over which our protocol can be made secure, and the level of resources required for that security. As in the QKD literature we define the following three types of quantum attack
 \begin{itemize}
-\item individual: Fig.~\ref{fig:individual_attacks}
-\item collective: Fig.~\ref{fig:collective_attacks}
-\item coherent: Fig.~\ref{fig:coherent_attacks}
+\item individual: Fig.~\ref{fig:types_of_attack_individual}
+\item collective: Fig.~\ref{fig:types_of_attack_collective}
+\item coherent: Fig.~\ref{fig:types_of_attack_coherent}
 \end{itemize}
 \MT{TODO: also create a figure to illustrate all of these, and provide sufficient references to the literature.}
 
 \begin{figure}[htp]
 \centering
-\includegraphics{types_of_attack.png}
-\caption{\label{fig:individual_attacks}, \label{fig:collective_attacks},\label{fig:coherent_attacks}}
+	\begin{subfigure}{\linewidth}
+		\centering
+			\caption{\label{fig:types_of_attack_individual}}
+		\includegraphics[width=\linewidth, draft=false]{qds/individual_attacks}
+	\end{subfigure}
+	\begin{subfigure}{\linewidth}
+		\centering
+		\caption{\label{fig:types_of_attack_collective}}	
+		\includegraphics[width=\linewidth, draft=false]{qds/collective_attacks}
+	\end{subfigure}
+	\begin{subfigure}{\linewidth}
+		\centering
+		\caption{\label{fig:types_of_attack_coherent}}	
+		\includegraphics[width=\linewidth, draft=false]{qds/coherent_attacks}
+	\end{subfigure}
+\caption{\label{fig:types_of_attack} Taxonomy of different eavesdropping attack strategies \cite{Lutkenhaus2004}. Gray arrows denote different quantum signal states distributed from Alice to Bob. Red items belong to Eve. (a) Individual attack. Eve inserts separate probes (red boxes) into state distribution and performs measurement on each system individually. (b) Collective attack. Eve inserts separate probes into state distribution and stores her states until the end of signal distribution. She may then perform a measurement on her entire system. (c) Coherent attack. Eve interacts with all signals at the same time and she can perform a measurement on a single probe. Attack (a) cannot introduce correlations between signals. Attack (b) may introduce classical correlations, and attack (c) may introduce any correlations between signals.}
 \end{figure}
 
 In this Thesis we will focus on individual and collective forging attacks. Full security against coherent quantum attacks in the QKD literature has only recently been proven for the relatively simple case of the gPSK alphabet \MT{cite}, and a security proof remains tricky for the discrete modulation of coherent states. %what about Lutkenhaus papers from around 2006? What type of security do they provide?
