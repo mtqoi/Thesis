@@ -413,44 +413,41 @@ Integrating, we arrive at
 \begin{figure}[htp]
 \centering
 \includegraphics[draft=false, width=0.5\linewidth]{qds/perrnonzero}
-\caption{\label{fig:perr} Histogram of possible heterodyne outcomes. A coherent state $\ket{\alpha} with \alpha>0$ has nonzero probability to give measurement outcome $z \in \mathbb{C}$ with $x = \text{Re}\left(z\right) < 0$. In other words, $\perr > 0$ always, and $\perr \rightarrow 0$ only as $\alpha \rightarrow \infty$. The blue region corresponds to measurement outcomes which will not give a mismatch, while the pink region corresponds to measurement outcomes which will yield a mismatch. $x = \text{Re}\left(z\right), y = \text{Im}\left(z\right)$. This histogram is equivalent to the Hussimi $Q$ function \cite{Leonhardt2010} of the received coherent state and is thus also Gaussian.}
+\caption{\label{fig:perr} Histogram of possible heterodyne outcomes. A coherent state $\ket{\alpha}$ with $\alpha>0$ has nonzero probability to give measurement outcome $z \in \mathbb{C}$ with $x = \text{Re}\left(z\right) < 0$. In other words, $\perr > 0$ always, and $\perr \rightarrow 0$ only as $\alpha \rightarrow \infty$. The blue region corresponds to measurement outcomes which will not give a mismatch, while the pink region corresponds to measurement outcomes which will yield a mismatch. $x = \text{Re}\left(z\right), y = \text{Im}\left(z\right)$. This histogram is equivalent to the Hussimi $Q$ function \cite{Leonhardt2010} of the received coherent state and is thus also Gaussian.}
 \end{figure}
 
 
 \section{Security against forgery}\label{sec:qds_security_forgery}
-We now turn to consider security against forgery, List.~\ref{list:qds_requirements}~requirement $1$, Fig.~\ref{fig:qds_cartoon_forgery}. In a forging attack, a dishonest player (or a fourth party, Eve) will declare some fake $m^\prime$ with the aim that it should be accepted by honest players as being genuine and originating with Alice.% In this attack we consider two possibilities, either that an honest Alice's $\Sigma$ has been intercepted and altered (interferance in Step $5$); or that honest Alice has completed distribution of quantum states, Step $3$, but has not yet sent $\Sigma$. As should be clear from the following discussion 
-We will not consider the possibility that a dishonest player is impersonating Alice from the beginning of the protocol (see Sec.~\ref{sec:qds_goals} for short discussion).
-
-
-The fake message $m^\prime$ will have an appended signature $\tau_{m^\prime}$ consisting of declared coherent state phases, and $m^\prime$ will be accepted if $\tau_{m^\prime}$ has sufficiently few mismatches with respect to an honest player's eliminated signature. 
+We now turn to consider security against forgery, List.~\ref{list:qds_requirements}~requirement $1$, Fig.~\ref{fig:attacks_forgery}. In a forging attack, a dishonest player (or a fourth party, Eve) will declare some fake $m^\prime$ with the aim that it should be accepted by honest players as being genuine and originating with Alice. % In this attack we consider two possibilities, either that an honest Alice's $\Sigma$ has been intercepted and altered (interferance in Step $5$); or that honest Alice has completed distribution of quantum states, Step $3$, but has not yet sent $\Sigma$. As should be clear from the following discussion 
+We will not consider the possibility that a dishonest player is impersonating Alice from the beginning of the protocol (see Sec.~\ref{sec:qds_goals} for brief discussion). The fake message $m^\prime$ will have an appended signature $\tau_{m^\prime}$ consisting of declared coherent state phases. Message $m^\prime$ will be accepted if $\tau_{m^\prime}$ has sufficiently few mismatches with respect to an honest player's eliminated signature. 
 
 %Since Bob already knows $L/2$ of Charlie's elements, precisely those $Z_m^C$ which originated with Bob,
 
-Since Bob and Charlie already know $L/2$ of each other's eliminated signature elements--those which were forwarded during the Symmetrization step of the protocol--a dishonest player who is internal to the signature scheme will have an advantage over an external Eve. Additionally, since $s_B < s_C$ it is more likely that Charlie accepts a spurious $m^\prime$ and fake signature, and so the most dangerous forger will be a dishonest Bob. We thus proceed with the mantra ``Bob is Eve'' and take Bob as our dishonest, forging party. 
+Since Bob and Charlie already know $L/2$ of each other's eliminated signature elements--those which were forwarded during the Symmetrization step of the protocol--a dishonest player who is internal to the signature scheme will have an advantage over an external Eve. Additionally, since $s_B < s_C$, Charlie is more likely than Bob to accept a forged message $m^\prime$ and fake signature $\sigma_{m^\prime}$, and so the most dangerous forger will be a dishonest Bob. We thus proceed with the mantra ``Bob is Eve'' and take Bob as our dishonest, forging party. Since the worst-case scenario is a forging Bob, our following analysis will implicitly also guard against the possiblity that Charlie or Eve are the forger.
 
-Specifically, Bob's goal is to declare a string $\tilde{\Phi}^C_{Y, m^\prime}$, length $L/2$ such that 
+Since Bob already knows the $L/2$ elements $Z_{m}^C$ which Charlie received from Bob during Symmetrization, Step $4$, Bob is able to cause arbitrarily few mismatches on that half of Charlie's signature. Bob's goal then is to declare a string $\tilde{\Phi}^C_{Y, m^\prime}$, length $L/2$ such that 
 \begin{equation}\label{eqn:forging_condition}
 \mathcal{M}\left(\tilde{\Phi}^C_{Y, m^\prime}, Y_{m^\prime}^C\right) \le s_C \frac{L}{2}
 \end{equation}
-which will be accepted by Charlie. Bob has full control over the number of mismatches with to respect Charlie's other half signature, and can even cause there to be no mismatches if he desires.
+which will be accepted by Charlie.
 
-The only way that Bob can gain information about the $Y_{m^\prime}^C$ is by eavesdropping on the distribution of states from Alice to Charlie during steps~$2$ and $3$ of the protocol, and Bob's eavesdropping attack will be fully considered in Sec.~\MT{X}, below.
+Bob's only strategy to gain information about the $Y_{m^\prime}^C$ is to eavesdrop on the distribution of states from Alice to Charlie during Steps~$2$ and $3$ of the protocol, and Bob's eavesdropping strategies will be fully considered in Sec.~\ref{sec:qds_attack_analysis}, below.
 
 Defining $\text{p}_e$ as the probability that Bob will induce a mismatch on an individual given signature element, the probability $\varepsilon_{\text{forgery}}$ that Bob succeeds in his forging attack is
 \begin{equation}\label{eqn:eforg}
 \varepsilon_{\text{forgery}} \le 2 \text{exp}\left( - \left[\text{p}_e - s_C\right]^2 L\right), 
 \end{equation}
-provided that $s_C \le \text{p}_e$. Equation~\ref{eqn:eforg} is derived using Eq.~\ref{eqn:qds_hoeffding1} similarly to Eqs.~\ref{eqn:erep},~\ref{eqn:ehonabort}. Charlie's threshold $s_C$ may be freely chosen, and by combining it with the analogous conditions required for Eqs.~\ref{eqn:erep},~\ref{eqn:ehonabort} we arrive at
+provided that $\pe - s_C \ge 0$. Equation~\ref{eqn:eforg} is derived using Eq.~\ref{eqn:qds_hoeffding1} similarly to Eqs.~\ref{eqn:erep},~\ref{eqn:ehonabort} in Secs.~\ref{sec:qds_security_robustness},~\ref{sec:qds_security_robustness} by calculating the probability that Charlie accepts a message with more than $\pe$ mismatches.
+
+Charlie's threshold $s_C$ may be freely chosen, and by combining it with conditions required for derivation of Eqs.~\ref{eqn:erep},~\ref{eqn:ehonabort} we deduce the requirement
 \begin{equation}\label{eqn:qds_security_condition}
 \perr \le s_B \le s_C \le \pe 
 \end{equation}
 where threshold parameters $s_B, s_C$ may be freely chosen to optimize security. 
 
-Equation~\ref{eqn:qds_security_condition} encodes the intuitive condition that the QDS protocol is secure provided that $\pe \ge \perr$, or, in other words, that a dishonest forger will cause more mismatches than an honest player. The protocol security analysis thus relies on finding parameters and channels for which a forger is guaranteed to make too many errors, and thus for which a forging attack will be detectable. In Sec.~\ref{sec:attack_analysis} will analyse several types of eavesdropping attack which a forger can attempt, and we will derive a bound for $\pe$, allowing us to analyse protocol security.
+Equation~\ref{eqn:qds_security_condition} encodes the intuitive condition that the QDS protocol is secure provided that $\pe \ge \perr$; or, in other words, that a dishonest forger will cause more mismatches than an honest player. The protocol security analysis thus relies on finding alphabet parameters and channels for which a forger is guaranteed to make more errors than the honest error rate $\perr$, and thus for which a forging attack will be detectable. In Sec.~\ref{sec:qds_bounding_pe} we demonstrate how $\pe$ relates to the quantum system held by Bob at the end of the protocol's Distribution stage, while in Sec.~\ref{sec:attack_analysis} we analyse several types of eavesdropping attack which Bob may attempt, and we perform several explicit calculations of $\pe$ under different channel conditions.
 
-\MT{Make a statement comparing this $\pe \ge \perr$ condition to QKD, where an eavesdropper can hide an attack below channel noise.}
-
-
+%\MT{Make a statement comparing this $\pe \ge \perr$ condition to QKD, where an eavesdropper can hide an attack below channel noise.}
 
 \section{Bounding $\pe$}
 To complete the security analysis of our protocol, and in order to compute an upper bound for $\varepsilon_{\text{fail}}$ Eq.~\ref{eqn:efail}, we must find an upper bound for $\pe$, the rate at which a forging Bob will induce a mismatch with respect to Charlie's signature. We will be secure provided that $\pe > \perr$. The key contribution of this section will be an upper bound for $\pe$ under two different types of forging attack
@@ -554,7 +551,7 @@ which is one of our key results. The Holevo information automatically includes a
 
 Since binary entropy $\text{h}\left(\pe\right)$ is monotonic for $\pe \le 1/2$, Fig.~\ref{fig:binary_entropy}, we conclude that a lower bound for $\text{h}\left(\pe\right)$ also gives us a lower bound for $\pe$. \MT{Mention/show somewhere that $\pe$ is always less than $1/2$.} The inequality~\ref{eqn:qds_hpe} may be numerically solved for Bob's mismatch rate $\pe$, which can be combined with $\perr$ in to calculate $\varepsilon_{\text{fail}}$ and provide security against collective attacks \MT{define} provided that Bob's Holevo information $\chi$ can be estimated.
 
-\section{Attack analysis}\label{sec:attack_analysis}
+\section{Attack analysis}\label{sec:qds_attack_analysis}
 Let us consider several different models of Bob's eavesdropping attack. Different models will affect both the parameter regimes over which our protocol can be made secure, and the level of resources required for that security. As in the QKD literature we define the following three types of quantum attack
 \begin{itemize}
 \item individual: Fig.~\ref{fig:types_of_attack_individual}
