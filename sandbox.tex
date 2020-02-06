@@ -39,6 +39,8 @@
 \newcommand{\tmsv}{\rho_{\text{TMSV}}}
 \newcommand{\rps}{\mathcal{R}_{\text{PS}}}
 
+\usepackage{newfloat}
+\DeclareFloatingEnvironment[placement={!ht},name=List]{mylist}
 
 %\includeonly{
 %	chapters/introduction,
@@ -85,11 +87,18 @@
 
 
 %\include{chapters/crypto_intro}
-\include{chapters/qds_lit_review}
+%\include{chapters/qds_lit_review}
 %\include{chapters/qss_lit_review}
 \include{chapters/qds}
 %\include{chapters/qss}
 %\include{chapters/aqc}
+
+
+\bibliographystyle{unsrt} 
+%\bibliography{qds_bib} 
+\bibliography{Thesis-QDS_lit_review}
+
+
 
 \appendix
 %\include{chapters/larger_alphabets}
