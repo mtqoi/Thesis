@@ -22,6 +22,9 @@
 \usepackage{bm}
 \usepackage{siunitx}
 
+\usepackage{newfloat}
+\DeclareFloatingEnvironment[placement={!ht},name=List]{mylist}
+
 
 \newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
 \newcommand*\erfc{\text{erfc}}
@@ -79,9 +82,14 @@
 \include{chapters/aqc}
 \part{PhoG: generation of sub-Poissonian light}
 
-\appendix
-\include{chapters/larger_alphabets}
-\include{chapters/coherent_noisy_channel}
+
+\bibliographystyle{unsrt} 
+%\bibliography{qds_bib} 
+\bibliography{Thesis-QDS_lit_review}
+
+%\appendix
+%\include{chapters/larger_alphabets}
+%\include{chapters/coherent_noisy_channel}
 
 %\part{Coherent signal transfer}
 \end{document}

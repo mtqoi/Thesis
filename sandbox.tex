@@ -1,9 +1,3 @@
-%
-%
-% This document is for testing specific parts of the thesis, e.g. 
-% those that will be included via the \input command.
-%
-%
 %\documentclass[12pt]{report}
 \documentclass{book}
 \usepackage[utf8]{inputenc}
@@ -26,8 +20,11 @@
 \usepackage{subcaption}
 \usepackage{wrapfig}
 \usepackage{bm}
-%\usepackage{bbold}
 \usepackage{siunitx}
+
+\usepackage{newfloat}
+\DeclareFloatingEnvironment[placement={!ht},name=List]{mylist}
+
 
 \newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
 \newcommand*\erfc{\text{erfc}}
@@ -38,31 +35,21 @@
 \newcommand{\cond}{\; | \;}
 \newcommand{\tmsv}{\rho_{\text{TMSV}}}
 \newcommand{\rps}{\mathcal{R}_{\text{PS}}}
-
-\usepackage{newfloat}
-\DeclareFloatingEnvironment[placement={!ht},name=List]{mylist}
-
-%\includeonly{
-%	chapters/introduction,
-%	chapters/qds
-%}
+\newcommand{{\systemB}}{QDS-$b$-QSS-$b$-CV-QPSK}
+\newcommand{{\systemF}}{QDS-$f$-QKD-$f$-CV-QPSK}
 
 \includeonly{
 	%chapters/introduction,
 	%chapters/crypto_intro,
-	chapters/qds,
+	chapters/qds
 	%chapters/qss,
 	%chapters/aqc
 }
 
 
+
 %\DeclareGraphicsExtensions{.pdf,.png,.jpg}
 \DeclareGraphicsExtensions{.png, .pdf,.jpg}
-
-
-
-\newcommand{{\systemB}}{QDS-$b$-QSS-$b$-CV-QPSK}
-\newcommand{{\systemF}}{QDS-$f$-QKD-$f$-CV-QPSK}
 
 
 \usepackage{color} 
@@ -81,33 +68,26 @@
 
 
 \begin{document}
-\part{Secure quantum networks}
-
 \tableofcontents
+
+%\part{Secure quantum networks}
 
 
 %\listoffigures
 %\include{chapters/introduction}
-%\include{chapters/qds}
+%\part{Agile cryptography: signatures and secrets}
+%\include{chapters/crypto_intro}
+\include{chapters/qds}
 %\include{chapters/qss}
 %\include{chapters/aqc}
-
-
-\include{chapters/crypto_intro}
-%\include{chapters/qds_lit_review}
-%\include{chapters/qss_lit_review}
-\include{chapters/qds}
-\include{chapters/qss}
-\include{chapters/aqc}
+%\part{PhoG: generation of sub-Poissonian light}
 
 
 \bibliographystyle{unsrt} 
 %\bibliography{qds_bib} 
 \bibliography{Thesis-QDS_lit_review}
 
-
-
-\appendix
+%\appendix
 %\include{chapters/larger_alphabets}
 %\include{chapters/coherent_noisy_channel}
 
