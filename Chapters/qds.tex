@@ -584,39 +584,40 @@ In an individual attack, Fig.~\ref{fig:types_of_attack_individual}, Bob interact
 \MT{--------------------------------------}
 
 
-In this section we will focus on individual and collective forging attacks. Full security against coherent quantum attacks in the CV QKD literature has only been proven for the simpler case of the gPSK alphabet \MT{cite}, and a full security proof remains elusive for the discrete modulation of coherent states. There has been some recent success in applying convex optimization methods to the problem \MT{cite} but these proofs rely on an assumption about the Gaussianity of the discretely modulated alphabet which is only valid as $\alpha \rightarrow 0$.
+In this section we will focus on individual and collective forging attacks. Full security against coherent quantum attacks in the CV QKD literature has only been proven for the simpler case of coherent states modulated with a Gaussian distribution \cite{Lodewyck2007, Leverrier2010c, Pirandola2008, Leverrier2015, Laudenbach2017, Furrer2012}, and a full security proof remains elusive for a discrete modulation of coherent states. There has been some recent success in applying convex optimization methods to the problem \cite{Ghorai2019, Lin2019}, but these proofs rely on an assumption about the Gaussianity of the discretely modulated alphabet \cite{Leverrier2009} which is only valid as $\alpha \rightarrow 0$. In keeping with recent trends in the QKD literature for the discrete modulation of coherent states without a Gaussian assumption \cite{Papanastasiou2018}, we will focus on bounding the attack strength of individual attack, and then assume the i.i.d. criterion \cite{Leverrier2017, Laudenbach2017}, to reach security against collective attack. 
 
-In the QKD literature it was demonstrated \MT{cite} that under \MT{conditions}, security against the collective attack may be proven in terms of security against individual attack. \MT{demonstrate (or motivate) that the same should be true here.}
+%In the QKD literature it was demonstrated \MT{cite} that under \MT{conditions}, security against the collective attack may be proven in terms of security against individual attack. \MT{demonstrate (or motivate) that the same should be true here.}
 
-In keeping with recent trends in the QKD literature for the discrete modulation of coherent states, we will focus on bounding the attack strength of individual attack, and then use \MT{conditions} to reach security against collective attack. 
 
-\MT{Dicuss fully the state of CV QKD security proofs, and provide a short literature review of recent developments.}
-
-In particular, we will study both the beamsplitter attack and the entangling cloner attack for our protocol. In both of these attacks the quantum distribution channel will be replaced, by Bob and unbeknownst to Alice and Charlie, with a beamsplitter intended to mimic the effect of the channel on Charlie's measurement outcomes. In particular, Bob will either input into the channel the vacuum state, a thermal state Eq.~\MT{X}, or one arm of his two-mode entangled state Eq.~\MT{X}.
+In particular, we will study both the beamsplitter attack and the entangling cloner attack for our protocol \cite{Grosshans2002, Grosshans2003}. In both of these attacks the quantum distribution channel will be replaced, by Bob and hidden from Alice and Charlie, with a beamsplitter intended to mimic the effect of the channel on Charlie's measurement outcomes. In particular, Bob will either input into the channel the vacuum state, a thermal state Eq.~\ref{eqn:intro_thermal}, or one arm of his two-mode entangled state Eq.~\ref{eqn:intro_tmsv}.
 
 \subsection{Beamsplitter attack}
 
 \begin{figure}[htp]
 \centering
 \includegraphics[draft=False,width=0.8\linewidth]{qds/BS0}
-\caption{\label{fig:bs0_attack} Attack BS$0$. Bob replaces the channel with a beamsplitter in order to mimic loss. By inputting vacuum into the beamsplitter Bob mimics channel loss while imposing zero excess noise.}
+\caption{\label{fig:bs0_attack} Attack BS$0$. Bob replaces the channel with a beamsplitter in order to mimic channel loss. By inputting vacuum $\ket{0}$ into the beamsplitter Bob mimics channel loss while imposing zero excess noise.}
 \end{figure}
-In its canonical form, the beamsplitter attack--as depicted in Fig.~\ref{fig:bs0_attack}--allows Bob to replace a lossy channel with a corresponding beamsplitter with vacuum input into the fourth port. Bob receives his quantum system from the reflected output port, and from his system he will attempt to gain information about Charlie's output. Crucially, to honest players Alice and Charlie this attack is indistinguishable from simply having a lossy transmission channel, and so all channel loss must be attributed to the action of the dishonest Bob. 
+In its canonical form, the beamsplitter attack, Fig.~\ref{fig:bs0_attack}, allows Bob to replace a lossy channel, transmittivity $T$ with a corresponding beamsplitter. Bob inputs vacuum $\ket{0}$ into the fourth port, and as such introduces no noise into the channel. Bob receives his quantum system $\rho_B$ from the reflected output port, and from $\rho_B$ he will attempt to gain information about Charlie's measurement outcomes. Crucially, to honest players Alice and Charlie this attack is indistinguishable from simply having a lossy transmission channel, and so in analysis all channel loss must be attributed to the action of the dishonest Bob. 
 
-Since in the beamsplitter attack Bob inputs only vacuum into the beamsplitter's fourth port, this form of the beamsplitter attack cannot model any excess noise $\xi$ and it should therefore be ignored in the analysis. However, in order to include excess noise in our analysis, we will examine two modifications to the standard beamsplitter attack. Each modification to the standard beamsplitter attack will be discussed in turn, and then we compare all three in Fig.~\ref{fig:qds_holevo_comparisons}. 
+Since in the usual beamsplitter attack Bob inputs only vacuum into the beamsplitter's fourth port, this form of attack cannot model any channel excess noise $\xi$ and it should therefore be ignored in the analysis. However, a realistic channel will impose noise onto Charlie's measurement outcomes, and we describe some modifications to the beamsplitter attack in Secs.~\ref{sec:qds_bs1},~\ref{sec:qds_bs2}. 
 
-\subsubsection{\underline{$BS0$: $\xi = 0$}}
-We will calculate the Holevo information $\chi$ of Bob's state after performing attack $BS0$ on the quantum channel. Attack $BS0$ is the canonical beamsplitter attack, in which Bob will replace the channel with a beamsplitter and take possession of the output of the reflected port. Crucially, the beamsplitter should be chosen such that it mimics the channel exactly, and Charlie should be unable to tell whether an attack has taken place - rather, \emph{all} loss should be attributed to Bob. Since there is vacuum input into the fourth beamsplitter port, and since no other modifications are made, this attack cannot induce any excess noise $\xi$ in Charlie's measurements, and so attack $BS0$ is useful for modelling purely lossy channels in the absence of thermal noise.
+%However, in order to include excess noise in our analysis, we will examine two modifications to the standard beamsplitter attack. Each modification to the standard beamsplitter attack will be discussed in turn, and then we compare all three in Fig.~\ref{fig:qds_holevo_comparisons}. 
 
-Let Alice send state $\dyad{\alpha_k}$, with the $\alpha_k \in \mathcal{A}_4$. Bob inputs the vacuum state $\dyad{0}$ into the fourth port of the beamsplitter. We will calculate the Holevo information of Bob's state $\rho_{B | C}$, which is conditioned on Charlie measuring a particular eliminated signature element.
+\subsubsection{$BS0$: $\xi = 0$}\label{sec:qds_bs0}
+Attack BS$0$ is depicted in Fig.~\ref{fig:bs0_attack}. This attack is the canonical beamsplitter attack, in which Bob will replace the channel with a beamsplitter and take possession of the output of the reflected port. Crucially, the beamsplitter should be chosen such that it mimics the channel exactly, and Charlie should be unable to tell whether an attack has taken place. In a run of the protocol therefore, all channel loss should be attributed to dishonest Bob.
 
-Using beamsplitter relation Eq.~\MT{X}, we see that a beamsplitter with transmittivity $T$ enacts the following transformation on the input state
+ %rather, \emph{all} loss should be attributed to Bob. Since there is vacuum input into the fourth beamsplitter port, and since no other modifications are made, this attack cannot induce any excess noise $\xi$ in Charlie's measurements, and so attack $BS0$ is useful for modelling purely lossy channels in the absence of thermal noise.
+
+Let Alice send state $\dyad{\alpha_k}$, with the $\alpha_k$ chosen uniformly at random from the QPSK alphabet. Bob inputs the vacuum state $\dyad{0}$ into the fourth port of the beamsplitter. We will calculate the Holevo information of Bob's state conditioned on Charlie measuring a particular eliminated signature element.
+
+Using beamsplitter relation Eq.~\ref{eqn:intro_beamsplitter}, we see that a beamsplitter with transmittivity $T$ enacts the following transformation on the input state
 \begin{equation}
 \dyad{\alpha_k}_A \otimes \dyad{0}_B \rightarrow \dyad{\sqrt{T} \alpha_k}_C \otimes \dyad{\sqrt{1-T}\alpha_k}_{B},
 \end{equation}
-and so Charlie holds state $\dyad{\sqrt{T}\alpha_k}$ as in the derivation of $\perr$ above, while Bob holds $\dyad{\sqrt{1-T}\alpha_k}$.
+and so Charlie holds state $\dyad*{\sqrt{T}\alpha_k}$, while Bob holds $\dyad*{\sqrt{1-T}\alpha_k}$.
 
-Similarly, when an arbitrary $\alpha_k \in \mathcal{A}_4$ is sent uniformly at random, we must mix over the alphabet and thus the mixed two-mode output state is
+When an arbitrary $\alpha_k$ is chosen uniformly at random, we must mix over the alphabet and thus the mixed two-mode output state is
 \begin{align}
 \left(\frac{1}{4}\sum_{\alpha_k \in \mathcal{A}_4} \dyad{\alpha_k}_A\right) &\otimes \dyad{0}_B \rightarrow \notag \\
 &\frac{1}{4}\sum_{\alpha_k \in \mathcal{A}_4} \left(\dyad{\sqrt{T}\alpha_k}_C \otimes \dyad{\sqrt{1-T}\alpha_k}_B\right).
@@ -624,47 +625,53 @@ Similarly, when an arbitrary $\alpha_k \in \mathcal{A}_4$ is sent uniformly at r
 
 \noindent Charlie heterodynes on his mode and receives outcome $c \in \mathbb{C}$, and so Bob now holds
 \begin{equation}
-\rho_{B | c} = \frac{1}{4}\frac{1}{\text{P}\left(c\right)}\sum_{\alpha_k \in \mathcal{A}_4} \left| \langle c | \sqrt{T}\alpha_k\rangle \right|^2 \times \dyad{\sqrt{1-T}\alpha_k}_B
+\rho_{B | c} = \frac{1}{4}\frac{1}{\text{P}\left(c\right)}\sum_{\alpha_k} \text{P}\left(c \given \alpha_k, T\right) \times \dyad{\sqrt{1-T}\alpha_k}_B
 \end{equation}
-where $\text{P}\left(c \given \alpha_k, T\right) = \left| \langle c | \sqrt{T}\alpha_k\rangle \right|^2$ corresponds to the probability that Charlie measures $c$ on his mode given that he received state $\dyad{\sqrt{T}\alpha_k}$, while $\text{P}\left(c\right) = \sum_{\alpha_k} \text{P}\left(c | \alpha_k, T\right)$ corresponds to the total unconditional probability that he measures $c$.
+where $\text{P}\left(c \given \alpha_k, T\right) = \left| \langle c | \sqrt{T}\alpha_k\rangle \right|^2$ corresponds to the probability that Charlie measures $c$ on his mode given that he received state $\dyad*{\sqrt{T}\alpha_k}$, while $\text{P}\left(c\right) = \sum_{\alpha_k} \text{P}\left(c | \alpha_k, T\right)$ corresponds to the total unconditional probability that he measures $c$.
 
-Recall that the eliminated signature element held by Charlie is determined entirely by his heterodyne outcome $c$, Table.~\MT{X}. Since $\chi$ is defined in terms of eliminated signature element rather than heterodyne measurement outcome, and since many $c$ will return the same eliminated signature element, we must now mix $\rho_{B | c}$ over phase-space quadrants.
+Recall that the eliminated signature element held by Charlie is determined entirely by his heterodyne outcome $c$, Fig.~\ref{fig:qds_elimsig2}. Since Holevo information $\chi$ is defined in terms of Charlie's eliminated signature element rather than heterodyne measurement outcome, and since many outcomes $c$ will return the same eliminated signature element, we must now mix $\rho_{B | c}$ over entire quadrants in phase-space.
 
-\MT{Assume I have introduced some notation for eliminated signature elements before now}
+\begin{figure}[htp]
+\centering
+\includegraphics[draft=false, width=0.8\linewidth]{qds/elimsig2}
+\caption{\label{fig:qds_elimsig2} Multiple heterodyne outcomes give rise to the same eliminated signature element. (a) A particular eliminated signature element. (b) All possible heterodyne outcomes consistent with (a).}
+\end{figure}
 
-Let us consider the first eliminated signature element $e_1$. We integrate $\rho_{B | c}$
+
+Let us use the notation for eliminated signature elements from Tab.~\MT{X}. Consider the first eliminated signature element $e_1$. We mix $\rho_{B | c}$ over all outcomes $c$ which are consistent with $e_1$
 
 \begin{equation}\label{eqn:qds_aposterioristate}
 \rho_{B | e_1} = \mathcal{N}\left(e_1\right) \int\limits_{\text{Re}\left(c\right) > 0, \; \text{Im}\left(c\right)>0} \Diff2 c \; \text{P}\left(c\right) \; \rho_{B | c},
 \end{equation}
-with the normalization factor defined as 
-\begin{equation}
+with the normalization factor defined as\footnote{Clearly the $\mathcal{N}$ as defined in Eq.~\ref{eqn:qds_aposterioristate_normalization} is equal to $1/4$ for each $e_1, e_2, e_3, e_4$. We show Eq.~\ref{eqn:qds_aposterioristate_normalization} here for completeness, though it will become important in Sec.~\ref{sec:qds_postselection} when we discuss postselection on measurement outcomes, and in Ch.~\ref{chapter:aqc} when assumptions about uniform sending probabilities are relaxed.}
+\begin{equation}\label{eqn:qds_aposterioristate_normalization}
 \frac{1}{\mathcal{N}\left(e_1\right)} = \int\limits_{\text{Re}\left(c\right) > 0, \; \text{Im}\left(c\right)>0} \Diff2 c \; \text{P}\left(c\right).
 \end{equation}
 
-\noindent The state $\rho_{B|e_1}$ is Bob's state when Charlie holds eliminated signature element $e_1$. Bob's states conditioned on eliminated signature elements $e_2, e_3, e_4$ are calculated likewise by varying the limits of integration.
+\noindent The conditional state $\rho_{B|e_1}$ is the quantum state held by Bob when Charlie has received eliminated signature element $e_1$. Bob's states conditioned on eliminated signature elements $e_2, e_3, e_4$ are calculated likewise by varying the limits of integration.
 
-Bob's \emph{a posteriori} entropy thus reads
+Bob's \emph{a posteriori} entropy Eq.~\ref{eqn:intro_aposteriori} thus reads
 \begin{equation}
 S_{\text{aposteriori}} = \sum_{e_k} \text{P}\left(e_k\right) S\left(\rho_{B | e_k}\right)
 \end{equation}
-in terms of Von Neumann entropy $S$. In this chapter we will work in the ideal case where each eliminated signature element is equally likely, and where the entropies of each of the $\rho_{B | e_k}$ are equal, and so we simply write Bob's \emph{a posteriori} entropy as
+in terms of Von Neumann entropy $S$. In this chapter we are working in the ideal case where each eliminated signature element is equally likely, and where the entropies of each of the $\rho_{B | e_k}$ are equal, and so we simply write Bob's \emph{a posteriori} entropy as
 
 \begin{equation}\label{eqn:aposteriori_entropy}
 S_{\text{aposteriori}} = S\left(\rho_{B | e_1}\right).
 \end{equation}
 
-Bob's \emph{a priori} state is given by
+\noindent Bob's \emph{a priori} state is given by
 \begin{equation}\label{eqn:qds_aprioristate}
 \rho_{\text{apriori}} = \sum_{e_k} \text{P}\left(e_k\right) \rho_{B|e_k}
 \end{equation}
-with corresponding \emph{a priori} entropy simply $S\left(\rho_{\text{apriori}}\right)$. Note that the state Eq.~\ref{eqn:qds_aprioristate} is equivalent to the \emph{a posteriori} state Eq.~\ref{eqn:qds_aposterioristate} when the integration limit is extended over the entire complex plane. Finally, using
+with corresponding \emph{a priori} entropy Eq.~\ref{eqn:intro_apriori} simply $S\left(\rho_{\text{apriori}}\right)$, and where $\text{P}\left(e_k\right)$ is here equal to $1/4$. %Note that the state Eq.~\ref{eqn:qds_aprioristate} is equivalent to the \emph{a posteriori} state Eq.~\ref{eqn:qds_aposterioristate} when the integration limit is extended over the entire complex plane. 
+Finally, using the definiition of Holevo information, Eq.~\ref{eqn:intro_holevo}
 \begin{equation}
 \chi = S_{\text{apriori}} - S_{\text{aposteriori}}.
 \end{equation}
-we calculate and plot $\chi$ under attack $BS0$ in Fig.~\ref{fig:qds_holevo_comparisons}
+we calculate and plot $\chi$ under attack $BS0$ in Fig.~\ref{fig:qds_holevo_comparisons}. 
 
-\subsubsection{\underline{$BS1$: $\xi > 0$}}
+\subsubsection{$BS1$: $\xi > 0$}\label{sec:qds_bs1}
 \begin{figure}[htp]
 \centering
 \includegraphics[draft=False, width=0.8\linewidth]{qds/BS1}
@@ -742,7 +749,7 @@ since the polar integral forces $k=l$.
 The Holevo information may now be calculated in the usual way, and we compare Holevo information under different attacks in Fig.~\ref{fig:qds_holevo_comparisons}.
 \MT{where do I want to talk about truncating matrices and numerical methods?}
 
-\subsubsection{\underline{$BS2$: $\xi > 0$}}
+\subsubsection{$BS2$: $\xi > 0$}\label{sec:qds_bs2}
 We now introduce and consider a second modification to the usual beamsplitter attack, which will allow the excess noise on the channel to be modelled. This attack can be viewed as an unphysical combination of the previous two attacks which advantages Bob and disadvantages honest parties.
 
 As we see in Fig.~\ref{fig:qds_holevo_comparisons}, below, Bob performs worse under $BS1$ than $BS0$. This is a consequence of the fact that the input noise also affects his own measurements and so will reduce his information about Charlie's output. So we modify the beamsplitter attack by imposing that the channel excess noise should only affect honest players. That is, the presence of $\xi$ causes $\perr$ to increase, but Holevo information and therefore $\pe$ should both be unaffected. 
