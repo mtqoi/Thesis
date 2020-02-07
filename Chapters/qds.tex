@@ -832,27 +832,30 @@ where we have included excess noise $\xi$ in our probability, as in Sec.~\ref{eq
 
 
 \section{Signature length $L$}
-\MT{better segue}
-We now wish to calculate the total probability $\varepsilon_{\text{fail}}$ that our QDS protocol fails by any of the routes discussed earlier: by allowing Alice to repudiate, by allowing Bob to forge, or by aborting even in the absence of attack.
+%\MT{better segue}
+We have proven protocol security against repudiation, Sec.~\ref{sec:qds_security_repudiation}, and forgery, Sec.~\ref{sec:qds_security_forgery}, and we have shown that our QDS protocol is robust, Sec.~\ref{sec:qds_security_robustness}. Additionally, we have demonstrated how a forging Bob's probability $\pe$ of introducing a mismatch into his signature is related to the Holevo information $\chi$ of his quantum system, Sec.~\ref{sec:qds_bounding_pe}, and explicitly analysed several attacks which he may perform which mimic different channel conditions, Sec.~\ref{sec:qds_attack_analysis}.
 
-For a figure of merit, we will assume that the protocol will fail in any of these ways with equal probability, and so we set
-\begin{equation}
+We are now in a position to calculate the total probability that our QDS protocol fails to meet the security requirements outlined in List.~\ref{list:qds_requirements}. We shall see that the total failure probability decays exponentially, and so our protocol is secure.
+
+Let us define $\varepsilon_{\text{fail}}$ as the total probability that our protocol fails, either by allowing a repudiation or forging attack, or by aborting when all players behaved honestly. For a figure of merit we assume that the protocol is equally likely to fail in any of these ways, and so we set
+\begin{equation}\label{eqn:qds_efail_deriv}
 \varepsilon_{\text{fail}} = \varepsilon_{\text{honest abort}} = \varepsilon_{\text{repudiation}} = \varepsilon_{\text{forgery}},
 \end{equation}
-though we note that alternative combinations could be considered. Let us eliminate free parameters $s_B, s_C$ by equating the arguments of Eqs.~\ref{eqn:erep},~\ref{eqn:ehonabort},~\ref{eqn:eforg}
+though we note that alternative combinations may be easily considered. Let us eliminate free parameters $s_B, s_C$ by equating the arguments of Eqs.~\ref{eqn:erep},~\ref{eqn:ehonabort},~\ref{eqn:eforg}
 \begin{equation}
 \left(\pe - s_C\right)^2  = \frac{1}{4}\left(s_C - s_B\right)^2 = \left(s_B - \perr\right)^2
 \end{equation}
 from which we may derive
-\begin{equation}
+\begin{equation}\label{eqn:qds_sbsc}
 s_B = \frac{3}{4} \perr + \frac{1}{4}\pe \qq{and} s_C = \frac{1}{4}\perr + \frac{3}{4}\pe
 \end{equation}
-as our choices of security thresholds. Notice that since $\perr \le \pe$ we automatically fulfil $s_B \le s_C$. The overall probability of failure becomes
+as our choices of security thresholds. Notice that since $\perr \le \pe$, Eq.~\ref{eqn:qds_sbsc} automatically fulfils $s_B \le s_C$. The overall probability of failure Eq.~\ref{eqn:qds_efail_deriv} becomes
 
 \begin{equation}\label{eqn:efail}
 \varepsilon_{\text{fail}} \le 2 \text{exp}\left( - \left[\pe - \perr\right]^2 \frac{L}{16}\right).
 \end{equation}
 
+\noindent Thus, provided that $\perr$ and $\pe$ are known, and $\pe - \perr \ge 0$, any security level $\varepsilon_{\text{fail}} > 0 $ may be reached by varying signature length $L$. In keeping with the recent works Refs.~\cite{Collins2014, Croal2016, Donaldson2016, Amiri2016} in this Thesis we will take $\varepsilon_{\text{fail}} = 0.01\%$, and then implicity solve Eq.~\ref{eqn:efail} for the signature length. We take $L$ as the main figure of merit for a QDS protocol\footnote{Analogously to the key rate in QKD.}, and we analyse the performance of our protocol in Sec.~\ref{sec:qds_protocol_performance}.
 
 
 
@@ -971,7 +974,7 @@ We plot $\mathcal{N}$ in Fig.~\ref{fig:psnorm}, and figure of merit $\tilde{L}$ 
 \MT{have a section where I make some remarks about the postselection technique. Note that I have implicitly assumed that Bob knows whether an individual state has been postselected on. This is a sensible assumption for QKD, since it will be declared, but for QDS it does not need to be declared, so I am giving Bob too much power here.}
 
 
-\section{Protocol performance}
+\section{Protocol performance}\label{sec:qds_protocol_performance}
 \MT{Let's look at some results and graphs of the protocol performance under the four above attacks. TODO: make graphs like in the PRA paper}
 
 
