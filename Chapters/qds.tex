@@ -589,7 +589,7 @@ In this section we will focus on individual and collective forging attacks. Full
 %In the QKD literature it was demonstrated \MT{cite} that under \MT{conditions}, security against the collective attack may be proven in terms of security against individual attack. \MT{demonstrate (or motivate) that the same should be true here.}
 
 
-In particular, we will study both the beamsplitter attack and the entangling cloner attack for our protocol \cite{Grosshans2002, Grosshans2003}. In both of these attacks the quantum distribution channel will be replaced, by Bob and hidden from Alice and Charlie, with a beamsplitter intended to mimic the effect of the channel on Charlie's measurement outcomes. In particular, Bob will either input into the channel the vacuum state, a thermal state Eq.~\ref{eqn:intro_thermal}, or one arm of his two-mode entangled state Eq.~\ref{eqn:intro_tmsv}.
+In particular, we will study both the beamsplitter attack and the entangling cloner attack for our protocol \cite{Grosshans2002, Grosshans2003}. In both of these attacks the quantum distribution channel will be replaced, by Bob and hidden from Alice and Charlie, with a beamsplitter intended to mimic the effect of the channel on Charlie's measurement outcomes. In particular, Bob will either input into the channel the vacuum state, a thermal state Eq.~\ref{eqn:intro_thermal}, or one arm of his two-mode entangled state Eq.~\ref{eqn:intro_tmsv}. The entangling cloner attack is known to be a dishonest player's optimal attack strategy in asymptotic QKD with gaussian-modulated coherent states \cite{Lodewyck2007, Laudenbach2017}, while the optimal attack strategy against discrete-modulated QKD remains an open question. However, we conjecture that entangling cloner should be optimal in the Gaussian limit $\alpha \rightarrow 0$, and close to optimal for the small $\alpha$'s considered in this thesis. Certainly, performing an entangling-cloner attack on each signal state as it passes will be physically demanding.
 
 \subsection{Beamsplitter attack}
 
@@ -770,14 +770,16 @@ The Holevo information is given by using Eqs.~\ref{eqn:qds_aposterioristate} and
 \includegraphics[draft=False, width=0.8\linewidth]{qds/EC}
 \caption{\label{fig:ec_attack} EC attack. Locally, one mode of the TMSV looks like $\rho_{\text{thermal}}$ and so allows channel excess noise to be emulated. Bob can exploit correlations in noise between his two mode output state $\rho_{B_1^\prime, B_2}$ to gain additional information.}
 \end{figure}
-The entangling cloner attack \cite{Grosshans2002, Grosshans2003} depicted in Fig.~\ref{fig:ec_attack}, is ideally suited to consistently incorporate the presence of excess noise $\xi$, and we shall see that it is a much more powerful attack than any of the beamsplitter attacks considered above. The entangling cloner attack, which we shall denote $EC$, may be viewed as a natural extension of attack $BS1$, above. Instead of inputting a thermal state into the beamsplitter's fourth port, Bob will input one arm of his entangled two-mode squeezed vacuum (TMSV) state. The mode which Bob inputs into the channel is locally indistinguishable from $\rho_{\text{thermal}}$, and so honest players cannot tell which of these attacks is being performed. 
+The entangling cloner attack \cite{Grosshans2002, Grosshans2003}, depicted in Fig.~\ref{fig:ec_attack}, is ideally suited to consistently incorporate the presence of excess noise $\xi$, and we shall see that it is a much more powerful attack than any of the beamsplitter attacks considered above. The entangling cloner attack, which we shall denote EC, may be viewed as a natural extension of attack BS$1$.  %EC is known to be the optimal collective attack for
 
-The $EC$ attack has a long history, and is known to be the optimal collective attack for gPSK QKD \MT{cite a bunch of stuff}. Since our QPSK alphabet is non-Gaussian we make no claims as to $EC$'s optimality, though we conjecture that $EC$ will be optimal as $\alpha \rightarrow 0$, and close to optimal for $\alpha << 1$. The status of optimal attacks on QDS is an open one and should be the subject of further exploration. The question about optimal attacks on QKD with discrete modulated coherent states is also open, despite a long history of activity on these protocols. In any case, the $EC$ attack is very difficult to perform with today's technology, and so a protocol with security against $EC$ (or even $BSx$) attacks should be expected to be practically secure for a long time.
+Instead of inputting a thermal state into the beamsplitter's fourth port, Bob will input one arm of his entangled two-mode squeezed vacuum (TMSV) state, Eq.~\ref{eqn:intro_tmsv}. The mode which Bob inputs into the channel is locally indistinguishable from $\rho_{\text{thermal}}$, Sec.~\ref{sec:intro_tmsv}, and so honest players are unable to distinguish between BS$1$, BS$2$ and EC.
 
-\MT{Talk somewhere about where the extra power in the EC attack comes from - we allow Bob to exploit also the correlations between his two modes. Also have some figures of histograms of this attack}
+%The $EC$ attack has a long history, and is known to be the optimal collective attack for gPSK QKD \MT{cite a bunch of stuff}. Since our QPSK alphabet is non-Gaussian we make no claims as to $EC$'s optimality, though we conjecture that $EC$ will be optimal as $\alpha \rightarrow 0$, and close to optimal for $\alpha << 1$. The status of optimal attacks on QDS is an open one and should be the subject of further exploration. The question about optimal attacks on QKD with discrete modulated coherent states is also open, despite a long history of activity on these protocols. In any case, the $EC$ attack is very difficult to perform with today's technology, and so a protocol with security against $EC$ (or even $BSx$) attacks should be expected to be practically secure for a long time.
 
-Let us analyse the $EC$ attack. Alice creates the coherent state $\rho_{\alpha_k}$ (Eq.~\MT{X}), while Bob creates
-\begin{equation}
+%\MT{Talk somewhere about where the extra power in the EC attack comes from - we allow Bob to exploit also the correlations between his two modes. Also have some figures of histograms of this attack}
+
+Let us analyse the $EC$ attack. Alice creates the coherent state $\dyad*{\alpha_k}$ while Bob generates
+\begin{equation}\label{eqn:qds_ec_tmsv}
 \tmsv = \frac{1}{\cosh^2 \zeta}  \sum_{n, m=0}^\infty \left(\tanh\zeta\right)^{n+m} \dyad{n, n}{m, m}.
 \end{equation}
 
@@ -790,8 +792,9 @@ Let us analyse the $EC$ attack. Alice creates the coherent state $\rho_{\alpha_k
 
 \noindent where we have explicitly separated in square brackets the two modes which will interfere on the beamsplitter.
 
-The beamsplitter mixes $\dyad{n_1, n_2}{m_1, m_2}$ via Eq.~\MT{X}, and gives an entangled three-mode state at the output. Charlie heterodynes on his mode and receives outcome $c$, and we arrive at Bob's sub-normalized two-mode output state:
+The beamsplitter mixes $\dyad{n_1, n_2}{m_1, m_2}$ via Eq.~\ref{eqn:intro_beamsplitter}, and gives an entangled three-mode state at the output. Charlie heterodynes on his mode and receives outcome $c$, and we arrive at Bob's conditional two-mode output state $\rho_{\left. B \given c\right.}$, which we display fully in Sec.~\ref{sec:appendix_ec_state}. A histogram of Bob's conditional two-mode state is displayed in Fig.~\ref{fig:qds_ec_histogram} where we see that his state depends heavily on Charlie's outcome $c$. 
 
+\iffalse
 \begin{align}\label{eqn:qds_ec_deriv_1}
 &\tilde{\rho}_{B}\left(c\right) =  \frac{e^{-\left|\alpha_k\right|^2}}{\cosh^2\zeta} \frac{1}{\pi} \sum_{n_1, m_1, n_2, m_2 = 0}^\infty \alpha_k^{n_1} \overline{\alpha_k}^{m_1} \left(\tanh\zeta\right)^{n_2 + m_2} \sum_{k_1, k_2, l_1, l_2 = 0}^{n_1, n_2, m_1, m_2}  \notag \\
 %
@@ -806,17 +809,21 @@ The beamsplitter mixes $\dyad{n_1, n_2}{m_1, m_2}$ via Eq.~\MT{X}, and gives an 
 &\times \left[e^{-\left|c\right|^2} c^{k_1 + k_2} \overline{c}^{l_1 + l_2} \right]
 \end{align}
 
-\noindent where we have again separated the terms involving $c$. Once again the state is readily integrated in $c$, either over the entire complex plane or a single quadrant, and we may simply substitute Eqs.~\ref{eqn:qds_bs1_deriv_3},~\ref{eqn:qds_bs1_deriv_4} into Eq.~\ref{eqn:qds_ec_deriv_1} to reach the \emph{a posteriori} and \emph{a priori} states, respectively.
+\noindent where we have again separated the terms involving $c$. 
+\fi
+
+
+Once again the state is readily integrated in $c$, either over the entire complex plane or a single quadrant, and we may simply substitute Eqs.~\ref{eqn:qds_bs1_deriv_3},~\ref{eqn:qds_bs1_deriv_4} into Eq.~\ref{eqn:qds_ec_deriv_1} to reach the \emph{a posteriori} and \emph{a priori} states, respectively.
 
 The \emph{a priori} state is automatically normalized by virtue of the integration over $\mathbb{C}$, while the \emph{a posteriori} state is normalized by multiplying by $\mathcal{N}\left(e_1 \given \xi \right)$, defined as 
 
 \begin{equation}
 \frac{1}{\mathcal{N}\left(e_1 \given \xi\right)} = \int\limits_{\text{Re}\left(c\right) > 0, \; \text{Im}\left(c\right)>0} \Diff2 c \; \text{P}\left(c \given \xi \right).
 \end{equation}
-where we have included excess noise $\xi$ in our probability, as in Eq.~\MT{X}.
+where we have included excess noise $\xi$ in our probability, as in Sec.~\ref{eqn:qds_perr_noisy}. The performance of this attack is analysed in Fig.~\ref{fig:qds_holevo_comparisons}.
+%Eq.~\MT{X}.
 
-
-
+\MT{Chat about Fig.~\ref{fig:qds_holevo_comparisons} and the power of the different attacks.}
 
 \begin{figure}
 \includegraphics{qds_holevo_comparisons.png}
