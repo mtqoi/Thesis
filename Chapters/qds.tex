@@ -641,11 +641,11 @@ Recall that the eliminated signature element held by Charlie is determined entir
 Let us use the notation for eliminated signature elements from Tab.~\MT{X}. Consider the first eliminated signature element $e_1$. We mix $\rho_{B | c}$ over all outcomes $c$ which are consistent with $e_1$
 
 \begin{equation}\label{eqn:qds_aposterioristate}
-\rho_{\left. B \given e_1\right.} = \mathcal{N}\left(e_1\right) \int\limits_{\text{Re}\left(c\right) > 0, \; \text{Im}\left(c\right)>0} \Diff2 c \; \text{P}\left(c\right) \; \rho_{\left. B \given  c\right.},
+\rho_{\left. B \given e_1\right.} = \frac{1}{\mathcal{N}\left(e_1\right)} \int\limits_{\text{Re}\left(c\right) > 0, \; \text{Im}\left(c\right)>0} \Diff2 c \; \text{P}\left(c\right) \; \rho_{\left. B \given  c\right.},
 \end{equation}
 with the normalization factor defined as\footnote{Clearly the $\mathcal{N}$ as defined in Eq.~\ref{eqn:qds_aposterioristate_normalization} is equal to $1/4$ for each $e_1, e_2, e_3, e_4$. We show Eq.~\ref{eqn:qds_aposterioristate_normalization} here for completeness, though it will become important in Sec.~\ref{sec:qds_postselection} when we discuss postselection on measurement outcomes, and in Ch.~\ref{chapter:aqc} when assumptions about uniform sending probabilities are relaxed.}
 \begin{equation}\label{eqn:qds_aposterioristate_normalization}
-\frac{1}{\mathcal{N}\left(e_1\right)} = \int\limits_{\text{Re}\left(c\right) > 0, \; \text{Im}\left(c\right)>0} \Diff2 c \; \text{P}\left(c\right).
+\mathcal{N}\left(e_1\right) = \int\limits_{\text{Re}\left(c\right) > 0, \; \text{Im}\left(c\right)>0} \Diff2 c \; \text{P}\left(c\right).
 \end{equation}
 
 \noindent The conditional state $\rho_{B|e_1}$ is the quantum state held by Bob when Charlie has received eliminated signature element $e_1$. Bob's states conditioned on eliminated signature elements $e_2, e_3, e_4$ are calculated likewise by varying the limits of integration.
@@ -818,7 +818,7 @@ Once again the state is readily integrated in $c$, either over the entire comple
 The \emph{a priori} state is automatically normalized by virtue of the integration over $\mathbb{C}$, while the \emph{a posteriori} state is normalized by multiplying by $\mathcal{N}\left(e_1 \given \xi \right)$, defined as 
 
 \begin{equation}
-\frac{1}{\mathcal{N}\left(e_1 \given \xi\right)} = \int\limits_{\text{Re}\left(c\right) > 0, \; \text{Im}\left(c\right)>0} \Diff2 c \; \text{P}\left(c \given \xi \right).
+\mathcal{N}\left(e_1 \given \xi\right) = \int\limits_{\text{Re}\left(c\right) > 0, \; \text{Im}\left(c\right)>0} \Diff2 c \; \text{P}\left(c \given \xi \right).
 \end{equation}
 where we have included excess noise $\xi$ in our probability, as in Sec.~\ref{eqn:qds_perr_noisy}. The performance of this attack is analysed in Fig.~\ref{fig:qds_holevo_comparisons}.
 %Eq.~\MT{X}.
@@ -831,7 +831,7 @@ where we have included excess noise $\xi$ in our probability, as in Sec.~\ref{eq
 \end{figure}
 
 
-\section{Signature length $L$}
+\section{Signature length $L$}\label{sec:qds_siglength}
 %\MT{better segue}
 We have proven protocol security against repudiation, Sec.~\ref{sec:qds_security_repudiation}, and forgery, Sec.~\ref{sec:qds_security_forgery}, and we have shown that our QDS protocol is robust, Sec.~\ref{sec:qds_security_robustness}. Additionally, we have demonstrated how a forging Bob's probability $\pe$ of introducing a mismatch into his signature is related to the Holevo information $\chi$ of his quantum system, Sec.~\ref{sec:qds_bounding_pe}, and explicitly analysed several attacks which he may perform which mimic different channel conditions, Sec.~\ref{sec:qds_attack_analysis}.
 
@@ -855,67 +855,75 @@ as our choices of security thresholds. Notice that since $\perr \le \pe$, Eq.~\r
 \varepsilon_{\text{fail}} \le 2 \text{exp}\left( - \left[\pe - \perr\right]^2 \frac{L}{16}\right).
 \end{equation}
 
-\noindent Thus, provided that $\perr$ and $\pe$ are known, and $\pe - \perr \ge 0$, any security level $\varepsilon_{\text{fail}} > 0 $ may be reached by varying signature length $L$. In keeping with the recent works Refs.~\cite{Collins2014, Croal2016, Donaldson2016, Amiri2016} in this Thesis we will take $\varepsilon_{\text{fail}} = 0.01\%$, and then implicity solve Eq.~\ref{eqn:efail} for the signature length. We take $L$ as the main figure of merit for a QDS protocol\footnote{Analogously to the key rate in QKD.}, and we analyse the performance of our protocol in Sec.~\ref{sec:qds_protocol_performance}.
+\noindent The probability $\varepsilon_{\text{fail}}$ decays exponentially in $L$, and so provided that $\perr$ and $\pe$ are known, and $\pe - \perr \ge 0$, any security level $\varepsilon_{\text{fail}} > 0 $ may be reached by varying signature length $L$. In keeping with the recent works Refs.~\cite{Collins2014, Croal2016, Donaldson2016, Amiri2016} in this Thesis we will take $\varepsilon_{\text{fail}} = 0.01\%$, and then implicity solve Eq.~\ref{eqn:efail} for the signature length. We take $L$ as the main figure of merit for a QDS protocol\footnote{Analogously to the key rate in QKD.}, and analyse the performance of our protocol in Sec.~\ref{sec:qds_protocol_performance}.
 
 
 
 \section{Postselection}
-In the context of QKD it has been known for some time that postselection of measurement outcomes will improve the key rates in the presence of excess noise, and is even a requirement to distill a key below $T \le 1/2$ in the direct reconciliation regime \MT{cite some stuff}. We are thus motivated to apply postselection to our QDS protocol in order to allow a message to be securely signed over a larger range of channel parameters. The results of this section will be useful in Ch.~\MT{X} where--as for DR QKD--we shall see that postselection is a necessity for some QDS protocols.
+In the context of QKD it has been known for some time that postselection of measurement outcomes will improve the key rates in the presence of excess noise, and is even a requirement to distill a key below $T \le 1/2$ in the direct reconciliation regime \cite{Silberhorn2002}. We are thus motivated to apply postselection to our QDS protocol in order to allow a message to be securely signed over a larger range of channel parameters. The results of this section will be especially useful in Ch.~\ref{chapter:aqc} where--as for direct reconciliation QKD--we shall see that postselection is a necessity for some QDS protocols which we discuss there.
 
-To apply the postselection technique, recipients Bob and Charlie in the protocol will simply disregard unfavourable measurement outcomes, i.e. outcomes for which a dishonest player is deemed to have too much knowledge, or for which the probability of honest mismatch is too high.
+For now we will apply postselection to the protocol outlined in this chapter. To apply the postselection technique, recipients Bob and Charlie will simply disregard unfavourable measurement outcomes, i.e. outcomes for which a dishonest player is deemed to have too much knowledge, or for which the probability of honest mismatch is too high.
 
-We thus define a region $\rps \in \mathbb{C}$, Fig.~\ref{fig:rps}. Honest recipients will only accept measurement outcomes $x \in \mathbb{C}\setminus\rps$. We will vary $\rps$ in order to increase the range of channel parameters for which the QDS protocol is secure, and to minimize signature length $L$.
+We thus define a region $\rps \in \mathbb{C}$, Fig.~\ref{fig:rps}. Honest recipients will only accept measurement outcomes $x \in \mathbb{C}\setminus\rps$. We may then vary $\rps$ in order to increase the range of channel parameters for which the QDS protocol is secure, and to minimize signature length $L$.
 
 \begin{figure}[htp]
 \centering
-\includegraphics[draft=false, width=0.5\linewidth]{qds/rps}
+\includegraphics[draft=false, width=0.5\linewidth]{qds/rps2}
 \caption{\label{fig:rps} The postselection region $\rps$, gray, is parametrized by $\Delta_r, \Delta_\theta$ in polar coordinates. Participants will only accept measurement outcomes $x \in \mathbb{C} \setminus \rps$. }
 \end{figure}
 
-To be concrete, we allow $\rps$ to be parametrized by two variables $\Delta_r, \Delta_\theta$ in polar coordinates, Fig.~\ref{fig:rps}. This is the same postselection region which was considered in the recent work \MT{cite}, but if desired more general regions may be readily considered. We make no claims as to the optimality of our choice of the shape $\rps$, though once the form of $\rps$ is set, $\Delta_r$ and $\Delta_\theta$ may be readily optimized over.
+To be concrete, we allow $\rps$ to be parametrized by two variables $\Delta_r, \Delta_\theta$ in polar coordinates, Fig.~\ref{fig:rps}. This is the same postselection region which was considered in the recent work \cite{Lin2019}, but if desired more general regions may be readily considered. We make no claims as to the optimality of our choice of the shape $\rps$, though once the form of $\rps$ is set, we may optimize over $\Delta_r$ and $\Delta_\theta$ to improve protocol security.
 
-The crucial quantity which controls the security of our QDS protocol is $g_{\text{sec}} = \pe - \perr$, which describes the performance advantage which an honest player has over a dishonest player. The protocol is secure provided that $g_{\text{sec}} > 0$. We therefore must consider how postselection affects $g_{\text{sec}}$. 
+The crucial quantity which controls the security of our QDS protocol is $g_{\text{sec}} := \pe - \perr$, which describes the performance advantage which an honest player has over a dishonest player. We saw in Sec.~\ref{sec:qds_siglength} that the protocol is secure provided that $g_{\text{sec}} > 0$, and that the signature length $L$ required to sign to a given level of security $\varepsilon_{\text{fail}}$ is directly controlled by $g_{\text{sec}}$. We therefore must consider how postselection affects $g_{\text{sec}}$. 
 
-Let us begin with the effect of postselection on $\perr = \perr\left(\Delta_r, \Delta_\theta\right)$. \MT{I don't want to talk yet about calculating $\perr$ from data - that should wait until the agile chapter.} Recall that when Alice sends state $\ket{\alpha}$ through a lossy channel, transmittivity $T$, Charlie receives outcome $x \in \mathbb{C}$ with probability
+Let us begin with the effect of postselection on $\perr = \perr\left(\Delta_r, \Delta_\theta\right)$. %\MT{I don't want to talk yet about calculating $\perr$ from data - that should wait until the agile chapter.} 
+Recall that when Alice sends state $\ket{\alpha}$ through a lossy channel, transmittivity $T$, Charlie receives outcome $x \in \mathbb{C}$ with probability
 
 \begin{equation}
-\text{P}\left(x \given \alpha, T\right) = \frac{1}{\pi} \exp\left( - \left| x - \sqrt{\frac{T}{2}}\alpha\right|^2\right).
+\text{P}\left(x \given \alpha, T\right) = \frac{1}{\pi} \exp\left( - \left| x - \sqrt{T}\alpha\right|^2\right).
 \end{equation}
 
 \noindent Thus the probability of eliminating the state $\ket{\alpha}$ when no postselection is used is, in polar coordinates,
-\begin{align}
+\begin{align}\label{eqn:perrps_deriv_nops}
 \perr &= \int\limits_{r=0}^\infty \mathrm{d}r \; r \int\limits_{\theta = \pi/2}^{3 \pi/2} \mathrm{d}\theta \; \text{P}\left(r e^{i \theta} \given \alpha, T\right) \notag \\
 %
-&= \frac{1}{2}\erfc\left(\sqrt{\frac{T}{2}}\left|\alpha\right|\right).
+&= \frac{1}{2}\erfc\left(\sqrt{T}\left|\alpha\right|\right).
 \end{align}
 
-\noindent Ignoring region $\rps$ from our integral, the mismatch probability becomes
+\noindent When the postselection technique is used we must change the limits of integration, so the mismatch probability becomes
 
 \begin{align}\label{eqn:perrps_deriv_2}
-\perr\left(\Delta_r, \Delta_\theta\right) = \frac{1}{\mathcal{N}} \int\limits_{\Delta_r}^{\infty} \mathrm{d}r \; r &\left[ \; \int\limits_{ \pi/2 + \Delta_\theta}^{\pi - \Delta_\theta} \mathrm{d}\theta \; \text{P}\left(r e^{i \theta} \given \alpha, T\right) \right. \notag \\
+\perr\left(\Delta_r, \Delta_\theta\right) %= \frac{1}{\mathcal{N}} \int\limits_{\left.x \in \mathbb{C} \setminus \rps \given \text{Re}\left(x\right) < 0\right. } \Diff2 x \; \text{P}\left(x \given \alpha, T\right) \notag \\
+= \frac{1}{\mathcal{N}} \int\limits_{\Delta_r}^{\infty} \mathrm{d}r \; r &\left[ \; \int\limits_{ \pi/2 + \Delta_\theta}^{\pi - \Delta_\theta} \mathrm{d}\theta \; \text{P}\left(r e^{i \theta} \given \alpha, T\right) \right. \notag \\
 %
-&\left. \int\limits_{3 \pi/2 - \Delta_\theta}^{\pi + \Delta_\theta} \mathrm{d}\theta \; \text{P}\left(r e^{i \theta} \given \alpha, T\right) \right],
+ &+ \left. \int\limits_{3 \pi/2 - \Delta_\theta}^{\pi + \Delta_\theta} \mathrm{d}\theta \; \text{P}\left(r e^{i \theta} \given \alpha, T\right) \right],
 \end{align}
 
-\noindent where normalization probability $\mathcal{N}$ is the probability that Charlie will accept his measurement outcome, which is calculated by extending the integration in Eq.~\ref{eqn:perrps_deriv_2} to the entire $\mathbb{C} \setminus \rps$.
 
-The calculation of $\perrps$ follows identically when excess noise $\xi$ is included, simply using the requisite formulae Eqs.~\MT{X} and performing the integrations as above. 
+\noindent where we effectively have the same integrations as Eq.~\ref{eqn:perrps_deriv_nops} restricted by $\rps$. The normalization probability $\mathcal{N}$ is the probability that Charlie will accept his measurement outcome, which is calculated by extending the integration in Eq.~\ref{eqn:perrps_deriv_2} to the entire $\mathbb{C} \setminus \rps$
 
-\MT{Remember to talk later about how $L$ should be rescaled.}
+\begin{equation}\label{eqn:qds_perrps_normalization}
+\mathcal{N} = \int\limits_{\mathbb{C} \setminus \rps} \Diff2 x \text{P}\left(x\right).
+\end{equation}
 
-Since a dishonest player's declaration will depend on an honest player's heterodyne outcome, the probability $\pe$ must also vary with $\rps$. We will calculate the effect of $\rps$ on Holevo information $\chi$. Probability $\pe$ is then calculated via Eq.~\ref{eqn:qds_hpe} as normal.
+\noindent The calculation of $\perrps$ follows identically to Eq.~\ref{eqn:perrps_deriv_2} when excess noise $\xi$ is included, simply using the requisite formula Eq.~\ref{eqn:perr_noisy} and performing the integrations as Eq.~\ref{eqn:perrps_deriv_2}.
 
-Let Bob's $j^{\text{th}}$ \emph{a posteriori} state be $\rho_{B | e_k}^j$, which is conditioned on Charlie holding eliminated signature element $e_k$, and $1\le j \le L/2$. Assume that Bob has performed any one of the attacks examined in Sec.~\ref{sec:attack_analysis}, and let Bob's state after Charlie's heterodyne measurement be denoted $\rho_{B | c}^j$. Again, since Charlie's eliminated signature element is entirely determined by the quadrant in which $c$ lies, the state $\rho_{B | e_k}^j$ is calculated by mixing $\rho_{B | c}^j$ over an entire quadrant of phase-space, as in Eqs.~\ref{eqn:qds_aposterioristate},~\ref{eqn:qds_bs1_deriv_3}. We must therefore update these integrals to include the effect of $\rps$. For example,
+%\MT{Remember to talk later about how $L$ should be rescaled.}
+
+Since a dishonest player's declaration will depend on an honest player's heterodyne outcome, the probability $\pe$ must also vary with $\rps$. We will calculate the effect of $\rps$ on Holevo information $\chi$. Probability $\pe$ is calculated via Eq.~\ref{eqn:qds_hpe} as normal.
+
+%Let Bob's $j^{\text{th}}$ \emph{a posteriori} state be $\rho_{B | e_k}^j$, which is conditioned on Charlie holding eliminated signature element $e_k$. 
+Assume that Bob has performed any one of the attacks examined in Sec.~\ref{sec:qds_attack_analysis}, and let Bob's state after Charlie's heterodyne measurement be denoted $\rho_{B | c}^j$. Again, since Charlie's eliminated signature element is entirely determined by the quadrant in which $c$ lies, the state $\rho_{B | e_k}^j$ is calculated by mixing $\rho_{B | c}^j$ over an entire quadrant of phase-space, as in Eqs.~\ref{eqn:qds_aposterioristate},~\ref{eqn:qds_bs1_deriv_3}. We must therefore update these integrals to include the effect of $\rps$. For example,
 
 \begin{align}\label{eqn:qdsps_aposteriori}
-\tilde{\rho}_{B | e_1}^j &= \frac{1}{\mathcal{N}} \int \Diff2 c \; \rho_{B | c}^j \notag \\
+\rho_{\left.B \given e_1\right.}^j &= \frac{1}{\mathcal{N}} \int \Diff2 c \; \rho_{B | c}^j \notag \\
 %
 &=\frac{1}{\mathcal{N}} \int\limits_{\Delta_r}^\infty \mathrm{d}r\; r\int\limits_{\Delta_\theta}^{\pi/2 - \Delta_\theta} \mathrm{d}\theta \; \rho_{B | r e^{i \theta}},
 \end{align}
 
-\noindent and similarly for $e_2, e_3, e_4$ with updated limits of the $\theta$ integral. The $\mathcal{N}$ is identical to that from Eq.~\ref{eqn:perrps_deriv_2}. The $\emph{a priori}$ state is likewise found by mixing Eq.~\ref{eqn:qdsps_aposteriori} over all quadrants, and thus $\pe\left(\Delta_r, \Delta_\theta\right)$ may be calculated via Eq.~\ref{eqn:qds_hpe}. \MT{gotta talk about how we actually perform the integration}
+\noindent and similarly for $e_2, e_3, e_4$ with updated limits of the $\theta$ integral. The $\mathcal{N}$ is identical to that required for Eq.~\ref{eqn:perrps_deriv_2}. Bob's $\emph{a priori}$ state is likewise found by mixing Eq.~\ref{eqn:qdsps_aposteriori} over all quadrants, and thus $\pe\left(\Delta_r, \Delta_\theta\right)$ may be calculated via Eq.~\ref{eqn:qds_hpe}. %\MT{gotta talk about how we actually perform the integration}
 
-We may again separate out terms involving $c$, and so the integration from Eq.~\ref{eqn:qdsps_aposteriori} becomes
+To perform the integration, we separate out terms involving $c$ in Bob's state (see Secs.~\ref{sec:qds_bs0},~\ref{sec:qds_ec},~\ref{sec:appendix_bs1_state},~\ref{sec:appendix_ec_state}) , and so the integration becomes
 
 \begin{equation}
 \frac{1}{\mathcal{N}} \int\limits_{\Delta_r}^{\infty} \mathrm{d}r \; r \int\limits_{\Delta_\theta}^{\pi/2 - \Delta_\theta} \mathrm{d}\theta \; r^k r^l e^{-r^2} e^{i \theta \left(k - l\right)}.
@@ -923,11 +931,11 @@ We may again separate out terms involving $c$, and so the integration from Eq.~\
 
 \noindent To perform the integration, it is helpful to perform the angular integral first, which readily integrates to a sum of exponentials when $k \ne l$, or to $\pi/2 - 2\Delta_\theta$ when $k=l$. The remaining radial term is
 
-\begin{equation}
+\begin{equation}\label{eqn:qds_perrps_radial_integration}
 \int\limits_{\Delta_r}^\infty \mathrm{d}r \; r^{k + l + 1} e^{-r^2}
 \end{equation}
 
-\noindent which is the definition of an upper incomplete Gamma function \MT{cite mathworld}, which we denote as $\Gamma_\uparrow$. The radial integration is thus identically
+\noindent which is the definition of an upper incomplete Gamma function \cite{mathworld_incomplete_gamma}, which we denote as $\Gamma_\uparrow$. The radial integration Eq.~\ref{eqn:qds_perrps_radial_integration} is thus identically
 
 \begin{equation}
 \Gamma_{\uparrow}\left(\frac{1}{2}\left[2 + k + l\right], \Delta_r^2\right)  \forall k, l \ge 0
@@ -938,17 +946,17 @@ We have now included the effects of $\rps$ on $g_{\text{sec}}$, and so the perfo
 
 \MT{Have some graphs showing effect of postselection on $g_{sec}$ under different attacks.}
 
-Let us turn now to examine our main figure of merit, the number of quantum states $L$ used in the protocol. Howver, directly incorporating $g_{\text{sec}}\left(\Delta_r, \Delta_\theta\right)$ into Eq.~\ref{eqn:efail} will give an erroneous level of security, for the following reason. Our calculations in this section, culminating in $g_{\text{sec}}$ may be used to bound the number of states required to sign a message. However, this is not equivalent to the number of states which Alice has sent. 
+Let us turn now to examine our main figure of merit, the number of quantum states $L$ used in the protocol. Directly incorporating $g_{\text{sec}}\left(\Delta_r, \Delta_\theta\right)$ into Eq.~\ref{eqn:efail} will give an erroneous level of security for the following reason. Our calculations in this section, culminating in $g_{\text{sec}}$ bound the number of states required to sign a message. However, this is not equivalent to the number of states which Alice has actually sent. 
 
-For example, choosing $\Delta_r = $\MT{X} and $\Delta_\theta = $\MT{X} gives $g_{\text{sec}} = $\MT{X}. Substituting this into Eq.~\ref{eqn:efail} and solving for $L$ gives $L = $\MT{X} under attack \MT{X}. But in order to have that many states accepted at Charlie, Alice will need to send $\MT{X}$ coherent states in total, since Charlie will reject his measurement outcomes with probability \MT{X}. It follows that $L$, as implicitly defined in Eq.~\ref{eqn:efail} is a poor figure of merit to measure the resource-use of our protocol when postselection is used.
+For example, choosing $\Delta_r = $\MT{X} and $\Delta_\theta = $\MT{X} gives $g_{\text{sec}} = $\MT{X}. Substituting this into Eq.~\ref{eqn:efail} and solving for $L$ gives $L = $\MT{X} under attack \MT{X}. But in order to have that many states accepted at Charlie, Alice will need to send $\MT{X}$ coherent states in total, since Charlie will reject his measurement outcomes with probability \MT{X}, Eq.~\ref{eqn:qds_perrps_normalization}. It follows that $L$, as implicitly defined in Eq.~\ref{eqn:efail} is a poor figure of merit to measure the resource-use of our protocol when postselection is used.
 
 Instead, we will work in terms of $\tilde{L}$, which we define as the total number of states sent by Alice. This is a rescaling of $L$ given by
 \begin{equation}
 L \mapsto \tilde{L} := \frac{L}{\mathcal{N}},
 \end{equation}
-with $\mathcal{N}$ defined as the average probability that Charlie accepts a given state sent by Alice (see the discussion surrounding Eq.~\ref{eqn:perrps_deriv_2}. 
+with normalization factor $\mathcal{N}$ interpreted sthe average probability that Charlie accepts a given state sent by Alice, Eq.~\ref{eqn:qds_perrps_normalization}.
 
-We plot $\mathcal{N}$ in Fig.~\ref{fig:psnorm}, and figure of merit $\tilde{L}$ is plotted in Fig.~\ref{fig:psl}. \MT{add a discussion of how postselection affects $\tilde{L}$.} 
+We plot $\mathcal{N}$ in Fig.~\ref{fig:psnorm}, and figure of merit $\tilde{L}$ is analysed below in Sec.~\ref{sec:qds_protocol_performance}. The figures of merit $\tilde{L}$ and $L$ may be directly compared, and so in Sec.~\ref{sec:qds_protocol_performance} we do not distinguish between them. However, it should be understood that when postselection is used ($\Delta_r \ne 0, \Delta_\theta \ne 0$) the $\tilde{L}$ is the explict and correct figure of merit.
 
 \begin{figure}[htp]
 \centering
@@ -960,16 +968,12 @@ We plot $\mathcal{N}$ in Fig.~\ref{fig:psnorm}, and figure of merit $\tilde{L}$ 
 \includegraphics[draft=false, width=\linewidth]{qds/psnorm2}
 \caption{}
 \end{subfigure}
-\caption{\label{fig:psnorm}}
-\end{figure}
-
-\begin{figure}[htp]
-\centering
-\includegraphics{psl.png}
-\caption{\label{fig:psl} Normalization factor $\mathcal{N}$ varies dramatically with postselection region $\rps$. (a) $\alpha=0.5, T=0.5$. (b) $\alpha=3.0, T=1.0$}
+\caption{\label{fig:psnorm} Normalization factor $\mathcal{N}$, Eq.~\ref{eqn:qds_perrps_normalizsation} varies dramatically with postselection region $\rps$. (a) $\alpha=0.5, T=0.5$. (b) $\alpha=3.0, T=1.0$}
 \end{figure}
 
 
+
+ \MT{Make some graphs and add a discussion of how postselection affects $\tilde{L}$.} 
 
 \MT{have a section where I make some remarks about the postselection technique. Note that I have implicitly assumed that Bob knows whether an individual state has been postselected on. This is a sensible assumption for QKD, since it will be declared, but for QDS it does not need to be declared, so I am giving Bob too much power here.}
 
@@ -977,6 +981,13 @@ We plot $\mathcal{N}$ in Fig.~\ref{fig:psnorm}, and figure of merit $\tilde{L}$ 
 \section{Protocol performance}\label{sec:qds_protocol_performance}
 \MT{Let's look at some results and graphs of the protocol performance under the four above attacks. TODO: make graphs like in the PRA paper}
 
+
+
+\begin{figure}[htp]
+\centering
+\includegraphics{psl.png}
+\caption{\label{fig:psl} }
+\end{figure}
 
 \section{Outlook}
 
