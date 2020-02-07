@@ -15,8 +15,8 @@
    viewBox="0 0 64.687641 28.458181"
    version="1.1"
    id="svg8"
-   inkscape:version="0.92.1 r15371"
-   sodipodi:docname="Fig5.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="EC.svg"
    inkscape:export-filename="C:\Users\Matthew Thornton\OneDrive - University of St Andrews\Year 2\Summer 2018\Theory cryptography paper\Images\Fig5.png"
    inkscape:export-xdpi="150"
    inkscape:export-ydpi="150">
@@ -28,10 +28,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2"
-     inkscape:cx="93.896641"
+     inkscape:cx="5.896641"
      inkscape:cy="47.771822"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer6"
+     inkscape:current-layer="layer5"
      showgrid="false"
      units="cm"
      inkscape:window-width="1920"
@@ -212,7 +212,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -608,50 +608,42 @@
            y="23.976717"
            style="font-size:8.46666622px;stroke-width:0.26458332px">A</tspan></text>
     </g>
-    <g
-       id="g10223"
-       transform="translate(-0.18708915)">
-      <rect
-         style="opacity:1;fill:#f0f0f0;fill-opacity:1;stroke:#000000;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-         id="rect5052-9-5"
-         width="15.144487"
-         height="6.5682268"
-         x="19.595701"
-         y="30.348898" />
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.39181519px;line-height:125%;font-family:Garamond;-inkscape-font-specification:Garamond;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="19.795441"
+    <rect
+       y="30.348898"
+       x="19.408611"
+       height="6.5682268"
+       width="15.144487"
+       id="rect5052-9-5"
+       style="opacity:1;fill:#f08c8c;fill-opacity:1;stroke:#000000;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <text
+       id="text5041-4-4-6"
+       y="35.413437"
+       x="19.608351"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.39181519px;line-height:125%;font-family:Garamond;-inkscape-font-specification:Garamond;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         id="tspan4735-7"
+         style="font-size:5.64444447px;stroke-width:0.26458332px"
          y="35.413437"
-         id="text5041-4-4-6"><tspan
-           sodipodi:role="line"
-           x="19.795441"
-           y="35.413437"
-           style="font-size:5.64444447px;stroke-width:0.26458332px"
-           id="tspan4735-7">TMSV</tspan></text>
-    </g>
-    <g
-       id="g4650"
-       transform="translate(59.861979,2.9852323)">
-      <rect
-         style="display:inline;opacity:1;fill:#f0f0f0;fill-opacity:1;stroke:#000000;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-         id="rect5052-3"
-         width="7.6805501"
-         height="7.6805501"
-         x="3.7267039"
-         y="25.796371" />
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.39181519px;line-height:125%;font-family:Garamond;-inkscape-font-specification:Garamond;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="5.105114"
-         y="32.315552"
-         id="text5041-4-3"><tspan
-           sodipodi:role="line"
-           id="tspan5039-4-6"
-           x="5.105114"
-           y="32.315552"
-           style="font-size:8.46666622px;stroke-width:0.26458332px">B</tspan></text>
-    </g>
+         x="19.608351"
+         sodipodi:role="line">TMSV</tspan></text>
+    <rect
+       y="28.781603"
+       x="63.588684"
+       height="7.6805501"
+       width="7.6805501"
+       id="rect5052-3"
+       style="display:inline;opacity:1;fill:#f08c8c;fill-opacity:1;stroke:#000000;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <text
+       id="text5041-4-3"
+       y="35.300785"
+       x="64.967094"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.39181519px;line-height:125%;font-family:Garamond;-inkscape-font-specification:Garamond;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         style="font-size:8.46666622px;stroke-width:0.26458332px"
+         y="35.300785"
+         x="64.967094"
+         id="tspan5039-4-6"
+         sodipodi:role="line">B</tspan></text>
     <g
        id="g5764">
       <rect
