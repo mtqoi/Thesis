@@ -550,35 +550,41 @@ Since binary entropy $\text{h}\left(\pe\right)$ is monotonic for $\pe \le 1/2$, 
 %and provide security against collective attacks \MT{define} provided that Bob's Holevo information $\chi$ can be estimated.
 
 \section{Attack analysis}\label{sec:qds_attack_analysis}
-Let us consider several different models of Bob's eavesdropping attack. Different models will affect both the parameter regimes over which our protocol can be made secure, and the level of resources required for that security. As in the QKD literature we define the following three types of quantum attack
+We will consider several different models of dishonest Bob's eavesdropping attack. Different models will affect both the parameter regimes over which our protocol can be made secure, and the cost of resources required for that security. We will demonstrate how Bob's Holevo information may be calculated in each model, which may then be used to calculate $\pe$, Eq.~\ref{eqn:qds_hpe}.
+
+As in the QKD literature \cite{Lutkenhaus2004} we define the following three types of quantum attack, which are displayed in Fig.~\ref{fig:types_of_attack}.
 \begin{itemize}
 \item individual: Fig.~\ref{fig:types_of_attack_individual}
 \item collective: Fig.~\ref{fig:types_of_attack_collective}
 \item coherent: Fig.~\ref{fig:types_of_attack_coherent}
 \end{itemize}
-\MT{TODO: also create a figure to illustrate all of these, and provide sufficient references to the literature.}
+In an individual attack, Fig.~\ref{fig:types_of_attack_individual}, Bob interacts separately with each signal state distributed from Alice to Charlie, and performs separate measurements on each state. For a collective attack, Fig.~\ref{fig:types_of_attack_collective}, Bob again interacts with each signal state separately, but is permitted to perform a global measurement on his entire quantum system. This may include either introducing or exploiting classical correlations between signal states. Finally, in a coherent attack, Fig.~\ref{fig:types_of_attack_coherent}, Bob interacts with all signal states globally and (assumed) simultaneously, and he is permitted to perform a global measurement on his entire system. This attack affords him the full power of quantum mechanics and he can perform anything which is physically consistent, including introducing and exploiting quantum correlations between signal states.
+
 
 \begin{figure}[htp]
 \centering
 	\begin{subfigure}{\linewidth}
 		\centering
 			\caption{\label{fig:types_of_attack_individual}}
-		\includegraphics[width=\linewidth, draft=false]{qds/individual_attacks}
+		\includegraphics[width=0.4\linewidth, draft=false]{qds/individual_attacks}
 	\end{subfigure}
 	\begin{subfigure}{\linewidth}
 		\centering
 		\caption{\label{fig:types_of_attack_collective}}	
-		\includegraphics[width=\linewidth, draft=false]{qds/collective_attacks}
+		\includegraphics[width=0.4\linewidth, draft=false]{qds/collective_attacks}
 	\end{subfigure}
 	\begin{subfigure}{\linewidth}
 		\centering
 		\caption{\label{fig:types_of_attack_coherent}}	
-		\includegraphics[width=\linewidth, draft=false]{qds/coherent_attacks}
+		\includegraphics[width=0.4\linewidth, draft=false]{qds/coherent_attacks}
 	\end{subfigure}
-\caption{\label{fig:types_of_attack} Taxonomy of different eavesdropping attack strategies \cite{Lutkenhaus2004}. Gray arrows denote different quantum signal states distributed from Alice to Bob. Red items belong to Eve. (a) Individual attack. Eve inserts separate probes (red boxes) into state distribution and performs measurement on each system individually. (b) Collective attack. Eve inserts separate probes into state distribution and stores her states until the end of signal distribution. She may then perform a measurement on her entire system. (c) Coherent attack. Eve interacts with all signals at the same time and she can perform a measurement on a single probe. Attack (a) cannot introduce correlations between signals. Attack (b) may introduce classical correlations, and attack (c) may introduce any correlations between signals.}
+\caption{\label{fig:types_of_attack} Taxonomy of different eavesdropping attack strategies \cite{Lutkenhaus2004}. Gray arrows denote quantum signal states distributed from Alice to Charlie. Red items belong to Bob. (a) Individual attack. Bob inserts separate probes (red boxes) into state distribution and performs measurement on each system individually. (b) Collective attack. Bob inserts separate probes into state distribution and stores his states until the end of signal distribution. He may then perform a measurement on her entire system. (c) Coherent attack. Bob interacts with all signals at the same time and he can perform a measurement on a single probe. Attack (a) cannot introduce correlations between signals. Attack (b) may introduce classical correlations, and attack (c) may introduce any correlations between signals.}
 \end{figure}
 
-In this Thesis we will focus on individual and collective forging attacks. Full security against coherent quantum attacks in the QKD literature has only recently been proven for the relatively simple case of the gPSK alphabet \MT{cite}, and a security proof remains tricky for the discrete modulation of coherent states. %what about Lutkenhaus papers from around 2006? What type of security do they provide?
+\MT{--------------------------------------}
+
+
+In this section we will focus on individual and collective forging attacks. Full security against coherent quantum attacks in the CV QKD literature has only been proven for the simpler case of the gPSK alphabet \MT{cite}, and a full security proof remains elusive for the discrete modulation of coherent states. There has been some recent success in applying convex optimization methods to the problem \MT{cite} but these proofs rely on an assumption about the Gaussianity of the discretely modulated alphabet which is only valid as $\alpha \rightarrow 0$.
 
 In the QKD literature it was demonstrated \MT{cite} that under \MT{conditions}, security against the collective attack may be proven in terms of security against individual attack. \MT{demonstrate (or motivate) that the same should be true here.}
 
