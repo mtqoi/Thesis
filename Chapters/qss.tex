@@ -1,6 +1,7 @@
 \chapter{Quantum secret sharing}
 Goal of chapter: introduce our QSS protocol and prove its security in different contexts.
 
+\iffalse
 Key results which I want to present:
 \begin{itemize}
 \item our QSS protocol
@@ -8,71 +9,115 @@ Key results which I want to present:
 \item analysis of security in various settings - heterodyne, $\mathcal{A}_4$, BS0, BS1, BS2, EC, varying $\alpha$, $T$, $\xi$, $g$, $h$ of both channels
 \item show how the protocol performs
 \end{itemize}
+\fi
 
-\MT{Short introduction to chapter. It can function a bit like an abstract}
-
-%\input{chapters/qss_lit_review}
-% ah, I forgot, the lit review should go in the lit review chapter
+\MT{Short introduction to chapter.}
 
 \section{Our QSS protocol}
 
-Our quantum secret-sharing scheme allows for a dealer, Alice, to distribute a classical secret between two recipients, Bob and Charlie. Bob and Charlie should be able to exactly reconstruct the secret when they behave honestly, while a dishonest and unauthorised conspiracy of players--including those outside the protocol--should gain no information. Crucially, the scheme should allow for dishonesty among the recipients, but a dishonest player should be forced to collaborate with an honest one.
-
-We propose a QSS protocol which will perform the task of quantum secret sharing without requiring the distribution of highly entangled states between players (in contrast to Ref.~\cite{Kogias2017}) and without requiring a dedicated hardware or network setup (in contrast to Ref.~\MT{cite}). Instead, we rely on the QPSK alphabet \MT{cite} and heterodyne detection \MT{cite} 
-\MT{make sure that this description mirrors what I have put in the QDS chapter}
-
-\MT{I don't want to say too much about compatibility with the QDS protocol or QKD here, since this should wait until the agility chapter}
-
-In our protocol, Bob and Charlie are chosen as the senders of the quantum states. This has the advantage of \MT{something}, and allows us to fully trust Alice's heterodyne detection. We note that allowing Bob or Charlie to perform heterodyne detection places implicit trust in their heterodyning beamsplitter \MT{cite 1sDI paper}. Instead, in our configuration we may trust and characterise Alice's device, and exploit the fact that \emph{at least one} recipient is honest, even though Alice does not know which recipient it is.
+Our quantum secret-sharing scheme allows for a dealer, Alice, to distribute a classical secret between two recipients, Bob and Charlie. Bob and Charlie should be able to exactly reconstruct the secret when they behave honestly, while a dishonest and unauthorised conspiracy of players--including those outside the protocol--should gain no information. Crucially, although the scheme should allow for dishonesty among the recipients a dishonest player should be forced to collaborate with an honest one.
 
 \begin{figure}[htp]
 \centering
-\includegraphics{qss_setup.png}
-\caption{\label{fig:qss_setup}}
+\includegraphics[draft=false, width=0.5\linewidth]{qss/qss_setup_cartoon}
+\caption{\label{fig:qss_structure} All quantum secret sharing schemes follow the same structure. Alice encrypts her classical secret $\sigma_A$ with key $K_A$, and broadcasts the resulting $\varsigma_A$. Shares of $K_A$ are distributed among recipients Bob and Charlie such that $K_B \oplus K_C = K_A$. Gray boxes denote honest players, while red denotes dishonest players. The half-red/half-gray boxes denote uncertainty about which player is dishonest. %say somewhere it's all classical?
+}
 \end{figure}
 
-Since Alice is the dealer who will decide on the eventual shared key our protocol is analogous to a reverse-reconciliation (RR) QKD system, and so we may similarly expect the performance benefits of RR QKD at high loss and noise. We note that having potentially untrusted players as the senders may open the protocol up to new classes of attack, e.g. if they are permitted to send a state which is outside the QPSK alphabet, and such attacks should be addressed in future work.
+\subsection{QSS setup}
 
-\MT{talk somewhere about the types of attack we allow}
+All QSS protocols follow essentially the same structure, Fig.~\ref{fig:qss_structure}:
+\begin{enumerate}
+\item Alice (A) uses quantum resources to distribute shares of classical key $K_A$ among recipients Bob (B) and Charlie (C), such that $K_A = K_B \oplus K_C$.
+\item Alice encrypts her secret $\varsigma_A = K_A \oplus \sigma_A$ and makes the encrypted secret $\varsigma_A$ publicly known.
+\end{enumerate}
+The $\oplus$ operation corresponds to bitwise addition (XOR) of binary keys and, provided that $K_A, K_B, K_C$ and $\sigma_A$ are the same length, the above secret sharing operation is provably unconditionally secure \cite{Schneier1996}, provided that key shares $K_B, K_C$ are securely distributed.
 
-%OOur QSS protocol runs as follows.
-Our QSS protocol runs in three stages, a Distribution stage, an Encryption stage and, finally, a Decryption stage. The Distribution stage involves distribution and measurement of quantum coherent states chosen from QPSK alphabet. At the end of Distribution Alice will hold classical information which is correlated with Bob and Charlie. In the Encryption stage, Alice will combine her classical information and use it to encode her sensitive classical secret. The encoded secret is distributed to Bob and Charlie. The secret is decoded by Bob and Charlie during Decryption. Our protocol setup is described in Fig.~\ref{fig:qss_setup}, and we describe it in detail below.
+This form is similar to QKD-based encryption and it is for this reason that renowned cryptographer Gustavus Simmons wrote that 
 
-\MT{make sure that the following is in the same style as my qds protocol description}
+\begin{center}\emph{``Secret sharing is simply a special form of key distribution''}\end{center}
 
-\subsubsection*{Distribution stage}
-\noindent \underline{Step $1$.} Alice wishes to encrypt a classical secret, $\sigma$. Bob forms a classical sequence $X_B = \left\{x_B^j\right\}_j$ where the $x_B^j$ are complex phases independently chosen from $\mathcal{A}_4$. The $x_B^j$ are assumed to be chosen uniformly at random, but we relax this assumption slightly in Ch.~\MT{X}. Charlie likewise forms $X_C$.
+\noindent as the abstract to Ref.~\cite{Simmons1990a}.
 
-\noindent \underline{Step $2$.} Bob and Charlie form sequences of coherent states
+QSS protocols then only differ in the method used to generate and share the $K_B, K_C$ forming the encryption key. One attractive option would be for Alice to perform individual QKD protocols, first with Bob and then with Charlie, and then XOR the resulting keys together. Since QKD is provably secure, neither Bob nor Charlie can gain sufficient information about the other player's key. The resulting QSS scheme is thus also secure. We discuss this form of QSS at length in Sec.~\ref{sec:intro_qss_lit_review} and again in Chapter~\cite{chapter:aqc}.
+
+Other options for generation and distribution of $K_B, K_C$ are discussed in Sec.~\ref{sec:intro_qss_lit_review} and fall into one of two categories. The first category \cite{Hillery1999, Karlsson1999, Gottesman1999, Markham2008, Wu2016, Kogias2017} relies on large entangled states shared between all $N$ players, while the second category \cite{Zhang2005a, Schmid2005, Schmid2007, Grice2019}, involves distribution of a single (typically one-mode) quantum state between all $N$ players, who each perform their choice of measurement on the state. In both forms, if $N-1$ players communicate and share their choice of measurement and their measurement outcomes, they have sufficient information to infer the measurement outcome of the $N^{\text{th}}$ player. In this way, a key $K_A$ is distributed between players.
+
+
+\subsection{QSS protocol description}
+
+We propose a QSS protocol which will perform the task of quantum secret sharing without requiring the distribution of highly entangled states between players \cite{Kogias2017} and without requiring a dedicated hardware or network setup \cite{Grice2019}. Instead, we rely on distribution of QPSK alphabet Eq.~\ref{eqn:intro_qpsk} and heterodyne detection Sec.~\ref{eqn:intro_heterodyne}. The QSS protocol guards against both eavesdropping by choice of QPSK alphabet with small coherent state amplitude $\alpha$, which ensures that Eve cannot accurately guess Alice's heterodyne outcomes. The protocol guards against the internal dishonesty of Bob or Charlie by ensuring that the key $K_A$ which Alice will use to encrypt her secret is a function of \emph{both} Bob and Charlie's information.% The dishonest internal player is then forced to collaborate with Eve to attack the honest player's quantum channel, which, by our choice of alphabet, will not succeed.
+
+In our protocol, Bob and Charlie are chosen as the senders of the quantum states. This has advantage in that we may fully trust Alice's heterodyne detection\footnote{Note that permitting Bob or Charlie to perform the heterodyne detection implicitly places trust in their heterodyning beamsplitter \cite{Walk2016a}.} and its characterisation. A dishonest internal player will be forced to collaborate with Eve to attack the honest player's quantum channel. By our choice of alphabet, this will not succeed.
+
+\begin{figure}[htp]
+\centering
+	\begin{subfigure}{0.8\linewidth}
+		\centering
+		\caption{\label{fig:qss_distribution_stage}}
+		\includegraphics[draft=false, width=\linewidth]{qss/qss_distribution_stage}
+		
+	\end{subfigure}
+	\begin{subfigure}{0.8\linewidth}
+		\centering
+		\caption{\label{fig:qss_encryption_stage}}
+		\includegraphics[draft=false, width=\linewidth]{qss/qss_encryption_stage}
+		
+	\end{subfigure}
+\caption{\label{fig:qss_protocol_cartoon} Distribution and encryption stages of our QSS protocol. Alice (A) wishes to securely share her secret $\sigma_A$ amongst potentially dishonest recipients Bob (B) and Charlie (C). (a) Distribution stage. B and C send coherent states chosen from QPSK alphabet to Alice, who heterodynes and obtains outcomes $A_B, A_C$. Dishonest Eve will eavesdrop on the distribution of quantum states in order to gain information about $A_B, A_C$. (b) Encryption stage. Alice will form variable $X_A$ using her chosen function $\mathcal{F}$ with her heterodyne measurement outcomes as input variables. She converts $X_A$ to binary $\tilde{X}_A$ and encrypts the secret with it to reach $\varsigma_A = \sigma_A \oplus \tilde{X}_A$. The encrypted secret is then broadcast. Dishonest players are shown in red and honest players in gray. A combination of red and gray denotes uncertainty about dishonesty.
+}
+\end{figure}
+
+Since Alice is the dealer who will decide on the eventual shared key our protocol is analogous to a reverse-reconciliation (RR) QKD system, and so we may similarly expect the performance benefits of RR QKD at high loss and noise. We note that having potentially untrusted players as the senders may open the protocol up to new classes of attack, for example if they are permitted to send a state which is outside the QPSK alphabet, and such attacks should be addressed in future work.
+
+%\MT{talk somewhere about the types of attack we allow}
+
+
+Our QSS protocol runs in three stages, a Distribution stage, an Encryption stage and, finally, a Decryption stage. Distribution and encryption stages are displayed in Fig.~\ref{fig:qss_protocol_cartoon}. The Distribution stage, Fig.~\ref{fig:qss_distribution_stage}, involves distribution and measurement of quantum coherent states chosen from QPSK alphabet. At the end of Distribution, Alice will hold classical information which is correlated with both Bob and Charlie. In the Encryption stage, Fig.~\ref{fig:qss_encryption_stage}, Alice will combine her classical information and use it to encode her sensitive classical secret. The encoded secret is distributed to Bob and Charlie. The secret is decoded by Bob and Charlie during Decryption. Our protocol setup is described in Fig.~\ref{fig:qss_setup}, and we describe it in detail below.
+
+%\MT{make sure that the following is in the same style as my qds protocol description}
+
+\subsubsection*{Distribution stage, Fig.~\ref{fig:qss_distribution_stage}}
+\paragraph{Step $1$}
+Alice wishes to encrypt a classical secret, $\sigma_A$. Bob forms a classical random variable $X_B = \left\{\phi_B\right\}$, where the $\phi_B$ are complex phases independently chosen from the QPSK alphabet. Phases $\phi_B$ are assumed to be chosen uniformly at random, but we relax this assumption in Chapter~\ref{chapter:aqc}. Charlie likewise forms classical random variable $X_C = \left\{\phi_C\right\}$.
+
+\paragraph{Step $2$}
+Bob and Charlie form sequences of coherent states based on their random variables
 \begin{equation}
-\rho\left[X_{\left(B, C\right)}\right] := \otimes_j \rho\left[x_{\left(B, C\right)}^j\right]
+\rho\left[X_{\left(B, C\right)}\right] := \otimes \rho\left[\phi_{\left(B, C\right)}\right]
 \end{equation}
-where $\rho\left[x_{\left(B, C\right)^j}\right]$ denotes a coherent state with phase $x_{\left(B, C\right)}^j$. These sequences of states are sent to Alice through quantum channels. \MT{Talk later about the types of channels which these are.}. Alice performs heterodyne detection on each of her received states and records her complex outcomes. We denote strings of Alice's measurement outcomes as $A_B, A_C \in \mathbb{C}$, where the subscript denotes which player sent the corresponding quantum state. The $A_B$ and $A_C$ are kept separate at this stage, and Bob and Charlie should retain their information $X_{\left(B, C\right)}$.
+where $\rho\left[\phi_{\left(B, C\right)}\right]$ denotes a coherent state with phase $\phi_{\left(B, C\right)}$. These sequences of states are sent to Alice through quantum channels. %\MT{Talk later about the types of channels which these are.}. 
+Alice performs heterodyne detection, Sec.~\ref{sec:intro_heterodyne} on each of her received states and records her complex outcomes. We denote the strings of Alice's measurement outcomes as $A_B, A_C$, where $A_B$ corresponds to measurement outcomes from states sent by Bob, and $A_C$ corresponds to those on states sent by Charlie. The $A_B$ and $A_C$ are kept separate and secret, and Bob and Charlie should retain their information $X_B, X_C$.
 
-\subsubsection*{Encryption stage}
+\subsubsection*{Encryption stage, Fig.~\ref{fig:qss_encryption_stage}}
 
-\noindent \underline{Step $3$.} Alice creates a new complex variable
+\paragraph{Step $3$} Alice creates a new string of complex variables
 \begin{equation}
-X_A = F\left(A_B, A_C\right)
+X_A = \mathcal{F}\left(A_B, A_C\right)
 \end{equation}
-from her measurement outcomes. The function $F$ is chosen by Alice and should be freely chosen to optimize security. \MT{Where shall I talk about function $F$?} \MT{I can create some nice graphs of different functions $F$, even those requiring a lot of parameters to be optimized over. But when it comes to actually analysing security I should pick simple ones.} 
+from her measurement outcomes. The function $\mathcal{F}$ is chosen by Alice and should be freely chosen to optimize security. In this thesis we will pick simple forms for $\mathcal{F}$ which allow us to easily make concrete predictions about protocol security, although in general $\mathcal{F}$ may be as pathological as Alice desires.
 
-\noindent \underline{Step $4$.} Alice now holds string $X_A$ which depends on both Bob and Charlie's choices of states to send. She then uses $X_A$ to encode $\sigma$
+% \MT{Where shall I talk about function $F$?} \MT{I can create some nice graphs of different functions $F$, even those requiring a lot of parameters to be optimized over. But when it comes to actually analysing security I should pick simple ones.} 
+
+\paragraph{Step $4$} Alice now holds random variable $X_A$ of complex variables, which depends on both Bob and Charlie's choices $X_B, X_C$. Alice maps her string of complex variables onto a binary random variable $X_A \mapsto \tilde{X}_A$, and uses $\tilde{X}_A$ to encode $\sigma_A$ via an XOR operation. For ease we shall write this combined step in terms of an encryption function $\text{Enc}$, which should be known to all players at the start of the protocol. % I should probably talk about this later at some point?
+
 \begin{equation}
-\tilde{\sigma} = \text{Enc}\left(\sigma, X_A\right)
+\varsigma_A = \text{Enc}\left(\sigma_A, X_A\right)
 \end{equation}
-\MT{Talk briefly about how this might be done, e.g. with reference to QKD}
-and distributes $\tilde{\sigma}$ to Bob and Charlie. Because Bob and Charlie do not have $X_A$ they cannot gain $\sigma$.
+
+\noindent Alice distributes $\varsigma_A$ to Bob and Charlie, who are unable to access $\sigma_A$ since they do not yet know $X_A$.
 
 \subsubsection*{Decryption stage}
 
-\noindent \underline{Step $5$.} Later, when Alice desires to allow Bob and Charlie access to $\sigma$, she broadcasts which function $F$ she used, along with enough classical information to perform a reconciliation procedure between $X_A$ and $F\left(X_B, X_C\right)$. This stage is similar to regular CV QKD. Bob and Charlie, by working together to form and reconcile $F\left(X_B, X_C\right)$ gain a copy of Alice's key, and are now able to access her secret $\sigma$.
+\paragraph{Step $5$} Later, when Alice desires to allow Bob and Charlie access to $\sigma_A$, she broadcasts her choice of function $\mathcal{F}$, along with enough classical information to perform a reconciliation procedure between $X_A$ and $\mathcal{F}\left(X_B, X_C\right)$. This stage is similar to CV QKD and so we will not discuss it further. Bob and Charlie contribute their information $X_B, X_C$ to form $\mathcal{F}\left(X_B, X_C\right)$ and reconcile it to $X_A$ and thus $\tilde{X}_A$. Then they are able to access Alice's original secret $\sigma_A$.
 
-Critical to the protocol is the fact that Alice forms a secret key based on a degree of freedom which is shared between Bob and Charlie. This forces them to collaborate. If one of Bob or Charlie is dishonest, they are forced to work with an honest player and so the scheme as succeeded.
+Critical to the protocol is the fact that Alice forms a secret key based on a degree of freedom shared between Bob and Charlie, which forces collaboration. In this way, our protocol is a natural extension of the protocol from Kogias \emph{et. al.} \cite{Kogias2017}, and may be seen to help bridge the gap betwee entanglement-based and sequential QSS.
 
-\MT{TODO: convert the strings $X_{A, B, C}$ into random variables describing the classical information, rather than classical strings. It'll make notation in the security proof easier.}
+If either one of Bob or Charlie is dishonest, they are forced to work with an honest player and so our scheme has succeeded.
 
-\MT{some more remarks about the running of the protocol}
+
+
+%\MT{some more remarks about the running of the protocol}
 
 
 \section{Security against Eve}

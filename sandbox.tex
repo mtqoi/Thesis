@@ -41,8 +41,8 @@
 \includeonly{
 	%chapters/introduction,
 	%chapters/crypto_intro,
-	chapters/qds
-	%chapters/qss,
+%	chapters/qds
+	chapters/qss,
 	%chapters/aqc
 }
 
@@ -66,11 +66,11 @@
 %\setcounter{tocdepth}{4} % + paragraphs
 %\setcounter{tocdepth}{5} % + subparagraphs
 
-\title{Thesis draft - selected chapters}
-\date{\today}
+%\title{Thesis draft - selected chapters}
+%\date{\today}
 
 \begin{document}
-\maketitle
+%\maketitle
 \tableofcontents
 
 %\part{Secure quantum networks}
@@ -81,15 +81,16 @@
 %\part{Agile cryptography: signatures and secrets}
 %\include{chapters/crypto_intro}
 %\input{chapters/qds_lit_review}
-\include{chapters/qds}
-%\include{chapters/qss}
+%\include{chapters/qds}
+\include{chapters/qss}
 %\include{chapters/aqc}
 %\part{PhoG: generation of sub-Poissonian light}
 
 
 \bibliographystyle{unsrt} 
 %\bibliography{qds_bib} 
-\bibliography{Thesis-QDS_lit_review}
+\bibliography{Thesis-QDS_lit_review, Thesis-QSS_lit_review}
+%\bibliography{Thesis-QSS_lit_review}
 
 %\appendix
 %\include{chapters/larger_alphabets}
