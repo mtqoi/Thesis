@@ -277,9 +277,9 @@ Finally, the mutual information Eq.~\ref{eqn:qss_deriv_1} may be calculated. We 
 
 \subsection{Holevo information}
 
-We will now detail how the Holevo information term in Eq.~\ref{eqn:qss_dw_eve} may be calculated. In doing so we will point to areas where future work might strengthen the security analysis to wider classes of attack, which should help to illuminate the contexts to which our security proof may be applied. In this section we consider a dishonest Eve performing attack BS$0$, as detailed above in Sec.~\MT{X}, and more general attacks will be considered later.
+We will now detail how the Holevo information term in Eq.~\ref{eqn:qss_dw_eve} may be calculated. In doing so we will point to areas where future work might strengthen the security analysis to consider wider classes of attack, which should illuminate the contexts to which our security proof may be applied. In this section we consider a dishonest Eve performing attack BS$0$, as detailed above in Sec.~\ref{sec:qds_bs0}, though the analysis follows readily for the other attacks described in Sec.~\ref{sec:qds_attack_analysis}. We will then compare the strength of attacks BS$0$, BS$1$, BS$2$ and EC. % and more general attacks will be considered later.
 
-Bob and Charlie prepare a state from QPSK alphabet with equal probability. The coherent states should be independently and randomly chosen. Before the channel they hold the joint state
+Bob and Charlie prepare a state from the QPSK alphabet, and each state is chosen randomly and with equal probability. Before the channel, Bob and Charlie hold the joint state
 \begin{equation}
 \rho_{\text{before}} = \rho_B \otimes \rho_C
 \end{equation}
@@ -287,18 +287,32 @@ with
 \begin{equation}
 \rho_B = \frac{1}{4} \sum_{k=0}^3 \dyad{\beta_k}_B \qq{and} \rho_C = \frac{1}{4} \sum_{k^\prime = 0}^3 \dyad{\gamma_{k^\prime}}_C
 \end{equation}
-where $\beta, \gamma$ are the amplitudes of Bob's and Charlie's coherent state alphabets.\footnote{Complex amplitudes $\beta, \gamma$ were denoted $b, c$ in the previous section.}
+where $\beta, \gamma$ are the amplitudes of Bob's and Charlie's coherent state alphabets.\footnote{These complex amplitudes $\beta, \gamma$ were denoted $b, c$ in the previous section.}
 
-We assume that the channel acts separately on each mode, and that modes $\rho_B$, $\rho_C$ undergo independent evolution. In other words, we assume that the channel has tensor-product structure
+We assume that the channel acts separately on each mode, and that modes $\rho_B$, $\rho_C$ undergo independent evolution. In other words, we assume that the channel has the following structure
 \begin{equation}
 \Phi\left[\rho\right] = \Phi_B\left[\rho\right] \otimes \Phi_C\left[\rho\right]
 \end{equation}
-where \MT{check this equation}
-\begin{equation}
-\Phi_B\left[\rho\right] = \phi_B\left(\text{Tr}_B \rho\right) \otimes \mathbb{1}\left(\rho\right).
-\end{equation}
+where $\Phi_{B, C}$ denote the lossy channels described by attack BS$0$, Sec.~\ref{sec:qds_bs0}, and the subscript $B, C$ denotes which mode of $\rho_{\text{before}}$ each channel acts on. 
+\iffalse
+\begin{align}
+\Phi_B\left[\rho\right] = \varphi_B\left(\text{Tr}_C \rho\right) \otimes \mathds{1}_C\left(\text{Tr}_B\rho\right) \notag \\
+\Phi_C\left[\rho\right] = \mathds{1}_B\left(\text{Tr}_C\rho\right) \otimes \varphi_C\left(\text{Tr}_B\rho\right)
+\end{align}
+with $\mathds{1}$ the identity channel and $\varphi_{B,C}$ denotes the lossy channels described by attack BS$0$, Sec.~\ref{sec:qds_bs0}. The Total 
+\fi
+The total channel $\Phi$ preserves the tensor-product structure of the input state.
 
-\noindent Eve performs separate beamsplitter attacks on each channed and retains two output modes $\mathbb{E}_{B, C}$. The total state after the channel becomes
+Physically $\Phi$ corresponds to the case where Eve performs separate beamsplitter attacks on each channel and retains two output modes $\mathbb{E}_{B, C}$, Fig.~\ref{fig:qss_bs0_attack}.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[draft=false, width=0.8\linewidth]{qss/qss_bs0}
+\caption{\label{fig:qss_bs0_attack} We model the channel $\Phi$ as two independent beamsplitter attacks of type BS$0$, Sec.~\ref{sec:qds_bs0}. This preserves the tensor-product structure of $\rho_{\text{before}}$.}
+\end{figure}
+
+
+The total state after the channel becomes
 \begin{equation}
 \rho_{\text{after}} = \rho_{\mathbb{A}_B, \mathbb{E}_B} \otimes \rho_{\mathbb{A}_C, \mathbb{E}_C}
 \end{equation}
@@ -307,8 +321,8 @@ with $\mathbb{A}_{B, C}$ denoting Alice's two modes and where
 \rho_{\mathbb{A}_B, \mathbb{E}_B} = \frac{1}{4} \sum_{k=0}^3 \dyad{\sqrt{T_B} \beta_k}_{\mathbb{A}_B} \otimes \dyad{\sqrt{1-T_B} \beta_k}_{\mathbb{E}_B}
 \end{equation}
 and similarly for $\rho_{\mathbb{A}_C, \mathbb{E}_C}$. Now, Alice heterodynes and measures $A_B \in \mathbb{C}$ from $\rho_{\mathbb{A}_B, \mathbb{E}_B}$ and $A_C \in \mathbb{C}$ from $\rho_{\mathbb{A}_C, \mathbb{E}_C}$. Eve's total state conditioned on these outcomes becomes 
-\begin{equation}
-\rho_{\left.\mathbb{E} \given A\right.} = \rho_{\left.\mathbb{E}_B \given A_B\right.} \otimes \rho_{\left. \mathbb{E}_C \given A_C\right.}
+\begin{equation}\label{eqn:qss_eve_conditional}
+\rho_{\left.\mathbb{E} \given A_B, A_C\right.} = \rho_{\left.\mathbb{E}_B \given A_B\right.} \otimes \rho_{\left. \mathbb{E}_C \given A_C\right.}
 \end{equation}
 with
 \begin{equation}
@@ -316,7 +330,7 @@ with
 \end{equation}
 and similarly for $\rho_{\left.\mathbb{E}_C \given A_C\right.}$. The probability $\text{P}_B\left(A_B \given \beta_k, T_B\right)$ is calculated analogously to Eq.~\ref{eqn:qss_channel_classical_prob}, and similarly for $A_C$.
 
-Take $X_A = g A_B + h A_C$ as usual, with $g, h$ fixed, and write $A_C = \left(X_A - g A_B\right)/h$. Therefore we have
+To proceed, we take $X_A = g A_B + h A_C$ as usual, with $g, h$ fixed, and write $A_C = \left(X_A - g A_B\right)/h$. Therefore the state $\rho_{\left.\mathbb{E} \given A_B, A_C\right.}$, Eq.~\ref{eqn:qss_eve_conditional}, becomes
 
 \begin{align}\label{eqn:qss_deriv_8}
 \rho_{\left. \mathbb{E} \given X_A, A_B\right.} &= \frac{1}{16 \pi^2} \sum_{k, k^\prime = 0}^3 \text{P}_B\left(A_B \given \beta_k, T_B\right) \text{P}_C\left(\frac{X_A - g A_B}{h} \given \gamma_{k^\prime}, T_C\right) \notag \\
@@ -324,7 +338,7 @@ Take $X_A = g A_B + h A_C$ as usual, with $g, h$ fixed, and write $A_C = \left(X
 &\dyad{\sqrt{1-T_B} \beta_k}_{\mathbb{E}_B} \otimes \dyad{\sqrt{1-T_C}\gamma_{k^\prime}}_{\mathbb{E}_C}
 \end{align}
 
-\noindent Once again since Alice's function $F$ is in general not injective, we must mix over outcomes $A_B, A_C$ in order to find Eve's state $\rho_{\left.\mathbb{E} \given X_A\right.}$
+\noindent Once again since Alice's function $\mathcal{F}$ is in general not injective we must mix over outcomes $A_B, A_C$ in order to find Eve's state $\rho_{\left.\mathbb{E} \given X_A\right.}$. Therefore 
 
 \begin{equation}\label{eqn:qss_aposteriori_state}
 \rho_{\left.\mathbb{E} \given X_A\right.} = \int\limits_{A_B \in \mathbb{C}} \Diff2 A_B \; \text{P}\left(A_B\right) \rho_{\left.\mathbb{E} \given X_A, A_B\right.}
@@ -341,6 +355,8 @@ Take $X_A = g A_B + h A_C$ as usual, with $g, h$ fixed, and write $A_C = \left(X
 \begin{equation}\label{eqn:qss_holevo}
 \chi = \text{S}\left(\rho_\mathbb{E}\right) - \int\limits_{X_A \in \mathbb{C}} \Diff2 X_A \; \text{P}\left(X_A\right) \text{S}\left(\rho_{\left.\mathbb{E} \given X_A\right.}\right).
 \end{equation}
+where we note that we can no longer simplify the second term in Eq.~\ref{eqn:qss_holevo}, as we did in Sec.~\ref{sec:qds_attack_analysis}, for example, since in general each state $\rho_{\left.\mathbb{E} \given X_A\right.}$ will have a different entropy.
+
 
 \noindent Let us explore the behaviour of Eve's Holevo information Eq.~\ref{eqn:qss_holevo}.
 
