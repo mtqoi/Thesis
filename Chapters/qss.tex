@@ -156,52 +156,72 @@ The starting point for our security analysis is the following Devetak-Winter bou
 We would like to calculate the lower bound for key rate given by Eq.~\ref{eqn:qss_dw_eve} and so we will consider each term in turn and demonstrate how they may be calculated for the protocol described above.
 
 
+
 \subsubsection{Mutual information}
 
 Using Eq.~\ref{eqn:intro_mutual_information} the mutual information $\text{I}$ may be written as 
 \begin{equation}\label{eqn:qss_deriv_1}
-\text{I}\left(X_A : X_B, X_C\right) = \text{H}\left(X_B, X_C\right) - \text{H} \left(X_B, X_C \given X_A\right)
+\text{I}\left(X_A : X_B, X_C\right) = \text{H}\left(X_B, X_C\right) - \text{H} \left(X_B, X_C \given X_A\right).
 \end{equation}
-where the first term on the right hand side is the joint Shannon entropy of $X_B$ and $X_C$, and the second term is the conditional Shannon entropy of $X_B, X_C$ given $X_A$. Intuitively this second term encodes the uncertainty one has about which $X_B, X_C$ were chosen, given a particular choice for $X_A$. 
+where the first term on the right hand side is the joint Shannon entropy of $X_B$ and $X_C$, and the second term is the conditional Shannon entropy of $X_B, X_C$ given $X_A$, Sec.~\ref{sec:intro_shannon_entropy}. Intuitively this second term encodes the uncertainty one has about which $X_B, X_C$ were chosen, once Alice has formed $X_A$, while the first term encodes the \emph{a priori} entropy about Bob and Charlie's choice of sent coherent states.
 
 The joint Shannon entropy may be written
 \begin{equation}\label{eqn:qss_deriv_2}
 \text{H}\left(X_B, X_C\right) = \sum_{X_B=b, X_C=c} - \text{P}\left(b, c\right) \log \text{P}\left(b, c\right)
 \end{equation}
-where $b, c$ are individual instances of variables $X_B, X_C$. The $b, c \in \mathcal{A}_4$. Since $b, c$ are taken to be independently chosen and uniformly random we see that the joint probability
+where $b, c$ are individual instances of variables $X_B, X_C$. In the following we shall take $b, c$ as phase elements of the QPSK alphabet, but this may be readily generalized to an $N$PSK alphabet. 
+
+Since $b, c$ are taken to be independently chosen and uniformly random we see that the joint probability
 \begin{equation}\label{eqn:qss_deriv_3}
 \text{P}\left(b, c\right) = \text{P}\left(b\right)\times \text{P}\left(c\right) = \frac{1}{16}
 \end{equation}
-since each of the $b, c$ are chosen with probability $1/4$. 
+since each of the $b, c$ are chosen with probability $1/4$. We will relax this assumption in Chapter~\ref{chapter:aqc}.
 
-Expanding the conditional probability in the prior \MT{is this the right term?} variable $X_A$ we reach
+Expanding the conditional entropy in $X_A$ via Eq.~\ref{eqn:intro_conditional_entropy_expansion} \cite{Wilde2013} we reach
 
 \begin{equation}\label{eqn:qss_deriv_4}
-\text{H}\left(X_B, X_C \given X_A\right) = \int\limits_{a \in \mathbb{C}} \Diff2 a \; \text{P}\left(X_A = a\right) \text{H}\left(X_B, X_C \given X_A = a\right).
+\text{H}\left(X_B, X_C \given X_A\right) = \int\limits_{a \in \mathbb{C}} \Diff2 a \; \text{P}\left(X_A = a\right) \text{H}\left(X_B, X_C \given X_A = a\right),
 \end{equation}
-Each term in Eq.~\ref{eqn:qss_deriv_4} can be calculated theoretically once function $F$ is known. 
-
-We have no requirement that $F$ should be injective. In particular, this implies that \MT{X}. To be concrete, in what follows we assume that $F$ is linear
-\begin{equation}\label{eqn:qss_F_linear}
-F\left(x, y\right) := g x + h y \qq{with} g, h \in \mathbb{R}\setminus \left\{0\right\}
-\end{equation} 
-Although we make no claims about the optimality of this choice of $F$, we are free to optimize over $g, h$, and we will make it clear when we have done so. The conditional entropy in the integrand of Eq.~\ref{eqn:qss_deriv_4} expands as \MT{make equation look nice}
+and we shall see that each term in Eq.~\ref{eqn:qss_deriv_4} can be calculated once function $\mathcal{F}$ is known. The conditional entropy $\text{H}\left(X_B, X_C \given X_A = a\right)$ expands as 
 
 \begin{align}
-\text{H}\left(X_B, X_C \given X_A\right) = \sum_{b, c \in \mathcal{A}_4} - &\text{P}\left(X_B=b, X_C=c \given X_A=a\right) \times \notag \\
+\text{H}\left(X_B, X_C \given X_A=a\right) = - \sum_{b, c}  &\text{P}\left(X_B=b, X_C=c \given X_A=a\right) \times \notag \\
 %
-&\log \text{P}\left(X_B=b, X_C=c \given X_A=a\right)
+&\log \text{P}\left(X_B=b, X_C=c \given X_A=a\right) \notag
 \end{align}
 
-\noindent and so all that remains to calculate are the probabilities \begin{equation}
-\text{P}\left(X_A=a\right) \qq{and} \text{P}\left(X_B=b, X_C=c \given X_A=a\right).
-\end{equation}
+\noindent and so all that remains is to calculate the probabilities 
+\begin{align}
+\label{eqn:qss_prob1} \text{P}\left(X_A=a\right) \qq{and} \\
+\label{eqn:qss_prob2} \text{P}\left(X_B=b, X_C=c \given X_A=a\right)
+\end{align}
+with respect to a given function $\mathcal{F}$.
+\MT{---------------------------------}
 
-\noindent Applying Bayes' formula to the second of these, we see that
-\begin{equation}
-\text{P}\left(X_B=b, X_C=c \given X_A=a\right) = \text{P}\left(X_A=a \given X_B=b, X_C=c\right) \frac{\text{P}\left(X_B=b, X_C=c\right)}{\text{P}\left(X_A=a\right)}.
-\end{equation}
-We can access $\text{P}\left(X_A=a \given X_B=b, X_C=c\right)$ by modelling the effects of the channel on quantum states distributed by Bob and Charlie, which we now do. We take
+\paragraph{Function $\mathcal{F}$}
+
+\par
+
+\noindent We have no requirement that $\mathcal{F}$ should be injective, which implies, for example, that the entropy $\text{S}\left(\rho_{A_B, A_C}\right) \ne \text{S}\left(\rho_{X_A}\right)$, and so we must carefully consider the action of $\mathcal{F}$ early on in our analysis. To be concrete, in what follows we assume that $F$ is linear
+\begin{equation}\label{eqn:qss_F_linear}
+\mathcal{F}\left(x, y\right) := g x + h y \qq{with} g, h \in \mathbb{R}\setminus \left\{0\right\}
+\end{equation} 
+which will enable us to make some predictions about the performance of the protocol. Although we make no claims about the optimality of this choice of $\mathcal{F}$, we are free to optimize over $g, h$, and we will make it clear when we have done so. In Sec.~\ref{appendix:qss_moreF} we consider some alternative forms for $\mathcal{F}$.
+
+
+
+
+
+\paragraph{Expanding classical probabilities}
+\par
+\noindent Applying Bayes' formula Eq.~\ref{eqn:intro_bayes} to the second of these, we see that
+\begin{align}
+\text{P}\left(X_B=b, X_C=c \given X_A=a\right) = \text{P}&\left(X_A=a \given X_B=b, X_C=c\right) \notag \\
+&\times \frac{\text{P}\left(X_B=b, X_C=c\right)}{\text{P}\left(X_A=a\right)}.
+\end{align}
+
+
+\noindent We can access $\text{P}\left(X_A=a \given X_B=b, X_C=c\right)$ by modelling the effects of the channel on quantum states distributed by Bob and Charlie, which we now do. We take
 \begin{equation}\label{eqn:qss_deriv_5}
 X_A = F\left(A_B, A_C\right) = g A_B + h A_C
 \end{equation}
