@@ -6,6 +6,7 @@
 % Q: where should I talk about Alice's function F?
 % - understand the mapping from complex values to binary
 % - some more remarks about the running of the protocol?
+% - mention somewhere my linestyle convention for different types of channel
 
 \chapter{Quantum secret sharing}
 Goal of chapter: introduce our QSS protocol and prove its security in different contexts.
@@ -82,7 +83,7 @@ Since Alice is the dealer who will decide on the eventual shared key our protoco
 %\MT{talk somewhere about the types of attack we allow}
 
 
-Our QSS protocol runs in three stages, a Distribution stage, an Encryption stage and, finally, a Decryption stage. Distribution and encryption stages are displayed in Fig.~\ref{fig:qss_protocol_cartoon}. The Distribution stage, Fig.~\ref{fig:qss_distribution_stage}, involves distribution and measurement of quantum coherent states chosen from QPSK alphabet. At the end of Distribution, Alice will hold classical information which is correlated with both Bob and Charlie. In the Encryption stage, Fig.~\ref{fig:qss_encryption_stage}, Alice will combine her classical information and use it to encode her sensitive classical secret. The encoded secret is distributed to Bob and Charlie. The secret is decoded by Bob and Charlie during Decryption. Our protocol setup is described in Fig.~\ref{fig:qss_setup}, and we describe it in detail below.
+Our QSS protocol runs in three stages, a Distribution stage, an Encryption stage and, finally, a Decryption stage. Distribution and encryption stages are displayed in Fig.~\ref{fig:qss_protocol_cartoon}. The Distribution stage, Fig.~\ref{fig:qss_distribution_stage}, involves distribution and measurement of quantum coherent states chosen from QPSK alphabet. At the end of Distribution, Alice will hold classical information which is correlated with both Bob and Charlie. In the Encryption stage, Fig.~\ref{fig:qss_encryption_stage}, Alice will combine her classical information and use it to encode her sensitive classical secret. The encoded secret is distributed to Bob and Charlie. The secret is decoded by Bob and Charlie during Decryption. Our protocol setup is described in Fig.~\ref{fig:qss_structure},~\ref{fig:qss_protocol_cartoon}, and we describe it in detail below.
 
 %\MT{make sure that the following is in the same style as my qds protocol description}
 
@@ -129,24 +130,35 @@ If either one of Bob or Charlie is dishonest, they are forced to work with an ho
 %\MT{some more remarks about the running of the protocol}
 
 
-\section{Security against Eve}
-\MT{talk here about security against an external eavesdropper.}
+\section{Security against Eve}\label{sec:qss_honest_recipients}
+%\MT{talk here about security against an external eavesdropper.}
 
-The QSS protocol presented above must be secure against both the actions of an external eavesdropper and the actions of a dishonest Bob or Charlie, who may collaborate with Eve. We first consider just an external Eve to illustrate key steps from the security analysis, an a dishonest Bob or Charlie is considered in the next section.
+The QSS protocol presented above must be secure against both the actions of an external eavesdropper and those of a dishonest Bob or Charlie who may be collaborating with Eve. We will first consider security against Eve in order to illustrate key steps from the security analysis, and so for this section we assume that Bob and Charlie are honest,
+Fig.~\ref{fig:qss_honest_recipients}. In Sec.~\ref{sec:qss_dishonest_recipient} we will begin to allow for dishonesty in recipients Bob and Charlie.
 
-The starting point for our security analysis is the following Devetak-Winter key-rate bound \MT{cite} \MT{should I motivate why this bound is helpful for us?}
+\begin{figure}[htp]
+\centering
+\includegraphics[draft=false, width=0.4\linewidth]{qss/qss_honest_recipients}
+\caption{\label{fig:qss_honest_recipients} Alice will distribute her secret $\sigma_A$ to Bob and Charlie who are assumed honest. Dishonest Eve will try to attack the protocol and gain information about $\sigma_A$. Gray: honest. Red: dishonest. See Fig.~\ref{fig:qss_structure} for further information.}
+\end{figure}
+
+
+The starting point for our security analysis is the following Devetak-Winter bound \cite{Devetak2004} for the asymptotic key rate under collective attack, Fig.~\ref{fig:types_of_attack_collective},
+
+%\MT{should I motivate why this bound is helpful for us?}
 
 \begin{equation}\label{eqn:qss_dw_eve}
-\kappa_{Eve} \ge \text{I}\left(X_A : X_B, X_C\right) - \chi\left(X_A : \mathbb{E}\right)
+\kappa_{\text{Eve}} \ge \text{I}\left(X_A : X_B, X_C\right) - \chi\left(X_A : \mathbb{E}\right)
 \end{equation}
 
-\noindent which describes the balance between the mutual information $\text{I}$ shared between Alice and a Bob-Charlie collaboration, and the Holevo information between Eve's quantum system $\mathbb{E}$ and Alice. It is unsurprising that Eq.~\ref{eqn:qss_dw_eve} should be our starting point given the noted similarities between QSS and QKD. The $X_A = F\left(X_B, X_C\right)$ is Alice's variable.
+\noindent which describes the balance between the mutual information, $\text{I}$, shared between Alice and a Bob-Charlie collaboration, and the Holevo information $\chi$ between Eve's quantum system $\mathbb{E}$ and Alice. It is perhaps unsurprising that Eq.~\ref{eqn:qss_dw_eve} should be our starting point given the noted similarities between QSS and QKD. The $X_A = \mathcal{F}\left(A_B, A_C\right)$ is Alice's variable based on her heterodyne measurement outcomes.
 
-We will consider each term in Eq.~\ref{eqn:qss_dw_eve} in turn.
+We would like to calculate the lower bound for key rate given by Eq.~\ref{eqn:qss_dw_eve} and so we will consider each term in turn and demonstrate how they may be calculated for the protocol described above.
+
 
 \subsubsection{Mutual information}
 
-Using Eq.~\MT{X} the mutual information may be written as 
+Using Eq.~\ref{eqn:intro_mutual_information} the mutual information $\text{I}$ may be written as 
 \begin{equation}\label{eqn:qss_deriv_1}
 \text{I}\left(X_A : X_B, X_C\right) = \text{H}\left(X_B, X_C\right) - \text{H} \left(X_B, X_C \given X_A\right)
 \end{equation}
