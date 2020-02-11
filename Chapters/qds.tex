@@ -835,16 +835,37 @@ The \emph{a priori} state is automatically normalized by virtue of the integrati
 \mathcal{N}\left(e_1 \given \xi\right) = \int\limits_{\text{Re}\left(c\right) > 0, \; \text{Im}\left(c\right)>0} \Diff2 c \; \text{P}\left(c \given \xi \right).
 \end{equation}
 where we have included excess noise $\xi$ in our probability, as in Sec.~\ref{eqn:qds_perr_noisy}. The performance of this attack is analysed in Fig.~\ref{fig:qds_holevo_comparisons}.
-%Eq.~\MT{X}.
 
-\MT{Chat about Fig.~\ref{fig:qds_holevo_comparisons} and the power of the different attacks.}
 
-\begin{figure}
-\includegraphics{qds_holevo_comparisons.png}
-\caption{\label{fig:qds_holevo_comparisons}}
+\subsection{Comparison of attacks}
+
+We compare attacks BS$0$, BS$1$ and EC in Fig.~\ref{fig:qds_holevo_comparisons} as amplitude $\alpha$ and channel transmission $T$ are varied. We observe that for all $\alpha, T$ and for all channel thermal photon numbers $\bar{n}$ the EC attack performs best, while attack BS$1$ performs worse than even attack BS$0$ where no excess noise is considered. Under EC, Bob is permitted to exploit correlations between his two modes, and the $\bar{n}$ restricts the level of entanglement between his modes. Larger $\bar{n}$ means larger entanglement, and so we should expect that as $\bar{n}$ increases Bob gains more information. However, under BS$1$ Bob is not permitted to use these correlations, and so his outcomes and Charlie's outcomes are both noisy. The added noise reduces Bob's information without providing him the advantage of EC. 
+
+The thermal photon number $\bar{n}$ is related to the inverse temperature of the input thermal state in BS$1$ as \cite{Leonhardt2010}
+\begin{equation}
+\tilde{\beta} = \log_e\left(\frac{1}{\bar{n}} + 1\right),
+\end{equation}
+while $\bar{n}$ is related to the squeezing parameter $\zeta$ of the input TMSV state in EC as \cite{Leonhardt2010}
+\begin{equation}
+\zeta = \text{Sinh}^{-1}\left(\sqrt{\bar{n}}\right).
+\end{equation}
+
+\begin{figure}[htp]
+\centering
+	\begin{subfigure}{0.6\linewidth}
+		\centering
+		\caption{\label{fig:qds_holevo_comparisons_varalpha}}
+		\includegraphics[draft=false, width=\linewidth]{qds/holevo_comparisons_varalpha}
+	\end{subfigure}
+	\begin{subfigure}{0.6\linewidth}
+		\centering
+		\caption{\label{fig:qds_holevo_comparisons_varT}}
+		\includegraphics[draft=false, width=\linewidth]{qds/holevo_comparisons_varT}	
+	\end{subfigure}
+	\caption{\label{fig:qds_holevo_comparisons} Comparison of Holevo information $\chi$ under attacks BS$0$ (black), BS$1$ (orange) and EC (red). BS$0$ has no excess noise in the channel which corresponds to channel thermal photon number $\bar{n} = 0$. BS$1$ and EC both include excess noise, with $\bar{n} = 0.01$ (solid red/orange lines) and $\bar{n} = 0.02$ (dashed red/orange lines). (a) Increasing amplitude $\alpha$ of the QPSK alphabet leads to larger Holevo information for dishonest Bob. Honest players should therefore choose small $\alpha$. (b) At $T=0$ and $T=1$ Bob gains no information about Charlies outcomes. In both (a) and (b), we see that EC attack gives Bob much more information than BS$0$, while BS$1$ performs worse.}
 \end{figure}
 
-
+\clearpage
 \section{Signature length $L$}\label{sec:qds_siglength}
 %\MT{better segue}
 We have proven protocol security against repudiation, Sec.~\ref{sec:qds_security_repudiation}, and forgery, Sec.~\ref{sec:qds_security_forgery}, and we have shown that our QDS protocol is robust, Sec.~\ref{sec:qds_security_robustness}. Additionally, we have demonstrated how a forging Bob's probability $\pe$ of introducing a mismatch into his signature is related to the Holevo information $\chi$ of his quantum system, Sec.~\ref{sec:qds_bounding_pe}, and have explicitly analysed several attacks which he may perform which mimic different channel conditions, Sec.~\ref{sec:qds_attack_analysis}.
