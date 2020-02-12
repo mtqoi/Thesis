@@ -977,9 +977,25 @@ To perform the integration, we separate out terms involving $c$ in Bob's state (
 \end{equation}
 which may be easily calculated.
 
-We have now included the effects of $\rps$ on $g_{\text{sec}}$, and so the performance of the protocol under postselection may be analysed.
+We have now included the effects of $\rps$ on $g_{\text{sec}}$, and so the performance of the protocol under postselection may be analysed. In Fig.~\ref{fig:qds_gsec_varying_rps} we plot $g_{\text{sec}}$ varying $\rps$ for attacks BS$0$, BS$1$, BS$2$ and EC, and for different $\alpha$'s at $T=0.5$. We observe that when $g_{\text{sec}}$ is considered it is advantageous to choose a large postselection region as this allows $g_{\text{sec}}$ to increase always. At $\alpha=0.2$ we see smaller increase in $g_{\text{sec}}$ as $\rps$ is increased, and almost no effect as $\Delta_\theta$ is varied under EC attack.
 
-\MT{Have some graphs showing effect of postselection on $g_{sec}$ under different attacks.}
+%\MT{Have some graphs showing effect of postselection on $g_{sec}$ under different attacks.}
+
+\begin{figure}[htp]
+\centering
+	\begin{subfigure}{0.6\linewidth}
+		\centering
+		\caption{}	
+		\includegraphics[draft=false, width=\linewidth]{qds/rps_varying_gsec_1}
+	\end{subfigure}
+	\begin{subfigure}{0.6\linewidth}
+		\centering
+		\caption{}
+		\includegraphics[draft=false, width=\linewidth]{qds/rps_varying_gsec_2}
+	\end{subfigure}
+\caption{\label{fig:qds_gsec_varying_rps} Security parameter $g_{\text{sec}}$ is influenced by choice of $\rps$ by differing amounts. Solid: $\Delta_\theta = 0$. Dashed: $\Delta_\theta = 0.3$. Blue: BS$0$. Orange: BS$1$. Green: BS$2$. Red: EC. (a) $\alpha = 0.5, T=0.5$ and (b) $\alpha = 0.2, T=0.5$. In both graphs attacks BS$1$, BS$2$ and EC have $\xi = 0.001\%$. The efficacy of postselection depends strongly both on attack type and parameters $\alpha, T$. }
+\end{figure}
+
 
 Let us turn now to examine our main figure of merit, the number of quantum states $L$ used in the protocol. Directly incorporating $g_{\text{sec}}\left(\Delta_r, \Delta_\theta\right)$ into Eq.~\ref{eqn:efail} will give an erroneous level of security, for the following reason. Our calculations in this section, culminating in $g_{\text{sec}}\left(\Delta_r, \Delta_\theta\right)$, bound the number of states required to sign a message. However, this is not equivalent to the number of states which Alice has actually sent. 
 
