@@ -994,12 +994,13 @@ We have now included the effects of $\rps$ on $g_{\text{sec}}$, and so the perfo
 		\includegraphics[draft=false, width=\linewidth]{qds/rps_varying_gsec_2}
 	\end{subfigure}
 \caption{\label{fig:qds_gsec_varying_rps} Security parameter $g_{\text{sec}}$ is influenced by choice of $\rps$ by differing amounts. Solid: $\Delta_\theta = 0$. Dashed: $\Delta_\theta = 0.3$. Blue: BS$0$. Orange: BS$1$. Green: BS$2$. Red: EC. (a) $\alpha = 0.5, T=0.5$ and (b) $\alpha = 0.2, T=0.5$. In both graphs attacks BS$1$, BS$2$ and EC have $\xi = 0.001\%$. The efficacy of postselection depends strongly both on attack type and parameters $\alpha, T$. }
+%Calculations/Cryptography/2020-02-11_gsec_varying_rps
 \end{figure}
 
 
 Let us turn now to examine our main figure of merit, the number of quantum states $L$ used in the protocol. Directly incorporating $g_{\text{sec}}\left(\Delta_r, \Delta_\theta\right)$ into Eq.~\ref{eqn:efail} will give an erroneous level of security, for the following reason. Our calculations in this section, culminating in $g_{\text{sec}}\left(\Delta_r, \Delta_\theta\right)$, bound the number of states required to sign a message. However, this is not equivalent to the number of states which Alice has actually sent. 
 
-For example, choosing $\Delta_r = $\MT{X} and $\Delta_\theta = $\MT{X} gives $g_{\text{sec}} = $\MT{X}. Substituting this into Eq.~\ref{eqn:efail} and solving for $L$ gives $L = $\MT{X} under attack \MT{X}. But in order to have that many states accepted at Charlie, Alice will actually need to have sent $\MT{X}$ coherent states in total, since Charlie will reject his measurement outcomes with probability \MT{X}, Eq.~\ref{eqn:qds_perrps_normalization}. It follows that $L$, as implicitly defined in Eq.~\ref{eqn:efail} is a poor figure of merit to measure the resource-use of our protocol when postselection is used.
+For example under attack EC with $\alpha=0.5, T=0.5, \xi=0.1\%$, choosing $\Delta_r = 4.0 $ and $\Delta_\theta = 0.4 $ gives $g_{\text{sec}} = 0.1225 $. Substituting this into Eq.~\ref{eqn:efail} and solving for $L$ gives $L = 10560$. But in order to have that many states accepted at Charlie, Alice will actually need to have sent $7\times10^{10}$ coherent states in total, since Charlie will reject his measurement outcomes with probability $1 - \left(1.5\times10^{-7}\right)$, Eq.~\ref{eqn:qds_perrps_normalization}. It follows that $L$, as implicitly defined in Eq.~\ref{eqn:efail} is actually a poor figure of merit to measure the resource-use of our protocol when postselection is used.
 
 Instead, we will work in terms of $\tilde{L}$, which we define as the total number of states sent by Alice. This is a rescaling of $L$ given by
 \begin{equation}
@@ -1007,7 +1008,8 @@ L \mapsto \tilde{L} := \frac{L}{\mathcal{N}},
 \end{equation}
 with normalization factor $\mathcal{N}$ interpreted sthe average probability that Charlie accepts a given state sent by Alice, Eq.~\ref{eqn:qds_perrps_normalization}.
 
-We plot $\mathcal{N}$ in Fig.~\ref{fig:psnorm}, and figure of merit $\tilde{L}$ is analysed below in Sec.~\ref{sec:qds_protocol_performance}. The figures of merit $\tilde{L}$ and $L$ may be directly compared, and so in Sec.~\ref{sec:qds_protocol_performance} we do not distinguish between them. However, it should be understood that when postselection is used ($\Delta_r \ne 0, \Delta_\theta \ne 0$) the $\tilde{L}$ is the explict and correct figure of merit.
+We plot $\mathcal{N}$ in Fig.~\ref{fig:psnorm}, and figure of merit $\tilde{L}$ in Fig.~\ref{fig:qds_L_vs_deltar}. We observe that even though large $\Delta_\theta$ causes $g_{\text{sec}}$ to increase, Fig.~\ref{fig:qds_gsec_varying_rps}, it also causes an increase in $\tilde{L}$, owing to the quick decay of $\mathcal{N}$ with $\Delta_\theta$, Fig.~\ref{fig:psnorm}. We also may deduce from the graphs Fig.~\ref{fig:qds_L_vs_deltar} that there is an optimum $\Delta_r$ which minimizes $\tilde{L}$ and gives the best performance of our protocol.
+
 
 \begin{figure}[htp]
 \centering
@@ -1020,15 +1022,31 @@ We plot $\mathcal{N}$ in Fig.~\ref{fig:psnorm}, and figure of merit $\tilde{L}$ 
 \caption{}
 \end{subfigure}
 \caption{\label{fig:psnorm} Normalization factor $\mathcal{N}$ Eq.~\ref{eqn:qds_perrps_normalization} varies dramatically with postselection region $\rps$. (a) $\alpha=0.5, T=0.5$. (b) $\alpha=3.0, T=1.0$}
+%images/qds/psnorm.nb
 \end{figure}
 
+\begin{figure}[htp]
+\centering
+	\begin{subfigure}{0.6\linewidth}
+		\centering
+		\caption{}
+		\includegraphics[draft=false, width=\linewidth]{qds/rps_varying_L_1}
+	\end{subfigure}
+	\begin{subfigure}{0.6\linewidth}
+		\centering
+		\caption{}
+		\includegraphics[draft=false, width=\linewidth]{qds/rps_varying_L_2}
+	\end{subfigure}
+\caption{\label{fig:qds_L_vs_deltar} Figure of merit $\tilde{L}$ depends strongly on $\rps$. Solid: $\Delta_\theta=0$. Dashed: $\Delta_\theta = 0.3$. Blue: BS$0$. Orange: BS$1$. Green: BS$2$. Red: EC. (a) $\alpha = 0.5, T = 0.5$ and (b) $\alpha=0.2, T=0.5$. In both graphs attacks BS$1$, BS$2$ and EC have $\xi = 0.001 \%$. In all cases it is optimal to choose $\Delta_\theta = 0$}
+%Calculations/Cryptography/2020-02-12_L_varying_rps.nb
+\end{figure}
+
+Since the figures of merit $\tilde{L}$ and $L$ qualitatively measure the same thing--how many states must Alice send in order to sign a $1$~bit message--they may be directly compared. For the remainder of this thesis then we will not distinguish between $\tilde{L}$ and $L$, and it should be understood that when postselection is used we are using the renormalized $\tilde{L}$, while when postselection is not use we are using $L$. Furthermore, since $\Delta_\theta > 0$ causes $\tilde{L}$ to increase we will take the optimal $\Delta_\theta=0$ always from now on, and only vary $\Delta_r$. It will be made clear in what follows whether the postselection technique has been used and the choice of $\Delta_r$.
 
 
- \MT{Make some graphs and add a discussion of how postselection affects $\tilde{L}$.} 
+\MT{have an "outlook" section where I make some remarks about the postselection technique. Note that I have implicitly assumed that Bob knows whether an individual state has been postselected on. This is a sensible assumption for QKD, since it will be declared, but for QDS it does not need to be declared, so I am giving Bob too much power here.}
 
-\MT{have a section where I make some remarks about the postselection technique. Note that I have implicitly assumed that Bob knows whether an individual state has been postselected on. This is a sensible assumption for QKD, since it will be declared, but for QDS it does not need to be declared, so I am giving Bob too much power here.}
-
-
+\clearpage
 \section{Protocol performance}\label{sec:qds_protocol_performance}
 \MT{Let's look at some results and graphs of the protocol performance under the four above attacks. TODO: make graphs like in the PRA paper}
 
