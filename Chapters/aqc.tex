@@ -53,7 +53,7 @@ In addition to considering the performance of unconditionally secure protocols, 
 
 The replacement of a newly-insecure cryptosystem is difficult, expensive and time-consuming. In response to this problem in classical cryptography there has recently been a push towards so-called \emph{crypographic aglity} (crypto-agility) \cite{Sullivan2009, Chen2016} with a key motivator being the development of quantum computers. %\MT{I want to mention somewhere the google chrome trial.} 
 
-\subsection{(Quantum ) crypto-agility}
+\subsection{(Quantum) crypto-agility}
 
 One of the main ideas of crypto-agility is the existence of a middleware which interacts both with the software application layer (user) and the underlying cypto-core (algorithm). This is accomplished in Ref.~\cite{Sullivan2009} for example by ensuring that written code is kept as abstract as possible without hard-coding the secure protocols which are used by the code. This allows for flexible switching between underlying algorithms and keeps the top-level code agnostic as to which secure algorithms are being used. When the security of the underlying algorithm is weakened it becomes easy to simply replace the algorithm with a new or modified one, without changes to the rest of the computational architecture. Failures to allow a system to respond to new cryptographic threats like this can be at best embarrassing, and at worst costly or life-threatening \cite{Schneier2016, Schneier2017}. The key idea of crypto-agility is depicted in Fig.~\ref{fig:agility}a. 
 
@@ -72,25 +72,37 @@ The framework of classical crypto-agility seems ideal to help us answer Q1 and Q
 
 %The following view of quantum crypto-agility (or quantum agility) can be thought of as analogous to a framework for quantum computing in which (this sentence doesn't really add much)
 
-\MT{-------------------}
+%\MT{-------------------}
 
 
-There are two possible ways to translate the idea of classical crypto-agility into the quantum realm. We depict them both in Figs.~\ref{fig:agility}b,~\ref{fig:agility}c. The first we refer to as QKD-assisted crypto agility which may be seen as a generalization of qCSS and the classical signatures protocols \MT{cite} which implicitly require QKD first in order to remain secure. The QKD system delivers fresh and secure random keys which may be used for many different protocols. This viewpoint is taken by the ETSI QKD ISG $004$ and $014$ standardization efforts \MT{cite} which specify the interface between a QKD system and the key management system. We expect that QKD-assisted crypto agility will form an important cornerstone for future quantum networks. This viewpoint on agility is displayed in Fig.~\ref{fig:agility}~(b).
+There are two potential ways to translate the idea of classical crypto-agility into the quantum realm. We depict them both in Figs.~\ref{fig:agility}b,~\ref{fig:agility}c. The first we refer to as ``QKD-assisted crypto agility'', which may be seen as a generalization of qCSS, Sec.~\ref{sec:qss_qcss} and the classical signatures protocols \cite{Wallden2015, Amiri2016a} which implicitly require QKD first in order to remain secure. The QKD system delivers fresh secure random keys which may be used for many different protocols. This is the stance taken by the ETSI QKD ISG $004$ \cite{ETSI004} and $014$ \cite{ETSI014} standardization efforts which specify interface design between a QKD system (hardware) and the key management system (software). We expect that this QKD-assisted crypto agility will form an important cornerstone for future quantum networks. %This viewpoint on agility is displayed in Fig.~\ref{fig:agility}~(b).
 
-However, as was shown in Ref.~\cite{Amiri2016} in the context of QDS, it is not always optimal to perform QKD + classical protocol, as there may be channels over which QKD is not possible, or hardware setups over which the costly reconciliation procedures are difficult. The second viewpoint may thus be referred to as a fully quantum crypto agility, Fig.~\ref{fig:agility}~(c). Rather than having an underlying QKD system, the setup has a "quantum network inferface card" (QNIC) which is able to perform multiple quantum communication protocols. This viewpoint is a generalization of the fact that multiple quantum cryptographic protocols differ only in classical postprocessing but share quantum stages. In this case the choice of protocol to perform is reduced simply to a firmware update. 
+However, as was shown in Ref.~\cite{Amiri2016} in the context of QDS, it is not always optimal to perform QKD and then a classical protocol, since there may be channels over which QKD is not possible, or hardware setups over which the costly reconciliation procedures are difficult. The second viewpoint of quantum crypto-agility may thus be referred to as a ``fully quantum crypto agility'', Fig.~\ref{fig:agility}c. Rather than building upon an underlying and fixed QKD system, such a setup should have the capability to perform multiple quantum communication protocols. This should use the so-called \emph{quantum network interface card} in Fig.~\ref{fig:agility}. This viewpoint recognises the fact that multiple quantum cryptographic protocols differ only in classical postprocessing but share quantum stages and so a full QKD protocol may not be required. %In this case the choice of quantum protocol to perform is reduced simply to an update 
+In a deployed system the ability to perform new quantum cryptographic protocols may then be reduced to a mere upgrade of classical firmware.
+
 
 %\MT{Do I want a statement along the lines of "It is important to relaize that the transfer of the crypto-agility idea to the field of quantum cryptography changes its meaning..." from the paper?}
 
-In Fig.~\ref{fig:big_agile} we present an example of an agile quantum communications stack of the viewpoint of Fig.~\ref{fig:agility}~(c). \MT{chat about this picture.}
+In Fig.~\ref{fig:big_agile} we present an example of an agile quantum communications stack which expresses the viewpoint of Fig.~\ref{fig:agility}c. The stack provides clear separation between the user (software layer) and the physical hardware layer, and may be interpreted as analogous to recent work on compilers for quantum computers \cite{Killoran2018, qiskit, Murali2019}.
 
+%\MT{chat about this picture.}
+\begin{figure}[htp]
+\floatbox[{\capbeside\thisfloatsetup{capbesideposition={left,top},capbesidewidth=4cm}}]{figure}[\FBwidth]
+{\caption{\label{fig:big_agile} Agile quantum communications stack following the viewpoint of Fig.~\ref{fig:agility}c. The \emph{user app} layer allows a user to select a task they wish to perform, (e.g. message encryption, message authentication, secret sharing). The agile middleware provides a separation between the user (software) and underlying quantum crypto-system (hardware). The \emph{primitive} layer selects the desired cryptographic primitive (e.g. QKD, QDS, QSS, RSA), and instructs the \emph{protocol and hardware abstraction} layer to run the protocol via a library of known functions (e.g. ``send coherent state'', ``perform heterodyne detection''). These commands are interpreted by the \emph{hardware} layer and sent to the physical hardware setup. The agile system should be flexible and allow for switching between different tasks, different protocols and different hardware setups. \emph{Picture credit: Stefan Richter in Ref.~\cite{Richter2020}}}}
+{\includegraphics[draft=false, width=10cm]{aqc/layers_5}}
+\end{figure}
+
+
+\iffalse
 \begin{figure}[htp]
 \centering
 \includegraphics[draft=false]{aqc/layers_5}
-\caption{\label{fig:big_agile} Made by Stefan and taken from the agile paper Ref.~\cite{Richter2020}. I should talk about it a lot more.}
+\caption{\label{fig:big_agile} Agile quantum communications stack following the viewpoint of Fig.~\ref{fig:agility}c. The \emph{user app} layer allows a user to select a task they wish to perform, (e.g. message encryption, message authentication, secret sharing). The agile middleware provides a separation between the user (software) and underlying quantum crypto-system (hardware). The \emph{primitive} layer selects the desired cryptographic primitive (e.g. QKD, QDS, QSS, RSA), and instructs the \emph{protocol and hardware abstraction} layer to run the protocol via a library of known functions (e.g. ``send coherent state'', ``perform heterodyne detection''). These commands are interpreted by the \emph{hardware} layer and sent to the physical hardware setup. The agile system should be flexible and allow for switching between different tasks, different protocols and different hardware setups. \emph{Picture credit: Stefan Richter in Ref.~\cite{Richter2020}}}
 \end{figure}
+\fi
 
 \clearpage
-\section{CV agile systems}
+\section{CV agile quantum systems}
 \MT{The text in this section is very close to Richter2020 section 3. I think this is fine, since I wrote it and had very little input or changes from other co-authors. But I should acknowledge this somewhere probably.}
 
 To illustrate the above discussion, in this section we will introduce and analyse two quantum systems which are capable of performing multiple protocols over the same hardware setups, with difference only at the level of classical postprocessing. Our setups are designed with Q$2$ in mind and the desire that they be compatible with currently deployed network architecture. The systems therefore are fully continuous-variable, relying on distribution of phase-modulated QPSK coherent states and their heterodyne phase detection \MT{statement and reference about how this is what we see in networks.} which renders each system highly compatible with deployed telecommunications infrastructure. This paves the way to an integration between our agile systems into deployed communication links which run with up to $100$~GHz sending rate \MT{richer2020 cites some stuff here}. In the next section we will describe and analyse an experimental implementation of the agile systems discussed here, and discuss further how they accomplish quantum agility.
