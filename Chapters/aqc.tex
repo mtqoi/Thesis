@@ -1,3 +1,17 @@
+%
+%
+% A (non-exhaustive) list of TODOs:
+% - expand the calculating holevo section
+% - find somewhere for my nice line about the quantum protocol being ``agnostic'' to the classical steps
+% - talk about how interpretation of \chi differs between qdsb and qdsf
+% Q: do I want more chat about the large figure?
+% - make new figure about the roles (just gonna use stefan's figure for now)
+% - make sure I show how each protocol can be made more ``experimentally realistic''.
+%
+%
+
+
+
 \chapter{Agile quantum cryptography}\label{chapter:aqc}
 Goal of chapter: introduce and make explicit the concept of quantum agility in quantum cryptography. Join together several threads from the previous two chapters. This chapter can be viewed as a "bonus" to the QDS and QSS chapters.
 
@@ -103,9 +117,9 @@ In Fig.~\ref{fig:big_agile} we present an example of an agile quantum communicat
 
 \clearpage
 \section{CV agile quantum systems}
-\MT{The text in this section is very close to Richter2020 section 3. I think this is fine, since I wrote it and had very little input or changes from other co-authors. But I should acknowledge this somewhere probably.}
+%Make sure to acknowledge that this text is very similar to Richter2020 Section 3. Which is fine, since I wrote it and it wasn't edited by coauthors. 
 
-To illustrate the above discussion, in this section we will introduce and analyse two quantum systems which are capable of performing multiple protocols over the same hardware setups, with difference only at the level of classical postprocessing. Our setups are designed with Q$2$ in mind and the desire that they be compatible with currently deployed network architecture. The systems therefore are fully continuous-variable, relying on distribution of phase-modulated QPSK coherent states and their heterodyne phase detection \MT{statement and reference about how this is what we see in networks.} which renders each system highly compatible with deployed telecommunications infrastructure. This paves the way to an integration between our agile systems into deployed communication links which run with up to $100$~GHz sending rate \MT{richer2020 cites some stuff here}. In the next section we will describe and analyse an experimental implementation of the agile systems discussed here, and discuss further how they accomplish quantum agility.
+To illustrate the above discussion, in this section we will introduce and analyse two quantum systems capable of implementing multiple protocols over the same hardware setups. The protocols differ only at the level of classical postprocessing. Our hardware setup is explicitly designed with question Q$2$ in mind, and with a desire for compatibility with currently deployed network architecture. The systems therefore are fully continuous-variable, and relying on distribution of phase-modulated QPSK coherent states and their heterodyne phase detection \cite{Agrawal2008} rendering each system highly compatible with deployed telecommunications infrastructure. This paves the way to an integration between our agile systems into deployed communication links which can run with up to $100$~GHz sending rate \cite{Khan2015, Khan2016}. In Sec.~\ref{sec:aqc_experiment} we describe and analyse an experimental implementation of the agile systems discussed here.
 
 We will consider the following tasks:
 
@@ -113,85 +127,91 @@ We will consider the following tasks:
 
 \textbf{QSS - quantum secret sharing}: allows for secure distribution of a classical secret among a conspiracy of potentially dishonest recipients.
 
-\textbf{QKD - quantum key distribution}: allows for secure key distribution of identical randomly-generated bits between players. These keys may them be used for encryption via OTP \MT{cite}.
+\textbf{QKD - quantum key distribution}: allows for secure key distribution of identical randomly-generated bits between players. These keys may them be used for encryption via one-time pad\cite{Schneier1996}.
 
-The tasks QDS and QSS are discussed in Chapters \MT{X}, above, while the reader is referred to \MT{cite} for review of QKD. The tasks QDS and QSS are inherently multipartite, while QKD is inherently bipartite\footnote{Though note its multipartite generalization - quantum conferencing \MT{cite}.}. In what follows we will use quantum networks with three players to allow for multipartite tasks, while we explicitly describe how QKD may be performed over them.
+The tasks QDS and QSS are discussed in Chapters~\ref{chapter:qds},~\ref{chapter:qss} above, while the reader is referred to \cite{Laudenbach2017, Scarani2009} for review of QKD. The tasks QDS and QSS are inherently multipartite, while QKD is inherently bipartite\footnote{Though note the existence of its multipartite generalization - quantum conferencing \cite{Ottaviani2017b, Ottaviani2019}}. In what follows we will use quantum networks with three players to allow for multipartite tasks, while also allowing for bipartite QKD to be performed.
 
 \begin{figure}[htp]
 \centering
-\includegraphics{aqc/agile_tasks.png}
-\caption{\label{fig:agile_tasks} This figure should be analogous to Fig.3 from Richter2020.}
+\includegraphics[draft=false, width=0.8\linewidth]{aqc/Fig2_roles-v8}
+\caption{\label{fig:agile_tasks} Our two agile quantum systems. Depending on the setup configuration and the chosen task, the hardware modules perform either as Alice or as Bob/Charlie. Tx: hardware sender module. Rx: hardware receiver modules. Hardware specifications are discussed in Sec.~\ref{sec:aqc_experiment}. \emph{Picture credit: Stefan Richter in Ref.~\cite{Richter2020}}}
 \end{figure}
 
-We denote our two systems as \systemB and \systemF, see Fig.~\ref{fig:agile_tasks}. The labels indicate which of the above cryptographic tasks are supported; the underlying quantum states which they use, and in which direction the quantum states are exchanged ("f" - forward, Alice sends quantum states to Bob and Charlie; or "b" - backward, Bob and Charlie send quantum states to Alice). The forward- or backward- distinction can be seen as analogous to direct- or reverse-reconcilition in QKD \MT{cite some stuff}, in which quantum and classical information flow in the same direction or in opposite directions.
+We therefore propose two separate agile quantum systems, one which may perform tasks QDS and QSS, and the other which may perform tasks QDS and QKD. We display these two systems in Fig.~\ref{fig:agile_tasks}. The crucial aspect of these two systems is the separation between the abstract user layer defining the roles performed in the protocols, and the hardware layer. For example, the task QDS can be performed in either of the two systems, and Alice can either choose to be the sender of the quantum states or their receiver, depending on available hardware.
 
-\MT{Perhaps have a table summarizing each system.}
+We denote our two systems as \systemB \;and \systemF. The labels indicate which of the above cryptographic tasks are supported; the underlying quantum states which they use, and in which direction the quantum states are exchanged ("f" - forward, Alice sends quantum states to Bob and Charlie; or "b" - backward, Bob and Charlie send quantum states to Alice). The forward- or backward- distinction can be seen as analogous to direct- or reverse-reconcilition in QKD \MT{cite some stuff}, in which quantum and classical information flow either in the same direction or in opposite directions.
+
+%\MT{Perhaps have a table summarizing each system.}
 
 
 
-
+\clearpage
 \section{Agile system \systemB}
-\MT{I'm not sure whether to discuss systemB or systemF first?}
-The first agile system we consider relies on the $b$-configuration, Fig.~\ref{fig:agile_tasks}, in which Bob and Charlie are the senders of quantum states while Alice is the receiver. We immediately see that the QSS protocol proposed and analysed in Chapter~\MT{X} may be inherited into this agile system. For consistency with notation we will refer to it as QSS-$b$, and we will analyse it further below.
+%\MT{I'm not sure whether to discuss systemB or systemF first?}
+The first agile system we consider runs in the $b$-configuration, Fig.~\ref{fig:agile_tasks}, in which Bob and Charlie are the senders of quantum states while Alice is their receiver. We immediately see that the QSS protocol proposed and analysed in Chapter~\ref{chapter:qss} may be inherited into this agile system, c.f. Fig.~\ref{fig:qss_distribution_stage}. For consistency with notation we will now refer to this QSS protocol as QSS-$b$, and we will analyse it further below in Sec.~\ref{sec:aqc_qssb}.
 
-We also propose a second cryptographic protocol which fits into system \systemB, which may perform the QDS task. We refer to the protocol as QDS-$b$, and describe it below. Unlike the QDS protocol analysed in Chapter~\MT{X}, for QDS-$b$ it is Bob and Charlie who are the senders of quantum states, while Alice is the recipient. We will describe the protocol below, and then discuss how its security analysis must differ from Chapter~\MT{X}, and demonstrate how it fulfils QDS requirements $1-5$ from Chapter~\MT{X}.
-
-Our first agile system \systemB is thus able to perform both QSS and QDS tasks using identical quantum resources. \MT{Say somewhere my nice line about the quantum stage being "agnostic" to final protocol}
+We also propose a second cryptographic protocol which fits into the system \systemB, which performs the QDS task. We refer to the second protocol as QDS-$b$, and will analyse it below in Sec.~\ref{sec:aqc_qdsb}. Unlike the QDS protocol analysed in Chapter~\ref{chapter:qds}, for QDS-$b$ it is Bob and Charlie who are the senders of quantum states, while Alice is the recipient. %We will describe the protocol below, and then discuss how its security analysis must differ from Chapter~\MT{X}, and demonstrate how it fulfils QDS requirements $1-5$ from Chapter~\MT{X}.
+Our first agile system \systemB \; is thus able to perform both QSS and QDS tasks using identical quantum resources. %\MT{Say somewhere my nice line about the quantum stage being "agnostic" to final protocol}
 
 \subsection{Protocol QDS-$b$}
 
-\MT{I can have a picture about the QDS-b implementation.}
+%\MT{I can have a picture about the QDS-b implementation.}
 
 \begin{figure}[htp]
 \centering
 \includegraphics{aqc/qdsb_setup.png}
-\caption{\label{fig:qdsb_setup}}
+\caption{\label{fig:qdsb_setup} \MT{TODO: make this figure. I should make the equivalent QDSf one first.}}
 \end{figure}
 
+Recall that a QDS scheme must fulfill the requirements from List~\ref{list:qds_requirements} and provide security against a dishonest forger, security against repudiation, and should be robust and succeed when all parties behave honestly, Fig.~\ref{fig:qds_attacks}. We will first outline how protocol QDS-$b$ runs, and then prove that it fulfills each of these requirements.
+
 The protocol QDS-$b$ runs as follows:
-\MT{Make sure it written analogously to QDS-$f$ above.}
+%\MT{Make sure it written analogously to QDS-$f$ above.}
 
 \subsubsection*{Distribution stage}
 
-\noindent \underline{Step $1$.} For each future message $m \in \left\{0, 1\right\}$ which Alice wishes to securely sign, Bob and Charlie create the classical strings
+\paragraph{Step $1$.}
+For each future message $m \in \left\{0, 1\right\}$ which Alice wishes to securely sign, Bob and Charlie create the classical strings
 \begin{equation}
 \Phi_m^{\left(B, C\right)} = \left\{\phi_{j, m}^{\left(B, C\right)}\right\}_{j=1}^L
 \end{equation}
-of length $L$, where the $\phi_j$ are complex phases chosen from QPSK alphabet $\mathcal{A}_4$. The $\phi_j$ are assumed to be drawn uniformly and at random from $\mathcal{A}_4$, but we relax this assumption later. 
+of length $L$, where the $\phi_j$ are complex phases chosen from the QPSK alphabet. The $\phi_j$ are assumed to be drawn uniformly and at random, but we relax this assumption later. 
 
 %Bob and Charlie both send Alice a sequence, length $L$, of coherent states chosen randomly from the QPSK alphabet. Bob and Charlie each keep a record of which states they have sent.
 
-\noindent \underline{Step $2$.} Bob and Charlie form sequences of quantum coherent states corresponding to elements of $\Phi_m^{\left(B, C\right)}$, analogously to Eqs.~\MT{X}, and distribute them through the quantum channels to Alice. Bob and Charlie each keep a record of $\Phi_m^{\left(B, C\right)}$.
 
-\noindent \underline{Step $3$.} Alice performs heterodyne detection on each received state and receives complex phase outcomes which we denote $x_{B, C}^j \in \mathbb{C}$, with the subscript denoting which player send the coherent state. Since measurement is performed immediately on receipt of the state, Alice does not require quantum memory and the remainder of the protocol is entirely classical.
+\paragraph{Step $2$.} Bob and Charlie form sequences of quantum coherent states corresponding to elements of $\Phi_m^{\left(B, C\right)}$ and distribute them through the quantum channels to Alice. Bob and Charlie each keep a record of $\Phi_m^{\left(B, C\right)}$.
 
-At the end of the quantum stage of the protocol, Alice possesses two classical strings, each of length $L$, which contain her complex phase measurements. She now forms eliminated signatures $A_{B, C}^m$ by writing down which two states from $\mathcal{A}_4$ are least-compatible with the $x_{B, C}^j$. The eliminated signatures are formed identically to Fig.~\MT{X}.
+\paragraph{Step $3$.} Alice performs heterodyne detection on each received state and receives complex phase outcomes which we denote $x_{B, C}^j \in \mathbb{C}$, with the subscript denoting which player send the coherent state. Since measurement is performed immediately on receipt of the state, Alice does not require quantum memory and the remainder of the protocol is entirely classical.
 
-\noindent \underline{Step $4$.} \emph{Symmetrization:} Bob and Charlie swap a random half of their $\Phi_m^{\left(B, C\right)}$ in order to guard against a dishonest Alice. Bob (Charlie) now possesses signature $X_B^m, \left(X_C^m\right)$ which consists of two halves of length $L/2$, one of which was generated by Bob (Charlie), and one of whoch was received during the swapping. Denote the first half by $Y_m^{\left(B\right)}$ and the second half by $Z_m^{\left(B\right)}$ by analogy with Chapter~\MT{X}, and similarly for Charlie. The difference with Chapter~\MT{X} is that strings$Y_m^{\left(B\right)}$ and $Z_m^{\left(B\right)}$ contain phase information (they are essentially just a rearranged $\Phi_m^{\left(B, C\right)}$, while $A_{B, C}^m$ are eliminated signatures
+At the end of the quantum stage of the protocol, Alice possesses two classical strings, each of length $L$, which contain her complex phase measurements. She now forms eliminated signatures $A_{B, C}^m$ by writing down which two states from the QPSK alphabet are least-compatible with the $x_{B, C}^j$. The eliminated signatures are formed identically to Fig.~\ref{fig:qds_mismatches}.
+
+\paragraph{Step $4$.} \emph{Symmetrization:} Bob and Charlie swap a random half of their $\Phi_m^{\left(B, C\right)}$ in order to guard against a dishonest Alice. Bob (Charlie) now possesses signature $X_B^m, \left(X_C^m\right)$ which consists of two halves of length $L/2$, one of which was generated by Bob (Charlie), and one of whoch was received during the swapping. Denote the first half by $Y_m^{\left(B\right)}$ and the second half by $Z_m^{\left(B\right)}$ by analogy with Chapter~\ref{chapter:qds}, and similarly for Charlie. The difference with Chapter~\ref{chapter:qds} is that strings$Y_m^{\left(B\right)}$ and $Z_m^{\left(B\right)}$ contain phase information (they are essentially just a rearranged $\Phi_m^{\left(B, C\right)}$, while $A_{B, C}^m$ are eliminated signatures
 
 \subsubsection{Messaging stage}
 Messaging may occur any time after distribution.
 
-\noindent \underline{Step $5$.} Alice sends the classical triplet $\Sigma = \left(m, \sigma_m\right)$ to Bob. The $m$ is the message she would like to convey, and her signature is $\sigma_m = \left(A_B^m, A_C^m\right)$. 
+\paragraph{Step $5$.} Alice sends the classical triplet $\Sigma = \left(m, \sigma_m\right)$ to Bob. The $m$ is the message she would like to convey, and her signature is $\sigma_m = \left(A_B^m, A_C^m\right)$. 
 
-\noindent \underline{Step $6$.} Bob rearranges $\sigma_m \rightarrow \tilde{\sigma}_m := \left(\tilde{A}_{Y, m}^B, \tilde{A}_{Z, m}^B\right)$ by selecting elements from Alice's declaration which correspond to the two halves of his signature. Bob compares $\tilde{\sigma}_m$ to his two halves and counts the number of mismatches. Bob will accept $m$ as genuine provided that
+\paragraph{Step $6$.} Bob rearranges $\sigma_m \rightarrow \tilde{\sigma}_m := \left(\tilde{A}_{Y, m}^B, \tilde{A}_{Z, m}^B\right)$ by selecting elements from Alice's declaration which correspond to the two halves of his signature. Bob compares $\tilde{\sigma}_m$ to his two halves and counts the number of mismatches. Bob will accept $m$ as genuine provided that
 \begin{equation}
 \mathcal{M}\left(Y_m^B, \tilde{A}_{Y, m}^B\right) \le s_B \frac{L}{2} \qq{and} \mathcal{M}\left(Z_m^B, \tilde{A}_{Z, m}^B\right) \le s_B \frac{L}{2}
 \end{equation}
-otherwise the protocol aborts. The threshold $s_B$ in general takes a different value from the $s_B$ used in Chapter.~\MT{X}.
+otherwise the protocol aborts. The threshold $s_B$ in general takes a different value from the $s_B$ used in Chapter~\ref{chapter:qds}.
 
-\noindent \underline{Step $7$.} If Bob has accepted $m$ then he forwards $\Sigma$ to Charlie, who similarly checks for mismatches between Alice's eliminated signature and his signature. Charlie accepts the message if
+\paragraph{Step $7$.} If Bob has accepted $m$ then he forwards $\Sigma$ to Charlie, who similarly checks for mismatches between Alice's eliminated signature and his signature. Charlie accepts the message if
 \begin{equation}
 \mathcal{M}\left(Y_m^C, \tilde{A}_{Y, m}^C\right) \le s_C \frac{L}{2} \qq{and} \mathcal{M}\left(Z_m^C, \tilde{A}_{Z, m}^C\right) \le s_C \frac{L}{2}
 \end{equation}
-otherwise it aborts. The $s_C$ in general takes a different value from the $s_C$ in Chapter~\MT{X}. If both Bob and Charlie accept $m$ then the protocol has succeeded. 
+otherwise it aborts. The $s_C$ in general takes a different value from the $s_C$ in Chapter~\ref{chapter:qds}. If both Bob and Charlie accept $m$ then the protocol has succeeded. 
 
-It is worth noting some important similarities and differences between QDS-$b$ and the protocol described in Ch.~\MT{X}. While both protocols rely on QPSK alphabet and heterodyne detection, and while both protocols rely on the construction and comparison of an eliminated signature, the security analysis required for the two protocols differs. Crucially, while in Ch.~\MT{X} the $j^{\text{th}}$ element of a dishonest forger's declaration is a single phase chosen from QPSK, for QDS-$b$ he must effectively declare \emph{two} phases from QPSK (in the form of an eliminated signature element). Additionally, while QDS in Ch.~\MT{X} shares similarities with reverse-reconciliation QKD since a forging Bob had to guess Charlie's measurement outcomes, here QDS-$b$ shares similarities with direct-reconciliation QKD as a forging Bob will have to guess Charlie's sent state. We will later see how this affects performance of the protocol.
+It is worth noting some important similarities and differences between QDS-$b$ and the protocol described in Ch.~\ref{chapter:qds}. While both protocols rely on QPSK alphabet and heterodyne detection, and while both protocols rely on the construction and comparison of an eliminated signature, the security analysis required for the two protocols differs. Crucially, while in Ch.~\ref{chapter:qds} the $j^{\text{th}}$ element of a dishonest forger's declaration is a single phase chosen from QPSK, for QDS-$b$ he must effectively declare \emph{two} phases from QPSK (in the form of an eliminated signature element). Additionally, while QDS in Ch.~\ref{chapter:qds} shares similarities with reverse-reconciliation QKD since a forging Bob had to guess Charlie's measurement outcomes, here QDS-$b$ shares similarities with direct-reconciliation QKD as a forging Bob will have to guess Charlie's sent state. We will later see how this affects performance of the protocol.
 
 \subsection{QDS-$b$ security}
 Let us consider the security of QDS-$b$ and check how it fulfils the requirements for a QDS protocol. 
+
 \subsubsection{Security against repudiation}
-Recall that during a repudiation attack Alice will try to cause Bob and Charlie to disagree about whether her message is genuine. Proof of security against repudiation follows identical lines to Chapter~\MT{X}.
+Recall that during a repudiation attack Alice will try to cause Bob and Charlie to disagree about whether her message is genuine. Proof of security against repudiation follows identical lines to Chapter~\ref{chapter:qds}.
 
 We assume that Alice is free to manipulate her declared $A_{B, C}^m$ and she has full control over the mismatch rates $p_B \left(p_C\right)$ with respect to states she originally received from Bob and Charlie. Alice may even choose $p_B$ or $p_C$ to be zero. Security against repudiation arises from the Symmetrizaton step of the protocol. After Bob and Charlie have swapped classical information, they each possess two half-signatures, length $L/2$, consisting either of information which they held originally or which they received during swapping. Alice succeeds in her repudiation attack if Bob accepts both of his halves as genuine while Charlie rejects at least one of his halves as fake. Therefore the probability of successful repudiation is given by
 
@@ -212,7 +232,7 @@ We assume that Alice is free to manipulate her declared $A_{B, C}^m$ and she has
 \end{align}
 respectively.
 
-Applying probability inequalities Eq.~\ref{eqn:prob_inequality_1},~\ref{eqn:prob_inequality_2} and Hoeffding's inequalities Eq.~\ref{eqn:hoeffding1},~\ref{eqn:hoeffding2} and following the analysis from Sec.~\MT{X} we see that
+Applying probability inequalities Eq.~\ref{eqn:prob_inequality_1},~\ref{eqn:prob_inequality_2} and Hoeffding's inequalities Eq.~\ref{eqn:hoeffding1},~\ref{eqn:hoeffding2} and following the analysis from Sec.~\ref{sec:qds_security_repudiation} we see that
 
 \begin{equation}
 \varepsilon_{\text{repudiation}} \le \text{min}\left\{ 2 \; \exp\left(-\left[ p - s_B\right]^2 L\right), 2 \; \exp\left( - \left[ s_C - p\right]^2 L\right) \right\}
@@ -227,28 +247,29 @@ p = \frac{s_B + s_C}{2}.
 \begin{equation}\label{eqn:aqc_repudiation}
 \varepsilon_{\text{repudiation}} \le 2 \; \exp\left( - \frac{\left[s_C - s_B\right]^2}{4}L\right)
 \end{equation}
-identically to Chapter~\MT{X}. We have seen that repudiation is only affected by relative mismatch rates between players' signatures and \emph{not} by who actually possesses the signatures. This is perhaps unsurprising since in both QDS-$b$ and earlier it is assumed that Alice has complete control over mismatch rates with respect to states held by players before swapping.
+
+identically to Ch.~\ref{chapter:qds}. We have seen that repudiation is only affected by relative mismatch rates between players' signatures and \emph{not} by who actually possesses the signatures. This is perhaps unsurprising, since in both QDS protocols it is assumed that Alice has complete control over mismatch rates with respect to states held by players before swapping.
 
 \subsection{Robustness}
-The robustness of the protocol depends only on parameters $s_B$ and $\perr$. Using Hoeffding inequality Eq.~\MT{X} identically to Sec.~\MT{X}, we may derive 
+The robustness of the protocol depends only on parameters $s_B$ and $\perr$. Using Hoeffding inequality Eq.~\ref{eqn:qds_hoeffding2} identically to Sec.~\ref{sec:qds_security_robustness}, we may derive 
 \begin{equation}\label{eqn:aqc_robustness}
 \varepsilon_{\text{honest abort}} \le 2 \, \exp\left( - \left[s_B - \perr\right]^2 L\right)
 \end{equation}
-provided that $\perr \le s_B$. The probability $\perr$ of honest mismatch may be modelled as in Sec.~\MT{X} and does not change here.
+provided that $\perr \le s_B$. The probability $\perr$ of honest mismatch may be modelled as in Sec.~\ref{sec:qds_modelling_perr} and does not change here.
 
 \subsection{Security against forgery}
 Since Bob already knows half of Charlie's signature elements (those which Bob himself forwarded) and since $s_B \le s_C$ the most dangerous forger is a dishonest Bob. He is therefore assumed to be the eavesdropper on Charlie's distribution of quantum states, and tries to gain information about the $L/2$ signature elements which Charlie generated himself.
 
-Using Hoeffding's inequalities Eq.~\MT{X} as in Sec.~\MT{X} we see that at a forging attack succeeds with probability 
+Using Hoeffding's inequalities Eq.~\ref{eqn:qds_hoeffding1} as in Sec.~\ref{sec:qds_security_forgery} we see that at a forging attack succeeds with probability 
 \begin{equation}\label{eqn:aqc_forgery}
 \varepsilon_{\text{forgery}} \le 2 \; \exp\left( - \left[ \pe - s_C\right]^2 \frac{L}{2} \right)
 \end{equation}
 provided that $\pe \ge s_C$. 
 
 \subsection{Bounding $\pe$}
-All that remains to do is to bound $\pe$. This will expose several of the differences between QDS-$b$ and QDS from Chapter~\MT{X}.
+All that remains is to bound $\pe$. This will expose several of the differences between QDS-$b$ and QDS from Chapter~\ref{chapter:qds}.
 
-\MT{I am just copying and pasting the following from Richter2020. Which is fine because I wrote it and it hasn't been edited.}
+%\MT{I am just copying and pasting the following from Richter2020. Which is fine because I wrote it and it hasn't been edited.}
 
 Consider the $j^\text{th}$ signature element. Charlie holds some $c_j$ denoting which state from the QPSK alphabet he sent. Bob will declare an eliminated signature element, $B_j = \left\{b_j^1, b_j^2\right\}$ which is chosen to minimize $\pe$. The $b_j^1, b_j^2$ correspond to adjacent elements of the QPSK alphabet. A mismatch occurs if $b_j^1 = c_j$ or $b_j^2 = c_j$. Additionally, we assume that $B_j$ is the result of some optimal strategy involving Bob's quantum system, $\mathbb{B}_j$.
 
@@ -293,13 +314,14 @@ which measures whether a mismatch has occurred between $\mathcal{F}_j$ and $\mat
 &\ge 2 - \chi\left(b_j^1, b_j^2 : c_j\right)
 \end{align}
 
-\noindent where we have used the fact that \emph{a priori} there are four choices for the pair $b_j^1, b_j^2$, and where $\chi$ is the Holevo information. Combining Eqs.~\MT{X},~\MT{X} we arrive at
+\noindent where we have used the fact that \emph{a priori} there are four choices for the pair $b_j^1, b_j^2$, and where $\chi$ is the Holevo information. Combining Eqs.~\ref{eqn:A7},~\ref{eqn:A8} we arrive at
 
 \begin{equation}
-\text{h}\left(\pe\right) \ge 1 - \chi
+\text{h}\left(\pe\right) \ge 1 - \chi\left(b_j^1, b_j^2 : c_j\right).
 \end{equation}
 
-\noindent \MT{add a comment about how this relates to QDSf}
+\noindent Surprisingly this equation has similar form to Eq.~\ref{eqn:qds_hpe}, but with a Holevo information interpreted and calculated differently. %TODO: add a comment about how the Holevo information here is different.
+
 
 Once $\pe$ and $\perr$ are bounded for the protocol, the probability $\varepsilon_{fail}$ that the protocol fails can be found. For concreteness, we assign equal probability to the failure of the protocol either by allowing a forging or repudiation attack, or by aborting when all players are honest, that is
 
@@ -307,9 +329,9 @@ Once $\pe$ and $\perr$ are bounded for the protocol, the probability $\varepsilo
 \varepsilon_{fail} = \varepsilon_{forg} = \varepsilon_{rep} = \varepsilon_{reject}
 \end{equation*}
 
-\noindent and by choosing $s_B = p_{err} + \left(p_e + p_{err}\right)/4$; $s_C = p_{err} = 3\left(p_e - p_{err}\right)/4$, in order to satisfy the second two equalities, we arrive at Eq.~(\ref{eqn:QDSbL}).
+\noindent and by choosing $s_B = p_{err} + \left(p_e + p_{err}\right)/4$; $s_C = p_{err} = 3\left(p_e - p_{err}\right)/4$, in order to satisfy the second two equalities, we arrive at 
 
-\begin{equation}
+\begin{equation}\label{eqn:QDSbL}
 \varepsilon_{fail} \le 2 \exp \left[ - \frac{\left( p_e - p_{err} \right)^2}{16} L \right]
 \end{equation}
 
