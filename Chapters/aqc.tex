@@ -347,7 +347,7 @@ Finally, we note that under a beamsplitter attack BS$0$ Bob's \emph{a priori} st
 when states $|\alpha_k\rangle$ from the QPSK alphabet are sent through lossy channel with transmittivity T. Bob's \emph{a posteriori} state is simply $\rho_{B}^k = |\sqrt{1-T}\alpha_k\rangle\langle \sqrt{1-T}\alpha_k|$, from which his Holevo information is calculated as
 
 \begin{equation}
-\chi = S\left(\rho_B\right) - \sum_{k=0}^3 p\left(k\right) S\left(\rho_E^k\right).
+\chi = S\left(\rho_B\right) - \sum_{k=0}^3 p\left(k\right) S\left(\rho_E^k\right)
 \end{equation}
 with $S$ the Von Neumann entropy. Under attack BS$0$ state $\rho_B^k$ is pure and so $\chi = S\left(\rho_B\right)$. Other attacks may be readily considered, and we present the requisite states in Sec.~\ref{appendix:qdsb_states}. %do this
 Bob's mismatch rate $\pe$ may now be calculated and we obtain figure of merit signature length $L$ via Eq.~\ref{eqn:aqc_qdsb_efail}.
@@ -355,6 +355,28 @@ Bob's mismatch rate $\pe$ may now be calculated and we obtain figure of merit si
 
 
 \subsection{QDS-$b$ postselection}
+Let us apply the postselection technique described in Sec.~\ref{sec:qds_postselection} to protocol QDS-$b$. We shall see that while previously postselection improved efficiency of the protocol, here it is absolutely necessary in order to sign a message for even short distances. We define region $\rps\left(\Delta_r, \Delta_\theta\right)$, Fig.~\ref{fig:rps}, and allow honest recipients to only accept outcomes $x \in \mathbb{C} \setminus \rps$. 
+
+The crucial quantity to consider is $g_{\text{sec}} := \pe - \perr$, measuring the advantage which and honest player has over a dishonest one. The protocol is secure provided that $g_{\text{sec}} > 0$, Eq.~\ref{eqn:aqc_qdsb_efail}. For protocol QDS-$b$, the probability $\pe$ does not depend on Alice's heterodyne measurement, since a dishonest player will attack the sender of the quantum states. Therefore we may reasonably deduce that $\pe$ is unaffected by postselection.
+
+Probability $\perr$ on the other hand is affected by our choice of $\rps$. Given the probability $\text{P}\left(r e^{i \theta} \given \alpha, T\right)$ to obtain complex outcome $r e^{i \theta}$ when state $\ket{\alpha}$ is sent through a noiseless channel with transmission $T$, we see that when no postselection is used
+\begin{equation}
+\perr = \int\limits_{r=0}^\infty \mathrm{d}r \; r \int\limits_{\theta = \pi/2}^{3\pi/2} \mathrm{d}\theta \; \text{P}\left(r e^{i \theta} \given \alpha, T\right).
+\end{equation}
+
+\noindent Incorporating the postselection technique here corresponds to changing the limits of integration, and so when postselection is used we have
+
+\begin{align}
+\perr\left(\Delta_r, \Delta_\theta\right) = \frac{1}{\mathcal{N}} \int\limits_{r = \Delta_r}^\infty \mathrm{d}r\; r  &\left[ \int\limits_{\theta = \pi/2 + \Delta_\theta}^{\pi - \Delta_\theta} \mathrm{d}\theta \; \text{P}\left(r e^{i \theta} \given \alpha, T\right)\right. \notag \\
+%
+&\left. + \int\limits_{\theta = \pi + \Delta_\theta}^{3\pi/2 - \Delta_\theta} \mathrm{d}\theta \text{P}\left(r e^{i \theta}\given \alpha, T\right)\right].
+\end{align}
+
+
+
+
+
+\subsection{QDS-$b$ performance}
 
 \section{Agile system \systemF}
 \MT{Let's start talking about the second agile system}
