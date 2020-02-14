@@ -400,16 +400,81 @@ Attempts to prove security of discete-modulated CV QKD protocols have made simpl
 
 %Another direction has been to truncate the size of hilbert space \cite{Ghorai2019, Lin2019, Papanastasiou2018}. This is perhaps a reasonable approach, since one can sensibly bound the dimension of an incoming quantum state by assuming that its energy is upper-bounded
 
+Another direction has been to truncate the size of the Hilbert space \cite{Ghorai2019, Lin2019, Papanastasiou2018}. This is perhaps a reasonable approach, since for many of the infinite-dimensional states used in the QKD protocols one can find a nearby state which lives in a large but finite-dimensional Hilbert space. This is especially true for small $\alpha$. 
 
-A QKD protocol relying on these resources is analysed in Ref.~\cite{Papanastasiou2018}, and it is their analysis which we continue with in this section. 
+A QKD protocol relying on a QPSK alphabet and heterodyne detection is analysed in Ref.~\cite{Papanastasiou2018}, and it is their analysis which we lean on in this section. 
 
-\MT{Q: how much of this paper should I include?}
 
-%\MT{I should make some graphs and talk about the performance of this protocol. (How close to a lit-review should it be?) <- ahhhh, perfomance will go in the next section}
+\begin{figure}[htp]
+\centering
+\includegraphics{aqc/qkdf_setup.png}
+\caption{\label{fig:aqc_qkdf_setup}}
+\end{figure}
 
-\section{Performance of CV agile systems}
-Let us now consider the theoretical performance of the protocols which contribute to the above agile systems. \MT{Perhaps at some point I should analyse optimal $\alpha$'s for protocols which run on the same system}
-\MT{TODO: decide on which graphs to make, and what the story will be here.}
+Alice distributes coherent state $\ket{\alpha}$ from her QPSK alphabet through the quantum channel to Bob. Assuming for now attack BS$0$, Bob recieves $\ket{\sqrt{1-T}\alpha}$ and performs heterodyne measurement, obtaining outcome $x \in mathbb{C}$ with probability
+\begin{equation}
+\text{P}\left(x\given \alpha, T\right) = \frac{1}{\pi}\exp\left( - \left[ x - \sqrt{T}\alpha\right]^2\right).
+\end{equation}
+We denote Alice's variable containing information of which coherent state she chose by $X_A$, and Bob's variable containing his measurement outcome by $X_B$. Alice and Bob then perform a reverse-reconciliation procedure \cite{Grosshans2002, Grosshans2003, Laudenbach2017} to form a secret ket.
+
+The starting point for the analysis is the Devetak-Winter key rate formula \cite{Devetak2004} 
+\begin{equation}
+\kappa \ge \text{I}\left(X_A : X_B\right) - \chi\left(X_B : \mathbb{E}\right)
+\end{equation}
+
+\noindent where $\mathbb{E}$ denotes Eve's quantum system. Let us calculate each term.
+
+\subsubsection{Mutual information I}
+The mutual information I is calculated in a similar fashion to the protocol QSS-$b$ discussed in Chapter~\ref{chapter:qss}. Using Eq.~\ref{eqn:intro_mutual_information} we expand $\text{I}$ as
+\begin{equation}\label{eqn:qkdf_deriv_1}
+\text{I}\left(X_A : X_B\right) = \text{H}\left(X_A\right) - \text{H}\left(X_A \given X_B\right).
+\end{equation}
+
+\noindent The Shannon entropy of Alice's variable is equal to $\sum_{X_A=a} - \text{P}\left(a\right) \log \text{P}\left(a\right)$ and is equal to $1/4$ in the ideal case. .
+
+We may expand the conditional entropy in Eq.~\ref{eqn:qkdf_deriv_1} as
+\begin{equation}
+\text{H}\left(X_A \given X_B\right) = \int\limits_{b \in \mathbb{C}} \Diff2 b \; \text{P}\left(X_B=b\right) \text{H}\left(X_A \given X_B=b\right)
+\end{equation}
+where the integration is performed over all possible outcomes $b$ which Bob can obtain. The mutual information I may then be calculated by expanding $\text{H}\left(X_A \given X_B=b\right)$ and then using Bayes's formula. 
+
+\subsubsection{Holevo information $\chi$}
+We will derive the Holevo information $\chi$ which Eve has about Bob's variable $X_B$ under attack BS$0$. Her Holevo information under other attacks may be calculated likewise, using steps from Sec.~\ref{sec:qds_attack_analysis}.
+
+When a coherent state $\alpha_k$ is chosen uniformly at random, the two-mode output state from the channel is
+
+\begin{equation}
+\rho_{B, E} = \frac{1}{4} \sum_{\alpha_k} \left[ \dyad{\sqrt{T}\alpha_k}_B \otimes \dyad{\sqrt{1-T}\alpha_k}_E\right]
+\end{equation}
+
+\noindent and so after Bob's heterodye measurement, outcome $b \in \mathbb{C}$, Eve's conditional state is
+
+\begin{equation}
+\rho_{\left. E \given b\right.} = \frac{1}{4} \frac{1}{\text{P}\left(b\right)} \sum_{\alpha_k} \text{P}\left(b \given \alpha_k, T\right) \times \dyad{\sqrt{1-T}\alpha_k}_E
+\end{equation}
+when $\text{P}\left(b\right) = \sum_{\alpha_k}\text{P}\left(b \given \alpha_k, T\right)$ denotes the total probability that Bob measures $b$.
+
+Eve's \emph{a posteriori} entropy is then
+
+\begin{equation}\label{eqn:qkdf_aposteriori_entropy}
+S_{\text{aposteriori}} = \int\limits_{b \in \mathbb{C}} \Diff2 b \; \text{P}\left(b\right) S\left(\rho_{\left. E \given b \right.}\right)
+\end{equation}
+
+\noindent and we note that each state $\rho_{\left.E\given b \right.}$ has in general a different entropy, so Eq.~\ref{eqn:qkdf_aposteriori_entropy} cannot be simplified further. 
+
+Eve's \emph{a priori} entropy is
+\begin{equation}
+S_{\text{apriori}} = S\left[\, \int\limits_{b \in \mathbb{C}} \Diff2 b \; \text{P}\left(b\right) \rho_{\left. E \given b \right.}\right],
+\end{equation}
+
+from which the Holevo information $\chi$ may be calculated.
+
+\subsection{QKD-$f$ performance}
+
+
+%\section{Performance of CV agile systems}
+%Let us now consider the theoretical performance of the protocols which contribute to the above agile systems. \MT{Perhaps at some point I should analyse optimal $\alpha$'s for protocols which run on the same system}
+%\MT{TODO: decide on which graphs to make, and what the story will be here.}
 
 \section{Experimental implementation}
 \MT{Briefly describe the experiment and what data I received. I want to make this section stuff which I \emph{didn't} do, so the next section can be stuff which I have actually done.}
