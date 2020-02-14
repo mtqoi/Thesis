@@ -341,8 +341,8 @@ Once $\pe$ and $\perr$ are bounded for the protocol, the probability $\varepsilo
 \subsubsection{Calculating Holevo}
 
 Finally, we note that under a beamsplitter attack BS$0$ Bob's \emph{a priori} state is
-\begin{equation}
-\rho_B = \sum_{k=0}^3 |\sqrt{1-T}\alpha_k\rangle\langle\sqrt{1-T}\alpha_k|
+\begin{equation}\label{eqn:qdsb_apriori_state}
+\rho_B = \frac{1}{4}\sum_{k=0}^3 |\sqrt{1-T}\alpha_k\rangle\langle\sqrt{1-T}\alpha_k|
 \end{equation}
 when states $|\alpha_k\rangle$ from the QPSK alphabet are sent through lossy channel with transmittivity T. Bob's \emph{a posteriori} state is simply $\rho_{B}^k = |\sqrt{1-T}\alpha_k\rangle\langle \sqrt{1-T}\alpha_k|$, from which his Holevo information is calculated as
 
@@ -466,7 +466,6 @@ Eve's \emph{a priori} entropy is
 \begin{equation}
 S_{\text{apriori}} = S\left[\, \int\limits_{b \in \mathbb{C}} \Diff2 b \; \text{P}\left(b\right) \rho_{\left. E \given b \right.}\right],
 \end{equation}
-
 from which the Holevo information $\chi$ may be calculated.
 
 \subsection{QKD-$f$ performance}
@@ -477,39 +476,124 @@ from which the Holevo information $\chi$ may be calculated.
 %\MT{TODO: decide on which graphs to make, and what the story will be here.}
 
 \section{Experimental implementation}
-\MT{Briefly describe the experiment and what data I received. I want to make this section stuff which I \emph{didn't} do, so the next section can be stuff which I have actually done.}
+%\MT{Briefly describe the experiment and what data I received. I want to make this section stuff which I \emph{didn't} do, so the next section can be stuff which I have actually done.}
 
-An experiment which investigates the above two agile systems was performed at \MT{X} \cite{Richter2020}. Specifically, two optical sender and receiver modules were used to implement the four protocols described above. A sender module (Tx) generates and distributes phase-encoded coherent states chosen from the QPSK alphabet, while a receiver module (Rx) performs heterodyne detection of the received states' phase. Depending on the required configuration, the modules Tx, Rx are variously interpreted as playing roles of Alice or Bob/Charlie, Fig.~\ref{fig:agile_tasks}. 
+An experiment which investigates the above two agile systems was performed at the Max Plank Institute for the Science of Light in Erlangen (MPL) \cite{Richter2020}, Fig.~\ref{fig:aqc_experiment}. Specifically, two optical sender and receiver modules were used to implement the four protocols which are described above. A sender module (Tx) generates and distributes phase-encoded coherent states chosen from the QPSK alphabet, while a receiver module (Rx) performs heterodyne detection of the received states' phase. Depending on the required configuration, the modules Tx, Rx are variously interpreted as playing roles of Alice or Bob/Charlie, Fig.~\ref{fig:agile_tasks}. 
 
 \begin{figure}[htp]
 \centering
-\includegraphics{images/aqc_experiment.png}
-\caption{\label{fig:aqc_experiment}}
+\includegraphics[draft=false, width=0.8\linewidth]{aqc/Fig2_exp-v6}
+\caption{\label{fig:aqc_experiment} The sender (Tx) and receiver (Rx) modules which are used to implement each of the four cryptographic protocols considered in this thesis. During distribution and measurement of the quantum states, hardware modules are ignorant about the roles which they are playing, and so identical experimental stages may be interpreted for different cryptographic tasks, Fig.~\ref{fig:agile_tasks}. ECDL: external-cavity diode laser; iso: isolator; VOA: variable optical attenuator; IQM: I/Q modulator; pol.c: polarization controller; AWG: arbitrary waveform generator; LO: local oscillator; $90\si{\degree}$h: $90\si{\degree}$ hybrid; OSC: oscilloscope. \emph{Picture credit: Stefan Richter in Ref.~\cite{Richter2020}}}
 \end{figure}
 
-\subsubsection{Sender module (Tx):} The sender module is depicted in Fig.\ref{fig:aqc_experiment}. An external cavity diode laser (PurePhotonics PPCL-$300$ \MT{cite}) with a linewidth of $15$~kHz is tuned to standard telecom wavelength $1550$~nm and acts as the optical carrier. The carrier beam impinges on a $50:50$ beamsplitter which allows for a shared local oscillator (LO) between modules from one output port. From the other output port  coherent state pulses, chosen randomly from QPSK alphabet $\left\{ \ket{+ \alpha_0}, \ket{i \alpha_0}, \ket{-\alpha_0}, \ket{-i \alpha_0}\right\}$, are prepared by using an I/Q modulator (Fujitsu DP-QPSK $40$~Gbps $LiNbO_3$-integrated)\MT{I'm not sure which word "integrated" should be attached to here}. The I/Q modulator is driven at a rate of $1$~GHz by an arbitrary waveform generator (AWG; Keysight M$8195$A). Finally, a variable optical attenuator (VOA) attenuates the coherent states to a final amplitude of either $\alpha$ or $\alpha^\prime$, with $\alpha \le \alpha^\prime \le \alpha_0$.
+\subsubsection{Sender module (Tx):} The sender module is depicted in Fig.\ref{fig:aqc_experiment}. An external cavity diode laser (PurePhotonics PPCL-$300$) with a linewidth of $15$~kHz is tuned to standard telecom wavelength $1550$~nm and acts as the optical carrier. The carrier beam impinges on a $50:50$ beamsplitter which allows for a shared local oscillator (LO) between modules from one output port. From the other output port  coherent state pulses, chosen randomly from QPSK alphabet $\left\{ \ket{+ \alpha_0}, \ket{i \alpha_0}, \ket{-\alpha_0}, \ket{-i \alpha_0}\right\}$, are prepared by using an integrated I/Q modulator (Fujitsu DP-QPSK $40$~Gbps $LiNbO_3$)%\MT{I'm not sure which word "integrated" should be attached to here}. 
+The I/Q modulator is driven at a rate of $1$~GHz by an arbitrary waveform generator (AWG; Keysight M$8195$A). Finally, a variable optical attenuator (VOA) attenuates the coherent states to a final amplitude of either $\alpha$ or $\alpha^\prime$, with $\alpha \le \alpha^\prime \le \alpha_0$.
 
 The coherent states are then sent through the quantum channel to receiver module Rx.
 
 \subsubsection{Receiver module (Rx):}
-Module Rx interferes the received states with the shared local oscillator using the integrated Kylia COH$24$-X $90\si{\degree}$ \MT{what is this?}. The two modules use a shared local oscillator which provides a frame of reference against which heterodyne phase measurement is performed using two balanced optical receivers (Discovery DSC-R$412$) with analog $3$~dB bandwidth of $20$~GHz \MT{what is this?}. In principle the Tx and Rx modules do not need to share a local oscillator and bright phase-reference pulses could be used \MT{cite some stuff.}\footnote{Chat about security loopholes of using shared LO.}
+Module Rx interferes the received states with the shared local oscillator using the integrated Kylia COH$24$-X $90\si{\degree}$s. The two modules use a shared local oscillator which provides a frame of reference against which heterodyne phase measurement is performed using two balanced optical receivers (Discovery DSC-R$412$) with analog $3$~dB bandwidth of $20$~GHz. In principle the Tx and Rx modules do not need to share a local oscillator and bright phase-reference pulses could be used \cite{Huang2015}\footnote{Though note that this may open up additional security issues \cite{Ren2019}.}
 
 Outputs from the optical receivers are digitized using a digital sampling oscilloscope (Tektronix DPO$77002$SX) with a sampling rate of $25$~GS/s. Finally, proprietary digital signal processing (DSP) algorithms are applied to the quadrature time traces. The DSP consists of a high-pass filter which eliminates low-frequency noise contributions to the signal. Finally, a phase-recovery step is performed using phase-reference states which originally had amplitude $\alpha^\prime$. The signal states carrying quantum information which may now be used for a quantum communications task are those which originally had amplitude $\alpha$.
 
-The Tx and Rx modules were connected by either a $2$~km or $20$~km SMF-$28$ optical fiber link which contributes to a total loss of $0.65$~dB or $4.75$~dB, respectively. This implements the realistic metropolitan distances over which the CV platform is expected to be effective. Experiments were performed for several different signal state modulation amplitudes $\alpha$. For each run of the experiment a total of $1.92\times 10^6$ states were sent in frames of $64$ which consisted of four bright reference pulses ($\alpha^\prime$) followed by $60$ signal pulses ($\alpha$). After the DSP step there remained information on $1.54 \times 10^6$ states. 
+The Tx and Rx modules were connected by either a $2$~km or $20$~km SMF-$28$ optical fiber link which contributes to a total loss of $0.65$~dB or $4.75$~dB, respectively. This implements the realistic metropolitan distances over which the CV platform is expected to be effective. Experiments were performed for several different signal state modulation amplitudes $\alpha$. For each run of the experiment a total of $1.92\times 10^6$ states were sent in frames of $64$ which consisted of four bright reference pulses ($\alpha^\prime$) followed by $60$ signal pulses ($\alpha$). After the DSP step there remained information on $1.54 \times 10^6$ states. An example of some raw output data is displayed in Fig.~\ref{fig:aqc_experimental_trace}. The top of the figure displays raw time trace data, while the bottom displays data after the DSP.
+
 
 \begin{figure}[htp]
 \centering
-\includegraphics{aqc/experimental_trace.png}
-\caption{\label{fig:aqc_experimental_trace} Just Fig.5 from Richter2020}
+\includegraphics[draft=false, width=0.6\linewidth]{aqc/QDS_dataplots}
+\caption{\label{fig:aqc_experimental_trace} Top: raw data trace. Bottom: data after DSP. Red: heterodyne outcomes on bright phase-reference states, amplitude $\alpha^\prime$ which are sent at the start of each frame, and allow the phases of the remaining states to be reconstructed. Green: heterodyne measurement outcomes on signal states amplitude $\alpha < \alpha^\prime$. The cryptographic tasks are performed with signal (green) data points only. \emph{Picture credit: Stefan Richter in Ref.~\cite{Richter2020}}}
 \end{figure}
 
-An example of some raw output data is displayed in Fig.~\ref{fig:aqc_experimental_trace}. The top of the figure displays raw time trace data, while the bottom displays data after the DSP.
-
+\clearpage
 \section{Data analysis}
+In this section we will analyse the data which was obtained in the experiment detailed in the previous section. Our starting point is signal data points\footnote{green in Fig.~\ref{fig:aqc_experimental_trace}} which we received from MPL. We will demonstrate how the cryptographic protocols detailed above may be altered to more closely match the realistic data which includes experimental imperfections, and so the ideal figures of merit obtained previously should be interpreted as upper bounds to protocol performance.
+
+\MT{Do some quick analysis of the data here, since I will want to refer to it in the Protocol modifications section.}
+
+\subsection{Protocol modifications}\label{sec:aqc_protocol_modifications}
+Throughout this thesis it has been assumed that an ideal QPSK alphabet has been distributed, with states chosen uniformly and at random. This has allowed us to make several simplifying assumptions. For example in protocol QDS-$f$, these assumptions allowed us to simplify Eq.~\ref{eqn:aposteriori_entropy} as follows
+\begin{equation}
+\sum_{e_k} \text{P}\left(e_k\right) S\left(\rho_{\left. B \given e_k\right.}\right) \rightarrow S\left(\rho_{\left. B \given e_1\right.}\right).
+\end{equation}
+
+\noindent Similarly, in QSS-$b$ we repeatedly used the fact that each QPSK state was equally likely, in order to write Eq.~\ref{eqn:qss_deriv_3}, for example, as
+\begin{equation}
+\text{P}\left(b, c\right) = \frac{1}{16}.
+\end{equation}
+
+\noindent Realistically the states are not sent with identical sending probabilities, nor are they sent with identical amplitudes. We see this from the experimental data in Tab.~\MT{X} where we explicitly write the amplitudes and probabilities of each state from the QPSK alphabet. This imperfection must be taken into account in our bounds for key rate and signature length, which we now do.
+
+\subsubsection{QDS-$b$}
+In QDS-$b$ the key parameter to calculate is $g_{\text{sec}} = \pe - \perr$, which is related to the signature length figure of merit via Eq.~\ref{eqn:aqc_qdsb_efail}. Bob's mismatch probability $\pe$ is made more realistic by changing several steps in the derivation of Holevo information $\chi$. 
+
+For example, under attack BS$0$ we update Bob's \emph{a priori} state, c.f. Eq.~\ref{eqn:qdsb_apriori_state} to be
+\begin{equation}
+\rho_B = \sum_{\alpha_k} \text{P}\left(\alpha_k\right) \dyad{\sqrt{1-T} \alpha_k}
+\end{equation}
+where the amplitudes $\alpha_k$ and sending probabilities $\text{P}\left(\alpha_k\right)$ are derived from data. Bob's \emph{a posteriori} states 
+
+\begin{equation}
+\rho_B^k = \dyad{\sqrt{1-T}\alpha_k}
+\end{equation} 
+and \emph{a posteriori} entropy
+\begin{equation}
+\sum_{\alpha_k}\text{P}\left(\alpha_k\right) S\left(\rho_B^k\right)
+\end{equation}
+now also depend on the measured data and for attacks BS$1$ and EC must be calculated without the simplifications afforded by ideal sending probabilities and equal $\left|\alpha_k\right|$'s. For attack BS$0$ Bob's \emph{a posteriori} entropy vanishes identically because his state is pure.
+
+The honest mismatch probability $\perr$ may be measured directly from the data by observing the probability that a state is eliminated.
+
+\MT{have some figures and numbers here}
+
+\subsubsection{QSS-$b$}
+We will demonstrate the necessary alterations which should be made to mutual information I and Holevo information $\chi$ in protocol QSS-$b$.
+
+\paragraph{Mutual Information I, Eq.~\ref{eqn:qss_deriv_1}}
+The joint Shannon entropy of Bob and Charlie's variables is given by
+\begin{equation}
+\text{H}\left(X_B, X_C\right) = - \sum_{X_B=b, X_C=c} \text{P}\left(b, c\right) \log \text{P}\left(b, c\right)
+\end{equation}
+where $X_B, X_C$ denote the states from QPSK which Bob and Charlie sent, and $\text{P}\left(b, c\right)$ their sending probabilities. We have observed that
+\begin{equation}
+\text{P}\left(b, c\right) = \text{P}\left(b\right) \times \text{P}\left(c\right)
+\end{equation}
+and when variations in the sending probabilities are considered this is no longer equal to $1/16$. 
+
+Secondly, the probability $\text{P}\left(X_A=a \given X_B=b, X_C=c\right)$, Eq.~\ref{eqn:qss_prob2}, should be updated to match the actual amplitudes of the sent coherent states.
+
+\paragraph{Holevo information $\chi$}
+The initial states Eq.~\ref{eqn:qss_initial_states} should be updated to
+\begin{equation}
+\rho_B = \sum_{k=0}^3 \text{P}\left(\beta_k\right) \dyad{\beta_k}_B \qq{and} \rho_C = \sum_{k^\prime=0}^3 \text{P}\left(\gamma_{k^\prime}\right) \dyad{\gamma_{k^\prime}}_C
+\end{equation}
+and therefore Eq.~\ref{eqn:qss_deriv_8} becomes
+\begin{align}
+&\rho_{\left.\mathbb{E} \given X_A, A_B\right.} = \frac{1}{\pi^2}\sum_{k, k^\prime=0}^3 \text{P}\left(b, c\right) \text{P}_B\left(A_B \given \beta_k, T_B\right) \text{P}C\left(\frac{X_A - g A_B}{h} \given \gamma_{k^\prime}, T_C\right) \notag \\
+&\dyad{\sqrt{1-T_B}\beta_k}_{\mathbb{E}_B} \otimes \dyad{\sqrt{1-T_C} \gamma_{k^\prime}}_{\mathbb{E}_C}
+\end{align}
+from which Holevo information $\chi$ is calculated.
+
+\subsubsection{QDS-$f$}
+
+\subsubsection{QKD-$f$}
+%The Shannon entropy $\text{H}\left(X_A\right)$ of Alice's variable is easily modified with the new probability distribution $\text{P}\left(X_A\right)$, and is given by
+%\begin{equation}
+%\text{H}\left(X_A\right) = - \sum_{X_A=a} \text{P}\left(a\right) \log \text{P}\left(a\right)
+%\end{equation}
+%which is easily calculated using the measured $\text{P}\left(a\right)$. The conditional entropy $\text{H}\left(X_A \given X_B\right)$ is calculated following the discussion beneath Eq.~\ref
+
+\MT{Do I want a graph of how this affects Eve's Holevo information, for example?}
+
+
+
 \MT{Include here what things I need to change for each of the protocols to make them realistic. Include here some analysis of the data.}
+
+\subsection{Received data}
 \MT{The starting point for this section should be what I received from MPL.}
 \MT{What do I want to include here?}
+
+\subsection{Protocol performance}
 
 
 \section{Outlook}
