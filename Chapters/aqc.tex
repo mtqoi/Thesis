@@ -8,7 +8,7 @@
 % - make new figure about the roles (just gonna use stefan's figure for now)
 % - make sure I show how each protocol can be made more ``experimentally realistic''.
 % - ensure that my description of QDSb is identical in style to QDSf from earlier
-%
+% - add appendix where I put the states for QDSb under each attack.
 %
 
 
@@ -272,7 +272,7 @@ All that remains is to bound $\pe$. This will expose several of the differences 
 
 %\MT{I am just copying and pasting the following from Richter2020. Which is fine because I wrote it and it hasn't been edited.}
 
-Consider the $j^\text{th}$ signature element. Charlie holds some $c_j$ denoting which state from the QPSK alphabet he sent. Bob will declare an eliminated signature element, $B_j = \left\{b_j^1, b_j^2\right\}$ which is chosen to minimize $\pe$. The $b_j^1, b_j^2$ correspond to adjacent elements of the QPSK alphabet. A mismatch occurs if $b_j^1 = c_j$ or $b_j^2 = c_j$. Additionally, we assume that $B_j$ is the result of some optimal strategy involving Bob's quantum system, $\mathbb{B}_j$.
+Consider the $j^\text{th}$ signature element. Charlie holds some $c_j$ denoting which state from the QPSK alphabet he sent. During Messaging, Bob will declare an eliminated signature element, $B_j = \left\{b_j^1, b_j^2\right\}$ which is chosen to minimize $\pe$ and should be the outcome of some optimal strategy on his system, denoted $\mathbb{B}$. The $b_j^1, b_j^2$ correspond to adjacent elements of the QPSK alphabet, with a mismatch occurring if $b_j^1 = c_j$ or $b_j^2 = c_j$. %Additionally, we assume that $B_j$ is the result of some optimal strategy involving Bob's quantum system, $\mathbb{B}_j$.
 
 We define an error variable $\mathcal{E}$ such that 
 
@@ -299,7 +299,7 @@ which measures whether a mismatch has occurred between $\mathcal{F}_j$ and $\mat
 \noindent since conditioning can never increase entropy. Therefore, by expanding the variable $\mathcal{E}_j$,
 
 \begin{align*}
-\text{H}\left(b_j^1, b_j^2 \given c_j\right) \le &\left(1 - p_e\right) \text{H}\left(b_j^1, b_j^2 \given \mathcal{E}_j = 0, c_j\right) \\ + &\pe \text{H}\left(b_j^1, b_j^2 \given \mathcal{E}_j=1, c_j\right) + \text{h}\left(\pe\right).
+\text{H}\left(b_j^1, b_j^2 \given c_j\right) \le \left(1 - p_e\right) &\text{H}\left(b_j^1, b_j^2 \given \mathcal{E}_j = 0, c_j\right) \\ + &\pe \; \text{H}\left(b_j^1, b_j^2 \given \mathcal{E}_j=1, c_j\right) + \text{h}\left(\pe\right).
 \end{align*}
 
 \noindent Now, $\text{H}\left(b_j^1, b_j^2 \given \mathcal{E}_j=0, c_j\right) \le \log_2\left(2\right) = 1$, and similarly for $\mathcal{E}_j=1$, and so
@@ -332,7 +332,7 @@ Once $\pe$ and $\perr$ are bounded for the protocol, the probability $\varepsilo
 
 \noindent and by choosing $s_B = p_{err} + \left(p_e + p_{err}\right)/4$; $s_C = p_{err} = 3\left(p_e - p_{err}\right)/4$, in order to satisfy the second two equalities, we arrive at 
 
-\begin{equation}\label{eqn:QDSbL}
+\begin{equation}\label{eqn:aqc_qdsb_efail}
 \varepsilon_{fail} \le 2 \exp \left[ - \frac{\left( p_e - p_{err} \right)^2}{16} L \right]
 \end{equation}
 
@@ -340,20 +340,19 @@ Once $\pe$ and $\perr$ are bounded for the protocol, the probability $\varepsilo
 
 \subsubsection{Calculating Holevo}
 
-Finally, we note that under a beamsplitter attack, Eve's \emph{a priori} state is
+Finally, we note that under a beamsplitter attack BS$0$ Bob's \emph{a priori} state is
 \begin{equation}
-\rho_E = \sum_{k=0}^3 |\sqrt{1-T}\alpha_k\rangle\langle\sqrt{1-T}\alpha_k|
+\rho_B = \sum_{k=0}^3 |\sqrt{1-T}\alpha_k\rangle\langle\sqrt{1-T}\alpha_k|
 \end{equation}
-when states $|\alpha_k\rangle$ from the QPSK alphabet are sent through lossy channel with transmittivity T. Eve's \emph{a posteriori} state is simply $\rho_{E}^k = |\sqrt{1-T}\alpha_k\rangle\langle \sqrt{1-T}\alpha_k|$, from which her Holevo information is calculated as
+when states $|\alpha_k\rangle$ from the QPSK alphabet are sent through lossy channel with transmittivity T. Bob's \emph{a posteriori} state is simply $\rho_{B}^k = |\sqrt{1-T}\alpha_k\rangle\langle \sqrt{1-T}\alpha_k|$, from which his Holevo information is calculated as
 
 \begin{equation}
-\chi = S\left(\rho_E\right) - \sum_{k=0}^3 p\left(k\right) S\left(\rho_E^k\right).
+\chi = S\left(\rho_B\right) - \sum_{k=0}^3 p\left(k\right) S\left(\rho_E^k\right).
 \end{equation}
-with $S$ the Von Neumann entropy.
+with $S$ the Von Neumann entropy. Under attack BS$0$ state $\rho_B^k$ is pure and so $\chi = S\left(\rho_B\right)$. Other attacks may be readily considered, and we present the requisite states in Sec.~\ref{appendix:qdsb_states}. %do this
+Bob's mismatch rate $\pe$ may now be calculated and we obtain figure of merit signature length $L$ via Eq.~\ref{eqn:aqc_qdsb_efail}.
 
-\MT{Note: I will need to smooth out the above discussion and make it appropriate for use here.}
-\MT{perhaps add some closing remarks or extra stuff to this section.}
-\MT{gotta add some postselection stuff.}
+
 
 \subsection{QDS-$b$ postselection}
 
