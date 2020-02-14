@@ -433,7 +433,7 @@ The mutual information I is calculated in a similar fashion to the protocol QSS-
 \noindent The Shannon entropy of Alice's variable is equal to $\sum_{X_A=a} - \text{P}\left(a\right) \log \text{P}\left(a\right)$ and is equal to $1/4$ in the ideal case. .
 
 We may expand the conditional entropy in Eq.~\ref{eqn:qkdf_deriv_1} as
-\begin{equation}
+\begin{equation}\label{eqn:qkdf_deriv_2}
 \text{H}\left(X_A \given X_B\right) = \int\limits_{b \in \mathbb{C}} \Diff2 b \; \text{P}\left(X_B=b\right) \text{H}\left(X_A \given X_B=b\right)
 \end{equation}
 where the integration is performed over all possible outcomes $b$ which Bob can obtain. The mutual information I may then be calculated by expanding $\text{H}\left(X_A \given X_B=b\right)$ and then using Bayes's formula. 
@@ -449,7 +449,7 @@ When a coherent state $\alpha_k$ is chosen uniformly at random, the two-mode out
 
 \noindent and so after Bob's heterodye measurement, outcome $b \in \mathbb{C}$, Eve's conditional state is
 
-\begin{equation}
+\begin{equation}\label{eqn:qkdf_eve_conditional}
 \rho_{\left. E \given b\right.} = \frac{1}{4} \frac{1}{\text{P}\left(b\right)} \sum_{\alpha_k} \text{P}\left(b \given \alpha_k, T\right) \times \dyad{\sqrt{1-T}\alpha_k}_E
 \end{equation}
 when $\text{P}\left(b\right) = \sum_{\alpha_k}\text{P}\left(b \given \alpha_k, T\right)$ denotes the total probability that Bob measures $b$.
@@ -463,7 +463,7 @@ S_{\text{aposteriori}} = \int\limits_{b \in \mathbb{C}} \Diff2 b \; \text{P}\lef
 \noindent and we note that each state $\rho_{\left.E\given b \right.}$ has in general a different entropy, so Eq.~\ref{eqn:qkdf_aposteriori_entropy} cannot be simplified further. 
 
 Eve's \emph{a priori} entropy is
-\begin{equation}
+\begin{equation}\label{eqn:qkdf_apriori_entropy}
 S_{\text{apriori}} = S\left[\, \int\limits_{b \in \mathbb{C}} \Diff2 b \; \text{P}\left(b\right) \rho_{\left. E \given b \right.}\right],
 \end{equation}
 from which the Holevo information $\chi$ may be calculated.
@@ -575,19 +575,50 @@ and therefore Eq.~\ref{eqn:qss_deriv_8} becomes
 from which Holevo information $\chi$ is calculated.
 
 \subsubsection{QDS-$f$}
+Protocol QDS-$f$ requires us to recalculate $g_{\text{sec}} = \pe - \perr$ with these experimental imperfections. Probability $\perr$ may be estimated directly from data and is equivalent to the analysis performed above for QDS-$b$.
+
+Probability $\pe$ requires us to reconsider certain steps in the calculation of Holevo information $\chi$. We consider attack BS$0$, and other attacks follow suit. After the channel, the state held by Charlie and dishonest Bob is, c.f. Eq.~\ref{eqn:qds_after_channel},
+
+\begin{equation}
+\sum_{\alpha_k} \text{P}\left(\alpha_k\right)  \left[ \dyad{\sqrt{T}\alpha_k}_C \otimes \dyad{\sqrt{1-T}\alpha_k}_B\right],
+\end{equation}
+and so Bob's conditional state becomes, c.f. Eq.~\ref{eqn:qds_bob_conditional_state}
+\begin{equation}
+\rho_{\left.B \given c\right.} = \frac{1}{\text{P}\left(c\right)} \sum_{\alpha_k} \text{P}\left(\alpha_k\right) \text{P}\left(c \given \alpha_k, T\right) \times \dyad{\sqrt{1-T}\alpha_k}_B
+\end{equation}
+where $\text{P}\left(c \given \alpha_k, T\right)$ is Charlie's probability to measure $c$ and $\text{P}\left(c\right) = \sum_{\alpha_k}\text{P}\left(c \given \alpha_k, T\right)$ which is now no longer symmetric.
+
+Each of Bob's states conditioned on an eliminated signature element $e_k$ now have different entropies and different probabilities $\text{P}\left(e_k\right)$ and so we must write the Holevo information out in full, c.f. Eq.~\ref{eqn:qds_deriv_holevo},
+
+\begin{equation}
+\chi = S\left(\sum_{e_k} \text{P}\left(e_k\right) \rho_{\left.B\given e_k\right.}\right) - \sum_{e_k} \text{P}\left(e_k\right) S\left(\rho_{\left.B\given e_k\right.}\right)
+\end{equation}
 
 \subsubsection{QKD-$f$}
-%The Shannon entropy $\text{H}\left(X_A\right)$ of Alice's variable is easily modified with the new probability distribution $\text{P}\left(X_A\right)$, and is given by
-%\begin{equation}
-%\text{H}\left(X_A\right) = - \sum_{X_A=a} \text{P}\left(a\right) \log \text{P}\left(a\right)
-%\end{equation}
-%which is easily calculated using the measured $\text{P}\left(a\right)$. The conditional entropy $\text{H}\left(X_A \given X_B\right)$ is calculated following the discussion beneath Eq.~\ref
-
-\MT{Do I want a graph of how this affects Eve's Holevo information, for example?}
 
 
+%\MT{Do I want a graph of how this affects Eve's Holevo information, for example?}
 
-\MT{Include here what things I need to change for each of the protocols to make them realistic. Include here some analysis of the data.}
+Finally, we consider how the protocol QKD-$f$ may be updated to allow for non-uniform QPSK alphabets.
+
+\paragraph{Mutual Information I, Eq.~\ref{eqn:eqn:qkdf_deriv_1}}
+
+The Shannon entropy $\text{H}\left(X_A\right)$ of Alice's variable is easily modified with the new probability distribution $\text{P}\left(X_A\right)$, and is given by
+\begin{equation}
+\text{H}\left(X_A\right) = - \sum_{X_A=a} \text{P}\left(a\right) \log \text{P}\left(a\right)
+\end{equation}
+which is easily calculated using the measured $\text{P}\left(a\right)$. The conditional entropy $\text{H}\left(X_A \given X_B\right)$ is readily calculated following the discussion beneath Eq.~\ref{eqn:qkdf_deriv_2}\footnote{See also the discussion for alterations to protocol QSS-$f$, which is analogous.}
+
+\paragraph{Holevo information $\chi$}
+Eve's conditional state after Bob's heterodyne measurement becomes, c.f. Eq.~\ref{eqn:qkdf_eve_conditional},
+\begin{equation}\label{eqn:qkdf_eve_conditional_modified}
+\rho_{\left. E \given b\right.} = \frac{1}{\text{P}\left(b\right)} \sum_{\alpha_k} \text{P}\left(\alpha_k\right) \text{P}\left(b \given \alpha_k, T\right) \times \dyad{\sqrt{1-T}\alpha_k}_E,
+\end{equation}
+with $\text{P}\left(b\right) = \sum_{\alpha_k} \text{P}\left(b \given \alpha_k, T\right)$ also changing and becoming asymmetric. 
+
+Eve's \emph{a posteriori} and \emph{a priori} entropies are calculated identically to Eqs.~\ref{eqn:qkdf_aposteriori_entropy},~\ref{eqn:qkdf_apriori_entropy} using Eq.~\ref{eqn:qkdf_eve_conditional_modified} as a starting point.
+
+
 
 \subsection{Received data}
 \MT{The starting point for this section should be what I received from MPL.}
