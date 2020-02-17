@@ -38,13 +38,21 @@
 \newcommand{\rps}{\mathcal{R}_{\text{PS}}}
 \newcommand{{\systemB}}{QDS-$b$-QSS-$b$-CV-QPSK}
 \newcommand{{\systemF}}{QDS-$f$-QKD-$f$-CV-QPSK}
+%\newcommand{\ddt}{\frac{\mathrm{d}}{\mathrm{d}t}
+%\newcommand*\ddtx[1]{\frac{\mathrm{d}#1}{\mathrm{d}t}
+%\newcommand{\ddt}{\frac{\mathrm{d}}{\mathrm{d}t}}
+%\newcommand{\ddtx}[1]{\frac{\mathrm{d}#1}{\mathrm{d}t}}
+\newcommand{\ddt}[1][]{\frac{\mathrm{d}#1}{\mathrm{d}t}}
+
+
 
 \includeonly{
 	%chapters/introduction,
 	%chapters/crypto_intro,
 %	chapters/qds
 %	chapters/qss,
-	chapters/aqc
+%	chapters/aqc
+	chapters/phog
 }
 
 
@@ -72,7 +80,7 @@
 
 \begin{document}
 %\maketitle
-\tableofcontents
+%\tableofcontents
 
 %\part{Secure quantum networks}
 
@@ -84,9 +92,9 @@
 %\input{chapters/qds_lit_review}
 %\include{chapters/qds}
 %\include{chapters/qss}
-\include{chapters/aqc}
+%\include{chapters/aqc}
 %\part{PhoG: generation of sub-Poissonian light}
-
+\include{chapters/phog}
 
 \bibliographystyle{unsrt} 
 %\bibliography{qds_bib} 
