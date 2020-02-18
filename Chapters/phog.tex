@@ -108,12 +108,13 @@ In Fig.~\ref{fig:phog_lindblad_two_photon_loss} we plot the evolution of $\langl
 \MT{TODO: analytically show in fock basis the steady state.}
 
 \subsection{$\hat{A} = \hat{a}^3$}
-We might guess that the steady state of the three-photon loss term $\hat{a}^3$ is likewise a superposition of $\ket{0}, \ket{1}$ and $\ket{2}$
-\begin{equation}
-\rho_a\left(t\rightarrow\infty\right) \stackrel{?}{=} \ket{0} + e^{i \phi}\ket{1} + e^{i \varphi}\ket{2}
+We might guess that the steady state $\ket{\psi}$ of the three-photon loss term $\hat{a}^3$ is likewise a superposition of $\ket{0}, \ket{1}$ and $\ket{2}$
+\begin{equation}\label{eqn:phog_three_photon_loss_ss}
+\rho_a\left(t\rightarrow\infty\right) = \dyad{\psi} \qq{with} \ket{\psi} \stackrel{?}{=} \ket{0} + e^{i \phi}\ket{1} + e^{i \varphi}\ket{2}
 \end{equation}
 \MT{check how the state is normalized}
-with phases $\phi, \varphi$ in general depending on the initial coherent state $\dyad{\alpha}$. \MT{TODO: investigate this numerically}
+with phases $\phi, \varphi$ in general depending on the initial coherent state $\dyad{\alpha}$. \MT{TODO: investigate this numerically}.
+Indeed, we can deduce that Eq.~\ref{eqn:phog_three_photon_loss_ss} must be a steady state of the system by noting that $\hat{a}^3 \ket{\psi} = 0$ which implies $\ddt \rho_a = 0$.
 
 \MT{TODO: analytically show in fock basis the steady state}
 
