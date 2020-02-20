@@ -150,7 +150,7 @@ We plot the evolution of fidelities between $\rho_a\left(t\right)$ evolving with
 \end{figure}
 
 \clearpage
-\subsection{$\hat{A} = \hat{a}\left(\hat{a}^\dagger \hat{a} - 1\right)$}
+\subsection{$\hat{A} = \hat{a}\left(\hat{a}^\dagger \hat{a} - 1\right)$}\label{sec:phog_single_mode_ncl_1}
 We have seen that the choice of $\hat{A}$ can give drastically different steady states of $\rho_a$,  from the uninteresting vacuum to the highly quantum and useful phase-state. We therefore wish to consider which choices for $\hat{A}$ will give rise to a Fock state $\dyad{n}$
 
 The choice 
@@ -159,13 +159,17 @@ The choice
 \end{equation}
 may be interpreted as a single-photon loss with a rate which depends on photon number. We can see that the loss rate will go to zero for state $\dyad{1}$, and so suspect that the single-photon state $\dyad{1}$ is a steady state of this loss mechanism.
 
+The Lindblad equation which we solve is
+\begin{equation}\label{eqn:phog_ncl_lindblad}
+\ddt \rho_a = \gamma \left[ \hat{a}\left(\hat{n}-1\right) \rho \left(\hat{n}-1\right)\hat{a}^\dagger - \frac{1}{2} \rho \left(\hat{n}-1\right) \hat{n} \left(\hat{n}-1\right) - \frac{1}{2} \left(\hat{n}-1\right)\hat{n}\left(\hat{n}-1\right) \rho \right]
+\end{equation}
+and for convenience we have written the photon-number operator $\hat{n}$ where possible.
 %The vacuum state $\dyad{0}$ also happens to be a steady-state of $\ncl$, but \MT{its coefficient remains constant, so we obtain $\dyad{1}$ in the limit of $\alpha\rightarrow \infty$}
-
-
 We examine the evolution of $\rho_a$ in Fig.~\ref{fig:phog_A_ncl} and plot the evolution of photon number, $\langle \hat{x}\rangle, \langle \hat{p}\rangle$ in (a). We observe non-exponential decay of photon-number expectation to $1$ %TODO: show that it is non-exponential. (e.g. try fitting an exponential to it)
 while in (b) the fidelity between $\rho_a\left(t\right)$ and $\dyad{1}$ increases to $1$, implying that this choise of $\hat{A}$ does indeed have a single-photon steady state. Even after short times $t < 0.1$ the fidelity to an equivalent coherent state quickly decreases (and the quadrature variances quickly increase over similar timescale), implying a rapid increase in non-classicality of the system.\footnote{We shall explore and quantify this later.}
 
 Therefore, we deduce that the decay operator $\hat{a}\left(\hat{a}^\dagger \hat{a} - 1\right)$ is a useful candidate for driving our system towards the highly nonclassical single-photon state. In the remainder of this chapter our goal will be to find a physical system which can efficiently implement this decay operator.
+
 
 
 \begin{figure}[htp]
@@ -183,17 +187,88 @@ Therefore, we deduce that the decay operator $\hat{a}\left(\hat{a}^\dagger \hat{
 \caption{\label{fig:phog_A_ncl}$\hat{A} = \hat{a}\left(\hat{a}^\dagger \hat{a} - 1\right)$ (a) Operator expectation values for state $\rho_a\left(t\right)$ as it evolves. An initially coherent state with $\alpha=3.0$ decays to a state with $\langle \hat{n}\rangle=1$, which we confirm as state $\dyad{1}$ by considering the fidelity in (b). Horizontal gridlines displayed in black, dashed.}
 \end{figure}
 
+To gain some insight into the action of $\ncl$ let us first write the Lindblad equation~\ref{eqn:phog_ncl_lindblad} in Fock basis for density matrix element $\rho_{m, n}$
+\begin{align}\label{eqn:phog_ncl_lindblad_fock}
+&\ddt \rho_{m, n} = \bra{m} \ddt \rho \ket{n} \notag  \\
+%
+&= \gamma \left[ m \sqrt{m+1} n \sqrt{n+1} \, \rho_{m+1, n+1} - \frac{1}{2} \left(n-1\right)^2 n\, \rho_{m, n} - \frac{1}{2} \left(m-1\right)^2 m\, \rho_{m, n}\right],
+\end{align}
+and consider some specific matrix elements. Immediately we see that Eq.~\ref{eqn:phog_ncl_lindblad_fock} couples diagonal elements $m=n$ to diagonal elements and so an analysis of the photon-number statistics is possible only considering diagonal elements of the density matrix, and ignoring coherences. We obtain, for example $\ddt \rho_{1, 1}=2 \gamma \rho_{2, 2}$ which is greater than zero, and so $\forall t$ we expect the single-photon contribution $\rho_{1,1}$ to increase, c.f. Fig.~\ref{fig:phog_A_ncl}b. 
+
+The elements $\rho_{0, 0}, \rho_{0, 1}$ and $\rho_{1, 0}$ give
+\begin{equation}
+\ddt \rho_{0,0} = 0, \qq{} \ddt \rho_{0, 1} = 0, \qq{and} \ddt\rho_{1, 0} = 0 
+\end{equation}
+which implies that these elements are constant in time. The single-photon state requires zero in each of these elements, and so we may predict that high fidelity between $\rho_a$ and $\dyad{1}$ may only be obtained when $\rho_{0,0}\left(t=0\right), \rho_{0, 1}\left(t=0\right), \rho_{1, 0}\left(t=0\right) \ll 1$. This implies, in particular, that high fidelity with $\dyad{1}$ is not obtainable for coherent states with small amplitude $\alpha$.\footnote{The requirement of large $\alpha$ for the input coherent state is not very restrictive, and as we shall see in the next section there are additional reasons to prefer $\alpha \gg 1$}. In Fig.~\ref{fig:phog_fidelity_ncl_vs_alpha} we show this explicitly.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=0.6\linewidth, draft=false]{phog/fidelities_ncl1_vs_alpha}
+\caption{\label{fig:phog_fidelity_ncl_vs_alpha} The fidelity of $\rho_a\left(t\rightarrow\infty\right)$ to single-photon state $\dyad{1}$ depends on $\alpha$ since the density matrix elements $\rho_{0, 0}, \rho_{0, 1}$ and $\rho_{1, 0}$ are constant in time. This helps to quantify the intuition that in our lossy system a state with on average less than $1$ photon cannot be used to increase the photon number.}
+\end{figure}
+
+
+
+
 Before we move on, let us quickly explore the related operator $\hat{a}\left(\hat{a}^\dagger \hat{a} -2\right)$. Based on the above discussion we might reasonably expect the steady-state to be $\dyad{2}$, and this is indeed what we see in Fig.~\ref{fig:phog_A_ncl2}, where the fidelity to the two-photon state increases to $1$.
 
 \begin{figure}[htp]
 \centering
 \includegraphics[width=0.6\linewidth, draft=false]{phog/fidelities_ncl2}
-\caption{\label{fig:phog_A_ncl2}}
+\caption{\label{fig:phog_A_ncl2} $\hat{A} = \hat{a}\left(\hat{a}^\dagger \hat{a} - 2\right)$. The steady-state of this loss operator is $\dyad{2}$ the fidelity of $\rho_a$ to this state increases to $1$.}
 \end{figure}
 
+\MT{add some references and chat about ``nonlinear coherent states''.}
 
 
 \clearpage
 \section{Including loss}
-We have seen that the loss operator $\ncl$ is a good canditate for driving an initial coherent state towards a single photon state $\ket{1}$. Any system, therefore, which can implement the Lindblad equation~\ref{eqn:phog_lindblad_1} with $\hat{A} = \ncl$ will asymptotically give rise to single-photon Fock states. 
+We have seen that the loss operator $\ncl$ is a good canditate for driving an initial coherent state towards a single photon state $\ket{1}$. Any system, therefore, which can implement the Lindblad equation~\ref{eqn:phog_lindblad_1} with $\hat{A} = \ncl$ will asymptotically give rise to single-photon Fock states, although fidelities close to $1$ are obtainable even at finite time, Fig.~\ref{fig:phog_A_ncl}b. 
+
+In a realistic situation however it is unlikely that a system can be designed to implement $\ncl$ only, and so we must consider how the final states are affected by additional loss mechanisms. In an optical system the single-photon (``linear'') loss can never be avoided, so we will explore its effect on the nonlinear coherent loss mechanism. \MT{make sure I have defined NCL before now.} To do this, we modify our original Lindblad equation to
+\begin{equation}\label{eqn:phog_lindblad_a_ncl}
+\ddt \rho_a =  - i \left[ \hat{H}, \rho_a\right] + \gamma_1 \mathcal{L}\left(\hat{a}\right)\rho_a + \gncl \mathcal{L}\left(\ncl\right)\rho_a
+\end{equation}
+with $\gamma_1$ the decay rate via the single-photon loss channel $\hat{a}$, and $\gncl$ the loss rate via NCL $\ncl$.
+
+We can immediately see that $\dyad{1}$ is only a steady-state of Eq.~\ref{eqn:phog_lindblad_a_ncl} when $\gamma_1 = 0$, in which case we revert to the analysis of Sec.~\ref{sec:phog_single_mode_ncl_1}. For all $\gamma_1 > 0$, $\dyad{0}$ is a steady-state, and a consideration of $\rho_{m, n}$ shows that $\rho_{0, 0}, \rho_{0, 1}, \rho_{1, 0}$ are no longer constant in time. 
+
+Physically we see therefore that the presence of linear loss ($\gamma_1 > 0$) leads to a degradation of the highly-quantum output state which can be reached under NCL, as the single-photon loss mechanism pushes $\rho_a$ towards the vacuum. We see this explicitly in Fig.~\ref{fig:phog_A_ncl_loss}b (c.f. Fig.~\ref{fig:phog_A_ncl}), where an intially increasing fidelity with $\dyad{1}$ eventually dies away, and fidelity to the vacuum state increases to $1$. 
+
+We examine the maximum attainable fidelity to $\dyad{1}$ in Fig.~\ref{fig:phog_max_fidelity}. The maximum fidelity decreases with increasing $\gamma_1$, but increasing $\alpha$ appears to allow larger fidelities to be reached at the same $\gamma_1$ (c.f. Fig.~\ref{fig:phog_fidelity_ncl_vs_alpha}). We will explore this phenomenon further in Sec.~\MT{X}.
+
+
+
+
+\begin{figure}[htp]
+\centering
+	\begin{subfigure}{0.6\linewidth}
+	\centering
+	\includegraphics[width=\linewidth, draft=false]{phog/expects_ncl1_and_a}
+	\caption{}
+	\end{subfigure}
+	\begin{subfigure}{0.6\linewidth}
+	\centering
+	\includegraphics[width=\linewidth, draft=false]{phog/fidelities_ncl1_and_a}
+	\caption{}
+	\end{subfigure}
+\caption{\label{fig:phog_A_ncl_loss} NCL $\ncl$ and linear loss $\hat{a}$. Initial coherent state amplitude $\alpha=3.0$, and $\gncl=8.0$. (a) Operator expectation values. Solid: $\langle \hat{a}^\dagger \hat{a}\rangle$. The presence of linear loss $\gamma_1 > 0$ ensures that the photon number decays to $0$. Dashed: $\text{Var}\left(\hat{x}\right)$. Similarly, for $\gamma_1 > 0$ we see the variance in $x$ return to its initial value, hinting that our state is being pushed towards vacuum. (b) Fidelities of $\rho_a\left(t\right)$ against vacuum (blue), single-photon state (red) and coherent state with equivalent photon-number expectation (orange). Solid: $\gamma_1 = 0$. Dot-dashed: $\gamma_1 = 2$. Dashed: $\gamma_1 = 20$. The presence of linear loss pushes $\rho_a$ away from the single-photon state for $t > 0.1$. For $t < 0.1$ the system is dominated by NCL}
+\end{figure}
+
+%It is only for $t > 0.1$ that the fidelity decays, even for large $\gamma_1 = 20$, and for $t < 0.1$ the system seems dominated by NCL $\ncl$. 
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=0.6\linewidth, draft=false]{phog/max_fidelities_vs_gamma1_ncl1_and_a}
+\caption{\label{fig:phog_max_fidelity} Maximum attainable fidelity between $\rho_a$ and $\dyad{1}$ at different linear loss levels $\gamma_1$. Linear loss drives $\rho_a$ towards the vacuum and destroys the quantumness of our state, but over short times the fidelity to $\dyad{1}$ appears independent of $\gamma_1$, Fig.~\ref{fig:phog_A_ncl_loss}. Here, we observe that after $\gamma_1 \approx 7.5$ the maximum attainable fidelity is practically independent of linear loss rate, while it depends on $\alpha$. We shall explore this further in Sec.~\MT{X}.}
+\end{figure}
+
+Figure~\ref{fig:phog_A_ncl_loss}b suggests an interesting phenomenon: over short timescales the system appears to be dominated by NCL $\ncl$. Consider for example the fidelity between $\rho_a\left(t < 0.05\right)$ and $\dyad{\alpha^\prime}$ denoting a coherent state with equivalent photon-number expectation. By considering this alone, for short times the behaviour is indistinguishable from the case with $\gamma_1 = 0$. Similar reasoning applies also to the fidelities between $\rho_a\left(t < 0.1\right)$ and $\dyad{1}$, where the evolution is almost independent of $\gamma_1$.
+
+From fidelity $\mathcal{F}\left( \rho_a\left(t<0.1\right), \dyad{0}\right)$ alone, Fig.~\ref{fig:phog_A_ncl_loss} even suggests that $\gamma_1 \gg 0$ might help drive $\rho_a$ towards the single-photon state faster than in the lossless case. We infer that loss actually is not helpful here, since after about $t=0.05$ the fidelity to $\dyad{\alpha^\prime}$ begins to increase again. This suggests that fidelity might not always be a useful measure of the desired behaviour when both nonlinear dissipation and linear loss are included.\footnote{Of course, we could have guessed this based on Fig.~\ref{fig:phog_lindblad_single_photon_loss}b as the fidelity to $\dyad{1}$ increases until $t\approx 0.25$ while the state remains completely coherent.}
+
+
+
+\MT{ segue into talking about our two options. 1) reduce time evolution of our system. 2) use bright input state }
+
 
