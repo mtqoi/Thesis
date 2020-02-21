@@ -28,6 +28,8 @@
 
 
 \newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
+\newcommand{\ncl}{\hat{a}\left(\hat{a}^\dagger \hat{a} - 1\right)}
+\newcommand{\gncl}{\gamma_{\text{NCL}}}
 \newcommand*\erfc{\text{erfc}}
 \newcommand{\perr}{\text{p}_{\text{err}}}
 \newcommand{\perrps}{\perr\left(\Delta_r, \Delta_\theta\right)}
@@ -38,13 +40,15 @@
 \newcommand{\rps}{\mathcal{R}_{\text{PS}}}
 \newcommand{{\systemB}}{QDS-$b$-QSS-$b$-CV-QPSK}
 \newcommand{{\systemF}}{QDS-$f$-QKD-$f$-CV-QPSK}
+\newcommand{\ddt}[1][]{\frac{\mathrm{d}#1}{\mathrm{d}t}}
 
 \includeonly{
 	chapters/introduction,
 	chapters/crypto_intro,
 	chapters/qds,
 	chapters/qss,
-	chapters/aqc
+	chapters/aqc,
+	chapters/phog
 }
 
 
@@ -85,6 +89,7 @@
 \include{chapters/qss}
 \include{chapters/aqc}
 \part{PhoG: generation of sub-Poissonian light}
+\include{chapters/phog}
 
 
 \bibliographystyle{unsrt} 
