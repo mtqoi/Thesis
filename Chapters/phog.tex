@@ -20,7 +20,7 @@ Goal of chapter: analyse and model the PhoG device and its efficacy for producin
 \caption{\label{fig:phog_models} Hierarchy of models of the phog device, from least realistic (left) to most realistic (right). We will discuss each model in turn throughout the rest of this chapter. \MakeUppercase{\romannumeral 1}: Single-mode model. \MakeUppercase{\romannumeral 2}: Two-mode model. \MakeUppercase{\romannumeral 3}: Three-mode model. \MakeUppercase{\romannumeral 4}: Multi-mode model. \MakeUppercase{\romannumeral 5} Multi-mode model embedded in glass. }
 \end{figure}
 
-\section{Single-mode model}
+\section{Single-mode model}\label{sec:phog_single_mode_model}
 
 \begin{figure}[htp]
 \centering
@@ -222,7 +222,7 @@ Before we move on, let us quickly explore the related operator $\hat{a}\left(\ha
 
 
 \clearpage
-\section{Including loss}
+\section{Including loss}\label{sec:phog_including_loss}
 We have seen that the loss operator $\ncl$ is a good canditate for driving an initial coherent state towards a single photon state $\ket{1}$. Any system, therefore, which can implement the Lindblad equation~\ref{eqn:phog_lindblad_1} with $\hat{A} = \ncl$ will asymptotically give rise to single-photon Fock states, although fidelities close to $1$ are obtainable even at finite time, Fig.~\ref{fig:phog_A_ncl}b. 
 
 In a realistic situation however it is unlikely that a system can be designed to implement $\ncl$ only, and so we must consider how the final states are affected by additional loss mechanisms. In an optical system the single-photon (``linear'') loss can never be avoided, so we will explore its effect on the nonlinear coherent loss mechanism. \MT{make sure I have defined NCL before now.} To do this, we modify our original Lindblad equation to
@@ -379,8 +379,17 @@ The Lindblad equation describing this three-mode model is
 \end{equation}
 where the subscript $3$ denotes that we are dealing with this three-mode model. We have taken modes $a$ and $b$ to be coupled to independent Markovian reservoirs with rate $\gamma_L$ which models the conventional linear loss. The Hamiltonian is taken to be $\hat{H}_3 = \hat{H}_3^{\text{int}} + \hat{H}_3^{\text{Kerr}}$, where
 \begin{align}
-\hat{H}_3^{\text{int}} = g_a \hat{a}^\dagger \hat{c}_0 + g_b \hat{b}^\dagger \hat{c}_0 + \hc
+&\hat{H}_3^{\text{int}} = g_a \hat{a}^\dagger \hat{c}_0 + g_b \hat{b}^\dagger \hat{c}_0 + \hc \notag \\
+%
+\hat{H}_3^{\text{Kerr}} = \frac{U}{2} \sum_{x} \hat{x}^\dagger \hat{x}^\dagger \hat{x} \hat{x} \qq{with} \hat{x} \in \left\{\hat{a}, \hat{b}, \hat{c}_0\right\}.
 \end{align}
+The interaction Hamiltonian $\hat{H}_3^{\text{int}}$ describes linear coupling between modes, while the Kerr Hamiltonian $\hat{H}_3^{\text{Kerr}}$ describes the self-Kerr interaction (self-phase modulation)% Check that these are indeed equivalent
+on each mode. This Hamiltonian may be realised, for example, by evanescently coupled waveguides in a $\chi^{\left(3\right)}$ glass. The $U$ is the Kerr nonlinear interaction constant, and we will relate this to glass properties in Sec.~\MT{X} below.
+
+The three-mode model Eq.~\ref{eqn:phog_lindblad_three_mode_model}, while a physically useful starting point for building a system which accurately simulates NCL, is as yet too complicated to difficult to analyse, either analytically or using the numerical methods which proved useful for the single mode model in Secs.~\ref{sec:phog_single_mode_model},~\ref{sec:phog_including_loss}. \MT{I should have an appendix where I discuss the numerical methods which I used in that section.}
+
+We may reduce the complexity of Eq.~\ref{eqn:phog_lindblad_three_mode_model} by assuming that the decay rate $\gamma_c$ of mode $c_0$ into the reservoir $R$ is large enough that mode $c_0$ completely decays on a much faster timescale than modes $a, b$. This will allow for adiabatic elimination of mode $c_0$, as we now show.
+\MT{TODO: show this calculation here.}
 
 
 
