@@ -345,25 +345,54 @@ We vary initial coherent state amplitude $\alpha$ and plot the initial stages of
 
 
 \subsection{Summary of NCL effects}
-Let us conclude by displaying the two signature behaviours of NCL under the single-mode model, using parameters which in subsequent sections we will show to be realistic choices. For reasons which will become apparent, we take \MT{$\gamma$ parameters} and solve
+Let us conclude by displaying the two signature behaviours of NCL under the single-mode model, using parameters which in subsequent sections we will show to be realistic choices. For reasons which will become apparent, we take $\gamma_2 = 0.0005, \gamma_3 = 0.002$ and solve
 \begin{equation}\label{eqn:phog_full_single_mode}
 \ddt \rho_a = \left[\gamma_1 \mathcal{L}\left(\hat{a}\right) + \gamma_2 \mathcal{L}\left(\hat{a}^2\right) + \gamma_3 \mathcal{L}\left(\ncl\right) \right] \rho_a
 \end{equation}
-where we have additionally included two-photon loss $\hat{a}^2$. We expect to see the following behaviours of $\rho_a$:
+where we have additionally included two-photon loss $\hat{a}^2$. We see the following behaviours of $\rho_a$:
 
 \begin{itemize}
-\item Nonlinear decay of $\ev{\hat{n}}$
-\item $Q < 0$.
+\item $Q < 0$ Fig.~\ref{fig:phog_fig3paper}a.
+\item Nonlinear decay of $\ev{\hat{n}}$ Fig.~\ref{fig:phog_fig3paper}b.
 \end{itemize}
 
-\noindent which will be good indicators that the system is experiencing nonlinear coherent loss
+\noindent which are good indicators that the system is experiencing nonlinear coherent loss. Throughout the rest of this Chapter we hope to observe these two signature behaviours in increasingly complex models.
+
+\begin{figure}[htp]
+\centering
+	\begin{subfigure}{0.6\linewidth}
+	\centering
+	\caption{}
+	\includegraphics[draft=false]{phog/Q_paper_fig3_noloss_varalpha}
+	\end{subfigure}
+	\begin{subfigure}{0.6\linewidth}
+	\centering
+	\caption{}
+	\includegraphics[draft=false]{phog/NL_decay_paper_fig3_noloss_varalpha}
+	\end{subfigure}
+\caption{\label{fig:phog_fig3paper} Signature behaviours of NCL. (a) Generation of sub-Poissonian light, as evidenced by $Q<0$. Linear loss $\gamma_1=0$ and so the maximum value of $\left|Q\right|$ is obtained for most choices of $\alpha$, but the time taken to reach maximum $Q$ decreases as initial $\alpha$ increases. (b) Nonlinear decay of photon-number expectation $\ev{\hat{n}}$. Intensity-dependent loss causes states with large photon numbers to decay very quickly, while states with similar photon numbers experience the same decay rate.}
+\end{figure}
+
+Varying $\gamma_1$ and $\alpha$, Fig.~\ref{fig:phog_fig3paper2}, we see that although linear loss $\gamma_1$ causes progressively worse values for $Q$, the dynamics are approximately independent of $\gamma_1$ over short timescales. However, for a given large $\gamma_1$, larger values of $\left|Q\right|$ can be reached by increasing the initial coherent state amplitude. Therefore, our recipe for generating non-classical states with highly sub-Poissonian photon-number statistics is to design a system which obeys Eq.~\ref{eqn:phog_full_single_mode} and allow an initially bright coherent state to evolve for a very short amount of time. In the limit $\gamma_1 \rightarrow 0$ this can generate states with $Q = -0.8$ (or $Q=-1$ if $\gamma_2 \rightarrow 0$ also), while for all $\gamma_1 > 0$ we can force $Q \rightarrow -0.8$ by choosing $\alpha \gg 1$. The state is no longer close to a single-photon state, e.g. the best $Q$ in Fig.~\ref{fig:phog_fig3paper2}b occurs when the state with initially $\ev{\hat{n}}=700$ has reduced to $\ev{\hat{n}} = 285$ and so the output state is both bright and highly sub-Poissonian. We shall discuss possible applications of such a state in Sec.~\MT{X}.
+
+\begin{figure}[htp]
+\centering
+	\begin{subfigure}{0.6\linewidth}
+	\centering
+	\caption{}
+	\includegraphics[draft=false]{phog/Q_paper_fig3_alpha500_vargamma1}
+	\end{subfigure}
+	\begin{subfigure}{0.6\linewidth}
+	\centering
+	\caption{}
+	\includegraphics[draft=false]{phog/Q_paper_fig3_gamma1200_varalpha}
+	\end{subfigure}
+\caption{\label{fig:phog_fig3paper2} Evolution of the Mandel $Q$ parameter as $\gamma_1$ and $\alpha$ are varied. (a) Constant $\ev{\hat{n}}\left(0\right) = 500$ photons, varying linear loss $\gamma_1$. Larger $\gamma_1$ causes progressively smaller values of $\left|Q\right|$ to be obtained, c.f. Fig.~\ref{fig:phog_ncl_best_Q_gamma1}, though the dynamics are independent of $\gamma_1$ for small times. (b) Constant $\gamma_1 = 200$. Even with large linear loss, larger $\left|Q\right|$ may be obtained by starting with a brighter coherent state (larger $\ev{\hat{n}}\left(0\right)$).}
+\end{figure}
 
 
 
-\MT{Basically just reproduce Fig.3 from phog paper.}
-\MT{TODO: check whether I actually need the Hamiltonian or not}
-
-
+\clearpage
 \section{Three-mode model}
 Having analysed the single-mode model in detail, and demonstrated that the NCL operator $\ncl$ is a good candidate for deterministic generation of highly non-classical states even in the presence of strong linear loss, we must turn to consider whether such a loss operator can be effectively realised in practice. In this section we will demonstrate that $\ncl$ may be effectively simulated by combining linear loss, linear coupling between multiple modes, and the Kerr nonlinearity. Our starting point is the three-mode model depicted in Fig.~\ref{fig:phog_three_mode}, in which two bosonic modes, $a$ and $b$, are coupled to a third, $c_0$, which decays into a Markovian reservoir $R$ with decay rate $\gamma_c$. 
 
