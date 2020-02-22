@@ -392,6 +392,20 @@ We may reduce the complexity of Eq.~\ref{eqn:phog_lindblad_three_mode_model} by 
 \MT{TODO: show this calculation here.}
 
 
+And so we have reduced our three-mode model to a two-mode system. Introducing the following collective symmetric and antisymmetric modes
+
+\begin{align}
+\hat{s}_+ = \frac{1}{G} \left(g_a \hat{a} + g_b \hat{b}\right) \qq{symmetric}  \notag \\
+%
+\hat{s}_- = \frac{1}{G} \left(g_a \hat{b} - g_b \hat{a}\right) \qq{antisymmetric}
+\end{align}
+with $G = \sqrt{ g_a^2 + g_b^2 }$ required to ensure that $\hat{s}_-, \hat{s}_+$ obey the same bosonic commutation relations as $\hat{a}, \hat{b}$. Rewriting Eq.~\MT{X} in terms of these new modes we arrive at our two-mode model
+\begin{equation}\label{eqn:phog_lindblad_two_mode_model}
+\ddt \rho_2 = - i \left[ \hat{H}_2, \rho_2 \right] + \left[ \gamma_1 \mathcal{L}\left(\hat{s}_-\right) + \left(\Gamma + \gamma_1\right) \mathcal{L}\left(\hat{s}_-\right) \right] \rho_2
+\end{equation}
+where the subscript $2$ denotes that each quantity is for this two-mode model.
+
+
 
 
 
