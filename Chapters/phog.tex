@@ -1,7 +1,16 @@
 %
 % A (non-exhaustive) list of TODOs:
+%	- create numerical methods appendix
+%	- add references
+% Graphs to make:
+%	- comparison of 2 mode to 1 mode 
+%		- NL decay of s_-
+%		- Q(s_-)
+%	- decay of s_+
 %
-% - write appendix displaying adiabatic elimination of a lossy mode for an arbitrary operator. 
+%
+%
+%
 
 \chapter{PhoG: Photon Gun}\label{chapter:phog}
 Goal of chapter: analyse and model the PhoG device and its efficacy for producing, from a classical input, (i) bright sub-Poissonian state; (ii) entangled state
@@ -492,7 +501,7 @@ where we have used the commutator to write $n_- s_- \rightarrow \ncl$, and where
 
 The effective decay rates in this single-mode model explicity depend on coupling constants $g_a, g_b$ (Fig.~\ref{fig:phog_three_mode}, Eq.~\ref{eqn:phog_three_mode_hamiltonian}). We see for example that in the limit of symmetric coupling $g_a = g_b$, $\gamma_3 = 0$ and there will be no NCL for mode $s_-$. Large $\gamma_3$ can be obtained however for strong asymmetry $g_a \gg g_b$ or $g_b \gg g_a$. 
 
-Since it is NCL which drives $\rho$ most effectively towards highly sub-Poissonian states we will seek to maximise $\gamma_3$. We fix $G = \sqrt{g_a^2 + g_b^2}$ and define $g_a = x G, g_b = \sqrt{1-x^2}G$ for $0 < x < 1$. Substituting these couplings into $\gamma_3$ we see that
+Since it is NCL which drives $\rho$ most effectively towards highly sub-Poissonian states we will seek to maximise $\gamma_3$\footnote{Note that $x = 1/\sqrt{2}$ is the only other solution with $0 < x < 1$. This choice of $x$ will yield symmetric coupling $g_a = g_b$ and hence $\gamma_3=0$. We will return to this scenario in Sec.~\MT{ENTANGLEMENT}}. We fix $G = \sqrt{g_a^2 + g_b^2}$ and define $g_a = x G, g_b = \sqrt{1-x^2}G$ for $0 < x < 1$. Substituting these couplings into $\gamma_3$ we see that
 \begin{equation}
 \gamma_3 = \frac{- 4 U x^2 \left(1 - 2 x^2\right)^2 \left(-1 + x^2\right)}{\Gamma + \gamma_L}.
 \end{equation}
@@ -515,12 +524,50 @@ Taking this optimal choice,
 To summarise, we have reduced the three-mode model (Eq.~\ref{eqn:phog_lindblad_three_mode_model}, Fig.~\ref{fig:phog_three_mode}) to a single-mode model (Eqs.~\ref{eqn:phog_full_single_mode}
 ,~\ref{eqn:phog_single_mode_deriv}, Fig.~\ref{fig:phog_single_mode}) via sequential adiabatic eliminations of modes $c_0$ and $s_+$, which rapidly decayed into reservoir $R$. In essence, the behaviour of the antisymmetric collective mode $s_-$ in the three-mode model simulates behaviour of a single mode undergoing both nonlinear coherent loss, two-photon loss and single-photon loss, which were all considered in Secs.~\ref{sec:phog_single_mode_model}~\ref{sec:phog_including_loss}. The combination of Kerr nonlinearity, linear coupling and single-photon loss allows for the effective NCL decay operator to be constructed.
 
-We demonstrate that the two-mode model gives rise to the same behaviour as the single-mode model in Fig.~\ref{fig:phog_two_mode_single_mode_comparison}. \MT{Additional comments.}
+We demonstrate in Figs.~\ref{fig:phog_two_mode_single_mode_comparison},~\ref{fig:phog_three_mode_single_mode_comparison} that both the three-mode model and the two-mode model do indeed give rise to the same behaviour as the single-mode model. \MT{Additional comments.}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=0.6\linewidth, draft=true]{phog/three_mode_single_mode_comparison.png}
+\caption{\label{fig:phog_three_mode_single_mode_comparison} \MT{Just take Fig.8 from paper, and attribute it to Anton}}
+\end{figure}
 
 \begin{figure}[htp]
 \centering
 \includegraphics[width=0.6\linewidth, draft=true]{phog/two_mode_single_mode_comparison.png}
 \caption{\label{fig:phog_two_mode_single_mode_comparison} \MT{Create figure then add caption.}}
+\end{figure}
+
+
+\clearpage
+\section{Multi-mode model}\label{sec:phog_multi_mode}
+In the previous sections we have demonstrated that the three-mode model considered in Sec.~\ref{sec:phog_three_mode_model} accurately simulates NCL and allows for deterministic generation of sub-Poissonian light over the initial stages of the dynamics. A natural next question to ask is ``how might we implement such a model?". \MT{add a little overview of some of the literature.}
+
+One approach which was successfully demonstrated in Ref.~\cite{Mukherjee2017} is to replace the Markovian reservoirs with a ``tail" of further bosonic modes. This mirrors a common numerical technique \MT{cite a bunch of stuff} which is regularly used to numerically simulate non-Markovian reservoirs. Here we adopt this replacement in order to implement the system in laser-inscribed waveguides, identically to Ref.~\cite{Mukherjee}. 
+
+We therefore wish to analyse the multi-mode model of the PhoG device, Fig.~\ref{fig:phog_multi_mode} in which two "signal" modes are linearly coupled to a "tail" of further modes. The intra-tail coupling $g_c$ should be chosen to mimic the effect of reservoir $R$, and we will analyse choices of $g_c$ below. The Lindblad master equation describing this system is
+
+\begin{equation}\label{eqn:phog_multi_mode}
+\ddt \rho = - i \left[\hat{H}, \rho\right] + \gamma_1 \left[\mathcal{L}\left(\hat{a}\right) + \mathcal{L}\left(\hat{b}\right) + \sum_{j=0}^N \mathcal{L}\left(\hat{c}_0\right) \right] \rho
+\end{equation}
+with $\hat{H} = \hat{H}^{\text{int}} + \hat{H}^{\text{Kerr}}$, and
+\begin{align}
+\hat{H}^{\text{int}} &= g_a \hat{a}^\dagger \hat{c}_0 + g_b \hat{b}^\dagger \hat{c}_0 + \sum_{j=1}^N g_j \hat{c}_{j-1}^\dagger \hat{c}_j + \hc \notag \\
+%
+\hat{H}^{\text{Kerr}} &= \frac{U}{2} \sum_{x \in \left\{a, b, c_j\right\}} \hat{x}^\dagger \hat{x}^\dagger \hat{x} \hat{x}, \qq{} j = 0, 1, \dots, N
+\end{align}
+with Kerr nonlinearity constant $N$ and couplings $g_a, g_b, g_c$. We cannot hope to numerically simulate Eq.~\ref{eqn:phog_multi_mode} over the necessary parameter regimes of large input $\alpha$ and large number of modes, $N$\footnote{Even taking each mode as a qubit cannot help, as the total Hilbert space size is $2^{N}$ which is intractable for $N$ large.}. For the multi-mode model the only decay route into a Markovian reservoir is via linear loss $\gamma_L$, the tail must be long enough that state which has initially decayed into the tail cannot return to the signal modes over the timescales of interest. We depict an example of this occurrence in Fig.~\ref{fig:phog_bounce}. We are therefore trapped in the unfortunate scenario of requiring to make predictions of the behaviour of a large number of coupled modes, with strong nonlinearity and a necessarily large Hilbert space size of each mode.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=0.6\linewidth, draft=false]{phog/multi_mode}
+\caption{\label{fig:phog_multi_mode} \MT{Caption for multi-mode model}}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics{phog/bounce.png}
+\caption{\label{fig:phog_bounce}}
 \end{figure}
 
 
