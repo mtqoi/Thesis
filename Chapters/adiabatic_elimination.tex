@@ -33,20 +33,67 @@ and expand $\hat{H}$ and $\hat{A}$ in terms of normal-ordered powers of creation
 \end{align}
 where operators $\hat{H}^{\left(p, q\right)}, \hat{A}^{\left(p, q\right)}$ are, in general, operators acting on the remaining modes of the system, and $\hat{A}^{\left(p, q\right)}$ is time-dependent.
 
-Let us take Eqs.~\ref{eqn:appendix_phog_H_expand},~\ref{eqn:appendix_phog_A_expand} and substitute into Eq.~\ref{eqn:appendix_phog_adjoint_start}. Grouping terms in $\hat{c}^\dagger, \hat{c}$ we see that
+Let us take Eqs.~\ref{eqn:appendix_phog_H_expand},~\ref{eqn:appendix_phog_A_expand} and substitute into Eq.~\ref{eqn:appendix_phog_adjoint_start}. Grouping terms in $\hat{c}^\dagger, \hat{c}$ we see that \MT{TODO: change indices on LHS}
 
 \begin{align}
-\ddt A^{\left(p, q\right)} = i \sum_{p, q, k, l} \left(H^{\left(k, l\right)} A^{\left(p, q\right)} c^{\dagger k} c^{l} c^{\dagger p} c^q - A^{\left(p, q\right)} H^{\left(k, l\right)} c^{\dagger p} c^q c^{\dagger k} c^l\right)& \notag \\
+\ddt A^{\left(p, q\right)} c^{\dagger p} c^q = i \sum_{p, q, k, l} \left(H^{\left(k, l\right)} A^{\left(p, q\right)} c^{\dagger k} c^{l} c^{\dagger p} c^q - A^{\left(p, q\right)} H^{\left(k, l\right)} c^{\dagger p} c^q c^{\dagger k} c^l\right)& \notag \\
 %
 + \qq{terms in $\gamma$}&
 \end{align}
 where we have absorbed terms in $\Gamma_j$ into the definition of $H^{\left(p, q\right)}$ \MT{can I do this?}. We have also dropped hats from operators for ease of notation.
 
 Relabelling dummy indices,
-\begin{equation}
-\ddt A^{\left(p, q\right)} = i \sum_{p, q, k, l} F\left(p, q, k, l\right) c^{\dagger p} c^{q} c^{\dagger k} c^l + \qq{terms in $\gamma$}
+\begin{equation}\label{eqn:appendix_phog_Apq}
+\ddt A^{\left(p, q\right)} c^{\dagger p} c^q = i \sum_{p, q, k, l} F\left(p, q, k, l\right) c^{\dagger p} c^{q} c^{\dagger k} c^l + \qq{terms in $\gamma$}
 \end{equation}
 where
 \begin{equation}
-F\left(p, q, k, l\right) = H^{\left(k, l\right)} A^{\left(p, q\right)} - A^{\left(p, q\right)} H^{\left(k, l\right)} \notag
+F\left(p, q, k, l\right) = H^{\left(k, l\right)} A^{\left(p, q\right)} - A^{\left(p, q\right)} H^{\left(k, l\right)}. \notag
 \end{equation}
+
+The differential equation for $A^{\left(0, 0\right)}$ is such that there are no operators in mode $c$ remaining on the right hand side of Eq.~\ref{eqn:appendix_phog_Apq}. Clearly this occurs when $p=q=k=l=0$. It can also occur for other values of $p, q, k, l$, owing to constant terms appearing the commutators of $\hat{c}$ operators. Additionally, since the lindblad operator $\mathcal{L}$ is second-order in $\hat{c}$ we can see immediately that there will be no terms proportional to $\gamma$ in the equation for $A^{\left(0, 0\right)}$. 
+
+Writing Eq.~\ref{eqn:appendix_phog_Apq} in normal order using the commutator,
+\begin{equation}
+\ddt A^{\left(p, q\right)} c^{p, \dagger} c^q = i \sum_{p, q, k, l}\left( F\left( p, q, k, l\right) c^{\dagger p} c^{\dagger k} c^q c^l + F\left(p, q, k, l\right)  \left[ c^{q}, c^{\dagger k}\right] c^{\dagger p} c^l \right)
+\end{equation}
+we observe that additional contributions to $A^{\left(0, 0\right)}$ are possible when $p=0, l=0$ but $q, k \ne 0$ provided that the commutator $\left[ c^q, c^{\dagger k}\right]$ contains a constant term. We observe
+
+\begin{align}\label{eqn:phog_appendix_commutator}
+&\left[ c, c^\dagger \right] = 1 \notag \\
+%
+&\left[ c^2, c^{\dagger 2} \right] = 4 c^\dagger c + 2 \notag \\
+%
+&\left[ c^3, c^{\dagger 3} \right] = 9 c^\dagger c^\dagger c c + 18 c^\dagger c + 6 \notag
+\end{align}
+while commutators with $q \ne k$ cannot give a constant term. 
+
+For ease, and because the largest terms considered in Ch.~\ref{chapter:phog} are of the form $c^\dagger c^\dagger c c$ we will restrict ourselves to $0 \le q, k \le 2$ and so
+
+\begin{equation}
+\ddt A^{\left(0, 0\right)} = i \left( \left[ H^{\left(0, 0\right)}, A^{\left(0, 0\right)}\right] + F\left(0, 1, 1, 0\right) + 2 F\left(0, 2, 2, 0\right)\right) \notag
+\end{equation}
+and so 
+\begin{align}
+\ddt A^{\left(0, 0\right)} = i  &\left(\left[ H^{\left(0, 0\right)}, A^{\left(0, 0\right)}\right] + H^{\left(0, 1\right)} A^{\left(1, 0\right)} - A^{\left(0, 1\right)} H^{\left(1, 0\right)} \right. \notag \\
+%
+&+\left. 2 H^{\left(0, 2\right)} A^{\left(2, 0\right)} - 2 A^{\left(0, 2\right)} H^{\left(2, 0\right)} \right).
+\end{align}
+
+
+
+
+
+
+\MT{----------------}
+
+Finally, we arrive at 
+\begin{equation}
+\ddt A^{\left(0, 0\right)} = i \left[ H^{\left(0, 0\right)}, A^{\left(0, 0\right)}\right] + \frac{4}{\gamma} \sum_{p = {1, 2}} \mathcal{L}\left( H^{\left(0, p\right)} \right) A^{\left(0, 0\right)} + \Gamma_j \mathcal{L}\left(a_j\right) \rho %Can I just stick the extra loss term here? Is it affected by the adiabatic elimination at all?
+\end{equation}
+and so transforming back to our master equation in Lindblad form
+\begin{equation}\label{eqn:adiabatic_elimination}
+\ddt \rho = - i \left[ H^{\left(0, 0\right)}, \rho\right] + \frac{4}{\gamma} \sum_{p = 1, 2} \mathcal{L} \left(H^{\left(0, p\right)\dagger}\right) \rho.
+\end{equation}
+This Eq.~\ref{eqn:adiabatic_elimination} is our key equation for performing the adiabatic elimination of the highly lossy mode $c$. The recipe to apply it to a general system is to identify the $H^{\left(0, 0\right)}$ and $H^{\left(0, p\right)}$ terms, which can take arbitrary form. The only requirement for the use of Eq.~\ref{eqn:adiabatic_elimination} is that $\hat{H}$ must have its largest term in lossy mode $c$ of the form $\hat{c}^\dagger \hat{c}^\dagger \hat{c} \hat{c}$, i.e. two creation and two annihilation operators. More general forms of Eq.~\ref{eqn:adiabatic_elimination} may be considered by continuing to higher-order commutators $\left[ \hat{c}^n, \hat{c}^{\dagger n}\right]$ which has constant term $n!$, allowing for different maximum combinations of $\hat{c}$ operators 
+
