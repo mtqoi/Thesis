@@ -581,7 +581,7 @@ and so
 which is an exact differential equation for $\ev{\hat{a}}$ in terms of first- and third-order expectations. Analogously, equations for second-order terms such as $\ev{\hat{a}\hat{a}}$ or $\ev{\hat{a}^\dagger \hat{a}}$ will involve second- and fourth-order expectations. As we noted for Eq.~\ref{eqn:aa_not_closed} this system of equations is not closed. In fact, when equations expectations of third- or fourth- order operators are derived we will see that they must be written in terms of fifth- and sixth- order operators, and so on. This approach will yield an infinite hierarchy of coupled differential equations, and so we must seek a simplification.
 
 If we write, for example, $\hat{a} \approx \ev{\hat{a}}$ and substitute in to Eq.~\ref{eqn:phog_meanfield_deriv} we see terms second-order or higher becoming much easier to handle. Equation~\ref{eqn:phog_meanfield_deriv} becomes
-\begin{equation}
+\begin{equation}\label{eqn:phog_meanfield_deriv_1}
 \ddt \ev{\hat{a}}\left(t\right) = - i g_a \ev{\hat{c}_0} - i \frac{U}{2} \ev{\hat{a}^\dagger} \ev{\hat{a}} \ev{\hat{a}} - \frac{\Gamma}{2} \ev{\hat{a}}
 \end{equation}
 solely in terms of first-order expectations. The differential equations for second-order expectations like $\ev{\hat{a}^\dagger \hat{a}}$ are likewise reduced to first-order
@@ -646,11 +646,46 @@ Higher-order expectations of products of operators may be calculated in the same
 
 The replacement for fourth-order operators is
 \begin{equation}
-YOLO
+\ev{A B C D} \approx \ev{A B}\ev{C D} + \ev{A C}\ev{B D} + \ev{A D}\ev{B C} - 2 \ev{A}\ev{B}\ev{C}\ev{D}
 \end{equation}
-while the replacements for fifth- and sixth-order operators are displayed in Sec.~\MT{X}.
+while the replacements for fifth- and sixth-order operators are not displayed\footnote{Each expansion is derived identically to the third- and fourth-order expressions, but the fifth-order one contains $26$ terms, while the sixth-order one contains $31$ terms.}. 
+
+Thus Eq.~\ref{eqn:phog_meanfield_deriv} reduces to (c.f. Eq.~\ref{eqn:phog_meanfield_deriv_1})
+
+\begin{equation}
+\ddt \ev{\hat{a}} = - \frac{\Gamma}{2} \ev{\hat{a}} - i g_a \ev{\hat{c}_0} + 2 i U \ev{\hat{a}^\dagger}\ev{\hat{a}}\ev{\hat{a}} - 2 i U \ev{\hat{a}}\ev{\hat{a}^\dagger \hat{a}} - i U \ev{\hat{a}^\dagger} \ev{\hat{a} \hat{a}},
+\end{equation}
+and equations for the remaining expectations are calculated likewise, and are shown in Sec.~\ref{sec:multimode_linearized}
 
 
+We plot $\ev{\hat{a}^\dagger \hat{a}}$ under this linearization approach in Fig.~\ref{fig:phog_multimode_linearized}a, and $Q$ in Fig.~\ref{fig:phog_multimode_linearized}b. 
+
+\begin{figure}[htp]
+\centering
+\includegraphics{phog/multimode_linearized.png}
+\caption{\label{fig:phog_multimode_linearized} \MT{Just use Fig.9 from paper}}
+\end{figure}
+
+We see that the photon-number expectation evolves identically between mean-field and linearization approaches, while our linearization approach has now given us the ability to calculate $Q$ of mode $a$ as
+
+\begin{equation}
+Q_{\text{Linearized}}\left[\hat{a}\right] = \frac{\ev{\hat{a}^\dagger \hat{a}}^2 + \ev{\hat{a}^\dagger\hat{a}^\dagger} \ev{\hat{a}\hat{a}} + \ev{\hat{a}^\dagger \hat{a}} - 2 \ev{\hat{a}^\dagger}^2 \ev{\hat{a}}^2}{\ev{\hat{a}^\dagger \hat{a}}} - 1.
+\end{equation}
+
+\noindent Mandel $Q$ parameter for mode $\hat{s}_-$ is calculated likewise using the transformation Eqs.~\ref{eqn:phog_rotation}. 
+
+We have shown that a $Q$ parameter close to the predicted maximum of $Q \approx -0.8$ is attainable under \MT{conditions}.
+
+\subsection{Comparison to single-mode model}
+Finally, we return to the single-mode model in order to demonstrate the accuracy of our linearization approach. We have demonstrated already that both mean-field and linearization approaches are accurate at modelling the non-linear decay of photon number expectation, and so in Fig.~\ref{fig:phog_single_mode_linearization} we model $Q$ under both linearization and \MT{X}.
+
+\begin{figure}[htp]
+\centering
+\includegraphics{phog/single_mode_linearization.png}
+\caption{\label{fig:phog_single_mode_linearization} \MT{Just include Fig.5 from the paper. Mention that the solid lines are identical to Fig.~X from this thesis}}
+\end{figure}
+
+The linearization approximation (dashed lines) accurately predicts the evolution of $Q$ over the initial stages of evolution, and actually underestimates $\left|Q\right|$ in the later stages. Including realistic $\gamma_L$ allows the approximation to remain accurate as the nonclassical output state is pushed towards the vacuum. Since when $\gamma_L = 0$ the linearization approximation remains accurate over the timescales of interest, and since the presence of realistic losses makes the approximation increasingly accurate, we may confidently apply the linearization approach over the parameter regimes of interest--short times and realistic loss--even in the case of a large number of modes. Indeed, we may even expect linearization to be more accurate in the multi-mode case than in the single-mode case, since the largest multi-mode expectation which is truncated is originally of fourth-order, as opposed to sixth-order for single-mode.
 
 
 

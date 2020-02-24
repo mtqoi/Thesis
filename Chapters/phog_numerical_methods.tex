@@ -1,1 +1,172 @@
 \chapter{PhoG: Numerical methods}\label{appendix:phog_numerical_methods}
+
+
+
+\section{Linearized single-mode model}\label{appendix:single_mode_linear}
+By applying the linearization approximations derived in Sec.~\ref{sec:linearization} to the system of coupled ODEs derived from single-mode Lindblad equation~\ref{eqn:phog_single_mode_deriv} we arrive at the following closed system of ODEs:
+
+
+\begin{align}\label{eqn:expectations_linear_first}
+%
+%a
+%
+\partial_t\langle s_- \rangle &= c_1 \langle s_- \rangle + c_2 \left(\langle s_-^\dagger \rangle \langle s_-^2 \rangle + 2 \langle s_- \rangle \langle n_-\rangle - 2 \langle s_-^\dagger \rangle \langle s_- \rangle^2\right) \notag \\
+%
+&-\frac{\gamma_3}{2}\left(
+6 \langle s_-^\dagger \rangle \langle n_- \rangle \langle s_-^2\rangle + 3 \langle s_- \rangle \langle s_-^{\dagger 2} \rangle \langle s_-^2 \rangle \right. \notag \\
+%
+&+ 6 \langle s_- \rangle \langle n_- \rangle^2 - 2 \langle s_-^{\dagger 2} \rangle \langle s_- \rangle^3 - 12 \langle n_- \rangle \langle s_-^\dagger \rangle \langle s_- \rangle^2 \notag \\
+%
+&\left. - 6 \langle s_-^2 \rangle \langle s_-^\dagger \rangle^2 \langle s_- \rangle + 6 \langle s_-^\dagger \rangle^2 \langle s_- \rangle^3\right)
+\end{align}
+\begin{align}
+%
+% ad
+%
+\partial_t\langle s_-^\dagger \rangle &= c_1^* \langle s_-^\dagger \rangle + c_2^* \left(\langle s_- \rangle \langle s_-^{\dagger 2} \rangle + 2 \langle s_-^\dagger \rangle \langle n_- \rangle - 2 \langle s_-^\dagger \rangle^2\langle s_- \rangle \right) \notag \\
+%
+&-\frac{\gamma_3}{2}\left(6 \langle s_- \rangle \langle n_- \rangle \langle s_-^{\dagger 2}\rangle + 3 \langle s_-^\dagger \rangle \langle s_-^2 \rangle \langle s_-^{\dagger 2}\rangle \notag \right. \notag \\
+%
+&+ 6 \langle s_-^\dagger \rangle \langle n_-\rangle^2 - 2 \langle s_-^2 \rangle \langle n_-^3\rangle - 12 \langle n_- \rangle \langle s_- \rangle \langle s_- \rangle^2 \notag \\
+%
+&\left. - 6 \langle s_-^{\dagger 2} \rangle \langle s_- \rangle^2 \langle s_-^\dagger \rangle + 6 \langle s_-^{\dagger 3} \rangle \langle s_- \rangle^2 \right)
+\end{align}
+\begin{align}
+%
+% aa
+%
+\partial_t\langle s_-^2 \rangle &= c_3 \langle s_- s_- \rangle + c_4 \left( 3 \langle n_- \rangle \langle s_-^2 \rangle  - 2 \langle s_-^\dagger \rangle \langle s_- \rangle^3 \right) \notag \\
+%
+&- \gamma_3 \left( 3 \langle s_-^{\dagger 2}\rangle \langle s_-^2\rangle^2 + 12 \langle n_- \rangle^2 \langle s_-^2\rangle - 2 \langle s_-^{\dagger 2}\rangle \langle s_- \rangle^4 \right. \notag \\
+%
+& - 12 \langle s_-^2 \rangle \langle s_-^{\dagger}\rangle^2 \langle s_- \rangle^2 - 16 \langle n_- \rangle \langle s_-^\dagger \rangle \langle s_- \rangle^3 \notag \\
+%
+&\left. + 16 \langle s_-^\dagger \rangle^2 \langle s_- \rangle^4 \right)
+\end{align}
+\begin{align}
+%
+% adad
+%
+\partial_t\langle s_-^{\dagger^2} \rangle &= c_3^* \langle s_-^{\dagger 2}\rangle + c_4^* \left(3 \langle s_-^{\dagger 2} \rangle \langle n_- \rangle - 2 \langle s_-^\dagger \rangle^3 \langle s_- \rangle \right) \notag \\
+%
+&- \gamma_3 \left(3 \langle s_-^{\dagger 2} \rangle^2 \langle s_-^2 \rangle + 12 \langle s_-^{\dagger 2} \rangle \langle n_- \rangle^2 - 2\langle s_-^2 \rangle \langle s_-^\dagger \rangle^4 \right. \notag \\
+%
+&\left. - 21 \langle s_-^{\dagger 2}\rangle \langle s_-^\dagger\rangle^2 \langle s_- \rangle^2 - 16 \langle n_- \rangle \langle s_-^\dagger \rangle^3 \langle s_-\rangle \right. \notag \\
+%
+& \left.+ 16 \langle s_-^\dagger\rangle^4 \langle s_- \rangle^2 \right)
+\end{align}
+\begin{align}\label{eqn:expectations_linear_last}
+%
+% ada
+%
+\partial_t \langle n_- \rangle &= - \gamma_1 \langle n_- \rangle + c_5 \left( \langle s_-^{\dagger 2} \rangle \langle s_-^2 \rangle + 2 \langle n_- \rangle^2 - 2 \langle s_-^\dagger \rangle^2 \langle s_- \rangle^2 \right) \notag \\
+%
+&- \gamma_3 \left( 9 \langle s_-^{\dagger 2} \rangle \langle n_-  \rangle \langle s_-^2\rangle + 6 \langle n_-\rangle^3  - 6 \langle s_-^{\dagger 2}\rangle \langle s_-^\dagger \rangle \langle s_- \rangle^3 \right. \notag \\
+%
+& - 18 \langle n_- \rangle \langle s_-^\dagger \rangle^2 \langle s_- \rangle^2 - 6 \langle s_-^2 \rangle \langle s_-^\dagger \rangle^3 \langle s_- \rangle \notag \\
+%
+& \left. + 16 \langle s_-^\dagger \rangle^3 \langle s_-\rangle^3 \right)
+\end{align}
+with $n_- = s_-^\dagger s_-$.
+
+This system is solved numerically for $\langle s_- \rangle$, $\langle s_-^\dagger \rangle$, $\langle s_-^2\rangle$, $\langle s_-^{\dagger 2}\rangle$, $\langle n_-\rangle$ and the results are shown as dashed lines in Fig.~\ref{fig:phog_single_mode_linearization}.
+
+
+\section{Linearized multi-mode model}\label{appendix:multi_mode_linear}
+We will derive a linearized and closed system of coupled differential equations capable of modelling the multi-mode PhoG device. In fact, our equations will be capable of modelling any collection of coupled modes with on-site Kerr nonlinearity and Markovian reservoirs. Our starting Lindblad equation is Eq.~\ref{eqn:phog_multi_mode}
+
+\begin{equation}
+\ddt \rho = - i \left[\hat{H}, \rho\right] + \gamma_1 \left[\mathcal{L}\left(\hat{a}_1\right) + \mathcal{L}\left(\hat{a}_2\right) + \sum_{j=3}^{N+2} \mathcal{L}\left(\hat{a}_j\right) \right] \rho
+\end{equation}
+where we here take $\hat{H} = \hat{H}^{\text{Coupling}} + \hat{H}^{\text{Kerr}}$. In this Appendix we label all modes as $\hat{a}_k$, with the subscript denoting which mode in the PhoG device is meant. In particular, $a_1 \leftrightarrow a$, $a_2 \leftrightarrow b$, and $a_{k \ge 3} \leftrightarrow c_{k-3}$ in the main body. The Hamtiltonian is
+\begin{align}
+\hat{H}^{\text{Kerr}} = \frac{U}{2} \sum_{x} \hat{x}^\dagger \hat{x}^\dagger \hat{x} \hat{x} \qq{} x \in \left\{a, b, c_j\right\}\; 0 \le j \le N
+%
+\hat{H}^{\text{Coupling}} = \sum_{k, l} \mathcal{G}_{k, l}\left(\hat{a}_k^\dagger \hat{a}_l + \hat{a}_l^\dagger \hat{a}_k \right)
+\end{align}
+where we have introduced a "coupling matrix" $\mathcal{G}$ which contains all information relating to the linear coupling between modes of our system. Coupling matrix element $\mathcal{G}_{j, p}$ denotes the coupling strength between modes $j$ and $p$, and $\mathcal{G}_{j, p} = 0$ if the modes are not coupled to each other, which is the case for most pairs $\left(j, p\right)$. We display some example coupling matrices below.
+\subsection{Example coupling matrices $\mathcal{G}$}
+\begin{figure}[htp]
+\begin{minipage}{.4\textwidth}
+\[
+\mathcal{G} = 
+\begin{bmatrix}
+0 & \highlight{g} & 0 & 0 & \dots & 0 & 0 & 0 \\
+\highlight{g} & 0 & \highlight{g} & 0 & \dots & 0 & 0 & 0 \\
+0 & \highlight{g} & 0 & \highlight{g} & \dots & 0 & 0 & 0  \\
+0 & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots & 0 \\
+0 & 0 & 0 & 0 & \dots & 0 & \highlight{g} & 0 \\
+0 & 0 & 0 & 0 & \dots & \highlight{g} & 0 & \highlight{g} \\
+0 & 0 & 0 & 0 & \dots & 0 & \highlight{g} & 0
+\end{bmatrix}
+\]
+\end{minipage}
+\begin{minipage}{.5\textwidth}
+\centering
+\includegraphics[width=0.3\textwidth, draft=false]{phog/bosonic_line_vertical}
+\end{minipage}
+\caption{\label{fig:coupline}Line of modes}
+\end{figure}
+
+
+
+\begin{figure}[htp]
+\begin{minipage}{.4\textwidth}
+\[
+\mathcal{G} = 
+\begin{bmatrix}
+0 & 0 & \highlight{g1} & 0 & 0 & 0 & \dots & 0 & 0 & 0 \\
+0 & 0 & \highlight{g2} & 0 & 0 & 0 & \dots & 0 & 0 & 0 \\
+\highlight{g1} & \highlight{g2} & 0 & \highlight{g3} & 0 & 0 & \dots & 0 & 0 & 0 \\
+0 & 0 & \highlight{g3} & 0 & \highlight{g3} & 0 & \dots & 0 & 0 & 0 \\
+0 & 0 & 0 & \highlight{g3} & 0 & \highlight{g3} & \dots & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & \highlight{g3} & 0 & \dots & 0 & 0 & 0  \\
+0 & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & \dots & 0 & \highlight{g3} & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & \dots & \highlight{g3} & 0 & \highlight{g3} \\
+0 & 0 & 0 & 0 & 0 & 0 & \dots & 0 & \highlight{g3} & 0 
+\end{bmatrix}
+\]
+\end{minipage}
+\begin{minipage}{.5\textwidth}
+\centering
+\includegraphics[width=0.3\textwidth, draft=false]{phog/bosonic_chain_phog_vertical}
+\end{minipage}
+\caption{\label{fig:coupPhoG}PhoG system \MT{TODO: fix alignment}}
+\end{figure}
+\clearpage
+\subsection{Linearized equations}
+Letting $n, m \in \left[1, N+2\right], n \ne m$, we derive a closed system of coupled differential equations for first- and second-order expectations
+
+\begin{align}\label{eqn:linearsystem}
+% an
+\partial_t\langle\hat{a}_n\rangle &= \left(- i \omega_n - \frac{\Gamma_n}{2}\right)\langle\hat{a}_n\rangle - 2 i U \langle\hat{a}_n\rangle\langle\hat{a}_n^\dagger\hat{a}_n\rangle - i U \langle\hat{a}_n^\dagger\rangle\langle\hat{a}_n\hat{a}_n\rangle + 2 i U \langle\hat{a}_n^\dagger\rangle \langle\hat{a}_n\rangle\langle\hat{a}_n\rangle - \sum_{j=1}^N i \mathcal{G}_{n, j} \langle\hat{a}_j\rangle\\
+% adn
+\partial_t\langle\hat{a}_n^\dagger\rangle &= \left(+ i \omega_n - \frac{\Gamma_n}{2} \right) \langle\hat{a}_n^\dagger\rangle + 2 i U \langle\hat{a}_n^\dagger\rangle\langle\hat{a}_n^\dagger\hat{a}_n\rangle + i U \langle\hat{a}_n\rangle\langle\hat{a}_n^\dagger\hat{a}_n^\dagger\rangle - 2 i U\langle\hat{a}_n^\dagger\rangle\langle\hat{a}_n^\dagger\rangle\langle\hat{a}_n\rangle + \sum_{j=1}^N i \mathcal{G}_{n,j}\langle\hat{a}_j^\dagger\rangle \\
+% anan
+\partial_t\langle\hat{a}_n\hat{a}_n\rangle &= \left( - 2 i \omega_n - \Gamma_n\right) \langle\hat{a}_n\hat{a}_n\rangle - 5 i U \langle\hat{a}_n^\dagger \hat{a}_n\rangle \langle\hat{a}_n\hat{a}_n\rangle + 4 i U \langle\hat{a}_n^\dagger\rangle \langle\hat{a}_n\rangle \langle\hat{a}_n\rangle\langle\hat{a}_n\rangle - i U \langle \hat{a}_1\hat{a}_1\rangle\langle\hat{a}_1\hat{a}_1^\dagger\rangle \notag \\
+&- \sum_{j=1}^N 2 i \mathcal{G}_{n, j}\langle\hat{a}_n\hat{a}_j\rangle \\
+% adnan
+\partial_t \langle\hat{a}_n^\dagger\hat{a}_n\rangle &= - \Gamma_n\langle\hat{a}_n^\dagger\hat{a}_n\rangle + \Gamma_n \bar{n}_{th}^{\left(n\right)} + \sum_{j=1}^N i \mathcal{G}_{n, j}\left(\langle\hat{a}_j^\dagger\hat{a}_n\rangle - \langle\hat{a}_n^\dagger\hat{a}_j\rangle\right) \\
+%anadn
+\partial_t \langle\hat{a}_n \hat{a}_n^\dagger\rangle &= - \Gamma_n \langle\hat{a}_1\hat{a}_1^\dagger\rangle + \Gamma_n \bar{n}_{th}^{\left(n\right)} + \sum_{j=1}^N i \mathcal{G}_{n,j}\left(\langle\hat{a}_j^\dagger\hat{a}_n\rangle - \langle\hat{a}_n^\dagger\hat{a}_j\rangle \right)
+\\
+% adnadn
+\partial_t\langle\hat{a}_n^\dagger\hat{a}_n^\dagger\rangle &= \left(2 i \omega_n - \Gamma_n  \right) \langle\hat{a}_n^\dagger\hat{a}_n^\dagger\rangle + 5 i U \langle\hat{a}_n^\dagger\hat{a}_n^\dagger\rangle\langle\hat{a}_n^\dagger \hat{a}_n\rangle - 4 i U \langle\hat{a}_n^\dagger\rangle\langle\hat{a}_n^\dagger\rangle\langle\hat{a}_n^\dagger\rangle\langle\hat{a}_n\rangle + i U \langle\hat{a}_1\hat{a}^\dagger_1\rangle \langle\hat{a}_1^\dagger\hat{a}_1^\dagger\rangle \notag \\
+&+ \sum_{j=1}^N 2 i \mathcal{G}_{n, j} \langle\hat{a}_n^\dagger\hat{a}_j^\dagger\rangle \\
+% anam
+\partial_t\langle\hat{a}_n\hat{a}_m\rangle &= \left(i\left(\omega_n + \omega_m\right) - \frac{\Gamma_n + \Gamma_m}{2}\right)\langle\hat{a}_n\hat{a}_m\rangle - 2 i U \langle\hat{a}_n^\dagger\hat{a}_n\rangle \langle\hat{a}_n\hat{a}_m\rangle - i U \langle\hat{a}_n^\dagger\hat{a}_m\rangle \langle\hat{a}_n\hat{a}_n\rangle \notag \\
+& - 2 i U \langle\hat{a}_m^\dagger\hat{a}_m\rangle\langle\hat{a}_n\hat{a}_m\rangle - i U \langle\hat{a}_m^\dagger\hat{a}_n\rangle\langle\hat{a}_m\hat{a}_m\rangle + 2 i U \langle\hat{a}_n^\dagger\rangle \langle\hat{a}_n\rangle \langle\hat{a}_n\rangle \langle\hat{a}_m\rangle + 2 i U \langle\hat{a}_n\rangle \langle\hat{a}_m^\dagger\rangle \langle\hat{a}_m\rangle\langle\hat{a}_m\rangle \notag \\
+& - \sum_{j=1}^N i \mathcal{G}_{n, j}\langle\hat{a}_j\hat{a}_m\rangle - \sum_{q=1}^N i \mathcal{G}_{m, q} \langle\hat{a}_n\hat{a}_q\rangle \\
+% adnam
+\partial_t\langle\hat{a}_n^\dagger\hat{a}_m\rangle &= \left(i\left(\omega_n - \omega_m\right) - \frac{\Gamma_n + \Gamma_m}{2}\right)\langle\hat{a}_n^\dagger\hat{a}_m\rangle + 2 i U \langle\hat{a}_n^\dagger\hat{a}_m \rangle \langle\hat{a}_n^\dagger \hat{a}_n\rangle + i U \langle \hat{a}_n^\dagger \hat{a}_n^\dagger\rangle\langle\hat{a}_n\hat{a}_m\rangle \notag \\
+& - 2 i U \langle\hat{a}_n^\dagger \hat{a}_m \rangle \langle \hat{a}_m^\dagger \hat{a}_m\rangle - i U \langle\hat{a}_n^\dagger \hat{a}_m^\dagger\rangle \langle\hat{a}_m\hat{a}_m\rangle - 2 i U \langle\hat{a}_n^\dagger\rangle \langle\hat{a}_n^\dagger\rangle \langle\hat{a}_n\rangle \langle\hat{a}_m\rangle + 2 i U \langle\hat{a}_n^\dagger \rangle \langle \hat{a}_m^\dagger \rangle \langle \hat{a}_m\rangle \langle\hat{a}_m\rangle \notag \\
+& + \sum_{j=1}^N i \mathcal{G}_{n, j}\langle\hat{a}_j^\dagger\hat{a}_m\rangle - \sum_{q=1}^N i \mathcal{G}_{m, q}\langle \hat{a}_n^\dagger \hat{a}_q\rangle \\
+% adnadm
+\partial_t\langle\hat{a}_n^\dagger\hat{a}_m^\dagger\rangle &= \left(i \left(\omega_n + \omega_m\right) - \frac{\Gamma_n + \Gamma_m}{2}\right) \langle \hat{a}_n^\dagger \hat{a}_m^\dagger\rangle + 2 i U \langle\hat{a}_n^\dagger \hat{a}_m^\dagger\rangle \langle \hat{a}_n^\dagger \hat{a}_n\rangle + i U \langle \hat{a}_n^\dagger \hat{a}_n^\dagger \rangle \langle \hat{a}_m^\dagger \hat{a}_n\rangle \notag \\
+&+ 2 i U \langle\hat{a}_n^\dagger \hat{a}_m^\dagger \rangle \langle \hat{a}_m^\dagger \hat{a}_m\rangle + i U \langle \hat{a}_n^\dagger \hat{a}_m\rangle \langle \hat{a}_m^\dagger \hat{a}_m^\dagger \rangle - 2 i U \langle\hat{a}_n^\dagger \rangle \langle \hat{a}_n^\dagger \rangle \langle \hat{a}_n \rangle \langle \hat{a}_m^\dagger\rangle - 2 i U \langle \hat{a}_n^\dagger \rangle \langle \hat{a}_m^\dagger \rangle \langle \hat{a}_m^\dagger \rangle \langle \hat{a}_m\rangle \notag \\
+& + \sum_{j=1}^N i \mathcal{G}_{n, j} \langle\hat{a}_j^\dagger \hat{a}_m^\dagger\rangle + \sum_{q=1}^N i \mathcal{G}_{m, q} \langle\hat{a}_n^\dagger \hat{a}_q^\dagger\rangle.
+\end{align} 
+\MT{TODO: get rid of antinormal ordered guy. TODO: fix appearance}
+\iffalse
+\fi
