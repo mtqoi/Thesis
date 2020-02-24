@@ -488,17 +488,40 @@ where we have used the commutator to write $n_- s_- \rightarrow \ncl$, and where
 
 \noindent We see that Eq.~\ref{eqn:phog_single_mode_deriv} matches Eq.~\ref{eqn:phog_full_single_mode} except for the addition of the Hamiltonian $\hat{H}$ which does not affect the photon-number statistics. 
 
+
+
+The effective decay rates in this single-mode model explicity depend on coupling constants $g_a, g_b$ (Fig.~\ref{fig:phog_three_mode}, Eq.~\ref{eqn:phog_three_mode_hamiltonian}). We see for example that in the limit of symmetric coupling $g_a = g_b$, $\gamma_3 = 0$ and there will be no NCL for mode $s_-$. Large $\gamma_3$ can be obtained however for strong asymmetry $g_a \gg g_b$ or $g_b \gg g_a$. 
+
+Since it is NCL which drives $\rho$ most effectively towards highly sub-Poissonian states we will seek to maximise $\gamma_3$. We fix $G = \sqrt{g_a^2 + g_b^2}$ and define $g_a = x G, g_b = \sqrt{1-x^2}G$ for $0 < x < 1$. Substituting these couplings into $\gamma_3$ we see that
+\begin{equation}
+\gamma_3 = \frac{- 4 U x^2 \left(1 - 2 x^2\right)^2 \left(-1 + x^2\right)}{\Gamma + \gamma_L}.
+\end{equation}
+We proceed by setting $\frac{\mathrm{d}}{\mathrm{d}x} \gamma_3 = 0$, which yields
+\begin{equation}
+x = \frac{\sqrt{2 + \sqrt{2}}}{2}
+\end{equation}
+as the only solution $0 < x < 1$ which will yield a nonzero $\gamma_3$. So, the optimum choice for $g_a, g_b$ is
+\begin{equation}\label{eqn:phog_gagb_optimal}
+g_b = \left(\sqrt{2} - 1\right)g_a.
+\end{equation}
+Taking this optimal choice,
+\begin{equation}\label{eqn:phog_gamma3_optimal}
+\gamma_2 = \frac{U^2}{16\left(\Gamma + \gamma_L\right)} \qq{and} \gamma_3 = \frac{U^2}{4 \left(\gamma_L + \Gamma\right)}.
+\end{equation}
+
+
+\noindent We are finally able to give motivation for the choices of $\gamma_2=0.0005, \gamma_3=0.002$ used in Sec.~\ref{sec:phog_summary_ncl_effects} as the decay rates given by Eq.~\ref{eqn:phog_gamma3_optimal} when $\Gamma = 432 g$, $U = 2 g$, $\gamma_L = 0$ and $g$ is a dimensionless scaling parameter taken to be $1$. Altering $g$ will only serve to re-scale the time axis of Figs.~\ref{fig:phog_fig3paper},~\ref{fig:phog_fig3paper2} but the qualitative dynamics will remain unchanged. 
+
 To summarise, we have reduced the three-mode model (Eq.~\ref{eqn:phog_lindblad_three_mode_model}, Fig.~\ref{fig:phog_three_mode}) to a single-mode model (Eqs.~\ref{eqn:phog_full_single_mode}
-,~\ref{eqn:phog_single_mode_deriv}, Fig.~\ref{fig:phog_single_mode}) via two sequential adiabatic eliminations of modes $c_0$ and $s_+$, which rapidly decayed into reservoir $R$. In essence, the behaviour of the antisymmetric collective mode $s_-$ in the three-mode model simulates behaviour of a single mode undergoing both nonlinear coherent loss, two-photon loss and single-photon loss, which were all considered in Secs.~\ref{sec:phog_single_mode_model}~\ref{sec:phog_including_loss}. The combination of Kerr nonlinearity, linear coupling and single-photon loss allows for the effective NCL decay operator to be constructed.
+,~\ref{eqn:phog_single_mode_deriv}, Fig.~\ref{fig:phog_single_mode}) via sequential adiabatic eliminations of modes $c_0$ and $s_+$, which rapidly decayed into reservoir $R$. In essence, the behaviour of the antisymmetric collective mode $s_-$ in the three-mode model simulates behaviour of a single mode undergoing both nonlinear coherent loss, two-photon loss and single-photon loss, which were all considered in Secs.~\ref{sec:phog_single_mode_model}~\ref{sec:phog_including_loss}. The combination of Kerr nonlinearity, linear coupling and single-photon loss allows for the effective NCL decay operator to be constructed.
 
-The effective decay rates in this single-mode model explicity depend on coupling constants $g_a, g_b$ (Fig.~\ref{fig:phog_three_mode}, Eq.~\ref{eqn:phog_three_mode_hamiltonian}). We see for example that in the limit of symmetric coupling $g_a = g_b$, $\gamma_3 = 0$ and there will be no NCL for mode $s_-$. Large $\gamma_3$ can be obtained however for strong asymmetry $g_a \gg g_b$ or $g_b \gg g_a$. Since it is NCL which drives $\rho$ most effectively towards highly sub-Poissonian states we will seek to maximise $\gamma_3$.
+We demonstrate that the two-mode model gives rise to the same behaviour as the single-mode model in Fig.~\ref{fig:phog_two_mode_single_mode_comparison}. \MT{Additional comments.}
 
-
-%\MT{I can't do this until I have motivated the best choice of $g_a, g_b$.}
-%We are finally able to give motivation for the choices of $\gamma_2=0.0005, \gamma_3=0.002$ used in Sec.~\ref{sec:phog_summary_ncl_effects} as the 
-
-
-
+\begin{figure}[htp]
+\centering
+\includegraphics[width=0.6\linewidth, draft=true]{phog/two_mode_single_mode_comparison.png}
+\caption{\label{fig:phog_two_mode_single_mode_comparison} \MT{Create figure then add caption.}}
+\end{figure}
 
 
 
