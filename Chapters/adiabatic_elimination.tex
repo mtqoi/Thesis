@@ -1,0 +1,52 @@
+%
+% Q: do I need to reference Shchesnovich2011? Or other places?
+%
+%
+
+
+\chapter{Adiabatic elimination}\label{sec:adiabatic_elimination}
+
+In this appendix we will derive Eq.~\MT{X} which is used in Sec.~\ref{sec:phog_three_mode_model} to simplify the analytical description of a multi-mode bosonic system when one of the modes takes its steady-state. 
+
+Consider a system involving a highly lossy bosonic mode, $c$. We assume that $c$ decays into a Markovian reservoir with decay rate $\gamma$, and that the system contains additional modes with possible losses, couplings and nonlinearities. 
+
+After $t \gg 1/\gamma$ the mode $c$ is empty, and it is assumed that this timescale is much faster than all other timescales in the system. Then, for $t \gg 1/\gamma$ the mode $c$ can be assumed to be in its steady-state and so, for example, $\ddt \hat{c} = 0$, which will allow us to simplify the description of our original system.
+
+The Lindblad master equation for our entire system is
+
+\begin{equation}
+\ddt \rho = - i \left[ \hat{H}, \rho \right] + \gamma \mathcal{L}\left(\hat{c}\right) \rho + \Gamma_j\mathcal{L}\left(f\left(\hat{a}_j\right)\right) \rho
+\end{equation}
+where $\rho$ is the density matrix describing the entire system and $\hat{H}$ is the system's Hamiltonian, on which we will later derive some restrictions. The term in $\gamma$ is strong loss of mode $c$ into the reservoir, and the term in $\Gamma$ denotes potential other sources of loss which do not affect $c$.
+
+ \MT{Talk to Pablo about this transformation}
+It is easiest to proceed in Heisenberg picture, and so we transform to the adjoint master equation \cite{Breuer2002} describing the evolution of an arbitrary operator $\hat{A}$
+
+\begin{equation}\label{eqn:appendix_phog_adjoint_start}
+\ddt \hat{A} = i \left[ \hat{H}, \hat{A} \right] + \gamma \mathcal{L}\left(\hat{c}^\dagger \right) \hat{A} + \Gamma_j \mathcal{L} \left( f\left(\hat{a}_j\right)^\dagger\right) \hat{A}
+\end{equation}
+and expand $\hat{H}$ and $\hat{A}$ in terms of normal-ordered powers of creation and annihilation operators of the lossy mode
+\begin{align}
+\hat{H} = \sum_{p, q = 0}^{\infty} \hat{H}^{\left(p, q\right)} \left(\hat{c}^\dagger\right)^p \hat{c}^q \label{eqn:appendix_phog_H_expand}  \\
+%
+\hat{A} = \sum_{p, q = 0}^{\infty} \hat{A}^{\left(p, q\right)} \left(\hat{c}^\dagger \right)^p \hat{c}^q \label{eqn:appendix_phog_A_expand}
+\end{align}
+where operators $\hat{H}^{\left(p, q\right)}, \hat{A}^{\left(p, q\right)}$ are, in general, operators acting on the remaining modes of the system, and $\hat{A}^{\left(p, q\right)}$ is time-dependent.
+
+Let us take Eqs.~\ref{eqn:appendix_phog_H_expand},~\ref{eqn:appendix_phog_A_expand} and substitute into Eq.~\ref{eqn:appendix_phog_adjoint_start}. Grouping terms in $\hat{c}^\dagger, \hat{c}$ we see that
+
+\begin{align}
+\ddt A^{\left(p, q\right)} = i \sum_{p, q, k, l} \left(H^{\left(k, l\right)} A^{\left(p, q\right)} c^{\dagger k} c^{l} c^{\dagger p} c^q - A^{\left(p, q\right)} H^{\left(k, l\right)} c^{\dagger p} c^q c^{\dagger k} c^l\right)& \notag \\
+%
++ \qq{terms in $\gamma$}&
+\end{align}
+where we have absorbed terms in $\Gamma_j$ into the definition of $H^{\left(p, q\right)}$ \MT{can I do this?}. We have also dropped hats from operators for ease of notation.
+
+Relabelling dummy indices,
+\begin{equation}
+\ddt A^{\left(p, q\right)} = i \sum_{p, q, k, l} F\left(p, q, k, l\right) c^{\dagger p} c^{q} c^{\dagger k} c^l + \qq{terms in $\gamma$}
+\end{equation}
+where
+\begin{equation}
+F\left(p, q, k, l\right) = H^{\left(k, l\right)} A^{\left(p, q\right)} - A^{\left(p, q\right)} H^{\left(k, l\right)} \notag
+\end{equation}
