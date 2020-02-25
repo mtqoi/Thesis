@@ -539,8 +539,35 @@ We demonstrate in Figs.~\ref{fig:phog_two_mode_single_mode_comparison},~\ref{fig
 \caption{\label{fig:phog_two_mode_single_mode_comparison} \MT{Create figure then add caption.}}
 \end{figure}
 
+\clearpage
 \section{Realistic parameters}\label{sec:parameters}
 \MT{Basically reproduce quick chat about realistic parameters from paper.}
+
+Let us consider how the analysis we have performed so far connects to real parameters of a physical system which is capable of implementing the PhoG device. We have in mind a network of waveguides laser-inscribed into IG$2$ class \MT{cite}, similar to the recent work Ref~\cite{Mukherjee2017}. Our envisioned system is depicted in Fig.~\ref{fig:phog_realistic}.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[draft=false, width=0.6\linewidth]{phog/phog3D}
+\caption{\label{fig:phog_realistic} $3$D representation of finished PhoG device. Waveguides are laser-inscribed into IG$2$ glass and allow for NCL to be simulated.}
+\end{figure}
+
+We must consider realistic physical parameters of light in such glass in order to check the feasibility of simulating NCL in such a system. We will derive realistic parameters in this section, and they will be used in Sec.~\ref{sec:phog_multi_mode} to show that the desired signature behaviours are still observed. These order-of-magnitude calculations are intended to illustrate feasibility of our device, while many of the parameters should be measured experimentally on the device itself.
+
+We must estimate the Kerr nonlinearity parameter $U$ which is used in our Hamiltonians. We assume that a pulse of finite length $L_\eff$ propagates through a waveguide with length much longer than $L_\eff$. The waveguide is assumed to have no dispersion and the pulse shape does not change, and we consider only the changes of the quantum state of the pulse caused by nonlinearity, linear loss and nonlinear phase changes.\footnote{We will briefly discuss relaxation of these conditions in Sec.~\MT{X}. %Outlook section where I will discuss pulses briefly
+}
+
+The parameter may be written as 
+\begin{equation}
+U = 2 \hbar \frac{\omega^2}{V_\eff} \frac{n_2}{n_\eff}
+\end{equation}
+which is derived e.g. in Refs.~\cite{Imoto1985, Kitagawa1986, Drummond1980} either in terms of nonlinear Kerr parameter $n_2$ or third-order susceptibility tensor $\chi^{\left(3\right)}$. $V_\eff$ is the effective mode area which we take to be $V_\eff \sim A_\eff L_\eff$, with $A_\eff$ the transverse mode area. We take the effective refractive index of the waveguide mode to be $n_\eff \approx 2.5$ which is typical for IG$2$ glass \MT{cite}. \MT{comment about suitability of each of these assumptions. How much are the numbers likely to vary in the final device?} IG$2$ also has $n_2 \sim 3 \times 10^{-18} \text{W}^{-1} \text{m}^2$ \MT{cite}.
+
+The effective mode area is uncertain, and so as an upper bound we take $A_\eff$ to be the area of the waveguide, which is on the order of $10^{-12}\text{m}^2$ as in Ref.~\MT{cite} for similar laser-inscribed waveguides which are capable of supporting large pulse energies. Taking for example $A_\eff = \MT{X}$, for a $100$~fs pulse at $1064$~nm we calculate $U \approx 8.5\times 10^{-8}$. Evolution under this $U$ is modelled in Sec.~\ref{sec:phog_multi_mode}.
+
+\MT{Calculation of $\gamma_1$? Calculation of approximate coupling constants?}
+
+
+
 
 \clearpage
 \section{Multi-mode model}\label{sec:phog_multi_mode}

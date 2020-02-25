@@ -23,13 +23,22 @@
 \usepackage{siunitx}
 \usepackage{floatrow}
 
+
+\usepackage{xcolor}
+
+\newcommand{\highlight}[1]{%
+  \colorbox{green!30}{$\displaystyle#1$}}
+
+
 \usepackage{newfloat}
 \DeclareFloatingEnvironment[placement={!ht},name=List]{mylist}
 
-
+\newcommand{\eff}{\text{eff}}
 \newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
 \newcommand{\ncl}{\hat{a}\left(\hat{a}^\dagger \hat{a} - 1\right)}
 \newcommand{\gncl}{\gamma_{\text{NCL}}}
+\newcommand{\hc}{\text{h. c.}}
+%\newcommand{\d}{\delta}
 \newcommand*\erfc{\text{erfc}}
 \newcommand{\perr}{\text{p}_{\text{err}}}
 \newcommand{\perrps}{\perr\left(\Delta_r, \Delta_\theta\right)}
@@ -42,13 +51,17 @@
 \newcommand{{\systemF}}{QDS-$f$-QKD-$f$-CV-QPSK}
 \newcommand{\ddt}[1][]{\frac{\mathrm{d}#1}{\mathrm{d}t}}
 
+
+
 \includeonly{
 	chapters/introduction,
 	chapters/crypto_intro,
 	chapters/qds,
 	chapters/qss,
 	chapters/aqc,
-	chapters/phog
+	chapters/phog,
+	chapters/phog_adiabatic_elimination,
+	chapters/phog_numerical_methods
 }
 
 
@@ -78,13 +91,14 @@
 \maketitle
 \tableofcontents
 
-%\part{Secure quantum networks}
+\part{Secure quantum networks}
 
 
 %\listoffigures
 \include{chapters/introduction}
 \part{Agile cryptography: signatures and secrets}
 \include{chapters/crypto_intro}
+\input{chapters/qds_lit_review}
 \include{chapters/qds}
 \include{chapters/qss}
 \include{chapters/aqc}
@@ -92,13 +106,17 @@
 \include{chapters/phog}
 
 
-\bibliographystyle{unsrt} 
-%\bibliography{qds_bib} 
-\bibliography{Thesis}
 
-%\appendix
+
+\appendix
 %\include{chapters/larger_alphabets}
 %\include{chapters/coherent_noisy_channel}
+\include{chapters/phog_adiabatic_elimination}
+\include{chapters/phog_numerical_methods}
+
+\bibliographystyle{unsrt} 
+\bibliography{Thesis}
+
 
 %\part{Coherent signal transfer}
 \end{document}
