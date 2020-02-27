@@ -331,7 +331,7 @@ We examine the best attainable $Q<0$ for a given linear loss rate $\gamma_1$, an
 \begin{figure}
 \centering
 \includegraphics[width=0.49\linewidth, draft=false]{phog/best_mandelQ_varying_gamma1}
-\caption{\label{fig:phog_ncl_best_Q_gamma1} The best attainable value of Mandel parameter $Q$ is approximately independent of $\gamma_1$ when the loss rate is nonzero. Larger $\alpha$ allows for better $Q$ to be reached. Numerical method: direct integration ($\alpha = 2.0, 3.0, 4.0$); quantum monte carlo ($\alpha = 10.0$).}
+\caption{\label{fig:phog_ncl_best_Q_gamma1} The best attainable value of Mandel parameter $Q$ is approximately independent of $\gamma_1$ when the loss rate is nonzero. Larger $\alpha$ allows for better $Q$ to be reached. Numerical method: direct integration ($\alpha = 2.0, 3.0, 4.0$); quantum monte carlo ($\alpha = 10.0$). \MT{TODO: Update graph.}}
 \end{figure}
 
 Figure~\ref{fig:phog_ncl_best_Q_gamma1} also appears to show that choosing larger initial $\alpha$ allows for smaller $Q$ to be obtained, and we saw similar effects previously in Fig.~\ref{fig:phog_max_fidelity} when considering the maximum attainable fidelity to the single-photon. While the large improvement in attainable $Q$ between $\alpha=2.0$ and $\alpha=3.0$ is primarily due to reduction in the initial $\rho_{0, 0}, \rho_{1, 0}, \rho_{0, 1}$, the improvement between $\alpha=3.0$ and $\alpha=4.0$ cannot be explained in the same way. We will explore this further using additional numerical methods in the following sections, but for now let us adopt an analytical approach. Consider the Lindblad equation describing both linear loss and NCL
@@ -357,13 +357,16 @@ To summarise, the inclusion of linear loss $\gamma_1$ causes our system to be dr
 
 \subsection{Nonlinear decay}
 
-Finally, let us examine behaviour of photon-number expectation $\ev{\hat{n}}$ when both NCL and linear loss are included. We have observed already, Fig.~\ref{fig:phog_A_ncl_loss}a that linear loss causes $\rho_a$ to decay to the vacuum, rather than $\dyad{1}$, and so in the long-time limit $\ev{\hat{n}} \rightarrow 0$. We have determined however that we are primarily interested in the early stages of dynamics over which NCL dominates, and so in our system we expect to see a signature of NCL behaviour on the photon-number expectation. As was remarked earlier, the NCL operator $\ncl$ may be interpreted as an intensity-dependent single-photon loss, with rate proportional to $\hat{n}$. This implies that a large coherent state amplitude should give rise to quick decay of photon-number, while smaller amplitude yields smaller decay. This is in contrast to linear loss in which the decay of $\ev{n}$ is exponential. 
+Finally, let us examine behaviour of photon-number expectation $\ev{\hat{n}}$ when both NCL and linear loss are included. We have observed already, Fig.~\ref{fig:phog_A_ncl_loss}a that linear loss causes $\rho_a$ to decay to the vacuum rather than $\dyad{1}$, and so in the long-time limit we have $\ev{\hat{n}} \rightarrow 0$. We have determined however that we are primarily interested in the early stages of dynamics over which NCL dominates, and so in our system we expect to see a signature of NCL behaviour on the photon-number expectation.
 
-We vary initial coherent state amplitude $\alpha$ and plot the initial stages of dynamics in Fig.~\ref{fig:phog_ncl_NL_decay}, where we have initially set $\gamma_1=0$ in order to isolate the effects of NCL. 
+As was remarked earlier, the NCL operator $\ncl$ may be interpreted as an intensity-dependent single-photon loss, with rate proportional to $\hat{n}$. This implies that a large coherent state amplitude should give rise to quick decay of photon-number, while smaller amplitude yields smaller decay. This is in contrast to linear loss in which the decay of $\ev{n}$ is exponential with constant rate.
+
+We vary initial coherent state amplitude $\alpha$ and plot the initial stages of dynamics in Fig.~\ref{fig:phog_ncl_NL_decay}, where we have initially set $\gamma_1=0$ in order to isolate the effects of NCL. Although each coherent state initially possesses different average photon number, after a short amount of time each state possesses the same average photon number since they have experienced different decay rates. This is a key indicator of NCL \cite{Mogilevtsev2010, Shchesnovich2011}.
 
 \begin{figure}[htp]
 \centering
 \includegraphics{phog/ncl_NL_decay.png}
+\caption{\label{fig:phog_ncl_NL_decay} NCL induces intensity-dependent decay rates, and so tates with initially different $\ev{\hat{n}}$ quickly decay to a level where they possess the same average photon number. This is a key demonstration of NCL. Numerical method: direct integration.}
 \end{figure}
 
 
