@@ -48,12 +48,12 @@ Assuming that reservoir $R$ is Markovian, the evolution of mode $a$ is given by 
 %\footnote{Equations in this form will be referred to as ``Lindblad equations''} NOTE: I don't need this statement since it will be motivated in the introduction.
 
 \begin{equation}\label{eqn:phog_lindblad_1}
-\ddt \rho_a =  - i \left[\hat{H}, \rho_a\right] + \gamma \mathcal{L}\left(\hat{A}\right)\rho_a
+\ddt \rho_a =  - i \left[\hat{H}, \rho_a\right] + \gamma \mathcal{L}\left[\hat{A}\right]\rho_a
 \end{equation}
 
-\noindent where we take the Hamiltonian $\hat{H} = \hbar \omega \hat{a}^\dagger \hat{a}$. Equation~\ref{eqn:phog_lindblad_1} then describes the decay of an initial state $\rho_a\left(t=0\right)$ into $R$ with rate $\gamma$. The Lindbladian term $\mathcal{L}\left(\hat{A}\right)$ takes the usual form
+\noindent where we take the Hamiltonian $\hat{H} = \hbar \omega \hat{a}^\dagger \hat{a}$. Equation~\ref{eqn:phog_lindblad_1} then describes the decay of an initial state $\rho_a\left(t=0\right)$ into $R$ with rate $\gamma$. The Lindbladian term $\mathcal{L}\left[\hat{A}\right]$ takes the usual form
 \begin{equation}\label{eqn:phog_lindbladian_form}
-\mathcal{L}\left(\hat{A}\right)\rho_a = \hat{A}\rho_a\hat{A}^\dagger - \frac{1}{2} \hat{A}^\dagger \hat{A} \rho_a - \frac{1}{2} \rho_a \hat{A}^\dagger \hat{A}.
+\mathcal{L}\left[\hat{A}\right]\rho_a = \hat{A}\rho_a\hat{A}^\dagger - \frac{1}{2} \hat{A}^\dagger \hat{A} \rho_a - \frac{1}{2} \rho_a \hat{A}^\dagger \hat{A}.
 \end{equation}
 
 \noindent We will examine the behaviour of an initially coherent state $\rho_a\left(t=0\right) = \dyad{\alpha}$ with amplitude $\alpha$ as it decays into $R$. We examine several choices for decay operator $\hat{A}$ and demonstrate that suitable choices of $\hat{A}$ drive $\rho_a$ towards highly non-classical output steady-states. In Sec.~\ref{sec:A_a} we let $\hat{A} = \hat{a}$, in Sec.~\ref{sec:A_aa} we let $\hat{A} = \hat{a}^2$, and in Sec.~\ref{sec:A_ncl} we examine the behaviour of decay operators of the form $\hat{A} = \hat{a} \left(\hat{a}^\dagger \hat{a} - p\right)$ for $p \in \mathbb{N}$.
@@ -150,9 +150,9 @@ In Fig.~\ref{fig:phog_lindblad_two_photon_loss}a we plot the evolution of $\lang
 \caption{\label{fig:phog_lindblad_two_photon_loss}$\hat{A} = \hat{a}^2$. (a) Operator expectation values for state $\rho_a\left(t\right)$ as it evolves under Eq.~\ref{eqn:phog_lindblad_two_photon_loss}. An intially coherent state with $\alpha=3.0$ no longer decays to the vacuum state, and the final photon-number expectation is $0.5$. Quadrature variances no longer stay constant, which implies that the state is no longer coherent. This is confirmed in (b) where the fidelity between $\rho_a\left(t\right)$ and $\dyad{\alpha^\prime}$ is plotted. The fidelity between $\rho_a\left(t\right)$ and steady state Eq.~\ref{eqn:phog_phase_state} increases to $1$. Horizontal gridlines displayed in black, dashed. Numerical method: direct integration.}
 \end{figure}
 
-
+\iffalse
 \clearpage
-%\subsection{$\hat{A} = \hat{a}^3$}\label{sec:A_aaa}
+\subsection{$\hat{A} = \hat{a}^3$}\label{sec:A_aaa}
 We might guess that the steady state of the three-photon loss term $\hat{a}^3$ is likewise a mixture of $\ket{0}, \ket{1}$ and $\ket{2}$
 \begin{align}\label{eqn:phog_three_photon_loss_ss}
 &\rho_{\text{steady}} = c_1 \dyad{\psi} + c_2 \dyad{0} + c_2 \dyad{1} + c_3 \dyad{2} \notag \\
@@ -170,6 +170,7 @@ We plot the evolution of fidelities between $\rho_a\left(t\right)$ evolving with
 \includegraphics[draft=false, width=0.6\linewidth]{phog/fidelities_aaa}
 \caption{\label{fig:phog_lindblad_three_photon_loss}$\hat{A} = \hat{a}^3$ (a) Fidelities between state $\rho_a\left(t\right)$ and vacuum (red), single-photon state (orange), coherent state with equivalent photon-number expectation to $\rho_a$ (green), and the two-phase state (blue). \MT{additional comments/interpretation.} Horizontal gridlines displayed in black, dashed. Numerical method: direct integration.}
 \end{figure}
+\fi
 
 \clearpage
 \subsection{$\hat{A} = \hat{a}\left(\hat{a}^\dagger \hat{a} - 1\right)$}\label{sec:A_ncl}
@@ -244,114 +245,115 @@ We will refer to the decay described by Lindblad operator $\hat{A} = \ncl$ as \e
 
 \clearpage
 \section{Including loss}\label{sec:phog_including_loss}
-We have seen that the loss operator $\ncl$ is a good canditate for driving an initial coherent state towards a single photon state $\ket{1}$. Any system, therefore, which can implement the Lindblad equation~\ref{eqn:phog_lindblad_1} with $\hat{A} = \ncl$ will asymptotically give rise to single-photon Fock states, although fidelities close to $1$ are obtainable even at finite time, Fig.~\ref{fig:phog_A_ncl}b. 
+We have seen that the nonlinear coherent loss (NCL) operator $\ncl$ is a good canditate for driving an initial coherent state towards a single photon state. Any system, therefore, which can implement the Lindblad equation~\ref{eqn:phog_lindblad_1} with decay operator $\hat{A} = \ncl$ will asymptotically and deterministically give rise to single-photon Fock states, although fidelities close to $1$ are obtainable even at finite time, Fig.~\ref{fig:phog_A_ncl}b. 
 
-In a realistic situation however it is unlikely that a system can be designed to implement $\ncl$ only, and so we must consider how the final states are affected by additional loss mechanisms. In an optical system the single-photon (``linear'') loss can never be avoided, so we will explore its effect on the nonlinear coherent loss mechanism. \MT{make sure I have defined NCL before now.} To do this, we modify our original Lindblad equation to
+In a realistic situation however it is unlikely that a system can be designed to implement $\ncl$ only, and so we must consider how the final states are affected by additional loss mechanisms. In an optical system the single-photon (``linear'') loss can never be avoided, so we will explore its effect on the nonlinear coherent loss mechanism. To do this, we modify our original Lindblad equation to include several Lindbladian terms
 \begin{equation}\label{eqn:phog_lindblad_a_ncl}
-\ddt \rho_a =  - i \left[ \hat{H}, \rho_a\right] + \gamma_1 \mathcal{L}\left(\hat{a}\right)\rho_a + \gncl \mathcal{L}\left(\ncl\right)\rho_a
+\ddt \rho_a =  - i \left[ \hat{H}, \rho_a\right] + \gamma_1 \mathcal{L}\left[\hat{a}\right]\rho_a + \gncl \mathcal{L}\left[\ncl\right]\rho_a
 \end{equation}
-with $\gamma_1$ the decay rate via the single-photon loss channel $\hat{a}$, and $\gncl$ the loss rate via NCL $\ncl$.
+with $\gamma_L$ the decay rate via the single-photon loss channel $\hat{a}$, and $\gncl$ the loss rate via NCL $\ncl$. We can immediately see that $\dyad{1}$ is only a steady-state of Eq.~\ref{eqn:phog_lindblad_a_ncl} when $\gamma_1 = 0$, in which case we revert to the analysis of Sec.~\ref{sec:A_ncl}. For all $\gamma_1 > 0$, the vacuum is the steady-state and the matrix elements $\rho_{0, 0}, \rho_{0, 1}, \rho_{1, 0}$ are no longer constant in time. 
 
-We can immediately see that $\dyad{1}$ is only a steady-state of Eq.~\ref{eqn:phog_lindblad_a_ncl} when $\gamma_1 = 0$, in which case we revert to the analysis of Sec.~\ref{sec:phog_single_mode_ncl_1}. For all $\gamma_1 > 0$, $\dyad{0}$ is a steady-state, and a consideration of $\rho_{m, n}$ shows that $\rho_{0, 0}, \rho_{0, 1}, \rho_{1, 0}$ are no longer constant in time. 
+Physically we see therefore that the presence of linear loss leads to a degradation of the highly non-classical output states reached under NCL alone, as the single-photon loss mechanism pushes $\rho_a$ towards the vacuum. We see this explicitly in Fig.~\ref{fig:phog_A_ncl_loss}b (c.f. Fig.~\ref{fig:phog_A_ncl}), where an intially increasing fidelity with $\dyad{1}$ eventually dies away, and fidelity to the vacuum state increases to $1$. Additionally, photon number expectations decay to $0$, and an initial increase in quadrature variances decays back to the coherent state variance, Fig.~\ref{fig:phog_A_ncl_loss}a.
 
-Physically we see therefore that the presence of linear loss ($\gamma_1 > 0$) leads to a degradation of the highly-quantum output state which can be reached under NCL, as the single-photon loss mechanism pushes $\rho_a$ towards the vacuum. We see this explicitly in Fig.~\ref{fig:phog_A_ncl_loss}b (c.f. Fig.~\ref{fig:phog_A_ncl}), where an intially increasing fidelity with $\dyad{1}$ eventually dies away, and fidelity to the vacuum state increases to $1$. 
-
-We examine the maximum attainable fidelity to $\dyad{1}$ in Fig.~\ref{fig:phog_max_fidelity}. The maximum fidelity decreases with increasing $\gamma_1$, but increasing $\alpha$ appears to allow larger fidelities to be reached at the same $\gamma_1$ (c.f. Fig.~\ref{fig:phog_fidelity_ncl_vs_alpha}). We will explore this phenomenon further in Sec.~\MT{X}.
 
 
 
 
 \begin{figure}[htp]
 \centering
-	\begin{subfigure}{0.6\linewidth}
+	\begin{subfigure}{0.49\linewidth}
 	\centering
 	\includegraphics[width=\linewidth, draft=false]{phog/expects_ncl1_and_a}
 	\caption{}
 	\end{subfigure}
-	\begin{subfigure}{0.6\linewidth}
+	\begin{subfigure}{0.49\linewidth}
 	\centering
 	\includegraphics[width=\linewidth, draft=false]{phog/fidelities_ncl1_and_a}
 	\caption{}
 	\end{subfigure}
-\caption{\label{fig:phog_A_ncl_loss} NCL $\ncl$ and linear loss $\hat{a}$. Initial coherent state amplitude $\alpha=3.0$, and $\gncl=8.0$. (a) Operator expectation values. Solid: $\langle \hat{a}^\dagger \hat{a}\rangle$. The presence of linear loss $\gamma_1 > 0$ ensures that the photon number decays to $0$. Dashed: $\text{Var}\left(\hat{x}\right)$. Similarly, for $\gamma_1 > 0$ we see the variance in $x$ return to its initial value, hinting that our state is being pushed towards vacuum. (b) Fidelities of $\rho_a\left(t\right)$ against vacuum (blue), single-photon state (red) and coherent state with equivalent photon-number expectation (orange). Solid: $\gamma_1 = 0$. Dot-dashed: $\gamma_1 = 2$. Dashed: $\gamma_1 = 20$. The presence of linear loss pushes $\rho_a$ away from the single-photon state for $t > 0.1$. For $t < 0.1$ the system is dominated by NCL}
+\caption{\label{fig:phog_A_ncl_loss} NCL $\ncl$ and linear loss $\hat{a}$. Initial coherent state amplitude $\alpha=3.0$, and $\gncl=8.0$. (a) Operator expectation values. Solid: $\langle \hat{a}^\dagger \hat{a}\rangle$. The presence of linear loss $\gamma_1 > 0$ ensures that the photon number decays to $0$. Dashed: $\text{Var}\left(\hat{x}\right)$. Similarly, for $\gamma_1 > 0$ we see the variance in $x$ return to its initial value, hinting that our state is being pushed towards vacuum. (b) Fidelities of $\rho_a\left(t\right)$ against vacuum (blue), single-photon state (red) and coherent state with equivalent photon-number expectation (orange). Solid: $\gamma_1 = 0$. Dot-dashed: $\gamma_1 = 2$. Dashed: $\gamma_1 = 20$. The presence of linear loss pushes $\rho_a$ away from the single-photon state for $t > 0.1$. For $t < 0.1$ the system is dominated by NCL. Numerical method: direct integration.}
 \end{figure}
 
 %It is only for $t > 0.1$ that the fidelity decays, even for large $\gamma_1 = 20$, and for $t < 0.1$ the system seems dominated by NCL $\ncl$. 
 
 \begin{figure}[htp]
 \centering
-\includegraphics[width=0.6\linewidth, draft=false]{phog/max_fidelities_vs_gamma1_ncl1_and_a}
-\caption{\label{fig:phog_max_fidelity} Maximum attainable fidelity between $\rho_a$ and $\dyad{1}$ at different linear loss levels $\gamma_1$. Linear loss drives $\rho_a$ towards the vacuum and destroys the quantumness of our state, but over short times the fidelity to $\dyad{1}$ appears independent of $\gamma_1$, Fig.~\ref{fig:phog_A_ncl_loss}. Here, we observe that after $\gamma_1 \approx 7.5$ the maximum attainable fidelity is practically independent of linear loss rate, while it depends on $\alpha$. We shall explore this further in Sec.~\MT{X}.}
+\includegraphics[width=0.49\linewidth, draft=false]{phog/max_fidelities_vs_gamma1_ncl1_and_a}
+\caption{\label{fig:phog_max_fidelity} Maximum attainable fidelity between $\rho_a$ and $\dyad{1}$ at different linear loss levels $\gamma_1$. Linear loss drives $\rho_a$ towards the vacuum and destroys the quantumness of our state, but over short times the fidelity to $\dyad{1}$ appears independent of $\gamma_1$, Fig.~\ref{fig:phog_A_ncl_loss}. Here, we observe that after $\gamma_1 \approx 7.5$ the maximum attainable fidelity is practically independent of linear loss rate, while it depends on $\alpha$. Numerical method: direct integration.}
 \end{figure}
 
-Figure~\ref{fig:phog_A_ncl_loss}b suggests an interesting phenomenon: over short timescales the system appears to be dominated by NCL $\ncl$. Consider for example the fidelity between $\rho_a\left(t < 0.05\right)$ and $\dyad{\alpha^\prime}$ denoting a coherent state with equivalent photon-number expectation. By considering this alone, for short times the behaviour is indistinguishable from the case with $\gamma_1 = 0$. Similar reasoning applies also to the fidelities between $\rho_a\left(t < 0.1\right)$ and $\dyad{1}$, where the evolution is almost independent of $\gamma_1$.
+Figure~\ref{fig:phog_A_ncl_loss}b suggests an interesting phenomenon: over short timescales the system appears to be dominated by NCL $\ncl$. Consider for example the fidelity between $\rho_a\left(t < 0.05\right)$ and $\dyad{\alpha^\prime}$ denoting a coherent state with equivalent photon-number expectation. By considering this alone, for short times the behaviour is indistinguishable from the case with $\gamma_1 = 0$. Similar reasoning applies also to the fidelities between $\rho_a\left(t < 0.1\right)$ and $\dyad{1}$, where the evolution is practically independent of $\gamma_1$.
 
-From fidelity $\mathcal{F}\left( \rho_a\left(t<0.1\right), \dyad{0}\right)$, Fig.~\ref{fig:phog_A_ncl_loss} even suggests that $\gamma_1 \gg 0$ might help drive $\rho_a$ towards the single-photon state faster than in the lossless case. However we infer that loss actually is not helpful here, since after about $t=0.05$ the fidelity to $\dyad{\alpha^\prime}$ begins to increase again. This suggests that fidelity might not always be a useful measure of the desired behaviour when both nonlinear dissipation and linear loss are included.\footnote{Of course, we could have guessed this based on Fig.~\ref{fig:phog_lindblad_single_photon_loss}b as the fidelity to $\dyad{1}$ increases until $t\approx 0.25$ while the state remains completely coherent.}
+From fidelity $\mathcal{F}\left( \rho_a\left(t<0.1\right), \dyad{0}\right)$, Fig.~\ref{fig:phog_A_ncl_loss} even suggests that $\gamma_1 \gg 0$ might help drive $\rho_a$ towards the single-photon state faster than in the lossless case. However we infer that loss actually is not helpful here, since after about $t=0.05$ the fidelity to $\dyad{\alpha^\prime}$ begins to increase again. This suggests that fidelity might not always be a useful measure of our desired behaviour when both nonlinear dissipation and linear loss are included.\footnote{Of course, we could have guessed this based on Fig.~\ref{fig:phog_lindblad_single_photon_loss}b as the fidelity to $\dyad{1}$ increases until $t\approx 0.25$ while the state remains completely coherent.}
 
+We examine the maximum attainable fidelity to $\dyad{1}$ in Fig.~\ref{fig:phog_max_fidelity}. The maximum fidelity decreases with increasing $\gamma_1$, but increasing $\alpha$ appears to allow larger fidelities to be reached for the same $\gamma_1$ (c.f. Fig.~\ref{fig:phog_fidelity_ncl_vs_alpha}). We will explore this phenomenon further in Sec.~\ref{sec:phog_summary_ncl_effects}.
 
 
 \MT{ segue into talking about our two options. 1) reduce time evolution of our system. 2) use bright input state }
 
+\clearpage
 \subsection{Mandel parameter $Q$}
-Although the fidelity is a helpful measure for measuring the ability of our system to produce single-photons, we have observed the case where fidelity to the single-photon increases while $\rho_a$ remains entirely coherent. It is therefore worth considering which other measures we might use to measure progress. One such measure is the Mandel $Q$ parameter \MT{cite}
+Although the fidelity has been a helpful measure for measuring the ability of our system to produce single-photons, we have observed in Fig.~\ref{fig:phog_lindblad_single_photon_loss}b a case where fidelity to the single-photon increases while $\rho_a$ remains entirely coherent. It is therefore worth considering which other measures we might use to measure progress. One such measure is the Mandel $Q$ parameter \cite{Mandel1979, Carmichael1999, Davidovich1996}
 \begin{equation}\label{eqn:phog_mandelQ}
 Q = \frac{\ev{\Delta\hat{n}^2}}{\ev{\hat{n}}} - 1
 \end{equation}
-in terms of photon-number expectation $\ev{\hat{n}}$ and variance $\ev{\Delta\hat{n}^2}$. Eq.~\ref{eqn:phog_mandelQ} may equivalently be written as 
+in terms of photon-number expectation $\ev{\hat{n}}$ and variance $\ev{\Delta\hat{n}^2}$. Equation~\ref{eqn:phog_mandelQ} may equivalently be written in normal order as 
 \begin{equation}
 Q = \frac{\ev{\hat{a}^\dagger \hat{a}^\dagger \hat{a}\hat{a}}}{\ev{\hat{a}^\dagger \hat{a}}} - \ev{\hat{a}^\dagger \hat{a}}.
 \end{equation}
-Intuitively, Eq.~\ref{eqn:phog_mandelQ} is a measure of the level of photon-number squeezing in $\rho_a$. In the limit of zero uncertainty in photon-number, $\ev{\Delta\hat{n}} \rightarrow 0$ and so $Q \rightarrow -1$, while for a coherent state obeying Poissonian photon-number statistics $Q = 1$. We will therefore seek to find parameter regimes for which loss operators $\ncl$ or $\hat{a}^2$ give $Q<0$. 
+Intuitively, the Mandel parameter is a measure of the level of photon-number squeezing in $\rho_a$. Coherent states have Poissonian photon-number statistics, $\ev{\Delta\hat{n}} = \ev{\hat{n}}$ and so $Q = 0$ in this case. States with $Q < 0$ have reduced photon-number variance and are known as sub-Poissonian, while states with $Q > 0$ are super-Poissonian. In the limit of zero uncertainty in photon-number, $\ev{\Delta\hat{n}} \rightarrow 0$ and so $Q \rightarrow -1$. 
+
+Clearly, both decay operators $\ncl$ and $\hat{a}^2$ give steady-states with sub-Poissonian photon number statistics, while $\hat{a}$ gives rise to the vacuum, which is Poissonian. We will therefore seek to find parameter regimes for which the loss operators $\ncl$ or $\hat{a}^2$ give $Q<0$, even in the presence of linear loss.
 
 %Using $Q$ as our measure to optimise has the advantage that it takes value $Q = -1$ for any Fock state and so knowledge of the steady-state of the system is not required. Additionally we do not require access to the full density matrix $\rho_a$ in order to calculate $Q$, and since $Q$ may be written entirely in terms of photon-number operator $\hat{n}$ we note that only the diagonal elements $\rho_{n, n}$ of $\rho_a$ are required. And as we observed in Sec.~\ref{sec:phog_single_mode_ncl_1}, the Lindblad equation~\ref{eqn:phog_A_ncl} couples diagonal elements to diagonal elements, which will allow for our analysis to be simplified.  \MT{Not sure where to put this paragraph or these statements.}
 
-The effect of NCL $\ncl$ on $Q$ is displayed in Fig.~\ref{fig:phog_ncl_Q}a under several different linear loss rates $\gamma_1$. We see that the effect of NCL is indeed to drive $\rho_a$ towards a Fock state, and $Q \rightarrow -1$ for $\gamma_1 = 0$. For all $\gamma_1 \ne 0$ however we see that $Q$ eventually returns to $0$ as the system becomes vacuum. However, large $\left|Q\right|$ are obtained for finite $t$. In Fig.~\ref{fig:phog_ncl_Q} we observe that the behaviour of $Q$ is indeed identical over the initial evolution of $\rho_a$ and is independent of linear loss rate $\gamma_1$ which bodes well for implementation of $\ncl$ as a deterministic generator of single-photon states. 
+The effect of NCL $\ncl$ on $Q$ is displayed in Fig.~\ref{fig:phog_ncl_Q}a under several different linear loss rates $\gamma_1$. We see that the effect of NCL is indeed to drive $\rho_a$ towards a Fock state, and $Q \rightarrow -1$ for $\gamma_1 = 0$. For all $\gamma_1 \ne 0$ however we see that $Q$ eventually returns to $0$ as the system tends towards the vacuum. However, even in this case large $\left|Q\right|$ are still obtained for finite $t$. In Fig.~\ref{fig:phog_ncl_Q} we observe that the behaviour of $Q$ over the initial evolution of $\rho_a$ is independent of linear loss rate $\gamma_1$ (c.f. Fig.~\ref{fig:phog_A_ncl_loss}b). This bodes well for implementation of $\ncl$ as a deterministic generator of single-photon states, since a restriction to small times $t$ is always possible.
 
 \begin{figure}[htp]
 \centering
-	\begin{subfigure}{0.6\linewidth}
+	\begin{subfigure}{0.49\linewidth}
 	\caption{}
 	\includegraphics[width=\linewidth, draft=false]{phog/mandelQ_varying_gamma1}
 	\end{subfigure}
-	\begin{subfigure}{0.6\linewidth}
+	\begin{subfigure}{0.49\linewidth}
 	\caption{}
 	\includegraphics[width=\linewidth, draft=false]{phog/mandelQ_varying_gamma1_short_time}
 	\end{subfigure}
-\caption{\label{fig:phog_ncl_Q} Mandel $Q$ parameter under both NCL and linear loss. With $\gamma_1=0$, $Q \rightarrow -1$ as the system approaches $\dyad{1}$. For any $\gamma_1 > 0$, $Q\left(t\rightarrow\infty\right) \rightarrow 0$, but significant $Q < 0$ are obtained for finite $t$. Solid: $\gncl \ne 0$. Dashed: $\gncl = 0$, i.e. just linear loss.}
+\caption{\label{fig:phog_ncl_Q} Mandel $Q$ parameter under both NCL and linear loss. With $\gamma_1=0$, $Q \rightarrow -1$ as the system approaches $\dyad{1}$. For any $\gamma_1 > 0$, $Q\left(t\rightarrow\infty\right) \rightarrow 0$, but significant $Q < 0$ are still obtained for finite $t$. Solid: $\gncl \ne 0$. Dashed: $\gncl = 0$, i.e. just linear loss. Numerical method: direct integration.}
 \end{figure}
 
-We therefore alter our goals. Rather than finding a system which deterministically generates single-photon states in the long-time limit, we seek a system which will deterministically generate highly non-classical states \emph{after a specified evolution time}. Since Fig.~\ref{fig:phog_ncl_Q} predicts $Q\left(t\right) > -1$ whenever $\gamma_1 \ne 0$ we will be unable to use NCL $\ncl$ to generate single-photons. However these states are highly squeezed in photon-number and still provide a useful quantum source. From now on we will make it our goal to generate sub-Poissonian light \MT{make sure this is defined before now}.
+We therefore alter our goals. Rather than finding a system which deterministically generates single-photon states in the long-time limit, we seek a system which will deterministically generate highly sub-Poissonian states \emph{after a specified evolution time}. Since Fig.~\ref{fig:phog_ncl_Q} predicts $Q\left(t\right) > -1$ whenever $\gamma_1 \ne 0$ we will unfortunately be unable to use NCL operatpr $\ncl$ to generate single-photons. However our true output states are highly squeezed in photon-number and still provide a deterministic source of quantum light which is useful for application. From now on we will take it as our goal to generate sub-Poissonian light over the initial times of the system evolution.
 
 
-We may examine the best attainable $Q<0$ for a given linear loss rate $\gamma_1$. This is plotted in Fig.~\ref{fig:phog_ncl_best_Q_gamma1}. As we see, although the best $Q$ attainable is no longer $-1$, it varies only slightly with increasing linear loss, and even for large $\gamma_1=15$ a mandel parameter of $Q \approx -0.778$ is still attainable, while $3.2$ photons remain in the state.
-%\MT{Make graph and plot the photon-number statistics.}
+We examine the best attainable $Q<0$ for a given linear loss rate $\gamma_1$, and plot in Fig.~\ref{fig:phog_ncl_best_Q_gamma1}. As we see, although the best attainable $Q$ is no longer $-1$, it varies only slightly with increasing linear loss, and even for large $\gamma_1=15$ a mandel parameter of $Q \approx -0.778$ is still attainable, while $3.2$ photons remain in the state.
+
 
 \begin{figure}
 \centering
-\includegraphics[width=0.6\linewidth, draft=false]{phog/best_mandelQ_varying_gamma1}
-\caption{\label{fig:phog_ncl_best_Q_gamma1}}
+\includegraphics[width=0.49\linewidth, draft=false]{phog/best_mandelQ_varying_gamma1}
+\caption{\label{fig:phog_ncl_best_Q_gamma1} The best attainable value of Mandel parameter $Q$ is approximately independent of $\gamma_1$ when the loss rate is nonzero. Larger $\alpha$ allows for better $Q$ to be reached. Numerical method: direct integration ($\alpha = 2.0, 3.0, 4.0$); quantum monte carlo ($\alpha = 10.0$).}
 \end{figure}
 
-Fig.~\ref{fig:phog_ncl_best_Q_gamma1} also appears to show that choosing larger $\alpha$ allows for smaller $Q$ to be obtained. We saw similar effects previously in Fig.~\ref{fig:phog_max_fidelity}. While the large improvement in attainable $Q$ between $\alpha=2.0$ and $\alpha=3.0$ is due to reduction in the initial $\rho_{0, 0}, \rho_{1, 0}, \rho_{0, 1}$, the improvement between $\alpha=3.0$ and $\alpha=4.0$ cannot be explained in the same way. We will explore this further using additional numerical methods in the following sections, but for now let us adopt an analytical approach. Consider the total Lindblad equation describing linear loss and NCL
+Figure~\ref{fig:phog_ncl_best_Q_gamma1} also appears to show that choosing larger initial $\alpha$ allows for smaller $Q$ to be obtained, and we saw similar effects previously in Fig.~\ref{fig:phog_max_fidelity} when considering the maximum attainable fidelity to the single-photon. While the large improvement in attainable $Q$ between $\alpha=2.0$ and $\alpha=3.0$ is primarily due to reduction in the initial $\rho_{0, 0}, \rho_{1, 0}, \rho_{0, 1}$, the improvement between $\alpha=3.0$ and $\alpha=4.0$ cannot be explained in the same way. We will explore this further using additional numerical methods in the following sections, but for now let us adopt an analytical approach. Consider the Lindblad equation describing both linear loss and NCL
 
 \begin{equation}\label{eqn:phog_lindblad_a_ncl_2}
-\ddt \rho = \left[ \gamma_1 \mathcal{L}\left(\hat{a}\right) + \gncl \mathcal{L}\left(\ncl\right)\right] \rho
+\ddt \rho_a = \left[ \gamma_L \mathcal{L}\left[\hat{a}\right] + \gncl \mathcal{L}\left[\ncl\right[\right] \rho_a
 \end{equation}
 and expand in Fock basis
-\begin{align}\label{eqn:phog_lidnblad_a_ncl_fock}
-\ddt \rho_{n} = - &\left[ \gamma_1 n + \gncl n \left(n - 1\right)^2 \right] \rho_n \notag \\
+\begin{align}\label{eqn:phog_lindblad_a_ncl_fock}
+\ddt \rho_{n} = - &\left[ \gamma_L n + \gncl n \left(n - 1\right)^2 \right] \rho_n \notag \\
 %
-&+\left[ \gamma_1 \left(n+1\right) + \gncl \left(n+1\right) n^2 \right] \rho_{n+1}
+&+\left[ \gamma_L \left(n+1\right) + \gncl \left(n+1\right) n^2 \right] \rho_{n+1}
 \end{align}
-where $\rho_n = \ev{\rho}{n}$. Terms in Eq.~\ref{eqn:phog_lindblad_a_ncl_fock} involving $\gncl$ are proportional to $n^3$, while terms involving $\gamma_1$ are proportional only to $n$. Therefore, for every $\gamma_1, \gncl  \ne 0$ we see that there exists an $n$ for which the NCL dominates and Eq.~\ref{eqn:phog_lindblad_a_ncl_fock} reduces to
+where $\rho_n = \ev{\rho}{n}$. Terms in Eq.~\ref{eqn:phog_lindblad_a_ncl_fock} involving $\gncl$ are proportional to $n^3$, while terms involving $\gamma_L$ are proportional only to $n$. Therefore, for every nonzero choice of $\gamma_L, \gncl$ we see that there exists an $n$ for which the NCL dominates ($\gamma_3 n^3 \gg \gamma_L n$) and so Eq.~\ref{eqn:phog_lindblad_a_ncl_fock} reduces to
 \begin{equation}
 \ddt \rho_n \approx - \gncl n \left(n-1\right)^2 \rho_n + \gncl \left(n+1\right)n^2 \rho_{n+1}
 \end{equation}
-which is independent of $\gamma_1$. Thus, a sufficient increase in $\ev{n}$ will compensate for the effects of linear loss, and so we have an additional tool to aid the generation of photon-number squeezed states.
+which is independent of $\gamma_1$. Thus, a sufficient increase in the initial $\ev{n}$ will compensate for the effects of linear loss, which helps to corroborate Fig.~\ref{fig:phog_ncl_best_Q_gamma1}. We thus have an additional tool to aid us toward generation of sub-Poissonian states via NCL.
 
-To summarise, the inclusion of linear loss $\gamma_1$ causes the steady-state of our system to be the vacuum rather than a single-photon state. However, strong photon-number squeezing is obtained over the initial stages of system dynamics, Fig.~\ref{fig:phog_ncl_Q}, and is roughly independent of $\gamma_1$, Fig.~\ref{fig:phog_ncl_best_Q_gamma1}. Linear loss may further be combated by increasing the initial coherent state amplitude, thereby increasing $\ev{n}$, which causes NCL to dominate over the initial stages of dynamics. A strongly photon-number squeezed state may then be obtained at the output by stopping the evolution at an appropriate time.
+To summarise, the inclusion of linear loss $\gamma_1$ causes our system to be driven toward the vacuum rather than a single-photon state. However, strong photon-number squeezing is obtained over the initial stages of system dynamics, Fig.~\ref{fig:phog_ncl_Q}, and is roughly independent of $\gamma_1$, Fig.~\ref{fig:phog_ncl_best_Q_gamma1}. Linear loss may further be combated by increasing the initial coherent state amplitude, thereby increasing $\ev{n}$, which causes NCL to dominate over the initial stages of dynamics. A strongly photon-number squeezed state is then obtained at the output by stopping the evolution at an appropriate time.
 
-\MT{I think I want to re-jig this section so I can include much larger $\alpha's$ in Fig.~\ref{fig:phog_ncl_best_Q_gamma1}}.
+%\MT{I think I want to re-jig this section so I can include much larger $\alpha's$ in Fig.~\ref{fig:phog_ncl_best_Q_gamma1}}.
 
 \subsection{Nonlinear decay}
 
