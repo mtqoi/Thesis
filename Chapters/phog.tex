@@ -543,13 +543,6 @@ To summarise, we have reduced the three-mode model (Eq.~\ref{eqn:phog_lindblad_t
 We demonstrate in Figs.~\ref{fig:phog_three_mode_single_mode_comparison},~\ref{fig:phog_two_mode_single_mode_comparison} that both the three-mode model and the two-mode model do indeed give rise to the same behaviour as the single-mode model.
 
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
 \begin{figure}[htp]
 \centering
 \includegraphics[width=0.49\linewidth, draft=false]{phog/PhoG-fig8}
@@ -565,35 +558,35 @@ Evolution of Mandel parameter (a) and mean photon number (b) of the antisymmetri
 
 \clearpage
 \section{Realistic parameters}\label{sec:parameters}
-\MT{Basically reproduce quick chat about realistic parameters from paper.}
 
-Let us consider how the analysis we have performed so far connects to real parameters of a physical system which is capable of implementing the PhoG device. We have in mind a network of waveguides laser-inscribed into IG$2$ class \MT{cite}, similar to the recent work Ref~\cite{Mukherjee2017}. Our envisioned system is depicted in Fig.~\ref{fig:phog_realistic}.
+Let us consider how the analysis we have performed so far connects to real parameters of a physical system which capable of implementing the PhoG device. We have in mind a network of waveguides laser-inscribed into IG$2$ class \cite{ig2}, using methods similar to the recent work Ref~\cite{Mukherjee2017}. Our envisioned system is depicted in Fig.~\ref{fig:phog_realistic}.
 
 \begin{figure}[htp]
 \centering
-\includegraphics[draft=false, width=0.6\linewidth]{phog/phog3D}
+\includegraphics[draft=false, width=0.49\linewidth]{phog/phog3D}
 \caption{\label{fig:phog_realistic} $3$D representation of finished PhoG device. Waveguides are laser-inscribed into IG$2$ glass and allow for NCL to be simulated.}
 \end{figure}
 
-We must consider realistic physical parameters of light in such glass in order to check the feasibility of simulating NCL in such a system. We will derive realistic parameters in this section, and they will be used in Sec.~\ref{sec:phog_multi_mode} to show that the desired signature behaviours are still observed. These order-of-magnitude calculations are intended to illustrate feasibility of our device, while many of the parameters should be measured experimentally on the device itself.
+We must consider two new things: (i) realistic glass parameters and how they influence constants which enter into our Lindblad equations~\ref{eqn:phog_lindblad_three_mode_model},~\ref{eqn:phog_lindblad_two_mode_model},~\ref{eqn:phog_single_mode_deriv}; (ii) simulation of a Markovian reservoir $R$ by a ``tail" of additional bosonic modes. We consider (i) in this section, and (ii) in Sec.~\ref{sec:phog_multi_mode}.
 
-We must estimate the Kerr nonlinearity parameter $U$ which is used in our Hamiltonians. We assume that a pulse of finite length $L_\eff$ propagates through a waveguide with length much longer than $L_\eff$. The waveguide is assumed to have no dispersion and the pulse shape does not change, and we consider only the changes of the quantum state of the pulse caused by nonlinearity, linear loss and nonlinear phase changes.\footnote{We will briefly discuss relaxation of these conditions in Sec.~\MT{X}. %Outlook section where I will discuss pulses briefly
-}
+We will derive realistic parameters in this section, and they will be used in Sec.~\ref{sec:phog_multi_mode} to show that the desired signature behaviours are still observed. These order-of-magnitude calculations are intended to illustrate feasibility of our device in real glass, and ideally many of the parameters must be measured experimentally on the device itself.
 
-The parameter may be written as 
+One important quantity to estimate is the Kerr nonlinearity parameter $U$ which is used in our Hamiltonians. To do so, we will follow the analyses put forth in Refs.~\cite{Drummond1980, Imoto1985, Kitagawa1986}, and assume that a pulse of finite length $L_\eff$ propagates through a waveguide with $L$, such that $L \gg L_\eff$. The waveguide in $\chi^{\left(3\right)}$ glass is assumed to have no dispersion and the pulse shape does not change. We consider only the changes of the quantum state of the pulse caused by nonlinearity, linear loss and nonlinear phase changes\footnote{We will briefly discuss relaxation of these conditions in Sec.~\ref{sec:outlook}}. %Outlook section where I will discuss pulses briefly
+
+The Kerr nonlinearity parameter may be written as 
 \begin{equation}
 U = 2 \hbar \frac{\omega^2}{V_\eff} \frac{n_2}{n_\eff}
 \end{equation}
-which is derived e.g. in Refs.~\cite{Imoto1985, Kitagawa1986, Drummond1980} either in terms of nonlinear Kerr parameter $n_2$ or third-order susceptibility tensor $\chi^{\left(3\right)}$. $V_\eff$ is the effective mode area which we take to be $V_\eff \sim A_\eff L_\eff$, with $A_\eff$ the transverse mode area. We take the effective refractive index of the waveguide mode to be $n_\eff \approx 2.5$ which is typical for IG$2$ glass \MT{cite}. \MT{comment about suitability of each of these assumptions. How much are the numbers likely to vary in the final device?} IG$2$ also has $n_2 \sim 3 \times 10^{-18} \text{W}^{-1} \text{m}^2$ \MT{cite}.
+which is derived e.g. in Refs.~\cite{Imoto1985, Kitagawa1986, Drummond1980} either in terms of nonlinear refractive index parameter $n_2$ or third-order susceptibility tensor $\chi^{\left(3\right)}$. $V_\eff$ is the effective mode area which we take to be $V_\eff \sim A_\eff L_\eff$, with $A_\eff$ the transverse mode area. We take the effective refractive index of the waveguide mode to be $n_\eff \approx 2.5$ which is typical for IG$2$ glass \cite{ig2}. IG$2$ also has $n_2 \sim 3 \times 10^{-18} \text{W}^{-1} \text{m}^2$ \cite{Demetriou2017, Wang2014}. %\MT{comment about suitability of each of these assumptions. How much are the numbers likely to vary in the final device?} 
 
-The effective mode area is uncertain, and so as an upper bound we take $A_\eff$ to be the area of the waveguide, which is on the order of $10^{-12}\text{m}^2$ as in Ref.~\MT{cite} for similar laser-inscribed waveguides which are capable of supporting large pulse energies. Taking for example $A_\eff = \MT{X}$, for a $100$~fs pulse at $1064$~nm we calculate $U \approx 8.5\times 10^{-8}$. Evolution under this $U$ is modelled in Sec.~\ref{sec:phog_multi_mode}.
+The effective mode area is uncertain, and so as an upper bound we take $A_\eff$ to be the area of the waveguide which is on the order of $10^{-12}\text{m}^2$ as in Ref.~\cite{Mukherjee2017} for similar laser-inscribed waveguides  capable of supporting large pulse energies. Taking for example $A_\eff = 120\times10^{-12} \text{m}^2$, for a $100$~fs pulse at $1064$~nm we calculate $U \approx 8.5\times 10^{-8}$. This certainly seems feasible, and we may expect the final values of $U$ to even increase in a finished device owing to reduction in $A_\eff$ (e.g. in Ref.~\cite{Mukherjee2017} the waveguides are approximately $4 \mu\text{m} \times 4 \mu\text{m}$.) Evolution under this $U = 8.5\times10^{-8}$ is modelled in Sec.~\ref{sec:phog_multi_mode}. We should stress however that the specific value of $U$ must be measured on a final physical device, and the values in this section are order-of-magnitude estimates only.
 
-\MT{Calculation of $\gamma_1$? Calculation of approximate coupling constants?}
-
-
+%\MT{Calculation of $\gamma_1$? Calculation of approximate coupling constants?}
 
 
-\clearpage
+
+
+%\clearpage
 \section{Multi-mode model}\label{sec:phog_multi_mode}
 In the previous sections we have demonstrated that the three-mode model considered in Sec.~\ref{sec:phog_three_mode_model} accurately simulates NCL and allows for deterministic generation of sub-Poissonian light over the initial stages of the dynamics. A natural next question to ask is ``how might we implement such a model?". \MT{add a little overview of some of the literature.}
 
