@@ -173,13 +173,11 @@ We plot the evolution of fidelities between $\rho_a\left(t\right)$ evolving with
 
 \clearpage
 \subsection{$\hat{A} = \hat{a}\left(\hat{a}^\dagger \hat{a} - 1\right)$}\label{sec:A_ncl}
-We have seen that the choice of $\hat{A}$ can give drastically different steady states of $\rho_a$,  from the uninteresting vacuum to the highly quantum and useful phase-state. We therefore wish to consider which choices for $\hat{A}$ will give rise to a Fock state $\dyad{n}$
-
-The choice 
+We have seen that the choice of $\hat{A}$ can give drastically different steady states of $\rho_a$,  from the uninteresting vacuum to the highly quantum and useful phase-state. We therefore wish to consider which choices for $\hat{A}$ will drive an initially coherent state to a Fock state $\dyad{n}$. The choice 
 \begin{equation}\label{eqn:phog_A_ncl}
 \hat{A} = \hat{a}\left(\hat{a}^\dagger \hat{a} - 1\right)
 \end{equation}
-may be interpreted as a single-photon loss with a rate which depends on photon number. We can see that the loss rate will go to zero for state $\dyad{1}$, and so suspect that the single-photon state $\dyad{1}$ is a steady state of this loss mechanism.
+may be interpreted as a single-photon loss at a rate which depends on photon number. The loss rate will go to zero when applied to state $\dyad{1}$, and so we may suspect that the single-photon state $\dyad{1}$ is a steady state of this loss mechanism.
 
 The Lindblad equation which we solve is
 \begin{equation}\label{eqn:phog_ncl_lindblad}
@@ -187,26 +185,26 @@ The Lindblad equation which we solve is
 \end{equation}
 and for convenience we have written the photon-number operator $\hat{n}$ where possible.
 %The vacuum state $\dyad{0}$ also happens to be a steady-state of $\ncl$, but \MT{its coefficient remains constant, so we obtain $\dyad{1}$ in the limit of $\alpha\rightarrow \infty$}
-We examine the evolution of $\rho_a$ in Fig.~\ref{fig:phog_A_ncl} and plot the evolution of photon number, $\langle \hat{x}\rangle, \langle \hat{p}\rangle$ in (a). We observe non-exponential decay of photon-number expectation to $1$ %TODO: show that it is non-exponential. (e.g. try fitting an exponential to it)
-while in (b) the fidelity between $\rho_a\left(t\right)$ and $\dyad{1}$ increases to $1$, implying that this choise of $\hat{A}$ does indeed have a single-photon steady state. Even after short times $t < 0.1$ the fidelity to an equivalent coherent state quickly decreases (and the quadrature variances quickly increase over similar timescale), implying a rapid increase in non-classicality of the system.\footnote{We shall explore and quantify this later.}
+We examine the evolution of $\rho_a$ in Fig.~\ref{fig:phog_A_ncl} and plot the evolution of photon number and quadrature expectations $\langle \hat{x}\rangle, \langle \hat{p}\rangle$ in (a). We observe a non-exponential decay of photon-number expectation to $1$ %TODO: show that it is non-exponential. 
+while in (b) the fidelity between $\rho_a\left(t\right)$ and $\dyad{1}$ increases to $1$. This choice of $\hat{A} = \ncl$ does indeed have a single-photon steady state. 
 
-Therefore, we deduce that the decay operator $\hat{a}\left(\hat{a}^\dagger \hat{a} - 1\right)$ is a useful candidate for driving our system towards the highly nonclassical single-photon state. In the remainder of this chapter our goal will be to find a physical system which can efficiently implement this decay operator.
+Even after short times $t < 0.1$ the fidelity to an equivalent coherent state has rapidly decreased, and the quadrature variances quickly increase over similar timescale. This implies a rapid increase in non-classicality of the system, which we shall explore and quantify later. Therefore, we deduce that the decay operator $\hat{a}\left(\hat{a}^\dagger \hat{a} - 1\right)$ is a useful candidate for driving our system towards the highly nonclassical single-photon state. In the remainder of this chapter our goal will be to find a physical system which can efficiently implement this decay operator.
 
 
 
 \begin{figure}[htp]
 \centering
-	\begin{subfigure}{0.6\linewidth}
+	\begin{subfigure}{0.49\linewidth}
 	\centering
 	\includegraphics[width=\linewidth, draft=false]{phog/expects_ncl1}
 	\caption{}
 	\end{subfigure}
-	\begin{subfigure}{0.6\linewidth}
+	\begin{subfigure}{0.49\linewidth}
 	\centering
 	\includegraphics[width=\linewidth, draft=false]{phog/fidelities_ncl1}
 	\caption{}
 	\end{subfigure}
-\caption{\label{fig:phog_A_ncl}$\hat{A} = \hat{a}\left(\hat{a}^\dagger \hat{a} - 1\right)$ (a) Operator expectation values for state $\rho_a\left(t\right)$ as it evolves. An initially coherent state with $\alpha=3.0$ decays to a state with $\langle \hat{n}\rangle=1$, which we confirm as state $\dyad{1}$ by considering the fidelity in (b). Horizontal gridlines displayed in black, dashed.}
+\caption{\label{fig:phog_A_ncl}$\hat{A} = \hat{a}\left(\hat{a}^\dagger \hat{a} - 1\right)$ (a) Operator expectation values for state $\rho_a\left(t\right)$ as it evolves. An initially coherent state with $\alpha=3.0$ decays to a state with $\langle \hat{n}\rangle=1$, which we confirm as state $\dyad{1}$ by considering the fidelity in (b). Horizontal gridlines displayed in black, dashed. Numerical method: direct integration.}
 \end{figure}
 
 To gain some insight into the action of $\ncl$ let us first write the Lindblad equation~\ref{eqn:phog_ncl_lindblad} in Fock basis for density matrix element $\rho_{m, n}$
@@ -215,32 +213,33 @@ To gain some insight into the action of $\ncl$ let us first write the Lindblad e
 %
 &= \gamma \left[ m \sqrt{m+1} n \sqrt{n+1} \, \rho_{m+1, n+1} - \frac{1}{2} \left(n-1\right)^2 n\, \rho_{m, n} - \frac{1}{2} \left(m-1\right)^2 m\, \rho_{m, n}\right],
 \end{align}
-and consider some specific matrix elements. Immediately we see that Eq.~\ref{eqn:phog_ncl_lindblad_fock} couples diagonal elements $m=n$ to diagonal elements and so an analysis of the photon-number statistics is possible only considering diagonal elements of the density matrix, and ignoring coherences. We obtain, for example $\ddt \rho_{1, 1}=2 \gamma \rho_{2, 2}$ which is greater than zero, and so $\forall t$ we expect the single-photon contribution $\rho_{1,1}$ to increase, c.f. Fig.~\ref{fig:phog_A_ncl}b. 
+and consider some specific matrix elements. Immediately we see that Eq.~\ref{eqn:phog_ncl_lindblad_fock} couples diagonal elements $m=n$ only to diagonal elements and so an analysis of the photon-number statistics is possible only considering diagonal elements of the density matrix and ignoring coherences. We obtain, for example $\ddt \rho_{1, 1}=2 \gamma \rho_{2, 2}$ which is greater than zero, and so $\forall t$ we expect the single-photon contribution $\rho_{1,1}$ to increase, c.f. Fig.~\ref{fig:phog_A_ncl}b. 
 
-The elements $\rho_{0, 0}, \rho_{0, 1}$ and $\rho_{1, 0}$ give
+\noindent The elements $\rho_{0, 0}, \rho_{0, 1}$ and $\rho_{1, 0}$ each give
 \begin{equation}
-\ddt \rho_{0,0} = 0, \qq{} \ddt \rho_{0, 1} = 0, \qq{and} \ddt\rho_{1, 0} = 0 
+\ddt \rho_{0,0} = 0, \qq{} \ddt \rho_{0, 1} = 0, \qq{and} \ddt\rho_{1, 0} = 0,
 \end{equation}
-which implies that these elements are constant in time. The single-photon state requires zero in each of these elements, and so we may predict that high fidelity between $\rho_a$ and $\dyad{1}$ may only be obtained when $\rho_{0,0}\left(t=0\right), \rho_{0, 1}\left(t=0\right), \rho_{1, 0}\left(t=0\right) \ll 1$. This implies, in particular, that high fidelity with $\dyad{1}$ is not obtainable for coherent states with small amplitude $\alpha$.\footnote{The requirement of large $\alpha$ for the input coherent state is not very restrictive, and as we shall see in the next section there are additional reasons to prefer $\alpha \gg 1$}. In Fig.~\ref{fig:phog_fidelity_ncl_vs_alpha} we show this explicitly.
+implying that these elements are constant in time. The single-photon state requires zero in each of these elements, and so we may predict that high fidelity between $\rho_a$ and $\dyad{1}$ may only be obtained when $\rho_{0,0}\left(t=0\right)$, $\rho_{0, 1}\left(t=0\right)$, and $\rho_{1, 0}\left(t=0\right) \ll 1$. This implies, in particular, that high fidelity with $\dyad{1}$ is not obtainable for coherent states with small amplitude\footnote{The requirement of large $\alpha$ for the input coherent state is not very restrictive, and as we shall see in the next section there are additional reasons to prefer $\alpha \gg 1$}. In Fig.~\ref{fig:phog_fidelity_ncl_vs_alpha} we show this explicitly.
 
 \begin{figure}[htp]
 \centering
 \includegraphics[width=0.6\linewidth, draft=false]{phog/fidelities_ncl1_vs_alpha}
-\caption{\label{fig:phog_fidelity_ncl_vs_alpha} The fidelity of $\rho_a\left(t\rightarrow\infty\right)$ to single-photon state $\dyad{1}$ depends on $\alpha$ since the density matrix elements $\rho_{0, 0}, \rho_{0, 1}$ and $\rho_{1, 0}$ are constant in time. This helps to quantify the intuition that in our lossy system a state with on average less than $1$ photon cannot be used to increase the photon number.}
+\caption{\label{fig:phog_fidelity_ncl_vs_alpha} The fidelity of $\rho_a\left(t\rightarrow\infty\right)$ to single-photon state $\dyad{1}$ depends on initial coherent state amplitude $\alpha$ since the density matrix elements $\rho_{0, 0}, \rho_{0, 1}$ and $\rho_{1, 0}$ are constant in time. This helps to quantify the intuition that in a purely lossy system a state with on average less than $1$ photon could not be used to increase the photon number. Numerical method: direct integration.}
 \end{figure}
 
 
 
 
-Before we move on, let us quickly explore the related operator $\hat{a}\left(\hat{a}^\dagger \hat{a} -2\right)$. Based on the above discussion we might reasonably expect the steady-state to be $\dyad{2}$, and this is indeed what we see in Fig.~\ref{fig:phog_A_ncl2}, where the fidelity to the two-photon state increases to $1$.
+Before we move on, let us quickly explore the related operator $\hat{a}\left(\hat{a}^\dagger \hat{a} -2\right)$. Based on the above discussion we might reasonably expect the steady-state to be $\dyad{2}$, and this is indeed what we see in Fig.~\ref{fig:phog_A_ncl2}, where the fidelity to the two-photon state increases to $1$. 
+
+We will refer to the decay described by Lindblad operator $\hat{A} = \ncl$ as \emph{nonlinear coherent loss} (NCL), since the eigenstates of the operator $\ncl$ are known as ``nonlinear coherent states" \cite{Manko1997}, while the operator itself may be considered as the annihilation operator for a so-called $f$-deformed harmonic oscillator \cite{Filho1996}\footnote{The operator $\ncl$ is a specific example of $\hat{a} \hat{f}\left(\hat{n}\right)$ for operator-valued function $\hat{f}$. Glauber coherent states are obtained for the choice $\hat{f} = \hat{\mathds{1}}$.}
 
 \begin{figure}[htp]
 \centering
 \includegraphics[width=0.6\linewidth, draft=false]{phog/fidelities_ncl2}
-\caption{\label{fig:phog_A_ncl2} $\hat{A} = \hat{a}\left(\hat{a}^\dagger \hat{a} - 2\right)$. The steady-state of this loss operator is $\dyad{2}$ the fidelity of $\rho_a$ to this state increases to $1$.}
+\caption{\label{fig:phog_A_ncl2} $\hat{A} = \hat{a}\left(\hat{a}^\dagger \hat{a} - 2\right)$. The steady-state of this loss operator is $\dyad{2}$. The fidelity of $\rho_a$ to this two-photon state increases to $1$.}
 \end{figure}
 
-\MT{add some references and chat about ``nonlinear coherent states''.}
 
 
 \clearpage
