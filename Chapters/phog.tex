@@ -56,7 +56,7 @@ Assuming that reservoir $R$ is Markovian, the evolution of mode $a$ is given by 
 \mathcal{L}\left(\hat{A}\right)\rho_a = \hat{A}\rho_a\hat{A}^\dagger - \frac{1}{2} \hat{A}^\dagger \hat{A} \rho_a - \frac{1}{2} \rho_a \hat{A}^\dagger \hat{A}.
 \end{equation}
 
-\noindent We will examine the behaviour of an initially coherent state $\rho_a\left(t=0\right) = \dyad{\alpha}$ with amplitude $\alpha$ as it decays into $R$. We examine several choices for decay operator $\hat{A}$ and demonstrate that suitable choices of $\hat{A}$ drive $\rho_a$ towards highly non-classical output steady-states. In Sec.~\ref{sec:A_a} we let $\hat{A} = \hat{a}$, in Sec.~\ref{sec:A_aa} we let $\hat{A} = \hat{a}^2$, in Sec.~\ref{sec:A_aaa} we let $\hat{A} = \hat{a}^3$, and in Sec.~\ref{sec:A_ncl} we examine the behaviour of decay operators of the form $\hat{A} = \hat{a} \left(\hat{a}^\dagger \hat{a} - p\right)$ for $p \in \mathbb{N}$.
+\noindent We will examine the behaviour of an initially coherent state $\rho_a\left(t=0\right) = \dyad{\alpha}$ with amplitude $\alpha$ as it decays into $R$. We examine several choices for decay operator $\hat{A}$ and demonstrate that suitable choices of $\hat{A}$ drive $\rho_a$ towards highly non-classical output steady-states. In Sec.~\ref{sec:A_a} we let $\hat{A} = \hat{a}$, in Sec.~\ref{sec:A_aa} we let $\hat{A} = \hat{a}^2$, and in Sec.~\ref{sec:A_ncl} we examine the behaviour of decay operators of the form $\hat{A} = \hat{a} \left(\hat{a}^\dagger \hat{a} - p\right)$ for $p \in \mathbb{N}$.
 
 
 
@@ -124,14 +124,15 @@ which gives the evolution of photon number expectation as
 
 For now, let us try to deduce what must be the steady-state of Eq.~\ref{eqn:phog_lindblad_two_photon_loss}. We observe that once again the vacuum $\dyad{0}$ must be a steady state, since then $\ddt \rho_a=0$. Surprisingly we now also have the single-photon state $\dyad{1}$, and states of the form $\dyad{0}{1}, \dyad{1}{0}$ as steady states since these also have $\ddt \rho_a=0$. The general steady-state should be a mixture of these, and takes the form
 \begin{align}\label{eqn:phog_phase_state}
-&\rho_a\left(t\rightarrow\infty\right) = c_1 \dyad{\psi} + c_2 \dyad{0} + c_3 \dyad{1} \notag \\
+&\rho_{\text{steady}} = c_1 \dyad{\psi} + c_2 \dyad{0} + c_3 \dyad{1} \notag \\
 %
-&\qq{with} \ket{\psi} = \ket{0} + e^{i \phi} \ket{1};  \qq{} c_1, c_2, c_3 \in \mathbb{C}.
+&\qq{with} \ket{\psi} = \frac{\ket{0} + e^{i \phi} \ket{1}}{\sqrt{2}};  \qq{} c_1, c_2, c_3 \in \mathbb{C}.
 \end{align}
 
-\noindent The state $\ket{\psi}$ is a so-called \emph{phase-state}, and it has long been known that two-photon absorption will lead to a phase state \cite{Ezaki1999} (plus additional mixing \cite{Alexanian2000, *Ezaki2000}) The phase $\phi$ is related to the phase of the initial coherent state. 
+\noindent The state $\ket{\psi}$ is a so-called \emph{phase-state}, and it has long been known that two-photon absorption will lead to a phase state \cite{Ezaki1999} (plus additional mixing \cite{Alexanian2000, *Ezaki2000}). The phase $\phi$ is related to the phase of the initial coherent state. 
 
-In Fig.~\ref{fig:phog_lindblad_two_photon_loss}a we plot the evolution of $\langle \hat{a}^\dagger \hat{a}\rangle, \langle \hat{x}\rangle, \langle \hat{p}\rangle$ and the quadrature variances. The photon number expectation no longer decays to zero as it did for $\hat{A}=\hat{a}$. In Fig.~\ref{fig:phog_lindblad_two_photon_loss}b we observe the fidelity between $\rho_a\left(t\right)$ and the final phase state increases to $\MT{X}$, and so we see that two-photon loss induces nonclassicality in the system. 
+In Fig.~\ref{fig:phog_lindblad_two_photon_loss}a we plot the evolution of $\langle \hat{a}^\dagger \hat{a}\rangle, \langle \hat{x}\rangle, \langle \hat{p}\rangle$ and the quadrature variances. The photon number expectation no longer decays to zero as it did for $\hat{A}=\hat{a}$. %rather it decays to 0.5.
+ In Fig.~\ref{fig:phog_lindblad_two_photon_loss}b we observe the fidelity between $\rho_a\left(t\right)$ and the final phase state increases to $1$, and the coefficients of steady state $\rho_{\text{steady}}$ Eq.~\ref{eqn:phog_phase_state} are $c_1 = 0.810$, $c_2 = c_3 = 0.095$. We see therefore that two-photon loss operator induces a high degree of non-classicality in the system as we are driven close to the phase state. We shall revisit this decay operator $\hat{a}^2$ in Sec.~\ref{sec:phog_entanglement} where we will demonstrate that it is even capable of producing entanglement between several modes of a larger system.
 
 
 \begin{figure}[htp]
@@ -146,28 +147,28 @@ In Fig.~\ref{fig:phog_lindblad_two_photon_loss}a we plot the evolution of $\lang
 	\includegraphics[draft=false, width=\linewidth]{phog/fidelities_aa}
 	\caption{}
 	\end{subfigure}
-\caption{\label{fig:phog_lindblad_two_photon_loss}$\hat{A} = \hat{a}^2$. (a) Operator expectation values for state $\rho_a\left(t\right)$ as it evolves under Eq.~\ref{eqn:phog_lindblad_two_photon_loss}. An intially coherent state with $\alpha=3.0$ no longer decays to the vacuum state, and the final photon-number expectation is nonzero. The quadrature variances are no longer constant which implies that the state is no longer coherent, which is confirmed in (b) where the fidelity between $\rho_a\left(t\right)$ and $\dyad{\alpha^\prime}$ is plotted. The fidelity between $\rho_a\left(t\right)$ and steady state increases to \MT{X}. Horizontal gridlines displayed in black, dashed.}
+\caption{\label{fig:phog_lindblad_two_photon_loss}$\hat{A} = \hat{a}^2$. (a) Operator expectation values for state $\rho_a\left(t\right)$ as it evolves under Eq.~\ref{eqn:phog_lindblad_two_photon_loss}. An intially coherent state with $\alpha=3.0$ no longer decays to the vacuum state, and the final photon-number expectation is $0.5$. Quadrature variances no longer stay constant, which implies that the state is no longer coherent. This is confirmed in (b) where the fidelity between $\rho_a\left(t\right)$ and $\dyad{\alpha^\prime}$ is plotted. The fidelity between $\rho_a\left(t\right)$ and steady state Eq.~\ref{eqn:phog_phase_state} increases to $1$. Horizontal gridlines displayed in black, dashed. Numerical method: direct integration.}
 \end{figure}
 
 
 \clearpage
-\subsection{$\hat{A} = \hat{a}^3$}\label{sec:A_aaa}
-We might guess that the steady state $\ket{\psi}$ of the three-photon loss term $\hat{a}^3$ is likewise a superposition of $\ket{0}, \ket{1}$ and $\ket{2}$
-\begin{equation}\label{eqn:phog_three_photon_loss_ss}
-\rho_a\left(t\rightarrow\infty\right) = \frac{\dyad{\psi}}{3} \qq{with} \ket{\psi} \stackrel{?}{=} \ket{0} + e^{i \phi}\ket{1} + e^{i \varphi}\ket{2}
-\end{equation}
-\MT{check how the state is normalized}
-with phases $\phi, \varphi$ in general depending on the initial coherent state $\dyad{\alpha}$. %\MT{TODO: investigate this numerically}.
-Indeed, we can deduce that Eq.~\ref{eqn:phog_three_photon_loss_ss} must be a steady state of the system by noting that $\hat{a}^3 \ket{\psi} = 0$ which implies $\ddt \rho_a = 0$.
+%\subsection{$\hat{A} = \hat{a}^3$}\label{sec:A_aaa}
+We might guess that the steady state of the three-photon loss term $\hat{a}^3$ is likewise a mixture of $\ket{0}, \ket{1}$ and $\ket{2}$
+\begin{align}\label{eqn:phog_three_photon_loss_ss}
+&\rho_{\text{steady}} = c_1 \dyad{\psi} + c_2 \dyad{0} + c_2 \dyad{1} + c_3 \dyad{2} \notag \\
+%
+&\qq{with} \ket{\psi} = \frac{\ket{0} + e^{i \phi}\ket{1} + e^{i \varphi}\ket{2}}{\sqrt{3}}; \; c_1, c_2, c_3, c_4 \in \mathbb{C}
+\end{align}
 
-%\MT{TODO: analytically show in fock basis the steady state}
+\noindent with phases $\phi, \varphi$ in general depending on the initial coherent state $\dyad{\alpha}$. %\MT{TODO: investigate this numerically}.
+Indeed, this $\rho_{\text{steady}}$ must be a steady state of the system by noting that $\hat{a}^3 \ket{\psi} = 0$ which implies $\ddt \rho_a = 0$.
 
-We plot the evolution of fidelities between $\rho_a\left(t\right)$ evolving with decay operator $\hat{a}^3$ in Fig.~\ref{fig:phog_lindblad_three_photon_loss}. We see the fidelity to the state in Eq.~\ref{eqn:phog_three_photon_loss_ss} increasing to \MT{X}. \MT{additional comments.}
+We plot the evolution of fidelities between $\rho_a\left(t\right)$ evolving with decay operator $\hat{a}^3$ in Fig.~\ref{fig:phog_lindblad_three_photon_loss}, and we see the fidelity to the state in Eq.~\ref{eqn:phog_three_photon_loss_ss} increasing to $1$. \MT{additional comments.}
 
 \begin{figure}[htp]
 \centering
 \includegraphics[draft=false, width=0.6\linewidth]{phog/fidelities_aaa}
-\caption{\label{fig:phog_lindblad_three_photon_loss}$\hat{A} = \hat{a}^3$ (a) Fidelities between state $\rho_a\left(t\right)$ and vacuum (red), single-photon state (orange), coherent state with equivalent photon-number expectation to $\rho_a$ (green), and the two-phase state (blue). \MT{additional comments/interpretation.} Horizontal gridlines displayed in black, dashed.}
+\caption{\label{fig:phog_lindblad_three_photon_loss}$\hat{A} = \hat{a}^3$ (a) Fidelities between state $\rho_a\left(t\right)$ and vacuum (red), single-photon state (orange), coherent state with equivalent photon-number expectation to $\rho_a$ (green), and the two-phase state (blue). \MT{additional comments/interpretation.} Horizontal gridlines displayed in black, dashed. Numerical method: direct integration.}
 \end{figure}
 
 \clearpage
