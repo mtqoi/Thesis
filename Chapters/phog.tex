@@ -691,7 +691,7 @@ while the replacements for fifth- and sixth-order operators are not displayed\fo
 and equations for the remaining expectations are calculated likewise. The full system of equations is shown in Sec.~\ref{appendix:multi_mode_linear}.
 
 
-We plot $\ev*{\hat{s_-}^\dagger \hat{s_-}}$ under this linearization approach in Fig.~\ref{fig:phog_multimode_linearized}a, and $Q$ in Fig.~\ref{fig:phog_multimode_linearized}b. 
+
 
 \begin{figure}[htp]
 \centering
@@ -699,16 +699,17 @@ We plot $\ev*{\hat{s_-}^\dagger \hat{s_-}}$ under this linearization approach in
 \caption{\label{fig:phog_multimode_linearized} With the realistic parameters $U = 8.5 \times 10^{-8}$, $g_c = 60$m$^{-1}$, tail length $N = 28$ and optimal coupling ratio Eq.~\ref{eqn:phog_gagb_optimal}, the mode $s_-$ quickly evolves to a strongly sub-Poissonian state. A coherent state with average photon number $\ev*{s_-^\dagger s_-}$ is initialized in mode $s_-$, and all other modes are initialized into the vacuum. (a) The dot-dashed, solid, dotted, and dashed lines correspond to initial photon numbers $1.7\times 10^9$, $1.2\times 10^9$, $7.2\times 10^8$ and $2.4\times 10^8$, respectively. We take linear loss rate $\gamma_L = 11.5$m$^{-1}$. Inset: the evolution of photon-number expectation, exhibiting the nonlinear decay behaviour of the NCL mechanism. (b) The Mandel $Q$ parameter remains strongly negative even in the presence of realistic linear loss $\gamma_L$. The dashed, solid, dotted and dot-dashed lines correspond to $\gamma_L = 0.0$, $11.5$, $20.0$, and $40$m$^{-1}$, respectively, and $\ev*{s_-^\dagger s_-} = 1.2\times 10^9$.}
 \end{figure}
 
-We see that the photon-number expectation evolves identically between mean-field and linearization approaches, while our linearization approach has now given us the ability to calculate $Q$ of mode $s_-$ as
 
+We may rotate our output equations into the collective $s_-, s_+$ basis and write $Q$ as 
 \begin{equation}
 Q_{\text{Linearized}}\left[\hat{s_-}\right] = \frac{\ev*{\hat{s_-}^\dagger \hat{s_-}}^2 + \ev*{\hat{s_-}^\dagger\hat{s_-}^\dagger} \ev{\hat{s_-}\hat{s_-}} + \ev*{\hat{s_-}^\dagger \hat{s_-}} - 2 \ev*{\hat{s_-}^\dagger}^2 \ev{\hat{s_-}}^2}{\ev*{\hat{s_-}^\dagger \hat{s_-}}} - 1.
 \end{equation}
-\MT{--------------------------}
-%\noindent Mandel $Q$ parameter for mode $\hat{s}_-$ is calculated likewise using the transformation Eqs.~\ref{eqn:phog_rotation}. 
+We plot the Mandel $Q$ parameter of mode $s_-$ in Fig.~\ref{fig:phog_multimode_linearized} and observe the characteristic $Q<0$ behaviour we are aiming for. Even at realistic parameters of small $U$ and large $\gamma_L$, desirable $Q \sim -0.8$ is attainable over short timescales for an initial bright coherent state containing $1.7\times 10^9$ photons. In Fig.~\ref{fig:phog_multimode_linearized}a we see that the linearized multi-mode model qualitatively obtains the same scaling behaviour of better $Q$ with increasing input $\alpha$, while $\gamma_L$ in Fig.~\ref{fig:phog_multimode_linearized}b causes $Q$ to decay to zero. In the inset of (a) we observe the nonlinear decay characteristic of NCL. The photon-number decay is reproducible in the mean-field approach, while our new linearization approximation allows $Q$ to be captured.
 
+\MT{-----------------------------------------}
 
-We have shown that a $Q$ parameter close to the predicted maximum of $Q \approx -0.8$ is attainable under \MT{conditions}. %mention energy here too
+\MT{Make a statement about pulse energy required here.}
+
 
 \subsection{Comparison to single-mode model}
 Finally, we return to the single-mode model in order to demonstrate the accuracy of our linearization approach. We have demonstrated already that both mean-field and linearization approaches are accurate at modelling the non-linear decay of photon number expectation, and so in Fig.~\ref{fig:phog_single_mode_linearization} we model $Q$ under both linearization and \MT{X}.
