@@ -14,8 +14,9 @@
 %
 
 \chapter{PhoG: Photon Gun}\label{chapter:phog}
-Goal of chapter: analyse and model the PhoG device and its efficacy for producing, from a classical input, (i) bright sub-Poissonian state; (ii) entangled state
+In this chapter we introduce and model a device which aims to be a deterministic source of useful, highly non-classical light. The device, which we call \emph{PhoG} (``\underline{Pho}ton \underline{G}un") uses engineered dissipation to simulate a so-called Nonlinear Coherent Loss (NCL), the steady state of which is a single-photon state. We first explore the properties of decay into a Markovian reservoir of an initial coherent state in a single-mode model involving one bosonic mode and a reservoir. We explore the forms of dissipation required to deterministically generate useful quantum outputs, Sec.~\ref{sec:phog_single_mode_model} (c.f. Fig.~\ref{fig:phog_models}~\MakeUppercase{\romannumeral 1}). In Sec.~\ref{sec:phog_including_loss} we begin mixing different forms of loss and show that although the ever-present linear (single-photon) loss prevents us from achieving perfect single-photon states, it is still possible to deterministically reach output states which are highly squeezed in photon number. These so-called sub-Poissonian states are reached over the initial stages of the dynamics which is dominated by NCL and practically unaffected by linear loss. In Sec.~\ref{sec:phog_three_mode_model} we demonstrate that the NCL decay operator may be effectively simulated on a system involving multiple bosonic modes and linear coupling, strong linear loss on one mode, and on-site nonlinearity. 
 
+The requisite nonlinearity may be introduced into a real physical system by building our device in laser-inscribed waveguides in a $\chi^{\left(3\right)}$ glass, and with a future experiment in view we explore the relevant parameters in Sec.~\ref{sec:parameters}. In Sec.~\ref{sec:phog_multi_mode} we show that even these realistic parameters--low nonlinearity and high linear loss--are suitable to allow generation of highly sub-Poissonian output. With experiment in mind we replace the Markovian reservoir with a long ``tail" of further bosonic modes, which effectively simulates the reservoir over the short timescales of interest. Finally, in Sec.~\ref{sec:phog_entanglement} we show that by tweaking the coupling ratio between the modes of our device can lead us to a different form of output state, and so the PhoG device can also be a deterministic source of quadrature entanglement. We conclude in Sec.~\ref{sec:phog_outlook} with a short discussion of how the output of PhoG may be used, and an outline of necessary future work.
 
 \section{Introduction}
 \begin{itemize}
@@ -30,6 +31,9 @@ Goal of chapter: analyse and model the PhoG device and its efficacy for producin
 \includegraphics[draft=false, width=\linewidth]{phog/phog_models}
 \caption{\label{fig:phog_models} Hierarchy of models of the phog device, from least realistic (left) to most realistic (right). We will discuss each model and relationships between them throughout the rest of this chapter. \MakeUppercase{\romannumeral 1}: Single-mode model. \MakeUppercase{\romannumeral 2}: Two-mode model. \MakeUppercase{\romannumeral 3}: Three-mode model. \MakeUppercase{\romannumeral 4}: Multi-mode model. \MakeUppercase{\romannumeral 5} Multi-mode model embedded in glass. }
 \end{figure}
+
+
+
 
 \section{Single-mode model}\label{sec:phog_single_mode_model}
 
