@@ -22,9 +22,9 @@ where $\ket{n}$ is the $n$-photon Fock state. The sum in Eq.~\ref{eqn:appendix_c
 \ket{\psi} = e^{-\frac{\left|\alpha\right|^2}{2}}\sum_{n=0}^N \frac{\alpha^n}{\sqrt{n!}}\ket{n}
 \end{equation} 
 has both $\left|\bra{\psi}\ket{\psi}\right|^2 \approx 1$ and $\bra{\alpha}\ket{\psi} \approx 1$. Thus, truncating the countable Hilbert space to a large but finite one should be possible. In this Thesis we use $N$ values such that all states are appropriately normalized and that no ill effects are introduced from the truncation to a finite $\dims$. A good rule-of-thumb is to pick
-\begin{equation*}
+\begin{equation}\label{eqn:rule_of_thumb}
 \dims \ge \lceil 2 \alpha^2 \rceil
-\end{equation*}
+\end{equation}
 which ensures that the coherent state Eq.~\ref{eqn:appendix_coherent_state_truncated} is correctly normalized and a good approximation of the full Eq.~\ref{eqn:appendix_coherent}. For all simulations $N$ was then increased until there was no change in the resulting dynamics.
 
 In this Thesis we use the open-source QuTiP package\footnote{QuTiP version $4.4.1$; Numpy version $1.16.4$; Scipy version $1.3.1$; Cython version $0.29.13$; Matplotlib version $3.1.0$; Python version $3.7.4$} \cite{qutip2} in Python to perform such numerical solutions. The coherent state must be defined in QuTiP specifying the ``analytic" option to \code{qutip.coherent\_dm}, which ensures that $\dyad{\alpha}$ uses the expression Eq.~\ref{eqn:intro_coherent_state}. The default option ``operator" instead finds the eigenstate of collapse operator $\hat{a}$. As $\dims \rightarrow \infty$ the two forms of coherent state become equivalent, but for small $\dims$ they can differ significantly. We have found that the analytic form gives much more accurate behaviour in the parameter ranges considered and requires smaller $\dims$ to give an accurate representation of the resulting dynamics.
@@ -60,9 +60,7 @@ is a non-Hermitian Hamiltonian which causes dissipation to the state $\ket{\psi}
 
 \MT{How does the averaging work?} \MT{See Plenio and Knight 1998}
 
-QuTiP leverages this behaviour into the following algorithm which models a single trajectory of evolution of $\ket{\psi}$. \MT{talk about averaging and all that.}
-
-Choose a number $r \in \left(0, 1\right)$ uniformly at random. This number is related to the collapse probability of $\ket{\psi}$ caused by the $\hat{C}_n$. The Schr{\"o}dinger equation Eq.~\ref{eqn:schrodinger} is numerically integrated\footnote{QuTiP uses \code{scipy.integrate.ode}} and the norm $\bra{\psi\left(t\right)}\ket{\psi\left(t\right)}$ is monitored. 
+QuTiP leverages this behaviour into the following algorithm which models a single trajectory of evolution of $\ket{\psi}$. \MT{talk about averaging and all that.} Choose a number $r \in \left(0, 1\right)$ uniformly at random. This number is related to the collapse probability of $\ket{\psi}$ caused by the $\hat{C}_n$. The Schr{\"o}dinger equation Eq.~\ref{eqn:schrodinger} is numerically integrated\footnote{QuTiP uses \code{scipy.integrate.ode}} and the norm $\bra{\psi\left(t\right)}\ket{\psi\left(t\right)}$ is monitored. 
 
 At time $\tau$ such that $\bra{\psi\left(\tau\right)}\ket{\psi\left(\tau\right)} = r$, project $\ket{\psi\left(\tau\right)}$ onto $\hat{C}_n \ket{\psi\left(\tau\right)}$ and re-normalize. So
 \begin{equation}
@@ -75,21 +73,42 @@ Let us consider the performance of the QMC method and compare it to direct integ
 
 For $\dims = 35$, the QMC method takes $12.40$~s to model $500$~trajectories. This performance is worse than for direct-integration, owing to the high overhead to average a large number of trajectories. Function \code{qutip.mcsolve} also naturally uses parallel-processing functionality\footnote{Provided by \code{multiprocessing.Pool}} which has high overhead. $\dims = 50$ takes $11.61$~s and $\dims = 200$ takes $19.08$~s.
 
-However, for collapse operator $\ncl$, $\dims = 35$ takes $167$~s, $\dims = 50$ takes 
+We compare the speed of the direct integration and QMC approaches to solve Eq.~\ref{eqn:phog_single_mode_deriv} with $\gamma = 1.0$, varying initial coherent state amplitude and decay operator $\ncl$ in Tab.~\ref{table:numerical_methods}. All states were correctly normalized, indeed implying that the earlier condition Eq.~\ref{eqn:rule_of_thumb} is only a rule-of-thumb.
+
+\begin{table}[htp]
+\begin{tabular}{|c|c|c|c|}
+\hline 
+$\dims$ & $\alpha$ & DI (s) & QMC (s) \\ 
+\hline
+\hline 
+35 & 3.0 & 0.048 & 10.33 \\ 
+\hline 
+50 & 5.0 & 0.145 & 11.05 \\ 
+\hline 
+100 & 10.0 & 0.319 & 14.84 \\ 
+\hline 
+200 & 12.0 & 4.04 & 29.68 \\ 
+\hline 
+500 & 20.0 & 332.32 & 143.84 \\ 
+\hline 
+750 & 25.0 & - & 224.00 \\ 
+\hline 
+1500 & 37.0 & - & 753.05 \\ 
+\hline 
+1950 & 38.0 & - & 1361.72 \\ 
+\hline 
+\end{tabular} 
+\caption{\label{table:numerical_methods} Run-times to solve Eq.~\ref{eqn:phog_single_mode_deriv} with $\gamma_L = 10.0$, $\gamma_2 = 0.0005$, $\gncl = 0.002$, input coherent state amplitude $\alpha$ and $500$ QMC trajectories. Missing direct integration entries returned memory errors.}
+\end{table}
 
 
-Additionally, we compare the QMC and direct integration methods in Fig.~\ref{fig:appendix_numerical_methods_comparisons}.
+We compare the QMC and direct integration methods for accuracy in Fig.~\ref{fig:appendix_numerical_methods_comparisons}.
 
 \begin{figure}[htp]
 \centering
 \includegraphics{phog/methods_comparisons.png}
 \caption{\label{fig:appendix_numerical_methods_comparisons}}
 \end{figure}
-
-
-\MT{TODO: re-write all of my times comparisons for $\ncl$ and put everything in a table. dims, alpha, times for each method.}
-
-
 
 
 
@@ -163,6 +182,21 @@ with $n_- = s_-^\dagger s_-$.
 
 This system is solved numerically for $\langle s_- \rangle$, $\langle s_-^\dagger \rangle$, $\langle s_-^2\rangle$, $\langle s_-^{\dagger 2}\rangle$, $\langle n_-\rangle$ and the results are shown as dashed lines in Fig.~\ref{fig:phog_single_mode_linearization}.
 
+\section{Mean-field multi-mode model}\label{appedix:mean_field}
+Applying the mean-field approximation outlined in Sec.~\ref{sec:meanfield} to the multi-mode PhoG model Eq.~\ref{eqn:phog_multi_mode}, we arrive at the following system of equations for first-order expectations. The system may be readily solved.
+
+\begin{align}
+&\ddt \ev{a} = - i g_a \ev{c_0} + i U \ev*{a^\dagger} \ev{a} \ev{a} - \frac{\gamma}{2} \ev{a} \notag \\
+%
+&\ddt \ev{b} = - i g_b \ev{c_0} + i U \ev*{b^\dagger}\ev{b} \ev{b} - \frac{\gamma}{2} \ev{b} \notag \\
+%
+&\ddt \ev{c_0} = - i g_a \ev{a} - i g_b \ev{b} - i g_c \ev{c_1} + i U \ev*{c_0^\dagger} \ev{c_0} \ev{c_0} - \frac{\gamma}{2} \ev{c_0} \notag \\
+%
+&\ddt \ev{c_j} = - i g_c \ev{c_{j-1}} - i g_c \ev{c_{j+1}} + i U \ev*{c_j^\dagger} \ev{c_j} \ev{c_j} - \frac{\gamma}{2} \ev{c_j} \qq{for} 0< j < N \notag \\
+%
+&\ddt \ev{c_N} = - i g_c \ev{c_{N-1}} + i U \ev*{c_N^\dagger}\ev{c_N} \ev{c_N} - \frac{\gamma}{2} \ev{c_N}
+\end{align}
+
 
 \section{Linearized multi-mode model}\label{appendix:multi_mode_linear}
 We will derive a linearized and closed system of coupled differential equations capable of modelling the multi-mode PhoG device. In fact, our equations will be capable of modelling any collection of coupled modes with on-site Kerr nonlinearity and Markovian reservoirs. Our starting Lindblad equation is Eq.~\ref{eqn:phog_multi_mode}
@@ -172,11 +206,11 @@ We will derive a linearized and closed system of coupled differential equations 
 \end{equation}
 where we here take $\hat{H} = \hat{H}^{\text{Coupling}} + \hat{H}^{\text{Kerr}}$. In this Appendix we label all modes as $\hat{a}_k$, with the subscript denoting which mode in the PhoG device is meant. In particular, $a_1 \leftrightarrow a$, $a_2 \leftrightarrow b$, and $a_{k \ge 3} \leftrightarrow c_{k-3}$ in the main body. The Hamtiltonian is
 \begin{align}
-\hat{H}^{\text{Kerr}} = \frac{U}{2} \sum_{x} \hat{x}^\dagger \hat{x}^\dagger \hat{x} \hat{x} \qq{} x \in \left\{a, b, c_j\right\}\; 0 \le j \le N
+&\hat{H}^{\text{Kerr}} = \frac{U}{2} \sum_{x} \hat{x}^\dagger \hat{x}^\dagger \hat{x} \hat{x} \qq{} x \in \left\{a, b, c_j\right\} \qq{} 0 \le j \le N \notag \\
 %
-\hat{H}^{\text{Coupling}} = \sum_{k, l} \mathcal{G}_{k, l}\left(\hat{a}_k^\dagger \hat{a}_l + \hat{a}_l^\dagger \hat{a}_k \right)
+&\hat{H}^{\text{Coupling}} = \sum_{k, l} \mathcal{G}_{k, l}\left(\hat{a}_k^\dagger \hat{a}_l + \hat{a}_l^\dagger \hat{a}_k \right)
 \end{align}
-where we have introduced a "coupling matrix" $\mathcal{G}$ which contains all information relating to the linear coupling between modes of our system. Coupling matrix element $\mathcal{G}_{j, p}$ denotes the coupling strength between modes $j$ and $p$, and $\mathcal{G}_{j, p} = 0$ if the modes are not coupled to each other, which is the case for most pairs $\left(j, p\right)$. We display some example coupling matrices below.
+where we have introduced a ``coupling matrix" $\mathcal{G}$ which contains all information relating to the linear coupling between modes of our system. Coupling matrix element $\mathcal{G}_{j, p}$ denotes the coupling strength between modes $j$ and $p$, and $\mathcal{G}_{j, p} = 0$ if the modes are not coupled to each other, which is the case for most pairs $\left(j, p\right)$. We display some example coupling matrices below.
 \subsection{Example coupling matrices $\mathcal{G}$}
 \begin{figure}[htp]
 \begin{minipage}{.4\textwidth}
