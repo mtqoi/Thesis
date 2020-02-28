@@ -507,7 +507,7 @@ and so
 \ddt \rho_1 = - i \left[\hat{H}_1, \rho_1\right] + \left\{\gamma_L \mathcal{L}\left[s_-\right] + \gamma_2 \mathcal{L}\left[s_-^2\right] + \gncl \mathcal{L}\left[\ncl\right] \right\}\rho_1
 \end{equation}
 where we have used the commutator to write $n_- s_- \rightarrow \ncl$. The decay rates are
-\begin{equation}
+\begin{equation}\label{eqn:phog_single_mode_decay_rates}
 \gamma_2 = \frac{4 U^2 \left(g_a g_b\right)^4}{G^8 \left(\Gamma + \gamma_L\right)} \qq{and} \gncl = \frac{4 U^2 \left(g_a g_b\right)^2}{G^8 \left(\Gamma + \gamma_L\right)}\left(g_a^2 - g_b^2\right)^2.
 \end{equation}
 
@@ -724,28 +724,25 @@ The linearization approximation (dashed lines) accurately predicts the evolution
 
 
 \section{Modal entanglement}\label{sec:phog_entanglement}
-Let us return to the two-mode model of the PhoG device (Eq.~\ref{eqn:phog_lindblad_two_mode_model}, Fig.~\ref{fig:phog_two_mode_model}) and set $g_a = g_b$. This will mean that the rate $\gamma_3$ of NCL simulated by this model is now zero, and so we cannot expect to reach strongly sub-Poissonian light except in the limit $\gamma_1 \rightarrow 0$\footnote{Because the steady-state of $\hat{A} = \hat{a}^2$ has $Q = -0.5$}.
+In the previous sections we have observed one of the remarkable features of our device: that strong linear loss on one mode of a multimode system, Kerr nonlinearity which is present in regular $\chi^{\left(3\right)}$ materials and linear coupling can be arranged and configured in order to simulate useful loss operators. When no linear loss is present in other modes of the system, we are able to deterministically generate a single-photon steady-state at the output, while bright strongly sub-Poissonian states are attainable even in the presence of linear loss. 
 
-However, even this symmetric system exhibiting two-photon absorption can be useful for generation of non-classical states. We will demonstrate that a symmetric PhoG device is capable to produce entanglement shared between signal modes $a$ and $b$. The system we consider is displayed in Fig.~\ref{fig:phog_entanglement_two_mode_device}.
+In the previous sections we have simulated loss operator $\hat{A} = \ncl$ in our system, which required very asymmetric coupling $g_a \gg g_b$ or $g_a \ll g_b$ (c.f. Eq.~\ref{eqn:phog_single_mode_decay_rates}). Here, we will explore the quantum effects which occur when this asymmetry is not met. Let us return to the two-mode model of the PhoG device (Eq.~\ref{eqn:phog_lindblad_two_mode_model}, Fig.~\ref{fig:phog_two_mode_model}) and set $g_a = g_b$. This will mean that the rate $\gamma_3$ of NCL simulated by this model is now zero, and so we cannot expect to reach strongly sub-Poissonian light except in the limit\footnote{The steady-state of $\hat{A} = \hat{a}^2$ has $Q = -0.5$} $\gamma_1 \rightarrow 0$.
 
 \begin{figure}[htp]
 \centering
-\includegraphics[width=0.8\linewidth, draft=false]{phog/entanglement_two_mode_device}
-\caption{\label{fig:phog_entanglement_two_mode_device} Two-mode model of PhoG device. (a) Collective basis, Eq.~\ref{eqn:phog_lindblad_two_mode_model}. (b) Signal basis, Eq.~\ref{eqn:phog_two_mode_model_deriv}}
+\includegraphics[width=0.6\linewidth, draft=false]{phog/entanglement_two_mode_device}
+\caption{\label{fig:phog_entanglement_two_mode_device} Two-mode model of PhoG device. (a) Collective basis $s_-, s_+$, Eq.~\ref{eqn:phog_lindblad_two_mode_model}. (b) Signal basis $a, b$, Eq.~\ref{eqn:phog_two_mode_model_deriv}}
 \end{figure}
 
-Because we wish to allow for large photon-numbers, we must resort to the linearized model described in Sec.~\ref{sec:linearization}. The method allows us to access first- and second- order expectations of creation and annihilation operators, and so we are in a perfect position to consider the Gaussian entanglement shared between modes $a$ and $b$. \MT{Cite some stuff.}
+However, even this symmetric system exhibiting two-photon absorption can be useful for generation of non-classical states. We will demonstrate that a symmetric PhoG device is capable to produce entanglement shared between signal modes $a$ and $b$. The system we consider is displayed in Fig.~\ref{fig:phog_entanglement_two_mode_device}. Because we wish to allow for large photon-numbers, we must resort to the linearized model described in Sec.~\ref{sec:linearization}, which allows us to access first- and second-order expectations of creation and annihilation operators. We are in a perfect position to consider the Gaussian entanglement shared between modes $a$ and $b$ \cite{Weedbrook2012, Adesso2007, Simon2000}.
 
-We proceed as follows. After using our linearization method to solve for expectations of the form $\ev{\hat{a}}$, $\ev{\hat{a}^\dagger \hat{a}}$, $\ev{\hat{a}\hat{b}}$, etc., we transform these quantities into expectations of quadrature operators, Eq.~\MT{X} %define these in the introdution. 
-So, for example, we form expectations as 
+We proceed as follows. After using our linearization method to solve for expectations of the form $\ev{\hat{a}}$, $\ev*{\hat{a}^\dagger \hat{a}}$, $\ev*{\hat{a}\hat{b}}$, etc., we transform these quantities into expectations of quadrature operators, Eq.~\ref{eqn:intro_quadrature}. So, for example, we form expectations as 
 \begin{align}
 &\ev{\hat{x}_a} = \frac{\ev{\hat{a}} + \ev{\hat{a}^\dagger}}{\sqrt{2}}, \notag \\
 %
-&\ev{\hat{p}_a} = \frac{i \left(\ev{\hat{a}^\dagger} - \ev{\hat{a}}\right)}{\sqrt{2}}, \notag \\
-%
-&\qq{etc.} \notag
+&\ev{\hat{p}_a} = \frac{i \left(\ev{\hat{a}^\dagger} - \ev{\hat{a}}\right)}{\sqrt{2}}, &\qq{etc.}\notag 
 \end{align}
-and crucially we can access second-order expectations, e.g. 
+Crucially, we can access second-order expectations such as
 \begin{align}
 &\ev{\hat{x}_a \hat{x}_a} = \frac{1}{2}\left[\ev{\hat{a}^\dagger \hat{a}^\dagger} + \ev{\hat{a} \hat{a}} + 2 \ev{\hat{a}^\dagger \hat{a}} + 1\right], \notag \\
 %
@@ -754,14 +751,14 @@ and crucially we can access second-order expectations, e.g.
 &\qq{etc.} \notag
 \end{align}
 
-\noindent We are therefore able to construct a covariance matrix $\sigma$ \MT{cite} describing the quadrature correlations between modes $a$ and $b$. The matrix element $\sigma_{j, k}$ is constructed as \MT{Do I want this here? Or in the introduction?}
+\noindent and therefore we can to construct a covariance matrix $\sigma$ \cite{Weedbrook2012} which describes the quadrature correlations between modes $a$ and $b$. The matrix element $\sigma_{j, k}$ is constructed as %\MT{Do I want this here? Or in the introduction?}
 
 \begin{equation}\label{eqn:covariance matrix}
-\sigma_{j, k} = \frac{1}{2} \left( \ev{d_j d_k} + \ev{d_k d_j}\right) - \ev{d_j} \ev{d_k}
+\sigma_{j, k} = \frac{1}{2} \left[ \ev{d_j d_k} + \ev{d_k d_j}\right] - \ev{d_j} \ev{d_k}
 \end{equation}
 with vector $\overrightarrow{d} = \left[\hat{x}_a, \hat{p}_a, \hat{x}_b, \hat{p}_b \right]$.
 
-The Gaussian entanglement between modes $a$ and $b$ may then be calculated in terms of $\sigma_{j, k}$ via the Gaussian logarithmic negativity, $\mathcal{N}_G$. The entanglement measure $\mathcal{N}_G$ quantifies the extent to which the state $\rho$ described by $\sigma$ fails the positive partial transpose (PPT) criterion. \MT{cite a bunch of stuff}. Having taken the positive partial transpose of mode $b$, $\rho \rightarrow \rho^{\text{T}_B}$, the covariance matrix transforms as \MT{cite a bunch of stuff}
+The Gaussian entanglement between modes $a$ and $b$ may then be calculated in terms of $\sigma_{j, k}$ via the Gaussian logarithmic negativity, $\mathcal{N}_G$ \cite{Adesso2007, Simon2000}. This entanglement measure $\mathcal{N}_G$ quantifies the extent to which the state $\rho$ described by $\sigma$ fails the positive partial transpose (PPT) criterion \cite{Simon2000, Plenio2005}. Having taken the positive partial transpose of mode $b$, $\rho \rightarrow \rho^{\text{T}_B}$, the covariance matrix transforms as
 \begin{align}
 &\hat{x}_a \rightarrow \hat{x}_a \notag \\
 %
@@ -771,15 +768,15 @@ The Gaussian entanglement between modes $a$ and $b$ may then be calculated in te
 %
 &\hat{p}_b \rightarrow - \hat{p}_b \notag
 \end{align}
-and we write $\tilde{\sigma}$ as the covariance matrix corresponding to $\rho^{\text{T}_B}$.
+and we write $\tilde{\sigma}$ as this transformed covariance matrix corresponding to $\rho^{\text{T}_B}$.
 
-\noindent The measure $\mathcal{N}_G$ is then defined as\footnote{Note the similarities between this and the logarithmic negativity $\MT{cite}$ defined directly in terms of $\rho^{\text{T}_B}$.}
+\noindent The measure $\mathcal{N}_G$ is then defined as\footnote{Note the similarities between this and the logarithmic negativity \cite{Plenio2005} which is defined directly in terms of $\rho^{\text{T}_B}$.}
 \begin{equation}
 \mathcal{N}_G = \max\left\{0, - \log \tilde{\lambda} \right\}
 \end{equation}
-where $\tilde{\lambda}$ is the smallest symplectic eigenvalue of $\tilde{\sigma}$. 
+where $\tilde{\lambda}$ is the smallest symplectic eigenvalue of $\tilde{\sigma}$. %Make sure this is defined in the introduction
 
-We calculate $\mathcal{N}_G$ and plot it in Fig.~\ref{fig:phog_negativities}. For example, for $\ev{\hat{a}^\dagger \hat{a}}\left(0\right) = \ev{\hat{b}^\dagger \hat{b}}\left(0\right) = 2500$, $U = 2 g$, $\gamma_c = 15 g$, $\gamma_1 = 11.5 g$ and symmetric coupling $g_a = g_b = 60 g$ the system evolves to $\mathcal{N}_G \approx 1.25$ within $t \sim 0.01 g$, while modes $a$ and $b$ each contain approximately $18$ photons. \MT{Make comparison to TMSV.} Thus, the symmetric PhoG is able to generate entanglement between modes $a$ and $b$ over the intial stages of dynamics, even though it cannot produce photon-number squeezing. \MT{what is $Q$ at the same time?}
+We calculate $\mathcal{N}_G$ and plot it in Fig.~\ref{fig:phog_negativities}. For example, for $\ev{\hat{a}^\dagger \hat{a}}\left(0\right) = \ev{\hat{b}^\dagger \hat{b}}\left(0\right) = 2500$, $U = 2 g$, $\gamma_c = 15 g$, $\gamma_1 = 11.5 g$ and symmetric coupling $g_a = g_b = 60 g$ (we take $g=1$), the system evolves to $\mathcal{N}_G \approx 1.25$ within $t \sim 0.01 g$, while modes $a$ and $b$ each contain approximately $18$ photons. \MT{Make comparison to TMSV.} Thus, we see that the symmetric PhoG is able to generate entanglement between modes $a$ and $b$ over the intial stages of dynamics, even though it cannot produce photon-number squeezing. \MT{what is $Q$ at the same time?}
 
 
 \begin{figure}[htp]
@@ -796,13 +793,6 @@ We calculate $\mathcal{N}_G$ and plot it in Fig.~\ref{fig:phog_negativities}. Fo
 
 
 
-
-
-
-
-
-
-%We will take the physical parameters from Sec.~\ref{sec:parameters} for coupled waveguides in bulk glass, and the number of tail modes to be $N = 28$. Since the Kerr nonlinearity parameter is small, $U \sim 10^{-8}$, in order to reach the regime of strongly sub-Poissonian light we must take a bright input state containing $\mathcal{O}\left(10^9\right)$ photons. 
 
 
 
