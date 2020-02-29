@@ -663,19 +663,20 @@ solely in terms of first-order expectations\footnote{Note that each expectation 
 \begin{equation}
 \ddt \ev*{\hat{a}^\dagger \hat{a}} = - \Gamma \ev*{\hat{a}^\dagger}\ev{\hat{a}} - i \ev*{\hat{a}^\dagger}\ev{\hat{c}_0} + i \ev{\hat{a}}\ev*{\hat{c}_0^\dagger}
 \end{equation}
-and so the system is completely specified by $N+2$ differential equations\footnote{Rather than $2(N+2)$, since $\ev{\hat{a}^\dagger} = \ev{\hat{a}}^*$.}, one for each mode $\ev{\hat{a}}, \ev{\hat{b}}, \ev{\hat{c}_j}$. We display this full system of equations in Sec.~\ref{appendix:multi_mode_meanfield}. 
+and so the system is completely specified by $N+2$ differential equations\footnote{Rather than $2(N+2)$, since $\ev{\hat{a}^\dagger} = \ev{\hat{a}}^*$.}, one for each mode $\ev{\hat{a}}, \ev*{\hat{b}}, \ev{\hat{c}_j}$. We display this full system of equations in Sec.~\ref{appendix:mean_field}. 
 
 
-This system may be readily solved, and we display the evolution of photon-number expectation $\ev{\hat{n}_-}$ in Fig.~\ref{fig:phog_MF_demonstration} for the multi-mode model. We include also behaviour of the single-mode model, for comparison. The approximation $\hat{a} \approx \ev{\hat{a}}$ is known as the \emph{mean-field} approximation, which treats our quantum system as a quasi-classical one.
+The approximation $\hat{a} \approx \ev{\hat{a}}$ is known as the \emph{mean-field} approximation, which treats our quantum system as a quasi-classical one. This system may be readily solved, and we display the evolution of photon-number expectation $\ev{\hat{n}_-}$ in Fig.~\ref{fig:phog_MF_demonstration} for the multi-mode model (dashed). We include also behaviour of the single-mode model (solid), for comparison. We see that even in the mean-field approximation, nonlinear decay due to NCL may be observed. The quantitative discrepancy between single- and multi-mode models for large initial amplitudes is due to finite (nonzero) decay time for mode $s_+$.
+
 
 \begin{figure}[htp]
 \centering
-\includegraphics{phog/MF_demonstration.png}
-\caption{\label{fig:phog_MF_demonstration}}
+\includegraphics[draft=false, width=0.49\linewidth]{phog/MF_single_mode_vs_multi_mode}
+\caption{\label{fig:phog_MF_demonstration} Nonlinear decay is observed even in mean-field approximation. Solid: single-mode model. Dashed: multi-mode model. Initial coherent states with $\ev{\hat{n}_-}\left(0\right) = 1.7\times 10^9$, $1.4\times10^9$, $7.2\times10^8$ and $2.4\times10^8$ were initialised in mode $s_-$. Linear loss $\gamma_1 = 11.5$, $g_a$ and $g_b$ optimal and $g_c = 60$m$^{-1}$. $U = 8.5\times10^{-8}$. Full systems of equations are shown in Sec.~\ref{appendix:single_mode_mean_field} for single-mode, and Sec.~\ref{appendix:mean_field} for multi-mode models.}
 \end{figure}
 
 
-While the mean-field approach is useful for observing the effect of nonlinear decay, it cannot give any insight into the squeezing of photon-number statistics. The $Q$ given by the mean-field approximation is 
+While the mean-field approach is useful for observing the effect of nonlinear decay, it cannot give any insight into the squeezing of photon-number statistics. The $Q$ given by the mean-field approximation is:
 
 \begin{align}
 Q = \frac{\ev{\hat{a}^\dagger \hat{a} \hat{a}^\dagger \hat{a}}}{\ev{\hat{a}^\dagger \hat{a}}} - 1 &= \frac{\ev{\hat{a}^\dagger \hat{a}^\dagger \hat{a} \hat{a}} - \ev{\hat{a}^\dagger \hat{a}}^2}{\ev{\hat{a}^\dagger \hat{a}}} = \frac{\left|\ev{\hat{a}}\right|^4 - \left|\ev{\hat{a}}\right|^4}{\left|\ev{\hat{a}}\right|^2} \notag

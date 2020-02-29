@@ -111,7 +111,16 @@ We compare the QMC and direct integration methods for accuracy in Fig.~\ref{fig:
 \end{figure}
 
 
+\section{Mean-field single-mode model}\label{appendix:single_mode_mean_field}
+Applying the mean-field approximation discussed in Sec.~\ref{sec:meanfield}to the single-mode PhoG model Eq.~\ref{eqn:phog_single_mode_deriv}, we arrive at the following equation for first-order expectation $\ev{s_-}$:
 
+\begin{align}
+\ddt \ev{s_-} = &- \frac{\gamma_1}{2} \ev{s_-} - i \varsigma_1 \ev{s_-} - i \varsigma_3 \ev{s_-} - 2 i \varsigma_1 \ev*{s_-^\dagger} \ev{s_-} \ev{s_-}  \notag \\
+%
+&- \gamma_2 \ev*{s_-^\dagger} \ev{s_-} \ev{s_-} - gamma_3 \ev*{s_-^\dagger} \ev{s_-} \ev{s_-} - \frac{\gamma_3}{2} \ev*{s_-^\dagger} \ev*{s_-^\dagger} \ev{s_-} \ev{s_-} \ev{s_-}
+\end{align}
+
+\noindent with $\ev*{s_-^\dagger} = \ev{s_-}^*$. The system may be readily solved for $\ev{s_-}\left(t\right)$.
 
 \section{Linearized single-mode model}\label{appendix:single_mode_linear}
 By applying the linearization approximations derived in Sec.~\ref{sec:linearization} to the system of coupled ODEs derived from single-mode Lindblad equation~\ref{eqn:phog_single_mode_deriv} we arrive at the following closed system of ODEs:
@@ -182,7 +191,7 @@ with $n_- = s_-^\dagger s_-$.
 
 This system is solved numerically for $\langle s_- \rangle$, $\langle s_-^\dagger \rangle$, $\langle s_-^2\rangle$, $\langle s_-^{\dagger 2}\rangle$, $\langle n_-\rangle$ and the results are shown as dashed lines in Fig.~\ref{fig:phog_single_mode_linearization}.
 
-\section{Mean-field multi-mode model}\label{appedix:mean_field}
+\section{Mean-field multi-mode model}\label{appendix:mean_field}
 Applying the mean-field approximation outlined in Sec.~\ref{sec:meanfield} to the multi-mode PhoG model Eq.~\ref{eqn:phog_multi_mode}, we arrive at the following system of equations for first-order expectations. The system may be readily solved.
 
 \begin{align}
