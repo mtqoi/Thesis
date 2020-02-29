@@ -31,14 +31,16 @@ The use of dissipation to enact coupling between modes also has a long history. 
 
 \subsection{Engineering the loss}
 
-A key requirement for enacting such dissipation-assisted protocols is that one should have precise control over both coherent and dissipative dynamics, and the system should possess the desired (engineered) dissipation while being relatively isolated from unwanted loss sources. Cavity QED has proven a useful platform \cite{Clark2003}, has have trapped ions \cite{Barreiro2011, Poyatos1996} which can allow for fine-tuning for master-equation simulation. Superconducting circuits may be another useful platform for precise and stable entanglement generation, quantum simulation and quantum error correction for computation \cite{Kimchi-Schwartz2016, Kapit2017}.
+A key requirement for enacting such dissipation-assisted protocols is that one should have precise control over both coherent and dissipative dynamics, and the system should possess the desired (engineered) dissipation while being relatively isolated from unwanted loss sources. Cavity QED has proven a useful platform \cite{Clark2003}, as have trapped ions \cite{Barreiro2011, Poyatos1996} which can allow for fine-tuning for master-equation simulation. Superconducting circuits may be another useful platform for precise and stable entanglement generation, quantum simulation and quantum error correction for computation \cite{Kimchi-Schwartz2016, Kapit2017}.
+
+\MT{Talk a little more about what has been achieved with control of loss, and how.}
 
 \subsection{Integrated photonic waveguides}
 
 Each of the above systems allows for precisely controlled coupling strengths and interaction times, and crucially they allow for high effective nonlinearities to be realised. In photonic systems this is more difficult. While integrated photonic waveguides have proven useful for enacting tight-binding networks of modes, and therefore for simulating solid-state systems \cite{Mukherjee2015, Vicencio2015}, the glasses typically used have small nonlinearities and large linear (single-photon) loss. Larger effective nonlinearities can normally be obtained by choosing ultrashort pulses or by reducing the effective fibre mode area \cite{Agrawal2007, Agrawal2001}
 
 
-Integrated waveguides in however have recently become an exciting platform with which to marry unitary and non-unitary couplings between bosonic modes, and to use these to explore interesting quantum effects. For example, recent works Refs.~\cite{Mukherjee2015, Vicencio2015} exploit collective (nonlocal) losses on the system in order to simulate a solid-state flat-band (dispersion free) state, while the integrated-waveguide platform itself allows for precise control over coupling length and strength. In any case, the generated state was found to be robust to such imperfections. Such a system may be useful for long-distance communication since it is in principle capable of propagation without dispersion.
+Integrated waveguides however have recently become an exciting platform with which to marry unitary and non-unitary couplings between bosonic modes, and to use these to explore interesting quantum effects. For example, recent works Refs.~\cite{Mukherjee2015, Vicencio2015} exploit collective (nonlocal) losses on the system in order to simulate a solid-state flat-band (dispersion free) state, while the integrated-waveguide platform itself allows for precise control over coupling length and strength. In any case, the generated state was found to be robust to such imperfections. Such a system may be useful for long-distance communication since it is in principle capable of propagation without dispersion.
 
 The recent work by Mukherjee \emph{et. al.} \cite{Mukherjee2017} implements a chain of dissipatively coupled waveguides and find that the system acts as an effective equalizer of an input quantum state, and that coupling to a common reservoir smooths out phase and amplitude fluctuations in the input state. The simultaneous action of both coherent unitary dynamics and diffusive non-unitary dynamics lead the authors to coin the term ``Coherent Diffusive Photonics" to describe photonic systems in which both unitary and diffusive action plays a key role. In the paper it was also demonstrated that the CDP platform was very robust to imperfections in both coupling strength and effective coupling length.
 
@@ -320,7 +322,7 @@ From fidelity $\mathcal{F}\left( \rho_a\left(t<0.1\right), \dyad{0}\right)$, Fig
 
 We examine the maximum attainable fidelity to $\dyad{1}$ in Fig.~\ref{fig:phog_max_fidelity}. The maximum fidelity decreases with increasing $\gamma_1$, but increasing $\alpha$ appears to allow larger fidelities to be reached for the same $\gamma_1$ (c.f. Fig.~\ref{fig:phog_fidelity_ncl_vs_alpha}). We will explore this phenomenon further in Sec.~\ref{sec:phog_summary_ncl_effects}.
 
-\clearpage
+
 \subsection{Mandel parameter $Q$}
 Although the fidelity has been a helpful measure for measuring the ability of our system to produce single-photons, we have observed in Fig.~\ref{fig:phog_lindblad_single_photon_loss}b a case where fidelity to the single-photon increases while $\rho_a$ remains entirely coherent. It is therefore worth considering which other measures we might use to measure progress. One such measure is the Mandel $Q$ parameter \cite{Mandel1979, Carmichael1999, Davidovich1996}
 \begin{equation}\label{eqn:phog_mandelQ}
@@ -819,7 +821,8 @@ We calculate $\mathcal{N}_G$ and plot it in Fig.~\ref{fig:phog_negativities}. Fo
 
 
 
-
+\section{Outlook}
+\MT{Write some things}
 
 
 
