@@ -32,6 +32,7 @@
 # I want to ignore calculations files
 Calculations/*
 *.dat
+*.qu
 
 # Specific folders to ignore
 Images/SciencePlots-master/*
