@@ -571,7 +571,7 @@ Taking this optimal choice,
 To summarise, we have reduced the three-mode model (Eq.~\ref{eqn:phog_lindblad_three_mode_model}, Fig.~\ref{fig:phog_three_mode}) to a single-mode model (Eqs.~\ref{eqn:phog_full_single_mode}
 ,~\ref{eqn:phog_single_mode_deriv}, Fig.~\ref{fig:phog_single_mode}) via sequential adiabatic eliminations of modes $c_0$ and $s_+$, which rapidly decayed into reservoir $R$. In essence, the behaviour of the antisymmetric collective mode $s_-$ in the three-mode model simulates behaviour of a single mode undergoing nonlinear coherent loss, two-photon loss and single-photon loss, which were all considered in Secs.~\ref{sec:phog_single_mode_model},~\ref{sec:phog_including_loss}. The combination of Kerr nonlinearity, linear coupling and single-photon loss allows for the effective NCL decay operator to be constructed.
 
-We demonstrate in Figs.~\ref{fig:phog_three_mode_single_mode_comparison},~\ref{fig:phog_two_mode_single_mode_comparison} that both the three-mode model and the two-mode model do indeed give rise to the same behaviour as the single-mode model.
+We demonstrate in Figs.~\ref{fig:phog_three_mode_single_mode_comparison},~\ref{fig:phog_two_mode_single_mode_comparison} that both the three-mode model and the two-mode model do  indeed give rise to the same behaviour as the single-mode model. Considering the two-mode model (Fig.~\ref{fig:phog_two_mode_single_mode_comparison}a) we see that initially mode $s_-$ does not have rapid decay. This is because mode $s_+$ is populated (Fig.~\ref{fig:phog_two_mode_single_mode_comparison}b). However, once $s_+$ begins to decay, we observe good agreement between two-mode and single-mode model. The two-mode model exhibits behaviours signature to NCL.
 
 
 \begin{figure}[htp]
@@ -583,8 +583,16 @@ Evolution of Mandel parameter (a) and mean photon number (b) of the antisymmetri
 
 \begin{figure}[htp]
 \centering
-\includegraphics[width=0.6\linewidth, draft=true]{phog/two_mode_single_mode_comparison.png}
-\caption{\label{fig:phog_two_mode_single_mode_comparison} \MT{Create figure then add caption.}}
+	\begin{subfigure}{0.49\linewidth}
+	\caption{}
+	\includegraphics[width=\linewidth, draft=false]{phog/NL_decay_two_mode_one_mode_comparison}
+	\end{subfigure}
+	\begin{subfigure}{0.49\linewidth}
+	\centering
+	\caption{}
+	\includegraphics[width=\linewidth, draft=false]{phog/two_mode_model_splus}
+	\end{subfigure}
+\caption{\label{fig:phog_two_mode_single_mode_comparison} (a) Comparison of nonlinear decay for single-mode model (solid) and two-mode model (dashed) with varying input $\ev{\hat{n}_-}$. Input $\ev{\hat{n}_+} = 0$, optimal couplings $g_a, g_b$, $\gamma_1 = 10.0$ and otherwise equivalent parameters to Fig.~\ref{fig:phog_fig3paper}. Finite (nonzero) decay time (b) of mode $s_+$ means that the adiabatic elimination of $s_+$ is not yet valid for $t \approx 0$. Otherwise, there is good agreement between models once $s_+$ has begun to decay, and the two-mode model exhibits the same signature behaviours of NCL.}
 \end{figure}
 
 \clearpage
