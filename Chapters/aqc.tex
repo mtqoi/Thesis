@@ -635,6 +635,40 @@ Eve's \emph{a posteriori} and \emph{a priori} entropies are calculated identical
 \subsection{Protocol performance}
 The experiment detailed in Sec.~\ref{sec:aqc_experiment} was  performed and we have received four datasets from the experimental collaborators\footnote{\MT{X}}. The key parameters for these datasets are described in Tab.~\ref{table:aqc_data_parameters} and will form the basis for an analysis of performance of each of our cryptosystems.
 
+%\iffalse
+\begin{table*}%[hb!p]
+	\centering \ra{1.75}
+	\begin{tabular*}{\textwidth}{@{\extracolsep{\stretch{1}}}   cccc c rr c rr c r cc}
+	%\toprule
+	% primary header
+%	\multicolumn{4}{c}{\textbf{Experiment}} &&
+	\multicolumn{2}{c}{\textbf{QDS\,-\,$b$}} &&
+	\multicolumn{2}{c}{\textbf{QDS\,-\,$f$}} &&
+	\multicolumn{1}{c}{\textbf{QSS\,-\,$b$}} && 
+	\multicolumn{1}{c}{\textbf{QKD\,-\,$f$}} \\
+%	\colrule
+	\hline
+	%\cline{1-4}\cline{6-7} \cline{9-10}\cline{12-12}
+	% secondary header
+%	\text{Run} & \head{$d\,[\si{km}]$} & \head{$\bar{\alpha}\,[\sqrt{\text{snu}}\,]$} & \head{$\xi\,[\si{\%}]$} &&
+	\head{$L\,[\si{bits^{-1}}]$} & \head{$t\,[\si{ms}]$} &&
+	\head{$L\,[\si{bits^{-1}}]$} & \head{$t\,[\si{ms}]$} &&
+	\head{$2 \kappa$}  && 
+	\head{$\kappa$}
+	\\
+%	\colrule
+\hline
+	% table body
+	  $\enot{5.70}{6}$ & $5.7$ && $\enot{4.79}{4}$ & $0.048$ && 0.3726 && 0.3479\\
+ - &        - && $\enot{2.26}{9}$ &  $2260$ && 0.1058 && 0.1024\\
+ - &        - && $\enot{1.37}{8}$ &    $137$ && 0.0858 && 0.0840 \\
+ - &        - && $\enot{2.08}{8}$ &    $208$ && 0.1004 && 0.0976\\
+	%\botrule
+	\end{tabular*}
+	\caption{\label{tab:lengths} Figures of merit for the experimental runs. QDS signature lengths (L) and signing times (t) required to sign a $1$-bit message for security level of $\varepsilon = 0.01\%$. The QSS and QKD key rates correspond to the maximum estimated number of bits of secure key which may be generated per use of the quantum channel. In QSS-$b$, one channel use corresponds to distribution of \emph{two} quantum states, one from Bob and one from Charlie, and so we display $2 \kappa$ for fair comparison with QKD. \MT{Make sure that security level $\varepsilon$ is defined.}}
+\end{table*}
+%\fi
+
 \subsubsection{First agile system \systemB}
 In the first agile system, \systemB, the sender module Tx is understood to play the role of either Bob or Charlie, while Rx plays the role of Alice. Signature lengths under QDS-$b$ are calculated using the data parameters from Tab.~\ref{table:aqc_data_parameters} with the postselection region\footnote{$\rps = \mathcal{R}\left(\Delta_r\right)$} $\rps$ optimized. In the ideal case, honest mismatch probability $\perr$ is calculated using Eq.~\MT{X} under the model described there (or including excess noise, Appendix~\MT{X}). These models both include a detector efficiency of $50\%$ which a dishonest player cannot exploit. 
 
