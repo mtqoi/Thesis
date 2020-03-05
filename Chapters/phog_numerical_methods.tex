@@ -54,20 +54,26 @@ where $\hat{H}_{\text{sys}}$ is the system Hamiltonian, identical to the $\hat{H
 \begin{equation}
 \hat{H}_{\text{non-Hermitian}} = -\frac{i}{2} \sum_n \hat{C}_n^\dagger \hat{C}_n
 \end{equation}
-is a non-Hermitian Hamiltonian which causes dissipation to the state $\ket{\psi}$ via collapse operators $\hat{C}_n$. The non-Hermitian Hamiltonian does not conserve the norm of $\ket{\psi}$. \MT{show this?}
+is a non-Hermitian Hamiltonian which causes dissipation to the state $\ket{\psi}$ via collapse operators $\hat{C}_n$. The non-Hermitian Hamiltonian does not conserve the norm of $\ket{\psi}$. 
 
-\MT{demonstration that QMC gives the same expectations as Lindblad?}
 
-\MT{How does the averaging work?} \MT{See Plenio and Knight 1998}
 
-QuTiP leverages this behaviour into the following algorithm which models a single trajectory of evolution of $\ket{\psi}$. \MT{talk about averaging and all that.} Choose a number $r \in \left(0, 1\right)$ uniformly at random. This number is related to the collapse probability of $\ket{\psi}$ caused by the $\hat{C}_n$. The Schr{\"o}dinger equation Eq.~\ref{eqn:schrodinger} is numerically integrated\footnote{QuTiP uses \code{scipy.integrate.ode}} and the norm $\bra{\psi\left(t\right)}\ket{\psi\left(t\right)}$ is monitored. 
+QuTiP leverages this behaviour into the following algorithm which models a single trajectory of evolution of $\ket{\psi}$ \cite{Plenio1998, Dum1992, Dalibard1992}. Choose a number $r \in \left(0, 1\right)$ uniformly at random. This number is related to the collapse probability of $\ket{\psi}$ caused by the $\hat{C}_n$. The Schr{\"o}dinger equation Eq.~\ref{eqn:schrodinger} is numerically integrated\footnote{QuTiP uses \code{scipy.integrate.ode}} and the norm $\bra{\psi\left(t\right)}\ket{\psi\left(t\right)}$ is monitored. 
 
 At time $\tau$ such that $\bra{\psi\left(\tau\right)}\ket{\psi\left(\tau\right)} = r$, project $\ket{\psi\left(\tau\right)}$ onto $\hat{C}_n \ket{\psi\left(\tau\right)}$ and re-normalize. So
-\begin{equation}
+\begin{equation}\label{eqn:appendix_jump}
 \ket{\psi\left(\tau\right)} \rightarrow \frac{\hat{C}_n \ket{\psi\left(\tau\right)}}{\sqrt{\bra{\psi\left(\tau\right)}\hat{C}_n^\dagger \hat{C}_n \ket{\psi\left(\tau\right)}}}
 \end{equation}
 
-\noindent Draw another $r \in \left(0, 1\right)$ and continue the evolution using the new $\ket{\psi}$ as the starting point. This process is repeated until the entire temporal range is covered. This has given us a single trajectory of the evolution of $\ket{\psi}$. \MT{Talk about getting expectations and averaging and stuff.}
+\noindent Draw another $r \in \left(0, 1\right)$ and continue the evolution using the new $\ket{\psi}$ as the starting point. This process is repeated until the entire temporal range is covered. This has given us a single trajectory of the evolution of $\ket{\psi}$. 
+
+The above procedure is repeated many times, and observables should be averaged\footnote{Simply using \code{numpy.mean} at each timestep} over many trajectories. It can be shown that this procedure implements the corresponding Lindblad master equation \cite{Plenio1998, Ulf2010} by noticing that the evolution from $\dyad{\psi}\left(t\right)$ to $\dyad{\psi}\left(t + \Delta t\right)$ is effectively a sum over whether a jump occurred or not:
+\begin{align}
+\dyad{\psi}\left(t + \Delta t\right)  = \Delta P \dyad{\psi_{\text{Jump}}} + \left(1 - \Delta P\right) \dyad{\psi_{\text{No Jump}}}
+\end{align}
+with the state $\ket{\psi_{\text{Jump}}}$ is given by Eq.~\ref{eqn:appendix_jump}, while $\ket{\psi_{\text{No Jump}}}$ is found by explicitly enacting the non-Hermitian effective Hamiltonian on $\ket{\psi}$ for $\Delta t$. By substituting in our expressions and allowing $\Delta t \rightarrow 0$, this reduces to a Lindblad equation of our original form.
+
+
 
 Let us consider the performance of the QMC method and compare it to direct integration. QMC may be implemented by using \code{qutip.mcsolve} and specifying $\hat{H}_{\text{sys}}$, $\ket{\psi\left(0\right)}$, $\hat{C}_n$ and the operators $\hat{E}_n$ whose expectations should be measured. Let us solve an identical system to the one discussed in Eq.~\ref{appendix:direct_integration}: single-mode system consisting of an initial coherent state with $\alpha = 3.0$, decay rate $\gamma = 8.0$ with collapse operator $\hat{a}$, and let us measure the photon-number expectation $\ev{\hat{a}^\dagger \hat{a}}$. 
 
@@ -117,7 +123,7 @@ Applying the mean-field approximation discussed in Sec.~\ref{sec:meanfield}to th
 \begin{align}
 \ddt \ev{s_-} = &- \frac{\gamma_1}{2} \ev{s_-} - i \varsigma_1 \ev{s_-} - i \varsigma_3 \ev{s_-} - 2 i \varsigma_1 \ev*{s_-^\dagger} \ev{s_-} \ev{s_-}  \notag \\
 %
-&- \gamma_2 \ev*{s_-^\dagger} \ev{s_-} \ev{s_-} - gamma_3 \ev*{s_-^\dagger} \ev{s_-} \ev{s_-} - \frac{\gamma_3}{2} \ev*{s_-^\dagger} \ev*{s_-^\dagger} \ev{s_-} \ev{s_-} \ev{s_-}
+&- \gamma_2 \ev*{s_-^\dagger} \ev{s_-} \ev{s_-} - \gamma_3 \ev*{s_-^\dagger} \ev{s_-} \ev{s_-} - \frac{\gamma_3}{2} \ev*{s_-^\dagger} \ev*{s_-^\dagger} \ev{s_-} \ev{s_-} \ev{s_-}
 \end{align}
 
 \noindent with $\ev*{s_-^\dagger} = \ev{s_-}^*$. The system may be readily solved for $\ev{s_-}\left(t\right)$.
