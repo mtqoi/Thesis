@@ -422,7 +422,7 @@ If Alice is certain that Bob is the dishonest player then she has no need for a 
 
 In order to take into account this uncertainty over which player is dishonest, Fig.~\ref{fig:qss_structure}, we proceed as in the recent QSS works Refs.~\cite{Kogias2017, Grice2019} and calculate the minimum over all possible dishonest configurations. That is, we take
 
-\begin{equation}
+\begin{equation}\label{eqn:qss_key_rate_min}
 \kappa \ge \min \left\{\kappa_{\text{Eve, Bob}}, \kappa_{\text{Eve, Charlie}}\right\}
 \end{equation}
 where $\kappa_{\text{Eve, Charlie}}$ is calculated analogously to Eq.~\ref{eqn:qss_keyrate_dishonest_Bob}. \MT{Comment about why this works.}
@@ -434,6 +434,63 @@ where $\kappa_{\text{Eve, Charlie}}$ is calculated analogously to Eq.~\ref{eqn:q
 \MT{If I have time, make some graphs with e.g. homodyning instead of heterodyning, or different alphabets.}
 
 
+We plot the mutual information Eq.~\ref{eqn:qss_deriv_1} in Fig.~\ref{fig:qss_mutual_information}, where we vary coherent state amplitude $\alpha$ and channel transmission $T$. We here take Bob and Charlie as having equal amplitudes and channel transmissions, but in principle they can vary. Unless $T=0$, the mutual information between Alice and Bob-Charlie always increases with $\alpha$ as the states at Alice become increasingly distinguishable. The mutual information with honest recipients is bounded by $4$, while in the case of dishonest recipients it is bounded by $2$.
+
+\begin{figure}[htp]
+\centering
+	\begin{subfigure}{0.49\linewidth}
+	\centering
+	\includegraphics[draft=false, width=\linewidth]{qss/mutinf_honest_symmetric_a_T}
+	\caption{}
+	\end{subfigure}
+	\begin{subfigure}{0.49\linewidth}
+	\centering
+	\includegraphics[draft=false, width=\linewidth]{qss/mutinf_dishonest_symmetric_a_T_and_honest}
+	\caption{}
+	\end{subfigure}
+\caption{\label{fig:qss_mutual_information} Mutual information Eq.~\ref{eqn:qss_deriv_1} as it varies with coherent state amplitude $\alpha$ and channel transmission $T$. (a) Honest recipients. (b) Orange: dishonest recipients. Blue, clear: honest recipients, same surface as (a). In both figures we have taken linear $\mathcal{F}$ parameters $g = h = 0.5$.}
+\end{figure}
+
+The Holevo information $\chi$ under identical conditions to Fig.~\ref{fig:qss_mutual_information} is plotted in Fig.~\ref{fig:qss_holevo_information}. We see that there is a clear maximum of $\chi$ at $T = 0.5$, which is when dishonest parties have maximum fidelity to Alice's received state. Our QSS protocol leverages the power of cryptographic protocols constructed in the reverse-reconciliation regime: that as $T < 0.5$ dishonest players receiving a greater share of the sent state, now have a much smaller overlap with the received state. 
+
+Curiously, Fig.~\ref{fig:qss_holevo_information}b demonstrates a reduction in the Holevo information when Bob or Charlie is dishonest. Since Holevo information is directly related to the efficacy of an attack, this might suggest that dishonesty gives no advantage, and even makes things worse. We note however that the mutual information is also reduced in this case, and a consideration of the key rate in Fig.~\ref{fig:qss_keyrate} demonstrates that such dishonesty internal to the protocol yields a reduction in the key rate $\kappa$. Reduction in $\chi$ is explained by noting that there is one fewer channel being attacked (the dishonest player already has perfect knowledge about what they have sent, and so does not attack their own channel), and that the Holevo information represents the amount of information gained via an attack.
+
+
+\begin{figure}[htp]
+\centering
+	\begin{subfigure}{0.49\linewidth}
+	\centering
+	\includegraphics[draft=false, width=\linewidth]{qss/holevo_honest_symmetric_a_T}
+	\caption{}	
+	\end{subfigure}
+	\begin{subfigure}{0.49\linewidth}
+	\centering
+	\includegraphics[width=\linewidth, draft=false]{qss/holevo_dishonest_symmetric_a_T_and_honest}
+	\caption{}	
+	\end{subfigure}
+\caption{\label{fig:qss_holevo_information} Holevo information Eq.~\ref{eqn:qss_holevo} as it varies with coherent state amplitude $\alpha$ and channel transmission $T$. (a) Honest recipients. (b) Orange: dishonest recipients. Blue, clear: honest recipients, same surface as (a). In both figures we have taken linear $\mathcal{F}$ parameters $g = h = 0.5$.}
+\end{figure}
+
+The key rate $\kappa$ is plotted in Fig.~\ref{fig:qss_keyrate}. Comparing (a) and (b), we see that in all cases the presence of dishonesty in Bob or Charlie causes a reduction in the obtained key rate. Each figure takes Bob and Charlie to have the same coherent state amplitude $\alpha$ and channel transmission $T$. At the loss levels considered here, $\alpha=0.8$ yields larger $\kappa$, but for larger losses (not shown) $\alpha=0.5$ performs better. Indeed, the best $\alpha$ reduces as the loss level increases.
+
+We see that a symmetric choice $g = h = 0.5$ is clearly optimal when both Bob and Charlie are honest (green and blue lines in (a) outperform red and orange), while the best choice of $g, h$ in (b) depends on which player is assumed dishonest. For example, assuming that Bob is dishonest (orange in (b)) gives much larger $\kappa$ for $g=0.2$, $h=0.8$ than for $g = h = 0.5$ (blue in (b)), because by lowering $g$ we are effectively reducing the amount of information which Bob has access to, i.e. his knowledge of which state was sent matters less and less. Conversely, this choice $g=0.2$, $h=0.8$ causes a large reduction in $\kappa$ when Charlie is dishonest. Since the final key rate $\kappa$ should be taken as a minimum over these two key rates, Eq.~\ref{eqn:qss_key_rate_min}, we see that when either party is equally likely to be dishonest the optimal choice should be the symmetric choice $g=h$.
+
+
+
+\begin{figure}[htp]
+\centering
+	\begin{subfigure}{0.49\linewidth}
+	\centering
+	\includegraphics[draft=false, width=\linewidth]{qss/keyrate_honest_1}
+	\caption{}
+	\end{subfigure}
+	\begin{subfigure}{0.49\linewidth}
+	\centering
+	\includegraphics[draft=false, width=\linewidth]{qss/keyrate_dishonest_1}
+	\caption{}
+	\end{subfigure}
+\caption{\label{fig:qss_keyrate} QSS key rates varying with dB loss. (a) Honest Bob and Charlie. (b) Dishonest Bob and Charlie. (a) and (b) - blue: $\alpha=0.5$, $g=h=0.5$; green: $\alpha = 0.8$, $g = h = 0.5$; orange: $\alpha = 0.5$; $g = 0.2$, $h=0.8$ Bob dishonest; red: $\alpha = 0.5$; $g=0.2$, $h=0.8$ Charlie dishonest.}
+\end{figure}
 
 
 
@@ -449,6 +506,7 @@ where $\kappa_{\text{Eve, Charlie}}$ is calculated analogously to Eq.~\ref{eqn:q
 
 
 
+\clearpage
 \section{Outlook}
 %Note, I haven't spent too much time polishing this section. I should come back to it last.
 The classical post-processing of the above protocol is inherently very similar to Ref.~\cite{Kogias2017}, in which a secret key is generated between Alice and a shared Bob-Charlie degree of freedom via incompatible homodyne measurements on a tripartite entangled state. We expect that our protocol will be secure against a more restricted set of attacks, but over a wider range of channel parameters, for several reasons. 
