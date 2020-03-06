@@ -493,7 +493,8 @@ We see that a symmetric choice $g = h = 0.5$ is clearly optimal when both Bob an
 \end{figure}
 
 
-Allowing for Bob and Charlie to experience different loss levels, or use different input alphabet amplitudes, we plot the resultant key rates in Fig.~\ref{fig:qss_keyrate_asymmetric}. \MT{TODO: add a symmetric line to (a), and then say more about the graphs.}
+Allowing for Bob and Charlie to experience different loss levels, or use different input alphabet amplitudes, we plot the resultant key rates in Fig.~\ref{fig:qss_keyrate_asymmetric}. In (a) we let $g=0.2$, $h=0.8$ (blue, green) and $g=0.3$, $h=0.7$ (orange, red) and vary the channel loss of Bob, while Charlie's is fixed at $-1.5$~dB. Bob is assumed dishonest. We see that the loss variation in the player who contributes little to the key, in this case Bob as $g < h$, leads to only small changes in the resultant $\kappa$. However, when Charlie's loss varies and Bob's remains constant, for equivalent parameters, we see (b) large variations in $\kappa$. Black lines denote $g=h=0.5$ with only Bob's loss (a) or Charlie's loss (b) varying. Gray, dashed lines denote $g=h=0.5$ when Bob and Charlie's losses vary equally. We see from this Figure~\ref{fig:qss_keyrate_asymmetric} that when $g \ne h$, the channel parameters of the player who contributes most to the key (Bob if $g < h$ or Charlie if $h < g$) make the most significant impact. Interestingly, for the symmetric case $g=h$, which we have already reasoned is the optimal choice, it is the largest amount of loss which controls $\kappa$. Little is to be gained by having one high quality channel if the other one is poor. 
+
 
 \begin{figure}[htp]
 \centering
@@ -507,8 +508,7 @@ Allowing for Bob and Charlie to experience different loss levels, or use differe
 	\includegraphics[width=\linewidth, draft=false]{qss/asymmetric_keyrates_2}
 	\caption{}
 	\end{subfigure}
-\caption{\label{fig:qss_keyrate_asymmetric} QSS key rates varying dB loss asymmetrically. (a) Bob's loss varies, while Charlie's remains at $T=0.7$. (b) Charlie's loss varies, while Bob's remains at $T=0.7$. (a)-(b): We have taken $g = 0.2, h=0.8$ (blue, green); $g=0.3, h=0.7$ (orange, red). Blue and orange lines: both Bob and Charlie are honest. Green and red lines: Bob is dishonest. Varying the loss of the dishonest player (a) results in negligible variation of $\kappa$. \MT{TODO: say more about this caption.}
-\MT{TODO: add a "symmetric" line to (a)}}
+\caption{\label{fig:qss_keyrate_asymmetric} QSS key rates varying dB loss asymmetrically. (a) Bob's loss varies, while Charlie's remains at $-1.5$~dB. (b) Charlie's loss varies, while Bob's remains at $T=0.7$. (a)-(b): We have taken $g = 0.2, h=0.8$ (blue, green); $g=0.3, h=0.7$ (orange, red). Blue and orange lines: both Bob and Charlie are honest. Green and red lines: Bob is dishonest. Varying the loss of the dishonest player (a) results in negligible variation of $\kappa$, while varying loss of honest player (b) results in large variation. Black: $g=h=0.5$ varying loss of honest player. Gray, dashed: $g=h=0.5$ varying loss of honest and dishonest player equally.}
 \end{figure}
 
 
