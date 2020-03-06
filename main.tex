@@ -23,6 +23,14 @@
 \usepackage{bm}
 \usepackage{siunitx}
 \usepackage{floatrow}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{siunitx}
+\usepackage{braket}
+\usepackage[nolist]{acronym}
+\usepackage{multirow}
+\usepackage{etoolbox}
+\usepackage[para]{threeparttable}
 
 
 
@@ -54,6 +62,9 @@
 \newcommand{\ddt}[1][]{\frac{\mathrm{d}#1}{\mathrm{d}t}}
 \newcommand{\dims}{\left|\mathcal{H}\right|}
 \newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}	
+\newcommand{\head}[1]{\multicolumn{1}{c}{#1}}
+\newcommand{\enot}[2]{{#1}\!\times\!10^{#2}}
 
 
 
@@ -65,7 +76,9 @@
 	chapters/aqc,
 	chapters/phog,
 	chapters/phog_adiabatic_elimination,
-	chapters/phog_numerical_methods
+	chapters/phog_numerical_methods,
+	chapters/crypto_numerical_methods,
+	chapters/crypto_larger_alphabets
 }
 
 
@@ -100,7 +113,6 @@
 \include{chapters/introduction}
 \part{Agile cryptography: signatures and secrets}
 \include{chapters/crypto_intro}
-%\input{chapters/qds_lit_review}
 \include{chapters/qds}
 \include{chapters/qss}
 \include{chapters/aqc}
@@ -111,8 +123,8 @@
 
 
 \appendix
-%\include{chapters/larger_alphabets}
-%\include{chapters/coherent_noisy_channel}
+\include{chapters/crypto_numerical_methods}
+\include{chapters/crypto_larger_alphabets}
 \include{chapters/phog_adiabatic_elimination}
 \include{chapters/phog_numerical_methods}
 

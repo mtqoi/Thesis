@@ -489,11 +489,27 @@ We see that a symmetric choice $g = h = 0.5$ is clearly optimal when both Bob an
 	\includegraphics[draft=false, width=\linewidth]{qss/keyrate_dishonest_1}
 	\caption{}
 	\end{subfigure}
-\caption{\label{fig:qss_keyrate} QSS key rates varying with dB loss. (a) Honest Bob and Charlie. (b) Dishonest Bob and Charlie. (a) and (b) - blue: $\alpha=0.5$, $g=h=0.5$; green: $\alpha = 0.8$, $g = h = 0.5$; orange: $\alpha = 0.5$; $g = 0.2$, $h=0.8$ Bob dishonest; red: $\alpha = 0.5$; $g=0.2$, $h=0.8$ Charlie dishonest.}
+\caption{\label{fig:qss_keyrate} QSS key rates varying with dB loss. Bob and Charlie experience the same loss, and begin with the same input alphabet amplitude. (a) Honest Bob and Charlie. (b) Dishonest Bob and Charlie. (a) and (b) - blue: $\alpha=0.5$, $g=h=0.5$; green: $\alpha = 0.8$, $g = h = 0.5$; orange: $\alpha = 0.5$; $g = 0.2$, $h=0.8$ Bob dishonest; red: $\alpha = 0.5$; $g=0.2$, $h=0.8$ Charlie dishonest.}
 \end{figure}
 
 
+Allowing for Bob and Charlie to experience different loss levels, or use different input alphabet amplitudes, we plot the resultant key rates in Fig.~\ref{fig:qss_keyrate_asymmetric}. \MT{TODO: add a symmetric line to (a), and then say more about the graphs.}
 
+\begin{figure}[htp]
+\centering
+	\begin{subfigure}{0.49\linewidth}
+	\centering
+	\includegraphics[width=\linewidth, draft=false]{qss/asymmetric_keyrates_1}
+	\caption{}
+	\end{subfigure}
+	\begin{subfigure}{0.49\linewidth}
+	\centering
+	\includegraphics[width=\linewidth, draft=false]{qss/asymmetric_keyrates_2}
+	\caption{}
+	\end{subfigure}
+\caption{\label{fig:qss_keyrate_asymmetric} QSS key rates varying dB loss asymmetrically. (a) Bob's loss varies, while Charlie's remains at $T=0.7$. (b) Charlie's loss varies, while Bob's remains at $T=0.7$. (a)-(b): We have taken $g = 0.2, h=0.8$ (blue, green); $g=0.3, h=0.7$ (orange, red). Blue and orange lines: both Bob and Charlie are honest. Green and red lines: Bob is dishonest. Varying the loss of the dishonest player (a) results in negligible variation of $\kappa$. \MT{TODO: say more about this caption.}
+\MT{TODO: add a "symmetric" line to (a)}}
+\end{figure}
 
 
 

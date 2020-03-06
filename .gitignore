@@ -33,6 +33,7 @@
 Calculations/*
 *.dat
 *.qu
+*.mx
 
 # Specific folders to ignore
 Images/SciencePlots-master/*
