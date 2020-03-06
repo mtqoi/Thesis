@@ -4,11 +4,7 @@
 % - expand the calculating holevo section
 % - find somewhere for my nice line about the quantum protocol being ``agnostic'' to the classical steps
 % - talk about how interpretation of \chi differs between qdsb and qdsf
-% Q: do I want more chat about the large figure?
-% - make new figure about the roles (just gonna use stefan's figure for now)
-% - make sure I show how each protocol can be made more ``experimentally realistic''.
-% - ensure that my description of QDSb is identical in style to QDSf from earlier
-% - add appendix where I put the states for QDSb under each attack.
+
 %
 
 
@@ -382,6 +378,15 @@ Probability $\perr$ on the other hand is affected by our choice of $\rps$. Given
 
 
 \subsection{QDS-$b$ performance}
+
+We plot signature length as it varies with $T$ under protocol QDS-$b$ in Fig.~\ref{fig:aqc_qdsb_lengths}. At each $T$ we have optimized over coherent state amplitude $\alpha$ and postselection parameter $\Delta_r$, and the resulting signature lengths are displayed as the solid lines in Fig.~\ref{fig:aqc_qdsb_lengths}. Black: BS$0$ attack, Red: EC attack with constant $\bar{n}=0.02$. Non-solid lines are specific choices of $\alpha$ which are close to optimal only at specific $T$. We see that choosing an $\alpha$ which is not optimal for a given channel transmission can drastically affect the signature length, and for some transmissions can even result in an increase similar to allowing a different class of attack. Since in a practical realization of the protocol, $\Delta_r$ may feasibly be chosen after the distribution of quantum states, we have optimized over $\Delta_r$ at each point in the figure.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[draft=false, width=0.6\linewidth]{aqc/QDSb_optimal_L}
+\caption{\label{fig:aqc_qdsb_lengths} QDS-$b$ signature lengths. Black: BS$0$ attack. Red: EC attack with constant $\bar{n} = 0.02$. Green, dashed: $BS0$ attack with $\alpha=0.5$. Orange, dotted: $BS0$ attack with $\alpha=0.7$, Blue, dot-dashed: EC attack with constant $\bar{n}=0.02$, $\alpha=0.5$. All lines have optimal $\Delta_r$ chosen at each point. Solid lines: optimal choice of $\alpha$ and $\Delta_r$ at each point.}
+\end{figure}
+
 
 \section{Agile system \systemF}
 
