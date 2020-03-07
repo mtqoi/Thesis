@@ -5,18 +5,33 @@
 %Note: after I have this section I can compare it to the Amiri2015 review paper and to Collins2018 progress report (and to Callum's thesis)
 
 \subsection*{Classical digital signatures}
-\MT{Talk about digital signatures' use in modern infrastructure. Introduce the Lamport scheme.}
+%\MT{Talk about digital signatures' use in modern infrastructure. Introduce the Lamport scheme.}
+
+Although encryption is perhaps the most well known cryptographic protocol, it is by no means the only important task which is accomplished daily by modern cryptography. Digital signatures for example are ubiquitous in our everyday information infrastructure and they are crucial to digital communication such as software distribution or financial transactions. In many countries, a digital signature is even legally meaningful.
+
+The aim of a digital signature scheme is to provide a way to securely sign a classical message, such that it can neither be forged nor tampered with, and such that every player will agree about the validity of the message. A fascinating overview of the development of digital signatures may be found in Ref.~\cite{Simmons1988} which describes historic details which motivated signatures, and which motivated the requirement of signatures-without-encryption (i.e. it is not sufficient to simply encrypt a message in order to prove that a given party sent it).
+
+One method which may be used to perform this task requires a symmetric (private-key) cryptosystem, Fig.~\ref{fig:pubpriv}a and a trusted arbiter. Assume that Alice wishes to securely sign a message to Bob. We will denote the arbiter David. David should share a secure key $\kappa_A$ with Alice, and another $\kappa_B$ with Bob. Alice encrypts her message $m$ with $\kappa_A$ and sends it to David, who decrypts it. David adds to $m$ a statement that $m$ definitely originated with Alice, and encrypts the entire thing with $\kappa_B$ and send it to Bob. Bob can decrypt and read $m$, and is confident that it definitely originated with Alice, because of David's stamp of approval.
+
+Such a scheme will accomplish all of the requirements of a digital signature, including transferability, but the requirement that all communication be mediated by arbiter David is a strong one, and David will become a bottleneck in this system.
+
+A more practical scheme uses asymmetric (public-key) cryptography, Fig.~\ref{fig:pubpriv}b. Assume that Alice has a private key, known only to her, while Bob possesses her public key, which is freely available to any interested party. Alice may sign her message by encrypting $m$ and send it to Bob. Bob decrypts using the public key, and he can freely read $m$ and be confident that it originated with Alice. Moreover, since Alice's public key is freely available her message $m$ is transferable. This system has the advantage of not requiring any trusted arbiter\footnote{Though in practice one will use a certificate authority to distribute the public keys} or bottleneck. The scheme described here was first invented by Diffie and Hellman in \MT{year}, \MT{cite}.
+
+This idea was expanded upon by Lamport in \MT{year}. The signature scheme proposed by Lamport uses one-way functions. In Lamport's scheme, Alice wishes to send a one-bit message $m$ to Bob. For each $m$ she will create a random string $\theta_0$, $\theta_1$ and input them to her one-way function $f$. Alice then freely distributes $\left\{m, f\left(\theta_0\right), f\left(\theta_1\right)\right\}$. Since $f$ is one-way, a potential forger cannot discover Alice's $\theta_0$, $\theta_1$. When Alice wishes to send her message, she will declare $\left(m, \theta_m\right)$. Bob applies the function $f$ to $\theta_m$, and if the output agrees with Alice's earlier declaration he will accept $m$ as genuine. 
+
+Lamport's scheme has the advantage that $m$ is visible to all and the scheme does not require encryption of the message. A drawback is that once the $\theta_m$ have been used they cannot be reused and must be discarded. We note also that this scheme is inherently very similar to hash-based signature schemes which Alice first applies a hash function $h$ \MT{cite} to $m$, and then signs $h\left(m\right)$ (e.g. via the Diffie-Hellman protocol described above) and distributes $m$ and her signed $h\left(m\right)$.
+
 
 
 \subsection*{Quantum one-way function}
 %Talk about Gottesman and Chuang.
 Gottesman and Chuang \cite{Gottesman2001} generalized Lamport's scheme \MT{cite} in $2001$ to build the first Quantum Digital Signatures protocol. The key contribution of their scheme is to replace the one-way function in \MT{cite} with a so-called \emph{quantum one-way function}, thereby securing the signatures protocol against a quantum adversary.
 
-\MT{TODO: chat more about quantum one-way function. Include the "figure" that I currently have in my historical introduction}
+%\MT{TODO: chat more about quantum one-way function. Include the "figure" that I currently have in my historical introduction}
 
-A direct analogue of public-key cryptography, their protocol relies on the difficult task, described in Fig.~\MT{X}, of accurately distinguishing between non-orthogonal quantum states. Their security relies on the fact that performing measurement on a state of $n$~qubits can yield at most $n$~bits of information, and so the protocol in Ref.~\cite{Gottesman2001} is designed such that this is insufficient to distinguish between states.
+A direct analogue of public-key cryptography, their protocol relies on the difficult task, described above in Fig.~\ref{fig:qutrapdoor}, of accurately distinguishing between non-orthogonal quantum states. Their security relies on the fact that performing measurement on a state of $n$~qubits can yield at most $n$~bits of information, and so the protocol in Ref.~\cite{Gottesman2001} is designed such that this is insufficient to distinguish between states.
 
-The key tool in the protocol is a quantum $SWAP$ test, Fig.~\MT{X}, which probabilistically determines whether two states are identical. To perform this test, players prepare $\ket{f_x}, \ket{f_{x^\prime}}$ and an additional ancilla $\left(\ket{0} + \ket{1}\right)/\sqrt{2}$. Players perform a Fredkin gate \MT{cite} using the ancilla as a control, and then perform a Hadamard \MT{cite} on the ancilla. In other words, the $SWAP$ test performs the mapping
+The key tool in the protocol is a quantum $SWAP$ test which probabilistically determines whether two states are identical. To perform this test, players prepare $\ket{f_x}, \ket{f_{x^\prime}}$ and an additional ancilla $\left(\ket{0} + \ket{1}\right)/\sqrt{2}$. Players perform a Fredkin gate \MT{cite} using the ancilla as a control, and then perform a Hadamard \MT{cite} on the ancilla. In other words, the $SWAP$ test performs the mapping
 \begin{equation}
 \ket{f_x}\ket{f_{x^\prime}}\frac{\left(\ket{0} + \ket{1}\right)}{\sqrt{2}} \mapsto \frac{\left(\ket{f_x}\ket{f_{x^\prime}} \pm \ket{f_{x^\prime}}\ket{f_x}\right)\ket{y_{\pm}}}{\sqrt{2}}
 \end{equation}
@@ -72,7 +87,7 @@ The key insight of Ref.~\cite{Dunjko2014} was to effectively replace the quantum
 
 The main difference then between Refs.~\cite{Dunjko2014} and \cite{Gottesman2001}, is that in Dunjko \emph{et. al.}, recipients Bob and Charlie perform photon-number measurement as they receive the quantum states. Remarkably, despite this fundamental change to the nature of the protocol's one-way function, secure QDS is possible. \MT{do I need to revise this sentence? Is it accurate and fair?}
 
-\MT{Include a figure (minipage thing) comparing the one-way functions used by Gottesman2001 and by Dunjko2014.}
+%\MT{Include a figure (minipage thing) comparing the one-way functions used by Gottesman2001 and by Dunjko2014.} %Nah, can't be bothered.
 
 In the Distribution stage of the protocol, Alice generates classical strings $\left\{k_j^m\right\}_{j=0}^L$, length $L$, corresponding to each future one-bit message $m$. The $k_j^m$ are chosen uniformly at random from the BPSK alphabet of coherent state phases $\left\{- \alpha, \alpha\right\}$. Alice then forms sequences of coherent states $\rho = \otimes_{j=0}^L \ket{k_j^m}$ which she then distributes to Bob and to Charlie. 
 
@@ -82,18 +97,19 @@ Bob and Charlie pass their received coherent states through the shared optical m
 
 During Messaging, Alice will declare $\left(m, k_j^m\right)$ which recipients will compare to their USD outcomes. Provided that there are enough matches between Alice's phase declarations $k_j^m$ and Bob/Charlie's USD outcomes, message $m$ is accepted and the protocol has succeeded.
 
-This first protocol avoiding the requirement for quantum memory shows that QDS may be both practical and secure. Furthermore the limited physical requirements--tensor-products of coherent states, beamsplitters and non-photon-number-resolving detectors--are feasible to work with, unlike the large number of superposition qubits required for Ref.~\cite{Gottesman2001}. \MT{Now talk about the implementation paper}. 
+This first protocol avoiding the requirement for quantum memory shows that QDS may be both practical and secure. Furthermore the limited physical requirements--tensor-products of coherent states, beamsplitters and non-photon-number-resolving detectors--are feasible to work with, unlike the large number of superposition qubits required for Ref.~\cite{Gottesman2001}. %\MT{Now talk about the implementation paper}. 
 
 An implementation of a variation of Dunjko's scheme is described in Ref.~\cite{Collins2014}. Collins \emph{et. al.} modify Dunjko's scheme in two key ways. Firstly, a QPSK alphabet Eq.~\MT{X} is used, rather than BPSK. This is in order to make the second modification: instead of using unambiguous state discrimination (USD) measurement, they perform unambiguous state \emph{elimination} (USE) measurement. If the measurement succeeds, rather than being able to say definitively which state was received, a recipient can say with certainty which state was \emph{not} received. This measurement scheme is described further in Fig.~\ref{fig:USE}. The key advantage of the USE measurement scheme is that the probability that the measurement fails is significantly smaller than for USD, and so the resulting QDS scheme gains a boost in efficiency. Indeed, if USE eliminates $N-1$ of $N$ possible states then one knows with certainty which state was sent, USD may be viewed as a special case of the more general USE measurement. The shift from state discrimination to state elimination allows for much greater efficiency in QDS schemes. \MT{Make sure to talk about it later in the context of our QDS - make a graph showing $g$ (or $L$?) under discrimination vs elimination.}
 
-\begin{figure}[htp]
-\centering
-\includegraphics{USE.png}
-\caption{\label{fig:USE}}
-\end{figure}
+%\begin{figure}[htp]
+%\centering
+%\includegraphics{USE.png}
+%\caption{\label{fig:USE}}
+%\end{figure}
 
 Collins \emph{et. al.} estimate a signature length $L = 5.1 \times 10^{13}$ in order to sign a message. Notice the subtle shift between Refs.~\cite{Gottesman2001} and \cite{Andersson2006, Clarke2012, Dunjko2014, Collins2014}. While previously the number of recipients did not need to be determined until the Messaging stage, here it must be determined before Distribution. After the coherent states have passed through the multiport the number of recipients cannot be changed. 
-\MT{I should note later that removing the multiport removes this restriction.} Because of the physical requirements for the optical multiport, it will also be challenging (though possible) to generalize to more recipients, though note that for more than two recipients in Ref.~\cite{Dunjko2014} one may not use $USD$ measurement. \MT{why?}. Realistic implementation of the multiport also introduces noise and losses due to misalignment and instability, further reducing the efficiency of the protocol, and requires Bob and Charlie to be physically connected. In Ref.~\cite{Clarke2012, Collins2014}, for example Bob and Charlie are separated by $5$~m of optical fibre. 
+%\MT{I should note later that removing the multiport removes this restriction.} 
+Because of the physical requirements for the optical multiport, it will also be challenging (though possible) to generalize to more recipients, though note that for more than two recipients in Ref.~\cite{Dunjko2014} one may not use $USD$ measurement. \MT{why?}. Realistic implementation of the multiport also introduces noise and losses due to misalignment and instability, further reducing the efficiency of the protocol, and requires Bob and Charlie to be physically connected. In Ref.~\cite{Clarke2012, Collins2014}, for example Bob and Charlie are separated by $5$~m of optical fibre. 
 
 The most difficult assumption which Refs.~\cite{Clarke2012, Dunjko2014, Collins2014} make, however, is that there should be no eavesdroppers on the quantum channels. This is a strong and impractical assumption, and one which subsequent papers endeavour to remove.
 
@@ -163,11 +179,11 @@ The correlated strings are shared between Alice and Bob as described in Fig.~\re
 
 Alice and Bob then communicate to each other their intensity and basis settings (but not the states which they each sent). This allows them to deduce each other's sent state, from Eve's Bell state declaration. Intuitively, since Eve claims to perform a Bell measurement, Alice and Bob \MT{talk about intuitive security of MDI stuff.}
 
-\begin{figure}[htp]
-\centering
-\includegraphics{puthoor2016_mdi.png}
-\caption{\label{fig:puthoor2016_mdi}}
-\end{figure}
+%\begin{figure}[htp]
+%\centering
+%\includegraphics{puthoor2016_mdi.png}
+%\caption{\label{fig:puthoor2016_mdi}}
+%\end{figure}
 
 
 There have been two main implementations of MDI-QDS. One experiment by Roberts \emph{et. al.} implements either MDI-QDS, MDI-QKD or regular QKD with a switchable setup \cite{Roberts2017}. By handing the untrusted measurement device to Charlie, and allowing Bob and Charlie to additionally share a QKD link, they securely sign a message between Alice and Bob situated $50$~km apart. They also only require two quantum links, between Alice-Charlie and Bob-Charlie (the same as Fig.~\ref{fig:puthoor2016_mid} with Charlie playing the role of Eve), which reduces the resource cost of distributing signatures across a network. Roberts \emph{et. al.} sign a single-bit message in just $74$~ms. 
@@ -199,12 +215,12 @@ Both of these schemes, although running over deployed fiber networks, require di
 %\subsection{Tokyo installed fibers scheme}
 %\MT{Perhaps the rest of the DPS-based protocols, or installed-fiber protocols here too?}
 
-\MT{Talk about other QDS implementations}
+%\MT{Talk about other QDS implementations}
 
 %\MT{Where shall I talk about An2019?}
 
 \subsection*{Continuous-variables}
-\MT{Motivate CV and then talk about Croal2016. Goal of section is to convince the reader that CV QDS is a good direction to go in, and to motivate the rest of the chapter.}
+%\MT{Motivate CV and then talk about Croal2016. Goal of section is to convince the reader that CV QDS is a good direction to go in, and to motivate the rest of the chapter.}
 
 Despite the many recent advances in single-photon detection, and its use above in modern QDS progressing towards practical implementation, the protocols presented above still require a dedicated hardware platform. Deploying such a platform will be difficult and costly, especially if it requires new network infrastructure.
 
@@ -230,7 +246,7 @@ The CV quantum cryptographic platform typically boasts fast sending rates and re
 
 
 \subsection*{Other directions}
-\MT{Talk about "classical" unconditionally secure signatures, and various extensions to the QDS schemes discussed above. I want the above narrative to be about the flow from impractical (Gottesman2016) to practical and good (my scheme, which I am about to present).}
+%\MT{Talk about "classical" unconditionally secure signatures, and various extensions to the QDS schemes discussed above. I want the above narrative to be about the flow from impractical (Gottesman2016) to practical and good (my scheme, which I am about to present).}
 
 
 %

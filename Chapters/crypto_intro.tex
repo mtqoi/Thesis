@@ -11,9 +11,9 @@ Cryptanalysis--the art and science of breaking cryptographic systems--has existe
 \MT{The following segue seems quite abrupt}
 There are two main important strands of cryptography: private-key and public-key crytography, Fig.~\ref{fig:pubpriv}. In private-key cryptography (also known as \emph{symmetric} cryptography), Alice and Bob share some secret information which they will use to perform some task, and without which an eavesdropper cannot break the system. An important example of private-key cryptography is encryption with a cipher $\mathcal{K}$ which is used to encrypt and decrypt messages. Any party with $\mathcal{K}$ can freely encypt or decrypt any piece of information, while any party lacking knowledge of $\mathcal{K}$ cannot. A relevant example of this type of cryptosystem is the one-time pad (OTP) which is discussed above.
 
-\MT{Perhaps some discussion about how $\mathcal{K}$ can be distributed and attacked}
+%\MT{Perhaps some discussion about how $\mathcal{K}$ can be distributed and attacked}
 
-\MT{I should have a discussion at some point about how public- and private- key cryptography relate to each other and how they are both used in modern infrastructure}
+%\MT{I should have a discussion at some point about how public- and private- key cryptography relate to each other and how they are both used in modern infrastructure}
 
 The second strand is public-key cryptography (also known as \emph{asymmetric} cryptography). Here, there are several pieces of information required to run a protocol. Alice is assumed to hold a key $\mathcal{E}$ (her ``private key'') while Bob holds a key $\mathcal{D}$ (Alice's ``public-key'') which is assumed to be publicly known. As an example, Alice may encrypt a message using $\mathcal{E}$ and sends it to Bob, who may decrypt it using $\mathcal{D}$.  \MT{Include more examples of this thing actually being used in practice}
 
@@ -42,17 +42,45 @@ m \mapsto \text{Encrypt}_\mathcal{E}\left(m\right) \\
 
 Usually, given knowledge of $\mathcal{E}$ it should be easy to derive $\mathcal{D}$. The converse should not be true, and the publicly available $\mathcal{D}$ should give no indication of $\mathcal{E}$. If $\mathcal{E}$ is unique to Alice, then a successful decryption using $\mathcal{D}$ proves sufficient to prove Alice's identity.\footnote{One may be tempted to build a digital signatures protocol on this exchange, but \MT{explain why it is a bad idea, with reference to Simmons}.}
 
-The function $f: \mathcal{E} \mapsto \mathcal{D}$ is sometimes referred to as a ``trapdoor'' or ``one-way'' function, and $f$ is typically based on a mathematical problem which is deemed to be computationally hard, for example \MT{examples} which underly the commonly used \MT{protocols}. \MT{motivate quantum cryptography via breaking of these trapdoors}
+The function $f: \mathcal{E} \mapsto \mathcal{D}$ is sometimes referred to as a ``trapdoor'' or ``one-way'' function, and $f$ is typically based on a mathematical problem which is deemed to be computationally hard, for example factoring a large integer into primes \MT{cite} or the discrete logarithm problem \MT{cite} which underly the commonly used \MT{protocols}. \MT{motivate quantum cryptography via breaking of these trapdoors}
 
 
-\MT{Have some examples of how the same hard problem, i.e. RSA, can be used for both private-key and public-key cryptography. Make sure the hard problem is well defined and motivated.}
+%\MT{Have some examples of how the same hard problem, i.e. RSA, can be used for both private-key and public-key cryptography. Make sure the hard problem is well defined and motivated.}
 
-\MT{Motivate quantum cryptography by showing how a hard problem can be broken}
+%\MT{Motivate quantum cryptography by showing how a hard problem can be broken}
 
+It has been shown, however, that while certain of these hard problems are hard for a classical computer, there exist algorithms for a future quantum computer which can break them. The most well known of these is Shor's algorithm, \cite{Shor1997} which provides an exponential speedup in the ability to split an integer into its prime factors. Thus, instead of taking an exponential number of steps in the length of the integer, the quantum computer will take a number of steps which is only polynomial in integer length. 
+
+The existence of such algorithms which may successfully solve a hard problem poses a threat to many commonly used cryptosystems such as RSA, DSA and ECDHE \MT{cite}, which rely on \MT{hard problems}. One must therefore carefully consider how to respond to this threat posed by quantum computers. 
+
+One solution will be to switch the underlying hard problem to a more difficult complexity class, which even a quantum computer cannot solve. This is the approach adopted by the so-called Post-Quantum Cryptography (PQC) community, whose aim is to design protocols based on problems like \MT{name some}, for which no good quantum algorithm is yet known. However, it is still an open question which problems a quantum computer can hope to solve\footnote{It is even not yet known whether they can solve a larger class of problems than a classical computer} and so by hardening and prematurely implementing a secure system based on a PQC hard-problem, it is still possible that a quantum computer may pose a threat. \MT{cite a bunch of stuff here.} 
+
+In any case, it is clear that the currently implemented cryptographic systems must either be strengthened or replaced, and this may prove challenging. We will briefly discuss some of the challenges, and a possible solution which has gained traction among the conventional cryptography community in recent years, in Chapter~\ref{chapter:aqc}
+
+The second solution to the threat posed by quantum computers is to begin to adopt cryptosystems which are provably secure against a quantum computer. There exist classical schemes for which this is possible and we will discuss some of them briefly in Sec.~\ref{sec:qss_lit_review}. However for many applications classical cryptography does not allow for such provably secure systems without an initial face-to-face interaction\footnote{To facilitate, for example, the sharing of large, random, secure keys.} and so one must move to the quantum realm.
+
+Quantum cryptography bases its security not on the assumption of a mathematical problem's hardness, but on physical laws. Quantum cryptography therefore requires the sharing of physical systems between players, and as we shall see in the remainder of this Thesis, quantum light is a natural object with which to perform cryptographic tasks. 
+
+One may think of the advantage provided by quantum cryptography in terms of the one-way functions discussed earlier, Fig.~\ref{fig:qutrapdoor}. While the classical one-way functions were only computationally hard, the quantum analogue of the one-way function is provably impossible to invert, and if the quantum states are chosen to be non-orthogonal then it is impossible to perfectly determine the classical information which they encode. \MT{cite some stuff.}
+
+\begin{figure}[h!]
+\centering
+%\captionsetup{width=0.8\linewidth}
+\begin{framed}
+\begin{align*}
+x_i &\mapsto \ket{x_i} \qq{easy}\\
+\ket{x_i} &\mapsto x_i \qq{impossible}
+\end{align*}
+\caption{A ``quantum one-way function''. If the quantum states $\ket*{x_i}$ are chosen to be non-orthogonal then it is impossible to perfectly determine the classical information $x$ given a quantum state $\ket*{x}$. This forms the basis for quantum cryptosystems, whose security is guaranteed by the no-cloning theorem}
+\label{fig:qutrapdoor}
+\end{framed}
+\end{figure}
+
+\clearpage
 \input{chapters/qds_lit_review}
 
-\MT{then I can have a section on QSS lit review and introduction, and one for agility. This way the chapters can be shorter and more readable.}
+%\MT{then I can have a section on QSS lit review and introduction, and one for agility. This way the chapters can be shorter and more readable.}
 
 \input{chapters/qss_lit_review}
 
-\MT{The rest of this chapter should take the following structure: 1) introduce task. 2) show how it is done classically (plus give some history). 3) motivate the quantum task. 4) lit review of the quantum task}
+%\MT{The rest of this chapter should take the following structure: 1) introduce task. 2) show how it is done classically (plus give some history). 3) motivate the quantum task. 4) lit review of the quantum task}
