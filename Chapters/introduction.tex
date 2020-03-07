@@ -1,23 +1,183 @@
 \chapter{Introduction}
 
-\subsection{Things to include}
-\begin{itemize}
-\item Beamsplitter properties and relations
-\item Definitions and interpretations of various entropic quantities
-\item Holevo information
-\item Phase space
-\item Background quantum mechanics
-\item POVMs
-\item Covariance matrices
-\item Master equations
-\item Coherent states
-\item Homodyning and heterodyning
-\item Mixed states, entangled states
-\item Thermal state
-\item TMSV state
-\item binary entropy
-\item Fock basis
-\end{itemize}
+
+\section{Introduction to Thesis}
+\MT{Statements about historical background of quantum optics/quantum information/quantum cryptography}
+
+This Thesis consists of two parts. In Part One, we consider several related cryptographic protocols which securely perform the tasks of Quantum Digital Signatures (QDS) and Quantum Secret Sharing (QSS). Our goals here are, firstly: to remove an assumption in continuous-variable (CV) QDS of secure quantum channels, and provide a security proof when an eavesdropping attack is permitted, and secondly: to demonstrate that several CV quantum cryptographic protocols may be run over identical hardware setups while the hardware at the quantum level is agnostic to the protocol being implemented. This so-called ``agile" system illustrates our translation of cryptographic agility from classical (conventional) cryptography to quantum cryptography, and allows for a move towards secure and practical quantum cryptosystems which can perform multiple tasks.
+
+In Part Two we consider the task of quantum state generation. We design and analyse a system which is capable to produce highly non-classical states at output, deterministically from a quasi-classical coherent state input. Using methods from nonlinear pulse propagation in fibers and from the field of open quantum systems, we analytically and numerically analyse a large multimode system and reduce it, step-by-step, to a single-mode system which is much more mathematically tangible. The system, which we denote PhoG (\underline{Pho}ton \underline{G}un), when implemented will provide a practical and cheap source of nonclassicality for quantum enhanced imaging and metrology, and may even improve the performance of quantum cryptographic systems.
+
+This Thesis is structured as follows. In the remainder of this chapter we will introduce and outline several of the theoretical and analytical tools which we make extensive use of in the rest of the Thesis. We will show how the electromagnetic field may be quantized and then discuss several common and useful quantum states of the field, and examine one method for their description and visualization. In Chapter~\ref{chapter:crypto_intro} we outline some of the developments in conventional cryptography which underpin our modern communications infrastructure, and discuss how two cryptographic tasks--digital signatures and secret sharing--may be translated to the quantum realm. In particular we will look at several recent and historic attempts to build such quantum protocols.
+
+\paragraph{Part One:} In Chapter~\ref{chapter:qds} we introduce our own QDS protocol, and prove its security against several classes of attack. We show that ours is the first CV QDS protocol to allow for an eavesdropper on the channels, and we show that despite this we attain very short signature lengths over practical distances. In Chapter~\ref{chapter:qss} we introduce our QSS protocol, prove its security, and analyse its performance. Crucially, unlike several recent QSS protocols, our protocol does not require generation and distribution of large-scale entangled states, nor does it require dedicated hardware for a sequential ``round-robin" style of approach. In the last chapter of Part One, Chapter~\ref{chapter:aqc} we introduce and discuss the concept of quantum cryptographic agility, and demonstrate how it may apply to our protocols discussed in earlier chapters. We additionally introduce a new QDS protocol which runs in a modified configuration, and discuss how a quantum key distribution (QKD) protocol which already exists in the literature may be adopted into our agile system. We finish with a figure-of-merit graph which demonstrates that our QDS scheme, in addition to being practical and compatible with commercial telecommunications hardware, is also the fastest QDS protocol over comparable distances. 
+
+\paragraph{Part Two:} In Chapter~\ref{chapter:phog} we motivate and introduce the PhoG device which will be the focus of the second half of this Thesis. We demonstrate that dissipation, far from being a hinderance to the desired evolution of our quantum system, is actually an asset and the main driver towards target nonclassicality. We introduce an exotic form of dissipation, called Nonlinear Coherent Loss, and show that in the ideal limit it will deterministically lead to single photons at the output. We then introduce progressively more complex models involving more bosonic system modes, and demonstrate that a realistic full multi-mode model of the system can be used to effectively simulate the Nonlinear Coherent Loss decay channel. Finally, we end the chapter by demonstrating that in addition to generating quasi-single-photon states, a slight modification to the PhoG device will lead to generation of entanglement at the output.
+
+\paragraph{Part Three:} We finish the Thesis with the inclusion of several appendices containing results which are used at multiple points throughout the Thesis. Appendix~\ref{appendix:cryptography_numerical_methods} contains the forms of quantum states which are used under various channel attacks in Chapter~\ref{chapter:qds}, and a description of how the states may be numerically modelled. Appendix~\ref{appendix:qds_larger_alphabets} contains a generalization to the QDS protocol from Chapter~\ref{chapter:qds} to allow for larger alphabets of coherent states. Appendix~\ref{appendix:qds_noisy_channel} contains results describing the output state of a channel in which an initial coherent state is mixed with thermal noise. This result is used multiple times throughout Part One. Appendix~\ref{appendix:adiabatic_elimination} provides a tool which is used multiple times in Chapter~\ref{chapter:phog} to reduce the complexity of a model by effectively ignoring a mode which reaches its steady state much quicker than the typical decay time of the system. Finally, in Appendix~\ref{appendix:phog_numerical_methods} we describe several numerical methods which may be applied to model the PhoG device. We compare several of them for speed, memory usage and accuracy, and then explicitly display several systems of coupled differential equations which approximate the PhoG device. Appendix~\ref{appendix:bibliography} contains the Bibliograpy.
+
+\section{Introduction to Quantum Optics}
+
+\subsection{Quantization of the electromagnetic field}
+
+\subsection{Single-mode operators}
+We have seen that the bosonic operators $\hat{a}, \hat{a}^\dagger$ create and destroy a quantum of energy in the light mode. These operators obey the bosonic commutation relation
+\begin{equation}
+\left[ \hat{a}, \hat{a}^\dagger \right] = 1
+\end{equation}
+and are crucial for modelling the quantum properties of our light. 
+
+We define the number operator $\hat{n}$ as 
+\begin{equation}
+\hat{n} = \hat{a}^\dagger \hat{a},
+\end{equation}
+and we will show in the next section that $\hat{n}$ counts the number of photons in our mode.
+
+We construct the following two operators
+
+\begin{equation}
+\hat{x} = \frac{\hat{a}^\dagger + \hat{a}}{\sqrt{2}} \qq{and} \hat{p} = i \frac{\hat{a}^\dagger - \hat{a}}{\sqrt{2}}
+\end{equation}
+which can be shown to obey the commutator
+\begin{equation}
+\left[\hat{x}, \hat{p}\right] = i.
+\end{equation}
+
+\noindent This commutator is equivalent to the commutator describing position and momentum of a quantum particle, and so we denote $\hat{x}$ as the position operator and $\hat{p}$ as the momentum operator. Indeed, it is easy to show that
+\begin{equation}
+\hat{E} = \hat{n} + \frac{1}{2} = \frac{\hat{x}^2}{2} + \frac{\hat{p}^2}{2},
+\end{equation}
+the right-hand side of which describes the energy of a simple harmonic oscillator. The position and momentum operators $\hat{x}, \hat{p}$ describe real and imaginary components of the complex phase $\hat{a}$ of the electric field.
+
+
+\subsection{State vectors and density matrices}
+An ideal quantum state is denoted in the so-called Dirac notation by $\ket{\psi}$. This state has been perfectly prepared with no noise, loss or additional uncertainty due to the preparation. The $\ket{\psi}$ is a vector living in a vector space denoted $\mathcal{H}$, which we call a Hilbert space. The space has dimension $\dims$ which we will typically take to be countably infinite, but there will be several points in this Thesis where we consider a finite $\dims$.
+
+Since $\ket{\psi}$ is a vector it can be written in terms of a set of basis vectors $\left\{\ket{e_j}\right\}_j$
+\begin{equation}
+\ket{\psi} = \sum_j c_j \ket{e_j}
+\end{equation}
+where the number of basis vectors typically equals $\dims$. 
+
+The state $\ket{\psi}$ should be normalized, that is
+\begin{equation}
+\dyad{\psi} = 1,
+\end{equation}
+where the notation $\dyad{\psi}$ denotes 
+\begin{equation}
+\sum_j \left|c_j\right|^2.
+\end{equation}
+
+\noindent We define an eigenstate of an arbitrary quantum operator $\hat{r}$ to be the state $\ket{r}$ such that
+\begin{equation}
+\hat{r} \ket{r} = r \ket{r}
+\end{equation}
+with $r in \mathbb{C}$.
+
+The basis we choose for vector $\ket{\psi}$ is not unique and we may similarly have expanded $\ket{\psi}$ in terms of eigenstates of $\hat{r}$,
+\begin{equation}
+\ket{\psi} = \sum_j \dyad{r}{\psi} \ket{r}
+\end{equation}
+where the $\dyad{r}{\psi} \in \mathbb{C}$ is such that its square modulus $\left|\dyad{r}{\psi}\right|^2$ is the probability that a measurement of $r$ on $\ket{\psi}$ will give outcome $r$.
+
+For convenience any basis vectors we use are chosen to be orthonormal to each other, that is
+\begin{equation}
+\dyad{\hat{e}_j}{\hat{e}_k} = \delta_{j, k}
+\end{equation}
+where $\delta_{j, k}$ is the Kronecker $\delta$ function.
+
+That a state $\ket{\psi}$ may be written as a sum of basis vectors corresponding to different measurement outcomes is a curious one, and a key feature of quantum mechanics known as the \emph{superposition principle}. A superposition state is one of the form
+\begin{equation}\label{eqn:intro_superposition}
+\ket{\psi} = \frac{\ket{0} + \ket{1}}{\sqrt{2}}
+\end{equation}
+where the constant factor $\mathcal{N}$ ensures normalization. We have chosen an abstract orthonormal basis set $\left\{ \ket{0}, \ket{1}\right\}$, and here $\dims=2$. The superposition state possesses a fundamental uncertainty about its measurement outcomes, that is to say, if many identical copies of $\ket{\psi}$ are created, and on each copy a measurement which distinguishes between $\ket{0}$ and $\ket{1}$ is performed, then the measurement will output $0$ half of the time, and $1$ the other half of the time. Such uncertainty is intrinsic to quantum mechanics and is unavoidable. However, it should be noted that unlike a classical uncertainty which one desires to reduce, this quantum uncertainty is highly desirable and forms the basis for many useful applications of quantum states.
+
+The density operator corresponding to a quantum state is
+\begin{equation}
+\hat{\rho} = \sum_{i, j} \rho_{i, j} \dyad{i}{j}
+\end{equation}
+where $\bra{i} \in \mathcal{H}^*$ is dual to $\ket{i}$. The matrix $\rho_{i, j}$ is referred to as the density matrix, though we shall often use the terms \emph{density operator} and \emph{density matrix} interchangably. As such, we will often neglect the hat above $\hat{\rho}$, and simply write $\rho$.
+
+The density operator description of a quantum state allows for a wider range of states to be described than the state vector description. Any state vector $\ket{\psi}$ can be described as a density operator. For example, the state $\ket{\psi}$ in Eq.~\ref{eqn:intro_superposition} may equivalently be described as 
+\begin{equation}
+\rho_\psi = \dyad{\psi}{\psi} = \frac{1}{2} \left(\dyad{0}{0} + \dyad{0}{1} + \dyad{1}{0} + \dyad{1}{1} \right).
+\end{equation}
+However, there are density operators which do not correspond to a state vector. For example, there exists no vector $\ket{\phi}$ such that
+\begin{equation}
+\rho_{\varphi} := \frac{\dyad{0}{0} + \dyad{1}{1}}{2} = \dyad{\phi}.
+\end{equation}
+The density operator formalism may be interpreted as encoding two distinct forms of uncertainty: quantum and classical. The quantum uncertainty arises from states which may be written as superposition state vector, while the classical uncertainty arises from states which cannot. We refer to the first type of summation as superposition, and the second type of summation as classical mixing. The classical mixing represents classical uncertainty about which state the system is in, and may in principle be removed simply by keeping more accurate records, or by building better equipment.
+
+In the $\left\{\ket{0}, \ket{1}\right\}$ basis, the states $\rho_\phi$ and $\rho_\varphi$ may be written as
+\begin{equation}
+\rho_\phi = \frac{1}{2}\pmqty{1 & 1 \\ 1 & 1} \qq{and} \rho_\varphi = \frac{1}{2}\pmqty{1 & 0 \\ 0  & 1}.
+\end{equation}
+
+\noindent The quantum nature of a state $\rho$ is therefore intimately connected to the off-diagonal elements of its density matrix. These off-diagonal elements may be referred to as \emph{coherences}. 
+
+The density matrix $\rho$ will be our primary tool for describing a quantum state in this Thesis.
+
+\subsection{Wigner function}
+
+\subsection{Coherent states}
+\begin{figure}[htp]
+\centering
+\begin{subfigure}[b]{0.4\linewidth}
+\includegraphics[draft=false, width=\linewidth]{introduction/qpsk_1}
+\caption{}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\linewidth}
+\includegraphics[draft=false, width=\linewidth]{introduction/qpsk_2}
+\caption{}
+\end{subfigure}
+\caption{\label{fig:qpsk} The Wigner function for a mixture over $\mathcal{A}_4$ is a sum of individual Wigner functions for each of the coherent states. QPSK alphabet with (a) $\alpha=1.5$; (b) $\alpha=0.8$}
+\end{figure}
+ In a quantum communications protocol, the alphabet states should be chosen with significant overlap.
+
+
+\subsection{Thermal states}
+\begin{figure}[htp]
+\centering
+\includegraphics[draft=false, width=0.4\linewidth]{introduction/thermal_state}
+\caption{\label{fig:thermal_state} The thermal state Wigner function is Gaussian, with variance greater than the vacuum state vacuum, depicted in orange.}
+\end{figure}
+\subsection{Squeezed states (quadrature)}
+
+\subsection{Squeezed states (photon-number)}
+
+\subsection{Mixing, purity, and entanglement}
+
+\subsection{Two-mode squeezed vacuum (TMSV)}
+\begin{figure}[htp]
+\centering
+\includegraphics[draft=false, width=0.8\linewidth]{introduction/tmsv_wigner}
+\caption{\label{fig:tmsv_wigner} Plots of the Wigner function for each reduced mode of the TMSV state. Locally the modes look like thermal states, see Fig.~\ref{fig:thermal_state}. The vacuum variance is depicted in orange.}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[draft=false, width=0.8\linewidth]{introduction/tmsv_histogram}
+\caption{\label{fig:tmsv_histogram} \MT{caption for TMSV histogram}}
+\end{figure}
+
+\section{Quantum measurement}
+
+\subsection{POVMs}
+
+\subsection{Homodyne measurement}
+
+\subsection{Heterodyne measurement}
+
+\section{Modelling the quantum state}
+
+\subsection{Covariance matrix}
+
+\subsection{Beamsplitter relations}
+
+\subsection{Master equation}
+
+
+\section{Entropy and probability}
 
 \subsection{Hoeffding's inequalities}
 Let $\mathcal{X} = X_1, X_2, \dots, X_n$ be $n$ independent binary random variables. Let $\bar{\mathcal{X}}$ be their empirical mean \MT{define} and let $\mathbb{E}\left(\bar{\mathcal{X}}\right)$ be its expected value. Then $\forall \epsilon \ge 0$ we may bound the probability that the empirical mean $\bar{\mathcal{X}}$ differs from its expectation $\mathbb{E}\left(\bar{\mathcal{X}}\right)$ by the following inequalities
@@ -36,46 +196,27 @@ Let $\mathcal{X} = X_1, X_2, \dots, X_n$ be $n$ independent binary random variab
 \noindent These inequalities are known as Hoeffding's inequalities \MT{cite} and will provide a necessary tool for analysis of our Quantum Digital Signatures protocol.
 
 
-\subsection{Coherent state alphabets}
-
-\begin{figure}[htp]
-\centering
-\begin{subfigure}[b]{0.4\linewidth}
-\includegraphics[draft=false, width=\linewidth]{introduction/qpsk_1}
-\caption{}
-\end{subfigure}
-\begin{subfigure}[b]{0.4\linewidth}
-\includegraphics[draft=false, width=\linewidth]{introduction/qpsk_2}
-\caption{}
-\end{subfigure}
-\caption{\label{fig:qpsk} The Wigner function for a mixture over $\mathcal{A}_4$ is a sum of individual Wigner functions for each of the coherent states. QPSK alphabet with (a) $\alpha=1.5$; (b) $\alpha=0.8$}
-\end{figure}
-
-% In a quantum communications protocol, the alphabet states should be chosen with significant overlap.
-
-\subsection{Thermal state}
-
-\begin{figure}[htp]
-\centering
-\includegraphics[draft=false, width=0.4\linewidth]{introduction/thermal_state}
-\caption{\label{fig:thermal_state} The thermal state Wigner function is Gaussian, with variance greater than the vacuum state vacuum, depicted in orange.}
-\end{figure}
-
-\subsection{TMSV state}
-\begin{figure}[htp]
-\centering
-\includegraphics[draft=false, width=0.8\linewidth]{introduction/tmsv_wigner}
-\caption{\label{fig:tmsv_wigner} Plots of the Wigner function for each reduced mode of the TMSV state. Locally the modes look like thermal states, see Fig.~\ref{fig:thermal_state}. The vacuum variance is depicted in orange.}
-\end{figure}
-
-\begin{figure}[htp]
-\centering
-\includegraphics[draft=false, width=0.8\linewidth]{introduction/tmsv_histogram}
-\caption{\label{fig:tmsv_histogram} \MT{caption for TMSV histogram}}
-\end{figure}
-
+\subsection{Shannon entropy}
+\subsection{Binary entropy}
 \begin{figure}
 \centering
 \includegraphics{binary_entropy.png}
 \caption{\label{fig:binary_entropy}}
 \end{figure}
+
+\subsection{Mutual information}
+
+\subsection{Von Neumann entropy}
+\subsection{Holevo information}
+
+
+
+
+
+
+
+
+
+
+
+
