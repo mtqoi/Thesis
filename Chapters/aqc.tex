@@ -635,8 +635,45 @@ Eve's \emph{a posteriori} and \emph{a priori} entropies are calculated identical
 \MT{The starting point for this section should be what I received from MPL.}
 \MT{What do I want to include here?}
 
+From our experimental collaborators we received four datasets output from the experiment detailed in Sec.~\ref{sec:aqc_experiment}, with parameters detailed in Tab.~\ref{table:aqc_data_parameters}. Each of the datasets consisted of
 
 
+\begin{table*}%[hb!p]
+	\centering \ra{1.75}
+	\begin{tabular*}{\textwidth}{@{\extracolsep{\stretch{1}}}  rr c rrrrr c rr }
+	%\toprule
+	% primary header
+	\multicolumn{2}{c}{\textbf{Experiment}} &&
+	\multicolumn{5}{c}{\textbf{QPSK amplitudes} $[\sqrt{\text{snu}}\,]$} &&
+	\multicolumn{1}{c}{\textbf{Excess noise}} \\
+%	\colrule
+	\hline
+	%\cline{1-4}\cline{6-7} \cline{9-10}\cline{12-12}
+	% secondary header
+%	\text{Run} & \head{$d\,[\si{km}]$} & \head{$\bar{\alpha}\,[\sqrt{\text{snu}}\,]$} & \head{$\xi\,[\si{\%}]$} &&
+%	\head{$L\,[\si{bits^{-1}}]$} & \head{$t\,[\si{ms}]$} &&
+%	\head{$L\,[\si{bits^{-1}}]$} & \head{$t\,[\si{ms}]$} &&
+%	\head{$2 \kappa$}  && 
+%	\head{$\kappa$}
+%	\\
+	\head{Run} & \head{Fiber $[\si{km}]$} &&
+	\head{$\alpha$} & \head{$i \alpha$} & \head{$- \alpha$} & \head{$- i \alpha$} & \head{$\bar{\alpha}$} &&
+	\head{$\xi_x [\si{\%}]$} & \head{$\xi_p [\si{\%}]$}
+	\\
+%	\colrule
+\hline
+	% table body
+	1 & 2 && 0.615 & 0.676 & 0.620 & 0.620 & 0.64 && - & -\\
+	2 & 20 && 0.624 & 0.754 & 0.629 & 0.717 & 0.67 && 0.2 & 1.9\\
+	3 & 20 && 0.493 & 0.626 & 0.499 & 0.606 & 0.55 && 0.2 & 2.1\\
+	4 & 20 && 0.578 & 0.716 & 0.579 & 0.688 & 0.64 && 0.1 & 1.7\\
+	%\botrule
+	\end{tabular*}
+	\caption{\label{table:aqc_data_parameters} Parameters of received datasets. Each of the four experimental runs had slightly asymmetric amplitudes for each of the QPSK alphabet states $\alpha$, $i \alpha$, $- \alpha$, $- i \alpha$. The mean amplitude is $\bar{\alpha}$. Each of the states was sent with probability close to $1/4$. Excess noise differs between $x$ and $p$ quadratures, and for our analysis the largest of these was chosen, i.e. $\xi = \max\left\{\xi_x, \xi_p\right\}$. The loss level corresponding to the $2$~km channel is $-0.65$~dB, and the loss level corresponding to $20$~km channel is $-4.75$~dB. This includes the channel and additional losses due to coupling inefficiencies, but does not include trusted detector loss. \MT{Calculate and include $\xi$ for $2$~km run.}}
+\end{table*}
+
+
+\clearpage
 \subsection{Protocol performance}
 The experiment detailed in Sec.~\ref{sec:aqc_experiment} was  performed and we have received four datasets from the experimental collaborators\footnote{\MT{X}}. The key parameters for these datasets are described in Tab.~\ref{table:aqc_data_parameters} and will form the basis for an analysis of performance of each of our cryptosystems.
 
@@ -670,7 +707,7 @@ The experiment detailed in Sec.~\ref{sec:aqc_experiment} was  performed and we h
  - &        - && $\enot{2.08}{8}$ &    $208$ && 0.1004 && 0.0976\\
 	%\botrule
 	\end{tabular*}
-	\caption{\label{tab:lengths} Figures of merit for the experimental runs. QDS signature lengths (L) and signing times (t) required to sign a $1$-bit message for security level of $\varepsilon = 0.01\%$. The QSS and QKD key rates correspond to the maximum estimated number of bits of secure key which may be generated per use of the quantum channel. In QSS-$b$, one channel use corresponds to distribution of \emph{two} quantum states, one from Bob and one from Charlie, and so we display $2 \kappa$ for fair comparison with QKD. \MT{Make sure that security level $\varepsilon$ is defined.}}
+	\caption{\label{tab:lengths} Figures of merit for the experimental runs. QDS signature lengths (L) and signing times (t) required to sign a $1$-bit message for security level of $\varepsilon = 0.01\%$. The QSS and QKD key rates correspond to the maximum estimated number of bits of secure key which may be generated per use of the quantum channel. In QSS-$b$, one channel use corresponds to distribution of \emph{two} quantum states, one from Bob and one from Charlie, and so we display $2 \kappa$ for fair comparison with QKD. \MT{Make sure that security level $\varepsilon$ is defined.} \MT{Add "Run number" column}}
 \end{table*}
 %\fi
 
