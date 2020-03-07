@@ -630,12 +630,31 @@ with $\text{P}\left(b\right) = \sum_{\alpha_k} \text{P}\left(b \given \alpha_k, 
 Eve's \emph{a posteriori} and \emph{a priori} entropies are calculated identically to Eqs.~\ref{eqn:qkdf_aposteriori_entropy},~\ref{eqn:qkdf_apriori_entropy} using Eq.~\ref{eqn:qkdf_eve_conditional_modified} as a starting point.
 
 
-
+\clearpage
 \subsection{Received data}\label{sec:aqc_received_data}
 \MT{The starting point for this section should be what I received from MPL.}
 \MT{What do I want to include here?}
 
-From our experimental collaborators we received four datasets output from the experiment detailed in Sec.~\ref{sec:aqc_experiment}, with parameters detailed in Tab.~\ref{table:aqc_data_parameters}. Each of the datasets consisted of
+From our experimental collaborators we received four datasets output from the experiment detailed in Sec.~\ref{sec:aqc_experiment}. Figure~\ref{fig:aqc_dataplots_stefan} displays raw data before and after the action of the experimental collaborators' proprietary digital signal processing (DSP) algorithm. The data we have received is of the form of bottom figure of Fig.~\ref{fig:aqc_dataplots_stefan}, and we received only the signal data (green circles) once the phase-reference data (red circles) was removed. Each of the received datasets consisted of $1.54\times10^6$ elements of pairs of measured phase outcomes $\left(x_{\text{out}}, p_{\text{out}}\right)$, along with information about which element from the QPSK alphabet Alice sent. The received datasets have parameters detailed in Tab.~\ref{table:aqc_data_parameters}.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=0.6\linewidth, draft=false]{aqc/QDS_dataplots}
+\caption{\label{fig:aqc_dataplots_stefan} Top: Raw quadrature data produced by the experiment detailed in Sec.~\ref{sec:aqc_experiment}. The raw data undergoes a proprietary digital signal processing (DSP), and produces the phase-space constellation displayed in the bottom diagram. Each black point is a measurement outcome. Shaded circles represent the means and variances of the received outcomes. Red: phase reference states. Green: signal states. \emph{Picture credit; Stefan Richter in Ref.~\cite{Richter2020}}}
+\end{figure}
+
+We may calculate the parameters entering Tab.~\ref{table:aqc_data_parameters} directly from the received data sets. The amplitude $\alpha$ sent by Alice is calculated by a rescaling of phase measurement data as follows. For data when $\ket{\alpha}$ was sent, calculate the means $\bar{x}_{\text{out}}$, $\bar{p}_{\text{out}}$ of measured output data. The mean coherent state amplitude which was received at Rx is then given by 
+\begin{equation}
+\alpha_{\text{Rx}} = \frac{\bar{x}_{\text{out}} + i \bar{p}_{\text{out}}}{\sqrt{2}}.
+\end{equation}
+From Tx to Rx, the distributed state has undergone two primary sources of loss: trusted loss and untrusted loss. Untrusted loss must be attributed to Eve, and is a combination of propagation losses in the fiber, and coupling losses into and out of the fiber. \MT{Check this. Have I received info from MPL at all ever?} We write this as a single number which corresponds to the loss of the channel (or channel transmittivity $T$), and is $-0.65$~dB for the $2$~km channel and $-4.75$~dB for the $20$~km channel. These values were given to us by our experimental collaborators and were estimated using proprietary methods. The trusted loss occurs in the detector Rx and an eavesdropper is assumed to not have access to this. The quoted value is $\approx 50\%$ loss due to Rx.
+
+The amplitude sent by Tx may then be calculated as
+\begin{equation}
+\alpha_{\text{Tx}} = \frac{\alpha_{\text{Rx}}}{\sqrt{0.5} \sqrt{T}}.
+\end{equation}
+This scaling procedure was done for each run and each distributed QPSK state, and the re-scaled values are displayed in Tab.~\ref{table:aqc_data_parameters}.
+
 
 
 \begin{table*}%[hb!p]
@@ -645,7 +664,7 @@ From our experimental collaborators we received four datasets output from the ex
 	% primary header
 	\multicolumn{2}{c}{\textbf{Experiment}} &&
 	\multicolumn{5}{c}{\textbf{QPSK amplitudes} $[\sqrt{\text{snu}}\,]$} &&
-	\multicolumn{1}{c}{\textbf{Excess noise}} \\
+	\multicolumn{2}{c}{\textbf{Excess noise}} \\
 %	\colrule
 	\hline
 	%\cline{1-4}\cline{6-7} \cline{9-10}\cline{12-12}
@@ -671,6 +690,56 @@ From our experimental collaborators we received four datasets output from the ex
 	\end{tabular*}
 	\caption{\label{table:aqc_data_parameters} Parameters of received datasets. Each of the four experimental runs had slightly asymmetric amplitudes for each of the QPSK alphabet states $\alpha$, $i \alpha$, $- \alpha$, $- i \alpha$. The mean amplitude is $\bar{\alpha}$. Each of the states was sent with probability close to $1/4$. Excess noise differs between $x$ and $p$ quadratures, and for our analysis the largest of these was chosen, i.e. $\xi = \max\left\{\xi_x, \xi_p\right\}$. The loss level corresponding to the $2$~km channel is $-0.65$~dB, and the loss level corresponding to $20$~km channel is $-4.75$~dB. This includes the channel and additional losses due to coupling inefficiencies, but does not include trusted detector loss. \MT{Calculate and include $\xi$ for $2$~km run.}}
 \end{table*}
+
+
+
+To illustrate our received data, we plot the first $10,000$ elements of raw data for run~$1$ in Fig.~\ref{fig:aqc_scatter}. In (a) we display data corresponding to the input state $\ket{\alpha}$ with $\alpha=0.615$, and in (b) we display data corresponding to the entire QPSK alphabet, which is highly non-orthogonal.
+
+\MT{Chat about how the data parameters for the table were constructed.}
+
+
+\begin{figure}[htp]
+\centering
+	\begin{subfigure}{0.49\linewidth}
+	\centering
+	\includegraphics[width=\linewidth, draft=false]{aqc/scatter_1}
+	\caption{}
+	\end{subfigure}
+	\begin{subfigure}{0.49\linewidth}
+	\centering
+	\includegraphics[width=\linewidth, draft=false]{aqc/scatter_2}
+	\end{subfigure}
+\caption{\label{fig:aqc_scatter} Datasets received from experimental collaborators, corresponding to $x_{\text{out}}$ and $p_{\text{out}}$ phase measurement outcomes when (a) state $\ket{\alpha}$ was sent, run~$1$ and (b) states $\ket{\alpha}$, $\ket{i \alpha}$, $\ket{- \alpha}$, $\ket{- i \alpha}$ were sent, run~$1$. We plot only the first $10,000$ points, for illustrative convenience. (b) At the amplitudes chosen our QPSK alphabet is overlapping and highly non-orthogonal.}
+\end{figure}
+
+In Fig.~\ref{fig:aqc_elimsig} we demonstrate for protocols QDS-$f$ and QDS-$b$ how $\perr$ may be calculated on a particular dataset. Having isolated elements for which a particular alphabet state was sent, the data is partitioned into groups which will induce a mismatch. In this case, $\ket{\alpha}$ was sent and so data with $x_{\text{received}} >=0$ will not induce a mismatch, while data with $x_{\text{received}}<0$ will. The mismatch probability $\perr$ is then calculated as
+\begin{equation}\label{eqn:aqc_data_perr}
+\perr = \frac{\text{Number of data points which cause a mismatch}}{\text{Total number of data points}},
+\end{equation}
+where the total number of data points which cause a mismatch are calculated including all four of the distributed QPSK states, with their respective mismatch criteria.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=0.6\linewidth, draft=false]{aqc/eliminated_signature_data}
+\caption{\label{fig:aqc_elimsig} Illustration of received data points grouped by whether they induce a mismatch in protocols QDS-$f$ and QDS-$b$. State $\ket{\alpha}$ was sent, and data is taken from run~$1$. Blue: data points will not cause $\ket{\alpha}$ to be eliminated, and so do not cause a mismatch. Red: data points will cause $\ket{\alpha}$ to be eliminated, and so a mismatch occurs.}
+\end{figure}
+
+In protocols QDS-$f$ and QDS-$b$ we also discussed the possibility to postselect on measurement outcomes, by ignoring datapoints which fall within $\rps$. As was discussed in their respective sections, we take $\rps\left(\Delta_r\right)$ and display examples of postselected data sets in Fig.~\ref{fig:aqc_ps}. Data corresponding to $\ket{\alpha}$ distributed are displayed in Fig.~\ref{fig:aqc_ps}a, while data for all elements of QPSK are displayed in Fig.~\ref{fig:aqc_ps}b. For convenience we display only the first $10,000$ elements. We may calculate $\perr$ in an identical way to that discussed above, simply starting from the postselected data in order to reduce $\perr$ and increase the advantage gained by an honest player.
+
+\begin{figure}[htp]
+\centering
+	\begin{subfigure}{0.49\linewidth}
+	\centering
+	\includegraphics[width=\linewidth, draft=false]{aqc/scatter_PS_1}
+	\caption{}
+	\end{subfigure}
+	\begin{subfigure}{0.49\linewidth}
+	\centering
+	\includegraphics[width=\linewidth, draft=false]{aqc/scatter_PS_2}
+	\caption{}
+	\end{subfigure}
+\caption{\label{fig:aqc_ps} Postselection technique with region $\rps\left(\Delta_r=1.0\right)$ applied to the datasets from Fig.~\ref{fig:aqc_scatter}.}
+\end{figure}
 
 
 \clearpage
