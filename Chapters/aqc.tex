@@ -655,16 +655,26 @@ The amplitude sent by Tx may then be calculated as
 \end{equation}
 This scaling procedure was done for each run and each distributed QPSK state, and the re-scaled values are displayed in Tab.~\ref{table:aqc_data_parameters}.
 
+The excess noises corresponding to measurements in each quadrature $\xi_x$, $\xi_p$ are calculated separately, and the value of excess noise which we use to estimate the power of the eavesdropper is $\xi = \max \left\{\xi_x, \xi_p\right\}$. This gives the eavesdropper additional power since it allows them to use the maximally entangled state for a given energy, which is a TMSV and which should induce noise symmetric in $x$ and $p$. We might reasonably expect that affording Eve this power should loosen the bounds which we calculate in this chapter, and tighter bounds with an analysis which includes this asymmetry in noise profiles are left for future work.
+
+The variance in measurement outcome in each $x$ and $p$ for each distributed state was measured, and the final excess noise is given by
+\begin{equation}
+\xi_{x} = \text{Var}\left(x\right) - \frac{1}{2} - \text{Var}\left(x\right)_{\text{trusted}},
+\end{equation} %Check whether it should be 1 or 1/2.
+and similarly for $p$. The contribution $\text{Var}\left(x\right)_{\text{trusted}}$ represents system detector noise which is assumed to be outside of Eve's control, and which was fully characterised by our experimental collaborators. The final excess noise values are then averaged over each distributed QPSK state, and then maximized over $x, p$. Final values $\xi$ are displayed in Tab.~\ref{table:aqc_data_parameters}.
+
+ Excess noise values were quoted to us by experimental collaborators.
+
 
 
 \begin{table*}%[hb!p]
 	\centering \ra{1.75}
-	\begin{tabular*}{\textwidth}{@{\extracolsep{\stretch{1}}}  rr c rrrrr c rr }
+	\begin{tabular*}{\textwidth}{@{\extracolsep{\stretch{1}}}  rr c rrrrr c l }
 	%\toprule
 	% primary header
 	\multicolumn{2}{c}{\textbf{Experiment}} &&
 	\multicolumn{5}{c}{\textbf{QPSK amplitudes} $[\sqrt{\text{snu}}\,]$} &&
-	\multicolumn{2}{c}{\textbf{Excess noise}} \\
+	\multicolumn{1}{l}{\textbf{Excess noise} $[\si{\%}]$} \\
 %	\colrule
 	\hline
 	%\cline{1-4}\cline{6-7} \cline{9-10}\cline{12-12}
@@ -677,25 +687,24 @@ This scaling procedure was done for each run and each distributed QPSK state, an
 %	\\
 	\head{Run} & \head{Fiber $[\si{km}]$} &&
 	\head{$\alpha$} & \head{$i \alpha$} & \head{$- \alpha$} & \head{$- i \alpha$} & \head{$\bar{\alpha}$} &&
-	\head{$\xi_x [\si{\%}]$} & \head{$\xi_p [\si{\%}]$}
+	\head{$\max\left\{\xi_x, \xi_p \right\}$}
 	\\
 %	\colrule
 \hline
 	% table body
-	1 & 2 && 0.615 & 0.676 & 0.620 & 0.620 & 0.64 && - & -\\
-	2 & 20 && 0.624 & 0.754 & 0.629 & 0.717 & 0.67 && 0.2 & 1.9\\
-	3 & 20 && 0.493 & 0.626 & 0.499 & 0.606 & 0.55 && 0.2 & 2.1\\
-	4 & 20 && 0.578 & 0.716 & 0.579 & 0.688 & 0.64 && 0.1 & 1.7\\
+	1 & 2 && 0.615 & 0.676 & 0.620 & 0.620 & 0.64 && 2.7\\
+	2 & 20 && 0.624 & 0.754 & 0.629 & 0.717 & 0.67 && 1.9\\
+	3 & 20 && 0.493 & 0.626 & 0.499 & 0.606 & 0.55 && 2.1\\
+	4 & 20 && 0.578 & 0.716 & 0.579 & 0.688 & 0.64 && 1.7\\
 	%\botrule
 	\end{tabular*}
-	\caption{\label{table:aqc_data_parameters} Parameters of received datasets. Each of the four experimental runs had slightly asymmetric amplitudes for each of the QPSK alphabet states $\alpha$, $i \alpha$, $- \alpha$, $- i \alpha$. The mean amplitude is $\bar{\alpha}$. Each of the states was sent with probability close to $1/4$. Excess noise differs between $x$ and $p$ quadratures, and for our analysis the largest of these was chosen, i.e. $\xi = \max\left\{\xi_x, \xi_p\right\}$. The loss level corresponding to the $2$~km channel is $-0.65$~dB, and the loss level corresponding to $20$~km channel is $-4.75$~dB. This includes the channel and additional losses due to coupling inefficiencies, but does not include trusted detector loss. \MT{Calculate and include $\xi$ for $2$~km run.}}
+	\caption{\label{table:aqc_data_parameters} Parameters of received datasets. Each of the four experimental runs had slightly asymmetric amplitudes for each of the QPSK alphabet states $\alpha$, $i \alpha$, $- \alpha$, $- i \alpha$. The mean amplitude is $\bar{\alpha}$. Each of the states was sent with probability close to $1/4$. Excess noise differs between $x$ and $p$ quadratures, and for our analysis the largest of these was chosen, i.e. $\xi = \max\left\{\xi_x, \xi_p\right\}$. The loss level corresponding to the $2$~km channel is $-0.65$~dB, and the loss level corresponding to $20$~km channel is $-4.75$~dB. This includes the channel and additional losses due to coupling inefficiencies, but does not include trusted detector loss. }
 \end{table*}
 
 
 
 To illustrate our received data, we plot the first $10,000$ elements of raw data for run~$1$ in Fig.~\ref{fig:aqc_scatter}. In (a) we display data corresponding to the input state $\ket{\alpha}$ with $\alpha=0.615$, and in (b) we display data corresponding to the entire QPSK alphabet, which is highly non-orthogonal.
 
-\MT{Chat about how the data parameters for the table were constructed.}
 
 
 \begin{figure}[htp]
