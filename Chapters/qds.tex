@@ -1048,33 +1048,47 @@ Since the figures of merit $\tilde{L}$ and $L$ qualitatively measure the same th
 
 \clearpage
 \section{Protocol performance}\label{sec:qds_protocol_performance}
-\MT{Let's look at some results and graphs of the protocol performance under the four above attacks. TODO: make graphs like in the PRA paper}
+We apply the analysis performed in the previous few sections and calculate our main figure of merit under several different attacks and different conditions. We plot the signature length $L$ required to sign a $1$~bit message under attacks BS$0$ (black) and EC (red) in Fig.~\ref{fig:qds_nonoptimal_L}, for several different $\alpha$. An entangling cloner attack with $\xi = 0.1\%$ has vastly increased signature length for $\alpha=0.2$ (dotted), while for larger $\alpha$ the signature length is increased by more modest amounts. Transmissions $T$ at which the lines stop should be interpreted as close to the smallest $T$ which can be obtained before $L$ begins to diverge, and signing a message becomes impractical (in the case of BS$0$) or impossible (in the case of EC).
+
+
+
+
 
 \begin{figure}[htp]
 \centering
 \includegraphics[width=0.6\linewidth, draft=false]{qds/QDSf_nonoptimal_L}
-\caption{\label{fig:qds_nonoptimal_L} \MT{TODO: add caption.}}
+\caption{\label{fig:qds_nonoptimal_L} Signature lengths $L$ varying with channel transmission $T$ for attacks BS$0$ (black) and EC (red). Solid: $\alpha=0.5$. Dashed: $\alpha=0.8$. Dotted: $\alpha=0.2$. Entangling cloner attack has excess noise $\xi = 0.1\%$ at all T. A non-optimal choice of $\alpha$ can lead to much larger signature lengths. No postselection is used.}
 \end{figure}
+
+
+Having observed the increase in $L$ which can arise from a sub-optimal choice of $\alpha$, we plot the security parameter $g_{\text{sec}}$ varying with $\alpha$ under attack BS$0$ in Fig.~\ref{fig:qds_gsec_croal}. We observe that the optimal $\alpha$ decreases with increasing loss (smaller $T$). Intuitively, at $T=1.0$ Eve gains no information and so one should pick $\alpha \gg 1$ so as to minimize mismatch rate between honest players. We also compare to a recent CV QDS protocol \cite{Croal2016} which did not allow for the presence of an eavesdropper on the quantum channels. The security parameter under Ref.~\cite{Croal2016} is displayed as red, dot-dashed lines in Fig.~\ref{fig:qds_gsec_croal} at $T=0.47$ (top) and $T=0.19$ (bottom). We see that for larger $T$, and almost all $\alpha$ at smaller $T$, our current protocol outperforms Ref.~\cite{Croal2016}, despite us having relaxed the requirement of no eavesdroppers. Our improvement in performance comes from the fact that in the current protocol, Alice distributes different signatures to each recipient, whereas in Ref.~\cite{Croal2016} she distributes identical signatures.
 
 \begin{figure}[htp]
 \centering
 \includegraphics[width=0.6\linewidth, draft=false]{qds/Thornton2019_croal_comparisons}
-\caption{\label{fig:qds_gsec_croal} \MT{TODO: add caption.}}
+\caption{\label{fig:qds_gsec_croal} Security parameter $g_{\text{sec}}$ under attack BS$0$ as it varies with $\alpha$ for $T = 0.61$, $0.47$, $0.19$, $0.11$, $0.01$ (solid, black, top to bottom). The optimal $\alpha$ which should be chosen to maximize $g_{\text{sec}}$ (minimize L) varies with $T$ and decreases as $T$ decreases. Horizontal gridlines denote $\mathcal{O}\left(L\right)$ starting from $L \sim 10^5$ at $g_{\text{sec}} = 0.038$ (top), $L$ increasing by a factor of $10$ at subsequent lower gridlines. Red, dot-dashed: $g_{\text{sec}}$ calculated via the protocol described in Ref.~\cite{Croal2016} for $T=0.19$ and $T=0.47$.}
 \end{figure}
+
+We optimize over $\alpha$ and postselection region $\Delta_r$ in Fig.~\ref{fig:qds_optimal_L}. The figure thus represents the smallest attainable $L$ for our protocol under attacks BS$0$ (solid, blue), BS$2$ (dashed, orange) and EC (solid, red). Even at $T \sim 0.4$ corresponding to a $\sim 20$~km fiber, for example, the attainable $L$ are very modest at only $\mathcal{O}\left(10^5\right)$ under BS$0$ and $\mathcal{O}\left(10^6\right)$ for EC attacks. 
 
 
 \begin{figure}[htp]
 \centering
 \includegraphics[width=0.6\linewidth, draft=false]{qds/QDSf_optimal_L}
-\caption{\label{fig:qds_optimal_L} \MT{TODO: add caption}}
+\caption{\label{fig:qds_optimal_L} Signature lengths under protocols BS$0$ (blue, solid), BS$2$ (orange, dashed) and EC (red, solid). At each point $L$ is optimized over $\alpha$ and postselection parameter $\Delta_r$. EC attack with $\xi = 0.1\%$.}
 \end{figure}
+
+Finally, in Appendix~\ref{appendix:qds_larger_alphabets} we extend the protocol discussed in this chapter to larger alphabet sizes. These alphabets, which we denote as $N$PSK alphabets, consist of $N$ coherent states equally distributed around the origin of phase space. The case $N=4$ is equivalent to the QPSK alphabet which we have used until now. For $N$PSK alphabets with $N=2$, $N=4$, $N=6$, $N=8$ we plot their signature lengths optimized over $\alpha$ in Fig.~\ref{fig:qds_npsk_length_body}, and the required optimal $\alpha$'s are displayed in the inset. 
+
+Surprisingly, although for larger alphabets the optimal $\alpha$ is decreased, the minimal $L$ is slightly increased. As has been found elsewhere \cite{Leverrier2011}, the biggest leap in behaviour occurs between $2 \rightarrow 4$, and indeed this is what we see, noting that for the case $N=2$ we no longer need to think about an eliminated signature and we simply consider optimal guessing probabilities. As $N$ increases, with $\alpha < 1$ we tend towards a Gaussian mixture of coherent states. We expect the attack strategies BS$0$ and EC to become increasingly optimal in this Gaussian limit, which explains the slight increase in $L$ for larger alphabets.
 
 \begin{figure}[htp]
 \centering
 \includegraphics[width=0.6\linewidth, draft=false]{qds/appendix_npsk_length}
-\caption{\label{fig:qds_npsk_length} \MT{TODO: add caption}}
+\caption{\label{fig:qds_npsk_length_body} Signature length $L$ under attack BS$0$. At each $T$, length $L$ has been optimized over amplitude $\left|\alpha\right|$ of the alphabet. We have considered $N$PSK alphabets with $N = 2$, $4$, $6$, $8$. Dot-dashed: $N=2$. Black, solid: $N = 4$. Dashed: $N = 6$. Gray, solid: $N = 8$. Inset: the corresponding optimal $\alpha_{\text{opt}}$. } %created in "Creating graphs for paper.nb" from my PRA paper folder.
 \end{figure}
 
+\clearpage
 \section{Outlook}
 
 
