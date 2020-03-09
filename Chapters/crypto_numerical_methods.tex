@@ -103,16 +103,21 @@ and Bob's two-mode squeezed vacuum state
 To illustrate the power of the EC attack we examine several histograms of $\rho_{\left. \mathbb{B} \given c\right.}$ and show how the correlations between Bob's two modes give him additional information. \MT{TODO: make some nice histograms.}
 
 
-\subsubsection{BS$2$: $\xi > 0$}\label{sec:qds_bs2}
-We now introduce and consider a second modification to attack BS$0$, which also allows the excess noise on the channel to be modelled. This attack can be viewed as an unphysical combination of attacks BS$0$ and BS$1$ which advantages Bob and disadvantages honest parties.
-
-As we shall see below in Fig.~\ref{fig:qds_holevo_comparisons}, Bob performs worse under BS$1$ than BS$0$. This is a consequence of the fact that the input noise also affects his own measurements and so reduces his information about Charlie's output. We here modify the attack by imposing that the channel excess noise should \emph{only} affect honest players. That is, the presence of $\xi$ causes $\perr$ to increase, but Holevo information and therefore $\pe$ should both be unaffected. 
-
-While strictly this attack is physically inconsistent, and therefore impossible for Bob to perform, it is more pessimistic than either BS$0$ or BS$1$ and so the security bounds it gives are also safe bounds on both of those attacks. Indeed, since an analytic expression for Bob's states under attack BS$0$ is readily attainable without resort to the numerical methods required for BS$1$ (Appendix~\ref{appendix:crypto_numerical_methods}), in some circumstances it may be computationally preferable to assume attack BS$2$.
-
-The Holevo information is given by using Eqs.~\ref{eqn:qds_aposterioristate} and \ref{eqn:qds_aprioristate} in the usual way, while $\perr$ is given by Eq.~\ref{fig:qds_perr_noisy}. 
 
 
+
+%
+%
+%\subsubsection{BS$2$: $\xi > 0$}\label{sec:qds_bs2}
+%We now introduce and consider a second modification to attack BS$0$, which also allows the excess noise on the channel to be modelled. This attack can be viewed as an unphysical combination of attacks BS$0$ and BS$1$ which advantages Bob and disadvantages honest parties.
+%
+%As we shall see below in Fig.~\ref{fig:qds_holevo_comparisons}, Bob performs worse under BS$1$ than BS$0$. This is a consequence of the fact that the input noise also affects his own measurements and so reduces his information about Charlie's output. We here modify the attack by imposing that the channel excess noise should \emph{only} affect honest players. That is, the presence of $\xi$ causes $\perr$ to increase, but Holevo information and therefore $\pe$ should both be unaffected. 
+%
+%While strictly this attack is physically inconsistent, and therefore impossible for Bob to perform, it is more pessimistic than either BS$0$ or BS$1$ and so the security bounds it gives are also safe bounds on both of those attacks. Indeed, since an analytic expression for Bob's states under attack BS$0$ is readily attainable without resort to the numerical methods required for BS$1$ (Appendix~\ref{appendix:crypto_numerical_methods}), in some circumstances it may be computationally preferable to assume attack BS$2$.
+%
+%The Holevo information is given by using Eqs.~\ref{eqn:qds_aposterioristate} and \ref{eqn:qds_aprioristate} in the usual way, while $\perr$ is given by Eq.~\ref{fig:qds_perr_noisy}. 
+%
+%
 
 
 
