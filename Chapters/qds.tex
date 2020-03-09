@@ -696,59 +696,37 @@ We calculate and plot $\chi$ under attack BS$0$ in Fig.~\ref{fig:qds_holevo_comp
 \includegraphics[draft=False, width=0.8\linewidth]{qds/BS1}
 \caption{\label{fig:bs1_attack} Attack BS$1$. The beamsplitter mimics channel loss, while mixing with thermal state $\rho_{\text{thermal}}$ introduces excess noise into Charlie's outcome.}
 \end{figure}
-Next, let us consider a modification to attack BS$0$ which will allow us to model lossy channels which also induce excess noise at Charlie. In the first modification, denoted BS$1$ and displayed in Fig.~\ref{fig:bs1_attack}, Bob inputs a thermal state $\rho_{\text{thermal}}$, Eq.~\ref{eqn:intro_thermal_state}, into the fourth port of the beamsplitter. %Let us analyse its effect on Holevo information. Its effect on Charlie's measurement outcomes is discussed above in Sec.~\MT{X} \MT{Make sure I do this}.
-This will induce excess noise $\xi > 0$ in Charlie's measurement outcomes consistent with thermal channel noise. We will calculate Bob's Holevo information under this attack.
+Next, let us consider a modification to attack BS$0$ which will allow us to model lossy channels which also induce excess noise in Charlie's measurement outcomes. In the first modification, denoted BS$1$ and displayed in Fig.~\ref{fig:bs1_attack}, Bob inputs a thermal state $\rho_{\text{thermal}}$, Eq.~\ref{eqn:intro_thermal_state}, into the second input port of the beamsplitter. This will induce excess noise $\xi > 0$ in Charlie's measurement outcomes consistent with the thermal channel noise,
+where we define the excess noise in Charlie's $q$ quadrature, when coherent state $\ket{\alpha_k}$ was sent, as
+\begin{equation}
+\xi_q = \frac{\text{Var}\left(\qout \given \alpha_k\right)}{\text{Var}\left(\text{vacuum}\right)} - 1,
+\end{equation}
+and similarly for $p$ quadrature. In other words, the excess noise in the $q$ quadrature is defined as the quadrature variance above the vacuum variance, and similarly for $p$. The total excess noise $\xi$ is then taken to be
+\begin{equation}
+\xi = \max \left\{ \xi_q, \xi_p\right\},
+\end{equation}
+and should be attributed to the action of dishonest Bob. We will calculate Bob's Holevo information under this attack.
 
-We wish to mix a coherent state $\rho_{\alpha_k} = \dyad{\alpha_k}$ and a thermal state $\rho_{\text{thermal}}$ on a beamsplitter with transmittivity $T$. In Fock basis our states take the following form
+We wish to mix a coherent state $\rho_{\alpha_k} = \dyad{\alpha_k}$ and a thermal state $\rho_{\text{thermal}}$ on a beamsplitter with transmittivity $T$. In Fock basis our states take the following form:
 
 \begin{align}
-&\rho_{\alpha_k} = e^{-\left|\alpha_k\right|^2} \sum_{n, m=0}^{\infty} \frac{\alpha_k^n \overline{\alpha_k}^{m}}{\sqrt{n! m!}} \dyad{n}{m} \notag \\
+&\rho_{\alpha_k} = e^{-\left|\alpha_k\right|^2} \sum_{n, m=0}^{\infty} \frac{\alpha_k^n \alpha_k^{* m}}{\sqrt{n! m!}} \dyad{n}{m} \notag \\
 &\rho_{\text{thermal}} = \left(1 - e^{-\tilde{\beta}}\right) \sum_{p=0}^\infty e^{- p \tilde{\beta}}\dyad{p} \qq{with} \tilde{\beta} = \log_e\left(\frac{1}{\bar{n}} +1\right)
 \end{align}
 
-\noindent where $\bar{\alpha}$ denotes the complex conjugate of $\alpha$. The input state into the beamsplitter is
+\noindent where $\alpha_k^{*}$ denotes the complex conjugate of $\alpha_k$. The input state into the beamsplitter is
 \begin{equation}\label{eqn:qds_bs1_input_state}
 \rho_{\text{input}} = \rho_{\alpha_k} \otimes \rho_{\text{thermal}}.
 \end{equation}
 
-\noindent Enacting beamsplitter relation Eq.~\ref{eqn:intro_beampslitter} on $\rho_{\text{input}}$ Eq.~\ref{eqn:qds_bs1_input_state}, and heterodyning on Charlie's mode, Eq.~\ref{eqn:intro_heterodyne} Sec.~\ref{sec:intro_heterodyne} we arrive at Bob's conditional output state $\rho_{\left. B \given c \right.}$. The state is displayed in full in Eq.~\ref{eqn:appendix_bs1_state}, Sec.~\ref{sec:appendix_bs1_state}
-%\begin{align}
-%%
-%&\rho_{\text{output}} = \sum_{n, m, p=0}^\infty e^{- \left| \alpha_k \right|^2}\left(1 - e^{- \tilde{\beta}}\right) \frac{\alpha_k^n \overline{\alpha_k}^m}{\sqrt{n! m!}} e^{- p \tilde{\beta}} \sqrt{n! p! m! p!} \notag \\
-%%
-%&\sum_{k_1, k_2, l_1, l_2=0}^{n, p, m, p} \pmqty{n \\ k_1} \pmqty{p \\ k_2} \pmqty{m \\ l_1} \pmqty{p \\ l_2} \left(\sqrt{T}\right)^{k_1 + l_1} \left(\sqrt{1-T}\right)^{n + m - k_1 - l_1} \notag \\
-%%
-%&\left(-\sqrt{1-T}\right)^{k_2 + l_2} \left(\sqrt{T}\right)^{2 p - k_2 - l_2} \sqrt{\left(k_1 + k_2\right)! \left(n + p - k_1 - k_2\right)!} \notag \\
-%%
-%&\sqrt{\left(l_1 + l_2\right)! \left(m + p - l_1 - l_2\right)!}
-%%
-%\dyad{k_1 + k_2, n + p - k_1 - k_1}{l_1 + l_2, m + p - l_1 - l_2}
-%\end{align}
-%\MT{make equation prettier. And decide whether I even want to include it.}
+\noindent Enacting beamsplitter relation Eq.~\ref{eqn:intro_beampslitter} on $\rho_{\text{input}}$ Eq.~\ref{eqn:qds_bs1_input_state}, and heterodyning on Charlie's mode, we arrive at Bob's conditional output state $\rho_{\left. B \given z_C \right.}$. The state is displayed in full in Eq.~\ref{eqn:appendix_bs1_state}, Appendix.~\ref{appendix:bs1}.
 
 
-%\MT{I think I should display Bob's sub-normalized conditional state, since I will then obviously work with it, but perhaps it is a waste of space to display the two-mode state? I can speak to NK about it}
-\iffalse
-\begin{align}\label{eqn:qds_bs1_deriv_2}
-%
-&\tilde{\rho}_B\left(c\right) = \frac{e^{-\left|\alpha_k\right|^2}}{\pi}\left(1 - e^{-\tilde{\beta}}\right) \sum_{n, m, p=0}^\infty \frac{\alpha_k^n \overline{\alpha_k}^m}{\sqrt{n! m!}} e^{- p \tilde{\beta}} \sqrt{n! p! m! p!} \notag \\
-%
-&\sum_{k_1, k_2, l_1, l_2=0}^{n, p, m, p} \pmqty{n \\ k_1} \pmqty{p \\ k-2} \pmqty{m \\ l_1} \pmqty{p \\ l_2} \left(\sqrt{T}\right)^{k_1 + l_1} \left(\sqrt{1-T}\right)^{n + m - k_1 - l_1} \notag \\
-%
-&\left(-\sqrt{1-T}\right)^{k_2 + l_2} \left(\sqrt{T}\right)^{2 p - k_2 - l_2} \sqrt{\left(n + p - k_1 - k_2\right)!} \notag \\
-%
-&\sqrt{\left(m + p - l_1 - l_2\right)!} \dyad{n + p - k_1 - k_2}{m + p - l_1 - l_2} \delta_{k_1+k_2}^{l_1+l_2} \left[ e^{-\left|c\right|^2} c^{k_1 + k_2} \overline{c}^{l_1 + l_2} \right]
-%
-\end{align}
-\fi
-%\MT{make this equation pretty. Also introduce somewhere the tilde notation to convey a sub-normalized state}
-%where $\delta_k^l$ is the Kronecker delta which arises after tracing out Charlie's mode.
 
-%\MT{I've gotta remember to mix it over $\alpha_k$.} 
-Now, to reach the \emph{a posteriori} state under this attack we will integrate this $\rho_{\left. B \given c \right.}$ over all $c \in \mathbb{C}$ consistent with a particular eliminated signature element. Mathematically, this corresponds to simply integrating scalar terms involving $c$ in Eq.~\ref{eqn:appendix_bs1_state}, noting that the integration operation commutes with the rest of the state. The required integration is
+Now, to reach the \emph{a posteriori} state under this attack we will integrate this $\rho_{\left. B \given z_C \right.}$ over all $z_C \in \mathbb{C}$ consistent with a particular eliminated signature element. Mathematically, this corresponds to simply integrating scalar terms involving $z_C$ in Eq.~\ref{eqn:appendix_bs1_state}, noting that the integration operation commutes with the rest of the state. Writing $z = z_C$ for convenience, the required integration is
 
 \begin{equation}
-\text{I}_{\text{BS}1} = \int\limits_{\text{Re}\left(c\right) \ge 0 \; \text{Im}\left(c\right) \ge 0} \Diff2 c \; c^k \bar{c}^l e^{ - \left| c \right|^2}
+\text{I}_{\text{BS}1} = \int\limits_{\qout>0, \pout>0} \Diff2 c \; z^k z^{* l} e^{ - \left| z \right|^2}
 \end{equation}
 
 \noindent where $k, l = 0, 1, 2, \dots$.
@@ -757,31 +735,20 @@ The integration is best performed in polar coordinates since the radial and angu
 \begin{equation}\label{eqn:qds_bs1_deriv_3}
 \text{I}_{\text{BS}1} =
 \begin{cases}
-\frac{\pi}{4} \Gamma\left(k+1\right) & \text{if } k = l \\
+\frac{\pi}{4} \Gamma\left(k+1\right) & \text{if } k = l; \\
 \frac{-i}{k-l}\left(-1 + e^{i \frac{\pi}{2}\left(k-l\right)}\right)\frac{1}{2}\Gamma\left(\frac{1}{2}\left(k + l + 2\right) \right) & \text{if } k \ne l
 \end{cases}
 \end{equation}
-with $\Gamma$ the gamma function \cite{mathworld_gamma}. Indeed, the radial component of the integrand of Eq.~\ref{eqn:qds_bs1_deriv_3} is a standard integral for $\Gamma$. The final \emph{a posteriori} state is now accessible by substituting Eq.~\ref{eqn:qds_bs1_deriv_3} into Eq.~\ref{eqn:appendix_bs1_state}.%, and we display the full \emph{a posteriori} state in Sec.~\ref{sec:appendix_bs1_state}.
+with $\Gamma$ the gamma function \cite{mathworld_gamma}. Indeed, the radial component of the integrand of Eq.~\ref{eqn:qds_bs1_deriv_3} is a standard integral for $\Gamma$. The final \emph{a posteriori} state is now accessible by substituting Eq.~\ref{eqn:qds_bs1_deriv_3} into Eq.~\ref{eqn:appendix_bs1_state}.
 
 The \emph{a priori} state is calculated likewise, but the limits of integration should be extended to the entire complex plane. In this case,
 \begin{equation}\label{eqn:qds_bs1_deriv_4}
-\int\limits_{\mathbb{C}} \Diff2 c \; e^{-\left|c\right|^2}c^k \overline{c}^l = \pi \Gamma\left(k+1\right)
+\int\limits_{\mathbb{C}} \Diff2 c \; e^{-\left|z\right|^2}z^k z^{* l} = \pi \Gamma\left(k+1\right)
 \end{equation}
-since the polar integral forces $k=l$.
-%\MT{Now let us talk about how $\text{P}\left(c\right)$ is affected by noise. (first, I should understand how the heterodyne povm is derived and where factors of sqrt2 should appear)}
-%\MT{summary paragraph:}
-The Holevo information may now be calculated in the same way as Sec.~\ref{sec:qds_bs0} by the difference of \emph{a priori} and \emph{a posteriori} entropies, and we compare Holevo information under different attacks in Fig.~\ref{fig:qds_holevo_comparisons}.
+since the polar integral forces $k=l$. The Holevo information may now be calculated in the same way as Sec.~\ref{sec:qds_bs0} by the difference of \emph{a priori} and \emph{a posteriori} entropies, and we compare Holevo information under different attacks in Fig.~\ref{fig:qds_holevo_comparisons}.
 %\MT{where do I want to talk about truncating matrices and numerical methods?}
 
-\subsubsection{BS$2$: $\xi > 0$}\label{sec:qds_bs2}
-We now introduce and consider a second modification to attack BS$0$, which also allows the excess noise on the channel to be modelled. This attack can be viewed as an unphysical combination of attacks BS$0$ and BS$1$ which advantages Bob and disadvantages honest parties.
 
-As we shall see below in Fig.~\ref{fig:qds_holevo_comparisons}, Bob performs worse under BS$1$ than BS$0$. This is a consequence of the fact that the input noise also affects his own measurements and so reduces his information about Charlie's output. We here modify the attack by imposing that the channel excess noise should \emph{only} affect honest players. That is, the presence of $\xi$ causes $\perr$ to increase, but Holevo information and therefore $\pe$ should both be unaffected. 
-
-While strictly this attack is physically inconsistent, and therefore impossible for Bob to perform, it is more pessimistic than either BS$0$ or BS$1$ and so the security bounds it gives are also safe bounds on both of those attacks. Indeed, since an analytic expression for Bob's states under attack BS$0$ is readily attainable without resort to the numerical methods required for BS$1$, %this assumes that I will talk about the numerical methods in the previous section?
-in some circumstances it may be computationally preferable to assume attack BS$2$.
-
-The Holevo information is given by using Eqs.~\ref{eqn:qds_aposterioristate} and \ref{eqn:qds_aprioristate} in the usual way, while $\perr$ is given by Eq.~\ref{fig:qds_perr_noisy}. The performance of this attack is analysed in Fig.~\ref{fig:qds_holevo_comparisons}.
 
 \subsection{Entangling-cloner attack}
 \begin{figure}[htp]
@@ -811,35 +778,16 @@ Let us analyse the EC attack. Alice creates the coherent state $\dyad*{\alpha_k}
 
 \noindent where we have explicitly separated in square brackets the two modes which will interfere on the beamsplitter.
 
-The beamsplitter mixes $\dyad{n_1, n_2}{m_1, m_2}$ via Eq.~\ref{eqn:intro_beamsplitter}, and gives an entangled three-mode state at the output. Charlie heterodynes on his mode and receives outcome $c$, and we arrive at Bob's conditional two-mode output state $\rho_{\left. B \given c\right.}$, which we display fully in Sec.~\ref{sec:appendix_ec_state}. A histogram of Bob's conditional two-mode state is displayed in Fig.~\ref{fig:qds_ec_histogram} where we see that his state depends heavily on Charlie's outcome $c$. 
+The beamsplitter mixes $\dyad{n_1, n_2}{m_1, m_2}$ via Eq.~\ref{eqn:intro_beamsplitter}, and gives an entangled three-mode state at the output. Charlie heterodynes on his mode and receives outcome $z_C$, and we arrive at Bob's conditional two-mode output state $\rho_{\left. B \given z_C\right.}$, which we display fully in Eq.~\ref{eqn:appendix_ec_state}, Appendix.~\ref{appendix:ec_state}. %A histogram of Bob's conditional two-mode state is displayed in Fig.~\ref{fig:appendix_qds_ec_histogram} where we see that his state depends heavily on Charlie's outcome $c$.  TODO: Put this sentence and the figure in the appendix
 
-\iffalse
-\begin{align}\label{eqn:qds_ec_deriv_1}
-&\tilde{\rho}_{B}\left(c\right) =  \frac{e^{-\left|\alpha_k\right|^2}}{\cosh^2\zeta} \frac{1}{\pi} \sum_{n_1, m_1, n_2, m_2 = 0}^\infty \alpha_k^{n_1} \overline{\alpha_k}^{m_1} \left(\tanh\zeta\right)^{n_2 + m_2} \sum_{k_1, k_2, l_1, l_2 = 0}^{n_1, n_2, m_1, m_2}  \notag \\
-%
-&\sqrt{n_2! m_2!} \left(\sqrt{T}\right)^{k_1 + l_1} \left(\sqrt{1-T}\right)^{n_1 + m_1 - k_1 - l_1} \left(-\sqrt{1-T}\right)^{k_2 + l_2} \left(\sqrt{T}\right)^{n_2 + m_2 - k_2 - l_2} \notag \\
-%
-&\times \sqrt{\left(n_1 + n_2 - k_1 - k_2\right)! \left(m_1 + m_2 - l_1 - l_2\right)} \notag \\
-%
-&\times \left[k_1! k_2! l_1! l_2! \left(n_1 - k_1\right)! \left(n_2 - k_2\right)! \left(m_1 - l_1\right)! \left(m_2 - l_2\right)! \right]^{-1} \notag \\
-%
-&\times \dyad{n_1 + n_2 - k_1 - k_2}{m-1 + m_2 - l_1 - l_2} \otimes \dyad{n_2}{m_2} \notag \\
-%
-&\times \left[e^{-\left|c\right|^2} c^{k_1 + k_2} \overline{c}^{l_1 + l_2} \right]
-\end{align}
-
-\noindent where we have again separated the terms involving $c$. 
-\fi
-
-
-Once again the state is readily integrated in $c$, either over the entire complex plane or a single quadrant, and we may simply substitute Eqs.~\ref{eqn:qds_bs1_deriv_3},~\ref{eqn:qds_bs1_deriv_4} into Eq.~\ref{eqn:qds_ec_deriv_1} to reach the \emph{a posteriori} and \emph{a priori} states, respectively.
+Once again the state is readily integrated in $z_C$, either over the entire complex plane or a single quadrant, and we may simply substitute Eqs.~\ref{eqn:qds_bs1_deriv_3},~\ref{eqn:qds_bs1_deriv_4} into Eq.~\ref{eqn:appendix_ec_state} to reach the \emph{a posteriori} and \emph{a priori} states, respectively.
 
 The \emph{a priori} state is automatically normalized by virtue of the integration over $\mathbb{C}$, while the \emph{a posteriori} state is normalized by multiplying by $\mathcal{N}\left(e_1 \given \xi \right)$, defined as 
 
 \begin{equation}
-\mathcal{N}\left(e_1 \given \xi\right) = \int\limits_{\text{Re}\left(c\right) > 0, \; \text{Im}\left(c\right)>0} \Diff2 c \; \text{P}\left(c \given \xi \right).
+\mathcal{N}\left(e_1 \given \xi\right) = \int\limits_{\qout>0, \pout>0} \Diff2 c \; \text{P}\left(z_C \given \xi \right).
 \end{equation}
-where we have included excess noise $\xi$ in our probability, as in Sec.~\ref{eqn:qds_perr_noisy}. The performance of this attack is analysed in Fig.~\ref{fig:qds_holevo_comparisons}.
+where we have included excess noise $\xi$ in our probability, as in Appendix.~\ref{eqn:qds_perr_noisy}. The performance of this attack is analysed in Fig.~\ref{fig:qds_holevo_comparisons}.
 
 
 \subsection{Comparison of attacks}

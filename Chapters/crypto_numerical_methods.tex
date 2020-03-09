@@ -43,7 +43,7 @@ Enacting beamsplitter relation Eq.~\ref{eqn:intro_beamsplitter} on $\rho_{\text{
 
 \noindent Rearranging\footnote{See e.g. page \MT{X} of Ref.~\cite{GerryandKnight}} the summation indices we arrive at Eq.~\MT{X} from the main body.
 
-\section{Attack BS$1$}
+\section{Attack BS$1$}\label{appendix:bs1}
 Beamsplitter attack BS$1$ is described in Sec.~\ref{sec:qds_bs1}. The total input state into the channel is 
 
 \begin{equation}\label{eqn:qds_bs1_input_state}
@@ -60,7 +60,7 @@ with
 
 \noindent Enacting beamsplitter relation Eq.~\ref{eqn:intro_beampslitter} on $\rho_{\text{input}}$ and heterodyning on Charlie's mode we arrive at \MT{TODO: make the equation look nice. TODO: compare this to my MMA file for consistency}
 
-\begin{align}
+\begin{align}\label{eqn:appendix_bs1_state}
 %
 &\tilde{\rho}_{\left. \mathbb{B} \given c\right.} = \sum_k \frac{e^{- \left|\alpha_k\right|^2}}{\pi} e^{-\left|c\right|^2} \left( 1 - e^{- \tilde{\beta}}\right) \sum_{n, m, p = 0}^\infty \frac{\alpha^n \alpha^{* m}}{\sqrt{n! m!}} e^{- p \tilde{\beta}}  \notag \\
 %
@@ -72,7 +72,7 @@ with
 %
 \end{align}
 
-\section{Attack EC}
+\section{Attack EC}\label{appendix:ec_state}
 Entangling cloner attack EC is described in Sec.~\MT{X}. The total input state into the channel is
 
 \begin{equation}
@@ -90,7 +90,7 @@ and Bob's two-mode squeezed vacuum state
 
 \noindent Enacting beamsplitter relation Eq.~\ref{eqn:intro_beamsplitter} on $\rho_{\text{input}}$ and heterodyning on Charlie's mode, we arrive at \MT{TODO: make equation look pretty.}
 
-\begin{align}
+\begin{align}\label{eqn:appendix_ec_state}
 &\tilde{\rho}_{\left. \mathbb{B} \given c\right.} = \sum_k\frac{e^{- \left|\alpha_k\right|^2}}{\cosh^2 \zeta}\frac{e^{-\left|c\right|^2}}{\pi} \sum_{n_1, m_1, n_2, m_2=0}^\infty \sum_{k_1, k_2 = 0}^{n_1, n_2} \sum_{l_1, l_2 = 0}^{m_1, m_2} \alpha^{n_1} \alpha^{* m_1} \left(\tanh{\zeta}\right)^{n_2 + m_2} \notag \\
 %
 &c^{k_1 + k_2} \left(c^*\right)^{l_1 + l_2} \sqrt{n_2! m_2!} \left(\sqrt{T}\right)^{k_1 + l_1} \left(\sqrt{1-T}\right)^{n_1 + m_1 - k_1 - l_1} \left(- \sqrt{1-T}\right)^{k_2 + l_2} \notag \\ %
@@ -101,6 +101,16 @@ and Bob's two-mode squeezed vacuum state
 \end{align}
 
 To illustrate the power of the EC attack we examine several histograms of $\rho_{\left. \mathbb{B} \given c\right.}$ and show how the correlations between Bob's two modes give him additional information. \MT{TODO: make some nice histograms.}
+
+
+\subsubsection{BS$2$: $\xi > 0$}\label{sec:qds_bs2}
+We now introduce and consider a second modification to attack BS$0$, which also allows the excess noise on the channel to be modelled. This attack can be viewed as an unphysical combination of attacks BS$0$ and BS$1$ which advantages Bob and disadvantages honest parties.
+
+As we shall see below in Fig.~\ref{fig:qds_holevo_comparisons}, Bob performs worse under BS$1$ than BS$0$. This is a consequence of the fact that the input noise also affects his own measurements and so reduces his information about Charlie's output. We here modify the attack by imposing that the channel excess noise should \emph{only} affect honest players. That is, the presence of $\xi$ causes $\perr$ to increase, but Holevo information and therefore $\pe$ should both be unaffected. 
+
+While strictly this attack is physically inconsistent, and therefore impossible for Bob to perform, it is more pessimistic than either BS$0$ or BS$1$ and so the security bounds it gives are also safe bounds on both of those attacks. Indeed, since an analytic expression for Bob's states under attack BS$0$ is readily attainable without resort to the numerical methods required for BS$1$ (Appendix~\ref{appendix:crypto_numerical_methods}), in some circumstances it may be computationally preferable to assume attack BS$2$.
+
+The Holevo information is given by using Eqs.~\ref{eqn:qds_aposterioristate} and \ref{eqn:qds_aprioristate} in the usual way, while $\perr$ is given by Eq.~\ref{fig:qds_perr_noisy}. 
 
 
 
