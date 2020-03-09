@@ -86,6 +86,21 @@
 }
 
 
+\usepackage[
+%    backend=bibtex8,
+    style=ieee,
+    citestyle=numeric-comp,
+    sortlocale=de_DE,
+%    natbib=true,
+    url=false, 
+    doi=false,
+    eprint=false,
+    isbn=false
+]{biblatex}
+%\bibliography{Thesis}
+%\usepackage{biblatex}
+\addbibresource{Thesis.bib}
+
 
 %\DeclareGraphicsExtensions{.pdf,.png,.jpg}
 \DeclareGraphicsExtensions{.png, .pdf,.jpg}
@@ -124,8 +139,9 @@
 \part{PhoG: generation of sub-Poissonian light}
 \include{chapters/phog}
 
-\bibliographystyle{unsrt} 
-\bibliography{Thesis}
+%\bibliographystyle{unsrt} 
+%\bibliographystyle{plain}
+%\bibliography{Thesis}
 
 
 \appendix
@@ -134,6 +150,9 @@
 %\include{chapters/coherent_noisy_channel}
 \include{chapters/phog_adiabatic_elimination}
 \include{chapters/phog_numerical_methods}
+
+\newpage
+\printbibliography
 
 
 \end{document}

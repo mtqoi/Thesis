@@ -12,7 +12,6 @@
 \usepackage{amssymb}
 \usepackage{hyperref}	
 \usepackage[stable]{footmisc}
-\usepackage{amssymb}
 \usepackage[nottoc,numbib]{tocbibind}
 \usepackage{dsfont}
 \usepackage{framed}
@@ -41,7 +40,8 @@
 
 
 \usepackage{newfloat}
-\DeclareFloatingEnvironment[placement={!ht},name=List]{mylist}
+%\DeclareFloatingEnvironment[placement={!ht},name=List]{mylist}
+\DeclareFloatingEnvironment[placement={h!},name=List]{mylist}
 
 \newcommand{\eff}{\text{eff}}
 \newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
@@ -60,27 +60,46 @@
 \newcommand{{\systemB}}{QDS-$b$-QSS-$b$-CV-QPSK}
 \newcommand{{\systemF}}{QDS-$f$-QKD-$f$-CV-QPSK}
 \newcommand{\ddt}[1][]{\frac{\mathrm{d}#1}{\mathrm{d}t}}
+\newcommand{\ddtau}[1][]{\frac{\mathrm{d}#1}{\mathrm{d}\tau}}
+%\newcommand{\tr}[1][]{\text{Tr}\left[#1\right]}
 \newcommand{\dims}{\left|\mathcal{H}\right|}
 \newcommand{\code}[1]{\texttt{#1}}
 \newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}	
 \newcommand{\head}[1]{\multicolumn{1}{c}{#1}}
 \newcommand{\enot}[2]{{#1}\!\times\!10^{#2}}
+\newcommand{\qout}{q_{\text{out}}}
+\newcommand{\pout}{p_{\text{out}}}
 
 
 
 \includeonly{
-	chapters/introduction,
-	chapters/crypto_intro,
+%	chapters/introduction,
+%	chapters/crypto_intro,
 	chapters/qds,
-	chapters/qss,
-	chapters/aqc,
-	chapters/phog,
-	chapters/phog_adiabatic_elimination,
-	chapters/phog_numerical_methods,
-	chapters/crypto_numerical_methods,
-	chapters/crypto_larger_alphabets
+%	chapters/qss,
+%	chapters/aqc,
+%	chapters/phog,
+%	chapters/phog_adiabatic_elimination,
+%	chapters/phog_numerical_methods,
+%	chapters/crypto_numerical_methods,
+%	chapters/crypto_larger_alphabets
 }
 
+
+\usepackage[
+%    backend=bibtex8,
+    style=ieee,
+    citestyle=numeric-comp,
+    sortlocale=de_DE,
+%    natbib=true,
+    url=false, 
+    doi=false,
+    eprint=false,
+    isbn=false
+]{biblatex}
+%\bibliography{Thesis}
+%\usepackage{biblatex}
+\addbibresource{Thesis.bib}
 
 
 %\DeclareGraphicsExtensions{.pdf,.png,.jpg}
@@ -109,6 +128,7 @@
 \tableofcontents
 
 
+
 %\listoffigures
 \include{chapters/introduction}
 \part{Agile cryptography: signatures and secrets}
@@ -119,18 +139,20 @@
 \part{PhoG: generation of sub-Poissonian light}
 \include{chapters/phog}
 
+%\bibliographystyle{unsrt} 
+%\bibliographystyle{plain}
+%\bibliography{Thesis}
 
 
-\part{Appendices}
 \appendix
 \include{chapters/crypto_numerical_methods}
 \include{chapters/crypto_larger_alphabets}
+%\include{chapters/coherent_noisy_channel}
 \include{chapters/phog_adiabatic_elimination}
 \include{chapters/phog_numerical_methods}
 
-\bibliographystyle{unsrt} 
-\bibliography{Thesis}
+\newpage
+\printbibliography
 
 
-%\part{Coherent signal transfer}
 \end{document}

@@ -16,9 +16,7 @@
 % - where to put perr with thermal noise?
 
 \chapter{Quantum digital signatures}
-Goal of chapter: introduce our QDS protocol and prove its security in different contexts using several methods.
-
-\MT{short introduction}
+%Goal of chapter: introduce our QDS protocol and prove its security in different contexts using several methods.
 
 
 In this chapter we introduce and investigate a continuous-variable Quantum Digital Signatures (QDS) protocol, which allows for secure authentication of classical messages even against a quantum adversary. We describe the protocol and its similarities and differences to recent QDS protocols from the literature in Sec.~\ref{sec:qds_protocol}, and then prove its security against several different attack strategies in Secs.~\ref{sec:qds_security_repudiation}-\ref{sec:qds_attack_analysis}. Finally, in Secs.~\ref{sec:qds_siglength}-\ref{sec:qds_protocol_performance} we analyse the performance of our protocol, including a postselection technique to improve performance, and demonstrate that a remarkably small number of quantum states are required to securely sign a message. Our protocol is implemented in Chapter~\ref{chapter:aqc}.
@@ -98,7 +96,7 @@ We here present a continuous-variable (CV) QDS protocol based on the quadrature 
 \captionsetup{width=0.8\linewidth}
 \centering
 \includegraphics[draft=false, width=0.8\linewidth]{qds/qds_setup}
-\caption{\label{fig:qds_setup} Setup of the QDS protocol considered in this chapter. Alice (A) wishes to securely sign a $1$~bit message $m$. Alice distributes quantum coherent states $\ket*{\alpha \phi_j^{\left(B, C\right)}}$ along insecure quantum distribution channels (solid lines) during the Distribution stage. Bob and Charlie swap eliminated signature elements via their securely encrypted classical channel (dotted lines). During the Messaging stage Alice sends $\Sigma$, containing her message $m$ and her corresponding signature $\sigma_m$ along a classical broadcast channel (dot-dashed line). Inset: QPSK alphabet. \MT{TODO: ensure consistent notation with main body.}}
+\caption{\label{fig:qds_setup} Setup of the QDS protocol considered in this chapter. Alice (A) wishes to securely sign a $1$~bit message $m$. Alice distributes quantum coherent states $\ket{\phi_j^{\left(B, C\right)}}$ along insecure quantum distribution channels (solid lines) during the Distribution stage. Bob and Charlie swap eliminated signature elements via their securely encrypted classical channel (dotted lines). During the Messaging stage Alice sends $\Sigma$, containing her message $m$ and her corresponding signature $\sigma_m$ along a classical broadcast channel (dot-dashed line). Inset: QPSK alphabet.}
 \end{figure}
 
 
