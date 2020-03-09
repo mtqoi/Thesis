@@ -40,7 +40,8 @@
 
 
 \usepackage{newfloat}
-\DeclareFloatingEnvironment[placement={!ht},name=List]{mylist}
+%\DeclareFloatingEnvironment[placement={!ht},name=List]{mylist}
+\DeclareFloatingEnvironment[placement={h!},name=List]{mylist}
 
 \newcommand{\eff}{\text{eff}}
 \newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
@@ -66,13 +67,15 @@
 \newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}	
 \newcommand{\head}[1]{\multicolumn{1}{c}{#1}}
 \newcommand{\enot}[2]{{#1}\!\times\!10^{#2}}
+\newcommand{\qout}{q_{\text{out}}}
+\newcommand{\pout}{p_{\text{out}}}
 
 
 
 \includeonly{
-	chapters/introduction,
+%	chapters/introduction,
 %	chapters/crypto_intro,
-%	chapters/qds,
+	chapters/qds,
 %	chapters/qss,
 %	chapters/aqc,
 %	chapters/phog,
@@ -102,38 +105,35 @@
 %\setcounter{tocdepth}{4} % + paragraphs
 %\setcounter{tocdepth}{5} % + subparagraphs
 
-%\title{Thesis draft - selected chapters}
-%\date{\today}
+\title{Thesis draft - selected chapters}
+\date{\today}
 
 \begin{document}
-%\maketitle
-%\tableofcontents
+\maketitle
+\tableofcontents
 
-%\part{Secure quantum networks}
 
 
 %\listoffigures
 \include{chapters/introduction}
-%\part{Agile cryptography: signatures and secrets}
-%\include{chapters/crypto_intro}
-%\input{chapters/qds_lit_review}
-%\include{chapters/qds}
-%\include{chapters/qss}
-%\include{chapters/aqc}
-%\part{PhoG: generation of sub-Poissonian light}
-%\include{chapters/phog}
+\part{Agile cryptography: signatures and secrets}
+\include{chapters/crypto_intro}
+\include{chapters/qds}
+\include{chapters/qss}
+\include{chapters/aqc}
+\part{PhoG: generation of sub-Poissonian light}
+\include{chapters/phog}
 
 \bibliographystyle{unsrt} 
-%\bibliography{Thesis}
+\bibliography{Thesis}
 
 
 \appendix
-%\include{chapters/crypto_numerical_methods}
-%%\include{chapters/crypto_larger_alphabets}
-%\include{chapters/larger_alphabets}
+\include{chapters/crypto_numerical_methods}
+\include{chapters/crypto_larger_alphabets}
 %\include{chapters/coherent_noisy_channel}
-%\include{chapters/phog_adiabatic_elimination}
-%\include{chapters/phog_numerical_methods}
+\include{chapters/phog_adiabatic_elimination}
+\include{chapters/phog_numerical_methods}
 
 
 \end{document}

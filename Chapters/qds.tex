@@ -20,9 +20,12 @@ Goal of chapter: introduce our QDS protocol and prove its security in different 
 
 \MT{short introduction}
 
+
+In this chapter we introduce and investigate a continuous-variable Quantum Digital Signatures (QDS) protocol, which allows for secure authentication of classical messages even against a quantum adversary. We describe the protocol and its similarities and differences to recent QDS protocols from the literature in Sec.~\ref{sec:qds_protocol}, and then prove its security against several different attack strategies in Secs.~\ref{sec:qds_security_repudiation}-\ref{sec:qds_attack_analysis}. Finally, in Secs.~\ref{sec:qds_siglength}-\ref{sec:qds_protocol_performance} we analyse the performance of our protocol, including a postselection technique to improve performance, and demonstrate that a remarkably small number of quantum states are required to securely sign a message. Our protocol is implemented in Chapter~\ref{chapter:aqc}.
+
 \section{Our QDS protocol}\label{sec:qds_protocol}
 
-In the simplest instance we may consider a signature scheme involving only three parties: a sender, Alice ($A$), and recipients Bob ($B$) and Charlie ($C$). Alice wishes to send a classical message $m$ to $B$ and $C$, such that $B$ and $C$ can correctly determine whether $m$ was indeed sent by $A$. Furthermore the recipients should be able to check whether $m$ has been altered. The three-party setting is the smallest setting to fully distinguishes a digital signatures protocol from related protocols such as MACs \cite{Schneier1996}, and because more than two (potentially dishonest) players are present, this allows for new attack strategies which distinguish QDS from other quantum tasks such as QKD.
+In the simplest instance we may consider a signature scheme involving only three parties: a sender, Alice ($A$), and recipients Bob ($B$) and Charlie ($C$). Alice wishes to send a classical message $m$ to $B$ and $C$, such that $B$ and $C$ can correctly determine whether $m$ was indeed sent by $A$. Furthermore the recipients should be able to check whether $m$ has been altered. The three-party setting is the smallest setting to fully distinguish a digital signatures protocol from related protocols such as MACs\footnote{Message Authentication Codes. See Ref.~\cite{Schneier1996}.}.Because more than two (potentially dishonest) players are present, this allows for new attack strategies which distinguish QDS from other quantum tasks such as QKD.
 
 \subsection{QDS setup}
 
@@ -36,9 +39,12 @@ Our signature scheme is displayed pictorially in Fig.~\ref{fig:qds_cartoon}. Ali
 
 \subsection{Goals of a signature scheme}\label{sec:qds_goals}
 
-A digital signature scheme must fulfill the following requirements
+
+
 
 \begin{mylist}
+\captionsetup{width=0.8\linewidth}
+\begin{framed}
 \begin{enumerate}
 \item\emph{Security against forgery}, Fig.~\ref{fig:attacks_forgery}. Neither a dishonest recipient ($B$ or $C$), nor an external fourth party (Eve, $E$), should be able to alter $m$ and have it accepted as genuine by an honest recipient. The signature scheme should ensure that $m$ is the message which Alice sent.
 
@@ -51,17 +57,20 @@ A digital signature scheme must fulfill the following requirements
 \item \emph{Robustness}, Fig.~\ref{fig:attacks_robustness}. The message $m$ should be accepted if all players behave honestly and there is no tampering by an eavesdropper.
 \end{enumerate}
 \caption{\label{list:qds_requirements} A secure QDS scheme should fulfill each of the above requirements. Requirement $1$ implies requirement $2$. In our $3$-party setting, requirements $3$ and $4$ are equivalent. We depict each type of attack which a QDS scheme must prevent in Fig.~\ref{fig:qds_attacks}.}
+\end{framed}
 \end{mylist}
+
 
 %Requirements $1$ and $2$ are fulfilled in our scheme by the same security process, and so we will focus on $1$ and simply note where $2$ arises.
 
-If requirement $1$ holds then no dishonest player will be able to impersonate Alice, requirement $2$, since in order to do so they will be required to generate $\sigma_m$ which at the start of the protocol is known only to her. The dishonest player's only hope for successful impersonation is to take Alice's place at the start of the protocol and perform a so-called ``man-in-the-middle'' attack. We do not investigate this possibilty further, though we note that without previous authenticated interaction between players even QKD is insecure for this attack \cite{Broadbent2015}.
+A digital signature scheme must fulfill the requirements outlined in List.~\ref{list:qds_requirements}. If requirement $1$ (security against forgery) holds then no dishonest player will be able to impersonate Alice, which fulfills requirement $2$ (genuine sender). In order to do so they will be required to generate $\sigma_m$ which at the start of the protocol is known only to her. The dishonest player's only hope for successful impersonation is to take Alice's place at the start of the protocol and perform a so-called ``man-in-the-middle'' attack. We do not investigate this possibility further, though we note that without previous authenticated interaction between players even QKD is insecure for this attack \cite{Broadbent2015}.
 
 For our scheme involving three parties, requirements $3$ and $4$ are equivalent. A QDS protocol involving $N$ recipients may distinguish between non-repudiation and transferability by defining a message $m^{\left(k\right)}$ as $k$-transferable if it may be successfully forwarded up to $k$ times. An honest participant should be able to determine the transferability level of $m$ \cite{Arrazola2016}, while non-repudiation then refers to Alice's ability to cause a message to be non-transferable. In what follows we treat these requirements as equivalent.
 
 A digital signature scheme which rejects all messages trivially fulfills requirements $1-4$, and so in order to get a useful digital signature scheme we must also impose requirement $5$.
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 	\begin{subfigure}{\linewidth}
 		\centering
@@ -78,29 +87,26 @@ A digital signature scheme which rejects all messages trivially fulfills require
 		\includegraphics[draft=false, width=\linewidth]{qds/qds_cartoon_honest_failure}
 		\caption{\label{fig:attacks_robustness}}
 	\end{subfigure}
-\caption{\label{fig:qds_attacks} The multipartite setting permits many different methods for attack on the protocol depicted in Fig.~\ref{fig:qds_cartoon}. Gray boxes depict honest players while red boxes depict dishonest players. (a) Forging attack with dishonest Bob. Bob will change the message $m \rightarrow n$ with fake signature $sigma_n$. The attack succeeds if Charlie accepts. Alternatively, either Charlie or a fourth player, Eve, may attempt a forging attack against an honest player. (b) Repudiation attack with dishonest Alice. Alice tries to convince Bob to accept the message and Charlie to reject it. (c) Honest failure. If all players behave honestly the protocol should succeed and both Bob and Charlie should accept the message. Such a protocol is called robust.}
+\caption{\label{fig:qds_attacks} The multipartite setting permits many different methods for attack on the protocol depicted in Fig.~\ref{fig:qds_cartoon}. Gray boxes depict honest players while red boxes depict dishonest players. (a) Forging attack with dishonest Bob. Bob will change the message $m \rightarrow n$ with fake signature $\sigma_n$. The attack succeeds if Charlie accepts. Alternatively, either Charlie or a fourth player, Eve, may attempt a forging attack against an honest player. (b) Repudiation attack with dishonest Alice. Alice tries to convince Bob to accept the message and Charlie to reject it. (c) Honest failure: all players behave honestly but the protocol fails and both Bob and Charlie reject $m$. A protocol which does not fail due to honest failure is called robust.}
 \end{figure}
 
 \subsection{QDS protocol description}
 
-We here present a continuous-variable (CV) QDS protocol based on the quadrature phase-shift keying (QPSK) alphabet of coherent states, Fig.~\ref{fig:qpsk}. 
-For the first time in a continuous-variables QDS protocol, our protocol takes into account insecure quantum distribution channels and permits the presence of an eavesdropper. Surprisingly, the same step of the protocol which ensures security against eavesdropping also makes the protocol efficient in its use of quantum resources, and so we shall see later in Sec.~\ref{sec:qds_protocol_performance} that we outperform many recent comparable QDS protocols.
+We here present a continuous-variable (CV) QDS protocol based on the quadrature phase-shift keying (QPSK) alphabet of coherent states, Fig.~\ref{fig:qpsk}. For the first time in a continuous-variables QDS protocol, our protocol takes into account insecure quantum distribution channels and permits the presence of an eavesdropper. Surprisingly, the same step of the protocol which ensures security against eavesdropping also makes the protocol efficient in its use of quantum resources. We shall see later in Sec.~\ref{sec:qds_protocol_performance} that we outperform recent comparable QDS protocols.
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 \includegraphics[draft=false, width=0.8\linewidth]{qds/qds_setup}
-\caption{\label{fig:qds_setup} Setup of the QDS protocol considered in this chapter. Alice (A) wishes to securely sign a $1$~bit message $m$. Alice distributes quantum coherent states $\ket{\alpha \phi_j^{\left(B, C\right)}}$ along insecure quantum distribution channels (solid lines) during the Distribution stage. Bob and Charlie swap eliminated signature elements via their securely encrypted classical channel (dotted lines). During the Messaging stage Alice sends a message-signature $\Sigma$ pair along a classical broadcast channel (dot-dashed line). Inset: QPSK alphabet. \MT{TODO: ensure consistent notation with main body.}}
+\caption{\label{fig:qds_setup} Setup of the QDS protocol considered in this chapter. Alice (A) wishes to securely sign a $1$~bit message $m$. Alice distributes quantum coherent states $\ket*{\alpha \phi_j^{\left(B, C\right)}}$ along insecure quantum distribution channels (solid lines) during the Distribution stage. Bob and Charlie swap eliminated signature elements via their securely encrypted classical channel (dotted lines). During the Messaging stage Alice sends $\Sigma$, containing her message $m$ and her corresponding signature $\sigma_m$ along a classical broadcast channel (dot-dashed line). Inset: QPSK alphabet. \MT{TODO: ensure consistent notation with main body.}}
 \end{figure}
 
 
-Our QDS scheme is split into two stages, Distribution and Messaging, which, by analogy with classical digital signatures, may occur with significant time delay. Quantum states are sent and measured during Distribution. During Messaging Alice will send her message and classical signature and recipients Bob and Charlie will try to determine its validity.\footnote{Note the intrinsic separation between the Distribution (quantum) and Messaging (classical) stages of the protocol. We will take further advantage of this separation between quantum and classical steps in Chapter~\ref{chapter:aqc}} Our protocol setup is outlined in Figs.~\ref{fig:qds_cartoon},~\ref{fig:qds_setup}. 
+Our QDS scheme is split into two stages, Distribution and Messaging, which, by analogy with classical digital signatures, may occur with significant time delay. Quantum states are sent and measured during Distribution. During Messaging Alice will send her message and classical signature, and recipients Bob and Charlie will try to determine its validity.\footnote{Note the intrinsic separation between the Distribution (quantum) and Messaging (classical) stages of the protocol. We will take further advantage of this separation between quantum and classical steps in Chapter~\ref{chapter:aqc}} Our protocol setup is outlined in Figs.~\ref{fig:qds_cartoon},~\ref{fig:qds_setup}. 
 \par
 \noindent We will now describe in detail the running of the protocol.
 
 
-%\MT{mention somewhere why we consider just a $1$ bit message}
-
-%\MT{I'll do everything for QPSK, but I should have a section where I generalize to NPSK}
 
 \subsubsection{Distribution stage}
 
@@ -109,7 +115,7 @@ Alice wishes to send a signed $1$ bit message $m$ to Bob and Charlie. For each p
 \begin{equation}
 \Phi_m^{\left(B, C\right)} = \left\{ \phi_{j, m}^{\left(B, C\right)}\right\}_{j=1}^{L}
 \end{equation}
-where the $\phi_{j}$ are complex phases chosen from QPSK alphabet. The $\phi_j$ are assumed to be drawn uniformly at random, though we will relax this assumption in Chapter~\ref{chapter:aqc}. The strings $\Phi_m^{\left(B, C\right)}$ may be interpreted as Alice's \emph{private key}. The signature length $L \in \mathbb{N}$ is chosen to ensure the desired level of security.
+which are of length $j$. The $\phi_{j}$ are complex phases chosen uniformly at random from the QPSK alphabet. The strings $\Phi_m^{\left(B, C\right)}$ may be interpreted as Alice's \emph{private key}. The signature length $L \in \mathbb{N}$ is chosen to ensure the desired level of security.
 
 \paragraph{Step $2$.} Corresponding to each private key, Alice forms the following quantum states
 \begin{equation}\label{eqn:QDS_publickey}
@@ -121,36 +127,23 @@ with
 \end{equation}
 understood to be the coherent state from QPSK with phase corresponding to the relevant element of Alice's private key.
 
-The states Eq.~\ref{eqn:QDS_publickey} may be interpreted simply as sequences of coherent states, and may be interpreted as Alice's \emph{public key}. An important difference between quantum and classical digital signatures is that here the public key may no longer be freely distributed, copied and stored. We also note that Alice no longer has a single public key, and her quantum public key differs both for each possible $m$ and for each recipient. This is a requirement for security against an eavesdropping forger. We shall discuss this at length in Sec.~\ref{sec:qds_security_forgery}. \MT{TODO: make sure I do this.}
+The states Eq.~\ref{eqn:QDS_publickey} may be interpreted simply as sequences of coherent states, and correspond to Alice's \emph{public key}. An important difference between quantum and classical digital signatures is that here the public key may no longer be freely distributed, copied and stored. We also note that Alice no longer has a single public key for each message (unlike Lamport's scheme \cite{Lamport}), and her quantum public key differs both for each possible $m$ and for each recipient. This is a requirement for security against an eavesdropping forger, Sec.~\ref{sec:qds_security_forgery}.
+
 \paragraph{Step $3$.}
-Each recipient $B, C$ performs heterodyne detection Eq.~\ref{eqn:intro_heterodyne} on their received coherent states, and receives complex phase outcome $x \in \mathbb{C}$. Crucially, since measurement is performed immediately on receipt of the states no quantum memory is required. The remainder of the protocol is entirely classical.
+Each recipient $B, C$ performs heterodyne detection Eq.~\ref{eqn:intro_heterodyne} on their received coherent states, and receives outcomes $\left( \qout, \pout \right)$ which we will write as $x = \left(\qout + i \pout)\right)/\sqrt{2} \in \mathbb{C}$. Crucially, since measurement is performed immediately on receipt of the states no quantum memory is required. The remainder of the protocol is entirely classical.
 
-\iffalse
-%
-% NOTE: I can stick this in my intro chapter.
-%
-each received $\rho\left[\phi_{j, m}^{\left(B, C\right)}\right]$ and receives complex phase outcome $x_{B,C}\in\mathbb{C}$. In other words, they perform the POVM
+
+At the end of the quantum stage of the protocol, recipients Bob and Charlie now possess classical strings, length $L$, containing their phase measurements on Alice's distributed states. They now form \emph{eliminated signatures}, Fig.~\ref{fig:elimsig}. For each $x \in\mathbb{C}$, recipients record the phases $\phi_{j, m}^{\left(B, C\right)}$ which Alice was \emph{least likely} to have sent. At position $j$ this may be understood as computing the four conditional probabilities 
 \begin{equation}
-E\left[x\right] := \otimes_{j=1}^L E_j\left[x\right] \qq{with} E_j\left[x\right] := \frac{1}{\sqrt{\pi}} \ket{x}_j\bra{x}_j
+p\left(\phi_j \given x_j\right) \qq{for each phase} \phi_j \in \text{QPSK},
 \end{equation}
-with $x \in \mathbb{C}$. 
-\fi
-
-
-At the end of the quantum stage of the protocol, recipients Bob and Charlie now possess classical strings, length $L$, containing their complex phase measurements on Alice's distributed states. They now form \emph{eliminated signatures}, Fig.~\ref{fig:elimsig}. For each outcome $x \in\mathbb{C}$, recipients record the phases $\phi_{j, m}^{\left(B, C\right)}$ which are \emph{least compatible} with $x$. For each entry $j$, this may be understood as computing the four conditional probabilities 
-\begin{equation}
-p\left(\alpha_j \given x_j\right) \qq{for each} \alpha_j \in \text{QPSK},
-\end{equation}
-and recording the $\alpha_j$ giving rise to the two smallest of these.
-
-Note that the $\alpha_j$ comprising the eliminated signature element will always be adjacent elements of QPSK. An example of this elimination procedure is displayed in Fig.~\ref{fig:elimsig}
-%, and for clarity we display the mapping explicitly in Tab.~\ref{tab:elimsig}
-. We denote Bob and Charlie's total eliminated signatures at this stage as $X_m^{\left(B, C\right)}$. Each is of length $L$ and they will later be compared to Alice's private key in order to test the validity of the message.
+and recording the two $\phi_j$ which yield the smallest of these. This record of $\phi_j$ forms the $j^{\text{th}}$ element of their eliminated signatures. We note that the $\phi_j$ comprising the eliminated signature element will always be adjacent in phase space, and an example of this elimination procedure is displayed in Fig.~\ref{fig:elimsig}. We denote Bob and Charlie's total eliminated signatures at this stage as $X_m^{\left(B, C\right)}$. Each is of length $L$ and they will later be compared to Alice's private key in order to test the validity of the message.
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 \includegraphics[draft=false, width=0.8\linewidth]{qds/elimsig}
-\caption{\label{fig:elimsig} (a) Bob and Charlie each perform heterodyne measurement on their received coherent states, and obtain complex outcome $x \in \mathbb{C}$. (b) They then record the two states from QPSK which are least likely to have been sent by Alice.}
+\caption{\label{fig:elimsig} Bob and Charlie each perform heterodyne measurement on their received coherent states, and obtain $\left(\qout, \pout\right)$. We define $x = \left(\qout + \pout\right)/\sqrt{2}$, which is the dark gray circle in (a). From their $x$, Bob and Charlie then record the two states from QPSK which are least likely to have been sent by Alice, (b).}
 \end{figure}
 
 \paragraph{Step $4$. \emph{Symmetrization:}}
@@ -160,14 +153,14 @@ In other words at the end of Step~$3$, having sent the state $\ket{\phi_{j, m}^B
 
 Bob (Charlie) now possesses an eliminated signature $\tilde{X}_m^{\left(B\right)}$ in two halves: one half $Y_m^{\left(B\right)}$ ($Y_m^{\left(C\right)}$) containing those elements received directly from Alice, and one half $Z_m^{\left(B\right)}$ ($Z_m^{\left(C\right)}$) containing elements received during this Symmetrization step from Charlie (Bob).
 
-The key parameters for the Distribution stage are the signature length $L$, which directly measures the quantum resources required for the protocol, and the alphabet parameter $\alpha$ denoting the average photon number of the distributed coherent states. Channel parameters such as loss and thermal noise will be discussed later.\footnote{We will also later discuss an extension to the protocol which allows it to run with an $N$PSK alphabet of coherent states, where $N$ is an even integer.}
+The key parameters for the Distribution stage are the signature length $L$, which directly measures the quantum resources required for the protocol, and the alphabet parameter $\alpha$ denoting the average photon number of the distributed coherent states. Channel parameters such as loss and thermal noise will be discussed later.\footnote{In Appendix~\ref{appendix:qds_larger_alphabets} we discuss an extension to the protocol which allows it to run with an $N$PSK alphabet of coherent states, where $N$ is an even integer.}
 
 \subsubsection{Messaging stage}
 
 Messaging may occur at any time after Distribution.
 
 \paragraph{Step $5$.}
-To sign $m$, Alice sends to Bob the classical information $\Sigma = \left(m, \sigma_m\right)$, consisting of the message which she would like to convey, and her private key $\sigma_m = \left(\Phi_m^B, \Phi_m^C\right)$ consisting of declared phases, which acts as $m$'s signature. 
+To sign $m$, Alice sends to Bob the classical information $\Sigma = \left(m, \sigma_m\right)$, consisting of the message $m$ which she would like to convey, and her private key $\sigma_m = \left(\Phi_m^B, \Phi_m^C\right)$ consisting of declared phases, which acts as $m$'s signature. 
 
 
 \paragraph{Step $6$.} Bob rearranges $\sigma_m \rightarrow \tilde{\sigma}_m^B := \left(\tilde{\Phi}_{Y, m}^B, \tilde{\Phi}_{Z, m}^B\right)$ by selecting elements from Alice's declaration which correspond to the two halves of his eliminated signature $\tilde{X}_m^{\left(B\right)}$. The original $\sigma_m$ has length $2 L$, while $\tilde{\sigma}_m^B$ has length $L$.
@@ -184,12 +177,13 @@ If Bob measures fewer than $s_B L/2$ mismatches on both of his eliminated signat
 \paragraph{Step $7$.} If Bob has accepted $m$, then he forwards $\Sigma$ to Charlie, who similarly checks for mismatches between Alice's signature and his eliminated signature. Charlie accepts the message if %$\mathcal{M}\left(\tilde{\Phi}_{Y, m}^C, Y_m^C\right) < s_C L/2$ and $\mathcal{M}\left(\tilde{\Phi}_{Z, m}^C, Z_m^C\right) < s_C L/2$, with security threshold $0 \le s_c \le 1$ to be discussed later. 
 there are fewer than $s_C L/2$  mismatches between $\tilde{\sigma}_m^C$ and $\tilde{X}_m^{\left(C\right)}$. If Charlie also accepts $m$ then the protocol has succeeded, otherwise it aborts.  Charlie's threshold mismatch rate is $s_C$ and will be discussed further in Secs.~\ref{sec:qds_mismatches},~\ref{sec:qds_security_repudiation},~\ref{sec:qds_siglength}.
 
-The key parameters for the Messaging stage are $s_B, s_C$ which may be freely chosen by Bob and Charlie in order to optimize security.
+The key parameters for the Messaging stage are $s_B, s_C$ which may be freely chosen by Bob and Charlie in order to optimize security. We observe in Sec.~\ref{sec:qds_security_repudiation} that the choice $s_B \le s_C$ will ensure security against Alice's repudiation attack.
 
 %\clearpage
 \subsection{Counting mismatches}\label{sec:qds_mismatches}
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 \includegraphics[draft=false, width=\linewidth]{qds/mismatch1}
 \caption{\label{fig:qds_mismatches} A mismatch occurs when an honest party eliminates the state which Alice claims to have sent. (a, d) Alice sends coherent state $\ket{\alpha}$. (b, e) Bob (Charlie) heterodynes and measures $x \in \mathbb{C}$. Even when all players are honest there is some probability of measuring $\text{Re}\left(x\right) < 0$, Sec.~\ref{sec:qds_modelling_perr}. (c) The eliminated signature element consists of $\ket{- \alpha}, \ket{- i \alpha}$ so there is no mismatch. (f) The eliminated signature element consists of $\ket{\alpha}, \ket{i \alpha}$ and so there is a mismatch.}
@@ -231,22 +225,22 @@ In what follows we will prove that our protocol is:
 
 Our proof will proceed by demonstrating that an attempted repudiation or forgery will induce a large mismatch rate, while a small mismatch rate is obtained when no attack is attempted. Thus, by appropriate choice of security parameters $s_B, s_C$ and signature length $L$, the probability of a \emph{successful} attack of any type may be made arbitrarily small. 
 
-We assume that in our $3$~party setting at most one of the players $A, B, C$ may behave dishonestly. For simplicity of notation we give a dishonest player the power to eavesdrop on the distribution of quantum states, and so the label $E$ is not required as an internal eavesdropper is at least as powerful as an external Eve. If two or more players are dishonest then we assume that they will collaborate, which allows them to trivially break the protocol and so this scenario is not discussed. We note that a collaboration of multiple dishonest players must be considered for an $n$~party QDS protocol, as discussed in Ref.~\cite{Arrazola2016}.
+We assume that in our $3$~party setting at most one of the players $A, B, C$ may behave dishonestly. For simplicity of notation we give a dishonest player the power to eavesdrop on the distribution of quantum states, and so the label ``Eve'' is not required. An internal eavesdropper is at least as powerful as an external Eve. If two or more players are dishonest then we assume that they will collaborate, which allows them to trivially break the protocol and so this scenario is not discussed. We note that a collaboration of multiple dishonest players must be considered for an $n$~party QDS protocol, as discussed in Ref.~\cite{Arrazola2016}.
 
 To succeed in a repudiation attack, a dishonest Alice aims to convince Bob that message $m$ is genuine, while Charlie that $m$ is fake, Fig.~\ref{fig:attacks_repudiation}. Security against repudiation is guaranteed by the symmetrization procedure (Step $4$ of the protocol) which ensures that Alice does not know which recipient holds the eliminated signature element corresponding to a particular distributed state. Proof of security against repudiation follows along similar lines to Refs.~\cite{Dunjko2014, Wallden2015, Donaldson2016, Croal2016, Thornton2019}.
 
-At the end of Step~$3$, having sent the state $\ket{\phi_{j, m}^B}\bra{\phi_{j, m}^B}$ to Bob, Alice knows that Bob holds the corresponding eliminated signature element $X_{j, m}^B$, and she may be able to guess it with high probability. In any case, knowing which recipient holds the $X_{j, m}^{\left(B, C\right)}$ gives Alice power to repudiate, even if she does not know what the individiual eliminated signature elements are\footnote{Alice could, for example, perform an optimal strategy in order to guess the $X_{j, m}^{\left(B, C\right)}$. Then she may declare $\sigma_m$ which uses her guesses on Bob's elements to reduce her mismatch rate with respect to Bob, while declaring the opposite of her guesses on Charlie's elements to increase her mismatch rate with respect to Charlie.}.
+At the end of Step~$3$, having sent the state $\ket*{\phi_{j, m}^B}\bra*{\phi_{j, m}^B}$ to Bob, Alice knows that Bob holds the corresponding eliminated signature element $X_{j, m}^B$, and she may be able to guess it with high probability. In any case, knowing which recipient holds the $X_{j, m}^{\left(B, C\right)}$ gives Alice power to repudiate, even if she does not know what the individiual eliminated signature elements are\footnote{Alice could, for example, perform an optimal strategy in order to guess the $X_{j, m}^{\left(B, C\right)}$. Then she may declare $\sigma_m$ which uses her guesses on Bob's elements to reduce her mismatch rate with respect to Bob, while declaring the opposite of her guesses on Charlie's elements to increase her mismatch rate with respect to Charlie.}.
 
-At the end of Step~$4$ however, Alice does not know whether it is Bob or Charlie who holds an element $X_{j, m}^B$. This uncertainty will prove crucial for preventing her from successfully repudiating. Recall that Bob  (Charlie) possesses an eliminated signature $\tilde{X}_m^{\left(B\right)}$ in two halves: one half ($Y_m^{\left(B\right)}$) containing those elements received directly from Alice, and one half ($Z_m^{\left(B\right)}$) containing elements received during this symmetrization step from Charlie (Bob).
+At the end of Step~$4$, however, Alice does not know whether it is Bob or Charlie who holds an element $X_{j, m}^B$. This uncertainty will prove crucial for preventing her from successfully repudiating. Recall that Bob  (Charlie) possesses an eliminated signature $\tilde{X}_m^{\left(B\right)}$ in two halves: one half ($Y_m^{\left(B\right)}$) containing those elements received directly from Alice, and one half ($Z_m^{\left(B\right)}$) containing elements received during this symmetrization step from Charlie (Bob).
 
 We assume that Alice is completely free to manipulate her declared $\sigma_m = \left(\Phi_m^B, \Phi_m^C\right)$. We also assume that she may freely manipulate the number of mismatches %$\mathcal{M}\left(\Phi_m^{B, C}, X_m^{\left(B, C\right)}\right)$ 
-between her declared signature and the eliminated signatures $X_m^{\left(B, C\right)}$ which Bob or Charlie held before symmetrization. We denote these observed mismatch rates as $p_B$ and $p_C$, respectively 
+between her declared signature and the eliminated signatures $X_m^{\left(B, C\right)}$ which Bob or Charlie held before symmetrization. We denote these observed mismatch rates as $p_B$ and $p_C$, respectively: 
 
 \begin{align}
 p_B &= \mathcal{M}\left(\Phi_m^B, X_m^B\right) \notag \\
-p_C &= \mathcal{M}\left(\Phi_m^C, X_m^C\right),
+p_C &= \mathcal{M}\left(\Phi_m^C, X_m^C\right).
 \end{align}
-and Alice may even choose them to be zero
+Alice may even choose them to be zero
 
 %After Symmetrization, Bob and Charlie each possess an eliminated signature in two halves, each of length $L/2$, consisting either of elements which they received directly from Alice, or of elements which they received during this step. 
 
@@ -257,28 +251,28 @@ Alice succeeds in her repudiation attack if Bob accepts both of his halves as ge
 \end{equation}
 where the events are defined as
 \begin{align}\label{eqn:repudiation_events}
-&E_A \qq{when} \mathcal{M}\left(\tilde{\Phi}_{Y, m}^B, Y_m^B\right) < s_B L/2  \notag \\
+&E_A \qq{when} \mathcal{M}\left(\tilde{\Phi}_{Y, m}^B, Y_m^B\right) < s_B L/2,  \notag \\
 %
-&E_B \qq{when} \mathcal{M}\left(\tilde{\Phi}_{Z, m}^B, Z_m ^B\right) < s_B L/2 \notag \\
+&E_B \qq{when} \mathcal{M}\left(\tilde{\Phi}_{Z, m}^B, Z_m ^B\right) < s_B L/2, \notag \\
 %
-&E_C \qq{when} \mathcal{M}\left(\tilde{\Phi}_{Y, m}^C, Y_m^C\right) \ge s_C L/2 \notag \\
+&E_C \qq{when} \mathcal{M}\left(\tilde{\Phi}_{Y, m}^C, Y_m^C\right) \ge s_C L/2, \notag \\
 %
-&E_D \qq{when} \mathcal{M}\left(\tilde{\Phi}_{Z, m}^C, Z_m^C\right) \ge s_C L/2 
+&E_D \qq{when} \mathcal{M}\left(\tilde{\Phi}_{Z, m}^C, Z_m^C\right) \ge s_C L/2 .
 \end{align}
-where $\tilde{\Phi}$ denotes the rearranged form of Alice's declared phases $\Phi$ in order to compare corresponding elements, symbol $Y$ denotes that an element was received directly from Alice and symbol $Z$ denotes that it was received during symmetrization. Function $\mathcal{M}$ measures the mismatch probability between two strings, and is defined above in Sec.~\ref{sec:qds_mismatches}.
+The $\tilde{\Phi}$ denotes the rearranged form of Alice's declared phases $\Phi$ in order to compare corresponding elements, symbol $Y$ denotes that an element was received directly from Alice and symbol $Z$ denotes that it was received during symmetrization. Function $\mathcal{M}$ measures the mismatch probability between two strings, and is defined above in Sec.~\ref{sec:qds_mismatches}.
 
 Thus, the probability $\varepsilon_{\text{repudiation}}$ of a successful repudiation attack is given by
 
 \begin{equation}
 \varepsilon_{\text{repudiation}} = \text{P}\left[\left(E_A \cap E_B\right) \cap \left(E_C \cup E_D\right)\right].
 \end{equation}
-To proceed, we require the following two probability inequalities for arbitrary events $x, y$
+To proceed, we require the following two probability inequalities for arbitrary events $x, y$:
 
 \begin{align}
 \label{eqn:prob_inequality_1}
-\text{P}\left(x \cap y\right) &\le \text{min}\left\{\text{P}\left(x\right), \text{P}\left(y\right)\right\} \\
+\text{P}\left(x \cap y\right) &\le \text{min}\left\{\text{P}\left(x\right), \text{P}\left(y\right)\right\}, \\
 \label{eqn:prob_inequality_2}
-\text{P}\left(x \cup y\right) &\le \text{P}\left(x\right) + \text{P}\left(y\right)
+\text{P}\left(x \cup y\right) &\le \text{P}\left(x\right) + \text{P}\left(y\right).
 \end{align}
 \noindent We may now use the probability inequality Eq.~\ref{eqn:prob_inequality_1} and observe that 
 
@@ -290,9 +284,9 @@ To proceed, we require the following two probability inequalities for arbitrary 
 
 \begin{equation}\label{eqn:rep_prob_working}
 \varepsilon_{\text{repudiation}} \le \text{min}\left\{
-\text{min}\left\{\text{P}\left(E_A\right), \text{P}\left(E_B\right) \right\}, \text{P}\left(E_C\right) + \text{P}\left(E_D\right)\right\}
+\text{min}\left\{\text{P}\left(E_A\right), \text{P}\left(E_B\right) \right\}, \text{P}\left(E_C\right) + \text{P}\left(E_D\right)\right\},
 \end{equation}
-which provides an upper bound for the probability of successful repudiation attack in terms of the individual probabilities for distinct events. We now wish to demonstrate that the probability for each event may be made arbitrarily small by suitable choice of $L$, and thus that $\varepsilon_{\text{repudiation}}$ may also be made arbitrarily small.
+which provides an upper bound for the probability of successful repudiation attack in terms of the individual probabilities for distinct events. We now wish to demonstrate that the probability for each event may be made arbitrarily small by suitable choice of $L$, and thus $\varepsilon_{\text{repudiation}}$ may also be made arbitrarily small.
 
 
 We rely on Hoeffding's inequalities Eqs.~\ref{eqn:hoeffding1},~\ref{eqn:hoeffding2} which we use to bound each probability appearing in Eq.~\ref{eqn:rep_prob_working}. Let $\mathcal{F}$ be a string of declared phases, and $\mathcal{G}$ be an eliminated signature. Strings $\mathcal{F}$ and $\mathcal{G}$ each have length $n$. We define a string $\mathcal{E}$ such that
@@ -300,7 +294,7 @@ We rely on Hoeffding's inequalities Eqs.~\ref{eqn:hoeffding1},~\ref{eqn:hoeffdin
 \begin{equation*}\label{eqn:error}
 \mathcal{E}_j = 
 \begin{cases}
-1 & \text{if $\mathcal{F}_j$ is eliminated in $\mathcal{G}_j$} \\
+1 & \text{if a mismatch occurs between $\mathcal{F}_j$ and $\mathcal{G}_j$} \\
 0 & \text{otherwise}
 \end{cases}
 \end{equation*}
@@ -312,52 +306,54 @@ The mismatch rate $\mathcal{M}\left(\mathcal{F}, \mathcal{G}\right)$ is equivale
 \mathbb{E}\left(\bar{\mathcal{E}}\right) = \frac{1}{n} \sum_{j=1}^n \mathcal{E}_j. \notag
 \end{equation}
 
-\noindent We wish to bound the probability that there are fewer than $s$ observed mismatches
+\noindent We wish to bound the probability that there are fewer than $s$ observed mismatches,
 \begin{equation}
-\text{P}\left(\mathcal{M}\left(\mathcal{F}, \mathcal{G}\right) \le s\right) = \text{P}\left( \mathbb{E}\left(\bar{\mathcal{E}}\right) - \bar{\mathcal{E}} \ge \mathbb{E}\left(\bar{\mathcal{E}}\right) - s\right),
+\text{P}\left(\mathcal{M}\left(\mathcal{F}, \mathcal{G}\right) \le s\right) = \text{P}\left( \mathbb{E}\left(\bar{\mathcal{E}}\right) - \bar{\mathcal{E}} \ge \mathbb{E}\left(\bar{\mathcal{E}}\right) - s\right).
 \end{equation}
-and so by applying Hoeffding inequality Eq.~\ref{eqn:hoeffding1}
+By applying Hoeffding inequality Eq.~\ref{eqn:hoeffding1},
 
 \begin{equation}\label{eqn:qds_hoeffding1}
 \text{P}\left(\mathcal{M}\left(\mathcal{F}, \mathcal{G}\right) \le s \right) \le \text{exp}\left(- 2 \left[\mathbb{E}\left(\bar{\mathcal{E}}\right) - s\right]^2 n \right)
 \end{equation}
-provided that $\mathbb{E}\left(\bar{\mathcal{E}}\right) - s \ge 0$. This Eq.~\ref{eqn:qds_hoeffding1} provides an upper bound for the probability that there are fewer than $s$ mismatches observed when the average probability for mismatch is $\mathbb{E}\left(\bar{\mathcal{E}}\right)$.
+provided that $\mathbb{E}\left(\bar{\mathcal{E}}\right) - s \ge 0$. This Eq.~\ref{eqn:qds_hoeffding1} gives an upper bound for the probability that there are fewer than $s$ mismatches observed when the average probability for mismatch is $\mathbb{E}\left(\bar{\mathcal{E}}\right)$.
 
 Similarly, we derive
 \begin{equation}\label{eqn:qds_hoeffding2}
 \text{P}\left(s \le \bar{\mathcal{E}}\right) \le \text{exp}\left( - 2 \left[s - \mathbb{E}\left(\bar{\mathcal{E}}\right)\right]^2 n\right)
 \end{equation}
-by applying Eq.~\ref{eqn:hoeffding2}, provided that $s - \mathbb{E}\left(\bar{\mathcal{E}}\right) \ge 0$. This Eq.~\ref{eqn:qds_hoeffding2} provides an upper bound for the probability that there are more than $s$ mismatches observed when the average probability for mismatch is $\mathbb{E}\left(\bar{\mathcal{E}}\right)$. 
+by applying Eq.~\ref{eqn:hoeffding2}, provided that $s - \mathbb{E}\left(\bar{\mathcal{E}}\right) \ge 0$. This Eq.~\ref{eqn:qds_hoeffding2} gives an upper bound for the probability that there are more than $s$ mismatches observed when the average probability for mismatch is $\mathbb{E}\left(\bar{\mathcal{E}}\right)$. 
 
 
-Using Eqs.~\ref{eqn:qds_hoeffding1},~\ref{eqn:qds_hoeffding2} we may now bound the probabilities for events Eq.~\ref{eqn:repudiation_events}
+Using Eqs.~\ref{eqn:qds_hoeffding1},~\ref{eqn:qds_hoeffding2} we may now bound the probabilities for events of Eq.~\ref{eqn:repudiation_events}
 
 \begin{align}\label{eqn:qds_repudiation_events_probs}
-\text{P}\left(E_A\right) \le \text{exp}\left( -\left[p_B - s_B\right]^2 L \right) \qq{provided that} p_B > s_B \notag \\
-\text{P}\left(E_B\right) \le \text{exp}\left( -\left[p_C - s_B\right]^2 L \right) \qq{provided that} p_C > s_B \notag \\
-\text{P}\left(E_C\right) \le \text{exp}\left( -\left[s_C - p_C\right]^2 L \right) \qq{provided that} p_C < s_C \notag \\
+\text{P}\left(E_A\right) \le \text{exp}\left( -\left[p_B - s_B\right]^2 L \right) \qq{provided that} p_B > s_B, \notag \\
+\text{P}\left(E_B\right) \le \text{exp}\left( -\left[p_C - s_B\right]^2 L \right) \qq{provided that} p_C > s_B, \notag \\
+\text{P}\left(E_C\right) \le \text{exp}\left( -\left[s_C - p_C\right]^2 L \right) \qq{provided that} p_C < s_C, \notag \\
 \text{P}\left(E_D\right) \le \text{exp}\left( -\left[s_C - p_B\right]^2 L \right) \qq{provided that} p_B < s_C
 \end{align}
 
-\noindent where in the first two inequalities we have applied Eq.~\ref{eqn:qds_hoeffding1} and in the second two inequalities we have applied Eq.~\ref{eqn:qds_hoeffding2}. Alice has the power to choose any $0 \le p_B, p_C \le 1$. We will consider some cases:
+\noindent where in the first two inequalities we have applied Eq.~\ref{eqn:qds_hoeffding1} and in the second two inequalities we have applied Eq.~\ref{eqn:qds_hoeffding2}. 
 
-Assume that $p_B \ge s_B$. Then by the first inequality of Eq.~\ref{eqn:qds_repudiation_events_probs} the probability Eq.~\ref{eqn:rep_prob_working} must decay exponentially %must it? Could we decay faster? 
+Alice has the power to choose any $0 \le p_B, p_C \le 1$. Let us consider some cases.
+
+\paragraph{Case 1:} Assume that $p_B \ge s_B$. Then, by the first inequality of Eq.~\ref{eqn:qds_repudiation_events_probs}, the probability Eq.~\ref{eqn:rep_prob_working} must decay exponentially %must it? Could we decay faster? 
 and so we are secure against repudiation. An analogous argument holds for the choice $p_C \ge s_B$ using the second inequality of Eq.~\ref{eqn:qds_repudiation_events_probs}.
 
-Assume that $p_B < s_B$ and $p_C < s_B$. It follows that if we choose $s_B \le s_C$, then we force $p_B < s_C$ and $p_C < s_C$, and so Eq.~\ref{eqn:rep_prob_working} decays exponentially via the third and fourth inequalities of Eq.~\ref{eqn:qds_repudiation_events_probs}. Intuitively, we have demonstrated that even though Alice has full control over $p_B, p_C$ she cannot engineer a situation in which Bob measures fewer than $s_B$ mismatches while Charlie measures more than $s_C$. This relies on the choice $s_B \le s_C$ to ensure that $\varepsilon_{\text{repudiation}}$ decays exponentially in $L$.
+\paragraph{Case 2:} Assume that $p_B < s_B$ and $p_C < s_B$. It follows that if we choose $s_B \le s_C$, then we force $p_B < s_C$ and $p_C < s_C$, and so Eq.~\ref{eqn:rep_prob_working} decays exponentially via the third and fourth inequalities of Eq.~\ref{eqn:qds_repudiation_events_probs}. Intuitively, we have demonstrated that even though Alice has full control over $p_B, p_C$ she cannot engineer a situation in which Bob measures fewer than $s_B$ mismatches while Charlie measures more than $s_C$. This relies on the choice $s_B \le s_C$ to ensure that $\varepsilon_{\text{repudiation}}$ decays exponentially in $L$.
 
 
-Let us simplify substitute Eq.~\ref{eqn:qds_repudiation_events_probs} into Eq.~\ref{eqn:rep_prob_working} and simplify. Clearly, increasing $p_B$ or $p_C$ will cause both of the exponentials in the first term to decrease. Because of the inner minimum, we will only care about $\text{max}\left\{p_B, p_C\right\}$, and so we define $p := \text{max}\left\{p_B, p_C\right\}$ and write
+Let us substitute Eq.~\ref{eqn:qds_repudiation_events_probs} into Eq.~\ref{eqn:rep_prob_working} and simplify. Clearly, increasing $p_B$ or $p_C$ will cause both of the exponentials in the first term to decrease. Because of the inner minimum, we will only care about $\text{max}\left\{p_B, p_C\right\}$, and so we define $p := \text{max}\left\{p_B, p_C\right\}$ and write
 
 \begin{equation}
 \text{min}\left\{\text{exp}\left(- \left[p_B - s_B\right]^2L\right), \; \text{exp}\left(- \left[p_C - s_B\right]^2L\right)\right\} = \text{exp}\left(-\left[p - s_B\right]^2L\right). \notag
 \end{equation}
-In the case $p_B, p_C \le s_C$ we may increase the second term of Eq.~\ref{eqn:rep_prob_working} 
+In the case $p_B, p_C \le s_C$ we may increase the second term of Eq.~\ref{eqn:rep_prob_working}:
 
 \begin{equation}
-\text{exp}\left(- \left[s_C - p_C\right]^2 L \right) + \text{exp}\left(- \left[s_C - p_B\right]^2 L \right) \le 2 \exp\left( - \left[s_C - p\right]^2 L\right)
+\text{exp}\left(- \left[s_C - p_C\right]^2 L \right) + \text{exp}\left(- \left[s_C - p_B\right]^2 L \right) \le 2 \exp\left( - \left[s_C - p\right]^2 L\right).
 \end{equation}
-and so
+This leads to
 
 \begin{equation}
 \varepsilon_{\text{repudiation}} \le \text{min}\left\{ 2 \text{exp}\left( - \left[p - s_B\right]^2 L \right), 2 \text{exp}\left( - \left[s_C - p\right]^2 L \right) \right\}.
@@ -371,7 +367,7 @@ p = \frac{s_B + s_C}{2}.
 \begin{equation}\label{eqn:erep}
 \varepsilon_{\text{repudiation}} \le 2 \text{exp}\left( - \frac{\left[s_C - s_B\right]^2}{4} L\right)
 \end{equation}
-as our useful bound for the probability that Alice succeeds in her repudiation attack. Since Eq.~\ref{eqn:erep} is exponentially decaying the probability that she succeeds may be made arbitrarily small by choice of $L$. We are therefore secure against repudiation attack.
+as our useful bound for the probability that Alice succeeds in her repudiation attack. Since Eq.~\ref{eqn:erep} is exponentially decaying, the probability that she succeeds may be made arbitrarily small by choice of $L$. Our protocol can therefore be secured against a repudiation attack by a sufficiently large choice of $L$, provided that we choose $s_B \le s_C$.
 
 
 
@@ -394,7 +390,7 @@ Using Hoeffding inequality Eq.~\ref{eqn:qds_hoeffding2} in an identical manner t
 \begin{equation}\label{eqn:ehonabort}
 \varepsilon_{\text{honest abort}} = \varepsilon_{\text{Bob rejects}} \le 2 \exp\left( - \left[s_B -\perr\right]^2 L\right)
 \end{equation}
-provided that $s_B - \perr \ge 0$. Equation~\ref{eqn:ehonabort} is our useful bound for the probability that the protocol fails the robustness requirement. Since it is exponentially decaying the probability that this happens can be made arbitrarily small, and so our protocol is robust.
+provided that $s_B - \perr \ge 0$. Equation~\ref{eqn:ehonabort} is our useful bound for the probability that the protocol fails the robustness requirement. Since it is exponentially decaying, the probability that this happens can be made arbitrarily small, and so our protocol is robust.
 
 \subsection{Modelling $p_{\text{err}}$}\label{sec:qds_modelling_perr}
 
