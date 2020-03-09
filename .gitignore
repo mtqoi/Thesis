@@ -41,3 +41,9 @@ Images/SciencePlots-master/*
 /Chapters/library_qds_lit_review.lnk
 /Chapters/QDS + QSS story - (from mpl).xlsx
 /hycolor.sty
+
+
+# Bibliography stuff
+*.bcf
+*.xml
+*.gz
