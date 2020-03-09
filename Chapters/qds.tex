@@ -465,19 +465,12 @@ Equation~\ref{eqn:qds_security_condition} encodes the intuitive condition that t
 \section{Bounding $\pe$}\label{sec:qds_bounding_pe}
 To complete the security analysis of our protocol, and in order to compute an upper bound for $\varepsilon_{\text{fail}}$, Eq.~\ref{eqn:efail}, we must find a lower bound for $\pe$, the rate at which a forging Bob will induce a mismatch with respect to Charlie's signature. Our protocol may be secured by choice of $L$ provided that $\pe > \perr$ and an honest Charlie outperforms dishonest Bob. The key contribution of this section will be a lower bound for $\pe$ which may be calculated once Bob's quantum system at the end of the Distribution stage of the protocol is known.
 
-%, while fully taking into account the ambiguity in Bob's declaration.
-
-%This ambiguity stems from the following. Because Charlie eliminates two states from $\mathcal{A}_4$, Fig.~\ref{fig:elimsig}, there are
-
-%\begin{figure}[htp]
-%\centering
-%\includegraphics{ambiguity.png}
-%\end{figure}
 
 Bob will declare a string $\tilde{\Phi}_{Y, m^\prime}^C$, length $L/2$,  aimed to cause sufficiently few mismatches with respect to Charlie. For convenience we will abbreviate Bob's declared string as $\tilde{\Phi}_{\text{Bob}}$. %Our security analysis must fully take into account the ambiguity in Bob's declarations. This ambiguity stems from the following, and is illustrated in Fig.~\ref{fig:ambiguity}. 
-Our analysis differs from QKD analysis in that Bob's mismatch probability is \emph{not equivalent} to the probability that he misidentifies an element of Chalie's eliminated signature\footnote{And so a Helstrom-like approach \MT{define} will not work. We will pick up this idea further for comparison with our mismatch-based protocol in Sec.~\ref{sec:qds_helstromlike}.}. Because Charlie eliminates two states from QPSK, Fig.~\ref{fig:elimsig}, there are remaining two states from the QPSK alphabet which Bob can declare without introducing a mismatch. Each of the remining states is shared with another possible eliminated signature element, and so it is possible for Bob to misidentify Charlie's eliminated signature and yet still not introduce a mismatch.
+Our analysis differs from QKD analysis in that Bob's mismatch probability is \emph{not equivalent} to the probability that he misidentifies an element of Chalie's eliminated signature%\footnote{And so a Helstrom-like approach \MT{define} will not work. We will pick up this idea further for comparison with our mismatch-based protocol in Sec.~\ref{sec:qds_helstromlike}.}. 
+Because Charlie eliminates two states from QPSK, Fig.~\ref{fig:elimsig}, there are remaining two states from the QPSK alphabet which Bob can declare without introducing a mismatch. Each of the remining states is shared with another possible eliminated signature element, and so it is possible for Bob to misidentify Charlie's eliminated signature and yet still not introduce a mismatch.
 
-This forces us to work directly in terms of mismatch probability $\pe$, which we do via our error variable $\mathcal{E}$, Eq.~\ref{eqn:error}, the $j^{\text{th}}$ element of which is $1$ if Bob induces a mismatch there, and $0$ if there is no mismatch. We will continue to work in terms of the QPSK alphabet, though in Sec.~\ref{sec:qds_larger_alphabets} we will show how the proof may be generalized to an $N$PSK alphabet.
+This forces us to work directly in terms of mismatch probability $\pe$, which we do via our error variable $\mathcal{E}$, Eq.~\ref{eqn:error}, the $j^{\text{th}}$ element of which is $1$ if Bob induces a mismatch there, and $0$ if there is no mismatch. We will continue to work in terms of the QPSK alphabet, though in Appendix~\ref{appendix:qds_larger_alphabets} we demonstrate how the proof may be generalized to an $N$PSK alphabet.
 
 To proceed, recall that $Y_{m^\prime}^C$ is the half of Charlie's eliminated signature based on states he received directly from Alice. This is the half which Bob will attack. We define $Y_j$ to be its $j^{\text{th}}$ element, and write $Y_j = \left\{ y_1^j, y_2^j\right\}$ for phases $y_1^j, y_2^j$ in the QPSK alphabet. The $y_{1,2}^j$ denote the states which Charlie has eliminated. Note that $y_{1,2}^j$ must be adjacent to each other in phase-space, that is, if $y_1^j = \alpha$ then $y_2^j$ must be either $i \alpha$ or $- i \alpha$. The string $\tilde{\Phi}_{\text{Bob}} = \left\{\phi_j\right\}_{j=1}^{L/2}$ is Bob's declaration, which is the result of an unspecified but optimal POVM and classical strategy.
 
@@ -502,7 +495,7 @@ Since an element $\mathcal{E}_j$ is uniquely determined once $\phi_j, y_1^j, y_2
 \text{H}\left( \mathcal{E}_j \given y_1^j, y_2^j, \phi_j\right) = 0. \notag
 \end{equation}
 
-\noindent Using chain rule Eq.~\ref{eqn:intro_chain_rule} once again on the left hand side of Eq.~\ref{eqn:qds_pe_deriv_1}, but this time expanding over variable $y_1^j, y_2^j$,
+\noindent Using chain rule Eq.~\ref{eqn:intro_chain_rule} once again on the left hand side of Eq.~\ref{eqn:qds_pe_deriv_1}, but this time expanding over variable $y_1^j, y_2^j$, we get:
 \begin{align}\label{eqn:qds_pe_deriv_2}
 \text{H}\left( \mathcal{E}_j, y_1^j, y_2^j \given \phi_j \right) &=
 \text{H}\left(y_1^j, y_2^j \given \mathcal{E}_j, \phi_j\right) + \text{H}\left(\mathcal{E}_j \given \phi_j\right) \notag \\
@@ -552,15 +545,14 @@ and so Eq.~\ref{eqn:qds_pe_deriv_3} becomes
 \text{H}\left(y_1^j, y_2^j \given \phi_j \right) = 3 - \chi\left(y_1^j, y_2^j : \phi_j\right).
 \end{equation}
 
-\noindent Finally, combining Eqs.~\ref{eqn:qds_pe_deriv_4} and \ref{eqn:qds_pe_deriv_6} we arrive at
+\noindent Finally, combining Eqs.~\ref{eqn:qds_pe_deriv_4} and \ref{eqn:qds_pe_deriv_6}, we arrive at
 \begin{equation}\label{eqn:qds_hpe}
 \text{h}\left(\pe\right) \ge 1 - \chi \left(y_1^j, y_2^j : \phi_j\right)
 \end{equation}
-which is one of the key results for this chapter, and a key result of Ref.~\cite{Thornton2019}. Because we have used the Holevo information, we automatically include dishonest Bob's optimal POVM and classical strategy. Thus, the bound Eq.~\ref{eqn:qds_hpe} is a useful one provided that we are able to calculate $\chi$. In the following sections we will consider some realistic cases where this is possible.
+which is one of the key results for this chapter, and a key result of Ref.~\cite{Thornton2019}. %Because we have used the Holevo information, we automatically include dishonest Bob's optimal POVM and classical strategy. 
 
-Since binary entropy $\text{h}\left(\pe\right)$ is monotonic for $\pe \le 1/2$, Fig.~\ref{fig:binary_entropy}, we conclude that a lower bound for $\text{h}\left(\pe\right)$ also gives us a lower bound for $\pe$. The inequality~\ref{eqn:qds_hpe} is solved for Bob's average mismatch rate $\pe$, which may then be combined with $\perr$ in order to calculate $\varepsilon_{\text{forgery}}$, Eq.~\ref{eqn:eforg}
+In order to use the bound Eq.~\ref{eqn:qds_hpe} we must calculating forging Bob's Holevo information $\chi$, Eq.~\ref{eqn:intro_holevo}. Since binary entropy $\text{h}\left(\pe\right)$ is monotone for $\pe \le 1/2$, Fig.~\ref{fig:binary_entropy}, we conclude that a lower bound for $\text{h}\left(\pe\right)$ also gives us a lower bound for $\pe$. Equation~\ref{eqn:qds_hpe} therefore fully quantifies the best mismatch probability which Bob can attain from an optimal measurement on his quantum system, combined with an optimal classical strategy. We may solve this equation for a lower bound on $\pe$ one Bob's Holevo information $\chi$ is quantified. We do this under several important classes of eavesdropping attack in the following Section,~\ref{sec:qds_attack_analysis}.
 
-%and provide security against collective attacks \MT{define} provided that Bob's Holevo information $\chi$ can be estimated.
 
 \section{Attack analysis}\label{sec:qds_attack_analysis}
 We will consider several different models of dishonest Bob's eavesdropping attack. Different models will affect both the parameter regimes over which our protocol can be made secure, and the cost of resources required for that security. We will demonstrate how Bob's Holevo information may be calculated in each model, which may then be used to calculate $\pe$, Eq.~\ref{eqn:qds_hpe}.
