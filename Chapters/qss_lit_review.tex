@@ -5,7 +5,7 @@ Such schemes are regularly employed in \MT{context}, the canonical example being
 \MT{Make sure to cite the paper "how to share a secret" and talk about its title}.
 
 
-\subsection*{Classical secret sharing}
+\subsection{Classical secret sharing}\label{sec:qss_qcss}
 Although many existing secret-sharing schemes are already information-theoretically secure while relying only on classical resources \MT{cite}, they may encounter problems when distribution shares of the secret across insecure channels. \MT{talk in more detail about an information-theoretically secure classical scheme} This is analogous to the classical unconditionally secure signature schemes discussed in Sec.~\MT{X}. Secure implementation of a scheme such as \MT{X} requires shared secret keys which, in reality, requires QKD. Thus we may ask whether it is more or less resource-efficient to first run pairwise QKD between players, or to run a "direct"-QSS scheme without first distilling pairwise secret keys. We should expect interesting parallels between QSS and QKD, since intuitively they are very similar, and rely on encryption of classical messages.
 
 Let us consider some examples. Alice wishes to share a secret $m$ between $n$ players, such that any $k$ of them can access $m$. The general framework for this is an $\left(n, k\right)$-threshold scheme, where there are $n$ players in total and any subset of $k$ players can reconstruct the secret. An example of an information-theoretically secure threshold sharing scheme was designed by Shamir in Ref.~\MT{X}. Shamir's scheme relies on polynomial equations and is provably secure even against an adversary with infinite computing power. 
