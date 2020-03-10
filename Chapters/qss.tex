@@ -118,13 +118,14 @@ Critical to the protocol is the fact that Alice forms a secret key based on a de
 \section{Security against Eve}\label{sec:qss_honest_recipients}
 %\MT{talk here about security against an external eavesdropper.}
 
-The QSS protocol presented above must be secure against both the actions of an external eavesdropper and those of a dishonest Bob or Charlie who may be collaborating with Eve. We will first consider security against Eve in order to illustrate key steps from the security analysis, and so for this section we assume that Bob and Charlie are honest,
+The QSS protocol presented above must be secure against both the actions of an external eavesdropper and those of a dishonest Bob or Charlie who may be collaborating with Eve. We will first consider security against Eve in order to illustrate key steps from the security analysis. For this section we assume that Bob and Charlie are honest,
 Fig.~\ref{fig:qss_honest_recipients}. In Sec.~\ref{sec:qss_dishonest_recipient} we will begin to allow for dishonesty in recipients Bob and Charlie.
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 \includegraphics[draft=false, width=0.6\linewidth]{qss/qss_honest_recipients}
-\caption{\label{fig:qss_honest_recipients} Alice will distribute her secret $\sigma_A$ to Bob and Charlie who are assumed honest. Dishonest Eve will try to attack the protocol and gain information about $\sigma_A$. Gray: honest. Red: dishonest. See Fig.~\ref{fig:qss_structure} for further information.}
+\caption{\label{fig:qss_honest_recipients} Alice distributes her secret $\sigma_A$ to Bob and Charlie who are assumed honest. Dishonest Eve will try to attack the protocol and gain information about $\sigma_A$. Gray: honest. Red: dishonest. See Fig.~\ref{fig:qss_structure} for further information.}
 \end{figure}
 
 
@@ -133,66 +134,68 @@ The starting point for our security analysis is the following Devetak-Winter bou
 %\MT{should I motivate why this bound is helpful for us?}
 
 \begin{equation}\label{eqn:qss_dw_eve}
-\kappa_{\text{Eve}} \ge \text{I}\left(X_A : X_B, X_C\right) - \chi\left(X_A : \mathbb{E}\right)
+\kappa_{\text{Eve}} \ge \text{I}\left(X_A : X_B, X_C\right) - \chi\left(X_A : \mathbb{E}\right).
 \end{equation}
 
-\noindent which describes the balance between the mutual information, $\text{I}$, shared between Alice and a Bob-Charlie collaboration, and the Holevo information $\chi$ between Eve's quantum system $\mathbb{E}$ and Alice. It is perhaps unsurprising that Eq.~\ref{eqn:qss_dw_eve} should be our starting point given the noted similarities between QSS and QKD. The $X_A = \mathcal{F}\left(A_B, A_C\right)$ is Alice's variable based on her heterodyne measurement outcomes.
+\noindent This equation describes the key rate in terms of the difference between the mutual information, $\text{I}$, shared between Alice and a Bob-Charlie collaboration, and the Holevo information $\chi$ between Eve's quantum system $\mathbb{E}$ and Alice. %\footnote{It is perhaps unsurprising that Eq.~\ref{eqn:qss_dw_eve} should be our starting point given the noted similarities between QSS and QKD.}
+The $X_A = \mathcal{F}\left(A_B, A_C\right)$ is Alice's variable based on her heterodyne measurement outcomes.
 
-We would like to calculate the lower bound for key rate given by Eq.~\ref{eqn:qss_dw_eve} and so we will consider each term in turn and demonstrate how they may be calculated for the protocol described above.
+We would like to calculate the lower bound for key rate given by Eq.~\ref{eqn:qss_dw_eve} and so we will consider each term, and demonstrate how they may be calculated in our protocol.
 
 
 
 \subsection{Mutual information}
 
-Using Eq.~\ref{eqn:intro_mutual_information} the mutual information $\text{I}$ may be written as 
+Using Eq.~\ref{eqn:intro_mutual_information}, the mutual information $\text{I}$ may be written as 
 \begin{equation}\label{eqn:qss_deriv_1}
 \text{I}\left(X_A : X_B, X_C\right) = \text{H}\left(X_B, X_C\right) - \text{H} \left(X_B, X_C \given X_A\right).
 \end{equation}
-where the first term on the right hand side is the joint Shannon entropy of $X_B$ and $X_C$, and the second term is the conditional Shannon entropy of $X_B, X_C$ given $X_A$, Sec.~\ref{sec:intro_shannon_entropy}. Intuitively this second term encodes the uncertainty one has about which $X_B, X_C$ were chosen, once Alice has formed $X_A$, while the first term encodes the \emph{a priori} entropy about Bob and Charlie's choice of sent coherent states.
+where the first term on the right hand side is the joint Shannon entropy of $X_B$ and $X_C$, and the second term is the conditional Shannon entropy of $X_B, X_C$ given $X_A$, Sec.~\ref{sec:intro_shannon_entropy}. Intuitively, this second term encodes the uncertainty one has about which $X_B, X_C$ were chosen, once Alice has formed $X_A$. The first term encodes the \emph{a priori} entropy about Bob and Charlie's choice of sent coherent states, and is purely a function of their sending probabilities.
 
 The joint Shannon entropy may be written
 \begin{equation}\label{eqn:qss_deriv_2}
-\text{H}\left(X_B, X_C\right) = \sum_{X_B=b, X_C=c} - \text{P}\left(b, c\right) \log \text{P}\left(b, c\right)
+\text{H}\left(X_B, X_C\right) = \sum_{X_B=\phi_B, X_C=\phi_C} - \text{P}\left(\phi_B, \phi_C\right) \log \text{P}\left(\phi_B, \phi_C\right),
 \end{equation}
-where $b, c$ are individual instances of variables $X_B, X_C$. In the following we shall take $b, c$ as phase elements of the QPSK alphabet, but this may be readily generalized to an $N$PSK alphabet. 
-
-Since $b, c$ are taken to be independently chosen and uniformly random we see that the joint probability
+where $\phi_B, \phi_C$ are individual instances of variables $X_B, X_C$. We take $\phi_B, \phi_C$ as phase elements of the QPSK alphabet, is easy to generalize to larger $N$PSK alphabets if desired. Since $\phi_B, \phi_C$ are taken to be independently and randomly chosen, each with probability\footnote{We relax this in Ch.~\ref{chapter:aqc}.} $1/4$, we see that the joint probability
 \begin{equation}\label{eqn:qss_deriv_3}
-\text{P}\left(b, c\right) = \text{P}\left(b\right)\times \text{P}\left(c\right) = \frac{1}{16}
+\text{P}\left(\phi_B, \phi_C\right) = \text{P}\left(\phi_B\right)\times \text{P}\left(\phi_C\right) = \frac{1}{16},
 \end{equation}
-since each of the $b, c$ are chosen with probability $1/4$. We will relax this assumption in Chapter~\ref{chapter:aqc}.
+and so $\text{H}\left(X_B, X_C\right) = 4$. %TODO: check this
 
-Expanding the conditional entropy in $X_A$ via Eq.~\ref{eqn:intro_conditional_entropy_expansion} \cite{Wilde2013} we reach
+Expanding the conditional entropy in terms of particular outcomes for $X_A$, via Eq.~\ref{eqn:intro_conditional_entropy_expansion}%\cite{Wilde2013}, 
+, we reach
 
 \begin{equation}\label{eqn:qss_deriv_4}
-\text{H}\left(X_B, X_C \given X_A\right) = \int\limits_{a \in \mathbb{C}} \Diff2 a \; \text{P}\left(X_A = a\right) \text{H}\left(X_B, X_C \given X_A = a\right),
+\text{H}\left(X_B, X_C \given X_A\right) = \int\limits_{a \in \mathbb{C}} \Diff2 a \; \text{P}\left(X_A = a\right) \text{H}\left(X_B, X_C \given X_A = a\right).
 \end{equation}
-and we shall see that each term in Eq.~\ref{eqn:qss_deriv_4} can be calculated once function $\mathcal{F}$ is known. The conditional entropy $\text{H}\left(X_B, X_C \given X_A = a\right)$ expands as 
+Each term in Eq.~\ref{eqn:qss_deriv_4} can be calculated once function $\mathcal{F}$ is known. The conditional entropy $\text{H}\left(X_B, X_C \given X_A = a\right)$ expands as 
 
 \begin{align}
-\text{H}\left(X_B, X_C \given X_A=a\right) = - \sum_{b, c}  &\text{P}\left(X_B=b, X_C=c \given X_A=a\right) \times \notag \\
+\text{H}\left(X_B, X_C \given X_A=a\right) = - \sum_{\phi_B, \phi_C} \;  &\text{P}\left(X_B=\phi_B, X_C=\phi_C \given X_A=a\right) \times \notag \\
 %
 &\log \text{P}\left(X_B=b, X_C=c \given X_A=a\right) \label{eqn:qss_deriv_4_1}
 \end{align}
 
-\noindent and so all that remains is to calculate the probabilities 
+\noindent and so all that remains to calculate are the probabilities 
 \begin{align}
 \label{eqn:qss_prob1} \text{P}\left(X_A=a\right) \qq{and} \\
-\label{eqn:qss_prob2} \text{P}\left(X_B=b, X_C=c \given X_A=a\right)
+\label{eqn:qss_prob2} \text{P}\left(X_B=\phi_B, X_C=\phi_C \given X_A=a\right)
 \end{align}
-with respect to a given function $\mathcal{F}$.
+once $\mathcal{F}$ is known.
 
 
 \subsubsection{Function $\mathcal{F}$}
 
 
-We have no requirement that $\mathcal{F}$ should be injective. This implies, for example, that $\text{S}\left(\rho_{\left.\mathbb{E} \given A_B, A_C\right.}\right) \ne \text{S}\left(\rho_{\left. \mathbb{E} \given X_A\right.}\right)$, i.e. the entropy of Eve's quantum state conditioned on Alice's heterodyne outcomes $A_B, A_C$ is not equal to the entropy of Eve's quantum state conditioned on Alice's variable $X_A$, and so we must carefully consider the action of $\mathcal{F}$ early on in our analysis. 
+We have no requirement that the function $\mathcal{F}$ should be injective. This implies, for example, that $\text{S}\left(\rho_{\left.\mathbb{E} \given A_B, A_C\right.}\right) \ne \text{S}\left(\rho_{\left. \mathbb{E} \given X_A\right.}\right)$, i.e. the entropy of Eve's quantum state conditioned on Alice's heterodyne outcomes $A_B, A_C$ is not equal to the entropy of Eve's quantum state conditioned on Alice's variable $X_A$. So, we must carefully consider the action of $\mathcal{F}$ early on in our analysis. 
 
-To be concrete, in what follows we assume that $F$ is linear
+To be concrete, in what follows we assume that $F$ is linear,
 \begin{equation}\label{eqn:qss_F_linear}
-\mathcal{F}\left(x, y\right) := g x + h y \qq{with} g, h \in \mathbb{R}\setminus \left\{0\right\}
+\mathcal{F}\left(x, y\right) := g x + h y \qq{with} g, h \in \mathbb{R}\setminus \left\{0\right\},
 \end{equation} 
-which will enable us to make some predictions about the performance of the protocol. Although we make no claims about the optimality of this choice of $\mathcal{F}$, we are free to optimize the key rate over $g, h$, and we will make it clear when we have done so. In Sec.~\ref{appendix:qss_moreF} we consider some alternative forms for $\mathcal{F}$.
+which will enable us to make some predictions about the performance of the protocol. Although we make no claims about the optimality of this choice of $\mathcal{F}$, Alice is free to optimize the key rate over $g, h$.
+
+%, and we will make it clear when we have done so. In Sec.~\ref{appendix:qss_moreF} we consider some alternative forms for $\mathcal{F}$.
 
 
 
@@ -202,18 +205,18 @@ which will enable us to make some predictions about the performance of the proto
 
 Applying Bayes' formula Eq.~\ref{eqn:intro_bayes} to probability Eq.~\ref{eqn:qss_prob2} we see that
 \begin{align}
-\text{P}\left(X_B=b, X_C=c \given X_A=a\right) = \text{P}&\left(X_A=a \given X_B=b, X_C=c\right) \notag \\
-&\times \frac{\text{P}\left(X_B=b, X_C=c\right)}{\text{P}\left(X_A=a\right)}.
+\text{P}\left(X_B=\phi_B, X_C=\phi_C \given X_A=a\right) = \text{P}&\left(X_A=a \given X_B=\phi_B, X_C=\phi_C\right) \notag \\
+&\times \frac{\text{P}\left(X_B=\phi_B, X_C=\phi_C\right)}{\text{P}\left(X_A=a\right)}.
 \end{align}
 
 
-\noindent Now, we can access $\text{P}\left(X_A=a \given X_B=b, X_C=c\right)$. 
+\noindent Now, we can access $\text{P}\left(X_A=a \given X_B=\phi_B, X_C=\phi_C\right)$. 
 %by modelling the effects of the channel on quantum states distributed by Bob and Charlie. 
 We take
 \begin{equation}\label{eqn:qss_deriv_5}
-X_A = \mathcal{F}\left(A_B, A_C\right) = g A_B + h A_C
+X_A = \mathcal{F}\left(A_B, A_C\right) = g A_B + h A_C,
 \end{equation}
-as in Eq.~\ref{eqn:qss_F_linear} and so we rearrange
+as in Eq.~\ref{eqn:qss_F_linear}, and so we rearrange
 \begin{equation}
 A_C = \frac{X_A - g A_B}{h}.
 \end{equation}
@@ -222,47 +225,38 @@ A_C = \frac{X_A - g A_B}{h}.
 we must average over all of the possible ways to reach a given $X_A$. Therefore, once $X_A, g$ and $h$ are fixed, the choice of $A_B, A_C$ reduces to a one-variable problem. So
 
 \begin{equation}\label{eqn:qss_deriv_5_1}
-\text{P}\left(X_A \given X_B=b, X_C=c\right) = \int\limits_{A_B \in \mathbb{C}} \Diff2 A_B \; \text{P}\left(A_B , \frac{X_A - g A_B}{h} \given X_B=b, X_C=c\right)
+\text{P}\left(X_A \given X_B=\phi_B, X_C=\phi_C\right) = \int\limits_{A_B \in \mathbb{C}} \Diff2 A_B \; \text{P}\left(A_B , \frac{X_A - g A_B}{h} \given X_B=\phi_B, X_C=\phi_C\right)
 \end{equation}
-which may be calculated once we know how the channel acts on input states. Note that an analogous expression would be reached by rearranging Eq.~\ref{eqn:qss_deriv_5} as $A_B = \left(X_A - h A_C\right)/g$, but it will make no difference to the resulting quantities which we derive from Eq.~\ref{eqn:qss_deriv_5_1}
+which may be calculated once we know how the channel acts on input states\footnote{Note that an analogous expression would be reached by rearranging Eq.~\ref{eqn:qss_deriv_5} as $A_B = \left(X_A - h A_C\right)/g$, but it will make no difference to the resulting quantities which we derive from Eq.~\ref{eqn:qss_deriv_5_1}}.
 
-Assuming that the two channels, one from Charlie$\rightarrow$Alice and one from Bob$\rightarrow$Alice, are independent from each other\footnote{We shall see later what this means for their combined action on an input quantum state} allows us to write
+Assuming that the two channels, one from Charlie$\rightarrow$Alice and one from Bob$\rightarrow$Alice, are independent\footnote{We shall see later what this means for their combined action on an input quantum state} from each other allows us to write
 \begin{equation}\label{eqn:qss_deriv_6}
-\text{P}\left(A_B, A_C \given X_b=b, X_C=c\right) = \text{P}\left(A_B \given X_B=b\right) \times \text{P}\left(A_C \given X_C=c\right)
+\text{P}\left(A_B, A_C \given X_b=\phi_B, X_C=\phi_C\right) = \text{P}\left(A_B \given X_B=\phi_B\right) \times \text{P}\left(A_C \given X_C=\phi_C\right)
 \end{equation}
-for the probabilities that Alice's heterodyne measurement outcomes are $A_B, A_C$ if coherent states with phases $\phi_B = b, \phi_C = c$ are sent.
+for the probabilities that Alice's heterodyne measurement outcomes are $A_B, A_C$, given that coherent states with phases $\phi_B, \phi_C$ are sent.
 
-Let us assume for now that each channel is noiseless but lossy. The probability that Alice measures a particular heterodyne outcome $a \in \mathbb{C}$ when a coherent state of complex amplitude $\beta$ is sent through a lossy channel, transmittivity $T$, is (Sec.~\ref{sec:qss_perr}) %where do I actually derive this? I should put it in one place and then refer to it a bunch
+Let us assume for now that each channel is noiseless but lossy. The probability that Alice measures a particular heterodyne outcome $a = \qout + i \pout$ when a coherent state of complex amplitude $\beta$ is sent through a lossy channel, transmittivity $T$, is (Sec.~\ref{sec:qss_perr}) %where do I actually derive this? I should put it in one place and then refer to it a bunch
 \begin{equation}\label{eqn:qss_channel_classical_prob}
 \text{P}\left(a \given \beta, T\right) = \frac{1}{\pi}\exp\left( - \left| a - \sqrt{T}\beta \right|^2\right)
 \end{equation}
-which we have used previously in Ch.~\ref{chapter:qds}. The required changes to include thermal noise of the channel can be readily made, Sec.~\ref{sec:thermal_channel}.
+which we have used previously in Ch.~\ref{chapter:qds}. The required changes to include thermal noise of the channel can be readily made, Appendix.~\ref{appendix:qds_noisy_channel}.
 
-The integral in Eq.~\ref{eqn:qss_deriv_5_1} may be calculated analytically to reach 
+The integral in Eq.~\ref{eqn:qss_deriv_5_1} may now be calculated analytically to reach 
 \begin{align}\label{eqn:qss_deriv_7}
-\text{P}\left(X_A \given X_B=b, X_C=c\right) = \frac{1}{\pi} \frac{1}{g^2 + h^2} &\exp \left( - \frac{\left[b^R g \sqrt{T_B} + c^R h \sqrt{T_C} - X_A^R \right]^2}{g^2 + h^2}\right) \notag \\
+\text{P}\left(X_A \given X_B=\phi_B, X_C=\phi_C\right) = \frac{1}{\pi} \frac{1}{g^2 + h^2} &\exp \left( - \frac{\left[\phi_B^R g \sqrt{T_B} + \phi_C^R h \sqrt{T_C} - X_A^R \right]^2}{g^2 + h^2}\right) \notag \\
 %
-&\times \exp \left( - \frac{\left[b^I g \sqrt{T_B} + c^I h \sqrt{T_C} - X_A^I \right]^2}{g^2 + h^2} \right)
+&\times \exp \left( - \frac{\left[\phi_B^I g \sqrt{T_B} + \phi_C^I h \sqrt{T_C} - X_A^I \right]^2}{g^2 + h^2} \right).
 \end{align}
-where $b, c$ are Bob and Charlie's coherent state amplitudes, $X_A$ is Alice's final variable after applying $\mathcal{F}$ Eq.~\ref{eqn:qss_F_linear} to her heterodyne outcomes, $T_B, T_C$ are the transmittivities of the Bob$\rightarrow$Alice channel and Charlie$\rightarrow$Alice channel, respectively, and a superscript $R\left(I\right)$ denotes the real (imaginary) part of the corresponding quantity. %\MT{I probably don't need to say much about how this integration is actually done, since it should be obvious.} 
-The probability $\text{P}\left(X_A=a\right)$ Eq.~\ref{eqn:qss_prob1} may now be found by %summing Eq.~\ref{eqn:qss_deriv_7} over all $b, c$ in our QPSK alphabet.
+Here $\phi_B, \phi_C$ are Bob and Charlie's coherent state amplitudes, $X_A$ is Alice's final variable after applying $\mathcal{F}$ (Eq.~\ref{eqn:qss_F_linear}) to her heterodyne outcomes, $T_B, T_C$ are the transmittivities of the Bob$\rightarrow$Alice channel and Charlie$\rightarrow$Alice channel, respectively, and a superscript $R\left(I\right)$ denotes the real (imaginary) part of the corresponding quantity. %\MT{I probably don't need to say much about how this integration is actually done, since it should be obvious.} 
+The probability $\text{P}\left(X_A=a\right)$ Eq.~\ref{eqn:qss_prob1} may now be found by summing over Eq.~\ref{eqn:qss_deriv_7}:
 
 \begin{equation}\label{eqn:qss_deriv_pxa}
-\text{P}\left(X_A\right) = \sum_{b, c} \text{P}\left(X_A \given X_B=b, X_C=c\right).
+\text{P}\left(X_A\right) = \sum_{\phi_B, \phi_C} \text{P}\left(X_A \given X_B=\phi_B, X_C=\phi_C\right).
 \end{equation}
 
 
+Finally, the mutual information Eq.~\ref{eqn:qss_deriv_1} may be calculated. We perform the integration over $X_A$ in Eq.~\ref{eqn:qss_deriv_4} numerically and display the mutual information $I$ in Fig.~\ref{fig:qss_mutual_information}.
 
-
-
-
-Finally, the mutual information Eq.~\ref{eqn:qss_deriv_1} may be calculated. We perform the integration over $X_A$ in Eq.~\ref{eqn:qss_deriv_4} numerically and display the mutual information $I$ in Fig.~\ref{fig:qss_mutinf_graphs}.
-
-
-% Have some graphs of the various probabilities and mutual information
-
-
-%Let us now explore how the mutual information behaves. \MT{Now let's make some graphs and really have fun exploring how $I$ behaves.}
 
 \subsection{Holevo information}
 
