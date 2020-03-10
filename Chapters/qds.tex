@@ -847,7 +847,7 @@ as our choices of security thresholds. Notice that since $\perr \le \pe$, Eq.~\r
 
 
 
-\section{Postselection}
+\section{Postselection}\label{sec:qds_postselection}
 In the context of QKD it has been known for some time that a postselection of measurement outcomes, in measurement outcomes unfavourable to honest players are discarded, will improve the key rates in the presence of excess noise. Postselection is even a requirement to distill a key below $T \le 1/2$ in the direct reconciliation regime \cite{Silberhorn2002}. We are thus motivated to apply postselection to our QDS protocol in order to allow a message to be securely signed over a larger range of channel parameters, and we shall see that it can reduce the necessary $L$. The results of this section will be especially useful in Ch.~\ref{chapter:aqc} where--as for direct reconciliation QKD--we shall see that postselection is a necessity for some QDS protocols.
 
 For now we will apply postselection to the protocol outlined in this chapter. To apply the postselection technique, recipients Bob and Charlie will simply disregard unfavourable measurement outcomes, i.e. outcomes for which a dishonest player is deemed to have too much knowledge, or for which the probability of honest mismatch is too high.
