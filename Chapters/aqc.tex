@@ -414,7 +414,7 @@ The mutual information I is calculated in a similar fashion to the protocol QSS-
 \text{I}\left(X_A : X_B\right) = \text{H}\left(X_A\right) - \text{H}\left(X_A \given X_B\right).
 \end{equation}
 
-\noindent The Shannon entropy of Alice's variable is equal to $\sum_{X_A=a} - \text{P}\left(a\right) \log \text{P}\left(a\right)$ and is equal to $1/4$ in the ideal case. .
+\noindent The Shannon entropy of Alice's variable is equal to $\sum_{X_A=a} - \text{P}\left(a\right) \log \text{P}\left(a\right)$ and is equal to $2$ in the ideal case. .
 
 We may expand the conditional entropy in Eq.~\ref{eqn:qkdf_deriv_1} as
 \begin{equation}\label{eqn:qkdf_deriv_2}
@@ -436,9 +436,7 @@ When a coherent state $\alpha_k$ is chosen uniformly at random, the two-mode out
 \begin{equation}\label{eqn:qkdf_eve_conditional}
 \rho_{\left. E \given b\right.} = \frac{1}{4} \frac{1}{\text{P}\left(b\right)} \sum_{\alpha_k} \text{P}\left(b \given \alpha_k, T\right) \times \dyad{\sqrt{1-T}\alpha_k}_E
 \end{equation}
-when $\text{P}\left(b\right) = \sum_{\alpha_k}\text{P}\left(b \given \alpha_k, T\right)$ denotes the total probability that Bob measures $b$.
-
-Eve's \emph{a posteriori} entropy is then
+when $\text{P}\left(b\right) = \sum_{\alpha_k}\text{P}\left(b \given \alpha_k, T\right)$ denotes the total probability that Bob measures $b$. Eve's \emph{a posteriori} entropy is then
 
 \begin{equation}\label{eqn:qkdf_aposteriori_entropy}
 S_{\text{aposteriori}} = \int\limits_{b \in \mathbb{C}} \Diff2 b \; \text{P}\left(b\right) S\left(\rho_{\left. E \given b \right.}\right)
@@ -450,9 +448,7 @@ Eve's \emph{a priori} entropy is
 \begin{equation}\label{eqn:qkdf_apriori_entropy}
 S_{\text{apriori}} = S\left[\, \int\limits_{b \in \mathbb{C}} \Diff2 b \; \text{P}\left(b\right) \rho_{\left. E \given b \right.}\right],
 \end{equation}
-from which the Holevo information $\chi$ may be calculated.
-
-The performance of protocol QKD-$f$ is discussed at length in Ref.~\cite{Papanstasiou2018} and so we refer the reader there. 
+from which the Holevo information $\chi$ may be calculated. Attacks BS$1$, BS$2$ and EC may be implemented following an identical analysis to this section. The performance of protocol QKD-$f$ is discussed at length in Ref.~\cite{Papanstasiou2018} and so we refer the reader there. 
 
 
 %\section{Performance of CV agile systems}
