@@ -479,18 +479,20 @@ The Tx and Rx modules were connected by either a $2$~km or $20$~km SMF-$28$ opti
 \captionsetup{width=0.8\linewidth}
 \centering
 \includegraphics[draft=false, width=0.8\linewidth]{aqc/QDS_dataplots}
-\caption{\label{fig:aqc_experimental_trace} Top: raw data trace. Bottom: data after DSP. Red: heterodyne outcomes on bright phase-reference states, amplitude $\alpha^\prime$ which are sent at the start of each frame, and allow the phases of the remaining states to be reconstructed. Green: heterodyne measurement outcomes on signal states amplitude $\alpha < \alpha^\prime$. The cryptographic tasks are performed with signal (green) data points only. \emph{Picture credit: Stefan Richter in Ref.~\cite{Richter2020}}}
+\caption{\label{fig:aqc_experimental_trace} Top: raw data trace. Bottom: data after DSP. Red: heterodyne outcomes on bright phase-reference states, amplitude $\alpha^\prime$ which are sent at the start of each frame, and allow the phases of the remaining states to be reconstructed. Green: heterodyne measurement outcomes on signal states amplitude $\alpha < \alpha^\prime$. The cryptographic tasks are performed with signal (green) data points only. \emph{Picture credit: Stefan Richter in Ref.~\cite{Richter2020}}
+%Top: Raw quadrature data produced by the experiment detailed in Sec.~\ref{sec:aqc_experiment}. The raw data undergoes a proprietary digital signal processing (DSP), and produces the phase-space constellation displayed in the bottom diagram. Each black point is a measurement outcome. Shaded circles represent the means and variances of the received outcomes. Red: phase reference states. Green: signal states. \emph{Picture credit; Stefan Richter in Ref.~\cite{Richter2020}
+}
 \end{figure}
 
 \clearpage
 \section{Data analysis}
-In this section we will analyse the data which was obtained in the experiment detailed in the previous section. Our starting point is signal data points\footnote{green in Fig.~\ref{fig:aqc_experimental_trace}} which we received from MPL. In Sec.~\ref{sec:aqc_protocol_modifications} we will demonstrate how the cryptographic protocols detailed above may be altered to more closely match the realistic data which includes experimental imperfections. %The ideal figures of merit obtained previously should be interpreted as upper bounds to protocol performance.
-In Sec.~\ref{eqn:aqc_received_data} we will closely examine the data which we have received from MPL and which forms the basis for our demonstration of two quantum agile systems. We will demonstrate how it may be used to estimate protocol performance and figures of merit\footnote{Of which the ideal figures of merit previously obtained are an upper bound}, and how the experiment lends itself to an agile interpretetation.
+In this section we will analyse the data which was obtained in the experiment detailed in the previous section. Our starting point is the signal data points\footnote{Green in Fig.~\ref{fig:aqc_experimental_trace}} which we received from MPL. In Sec.~\ref{sec:aqc_protocol_modifications} we will demonstrate how the cryptographic protocols detailed above may be altered to more closely match the realistic data which includes experimental imperfections. %The ideal figures of merit obtained previously should be interpreted as upper bounds to protocol performance.
+In Sec.~\ref{eqn:aqc_received_data} we will closely examine the data which we have received from MPL and which forms the basis for our demonstration of two quantum agile systems. We will demonstrate how it may be used to estimate protocol performance and figures of merit\footnote{Of which the ideal figures of merit obtained in previous chapters are an upper bound}, and then discuss how how the experiment lends itself to an agile interpretetation.
 
 %\MT{Do some quick analysis of the data here, since I will want to refer to it in the Protocol modifications section.}
 
 \subsection{Protocol modifications}\label{sec:aqc_protocol_modifications}
-Throughout this thesis it has been assumed that an ideal QPSK alphabet has been distributed, with states chosen uniformly and at random. This has allowed us to make several simplifying assumptions. For example in protocol QDS-$f$, these assumptions allowed us to simplify Eq.~\ref{eqn:aposteriori_entropy} as follows
+Throughout this Thesis it has been assumed that an ideal QPSK alphabet has been distributed, with states chosen uniformly and at random. This has allowed us to make several simplifying assumptions. For example in protocol QDS-$f$, these assumptions allowed us to simplify Eq.~\ref{eqn:aposteriori_entropy} as follows
 \begin{equation}
 \sum_{e_k} \text{P}\left(e_k\right) S\left(\rho_{\left. B \given e_k\right.}\right) \rightarrow S\left(\rho_{\left. B \given e_1\right.}\right).
 \end{equation}
@@ -500,7 +502,7 @@ Throughout this thesis it has been assumed that an ideal QPSK alphabet has been 
 \text{P}\left(b, c\right) = \frac{1}{16}.
 \end{equation}
 
-\noindent Realistically the states are not sent with identical sending probabilities, nor are they sent with identical amplitudes. We see this from the experimental data in Tab.~\MT{X} where we explicitly write the amplitudes and probabilities of each state from the QPSK alphabet. This imperfection must be taken into account in our bounds for key rate and signature length, which we now do.
+\noindent Realistically the states are not sent with identical sending probabilities, nor are they sent with identical amplitudes. The actual sending amplitudes for each experimental run are displayed in Tab.~\ref{table:aqc_data_parameters}. Non-uniform sending probabilities may also be directly measured from a disclosed subset of data. These imperfections must be taken into account in our bounds for key rate and signature length, which we now do.
 
 \subsubsection{QDS-$b$}
 In QDS-$b$ the key parameter to calculate is $g_{\text{sec}} = \pe - \perr$, which is related to the signature length figure of merit via Eq.~\ref{eqn:aqc_qdsb_efail}. Bob's mismatch probability $\pe$ is made more realistic by changing several steps in the derivation of Holevo information $\chi$. 
@@ -509,20 +511,19 @@ For example, under attack BS$0$ we update Bob's \emph{a priori} state, c.f. Eq.~
 \begin{equation}
 \rho_B = \sum_{\alpha_k} \text{P}\left(\alpha_k\right) \dyad{\sqrt{1-T} \alpha_k}
 \end{equation}
-where the amplitudes $\alpha_k$ and sending probabilities $\text{P}\left(\alpha_k\right)$ are derived from data. Bob's \emph{a posteriori} states 
+where the amplitudes $\alpha_k$ and sending probabilities $\text{P}\left(\alpha_k\right)$ are directly derived from the received data. Bob's \emph{a posteriori} states 
 
 \begin{equation}
-\rho_B^k = \dyad{\sqrt{1-T}\alpha_k}
+\rho_B^k = \dyad{\sqrt{1-T}\alpha_k},
 \end{equation} 
 and \emph{a posteriori} entropy
 \begin{equation}
-\sum_{\alpha_k}\text{P}\left(\alpha_k\right) S\left(\rho_B^k\right)
+\sum_{\alpha_k}\text{P}\left(\alpha_k\right) S\left(\rho_B^k\right),
 \end{equation}
-now also depend on the measured data and for attacks BS$1$ and EC must be calculated without the simplifications afforded by ideal sending probabilities and equal $\left|\alpha_k\right|$'s. For attack BS$0$ Bob's \emph{a posteriori} entropy vanishes identically because his state is pure.
+now also depend on the measured data. For attacks BS$1$ and EC, they must be calculated without the simplifications afforded by ideal sending probabilities and equal $\left|\alpha_k\right|$'s. For attack BS$0$ Bob's \emph{a posteriori} entropy vanishes identically because his state is pure.
 
-The honest mismatch probability $\perr$ may be measured directly from the data by observing the probability that a state is eliminated.
+The honest mismatch probability $\perr$ may be measured directly from the data by observing the probability that a state is eliminated. We demonstrate this in Sec.~\ref{sec:aqc_performance}.
 
-\MT{have some figures and numbers here}
 
 \subsubsection{QSS-$b$}
 We will demonstrate the necessary alterations which should be made to mutual information I and Holevo information $\chi$ in protocol QSS-$b$.
@@ -579,13 +580,13 @@ Each of Bob's states conditioned on an eliminated signature element $e_k$ now ha
 
 Finally, we consider how the protocol QKD-$f$ may be updated to allow for non-uniform QPSK alphabets.
 
-\paragraph{Mutual Information I, Eq.~\ref{eqn:eqn:qkdf_deriv_1}}
+\paragraph{Mutual Information I, Eq.~\ref{eqn:qkdf_deriv_1}}
 
 The Shannon entropy $\text{H}\left(X_A\right)$ of Alice's variable is easily modified with the new probability distribution $\text{P}\left(X_A\right)$, and is given by
 \begin{equation}
 \text{H}\left(X_A\right) = - \sum_{X_A=a} \text{P}\left(a\right) \log \text{P}\left(a\right)
 \end{equation}
-which is easily calculated using the measured $\text{P}\left(a\right)$. The conditional entropy $\text{H}\left(X_A \given X_B\right)$ is readily calculated following the discussion beneath Eq.~\ref{eqn:qkdf_deriv_2}\footnote{See also the discussion for alterations to protocol QSS-$f$, which is analogous.}
+which is easily calculated using the measured $\text{P}\left(a\right)$. The conditional entropy $\text{H}\left(X_A \given X_B\right)$ is readily calculated following the discussion\footnote{See also the discussion for alterations to protocol QSS-$f$, which is analogous.} beneath Eq.~\ref{eqn:qkdf_deriv_2}.
 
 \paragraph{Holevo information $\chi$}
 Eve's conditional state after Bob's heterodyne measurement becomes, c.f. Eq.~\ref{eqn:qkdf_eve_conditional},
@@ -597,24 +598,21 @@ with $\text{P}\left(b\right) = \sum_{\alpha_k} \text{P}\left(b \given \alpha_k, 
 Eve's \emph{a posteriori} and \emph{a priori} entropies are calculated identically to Eqs.~\ref{eqn:qkdf_aposteriori_entropy},~\ref{eqn:qkdf_apriori_entropy} using Eq.~\ref{eqn:qkdf_eve_conditional_modified} as a starting point.
 
 
-\clearpage
+%\clearpage
 \subsection{Received data}\label{sec:aqc_received_data}
-\MT{The starting point for this section should be what I received from MPL.}
-\MT{What do I want to include here?}
+From our experimental collaborators at MPL we received four datasets output from the experiment detailed in Sec.~\ref{sec:aqc_experiment}. Figure~\ref{fig:aqc_dataplots_stefan} displays raw data before and after the action of the experimental collaborators' proprietary digital signal processing (DSP) algorithm. The data we have received is of the form of bottom figure of Fig.~\ref{fig:aqc_dataplots_stefan}, and we received only the signal data (green circles) once the phase-reference data (red circles) was removed. Each of the received datasets consisted of $1.54\times10^6$ elements of pairs of measured phase outcomes $\left(x_{\text{out}}, p_{\text{out}}\right)$, along with information about which element from the QPSK alphabet Alice sent. The received datasets have parameters detailed in Tab.~\ref{table:aqc_data_parameters}.
 
-From our experimental collaborators we received four datasets output from the experiment detailed in Sec.~\ref{sec:aqc_experiment}. Figure~\ref{fig:aqc_dataplots_stefan} displays raw data before and after the action of the experimental collaborators' proprietary digital signal processing (DSP) algorithm. The data we have received is of the form of bottom figure of Fig.~\ref{fig:aqc_dataplots_stefan}, and we received only the signal data (green circles) once the phase-reference data (red circles) was removed. Each of the received datasets consisted of $1.54\times10^6$ elements of pairs of measured phase outcomes $\left(x_{\text{out}}, p_{\text{out}}\right)$, along with information about which element from the QPSK alphabet Alice sent. The received datasets have parameters detailed in Tab.~\ref{table:aqc_data_parameters}.
+%\begin{figure}[htp]
+%\centering
+%\includegraphics[width=0.6\linewidth, draft=false]{aqc/QDS_dataplots}
+%\caption{\label{fig:aqc_dataplots_stefan} Top: Raw quadrature data produced by the experiment detailed in Sec.~\ref{sec:aqc_experiment}. The raw data undergoes a proprietary digital signal processing (DSP), and produces the phase-space constellation displayed in the bottom diagram. Each black point is a measurement outcome. Shaded circles represent the means and variances of the received outcomes. Red: phase reference states. Green: signal states. \emph{Picture credit; Stefan Richter in Ref.~\cite{Richter2020}}}
+%\end{figure}
 
-\begin{figure}[htp]
-\centering
-\includegraphics[width=0.6\linewidth, draft=false]{aqc/QDS_dataplots}
-\caption{\label{fig:aqc_dataplots_stefan} Top: Raw quadrature data produced by the experiment detailed in Sec.~\ref{sec:aqc_experiment}. The raw data undergoes a proprietary digital signal processing (DSP), and produces the phase-space constellation displayed in the bottom diagram. Each black point is a measurement outcome. Shaded circles represent the means and variances of the received outcomes. Red: phase reference states. Green: signal states. \emph{Picture credit; Stefan Richter in Ref.~\cite{Richter2020}}}
-\end{figure}
-
-We may calculate the parameters entering Tab.~\ref{table:aqc_data_parameters} directly from the received data sets. The amplitude $\alpha$ sent by Alice is calculated by a rescaling of phase measurement data as follows. For data when $\ket{\alpha}$ was sent, calculate the means $\bar{x}_{\text{out}}$, $\bar{p}_{\text{out}}$ of measured output data. The mean coherent state amplitude which was received at Rx is then given by 
+We calculate the parameters entering Tab.~\ref{table:aqc_data_parameters} directly from the received data sets. The amplitude $\alpha$ sent by Alice is calculated by a rescaling of phase measurement data, as follows. For data when a particular $\ket{\alpha}$ was sent, we calculate the means $\bar{x}_{\text{out}}$, $\bar{p}_{\text{out}}$ of measured output data. The mean coherent state amplitude which was received at Rx is then given by 
 \begin{equation}
 \alpha_{\text{Rx}} = \frac{\bar{x}_{\text{out}} + i \bar{p}_{\text{out}}}{\sqrt{2}}.
 \end{equation}
-From Tx to Rx, the distributed state has undergone two primary sources of loss: trusted loss and untrusted loss. Untrusted loss must be attributed to Eve, and is a combination of propagation losses in the fiber, and coupling losses into and out of the fiber. \MT{Check this. Have I received info from MPL at all ever?} We write this as a single number which corresponds to the loss of the channel (or channel transmittivity $T$), and is $-0.65$~dB for the $2$~km channel and $-4.75$~dB for the $20$~km channel. These values were given to us by our experimental collaborators and were estimated using proprietary methods. The trusted loss occurs in the detector Rx and an eavesdropper is assumed to not have access to this. The quoted value is $\approx 50\%$ loss due to Rx.
+From Tx to Rx, the distributed state has undergone two primary sources of loss: trusted loss and untrusted loss. Untrusted loss must be attributed to Eve, and is a combination of propagation losses in the fiber, and coupling losses into and out of the fiber. \MT{Check this. Have I received info from MPL at all ever?} We write this as a single number which corresponds to the loss of the channel (or channel transmittivity $T$), and is $-0.65$~dB for the $2$~km channel and $-4.75$~dB for the $20$~km channel. These values were given to us by our experimental collaborators and were measured using their proprietary methods. The trusted loss occurs in the detector Rx and an eavesdropper is assumed to not have access to this. The quoted value is $\approx 50\%$ loss due to Rx.
 
 The amplitude sent by Tx may then be calculated as
 \begin{equation}
@@ -622,21 +620,20 @@ The amplitude sent by Tx may then be calculated as
 \end{equation}
 This scaling procedure was done for each run and each distributed QPSK state, and the re-scaled values are displayed in Tab.~\ref{table:aqc_data_parameters}.
 
-The excess noises corresponding to measurements in each quadrature $\xi_x$, $\xi_p$ are calculated separately, and the value of excess noise which we use to estimate the power of the eavesdropper is $\xi = \max \left\{\xi_x, \xi_p\right\}$. This gives the eavesdropper additional power since it allows them to use the maximally entangled state for a given energy, which is a TMSV and which should induce noise symmetric in $x$ and $p$. We might reasonably expect that affording Eve this power should loosen the bounds which we calculate in this chapter, and tighter bounds with an analysis which includes this asymmetry in noise profiles are left for future work.
+The excess noises corresponding to measurements in each quadrature $\xi_x$, $\xi_p$ are calculated separately, and the value of excess noise which we use to estimate the power of the eavesdropper is $\xi = \max \left\{\xi_x, \xi_p\right\}$. Maximizing $\xi$ in this way gives the eavesdropper additional power, since it assumes that they have used a state with a higher degree of entanglement. We might reasonably expect that affording Eve this power should loosen the bounds which we calculate in this chapter, and tighter bounds with an analysis which includes this asymmetry in noise profiles are left for future work.
 
 The variance in measurement outcome in each $x$ and $p$ for each distributed state was measured, and the final excess noise is given by
 \begin{equation}
 \xi_{x} = \text{Var}\left(x\right) - \frac{1}{2} - \text{Var}\left(x\right)_{\text{trusted}},
 \end{equation} %Check whether it should be 1 or 1/2.
-and similarly for $p$. The contribution $\text{Var}\left(x\right)_{\text{trusted}}$ represents system detector noise which is assumed to be outside of Eve's control, and which was fully characterised by our experimental collaborators. The final excess noise values are then averaged over each distributed QPSK state, and then maximized over $x, p$. Final values $\xi$ are displayed in Tab.~\ref{table:aqc_data_parameters}.
-
- Excess noise values were quoted to us by experimental collaborators.
+and similarly for $p$. The contribution $\text{Var}\left(x\right)_{\text{trusted}}$ represents system detector noise which is assumed to be outside of Eve's control, and which was fully characterised by our experimental collaborators. The final excess noise values are then averaged over each distributed QPSK state, and then maximized over $x, p$. These final values $\xi$ are displayed in Tab.~\ref{table:aqc_data_parameters}. The excess noise values were quoted to us by experimental collaborators.
 
 
 
 \begin{table*}%[hb!p]
+	\captionsetup{width=0.8\linewidth}
 	\centering \ra{1.75}
-	\begin{tabular*}{\textwidth}{@{\extracolsep{\stretch{1}}}  rr c rrrrr c l }
+	\begin{tabular*}{\textwidth}{@{\extracolsep{\stretch{1}}}  cc c ccccc c c }
 	%\toprule
 	% primary header
 	\multicolumn{2}{c}{\textbf{Experiment}} &&
@@ -665,7 +662,7 @@ and similarly for $p$. The contribution $\text{Var}\left(x\right)_{\text{trusted
 	4 & 20 && 0.578 & 0.716 & 0.579 & 0.688 & 0.64 && 1.7\\
 	%\botrule
 	\end{tabular*}
-	\caption{\label{table:aqc_data_parameters} Parameters of received datasets. Each of the four experimental runs had slightly asymmetric amplitudes for each of the QPSK alphabet states $\alpha$, $i \alpha$, $- \alpha$, $- i \alpha$. The mean amplitude is $\bar{\alpha}$. Each of the states was sent with probability close to $1/4$. Excess noise differs between $x$ and $p$ quadratures, and for our analysis the largest of these was chosen, i.e. $\xi = \max\left\{\xi_x, \xi_p\right\}$. The loss level corresponding to the $2$~km channel is $-0.65$~dB, and the loss level corresponding to $20$~km channel is $-4.75$~dB. This includes the channel and additional losses due to coupling inefficiencies, but does not include trusted detector loss. }
+	\caption{\label{table:aqc_data_parameters} Parameters of received datasets. Each of the four experimental runs had slightly asymmetric amplitudes for each of the QPSK alphabet states $\alpha$, $i \alpha$, $- \alpha$, $- i \alpha$. The mean amplitude for each run is $\bar{\alpha}$. Each of the states was sent with probability close to $1/4$. Excess noise differs between $x$ and $p$ quadratures, and for our analysis the largest of these was chosen, i.e. $\xi = \max\left\{\xi_x, \xi_p\right\}$. The loss level corresponding to the $2$~km channel is $-0.65$~dB, and the loss level corresponding to $20$~km channel is $-4.75$~dB. This includes the channel and additional losses due to coupling inefficiencies, but does not include trusted detector loss of $50\%$. }
 \end{table*}
 
 
@@ -675,6 +672,7 @@ To illustrate our received data, we plot the first $10,000$ elements of raw data
 
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 	\begin{subfigure}{0.49\linewidth}
 	\centering
@@ -685,24 +683,26 @@ To illustrate our received data, we plot the first $10,000$ elements of raw data
 	\centering
 	\includegraphics[width=\linewidth, draft=false]{aqc/scatter_2}
 	\end{subfigure}
-\caption{\label{fig:aqc_scatter} Datasets received from experimental collaborators, corresponding to $x_{\text{out}}$ and $p_{\text{out}}$ phase measurement outcomes when (a) state $\ket{\alpha}$ was sent, run~$1$ and (b) states $\ket{\alpha}$, $\ket{i \alpha}$, $\ket{- \alpha}$, $\ket{- i \alpha}$ were sent, run~$1$. We plot only the first $10,000$ points, for illustrative convenience. (b) At the amplitudes chosen our QPSK alphabet is overlapping and highly non-orthogonal.}
+\caption{\label{fig:aqc_scatter} Datasets received from experimental collaborators, corresponding to $x_{\text{out}}$ and $p_{\text{out}}$ phase measurement outcomes when (a) state $\ket{\alpha}$ was sent, run~$1$ and (b) states $\ket{\alpha}$, $\ket{i \alpha}$, $\ket{- \alpha}$, $\ket{- i \alpha}$ were sent, run~$1$. We plot only the first $10,000$ points, for illustrative convenience. (b) At the amplitudes chosen, our QPSK alphabet is overlapping and highly non-orthogonal.}
 \end{figure}
 
-In Fig.~\ref{fig:aqc_elimsig} we demonstrate for protocols QDS-$f$ and QDS-$b$ how $\perr$ may be calculated on a particular dataset. Having isolated elements for which a particular alphabet state was sent, the data is partitioned into groups which will induce a mismatch. In this case, $\ket{\alpha}$ was sent and so data with $x_{\text{received}} >=0$ will not induce a mismatch, while data with $x_{\text{received}}<0$ will. The mismatch probability $\perr$ is then calculated as
+In Fig.~\ref{fig:aqc_elimsig} we demonstrate for protocols QDS-$f$ and QDS-$b$ how $\perr$ may be calculated on a particular dataset. Having isolated the elements for which a particular alphabet state was sent, the data is partitioned into groups which will induce a mismatch. In this case, $\ket{\alpha}$ was sent and so data with $x_{\text{received}} \ge 0$ will not induce a mismatch, while data with $x_{\text{received}}<0$ will. The mismatch probability $\perr$ is then calculated as
 \begin{equation}\label{eqn:aqc_data_perr}
 \perr = \frac{\text{Number of data points which cause a mismatch}}{\text{Total number of data points}},
 \end{equation}
-where the total number of data points which cause a mismatch are calculated including all four of the distributed QPSK states, with their respective mismatch criteria.
+where the numerator is calculated including all four of the distributed QPSK states, with their respective mismatch criteria.
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 \includegraphics[width=0.6\linewidth, draft=false]{aqc/eliminated_signature_data}
-\caption{\label{fig:aqc_elimsig} Illustration of received data points grouped by whether they induce a mismatch in protocols QDS-$f$ and QDS-$b$. State $\ket{\alpha}$ was sent, and data is taken from run~$1$. Blue: data points will not cause $\ket{\alpha}$ to be eliminated, and so do not cause a mismatch. Red: data points will cause $\ket{\alpha}$ to be eliminated, and so a mismatch occurs.}
+\caption{\label{fig:aqc_elimsig} Illustration of received data points, coloured by whether they induce a mismatch in protocols QDS-$f$ and QDS-$b$. State $\ket{\alpha}$ was sent, and data is taken from run~$1$. Blue: data points will not cause $\ket{\alpha}$ to be eliminated, and so do not cause a mismatch. Red: data points will cause $\ket{\alpha}$ to be eliminated, and so a mismatch occurs. \MT{TODO: Change axis labels for consisteny. Q: how many points are here?}}
 \end{figure}
 
-In protocols QDS-$f$ and QDS-$b$ we also discussed the possibility to postselect on measurement outcomes, by ignoring datapoints which fall within $\rps$. As was discussed in their respective sections, we take $\rps\left(\Delta_r\right)$ and display examples of postselected data sets in Fig.~\ref{fig:aqc_ps}. Data corresponding to $\ket{\alpha}$ distributed are displayed in Fig.~\ref{fig:aqc_ps}a, while data for all elements of QPSK are displayed in Fig.~\ref{fig:aqc_ps}b. For convenience we display only the first $10,000$ elements. We may calculate $\perr$ in an identical way to that discussed above, simply starting from the postselected data in order to reduce $\perr$ and increase the advantage gained by an honest player.
+In protocols QDS-$f$ and QDS-$b$ we also discussed the possibility to postselect on measurement outcomes, by ignoring datapoints which fall within $\rps$. As was discussed in their respective sections we take $\rps\left(\Delta_r\right)$, and display examples of postselected data sets in Fig.~\ref{fig:aqc_ps}. Data corresponding to distributed $\ket{\alpha}$ are displayed in Fig.~\ref{fig:aqc_ps}a, while data for all elements of QPSK are displayed in Fig.~\ref{fig:aqc_ps}b. For illustrative convenience we display only the first $10,000$ elements. We may calculate $\perr$ in an identical way to that discussed above, simply starting from the postselected data in order to reduce $\perr$ and increase the advantage gained by an honest player.
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 	\begin{subfigure}{0.49\linewidth}
 	\centering
@@ -724,6 +724,7 @@ The experiment detailed in Sec.~\ref{sec:aqc_experiment} was  performed and we h
 
 %\iffalse
 \begin{table*}%[hb!p]
+	\captionsetup{width=0.8\linewidth}
 	\centering \ra{1.75}
 	\begin{tabular*}{\textwidth}{@{\extracolsep{\stretch{1}}}   cccc c rr c rr c r cc}
 	%\toprule
@@ -752,7 +753,7 @@ The experiment detailed in Sec.~\ref{sec:aqc_experiment} was  performed and we h
  - &        - && $\enot{2.08}{8}$ &    $208$ && 0.1004 && 0.0976\\
 	%\botrule
 	\end{tabular*}
-	\caption{\label{tab:lengths} Figures of merit for the experimental runs. QDS signature lengths (L) and signing times (t) required to sign a $1$-bit message for security level of $\varepsilon = 0.01\%$. The QSS and QKD key rates correspond to the maximum estimated number of bits of secure key which may be generated per use of the quantum channel. In QSS-$b$, one channel use corresponds to distribution of \emph{two} quantum states, one from Bob and one from Charlie, and so we display $2 \kappa$ for fair comparison with QKD. \MT{Make sure that security level $\varepsilon$ is defined.} \MT{Add "Run number" column}}
+	\caption{\label{tab:lengths} Protocol figures of merit for the experimental runs. QDS signature lengths (L) and signing times (t) required to sign a $1$-bit message for security level of $\varepsilon = 0.01\%$. The QSS and QKD key rates correspond to the maximum estimated number of bits of secure key which may be generated per use of the quantum channel. In QSS-$b$, one channel use corresponds to distribution of \emph{two} quantum states, one from Bob and one from Charlie, and so we display $2 \kappa$ for fair comparison with QKD. \MT{Make sure that security level $\varepsilon$ is defined.} \MT{Add "Run number" column}}
 \end{table*}
 %\fi
 
