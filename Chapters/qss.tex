@@ -9,28 +9,22 @@
 % - mention somewhere my linestyle convention for different types of channel
 
 \chapter{Quantum secret sharing}
-Goal of chapter: introduce our QSS protocol and prove its security in different contexts.
 
-\iffalse
-Key results which I want to present:
-\begin{itemize}
-\item our QSS protocol
-\item security proof (what does it do? what does it not do?)
-\item analysis of security in various settings - heterodyne, $\mathcal{A}_4$, BS0, BS1, BS2, EC, varying $\alpha$, $T$, $\xi$, $g$, $h$ of both channels
-\item show how the protocol performs
-\end{itemize}
-\fi
 
-\MT{Short introduction to chapter.}
+In this chapter we introduce and investigate a continuous-variable Quantum Secret Sharing (QSS) protocol, which allows for secure distribution of a classical secret among multiple potentially dishonest recipients. Crucially, recipients are forced to collaborate in order to reconstruct the secret, and a dishonest player should not be able to access the secret by themselves.
 
-\section{Our QSS protocol}
+We describe the protocol and its similarities and differences to recent QSS protocols from the literature in Sec.~\ref{sec:qss_our_protocol}, and then prove its security against several different attack strategies in Secs.~\ref{sec:qss_honest_recipients},~\ref{sec:qss_dishonest_recipient}. In Sec.~\ref{sec:qss_performance} we analyse the performance of our protocol. Although the QSS task has been around for many years, many of the existing protocols are not suitable for implementation, despite their high level of security. We investigate the implementation of our protocol in Chapter~\ref{chapter:aqc}.
 
-Our quantum secret-sharing scheme allows for a dealer, Alice, to distribute a classical secret between two recipients, Bob and Charlie. Bob and Charlie should be able to exactly reconstruct the secret when they behave honestly, while a dishonest and unauthorised conspiracy of players--including those outside the protocol--should gain no information. Crucially, although the scheme should allow for dishonesty among the recipients a dishonest player should be forced to collaborate with an honest one.
+\section{Our QSS protocol}\label{sec:qss_our_protocol}
+
+Our Quantum Secret Sharing (QSS) scheme allows for Alice to distribute a classical secret between two recipients, Bob and Charlie. To keep with convention we call Alice the ``dealer''. Either Bob or Charlie is dishonest, and Alice does not know which one. Bob and Charlie should be able to exactly reconstruct the secret when they work together, while the dishonest player should not be able to access the secret by themselves, or even if they work with an external Eve.
+
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
-\includegraphics[draft=false, width=0.5\linewidth]{qss/qss_setup_cartoon}
-\caption{\label{fig:qss_structure} All quantum secret sharing schemes follow the same structure. Alice encrypts her classical secret $\sigma_A$ with key $K_A$, and broadcasts the resulting $\varsigma_A$. Shares of $K_A$ are distributed among recipients Bob and Charlie such that $K_B \oplus K_C = K_A$. Gray boxes denote honest players, while red denotes dishonest players. The half-red/half-gray boxes denote uncertainty about which player is dishonest. %say somewhere it's all classical?
+\includegraphics[draft=false, width=0.8\linewidth]{qss/qss_setup_cartoon}
+\caption{\label{fig:qss_structure} All quantum secret sharing schemes follow the same structure: Alice encrypts her classical secret $\sigma_A$ with secret key $K_A$, and broadcasts the resulting $\varsigma_A$. Shares of $K_A$ are distributed among recipients Bob and Charlie such that $K_B \oplus K_C = K_A$. Gray boxes denote honest players, while red denotes dishonest players. The half-red/half-gray boxes denote uncertainty about which player is dishonest. %say somewhere it's all classical?
 }
 \end{figure}
 
@@ -428,7 +422,7 @@ In order to take into account this uncertainty over which player is dishonest, F
 where $\kappa_{\text{Eve, Charlie}}$ is calculated analogously to Eq.~\ref{eqn:qss_keyrate_dishonest_Bob}. \MT{Comment about why this works.}
 
 
-\section{Protocol performance}
+\section{Protocol performance}\label{sec:qss_performance}
 \MT{Make some graphs of key rate and tweak all of the parameters that I can in all of the attacks that I can.}
 
 \MT{If I have time, make some graphs with e.g. homodyning instead of heterodyning, or different alphabets.}

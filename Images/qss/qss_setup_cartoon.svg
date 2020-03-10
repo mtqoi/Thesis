@@ -59,10 +59,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.0000001"
-     inkscape:cx="-92.821857"
-     inkscape:cy="146.26902"
+     inkscape:cx="53.928136"
+     inkscape:cy="111.26902"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer1"
      showgrid="false"
      fit-margin-top="0"
      fit-margin-left="0"
@@ -100,7 +100,7 @@
      style="display:inline"
      transform="translate(7.0826416,1.4509072)">
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.3232;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.29279998,0.64639999,0.3232,0.64639999;stroke-opacity:1;marker-end:url(#Arrow2Mend-0-1);stroke-dashoffset:0"
+       style="fill:none;stroke:#000000;stroke-width:0.32319999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.29279998, 0.64639999, 0.3232, 0.64639999;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#Arrow2Mend-0-1)"
        d="M 1.4360063,14.617642 29.894588,3.538716"
        id="path4753-4-5"
        inkscape:connector-curvature="0"
@@ -109,7 +109,7 @@
        inkscape:connector-curvature="0"
        id="path2543"
        d="M 2.0187684,19.856125 29.92176,30.448359"
-       style="fill:none;stroke:#000000;stroke-width:0.323;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.29200001,0.646,0.323,0.646;stroke-opacity:1;marker-end:url(#marker2547);stroke-dashoffset:0"
+       style="fill:none;stroke:#000000;stroke-width:0.32300001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.29200001, 0.646, 0.323, 0.646;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker2547)"
        sodipodi:nodetypes="cc" />
   </g>
   <g
@@ -346,7 +346,7 @@
            sodipodi:role="line">A</tspan></text>
     </g>
     <g
-       id="g1017">
+       id="g930">
       <g
          transform="translate(1.403165,-14.125195)"
          id="g1003">
@@ -379,11 +379,10 @@
              style="font-size:10.32520294px;stroke-width:0.32266259px">B</tspan></text>
       </g>
       <g
-         transform="translate(-36.950013,12.067219)"
-         id="g996">
+         id="g916">
         <g
            id="g989"
-           transform="translate(38.353178,1.122532)">
+           transform="rotate(180,21.045439,135.59655)">
           <rect
              style="opacity:1;fill:#f0f0f0;fill-opacity:1;stroke:#000000;stroke-width:0.12195123;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
              id="rect985"
@@ -401,13 +400,13 @@
         <text
            xml:space="preserve"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.67294502px;line-height:125%;font-family:Garamond;-inkscape-font-specification:Garamond;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.32266259px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           x="55.412693"
-           y="133.40402"
+           x="18.462681"
+           y="145.47124"
            id="text5041-4-9"><tspan
              sodipodi:role="line"
              id="tspan5039-4-6"
-             x="55.412693"
-             y="133.40402"
+             x="18.462681"
+             y="145.47124"
              style="font-size:10.32520294px;stroke-width:0.32266259px">C</tspan></text>
       </g>
     </g>
