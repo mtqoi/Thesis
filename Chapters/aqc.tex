@@ -720,16 +720,17 @@ In protocols QDS-$f$ and QDS-$b$ we also discussed the possibility to postselect
 
 \clearpage
 \subsection{Protocol performance}\label{sec:aqc_performance}
-The experiment detailed in Sec.~\ref{sec:aqc_experiment} was  performed and we have received four datasets from the experimental collaborators\footnote{\MT{X}}. The key parameters for these datasets are described in Tab.~\ref{table:aqc_data_parameters} and will form the basis for an analysis of performance of each of our cryptosystems.
+The experiment detailed in Sec.~\ref{sec:aqc_experiment} was  performed and we have received four datasets from our experimental collaborators. The key parameters for these datasets are described in Tab.~\ref{table:aqc_data_parameters} and form the basis for an analysis of performance of each of our cryptosystems.
 
 %\iffalse
 \begin{table*}%[hb!p]
 	\captionsetup{width=0.8\linewidth}
 	\centering \ra{1.75}
-	\begin{tabular*}{\textwidth}{@{\extracolsep{\stretch{1}}}   cccc c rr c rr c r cc}
+	\begin{tabular*}{\textwidth}{@{\extracolsep{\stretch{1}}} c  cccc c rr c rr c r cc}
 	%\toprule
 	% primary header
 %	\multicolumn{4}{c}{\textbf{Experiment}} &&
+	\multicolumn{1}{c}{\textbf{}} &&
 	\multicolumn{2}{c}{\textbf{QDS\,-\,$b$}} &&
 	\multicolumn{2}{c}{\textbf{QDS\,-\,$f$}} &&
 	\multicolumn{1}{c}{\textbf{QSS\,-\,$b$}} && 
@@ -739,6 +740,7 @@ The experiment detailed in Sec.~\ref{sec:aqc_experiment} was  performed and we h
 	%\cline{1-4}\cline{6-7} \cline{9-10}\cline{12-12}
 	% secondary header
 %	\text{Run} & \head{$d\,[\si{km}]$} & \head{$\bar{\alpha}\,[\sqrt{\text{snu}}\,]$} & \head{$\xi\,[\si{\%}]$} &&
+	\head{Run} &&
 	\head{$L\,[\si{bits^{-1}}]$} & \head{$t\,[\si{ms}]$} &&
 	\head{$L\,[\si{bits^{-1}}]$} & \head{$t\,[\si{ms}]$} &&
 	\head{$2 \kappa$}  && 
@@ -747,64 +749,69 @@ The experiment detailed in Sec.~\ref{sec:aqc_experiment} was  performed and we h
 %	\colrule
 \hline
 	% table body
-	  $\enot{5.70}{6}$ & $5.7$ && $\enot{4.79}{4}$ & $0.048$ && 0.3726 && 0.3479\\
- - &        - && $\enot{2.26}{9}$ &  $2260$ && 0.1058 && 0.1024\\
- - &        - && $\enot{1.37}{8}$ &    $137$ && 0.0858 && 0.0840 \\
- - &        - && $\enot{2.08}{8}$ &    $208$ && 0.1004 && 0.0976\\
+	 1 && $\enot{5.70}{6}$ & $5.7$ && $\enot{4.79}{4}$ & $0.048$ && 0.3726 && 0.3479\\
+2 && - &        - && $\enot{2.26}{9}$ &  $2260$ && 0.1058 && 0.1024\\
+3 && - &        - && $\enot{1.37}{8}$ &    $137$ && 0.0858 && 0.0840 \\
+4 && - &        - && $\enot{2.08}{8}$ &    $208$ && 0.1004 && 0.0976\\
 	%\botrule
 	\end{tabular*}
-	\caption{\label{tab:lengths} Protocol figures of merit for the experimental runs. QDS signature lengths (L) and signing times (t) required to sign a $1$-bit message for security level of $\varepsilon = 0.01\%$. The QSS and QKD key rates correspond to the maximum estimated number of bits of secure key which may be generated per use of the quantum channel. In QSS-$b$, one channel use corresponds to distribution of \emph{two} quantum states, one from Bob and one from Charlie, and so we display $2 \kappa$ for fair comparison with QKD. \MT{Make sure that security level $\varepsilon$ is defined.} \MT{Add "Run number" column}}
+	\caption{\label{tab:lengths} Protocol figures of merit for the experimental runs. QDS signature lengths (L) and signing times (t) required to sign a $1$-bit message for security level of $\varepsilon = 0.001\%$. The QSS and QKD key rates correspond to the maximum estimated number of bits of secure key which may be generated per use of the quantum channel. In QSS-$b$, one channel use corresponds to distribution of \emph{two} quantum states, one from Bob and one from Charlie, and so we display $2 \kappa$ for fair comparison with QKD. \MT{Make sure that security level $\varepsilon$ is defined.}}
 \end{table*}
 %\fi
 
 \subsubsection{First agile system \systemB}
-In the first agile system, \systemB, the sender module Tx is understood to play the role of either Bob or Charlie, while Rx plays the role of Alice. Signature lengths under QDS-$b$ are calculated using the data parameters from Tab.~\ref{table:aqc_data_parameters} with the postselection region\footnote{$\rps = \mathcal{R}\left(\Delta_r\right)$} $\rps$ optimized. In the ideal case, honest mismatch probability $\perr$ is calculated using Eq.~\MT{X} under the model described there (or including excess noise, Appendix~\MT{X}). These models both include a detector efficiency of $50\%$ which a dishonest player cannot exploit. 
+In the first agile system, \systemB, the sender module Tx is understood to play the role of either Bob or Charlie, while Rx plays the role of Alice. Signature lengths under QDS-$b$ are calculated using the data parameters from Tab.~\ref{table:aqc_data_parameters} with the postselection region\footnote{$\rps = \mathcal{R}\left(\Delta_r\right)$} $\rps$ optimized. In the ideal case, honest mismatch probability $\perr$ is calculated using Eq.~\ref{eqn:perr} under the model described there (or including excess noise, Appendix~\ref{appendix:noisy_channel}). We additionally include a detector efficiency of $50\%$ which a dishonest player cannot exploit. 
 
-For QDS-$b$ we allow dishonest Bob to perform the entangling cloner attack, and we estimate $\pe$ using the models in Sec.~\MT{X} once the worst-case $\alpha$ and excess noise $\xi$ have been estimated from data. These ideal signature lengths for QDS-$b$ are displayed in Fig.~\ref{fig:aqc_qdsb}. The point at which run~$1$ (red) intersects the vertical gridline ($2$~km fiber length) corresponds to a point at which we have data. Other points in Fig.~\ref{fig:aqc_qdsb} are calculated by varying $T$ in our model.
+For QDS-$b$ we allow dishonest Bob to perform the entangling cloner attack, and we estimate $\pe$ using the models in Sec.~\ref{sec:qds_attack_analysis},~\ref{sec:aqc_systemb} once $\alpha$ and the worst-case excess noise $\xi$ have been estimated from data. These ideal signature lengths for QDS-$b$ are displayed in Fig.~\ref{fig:aqc_qdsb}. The point at which run~$1$ (red) intersects the vertical gridline ($2$~km fiber length) corresponds to a point at which we have data. Other points in Fig.~\ref{fig:aqc_qdsb} are calculated by varying $T$ in our model.
 
 We see that over metropolitan distances of up to several kilometers, which are favourable to the CV platform, the protocol QDS-$b$ obtains modest signature lengths $\mathcal{O}\left(10^6\right)$. At these short distances however the excess noise $\xi$ has strong impact on the required signature lengths.
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 \includegraphics[draft=false, width=0.8\linewidth]{aqc/qdsb}
-\caption{\label{fig:aqc_qdsb} Signature lengths required to sign a single bit in protocol QDS-$b$, under entangling-cloner attack. The signature lengths at a distance of $2$~km remain modest both in the ideal (above) and experimental (Tab.~\ref{table:aqc_results}) realizations. The system is robust to choice of $\alpha$. Solid (red), dashed (blue), dot-dashed (orange) and dotted (green) lines correspond to performance deduced by parameters from experimental runs $1$, $2$, $3$ and $4$, respectively. The vertical grid line depicts the loss level over experimental channel $A$ ($0.65$~dB loss).}
+\caption{\label{fig:aqc_qdsb} Signature lengths required to sign a single bit in protocol QDS-$b$, under entangling-cloner attack. The signature lengths at a distance of $2$~km remain modest both in the ideal (above) and experimental (Tab.~\ref{table:lengths}) realizations. %The system is robust to choice of $\alpha$. 
+Solid (red), dashed (blue), dot-dashed (orange) and dotted (green) lines correspond to performance deduced by parameters from experimental runs $1$, $2$, $3$ and $4$, respectively. The vertical grid line depicts the loss level over experimental channel $A$ ($0.65$~dB loss).}
 \end{figure} %Make sure that channel A is described somewhere.
 
-More realistic signature lengths may be calculated by taking into account in the estimate of $\pe$ the actual amplitudes and sending probabilities which Tx sent, rather than their average, and additionally by measuring $\perr$ directly from the output of Rx. \MT{Have a figure showing how $\perr$ is measured}. The $\perr$ calculated in this way automatically takes into account all sources of trusted detector loss and noise which will increase $\perr$. The actual measured $L$ will be larger than those displayed in Fig.~\ref{fig:aqc_qdsb}. 
+More realistic signature lengths may be calculated by taking into account in the estimate of $\pe$ the actual amplitudes and sending probabilities which Tx sent (Sec.~\ref{sec:aqc_protocol_modifications}), rather than their average, and additionally by measuring $\perr$ directly from the output of Rx. The $\perr$ calculated in this way automatically takes into account all sources of trusted detector loss and noise which will increase $\perr$. The actual measured $L$ will be larger than those displayed in Fig.~\ref{fig:aqc_qdsb}. 
 
-For example, for experimental run~$1$ over the $2$~km channel (Channel A), a signature length of $5.7 \times 10^6$ is required to sign a single bit, Tab.~\ref{table:aqc_results}. However, even at $20$~km protocol QDS-$b$ could still be made secure by choosing a postselection region with $\Delta_r \ggg 1$, but for loss levels larger than $\sim 2$~dB the required signature length becomes impractically large.
+For example, for experimental run~$1$ over the $2$~km channel (Channel A), a signature length of $5.7 \times 10^6$ is required to sign a single bit, Tab.~\ref{tab:lengths}. However, even at $20$~km protocol QDS-$b$ could still be made secure by choosing a postselection region with $\Delta_r \ggg 1$, but for loss levels larger than $\sim 2$~dB the required signature length becomes impractically large.
 
-For our secret sharing protocol QSS-$b$, Fig.~\ref{fig:aqc_qssb}, the Holevo information is calculated by estimating channel transmission $T$ and excess noise $\xi$ from the data and assuming that the dishonest players perform beamsplitter attack BS$2$ (Sec.~\MT{X}). The mutual information is obtained by calculating the probability $p\left(x \given \alpha_k\right)$ of measuring $x \in \mathbb{C}$ at the output when coherent state $\alpha_k$ was sent, noting again that the realistic non-identical amplitudes and sending probabilities of the implemented QPSK alphabet may be readily included.
+For our secret sharing protocol QSS-$b$, Fig.~\ref{fig:aqc_qssb}, the Holevo information is calculated by estimating channel transmission $T$ and excess noise $\xi$ from the data and assuming that the dishonest players perform beamsplitter attack BS$2$ (Sec.~\ref{sec:qds_attack_analysis}). The mutual information is obtained by calculating the probability $p\left(x \given \alpha_k\right)$ of measuring $x$ at the output when coherent state $\alpha_k$ was sent.% noting again that the realistic non-identical amplitudes and sending probabilities of the implemented QPSK alphabet may be readily included.
 
-Maximum QSS key rates, calculated from measured experimental parameters Tab.~\ref{table:aqc_data_parameters}, are displayed in Tab.~\ref{table:aqc_results}, where we see that twice the key rate, $2 \kappa$ is greater than the comparable key rate $\kappa$ for QKD-$f$ (remembering that one channel use is defined differently between QKD and QSS). In other words, QSS-$b$ outperforms pairwise QKD by consuming fewer quantum resources to obtain an equivalent key rate. Protocol QSS-$b$ is therefore preferable to a classical information-theoretically secure protocol performed over pairwise QKD-encrypted channels. \MT{Make a link back to the QSS chapter.}
+Maximum QSS key rates, calculated from measured experimental parameters Tab.~\ref{table:aqc_data_parameters} with modifications from Sec.~\ref{sec:aqc_protocol_modifications}, are displayed in Tab.~\ref{tab:lengths}. We see that twice the key rate, $2 \kappa$ is greater than the comparable key rate $\kappa$ for QKD-$f$ (remembering that one channel use is defined differently between QKD and QSS). In other words, QSS-$b$ outperforms pairwise QKD by consuming fewer quantum resources to obtain an equivalent key rate. We have observed therefore that a ``direct'' QSS can outperform the classical unconditionally secure secret sharing mediated by QKD. This is thus another case where our agile framework is preferable to the QKD-assisted crypto-agility.
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 \includegraphics[draft=false, width=0.8\linewidth]{aqc/qssb}
 \caption{\label{fig:aqc_qssb} Maximum attainable key rates for protocol QSS-$b$. Dishonest Eve performs attack BS$2$, and either Bob or Charlie are also dishonest. The key rate is robust to variations in $\alpha$, and remains large even for our $20$~km channel. Solid (red), dashed (blue), dot-dashed (orange) and dotted (green) lines correspond to the ideal performance deduced by parameters from experimental runs $1$, $2$, $3$ and $4$, respectively. Vertical grid lines depict loss levels over experimental channels $A$ and $B$, corresponding to fiber lengths $2$~km ($0.65$~dB loss) and $20$~km ($4.75$~dB loss)}
 \end{figure}
 
 \subsubsection{Second agile system \systemF}
-For the second agile system, \systemF, Tx plays the role of Alice while Rx plays either Bob or Charlie. The performance under protocol QDS-$f$ is displayed in Fig.~\ref{fig:aqc_qdsf} under attack BS$2$. The excess noise and detector efficiency from the experiment are included, and $\pe$ and $\perr$ are calculated from analogous methods to QDS-$b$, above. We see than in the ideal analysis of Fig~\ref{fig:aqc_qdsf}, the protocol QDS-$f$ allows for very small signature lengths $\mathcal{O}\left(10^4\right)$ at $2$~km, while at $20$~km the predicted lengths are still very modest at $\mathcal{O}\left(10^6\right)$.
+For the second agile system, \systemF, Tx plays the role of Alice while Rx plays either Bob or Charlie. The performance under protocol QDS-$f$ is displayed in Fig.~\ref{fig:aqc_qdsf} under attack BS$2$. The excess noise and detector efficiency from the experiment are included, and $\pe$ and $\perr$ are calculated using analogous methods to QDS-$b$, above. We see than in the ideal analysis of Fig~\ref{fig:aqc_qdsf} (using models from Ch.~\ref{chapter:qds}) the protocol QDS-$f$ allows for very small signature lengths $\mathcal{O}\left(10^4\right)$ at $2$~km, while at $20$~km the predicted lengths are still very modest at $\mathcal{O}\left(10^6\right)$.
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 \includegraphics[width=0.8\linewidth, draft=false]{aqc/qdsf}
-\caption{\label{fig:aqc_qdsf} Signature lengths required to sign a single bit in protocol QDS-$b$, under attack BS$2$. The signature lengths at $20$~km (Channel B) remain feasible under both ideal (above) and experimental (Tab.~\ref{table:aqc_results} realizations. At $2$~km (Channel A) the protocol requires small signature lengths and is thus the fastest QDS protocol over comparable distances, Fig.~\ref{fig:aqc_star}. Solid (red), dashed (blue), dot-dashed (orange) and dotted (green) lines correspond to experiments $1$, $2$, $3$ and $4$, respectively. Vertical grid lines depict loss levels over implemented channels $A$ and $B$, corresponding to fiber lengths $2$~km ($0.65$~dB loss) and $20$~km ($4.75$~dB loss), respectively.}
+\caption{\label{fig:aqc_qdsf} Signature lengths required to sign a single bit in protocol QDS-$b$, under attack BS$2$. The signature lengths at $20$~km (Channel B) remain feasible under both ideal (above) and experimental (Tab.~\ref{tab:lengths} realizations. At $2$~km (Channel A) the protocol requires small signature lengths and is thus the fastest QDS protocol over comparable distances, Fig.~\ref{fig:aqc_star}. Solid (red), dashed (blue), dot-dashed (orange) and dotted (green) lines correspond to experiments $1$, $2$, $3$ and $4$, respectively. Vertical grid lines depict loss levels over implemented channels $A$ and $B$, corresponding to fiber lengths $2$~km ($0.65$~dB loss) and $20$~km ($4.75$~dB loss), respectively.}
 \end{figure}
 
-For small channel loss the required $L$ is roughly invariant over a broad range of $\alpha$, which suggests that QDS-$f$ is robust to experimental differences, and is thus easy to implement on an agile system alongside further alternative cryptographic protocols which may require a more restrictive choice of $\alpha$. For large channel loss however, the choice of $\alpha$ becomes increasingly important, but using for example the mean $\alpha = 0.55$ and $\xi = 2.1\%$ from experimental run~$3$, QDS-$f$ is predicted to remain secure een down to $20$~dB loss with still-feasible signature lengths $\mathcal{O}\left(10^9\right)$. This would allow a one-bit message to be signed in approximately one second.
+For small channel loss the required $L$ is roughly invariant over a broad range of $\alpha$, $\xi$, which suggests that QDS-$f$ is robust to experimental differences. Thus, it is easier to implement on an agile system alongside further alternative cryptographic protocols which may require a more restrictive choice of $\alpha$. For large channel loss however, the choice of $\alpha$ becomes increasingly important, but using for example the mean $\alpha = 0.55$ and $\xi = 2.1\%$ from experimental run~$3$, QDS-$f$ is predicted to remain secure een down to $20$~dB loss with still-feasible signature lengths $\mathcal{O}\left(10^9\right)$. On our system this would allow a one-bit message to be signed in approximately one second.
 
-A more realistic signature length may be calculated by using the $\perr$ directly from Rx output, which includes all noise sources and detector inefficiencies. This results in the signature lengths which are displayed in Tab.~\ref{table:aqc_results}. Crucially, they remain highly feasible over the metropolitan distances where continuous-variable cryptography is expected to be effective. Of particular note is the $L = 47,887$ required to securely sign a $1$~bit message over $2$~km fiber, which to our knowledge makes QDS~$f$ the fastest ever demonstration of a QDS protocol, requiring just $0.047$~ms to sign a message at our $1$~GHz sending rate, Fig.~\ref{fig:aqc_star}.
+A more realistic signature length may be calculated by using the $\perr$ directly from Rx output, which includes all noise sources and detector inefficiencies, and using the models from Sec.~\ref{sec:aqc_protocol_modifications}. This results in the signature lengths which are displayed in Tab.~\ref{tab:lengths}. Crucially, they remain highly feasible over the metropolitan distances where continuous-variable cryptography is expected to be effective. Of particular note is the $L = 47,887$ required to securely sign a $1$~bit message over $2$~km fiber, which to our knowledge makes QDS~$f$ the fastest ever demonstration of a QDS protocol, requiring just $0.047$~ms to sign a message at our $1$~GHz sending rate, Fig.~\ref{fig:aqc_star}.
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
-\includegraphics[width=0.8\linewidth, draft=false]{aqc/stargraph_ver2}
+\includegraphics[width=1.0\linewidth, draft=false]{aqc/stargraph_ver2}
 \caption{\label{fig:aqc_star} Time required to sign a one-bit message, and the corresponding channel lengths, for several recent QDS protocols. At the short distnaces ($\sim 2$~km) favoured by the continuous-variable platform, our QDS-$f$ and QDS-$b$ protocols allow for signing times of less than $0.05$~ms and $6$~ms, respectively, improving on previous results in CV (a) and discrete-variable (DV) (b) systems. At $20$~km, QDS-$f$ has a signing time comparable to recent DV QDS systems (c)-(e). Protocols depicted: red triangles - QDS-$b$ and QDS-$f$ from this chapter and Ref.~\cite{Richter2020}. (a) Free-space CV QDS \cite{Croal2016}. (b) Unambiguous-state-elimination-based QDS \cite{Donaldson2016}. (c) Differential-phase-shift-based QDS \cite{Collins2016}. (d) GHz BB$84$ QDS \cite{An2019}. (e) Early QDS-QKD ``agile'' system with measurement-device-independent capabilities \cite{Roberts2017}.}
 \end{figure}
 
 
-The calculated maximum secure key rates under protocol QKD-$f$ are plotted in Fig.~\ref{fig:aqc_qkdf} under attack BS$2$. The performance of this protocol agrees with Ref.~\cite{Papanastasiou2018} over comparable parameter regimes (under the BS$0$ and EC attacks considered in that Paper), while the QPSK amplitudes employed in our experiment are close to optimal. Calculated maximum key rates, deduced from experimental parameters, are displayed in Tab.~\ref{table:aqc_results}.
+The calculated maximum secure key rates under protocol QKD-$f$ are plotted in Fig.~\ref{fig:aqc_qkdf} under attack BS$2$. The performance of this protocol agrees with Ref.~\cite{Papanastasiou2018} over comparable parameter regimes (when we analyse under the BS$0$ and EC attacks considered in that Paper), while the QPSK amplitudes employed in our experiment are much closer to optimal. Calculated maximum key rates, deduced from experimental parameters with models Sec.~\ref{sec:aqc_protocol_modifications}, are displayed in Tab.~\ref{tab:lengths}.
 
 \begin{figure}[htp]
 \centering
@@ -814,7 +821,7 @@ The calculated maximum secure key rates under protocol QKD-$f$ are plotted in Fi
 
 
 
-%\clearpage
+\clearpage
 \section{Outlook}
 We have observed efficient performance of each of our cryptographic protocols, QDS-$b$, QSS-$b$, QDS-$f$ and QKD-$f$, when key rates and signature lengths are estimated from the experimental data. Crucially, the experiment detailed in Sec.~\ref{sec:aqc_experiment} is performed without reference to any particular protocol and so the experimental hardware layer of Fig.~\ref{fig:big_agile} is agnostic to the application for which it is being used. Therefore, each system \systemB, \systemF may accurately be denoted ``agile''.
 
