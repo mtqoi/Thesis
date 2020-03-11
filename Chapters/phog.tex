@@ -652,9 +652,7 @@ The effective mode area is uncertain, and so as an upper bound we take $A_\eff$ 
 In the previous sections we have demonstrated that the three-mode model considered in Sec.~\ref{sec:phog_three_mode_model} accurately simulates NCL and allows for deterministic generation of sub-Poissonian light over the initial stages of the dynamics. A natural next question to ask is ``how might we implement such a model?". %\MT{add a little overview of some of the literature.}
 
 One approach which was successfully demonstrated in Ref.~\cite{Mukherjee2017} is to replace the Markovian reservoir $R$ with a ``tail" of further bosonic modes. %This mirrors a common numerical technique \MT{cite a bunch of stuff} which is regularly used to numerically simulate non-Markovian reservoirs. 
-Here we adopt this replacement in order to implement the system in laser-inscribed waveguides, identically to Ref.~\cite{Mukherjee2015, Mukherjee2017}.
-
-We therefore wish to analyse the multi-mode model of the PhoG device, Fig.~\ref{fig:phog_multi_mode} in which two "signal" modes are linearly coupled to a "tail" of further modes. The intra-tail coupling $g_c$ should be chosen to mimic the effect of reservoir $R$. We will solve this model and compare it to the models used previously in order to demonstrate agreement between these approaches. %Gotta mention later in my graphs and analysis that I have chosen the best $g_c$.
+Here we adopt this replacement in order to implement the system in laser-inscribed waveguides. This replacement was recently considered in Ref.~\cite{Mukherjee2015, Mukherjee2017}. We therefore wish to analyse the multi-mode model of the PhoG device, Fig.~\ref{fig:phog_multi_mode}, in which two "signal" modes are linearly coupled to the "tail" of further modes. The intra-tail coupling $g_c$ should be chosen to mimic the effect of reservoir $R$. We will solve this model and compare it to the models used previously in order to demonstrate agreement between these approaches. %Gotta mention later in my graphs and analysis that I have chosen the best $g_c$.
 The Lindblad master equation describing the multi-mode system is
 
 \begin{equation}\label{eqn:phog_multi_mode}
@@ -664,17 +662,18 @@ with $\hat{H} = \hat{H}^{\text{int}} + \hat{H}^{\text{Kerr}}$, and
 \begin{align}
 &\hat{H}^{\text{int}} = g_a \hat{a}^\dagger \hat{c}_0 + g_b \hat{b}^\dagger \hat{c}_0 + \sum_{j=1}^N g_j \hat{c}_{j-1}^\dagger \hat{c}_j + \hc \notag \\
 %
-&\hat{H}^{\text{Kerr}} = \frac{U}{2} \sum_{x \in \left\{a, b, c_j\right\}} \hat{x}^\dagger \hat{x}^\dagger \hat{x} \hat{x}, \qq{} j = 0, 1, \dots, N
+&\hat{H}^{\text{Kerr}} = \frac{U}{2} \sum_{x \in \left\{a, b, c_j\right\}} \hat{x}^\dagger \hat{x}^\dagger \hat{x} \hat{x}, \qq{} j = 0, 1, \dots, N.
 \end{align}
-with Kerr nonlinearity constant $U$, total number of tail modes $N$, and couplings $g_a, g_b, g_c$. We cannot hope to numerically simulate Eq.~\ref{eqn:phog_multi_mode} over the necessary parameter regimes of large input $\alpha$ and large number of modes\footnote{Even taking each mode as a qubit cannot help, as the total Hilbert space size is $2^{N}$ which is intractable for $N$ large.}, $N$. For the multi-mode model the only decay route into a Markovian reservoir is via linear loss $\gamma_1$, and so we require the tail to be long enough that state which has initially decayed into the tail cannot return to the signal modes over the timescales of interest. We are therefore trapped in the unfortunate scenario of having to make predictions of the behaviour of a large number of coupled modes, with strong nonlinearity and a necessarily large Hilbert space size of each mode. 
+The Kerr nonlinearity constant is $U$, total number of tail modes is $N$, and coupling constants are $g_a, g_b, g_c$. We cannot hope to numerically simulate Eq.~\ref{eqn:phog_multi_mode} over the necessary parameter regimes of large input $\alpha$ and large number of modes\footnote{Even taking each mode as a qubit cannot help, as the total Hilbert space size is $2^{N}$ which remains intractable for $N$ large.}. For the multi-mode model the only decay route into a Markovian reservoir is via linear loss $\gamma_1$ which we take to affect every mode independently. We thus require the tail to be long enough that state which has initially decayed into the tail cannot return to the signal modes over the timescales of interest. We are therefore trapped in the unfortunate scenario of having to make predictions of the behaviour of a large number of coupled modes, with strong nonlinearity and a necessarily large Hilbert space size of each mode. 
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 \includegraphics[width=0.6\linewidth, draft=false]{phog/multi_mode}
 \caption{\label{fig:phog_multi_mode} Multi-mode model of the PhoG device (c.f. Fig.~\ref{fig:phog_models}~\MakeUppercase{\romannumeral 4}) in which the Markovian reservoir $R$ from the three-mode model (Fig.~\ref{fig:phog_three_mode}) is replaced by a long ``tail" of additional bosonic modes.}
 \end{figure}
 
-To proceed we will consider two related approaches to approximate the system Eq.~\ref{eqn:phog_multi_mode}: a meanfield approach (Sec.~\ref{sec:meanfield}) and a quantum linearization approach (Sec.~\ref{sec:linearization}). Each of these techniques will give us a set of coupled differential equations for expectations of quantum operators. The number of equations scales only polynomially\footnote{Rather than the exponential scaling of the Lindblad master equation~\ref{eqn:phog_multi_mode}.} in $N$ and so is much more manageable than the numerical methods considered in Appendix~\ref{appendix:direct_integration},~\ref{appendix:monte_carlo} and used in previous sections.
+To proceed we will consider two related approaches to approximate the system Eq.~\ref{eqn:phog_multi_mode}: a meanfield approach (Sec.~\ref{sec:meanfield}) and a quantum linearization approach (Sec.~\ref{sec:linearization}). Each of these techniques will give us a set of coupled differential equations for expectations of quantum operators. The number of equations scales only polynomially\footnote{Rather than the exponential scaling of the Lindblad master equation~\ref{eqn:phog_multi_mode}, see Appendix~\ref{appendix:phog_numerical_methods}.} in $N$ and so is much more manageable than the numerical methods considered in Appendix~\ref{appendix:direct_integration},~\ref{appendix:monte_carlo} and used in previous sections.
 
 \subsection{Meanfield approach}\label{sec:meanfield}
 To illustrate the first of these approaches, let us use our master equation~\ref{eqn:phog_multi_mode} to find an equation for expectation $\ev{\hat{a}}$ of mode $a$. We see that
@@ -685,7 +684,7 @@ and so
 \begin{equation}\label{eqn:phog_meanfield_deriv}
 \ddt \ev{\hat{a}}\left(t\right) = - i g_a \ev{\hat{c}_0} - i \frac{U}{2} \ev{\hat{a}^\dagger \hat{a}\hat{a}} - \frac{\Gamma}{2} \ev{\hat{a}}
 \end{equation}
-which is an exact differential equation for $\ev{\hat{a}}$ in terms of first- and third-order expectations. Analogously, equations for second-order terms such as $\ev{\hat{a}\hat{a}}$ or $\ev{\hat{a}^\dagger \hat{a}}$ will involve second- and fourth-order expectations. As we noted in the discussion around Eq.~\ref{eqn:aa_not_closed} this system of equations is not closed. In fact, when equations for expectations of third- or fourth- order operator products are derived, we see that they must be written in terms of fifth- and sixth- order operators, and so on. This approach yields an infinite hierarchy of coupled differential equations of progressively higher orders. We must seek a simplification.
+which is an exact differential equation for $\ev{\hat{a}}$ in terms of first- and third-order expectations. Analogously, equations for second-order terms such as $\ev{\hat{a}\hat{a}}$ or $\ev{\hat{a}^\dagger \hat{a}}$ will involve second- and fourth-order expectations. As we noted in the discussion around Eq.~\ref{eqn:aa_not_closed}, this system of equations is not closed. In fact, when equations for expectations of third- or fourth- order operator products are derived, we see that they must be written in terms of fifth- and sixth- order operators, and so on. This yields an infinite hierarchy of coupled differential equations of progressively higher orders. We must seek a simplification.
 
 If we write, for example, $\hat{a} \approx \ev{\hat{a}}$ and substitute in to Eq.~\ref{eqn:phog_meanfield_deriv} we see terms second-order or higher becoming much easier to handle. Equation~\ref{eqn:phog_meanfield_deriv} becomes
 \begin{equation}\label{eqn:phog_meanfield_deriv_1}
@@ -693,17 +692,18 @@ If we write, for example, $\hat{a} \approx \ev{\hat{a}}$ and substitute in to Eq
 \end{equation}
 solely in terms of first-order expectations\footnote{Note that each expectation $\ev{\hat{a}}$ is just a c-number.}. The differential equations for second-order expectations like $\ev{\hat{a}^\dagger \hat{a}}$ are likewise reduced to first-order
 \begin{equation}
-\ddt \ev*{\hat{a}^\dagger \hat{a}} = - \Gamma \ev*{\hat{a}^\dagger}\ev{\hat{a}} - i \ev*{\hat{a}^\dagger}\ev{\hat{c}_0} + i \ev{\hat{a}}\ev*{\hat{c}_0^\dagger}
+\ddt \ev*{\hat{a}^\dagger \hat{a}} = \ddt \left|\ev{\hat{a}}\right|^2 =  - \Gamma \ev*{\hat{a}^\dagger}\ev{\hat{a}} - i \ev*{\hat{a}^\dagger}\ev{\hat{c}_0} + i \ev{\hat{a}}\ev*{\hat{c}_0^\dagger}
 \end{equation}
-and so the system is completely specified by $N+2$ differential equations\footnote{Rather than $2(N+2)$, since $\ev{\hat{a}^\dagger} = \ev{\hat{a}}^*$.}, one for each mode $\ev{\hat{a}}, \ev*{\hat{b}}, \ev{\hat{c}_j}$. We display this full system of equations in Sec.~\ref{appendix:mean_field}. 
+and so the system is completely specified by $N+2$ differential equations\footnote{Rather than $2(N+2)$, since $\ev{\hat{a}^\dagger} = \ev{\hat{a}}^*$.}, one for each mode $\ev{\hat{a}}, \ev*{\hat{b}}, \ev{\hat{c}_j} \dots$. We display this full system of equations in Appendix~\ref{appendix:mean_field}. 
 
 
-The approximation $\hat{a} \approx \ev{\hat{a}}$ is known as the \emph{mean-field} approximation, which treats our quantum system as a quasi-classical one. This system may be readily solved, and we display the evolution of photon-number expectation $\ev{\hat{n}_-}$ in Fig.~\ref{fig:phog_MF_demonstration} for the multi-mode model (dashed). We include also behaviour of the single-mode model (solid), for comparison. We see that even in the mean-field approximation, nonlinear decay due to NCL may be observed. The quantitative discrepancy between single- and multi-mode models for large initial amplitudes is due to finite (nonzero) decay time for mode $s_+$.
+The approximation $\hat{a} \approx \ev{\hat{a}}$ is known as the \emph{mean-field} approximation, which treats our quantum system as a quasi-classical one. This system may be readily solved with any standard numerical package, and we display the evolution of photon-number expectation $\ev{\hat{n}_-}$ in Fig.~\ref{fig:phog_MF_demonstration} for the multi-mode model (dashed). We include also behaviour of the single-mode model (solid), for comparison. We see that even in the mean-field approximation, nonlinear decay due to NCL may be observed. The slight discrepancy between single- and multi-mode models for large initial amplitudes is due to finite (nonzero) decay time for mode $s_+$.
 
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
-\includegraphics[draft=false, width=0.49\linewidth]{phog/MF_single_mode_vs_multi_mode}
+\includegraphics[draft=false, width=0.6\linewidth]{phog/MF_single_mode_vs_multi_mode}
 \caption{\label{fig:phog_MF_demonstration} Nonlinear decay is observed even in mean-field approximation. Solid: single-mode model. Dashed: multi-mode model. Initial coherent states with $\ev{\hat{n}_-}\left(0\right) = 1.7\times 10^9$, $1.4\times10^9$, $7.2\times10^8$ and $2.4\times10^8$ were initialised in mode $s_-$. Linear loss $\gamma_1 = 11.5$, $g_a$ and $g_b$ optimal and $g_c = 60$m$^{-1}$. $U = 8.5\times10^{-8}$. Full systems of equations are shown in Sec.~\ref{appendix:single_mode_mean_field} for single-mode, and Sec.~\ref{appendix:mean_field} for multi-mode models.}
 \end{figure}
 
@@ -713,19 +713,21 @@ While the mean-field approach is useful for observing the effect of nonlinear de
 \begin{align}
 Q = \frac{\ev{\hat{a}^\dagger \hat{a} \hat{a}^\dagger \hat{a}}}{\ev{\hat{a}^\dagger \hat{a}}} - 1 &= \frac{\ev{\hat{a}^\dagger \hat{a}^\dagger \hat{a} \hat{a}} - \ev{\hat{a}^\dagger \hat{a}}^2}{\ev{\hat{a}^\dagger \hat{a}}} = \frac{\left|\ev{\hat{a}}\right|^4 - \left|\ev{\hat{a}}\right|^4}{\left|\ev{\hat{a}}\right|^2} \notag
 \end{align}
-which is identically $0$ when the mean-field approximation is applied\footnote{Note that in this equation we have implicitly used a subtle feature of the mean-field approximation. Since the mean-field approximation cannot capture phenomena arising from different ordering of operators, we must specify that the approximation only applies to expectations of normal-ordered operators.}.
+which is identically $0$. Note that in this equation we have implicitly used a subtle feature of the mean-field approximation. Since the mean-field approximation cannot capture phenomena arising from different ordering of operators, we must specify that the approximation only applies to expectations of normal-ordered operators.
 
 \subsection{Higher-order linearization}\label{sec:linearization}
-Since the mean-field approximation cannot capture the dynamics of $Q$ we must consider a different approach in order to reduce the order of Eq.~\ref{eqn:phog_meanfield_deriv}. We will adopt a linearization approach which is typical for consideration of non-linear waveguide systems \cite{Doerr1994, Haus1990,Ju2012}, which is essentially a linearization of the quantum correction to the previous mean-field approach. We will derive the approach and then provide useful formulae which can be substituted into Eq.~\ref{eqn:phog_meanfield_deriv} and any similar equation. 
+Since the mean-field approximation cannot capture the dynamics of $Q$ we must consider a different approach in order to reduce the order of Eq.~\ref{eqn:phog_meanfield_deriv}. We will adopt a linearization approach which is typical for consideration of non-linear waveguide systems \cite{Doerr1994, Haus1990,Ju2012}. This is essentially a linearization of the quantum correction to the previous mean-field approach. We will derive the approach and then provide useful formulae which can be substituted into Eq.~\ref{eqn:phog_meanfield_deriv} and any similar equation. 
 
-Consider arbitrary quantum operators $A, B, C$. We will explicitly demonstrate how $\ev{ABC}$ may be simplified, and then show the results for generalizing it to expectations of higher-order operator products. We expand each operator $A, B, C$ into a mean-field term and a quantum fluctuation term: $A = \ev{A} + \delta A$, and we take $\ev{\delta A} = 0$ to ensure that $\ev{A}$ is well-defined. It is important to note that the $\ev{A}$ derived here in general behave differently to those derived in the mean-field approach. Substituting these expansions into $\ev{A B C}$,
+Consider arbitrary quantum operators $A, B, C$. We will explicitly demonstrate how $\ev{ABC}$ may be simplified, and then display the results for a generalization to expectations of fourth-order operator products. 
+
+Let us expand each operator $A, B, C$ into a mean-field term and a quantum fluctuation term: $A = \ev{A} + \delta A$, and we take $\ev{\delta A} = 0$ to ensure that $\ev{A}$ is well-defined. It is important to note that the $\ev{A}$ derived here in general behave differently to those derived in the mean-field approach. Substituting these expansions into $\ev{A B C}$,
 \begin{align}\label{eqn:phog_linearization_deriv}
 &\ev{A B C} = \notag \\
 %
 &\ev{A}\ev{B}\ev{C} + \ev{A}\ev{\delta B \delta C} + \ev{B} \ev{\delta A \delta C} + \ev{C} \ev{\delta A \delta B} + \ev{\delta A \delta B \delta C}.
 \end{align}
 
-\noindent A key tool which we require is the cumulant expansion for a set of generic operators $\left\{ O_1, \dots, O_n\right\}$, 
+\noindent A key tool which we require is the cumulant expansion \cite{mathworld_cumulant} for a set of generic operators $\left\{ O_1, \dots, O_n\right\}$, 
 \begin{equation}
 \mathcal{C}\left(O_1, \dots, O_n\right) = \sum_{\mathcal{P}\in \mathbb{P}} \left(\left|\mathcal{P}\right| - 1\right)! \left(-1\right)^{\left|\mathcal{P}\right|-1} \prod_{p \in \mathcal{P}} \ev{\prod_{i \in p} O_i}
 \end{equation}
@@ -739,7 +741,7 @@ where $\mathbb{P}$ denotes all disjoint partitions of the set $\left\{O_1, \dots
 \begin{equation}\label{eqn:linearization_3}
 \ev{A B C} \approx \ev{A} \ev{B C} + \ev{B} \ev{A C} + \ev{C} \ev{A B} - 2 \ev{A} \ev{B} \ev{C}.
 \end{equation}
-Higher-order expectations of products of operators may be calculated in the same way, with the only requirements assumed about the fluctuations being the zero-mean condition $\ev{\delta A} = \dots = \ev{\delta Z} = 0$ and the assumption on the cumulant of $\delta$-operators.\footnote{e.g. for a truncation of the system of equations to third-order, one would instead set $\mathcal{C}\left(\delta A, \delta B, \delta C\right) \ne 0$ but $\mathcal{C}\left(\delta A, \delta B, \delta C , \delta D\right) = 0$, and so on.}
+Higher-order expectations of products of operators may be calculated in the same way, with the only requirements assumed about the fluctuations being the zero-mean condition $\ev{\delta A} = \dots = \ev{\delta Z} = 0$ and the assumption on the cumulant of $\delta$-operators\footnote{e.g. for a truncation of the system of equations to third-order, one would instead set $\mathcal{C}\left(\delta A, \delta B, \delta C\right) \ne 0$ but $\mathcal{C}\left(\delta A, \delta B, \delta C , \delta D\right) = 0$, and so on.}.
 
 The replacement for fourth-order operators is derived similarly,
 \begin{equation}
@@ -756,8 +758,9 @@ and equations for the remaining expectations are calculated likewise. The full s
 
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
-\includegraphics[width=0.49\linewidth, draft=false]{phog/PhoG-fig9}
+\includegraphics[width=0.8\linewidth, draft=false]{phog/PhoG-fig9}
 \caption{\label{fig:phog_multimode_linearized} With the realistic parameters $U = 8.5 \times 10^{-8}$, $g_c = 60$m$^{-1}$, tail length $N = 28$ and optimal coupling ratio Eq.~\ref{eqn:phog_gagb_optimal}, the mode $s_-$ quickly evolves to a strongly sub-Poissonian state. A coherent state with average photon number $\ev*{s_-^\dagger s_-}$ is initialized in mode $s_-$, and all other modes are initialized into the vacuum. (a) The dot-dashed, solid, dotted, and dashed lines correspond to initial photon numbers $1.7\times 10^9$, $1.2\times 10^9$, $7.2\times 10^8$ and $2.4\times 10^8$, respectively. We take linear loss rate $\gamma_1 = 11.5$m$^{-1}$. Inset: the evolution of photon-number expectation, exhibiting the nonlinear decay behaviour of the NCL mechanism. (b) The Mandel $Q$ parameter remains strongly negative even in the presence of realistic linear loss $\gamma_1$. The dashed, solid, dotted and dot-dashed lines correspond to $\gamma_1 = 0.0$, $11.5$, $20.0$, and $40$m$^{-1}$, respectively, and $\ev*{s_-^\dagger s_-} = 1.2\times 10^9$.}
 \end{figure}
 
@@ -776,14 +779,15 @@ In Fig.~\ref{fig:phog_multimode_linearized}a we see that the linearized multi-mo
 Finally, we return to the single-mode model Eq.~\ref{eqn:phog_single_mode_deriv} in order to demonstrate the accuracy of our linearization approach. We have demonstrated already that both mean-field and linearization approaches are accurate at modelling the non-linear decay of photon number expectation, and so in Fig.~\ref{fig:phog_single_mode_linearization} we make a comparison of $Q$ under both the linearization approach derived in Sec.~\ref{sec:linearization} and quantum monte carlo on Eq.~\ref{eqn:phog_single_mode_deriv}. We refer to the reader to Appendix~\ref{appendix:direct_integration} for more information about this numerical method.
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
-\includegraphics[width=0.49\linewidth, draft=false]{phog/PhoG-fig5}
+\includegraphics[width=0.8\linewidth, draft=false]{phog/PhoG-fig5}
 \caption{\label{fig:phog_single_mode_linearization} Evolution of the Mandel $Q$ parameter is accurately predicted by the linearization method over the initial stages of evolution, while $\left|Q\right|$ is underestimated at later stages. Dashed: linearized approximation. Solid: exact solution Eq.~\ref{eqn:phog_single_mode_deriv}, via quantum monte carlo. $U = 2g$ and $\Gamma = 432g$. (a) Initial photon number $\ev{\hat{n}_-} = 100$, $300$, $500$, $700$ (top to buttom), with $\gamma_1 = 0$. (b) Initial photon number $\ev{\hat{n}_-}=500$, $\gamma_1 = 0$, $20g$, $200g$, $400g$ (bottom to top). With realistic linear loss rates $\gamma_1$ our linearization approximation remains accurate even in the late stages of evolution. Both graphs use the same time scaling $g t$ as Fig.~\ref{fig:phog_fig3paper2} ($g=1$), and solid lines are identical to Fig.~\ref{fig:phog_fig3paper2}.}
 \end{figure}
 
 The linearization approximation (dashed lines) accurately predicts the evolution of $Q$ over the initial stages of evolution, and actually underestimates $\left|Q\right|$ in the later stages. Including realistic $\gamma_1$ allows the approximation to remain accurate as the nonclassical output state is pushed towards the vacuum. Since when $\gamma_1 = 0$ the linearization approximation remains accurate over the timescales of interest, and since the presence of realistic losses makes the approximation increasingly accurate, we may confidently apply the linearization approach over the parameter regimes of interest--short times and realistic loss--even in the case of a large number of modes. Indeed, we may even expect linearization to be more accurate in the multi-mode case than in the single-mode case, since the largest multi-mode expectation which is truncated is originally of fourth-order, as opposed to sixth-order for single-mode.
 
-
+We have observed that even the full multi-mode model of the PhoG device, with realistic $U=8.5\times10^{-8}$ and large linear loss $\gamma_1$, is capable of producing highly sub-Poissonian light at the output. The main feature of our system which we have exploited is that NCL dominates (i) over short timescales, and (ii) for large photon number. By increasing the input coherent state amplitude we force ourselves into the regime of NCL. The amplitudes require pulse energies $\sim 320$~pJ which is feasible in similar glasses to IG$2$ \cite{Butcher2018}.
 
 \section{Modal entanglement}\label{sec:phog_entanglement}
 In the previous sections we have observed one of the remarkable features of our device: that strong linear loss on one mode of a multimode system, Kerr nonlinearity which is present in regular $\chi^{\left(3\right)}$ materials and linear coupling can be arranged and configured in order to simulate useful loss operators. When no linear loss is present in other modes of the system, we are able to deterministically generate a single-photon steady-state at the output, while bright strongly sub-Poissonian states are attainable even in the presence of linear loss. 
