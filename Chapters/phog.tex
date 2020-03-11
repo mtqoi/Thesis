@@ -469,9 +469,10 @@ Varying $\gamma_1$ and $\alpha$, Fig.~\ref{fig:phog_fig3paper2}, we see that alt
 
 \clearpage
 \section{Three-mode model}\label{sec:phog_three_mode_model}
-Having analysed the single-mode model in detail, and demonstrated that the NCL operator $\ncl$ is a good candidate for deterministic generation of highly non-classical states even in the presence of two-photon loss and strong linear loss, we must turn to consider whether such an NCL operator can be effectively realised in practice. In this section we will demonstrate that $\ncl$ may be effectively simulated in a three-mode system via a combination of strong linear loss, linear coupling between multiple modes, and the Kerr nonlinearity. Our starting point is the three-mode model depicted in Fig.~\ref{fig:phog_three_mode} in which two bosonic modes, $a$ and $b$, are coupled to a third, $c_0$, which decays into a Markovian reservoir $R$ with decay rate $\gamma_c$. 
+Having analysed the single-mode model in detail, and demonstrated that the NCL operator $\ncl$ is a good candidate for deterministic generation of highly non-classical states even in the presence of two-photon loss and strong linear loss, we must turn to consider whether such an NCL operator can be effectively realised in practice. In this section we will demonstrate that $\ncl$ may be effectively simulated in a three-mode system via a combination of strong linear loss, linear coupling between multiple modes, and the Kerr nonlinearity. Our starting point is the three-mode model, depicted in Fig.~\ref{fig:phog_three_mode}, in which two bosonic modes, $a$ and $b$, are coupled to a third, $c_0$, which then decays into a Markovian reservoir $R$ with decay rate $\gamma_c$. 
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 \includegraphics[width=0.3\linewidth, draft=false]{phog/three_mode}
 \caption{\label{fig:phog_three_mode} Three-mode model of PhoG device. Two bosonic modes, $a$ and $b$, are each coupled to a third mode, $c_0$. Mode $c_0$ is then strongly coupled to Markovian reservoir $R$ via linear loss $\left(\hat{A} = \hat{a}\right)$ with decay rate $\gamma_c$. }
@@ -488,7 +489,7 @@ where the subscript $3$ denotes that we are dealing with this three-mode model. 
 &\hat{H}_3^{\text{Kerr}} = \frac{U}{2} \sum_{x} \hat{x}^\dagger \hat{x}^\dagger \hat{x} \hat{x} \qq{with} \hat{x} \in \left\{\hat{a}, \hat{b}, \hat{c}_0\right\}.
 \end{align}
 The interaction Hamiltonian $\hat{H}_3^{\text{int}}$ describes linear coupling between modes, while the Kerr Hamiltonian $\hat{H}_3^{\text{Kerr}}$ describes the self-Kerr interaction (self-phase modulation) % Check that these are indeed equivalent
-on each mode. This Hamiltonian may be realised, for example, by evanescently coupled waveguides in a $\chi^{\left(3\right)}$ glass. The constant $U$ is the Kerr nonlinear interaction constant, and we will relate this to glass properties in Sec.~\ref{sec:parameters}, below.
+on each mode. This Hamiltonian may be realised, for example, by evanescently coupled waveguides in a $\chi^{\left(3\right)}$ glass \cite{Imoto1985, Kitagawa1986, Drummond1980}. The constant $U$ is the Kerr nonlinear interaction constant, and we will relate this to glass properties in Sec.~\ref{sec:parameters}, below.
 
 The three-mode model Eq.~\ref{eqn:phog_lindblad_three_mode_model}, while a physically useful starting point for building a system which accurately simulates NCL, is currently too difficult to analyse, either analytically or using the numerical methods which proved useful for the single mode model in Secs.~\ref{sec:phog_single_mode_model},~\ref{sec:phog_including_loss} (see Appendix~\ref{appendix:phog_numerical_methods}). 
 
@@ -515,7 +516,7 @@ and rewriting Eq.~\ref{eqn:phog_two_mode_model_deriv} in terms of these new mode
 \begin{equation}\label{eqn:phog_lindblad_two_mode_model}
 \ddt \rho_2 = - i \left[ \hat{H}_2, \rho_2 \right] + \left[ \gamma_1 \mathcal{L}\left[\hat{s}_-\right] + \left(\Gamma + \gamma_1\right) \mathcal{L}\left[\hat{s}_+\right] \right] \rho_2
 \end{equation}
-where the subscript $2$ denotes that each quantity is for this two-mode model, and we have defined $\Gamma = 4 G^2 / \gamma_c$. The Hamiltonian $\hat{H}_2$ takes the form $\hat{H}_2 = \hat{H}_2^{\text{self}} + \hat{H}_2^{\text{int}}$, with
+where the subscript $2$ denotes that each quantity is for this two-mode model. We have defined the new decay rate as $\Gamma = 4 G^2 / \gamma_c$. The Hamiltonian $\hat{H}_2$ takes the form $\hat{H}_2 = \hat{H}_2^{\text{self}} + \hat{H}_2^{\text{int}}$, with
 \begin{align}
 &H_2^{\text{self}} = \varsigma_1\left(n_+^2 + n_-^2\right) + \varsigma_2 n_+ n_- + \varsigma_3\left(n_+ + n_-\right) \notag \\
 %
@@ -527,17 +528,18 @@ where $n_{\pm} = s_{\pm}^\dagger s_\pm$. Our $\varsigma$ coefficients are
 %
 &\varsigma_3 = \frac{\varsigma_2}{4} - \frac{U}{2}, \; \varsigma_4 = \frac{\varsigma_2}{4}, \; \varsigma_5 = \frac{U}{G^4} g_a g_b \left(g_a^2 - g_b^2\right).
 \end{align}
-The two-mode model obeying Eq.~\ref{eqn:phog_lindblad_two_mode_model} is depicted in Fig.~\ref{fig:phog_two_mode_model} where we see that mode $s_+$ decays into reservoir $R$ with decay rate $\Gamma + \gamma_1$. In the absence of linear loss, $\gamma_1=0$, mode $s_-$ will decay only vicariously through $s_+$, and the coupling between modes is proportional to nonlinearity parameter $U$. In a linear system, $U = 0$, the antisymmetric mode $s_-$ will not decay and so we identify it as the dark mode of the system, which is considered further e.g. in Ref.~\cite{Delanty2012}.
+The two-mode model obeying Eq.~\ref{eqn:phog_lindblad_two_mode_model} is depicted in Fig.~\ref{fig:phog_two_mode_model}. Mode $s_+$ decays into reservoir $R$ with decay rate $\Gamma + \gamma_1$. In the absence of linear loss, $\gamma_1=0$, mode $s_-$ will decay only vicariously through $s_+$, and the coupling between modes is proportional to nonlinearity parameter $U$. In a linear system, $U = 0$, the antisymmetric mode $s_-$ will not decay and so in that case we may identify it as the dark mode of such linear system, which is considered further e.g. in Ref.~\cite{Delanty2012}.
 
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 \includegraphics[width=0.3\linewidth, draft=false]{phog/two_mode}
 \caption{\label{fig:phog_two_mode_model} Two-mode model of the PhoG device. Having adiabatically eliminated mode $c_0$ from the three-mode model (Fig.~\ref{fig:phog_three_mode}) and rotated to collective basis $s_-, s_+$ using Eqs.~\ref{eqn:phog_rotation} we see that mode $s_-$ will only decay into $R$ by first decaying into $s_+$. The linear coupling between $s_-$ and $s_+$ is proportional to $U$, and so for a linear system $U=0$ mode $s_-$ cannot decay into $R$. Decay rate $\Gamma = 4 G^2 / \gamma_1$.}
 \end{figure}
 
 
-However, even two bosonic modes are computationally very challenging to simulate when large photon numbers are required\footnote{For example, we shall note in Appendix~\ref{appendix:phog_numerical_methods} that a coherent state may be accurately modelled on a Hilbert space size $2 \lceil \alpha^2 \rceil$ without adverse effects due to Hilbert space truncation. Initial $\ev{\hat{n}} = 700$, required in Fig.~\ref{fig:phog_fig3paper2}b to give large negative $Q$, will require a Hilbert space size $\dims > 1400$ on each mode, and so a total Hilbert space size of $1400 \times 1400 = 1960000$. This is challenging to implement.}, although we shall encounter approximation methods in Sec.~\ref{sec:linearization} which help us to deal with this. 
+We have thus reduced the complexity of our system from three modes to two. However, even two bosonic modes are computationally very challenging to simulate when large photon numbers are required\footnote{For example, we note in Appendix~\ref{appendix:phog_numerical_methods} that a coherent state may be accurately modelled on a Hilbert space size $2 \lceil \alpha^2 \rceil$ without adverse effects due to Hilbert space truncation. Initial $\ev{\hat{n}} = 700$, required in Fig.~\ref{fig:phog_fig3paper2}b to give large negative $Q$, will require a Hilbert space size $\dims > 794$ on each mode, and so a total Hilbert space size of $794 \times 794 = 630436$. This is challenging to implement.}, although we shall encounter approximation methods in Sec.~\ref{sec:linearization} which help us to deal with this. 
 
 We thus seek to adiabatically eliminate mode $s_+$ from the system, which will leave us with an equation for $s_-$ only. Let us assume that the decay rate $\Gamma + \gamma_1$ is the dominating decay rate of the two-mode model, and that mode $s_+$ decays to its steady state much quicker than the typical timescale of the dynamics of $s_-$. Then applying the adiabatic elimination method described in Appendix~\ref{appendix:adiabatic_elimination} we identify
 
@@ -546,19 +548,19 @@ H^{\left(0, 0\right)} &= \varsigma_1 n_-^2 + \varsigma_3 n_- \notag \\
 %
 H^{\left(0, 1\right)} &= \varsigma_5 s_-^\dagger n_- \notag \\
 %
-H^{\left(0, 2\right)} &= \varsigma_4 s_-^{\dagger 2}
+H^{\left(0, 2\right)} &= \varsigma_4 s_-^{\dagger 2},
 \end{align}
 and so
 
 \begin{equation}\label{eqn:phog_single_mode_deriv}
-\ddt \rho_1 = - i \left[\hat{H}_1, \rho_1\right] + \left\{\gamma_1 \mathcal{L}\left[s_-\right] + \gamma_2 \mathcal{L}\left[s_-^2\right] + \gncl \mathcal{L}\left[\ncl\right] \right\}\rho_1
+\ddt \rho_1 = - i \left[\hat{H}_1, \rho_1\right] + \left\{\gamma_1 \mathcal{L}\left[s_-\right] + \gamma_2 \mathcal{L}\left[s_-^2\right] + \gncl \mathcal{L}\left[\ncl\right] \right\}\rho_1.
 \end{equation}
-where we have used the commutator to write $n_- s_- \rightarrow \ncl$. The decay rates are
+We have used the commutator to write $n_- s_- \rightarrow \ncl$. The new decay rates are
 \begin{equation}\label{eqn:phog_single_mode_decay_rates}
 \gamma_2 = \frac{4 U^2 \left(g_a g_b\right)^4}{G^8 \left(\Gamma + \gamma_1\right)} \qq{and} \gncl = \frac{4 U^2 \left(g_a g_b\right)^2}{G^8 \left(\Gamma + \gamma_1\right)}\left(g_a^2 - g_b^2\right)^2.
 \end{equation}
 
-\noindent We see that Eq.~\ref{eqn:phog_single_mode_deriv} matches Eq.~\ref{eqn:phog_full_single_mode} except for the addition of the Hamiltonian $\hat{H}_1 = H^{\left(0, 0\right)}$ in Eqs.~\ref{eqn:phog_single_mode_deriv_adiabatic} which does not affect the photon-number statistics. 
+\noindent We see that Eq.~\ref{eqn:phog_single_mode_deriv} matches Eq.~\ref{eqn:phog_full_single_mode} except for the addition of the Hamiltonian $\hat{H}_1 = H^{\left(0, 0\right)}$, which does not affect the photon-number statistics. 
 
 
 
@@ -582,15 +584,16 @@ Taking this optimal choice,
 \end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\noindent and we are finally able to give motivation for the choices of $\gamma_2=0.0005, \gncl=0.002$ used in Sec.~\ref{sec:phog_summary_ncl_effects} as the decay rates given by Eq.~\ref{eqn:phog_gamma3_optimal} when $\Gamma = 432 g$, $U = 2 g$, $\gamma_1 = 0$ and $g$ is a dimensionless scaling parameter which we here take to be $1$. Altering $g$ will only serve to re-scale the time axis of Figs.~\ref{fig:phog_fig3paper},~\ref{fig:phog_fig3paper2} but the qualitative dynamics will remain unchanged. 
+\noindent and we are finally able to give motivation for the choices of $\gamma_2=0.0005, \gncl=0.002$ used in Sec.~\ref{sec:phog_summary_ncl_effects} as the decay rates given by Eq.~\ref{eqn:phog_gamma3_optimal} when $\Gamma = 432 g$, $U = 2 g$, $\gamma_1 = 0$. The $g$ is a dimensionless scaling parameter which we here take to be $1$. Altering $g$ will only serve to re-scale the time axis of Figs.~\ref{fig:phog_fig3paper},~\ref{fig:phog_fig3paper2} but the qualitative dynamics will remain unchanged. 
 
 To summarise, we have reduced the three-mode model (Eq.~\ref{eqn:phog_lindblad_three_mode_model}, Fig.~\ref{fig:phog_three_mode}) to a single-mode model (Eqs.~\ref{eqn:phog_full_single_mode}
-,~\ref{eqn:phog_single_mode_deriv}, Fig.~\ref{fig:phog_single_mode}) via sequential adiabatic eliminations of modes $c_0$ and $s_+$, which rapidly decayed into reservoir $R$. In essence, the behaviour of the antisymmetric collective mode $s_-$ in the three-mode model simulates behaviour of a single mode undergoing nonlinear coherent loss, two-photon loss and single-photon loss, which were all considered in Secs.~\ref{sec:phog_single_mode_model},~\ref{sec:phog_including_loss}. The combination of Kerr nonlinearity, linear coupling and single-photon loss allows for the effective NCL decay operator to be constructed.
+,~\ref{eqn:phog_single_mode_deriv}, Fig.~\ref{fig:phog_single_mode}) via sequential adiabatic eliminations of modes $c_0$ and $s_+$, which each rapidly decayed into reservoir $R$. In essence, the behaviour of the antisymmetric collective mode $s_-$ in the three-mode model simulates behaviour of a single mode undergoing nonlinear coherent loss, two-photon loss and single-photon loss, which were all considered in Secs.~\ref{sec:phog_single_mode_model},~\ref{sec:phog_including_loss}. The combination of Kerr nonlinearity, linear coupling and single-photon loss allows for the effective NCL decay operator to be constructed.
 
 We demonstrate in Figs.~\ref{fig:phog_three_mode_single_mode_comparison},~\ref{fig:phog_two_mode_single_mode_comparison} that both the three-mode model and the two-mode model do  indeed give rise to the same behaviour as the single-mode model. Considering the two-mode model (Fig.~\ref{fig:phog_two_mode_single_mode_comparison}a) we see that initially mode $s_-$ does not have rapid decay. This is because mode $s_+$ is populated (Fig.~\ref{fig:phog_two_mode_single_mode_comparison}b). However, once $s_+$ begins to decay, we observe good agreement between two-mode and single-mode model. The two-mode model exhibits behaviours signature to NCL.
 
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 \includegraphics[width=0.49\linewidth, draft=false]{phog/PhoG-fig8}
 \caption{\label{fig:phog_three_mode_single_mode_comparison}
@@ -598,6 +601,7 @@ Evolution of Mandel parameter (a) and mean photon number (b) of the antisymmetri
 \end{figure}
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 	\begin{subfigure}{0.49\linewidth}
 	\caption{}
