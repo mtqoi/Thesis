@@ -31,6 +31,7 @@
 \usepackage{etoolbox}
 \usepackage[para]{threeparttable}
 
+\AtBeginDocument{\DeclareUnicodeCharacter{00B4}{'}}
 
 
 \usepackage{xcolor}
@@ -73,21 +74,21 @@
 
 
 \includeonly{
-%	chapters/introduction,
-%	chapters/crypto_intro,
+	chapters/introduction,
+	chapters/crypto_intro,
 	chapters/qds,
-%	chapters/qss,
-%	chapters/aqc,
-%	chapters/phog,
-%	chapters/phog_adiabatic_elimination,
-%	chapters/phog_numerical_methods,
-%	chapters/crypto_numerical_methods,
-%	chapters/crypto_larger_alphabets
+	chapters/qss,
+	chapters/aqc,
+	chapters/phog,
+	chapters/phog_adiabatic_elimination,
+	chapters/phog_numerical_methods,
+	chapters/crypto_numerical_methods,
+	chapters/crypto_larger_alphabets
 }
 
 
 \usepackage[
-%    backend=bibtex8,
+    backend=bibtex8,
     style=ieee,
     citestyle=numeric-comp,
     sortlocale=de_DE,
@@ -152,7 +153,7 @@
 \include{chapters/phog_numerical_methods}
 
 \newpage
-\printbibliography
+\printbibliography[heading=bibintoc]
 
 
 \end{document}
