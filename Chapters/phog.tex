@@ -790,17 +790,18 @@ The linearization approximation (dashed lines) accurately predicts the evolution
 We have observed that even the full multi-mode model of the PhoG device, with realistic $U=8.5\times10^{-8}$ and large linear loss $\gamma_1$, is capable of producing highly sub-Poissonian light at the output. The main feature of our system which we have exploited is that NCL dominates (i) over short timescales, and (ii) for large photon number. By increasing the input coherent state amplitude we force ourselves into the regime of NCL. The amplitudes require pulse energies $\sim 320$~pJ which is feasible in similar glasses to IG$2$ \cite{Butcher2018}.
 
 \section{Modal entanglement}\label{sec:phog_entanglement}
-In the previous sections we have observed one of the remarkable features of our device: that strong linear loss on one mode of a multimode system, Kerr nonlinearity which is present in regular $\chi^{\left(3\right)}$ materials and linear coupling can be arranged and configured in order to simulate useful loss operators. When no linear loss is present in other modes of the system, we are able to deterministically generate a single-photon steady-state at the output, while bright strongly sub-Poissonian states are attainable even in the presence of linear loss. 
+In the previous sections we have observed one of the remarkable features of our device: that strong linear loss on one mode of a multimode system, Kerr nonlinearity which is present in $\chi^{\left(3\right)}$ materials, and linear coupling, can be arranged and configured in order to simulate useful loss operators. When no linear loss is present in the signal modes of the system, we are able to deterministically generate a single-photon steady-state at the output, while bright strongly sub-Poissonian states are attainable even in the presence of linear loss. We have simulated loss operator $\hat{A} = \ncl$ in our system, which required very asymmetric coupling $g_a \gg g_b$ or $g_a \ll g_b$ (c.f. Eq.~\ref{eqn:phog_single_mode_decay_rates}). 
 
-In the previous sections we have simulated loss operator $\hat{A} = \ncl$ in our system, which required very asymmetric coupling $g_a \gg g_b$ or $g_a \ll g_b$ (c.f. Eq.~\ref{eqn:phog_single_mode_decay_rates}). Here, we will explore the quantum effects which occur when this asymmetry is not met. Let us return to the two-mode model of the PhoG device (Eq.~\ref{eqn:phog_lindblad_two_mode_model}, Fig.~\ref{fig:phog_two_mode_model}) and set $g_a = g_b$. This will mean that the rate $\gncl$ of NCL simulated by this model is now zero, and so we cannot expect to reach strongly sub-Poissonian light except in the limit\footnote{The steady-state of $\hat{A} = \hat{a}^2$ has $Q = -0.5$} $\gamma_1 \rightarrow 0$.
+In this section, we will explore the quantum effects which occur when this asymmetry is not met. Let us return to the two-mode model of the PhoG device (Eq.~\ref{eqn:phog_lindblad_two_mode_model}, Fig.~\ref{fig:phog_two_mode_model}) and set $g_a = g_b$. This will mean that the rate $\gncl$ of NCL simulated by this model is now zero, and so we cannot expect to reach strongly sub-Poissonian light, except in the limit\footnote{The steady-state of $\hat{A} = \hat{a}^2$ has $Q = -0.5$} $\gamma_1 \rightarrow 0$.
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 \includegraphics[width=0.6\linewidth, draft=false]{phog/entanglement_two_mode_device}
 \caption{\label{fig:phog_entanglement_two_mode_device} Two-mode model of PhoG device. (a) Collective basis $s_-, s_+$, Eq.~\ref{eqn:phog_lindblad_two_mode_model}. (b) Signal basis $a, b$, Eq.~\ref{eqn:phog_two_mode_model_deriv}}
 \end{figure}
 
-However, even this symmetric system exhibiting two-photon absorption can be useful for generation of non-classical states. We will demonstrate that a symmetric PhoG device is capable to produce entanglement shared between signal modes $a$ and $b$. The system we consider is displayed in Fig.~\ref{fig:phog_entanglement_two_mode_device}. Because we wish to allow for large photon-numbers, we must resort to the linearized model described in Sec.~\ref{sec:linearization}, which allows us to access first- and second-order expectations of creation and annihilation operators. We are in a perfect position to consider the Gaussian entanglement shared between modes $a$ and $b$ \cite{Weedbrook2012, Adesso2007, Simon2000}.
+However, even this symmetric system exhibiting two-photon absorption can be useful for generation of non-classical states. We will demonstrate that a symmetric PhoG device is capable to produce entanglement shared between signal modes $a$ and $b$. The system we consider is displayed in Fig.~\ref{fig:phog_entanglement_two_mode_device}. Because we wish to allow for large photon-numbers, we must resort to the linearized model described in Sec.~\ref{sec:linearization}. This leaves us in a perfect position to access first- and second-order expectations of creation and annihilation operators. We are in a perfect position to consider the Gaussian entanglement shared between modes $a$ and $b$ \cite{Weedbrook2012, Adesso2007, Simon2000}.
 
 We proceed as follows. After using our linearization method to solve for expectations of the form $\ev{\hat{a}}$, $\ev*{\hat{a}^\dagger \hat{a}}$, $\ev*{\hat{a}\hat{b}}$, etc., we transform these quantities into expectations of quadrature operators, Eq.~\ref{eqn:intro_quadrature}. So, for example, we form expectations as 
 \begin{align}
@@ -817,7 +818,7 @@ Crucially, we can access second-order expectations such as
 &\qq{etc.} \notag
 \end{align}
 
-\noindent and therefore we can to construct a covariance matrix $\sigma$ \cite{Weedbrook2012} which describes the quadrature correlations between modes $a$ and $b$. The matrix element $\sigma_{j, k}$ is constructed as %\MT{Do I want this here? Or in the introduction?}
+\noindent Therefore, we can to construct a covariance matrix $\sigma$ \cite{Weedbrook2012} which describes the quadrature correlations between modes $a$ and $b$. The matrix element $\sigma_{j, k}$ is constructed as %\MT{Do I want this here? Or in the introduction?}
 
 \begin{equation}\label{eqn:covariance matrix}
 \sigma_{j, k} = \frac{1}{2} \left[ \ev{d_j d_k} + \ev{d_k d_j}\right] - \ev{d_j} \ev{d_k}
@@ -854,6 +855,7 @@ We calculate $\mathcal{N}_G$ and plot it in Fig.~\ref{fig:phog_negativities}. Fo
 %\end{figure}
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 	\begin{subfigure}{0.49\linewidth}
 	\centering
@@ -865,7 +867,7 @@ We calculate $\mathcal{N}_G$ and plot it in Fig.~\ref{fig:phog_negativities}. Fo
 	\includegraphics[width=\linewidth, draft=false]{phog/entanglement/entanglement_3}
 	\caption{}
 	\end{subfigure}
-	\caption{\label{fig:phog_negativities} Attainable logarithmic negativities $\mathcal{N}_G$ in the symmetric two-mode PhoG device. (a) Modes $a$ and $b$ each initialized in coherent states with $200$ photons. Symmetric coupling $g_a = g_b = 10$, $\Gamma=432$ $U=2.0$ for comparison with Fig.~\ref{fig:phog_fig3paper}. $\gamma_1 = 0$, $5$, $10$, $20$, $200$, $400$m$^{-1}$. (top to bottom). (b) Modes $a$ and $b$ each initialized in coherent states with $2500$ photons. Symmetric coupling $g_a = g_b = 60$, $\Gamma = 1087$, $gamma_1 = 0$, $5$, $11.5$, $20$, $200$, $400$m$^{-1}$. $U = 2.0$.}
+	\caption{\label{fig:phog_negativities} Attainable logarithmic negativities $\mathcal{N}_G$ in the symmetric two-mode PhoG device. (a) Modes $a$ and $b$ each initialized in coherent states with $200$ photons. Symmetric coupling $g_a = g_b = 10$, $\Gamma=432$ $U=2.0$ for comparison with Fig.~\ref{fig:phog_fig3paper}. $\gamma_1 = 0$, $5$, $10$, $20$, $200$, $400$m$^{-1}$. (top to bottom). (b) Modes $a$ and $b$ each initialized in coherent states with $2500$ photons. Symmetric coupling $g_a = g_b = 60$, $\Gamma = 1087$, $\gamma_1 = 0$, $5$, $11.5$, $20$, $200$, $400$m$^{-1}$. $U = 2.0$.}
 \end{figure}
 
 
