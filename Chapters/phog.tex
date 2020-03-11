@@ -70,38 +70,38 @@ Throughout the Chapter we will use several different numerical methods to model 
 \section{Single-mode model}\label{sec:phog_single_mode_model}
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 \includegraphics[width=0.2\linewidth, draft=false]{phog/single_mode}
-\caption{\label{fig:phog_single_mode} A single bosonic mode, $a$, is coupled to a Markovian reservoir $R$ by operator $\hat{A}$. }
+\caption{\label{fig:phog_single_mode} A single bosonic mode, $a$, decays into a Markovian reservoir $R$ by decay operator $\hat{A}$. }
 \end{figure}
 
 
-Consider the model displayed in Fig.~\ref{fig:phog_single_mode} (c.f. Fig.~\ref{fig:phog_models}~\MakeUppercase{\romannumeral 1}), which consists of a single bosonic mode, $a$, coupled to a reservoir $R$ via a reservoir operator $\hat{A}$. The annihilation (creation) operator for mode $a$ is denoted $\hat{a} \left(\hat{a}^\dagger\right)$, and the density matrix containing all information about the state of the mode is denoted $\rho_a$. This model will prove illustrative of several principles which we will develop throughout the chapter. 
+Consider the single-mode model displayed in Fig.~\ref{fig:phog_single_mode} (c.f. Fig.~\ref{fig:phog_models}~\MakeUppercase{\romannumeral 1}), which consists of a single bosonic mode, $a$, decaying into a reservoir $R$ via operator $\hat{A}$. The annihilation (creation) operator for mode $a$ is $\hat{a} \left(\hat{a}^\dagger\right)$, and the density matrix containing all information about the state of the mode is $\rho_a$. This model will prove illustrative of several principles which we will develop throughout the chapter. 
 
-Assuming that reservoir $R$ is Markovian, the evolution of mode $a$ is given by the following quantum master equation in Lindblad form
+Assuming that reservoir $R$ is Markovian, the evolution of mode $a$ is given by the following quantum master equation in Lindblad form \cite{Carmichael1999a, Breuer2002}
 
-%\footnote{Equations in this form will be referred to as ``Lindblad equations''} NOTE: I don't need this statement since it will be motivated in the introduction.
 
 \begin{equation}\label{eqn:phog_lindblad_1}
 \ddt \rho_a =  - i \left[\hat{H}, \rho_a\right] + \gamma \mathcal{L}\left[\hat{A}\right]\rho_a
 \end{equation}
 
-\noindent where we take the Hamiltonian $\hat{H} = \hbar \omega \hat{a}^\dagger \hat{a}$. Equation~\ref{eqn:phog_lindblad_1} then describes the decay of an initial state $\rho_a\left(t=0\right)$ into $R$ with rate $\gamma$. The Lindbladian term $\mathcal{L}\left[\hat{A}\right]$ takes the usual form
+\noindent where we take the Hamiltonian $\hat{H} = \hbar \omega \hat{a}^\dagger \hat{a}$ ($\hbar = 1$). Equation~\ref{eqn:phog_lindblad_1} then describes the decay of an initial state $\rho_a\left(t=0\right)$ into $R$ with rate $\gamma$. The Lindbladian term $\mathcal{L}\left[\hat{A}\right]$ takes the usual form %TODO: check that I am correct to call this a Lindbladian
 \begin{equation}\label{eqn:phog_lindbladian_form}
 \mathcal{L}\left[\hat{A}\right]\rho_a = \hat{A}\rho_a\hat{A}^\dagger - \frac{1}{2} \hat{A}^\dagger \hat{A} \rho_a - \frac{1}{2} \rho_a \hat{A}^\dagger \hat{A}.
 \end{equation}
 
-\noindent We will examine the behaviour of an initially coherent state $\rho_a\left(t=0\right) = \dyad{\alpha}$ with amplitude $\alpha$ as it decays into $R$. We examine several choices for decay operator $\hat{A}$ and demonstrate that suitable choices of $\hat{A}$ drive $\rho_a$ towards highly non-classical output steady-states. In Sec.~\ref{sec:A_a} we let $\hat{A} = \hat{a}$, in Sec.~\ref{sec:A_aa} we let $\hat{A} = \hat{a}^2$, and in Sec.~\ref{sec:A_ncl} we examine the behaviour of decay operators of the form $\hat{A} = \hat{a} \left(\hat{a}^\dagger \hat{a} - p\right)$ for $p \in \mathbb{N}$.
+\noindent In the remainder of this section, we examine the behaviour of an initially coherent state, $\rho_a\left(t=0\right) = \dyad{\alpha}$ with amplitude $\alpha$, as it decays into $R$. We examine several choices for decay operator $\hat{A}$ and demonstrate that suitable choices of $\hat{A}$ drive $\rho_a$ towards highly non-classical output steady-states. In Sec.~\ref{sec:A_a} we let $\hat{A} = \hat{a}$, in Sec.~\ref{sec:A_aa} we let $\hat{A} = \hat{a}^2$, and in Sec.~\ref{sec:A_ncl} we examine the behaviour of decay operators of the form $\hat{A} = \hat{a} \left(\hat{a}^\dagger \hat{a} - p\right)$ for $p \in \mathbb{N}$.
 
 
 
 \subsection{$\hat{A} = \hat{a}$}\label{sec:A_a}
-First, we consider the case $\hat{A}=\hat{a}$, which corresponds to single-photon loss. The evolution of $\rho_a$ is described by
+First, we consider the case $\hat{A}=\hat{a}$, which corresponds to a single-photon loss with constant rate, which we denote $\gamma$. The evolution of $\rho_a$ is described by
 
 \begin{equation}\label{eqn:phog_lindblad_single_photon_loss}
 \ddt \rho_a = \gamma\left[\hat{a}\rho_a \hat{a}^\dagger - \frac{1}{2} \hat{a}^\dagger \hat{a} \rho_a - \frac{1}{2} \rho_a \hat{a}^\dagger \hat{a}\right],
 \end{equation}
-where we have implicitly transformed into a rotating frame so the free Hamiltonian term $\hbar \omega \hat{a}^\dagger \hat{a}$ vanishes. Let us calculate the evolution of photon number expectation $\langle \hat{a}^\dagger \hat{a}\rangle\left(t\right)$:
+where for convenience we have implicitly transformed into a rotating frame so the free Hamiltonian term $\omega \hat{a}^\dagger \hat{a}$ vanishes. Let us calculate the evolution of photon number expectation $\langle \hat{a}^\dagger \hat{a}\rangle\left(t\right)$:
 
 \begin{align}
 \ddt \langle \hat{a}^\dagger \hat{a}\rangle &= \gamma \left[ \text{Tr}\left(\hat{a}^\dagger \hat{a} \hat{a} \rho_a \hat{a}^\dagger \right) - \frac{1}{2} \text{Tr}\left(\hat{a}^\dagger \hat{a} \hat{a}^\dagger \hat{a} \rho_a\right) - \frac{1}{2} \text{Tr}\left(\hat{a}^\dagger \hat{a} \rho_a \hat{a}^\dagger \hat{a}\right)\right] \notag \\
@@ -112,9 +112,9 @@ where we have implicitly transformed into a rotating frame so the free Hamiltoni
 \end{align}
 \noindent and so
 \begin{equation}\label{eqn:phog_single_photon_loss_number_expectation}
-\langle\hat{a}^\dagger \hat{a} \rangle \left(t\right) = \langle \hat{a}^\dagger \hat{a}\rangle \left(0\right) e^{- \gamma t}
+\langle\hat{a}^\dagger \hat{a} \rangle \left(t\right) = \langle \hat{a}^\dagger \hat{a}\rangle \left(0\right) e^{- \gamma t}.
 \end{equation}
-the photon number exponentially decays in time with decay rate $\gamma$ from its initial value. We may derive similar equations for quadrature expectations $\langle\hat{x}\rangle\left(t\right)$ and $\langle\hat{x}\rangle\left(t\right)$ and also find 
+The photon number exponentially decays in time with decay rate $\gamma$ from its initial value. We may derive similar equations for quadrature expectations $\langle\hat{x}\rangle\left(t\right)$ and $\langle\hat{x}\rangle\left(t\right)$ and also find 
 \begin{align}\label{eqn:phog_single_photon_loss_quadrature_expectation}
  \langle \hat{x}\rangle\left(t\right) &= \langle \hat{x}\rangle\left(0\right) e^{- \frac{\gamma}{2} t} \notag \\
 %
@@ -123,11 +123,11 @@ the photon number exponentially decays in time with decay rate $\gamma$ from its
 
 \noindent Since each of these is exponentially decaying to zero, we might guess that the steady-state of Eq.~\ref{eqn:phog_lindblad_single_photon_loss} is the vacuum $\dyad{0}$, and indeed we can deduce that this must be the case by noticing that $\ddt \rho_a = 0$ when $\rho_a$ is vacuum. In Fig.~\ref{fig:phog_lindblad_single_photon_loss}a we plot the evolution of $\langle\hat{a}^\dagger \hat{a}\rangle, \langle \hat{x}\rangle, \langle \hat{p}\rangle$ which decay towards zero, while the variances in $\hat{x}$ and $\hat{p}$ remain constant throughout the evolution. This hints that the state $\rho_a\left(t\right)$ remains a coherent state with decreasing amplitude $\alpha\rightarrow0$, until it reaches the vacuum state.
 
-In Fig.~\ref{fig:phog_lindblad_single_photon_loss}b we plot the fidelities $\mathcal{F}$ between $\rho_a\left(t\right)$ and both the vacuum state $\dyad{0}$ and the single-photon state $\dyad{1}$. We also show fidelity between $\rho_a\left(t\right)$ and a coherent state $\dyad{\alpha^\prime}$ defined to have the same photon-number expectation as $\rho_a$ at all times. We observe that the fidelity to the vacuum state increases to $1$ while the fidelity to coherent state $\dyad{\alpha^\prime}=1$ always. This confirms our intuitions that $\rho_a$ remains coherent $\forall t$ and that $\dyad{0}$ is the steady state. %The increase of fidelity between $\rho_a$ and the single-photon state--while $\rho_a$ is still itself a coherent state-- 
-% Q: do I want to chat at all about the single-photon Fidelity?
+In Fig.~\ref{fig:phog_lindblad_single_photon_loss}b we plot the fidelities $\mathcal{F}$ between $\rho_a\left(t\right)$ and both the vacuum state $\dyad{0}$ and the single-photon state $\dyad{1}$. We also show fidelity between $\rho_a\left(t\right)$ and a coherent state $\dyad{\alpha^\prime}$, which is defined to have the same photon-number expectation as $\rho_a$ at all times. We observe that the fidelity to the vacuum state increases to $1$ while the fidelity to coherent state $\dyad{\alpha^\prime}=1$ always. This confirms our intuition that $\rho_a$ remains coherent $\forall t$ and that $\dyad{0}$ is the steady state. 
 
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 	\begin{subfigure}{0.49\linewidth}
 	\centering
@@ -157,20 +157,21 @@ which gives the evolution of photon number expectation as
 
 \noindent This equation does not take a closed form and so we cannot yet directly calculate $\langle \hat{a}^\dagger \hat{a}\rangle\left(t\right)$. Similarly, equations for evolution of $\langle\hat{a}\rangle\left(t\right)$ require terms to the third power in $\hat{a}, \hat{a}^\dagger$, and so are also not yet closed.  We will encounter techniques later in Sec.~\ref{sec:linearization} which allow us to deal with this.
 
-For now, let us try to deduce what must be the steady-state of Eq.~\ref{eqn:phog_lindblad_two_photon_loss}. We observe that once again the vacuum $\dyad{0}$ must be a steady state, since then $\ddt \rho_a=0$. Surprisingly we now also have the single-photon state $\dyad{1}$, and states of the form $\dyad{0}{1}, \dyad{1}{0}$ as steady states since these also have $\ddt \rho_a=0$. The general steady-state should be a mixture of these, and takes the form
+For now, let us try to deduce the steady-state of Eq.~\ref{eqn:phog_lindblad_two_photon_loss}. We observe that once again the vacuum $\dyad{0}$ must be a steady state, since then $\ddt \rho_a=0$. Surprisingly we now also have the single-photon state $\dyad{1}$, and states of the form $\dyad{0}{1}, \dyad{1}{0}$ as steady states, since these also have $\ddt \rho_a=0$. The general steady-state should be a mixture of these, and takes the form
 \begin{align}\label{eqn:phog_phase_state}
 &\rho_{\text{steady}} = c_1 \dyad{\psi} + c_2 \dyad{0} + c_3 \dyad{1} \notag \\
 %
 &\qq{with} \ket{\psi} = \frac{\ket{0} + e^{i \phi} \ket{1}}{\sqrt{2}};  \qq{} c_1, c_2, c_3 \in \mathbb{C}.
 \end{align}
 
-\noindent The state $\ket{\psi}$ is a so-called \emph{phase-state}, and it has long been known that two-photon absorption will lead to a phase state \cite{Ezaki1999} (plus additional mixing \cite{Alexanian2000, *Ezaki2000}). The phase $\phi$ is related to the phase of the initial coherent state. 
+\noindent The state $\ket{\psi}$ is a so-called \emph{phase-state}, and it has long been known that two-photon absorption will lead to a phase state \cite{Ezaki1999} (plus additional mixing \cite{Alexanian2000, *Ezaki2000} which reduces purity). The phase $\phi$ is related to the phase of the initial coherent state. 
 
 In Fig.~\ref{fig:phog_lindblad_two_photon_loss}a we plot the evolution of $\langle \hat{a}^\dagger \hat{a}\rangle, \langle \hat{x}\rangle, \langle \hat{p}\rangle$ and the quadrature variances. The photon number expectation no longer decays to zero as it did for $\hat{A}=\hat{a}$. %rather it decays to 0.5.
- In Fig.~\ref{fig:phog_lindblad_two_photon_loss}b we observe the fidelity between $\rho_a\left(t\right)$ and the final phase state increases to $1$, and the coefficients of steady state $\rho_{\text{steady}}$ Eq.~\ref{eqn:phog_phase_state} are $c_1 = 0.810$, $c_2 = c_3 = 0.095$. We see therefore that two-photon loss operator induces a high degree of non-classicality in the system as we are driven close to the phase state. We shall revisit this decay operator $\hat{a}^2$ in Sec.~\ref{sec:phog_entanglement} where we will demonstrate that it is even capable of producing entanglement between several modes of a larger system.
+ In Fig.~\ref{fig:phog_lindblad_two_photon_loss}b we observe the fidelity between $\rho_a\left(t\right)$ and the final steady-state increases to $1$, and the coefficients of the steady state $\rho_{\text{steady}}$ are $c_1 = 0.810$, $c_2 = c_3 = 0.095$. We see therefore that two-photon loss operator induces a high degree of non-classicality in the system. We shall revisit this decay operator $\hat{a}^2$ in Sec.~\ref{sec:phog_entanglement} where we will demonstrate that it is even capable of producing entanglement between spatially separated modes of a larger system.
 
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 	\begin{subfigure}{0.49\linewidth}
 	\centering
@@ -182,7 +183,7 @@ In Fig.~\ref{fig:phog_lindblad_two_photon_loss}a we plot the evolution of $\lang
 	\includegraphics[draft=false, width=\linewidth]{phog/fidelities_aa}
 	\caption{}
 	\end{subfigure}
-\caption{\label{fig:phog_lindblad_two_photon_loss}$\hat{A} = \hat{a}^2$. (a) Operator expectation values for state $\rho_a\left(t\right)$ as it evolves under Eq.~\ref{eqn:phog_lindblad_two_photon_loss}. An intially coherent state with $\alpha=3.0$ no longer decays to the vacuum state, and the final photon-number expectation is $0.5$. Quadrature variances no longer stay constant, which implies that the state is no longer coherent. This is confirmed in (b) where the fidelity between $\rho_a\left(t\right)$ and $\dyad{\alpha^\prime}$ is plotted. The fidelity between $\rho_a\left(t\right)$ and steady state Eq.~\ref{eqn:phog_phase_state} increases to $1$. Horizontal gridlines displayed in black, dashed. Numerical method: direct integration.}
+\caption{\label{fig:phog_lindblad_two_photon_loss}$\hat{A} = \hat{a}^2$. (a) Operator expectation values for state $\rho_a\left(t\right)$ as it evolves under Eq.~\ref{eqn:phog_lindblad_two_photon_loss}. Unlike Fig.~\ref{fig:phog_lindblad_single_photon_loss}, an intially coherent state with $\alpha=3.0$ no longer decays to the vacuum state, and the final photon-number expectation is $0.5$. Quadrature variances no longer stay constant, which implies that the state is no longer a coherent state. This is confirmed in (b) where the fidelity between $\rho_a\left(t\right)$ and $\dyad{\alpha^\prime}$ is plotted. The fidelity between $\rho_a\left(t\right)$ and steady state Eq.~\ref{eqn:phog_phase_state} increases to $1$. Horizontal gridlines displayed in black, dashed. Numerical method: direct integration.} %TODO: make sure that I have defined fidelity in the introduction
 \end{figure}
 
 \iffalse
@@ -209,11 +210,13 @@ We plot the evolution of fidelities between $\rho_a\left(t\right)$ evolving with
 
 \clearpage
 \subsection{$\hat{A} = \hat{a}\left(\hat{a}^\dagger \hat{a} - 1\right)$}\label{sec:A_ncl}
-We have seen that the choice of $\hat{A}$ can give drastically different steady states of $\rho_a$,  from the uninteresting vacuum to the highly quantum and useful phase-state. We therefore wish to consider which choices for $\hat{A}$ will drive an initially coherent state to a Fock state $\dyad{n}$. The choice 
+We have seen that the choice of $\hat{A}$ can give drastically different steady states of $\rho_a$,  from the uninteresting vacuum to the highly quantum and useful phase-state. We therefore wish to consider which choices for $\hat{A}$ will drive an initially coherent state to a Fock state $\dyad{n}$. 
+
+The choice 
 \begin{equation}\label{eqn:phog_A_ncl}
 \hat{A} = \hat{a}\left(\hat{a}^\dagger \hat{a} - 1\right)
 \end{equation}
-may be interpreted as a single-photon loss at a rate which depends on photon number. The loss rate will go to zero when applied to state $\dyad{1}$, and so we may suspect that the single-photon state $\dyad{1}$ is a steady state of this loss mechanism.
+may be interpreted as a single-photon loss at a rate which depends on photon number $\hat{n} = \hat{a}^\dagger \hat{a}$. The loss rate will go to zero when applied to state $\dyad{1}$, and so we may suspect that the single-photon state $\dyad{1}$ is a steady state of this loss mechanism.
 
 The Lindblad equation which we solve is
 \begin{equation}\label{eqn:phog_ncl_lindblad}
@@ -221,14 +224,17 @@ The Lindblad equation which we solve is
 \end{equation}
 and for convenience we have written the photon-number operator $\hat{n}$ where possible.
 %The vacuum state $\dyad{0}$ also happens to be a steady-state of $\ncl$, but \MT{its coefficient remains constant, so we obtain $\dyad{1}$ in the limit of $\alpha\rightarrow \infty$}
-We examine the evolution of $\rho_a$ in Fig.~\ref{fig:phog_A_ncl} and plot the evolution of photon number and quadrature expectations $\langle \hat{x}\rangle, \langle \hat{p}\rangle$ in (a). We observe a non-exponential decay of photon-number expectation to $1$ %TODO: show that it is non-exponential. 
+We examine the evolution of $\rho_a$ in Fig.~\ref{fig:phog_A_ncl} and plot the evolution of photon number and quadrature expectations $\langle \hat{x}\rangle, \langle \hat{p}\rangle$ in (a). We observe a non-exponential decay of photon-number expectation to $1$, \MT{TODO: show that it is non-exponential.}
 while in (b) the fidelity between $\rho_a\left(t\right)$ and $\dyad{1}$ increases to $1$. This choice of $\hat{A} = \ncl$ does indeed have a single-photon steady state. 
 
-Even after short times $t < 0.1$ the fidelity to an equivalent coherent state has rapidly decreased, and the quadrature variances quickly increase over similar timescale. This implies a rapid increase in non-classicality of the system, which we shall explore and quantify later. Therefore, we deduce that the decay operator $\hat{a}\left(\hat{a}^\dagger \hat{a} - 1\right)$ is a useful candidate for driving our system towards the highly nonclassical single-photon state. In the remainder of this chapter our goal will be to find a physical system which can efficiently implement this decay operator.
+Even after short times $t < 0.1$ the fidelity to an equivalent coherent state has rapidly decreased, and the quadrature variances sharply increase over similar timescale. This implies a rapid increase in non-classicality of the system, which we shall explore and quantify later.
+
+We deduce that the decay operator $\hat{a}\left(\hat{a}^\dagger \hat{a} - 1\right)$ is a useful candidate for driving our system towards the highly nonclassical single-photon state. In the remainder of this Chapter our goal will be to find a physical system which can efficiently implement this decay operator.
 
 
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 	\begin{subfigure}{0.49\linewidth}
 	\centering
@@ -243,13 +249,13 @@ Even after short times $t < 0.1$ the fidelity to an equivalent coherent state ha
 \caption{\label{fig:phog_A_ncl}$\hat{A} = \hat{a}\left(\hat{a}^\dagger \hat{a} - 1\right)$ (a) Operator expectation values for state $\rho_a\left(t\right)$ as it evolves. An initially coherent state with $\alpha=3.0$ decays to a state with $\langle \hat{n}\rangle=1$, which we confirm as state $\dyad{1}$ by considering the fidelity in (b). Horizontal gridlines displayed in black, dashed. Numerical method: direct integration.}
 \end{figure}
 
-To gain some insight into the action of $\ncl$ let us first write the Lindblad equation~\ref{eqn:phog_ncl_lindblad} in Fock basis for density matrix element $\rho_{m, n}$
+To gain some insight into the action of $\ncl$, let us first write the Lindblad equation~\ref{eqn:phog_ncl_lindblad} in Fock basis for density matrix element $\rho_{m, n}$
 \begin{align}\label{eqn:phog_ncl_lindblad_fock}
 &\ddt \rho_{m, n} = \bra{m} \ddt \rho \ket{n} \notag  \\
 %
 &= \gamma \left[ m \sqrt{m+1} n \sqrt{n+1} \, \rho_{m+1, n+1} - \frac{1}{2} \left(n-1\right)^2 n\, \rho_{m, n} - \frac{1}{2} \left(m-1\right)^2 m\, \rho_{m, n}\right],
 \end{align}
-and consider some specific matrix elements. Immediately we see that Eq.~\ref{eqn:phog_ncl_lindblad_fock} couples diagonal elements $m=n$ only to diagonal elements and so an analysis of the photon-number statistics is possible only considering diagonal elements of the density matrix and ignoring coherences. We obtain, for example $\ddt \rho_{1, 1}=2 \gamma \rho_{2, 2}$ which is greater than zero, and so $\forall t$ we expect the single-photon contribution $\rho_{1,1}$ to increase, c.f. Fig.~\ref{fig:phog_A_ncl}b. 
+and consider some specific matrix elements. Immediately we see that Eq.~\ref{eqn:phog_ncl_lindblad_fock} couples diagonal elements $m=n$ only to diagonal elements and so an analysis of the photon-number statistics is possible by only considering diagonal elements. We obtain, for example $\ddt \rho_{1, 1}=2 \gamma \rho_{2, 2}$ which is greater than zero, and so $\forall t$ we expect the single-photon contribution $\rho_{1,1}$ to monotonically increase, c.f. Fig.~\ref{fig:phog_A_ncl}b. 
 
 \noindent The elements $\rho_{0, 0}, \rho_{0, 1}$ and $\rho_{1, 0}$ each give
 \begin{equation}
@@ -258,9 +264,11 @@ and consider some specific matrix elements. Immediately we see that Eq.~\ref{eqn
 implying that these elements are constant in time. The single-photon state requires zero in each of these elements, and so we may predict that high fidelity between $\rho_a$ and $\dyad{1}$ may only be obtained when $\rho_{0,0}\left(t=0\right)$, $\rho_{0, 1}\left(t=0\right)$, and $\rho_{1, 0}\left(t=0\right) \ll 1$. This implies, in particular, that high fidelity with $\dyad{1}$ is not obtainable for coherent states with small amplitude\footnote{The requirement of large $\alpha$ for the input coherent state is not very restrictive, and as we shall see in the next section there are additional reasons to prefer $\alpha \gg 1$}. In Fig.~\ref{fig:phog_fidelity_ncl_vs_alpha} we show this explicitly.
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 \includegraphics[width=0.6\linewidth, draft=false]{phog/fidelities_ncl1_vs_alpha}
-\caption{\label{fig:phog_fidelity_ncl_vs_alpha} The fidelity of $\rho_a\left(t\rightarrow\infty\right)$ to single-photon state $\dyad{1}$ depends on initial coherent state amplitude $\alpha$ since the density matrix elements $\rho_{0, 0}, \rho_{0, 1}$ and $\rho_{1, 0}$ are constant in time. This helps to quantify the intuition that in a purely lossy system a state with on average less than $1$ photon could not be used to increase the photon number. Numerical method: direct integration.}
+\caption{\label{fig:phog_fidelity_ncl_vs_alpha} The fidelity of $\rho_a\left(t\rightarrow\infty\right)$ to single-photon state $\dyad{1}$ depends on initial coherent state amplitude $\alpha$ since the density matrix elements $\rho_{0, 0}, \rho_{0, 1}$ and $\rho_{1, 0}$ are constant in time. %This helps to quantify the intuition that in a purely lossy system a state with on average less than $1$ photon could not be used to increase the photon number. Numerical method: direct integration.
+}
 \end{figure}
 
 
@@ -268,9 +276,10 @@ implying that these elements are constant in time. The single-photon state requi
 
 Before we move on, let us quickly explore the related operator $\hat{a}\left(\hat{a}^\dagger \hat{a} -2\right)$. Based on the above discussion we might reasonably expect the steady-state to be $\dyad{2}$, and this is indeed what we see in Fig.~\ref{fig:phog_A_ncl2}, where the fidelity to the two-photon state increases to $1$. 
 
-We will refer to the decay described by Lindblad operator $\hat{A} = \ncl$ as \emph{nonlinear coherent loss} (NCL), since the eigenstates of the operator $\ncl$ are known as ``nonlinear coherent states" \cite{Manko1997}, while the operator itself may be considered as the annihilation operator for a so-called $f$-deformed harmonic oscillator \cite{Filho1996}\footnote{The operator $\ncl$ is a specific example of $\hat{a} \hat{f}\left(\hat{n}\right)$ for operator-valued function $\hat{f}$. Glauber coherent states are obtained for the choice $\hat{f} = \hat{\mathds{1}}$.}
-
+We will refer to the decay described by Lindblad operator $\hat{A} = \ncl$ as \emph{nonlinear coherent loss} (NCL), since the eigenstates of the operator\footnote{The operator $\ncl$ is a specific example of $\hat{a} \hat{f}\left(\hat{n}\right)$ for operator-valued function $\hat{f}$. Glauber coherent states are obtained for the choice $\hat{f} = \hat{\mathds{1}}$.}
+ $\ncl$ are known as ``nonlinear coherent states" \cite{Manko1997}, while the operator itself may be considered as the annihilation operator for a so-called $f$-deformed harmonic oscillator \cite{Filho1996}.
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 \includegraphics[width=0.6\linewidth, draft=false]{phog/fidelities_ncl2}
 \caption{\label{fig:phog_A_ncl2} $\hat{A} = \hat{a}\left(\hat{a}^\dagger \hat{a} - 2\right)$. The steady-state of this loss operator is $\dyad{2}$. The fidelity of $\rho_a$ to this two-photon state increases to $1$.}
