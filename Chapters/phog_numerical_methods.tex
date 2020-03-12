@@ -82,6 +82,7 @@ For $\dims = 35$, the QMC method takes $12.40$~s to model $500$~trajectories. Th
 
 We compare the speed of the direct integration and QMC approaches to solve Eq.~\ref{eqn:phog_single_mode_deriv} with $\gamma = 1.0$, varying initial coherent state amplitude and decay operator $\ncl$ in Tab.~\ref{table:numerical_methods}. All states were correctly normalized, which implies that the earlier condition Eq.~\ref{eqn:rule_of_thumb} is only a rule-of-thumb. We compare the QMC and direct integration methods for accuracy in Fig.~\ref{fig:appendix_numerical_methods_comparisons}.
 
+\iffalse
 \begin{table}[htp]
 \captionsetup{width=0.8\linewidth}
 \begin{tabular}{|c|c|c|c|}
@@ -108,6 +109,30 @@ $\dims$ & $\alpha$ & DI (s) & QMC (s) \\
 \end{tabular} 
 \caption{\label{table:numerical_methods} Run-times to solve Eq.~\ref{eqn:phog_single_mode_deriv} with $\gamma_L = 10.0$, $\gamma_2 = 0.0005$, $\gncl = 0.002$, input coherent state amplitude $\alpha$ and $500$ QMC trajectories. Missing direct integration entries returned memory errors.}
 \end{table}
+\fi
+
+\begin{table*}
+	\captionsetup{width=0.8\linewidth}
+	\centering \ra{1.75}
+	\begin{tabular*}{0.8\textwidth}{@{\extracolsep{\stretch{1}}} cc c cc c}
+	\multicolumn{2}{c}{\textbf{Run parameters}} && 
+	\multicolumn{2}{c}{\textbf{Timings}} \\
+	\hline 
+	\head{$\dims$} & \head{$\alpha$} && \head{DI $[\si{s}]$} & \head{QMC $[\si{s}]$}
+	\\
+	\hline
+	\phantom{0}35 & \phantom{0}3.0 && \phantom{0}0.048 & \phantom{0}\phantom{0}10.33 \\ 
+	\phantom{0}50 & \phantom{0}5.0 && \phantom{0}0.145 & \phantom{0}\phantom{0}11.05 \\ 
+	100 & \phantom{0}8.0 && \phantom{0}0.319 & \phantom{0}\phantom{0}14.84 \\  
+	200 & 12.0 && \phantom{0}\phantom{0}4.04 & \phantom{0}\phantom{0}29.68 \\ 
+	500 & 20.0 && 332.32 & \phantom{0}143.84 \\ 
+	750 & 25.0 && - & \phantom{0}224.00 \\ 
+	1500 & 37.0 && - & \phantom{0}753.05 \\ 
+	1950 & 38.0 && - & 1361.72 \\
+	\end{tabular*}
+	\caption{\label{table:numerical_methods} Run-times to solve Eq.~\ref{eqn:phog_single_mode_deriv} with $\gamma_L = 10.0$, $\gamma_2 = 0.0005$, $\gncl = 0.002$, input coherent state amplitude $\alpha$ and $500$ QMC trajectories. Missing direct integration entries returned memory errors.}
+\end{table*}
+	
 
 
 \begin{figure}[htp]
