@@ -90,15 +90,20 @@ In the first sequential QSS protocol \cite{Zhang2005}, Zhang \emph{et. al.} prop
 
 Just as prepare-and-measure QKD allows Alice and Bob to mimic the measurement outcomes of a shared entangled state \MT{is it only when they measure in the same basis?} under \MT{criterion} the scheme \cite{Zhang2005} allows players to receive the same measurement outcomes they would if they had shared a GHZ state. Secret sharing then may proceed in the usual way. \MT{talk about this.}
 
-Sequential protocols have the obvious advantage that large entangled states are not required. Even though Ref.~\cite{Zhang2005} proposes to use a quantum memory it is ultimately not necessary for the protocol \MT{talk some more about this.}
+Sequential protocols have the obvious advantage that large entangled states are not required. Even though Ref.~\cite{Zhang2005} proposes to use a quantum memory it is ultimately not necessary for the protocol, and the work by Schmid \emph{et. al.} demonstrates this \cite{Schmid2005} in a sequential QSS experiment. Their experiment, in which players perform operations on heralded single photons, allows for a secret to be shared among six players in a setup which is much more readily scalable to more players than the earlier QSS schemes requiring entanglement.
 
-\MT{Add more stuff about sequential QSS. Make sure I have cited everything.}
+The sequential scheme, while secure against an Eve external to the protocol, is difficult to secure against dishonesty from one of the internal players \cite{Deng2005, Qin2006, He2007}. For example, Ref.~\ref{He2007} points out that the order in which recipients declare their information is of utmost importance, and this is adopted into the sequential protocol in Ref.~\cite{Schmid2007}. Unfortunately, the protocol remains insecure against a so-called Trojan Horse attack \cite{Deng2005}, in which an internal player to the protocol adds one mode of an entangled state to the single photon as it is being distributed. This entangled mode will undergo the same subsequent gates as the signal photon, and so the dishonest player can gain additional information. 
+
+The Trojan Horse attack is guarded against in the recent work from Grice \emph{et. al.} \cite{Grice2019}. In their protocol for sequential QSS, each player creates a coherent state, chosen from a Gaussian modulation. These states are added to the initial coherent state as it travels, and the final state is heterodyned at the dealer Alice. With combined knowledge of the injected states the players are able to estimate Alice's measurement outcome. This protocol has the advantage of high tolerable losses, especially when compared to entanglement-based QSS. Crucially, the scheme is immune to Trojan Horse attacks since once a coherent state has been added to the total state, it only interacts with Alice's measurement apparatus and does not pass through the equipment of any other player, and a dishonest player cannot access other players' devices.
+
+Owing to its simplicity of implementation QSS has been performed in many experiments \cite{Schmid2005, Hai-Qiang2013a} including those explicitly using telecom fiber networks \cite{Bogdanski2009}. This latter work, Ref.~\cite{Bogdanski2009}, demonstrates QSS in two experiments, between three players and four players, using phase encoding of single qubits. Their implementation uses a Sagnac interferometer, with light travelling in two directions around a loop. The light at standard telecom wavelengths $1550$~nm and channel lengths between $50$ and $70$~km render secure QSS eminently practical.
 
 
-%
-%\subsection*{Recent quantum secret sharing}
-%\MT{(I should think up better titles for these)}
-%
-%\subsubsection*{Using entangled states}
-%\subsubsection*{Using sequential measurements}
-%\subsubsection*{Using a QKD-like setup}
+%\MT{Add more stuff about sequential QSS. Make sure I have cited everything.}
+
+\subsection{Summary}
+Quantum Secret Sharing has been an intense field of active research for the quantum communications community for the last two decades. Entanglement-based QSS boasts a high level of provable security against both internal and external dishonesty. While there have been some proof-of-principle demonstrations of these QSS schemes \cite{Gartner2007, Bell2014, Tittel2001, Chen2005b} the style of protocol is still far off routine and practical implementation.
+
+In contrast, sequential QSS involving a single quantum system is much more practical for implementation and has been demonstrated to be practical \cite{Schmid2005, Bogdanski2009, Hai-Qiang2013a}. However, these protocols face difficulty against a dishonest player internal to the protocol, which is precisely the context which secret sharing should guard against. Moreover, even though these schemes do not require generation or distribution of entangled states, they still require a dedicated hardware setup in order to distribute the quantum state and perform sequential measurements. To our knowledge, the most plausible protocol in terms of both its security and practicality, that of Grice \emph{et. al.} \cite{Grice2019}, is yet to be implemented. 
+
+It is therefore yet unclear whether these quantum secret sharing protocols will give an advantage over the quantum-mediated classical unconditionally secure protocols which we have discussed in Sec.\ref{sec:qss_qcss}. The underlying quantum encryption algorithm, QKD, boasts advanced security proofs and intensely researched hardware, and any proposed QSS scheme must be benchmarked against a QKD-based classical protocol which performs the same task.
