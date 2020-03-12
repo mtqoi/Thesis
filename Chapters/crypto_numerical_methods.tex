@@ -1,27 +1,28 @@
 \chapter{Cryptography: numerical methods}\label{appendix:crypto_numerical_methods}
 
-In this Appendix we display the full form of the quantum states which are used in Chapter.~\ref{chapter:qds} to analyse different eavesdropping attacks. Each state is calculated as described in Sec.~\ref{sec:qds_attack_analysis}, and is conditioned on the honest player possessing outcome $c \in \mathbb{C}$.
+\section{Truncation}
+In this Appendix we display the full form of the quantum states which are used in Chapter.~\ref{chapter:qds} to analyse eavesdropping attacks. Each state is calculated as described in Sec.~\ref{sec:qds_attack_analysis}, and is conditioned on the honest player possessing $c = \qout + i \pout \in \mathbb{C}$, for heterodyne outcomes $\qout, \pout$.
 
-We denote each state as $\tilde{\rho}_{\left. \mathbb{B} \given c\right.}$, where $\mathbb{B}$ denotes that the state belongs to the quantum system of dishonest Bob, while $\left. \mathbb{B} \given c \right.$ makes explicit that this state depends on $c$. Since each state $\tilde{\rho}_{\left. \mathbb{B} \given c\right.}$ is a conditional quantum state, they have norm $\tr{\tilde{\rho}_{\left. \mathbb{B} \given c\right.}}\le 1$, since $\tr{\tilde{\rho}_{\left. \mathbb{B} \given c\right.}}$ is the probability, $\text{P}\left(c\right)$, that Charlie measures $c$. The tilde denotes that the state is sub-normalized, and we will define the normalized state as
+We denote each state as $\tilde{\rho}_{\left. \mathbb{B} \given c\right.}$, where $\mathbb{B}$ denotes that the state belongs to dishonest Bob, while $\left. \mathbb{B} \given c \right.$ makes explicit that this state depends on $c$. Since each state $\tilde{\rho}_{\left. \mathbb{B} \given c\right.}$ is a conditional quantum state \cite{Nielsen2010}, they have norm $\tr{\tilde{\rho}_{\left. \mathbb{B} \given c\right.}}\le 1$. The $\tr{\tilde{\rho}_{\left. \mathbb{B} \given c\right.}} = \text{P}\left(c\right)$ is the probability that Charlie measures $c$. The tilde denotes that the state is sub-normalized, and we will define the normalized state as
 
 \begin{equation}
 \rho_{\left. \mathbb{B} \given c \right.} := \frac{\tilde{\rho}_{\left. \mathbb{B} \given c\right.}}{\text{P}\left(c\right)}.
 \end{equation}
 
-\noindent Unless otherwise specified, it is the normalized forms $\rho_{\left. \mathbb{B} \given c \right.}$ which are used in the main body of this Thesis.
+\noindent It is the normalized forms $\rho_{\left. \mathbb{B} \given c \right.}$ which are used in the main body of this Thesis.
 
 Each of the states required to calculate Holevo information $\chi$ involves sums of the form
 \begin{equation}
 \sum_{n = 0}^\infty ,
 \end{equation}
-since each state lives in a Hilbert space $\mathcal{H}$ with a countably infinite dimensionality $\dims$. It is impossible to exactly encode such a state, and so we must resort to a truncation of the Hilbert space size to some large but finite $\dims = N$, i.e.
+since each state lives in a Hilbert space $\mathcal{H}$ with a countably infinite dimensionality $\dims$. It is impossible to exactly encode such a state numerically, and so we must resort to a truncation of the Hilbert space size to some large but finite $\dims = N$, i.e.
 
 \begin{equation}
 \sum_{n=0}^\infty \rightarrow \sum_{n=0}^N.
 \end{equation}
-It is still an open question as to whether this will afford an eavesdropper additional powers. In lieu of an answer to this, whenever we numerically encode any of the following states we will choose $\dims$ large enough such that the state living on the truncated space is normalized. Additionally, in each of the calculations in the main body of this Thesis, we gradually increased the Hilbert space size $\dims$ until we converged to identical output $\chi$. For a typical coherent state amplitude $\alpha \le 2$ we chose $\dims \lesssim 10$, though we note that often much smaller $\dims$ were often possible. We note that this strategy is the same one as was adopted in the recent state-of-the-art work Ref.~\cite{Lin2019}.
+We will briefly discuss such truncation again in Appendix~\ref{appendix:phog_numerical_methods} in the context of the PhoG chapter. It is still an open question \cite{Lin2019} as to whether this will afford an eavesdropper additional powers. In lieu of an answer to this, whenever we numerically encode any of the following states we will choose $\dims$ large enough such that the state living on the truncated space is normalized. Additionally, in each of the calculations in the main body of this Thesis, we gradually increased the Hilbert space size $\dims$ until we converged to a a constant output $\chi$ which does not further vary with $\dims$. For a coherent state amplitude $\alpha \le 2$ we typically chose $\dims \lesssim 10$, though we note that often much smaller $\dims$ were often possible (Tab.~\ref{table:numerical_methods}). We note that this strategy is the same one as was adopted in the recent state-of-the-art work Ref.~\cite{Lin2019}.
 
-Finally, we note that each of the following expressions for output states $\tilde{\rho}_{\left. \mathbb{B} \given c\right.}$ was encoded in the displayed Fock basis in a custom script\footnote{Making extensive use of the \code{SparseArray[]} function} in Mathematica~$11.3$. The overall state is then a matrix in $\mathcal{M}_{\dims \times \dims}\left(\mathbb{C}\right)$. The Von Neumann entropy $\text{S}\left(\centerdot\right)$ of the state is then found by taking eigenvalues and using Eq.~\ref{eqn:intro_von_neumann}.
+Each of the following expressions for output states $\tilde{\rho}_{\left. \mathbb{B} \given c\right.}$ were encoded in the displayed Fock basis in a custom script\footnote{Making extensive use of the \code{SparseArray[]} function for speed.} in Mathematica~$11.3$. The overall state is then a matrix in $\mathcal{M}_{\dims \times \dims}\left(\mathbb{C}\right)$. The Von Neumann entropy $\text{S}\left(\centerdot\right)$ of the state is found by taking eigenvalues and using Eq.~\ref{eqn:intro_von_neumann}.
 
 \section{Attack BS$0$}
 Beamsplitter attack BS$0$ is described in Sec.~\ref{sec:qds_bs0}. The total input state into the channel is
@@ -35,13 +36,15 @@ where
 \end{equation}
 is Alice's input coherent state, with $\alpha_k$ chosen from the QPSK alphabet. 
 
-Enacting beamsplitter relation Eq.~\ref{eqn:intro_beamsplitter} on $\rho_{\text{input}}$ and performing heterodyne detection on Charlie's mode, we arrive at \MT{TODO: make the equation look nice.}
+Enacting beamsplitter relation Eq.~\ref{eqn:intro_beamsplitter} on $\rho_{\text{input}}$ and performing heterodyne detection on Charlie's mode, we arrive at
 
-\begin{equation}
-\tilde{\rho}_{\left. \mathbb{B} \given c \right.} = \sum_k \frac{1}{\pi} e^{-\left|\alpha_k\right|^2}  e^{-\left|c\right|^2} \sum_{n, m = 0}^\infty \sum_{k, l = 0}^{n, m} \frac{\alpha^n \alpha^{* m}}{\sqrt{k! \left(n - k\right)!}} \frac{c^k c^{* l}}{\sqrt{k! l!}} \frac{\left(\sqrt{T}\right)^{k+l} \left(\sqrt{1-T}\right)^{n + m - k - l}}{\sqrt{l! \left(m-l\right)!}} \dyad{n-l}{m-l}.
-\end{equation}
+\begin{align}
+\tilde{\rho}_{\left. \mathbb{B} \given c \right.} = \sum_k \frac{1}{\pi} e^{-\left|\alpha_k\right|^2}  e^{-\left|c\right|^2} \sum_{n, m = 0}^\infty \sum_{k, l = 0}^{n, m} \frac{\alpha^n \alpha^{* m}}{\sqrt{k! \left(n - k\right)!}} \frac{c^k c^{* l}}{\sqrt{k! l!}}& \notag \\
+%
+\times\frac{\left(\sqrt{T}\right)^{k+l} \left(\sqrt{1-T}\right)^{n + m - k - l}}{\sqrt{l! \left(m-l\right)!}} \dyad{n-l}{m-l}&.
+\end{align}
 
-\noindent Rearranging\footnote{See e.g. page \MT{X} of Ref.~\cite{GerryandKnight}} the summation indices we arrive at Eq.~\MT{X} from the main body.
+\noindent Rearranging\footnote{See e.g. page $142$ of Ref.~\cite{GerryandKnight}} the summation indices we arrive at Eq.~\ref{eqn:qds_coherent_state_beamsplitter} from the main body.
 
 \section{Attack BS$1$}\label{appendix:bs1}
 Beamsplitter attack BS$1$ is described in Sec.~\ref{sec:qds_bs1}. The total input state into the channel is 

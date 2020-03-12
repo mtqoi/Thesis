@@ -630,7 +630,7 @@ Attack BS$0$ is depicted in Fig.~\ref{fig:bs0_attack}. This attack is the canoni
 Consider a single input coherent state $\dyad{\alpha_k}$, with the $\alpha_k$ chosen uniformly at random from the QPSK alphabet ($k = 0,1,2,3$). Bob's attack effectively inputs the vacuum state $\dyad{0}$ into the second input port of the beamsplitter. We will calculate the Holevo information $\chi$, Eq.~\ref{eqn:intro_holevo}, of Bob's state conditioned on Charlie receiving a particular eliminated signature element after his heterodyne measurement.
 
 Using beamsplitter relation Eq.~\ref{eqn:intro_beamsplitter}, we see that a beamsplitter with transmittivity $T$ enacts the following transformation on the input state:
-\begin{equation}
+\begin{equation}\label{eqn:qds_coherent_state_beamsplitter}
 \dyad{\alpha_k}_A \otimes \dyad{0}_B \rightarrow \dyad{\sqrt{T} \alpha_k}_C \otimes \dyad{\sqrt{1-T}\alpha_k}_{B}.
 \end{equation}
 So Charlie holds the state $\dyad*{\sqrt{T}\alpha_k}$, while Bob holds $\dyad*{\sqrt{1-T}\alpha_k}$. When the $\alpha_k$ is chosen uniformly at random, we must mix over the alphabet and so the mixed two-mode output state is
