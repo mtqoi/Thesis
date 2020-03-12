@@ -61,17 +61,17 @@ with
 
 
 
-\noindent Enacting beamsplitter relation Eq.~\ref{eqn:intro_beampslitter} on $\rho_{\text{input}}$ and heterodyning on Charlie's mode we arrive at \MT{TODO: make the equation look nice. TODO: compare this to my MMA file for consistency}
+\noindent Enacting beamsplitter relation Eq.~\ref{eqn:intro_beampslitter} on $\rho_{\text{input}}$ and heterodyning on Charlie's mode we arrive at %\MT{ TODO: compare this to my MMA file for consistency} - it matches my mma file nicely 
 
 \begin{align}\label{eqn:appendix_bs1_state}
 %
 &\tilde{\rho}_{\left. \mathbb{B} \given c\right.} = \sum_k \frac{e^{- \left|\alpha_k\right|^2}}{\pi} e^{-\left|c\right|^2} \left( 1 - e^{- \tilde{\beta}}\right) \sum_{n, m, p = 0}^\infty \frac{\alpha^n \alpha^{* m}}{\sqrt{n! m!}} e^{- p \tilde{\beta}}  \notag \\
 %
-&\sum_{k_1, k_2, l_1, l_2=0}^{n, p, m, p} c^{k_1 + k_2} \left(c^*\right)^{l_1 + l_2} \pmqty{n \\ k_1} \pmqty{ p \\ k_2} \pmqty{ m \\ l_1 } \pmqty{p \\ l_2} \left( \sqrt{T} \right)^{k_1 + l_1} \notag \\
+&\times \sum_{k_1, k_2, l_1, l_2=0}^{n, p, m, p} c^{k_1 + k_2} \left(c^*\right)^{l_1 + l_2} \pmqty{n \\ k_1} \pmqty{ p \\ k_2} \pmqty{ m \\ l_1 } \pmqty{p \\ l_2} \left( \sqrt{T} \right)^{k_1 + l_1} \notag \\
 %
-&\left(\sqrt{1-T}\right)^{n + m - k_1 - l_1} \left( - \sqrt{1-T}\right)^{k_2 + l_2} \left( \sqrt{T} \right)^{2 p - k_2 - l_2} \notag \\
+&\times \left(\sqrt{1-T}\right)^{n + m - k_1 - l_1} \left( - \sqrt{1-T}\right)^{k_2 + l_2} \left( \sqrt{T} \right)^{2 p - k_2 - l_2}\sqrt{\left(n + p - k_1 - k_2\right)!}  \notag \\
 %
-&\sqrt{\left(n + p - k_1 - k_2\right)!}\sqrt{\left(m + p - l_1 - l_2 \right)!} \dyad{n + p - k_1 - k_2}{m + p - l_1 - l_2}.
+&\times\sqrt{\left(m + p - l_1 - l_2 \right)!} \dyad{n + p - k_1 - k_2}{m + p - l_1 - l_2}.
 %
 \end{align}
 
