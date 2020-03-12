@@ -77,16 +77,14 @@ Alice sends coherent states from her alphabet of possible coherent states, both 
 This protocol was implemented by Clarke \emph{et. al.} in Ref.~\cite{Clarke2012}, where an alphabet with $8$ phase-encoded coherent states was used, and signature lengths $L \sim 5 \times 10^6$ were obtained. To get around the requirement for quantum memory, in Ref.~\cite{Clarke2012} the Messing and Distribution stages occur at the same time so the coherent state corresponding to the chosen private key may be interfered with the distributed quantum signatures. This prevents their scheme from being used in a realistic setting where the Distribution and Messaging stages can typically occur with a delay of days, weeks or even years.
 
 
-
-\MT{----------}
-
 %\subsection{Dunjko2014 (+ implementation}
 \subsection{Removing quantum memory}
 The requirement that recipients possess long-term and efficient quantum memory, needed for the above protocols, makes it impractical for realization. The removal of this requirement by Dunjko \emph{et. al.} \cite{Dunjko2014} was one of the major milestones towards a practical QDS which can be implemented. 
 
 The key insight of Ref.~\cite{Dunjko2014} was to effectively replace the quantum public key by a classical one, albeit one which relies on the distribution and measurement of non-orthogonal quantum states. This physical requirement is a practical one, relying on simply linear optics (beamsplitters) and photodetectors capable of distinguishing just between zero and nonzero photon numbers, such as avalanche photodiodes (APDs). The storage of classical public keys is clearly no restriction. 
 
-The main difference then between Refs.~\cite{Dunjko2014} and \cite{Gottesman2001}, is that in Dunjko \emph{et. al.}, recipients Bob and Charlie perform photon-number measurement as they receive the quantum states. Remarkably, despite this fundamental change to the nature of the protocol's one-way function, secure QDS is possible. \MT{do I need to revise this sentence? Is it accurate and fair?}
+The main difference then between Refs.~\cite{Dunjko2014} and \cite{Gottesman2001}, is that in Dunjko \emph{et. al.}, recipients Bob and Charlie perform photon-number measurement immediately upon receipt of the quantum states. Remarkably, despite this fundamental change to the nature of the protocol's one-way function, secure QDS is still possible. %\MT{do I need to revise this sentence? Is it accurate and fair?}
+%TODO: make sure I can talk about this for the viva.
 
 %\MT{Include a figure (minipage thing) comparing the one-way functions used by Gottesman2001 and by Dunjko2014.} %Nah, can't be bothered.
 
@@ -100,7 +98,9 @@ During Messaging, Alice will declare $\left(m, k_j^m\right)$ which recipients wi
 
 This first protocol avoiding the requirement for quantum memory shows that QDS may be both practical and secure. Furthermore the limited physical requirements--tensor-products of coherent states, beamsplitters and non-photon-number-resolving detectors--are feasible to work with, unlike the large number of superposition qubits required for Ref.~\cite{Gottesman2001}. %\MT{Now talk about the implementation paper}. 
 
-An implementation of a variation of Dunjko's scheme is described in Ref.~\cite{Collins2014}. Collins \emph{et. al.} modify Dunjko's scheme in two key ways. Firstly, a QPSK alphabet Eq.~\MT{X} is used, rather than BPSK. This is in order to make the second modification: instead of using unambiguous state discrimination (USD) measurement, they perform unambiguous state \emph{elimination} (USE) measurement. If the measurement succeeds, rather than being able to say definitively which state was received, a recipient can say with certainty which state was \emph{not} received. This measurement scheme is described further in Fig.~\ref{fig:USE}. The key advantage of the USE measurement scheme is that the probability that the measurement fails is significantly smaller than for USD, and so the resulting QDS scheme gains a boost in efficiency. Indeed, if USE eliminates $N-1$ of $N$ possible states then one knows with certainty which state was sent, USD may be viewed as a special case of the more general USE measurement. The shift from state discrimination to state elimination allows for much greater efficiency in QDS schemes. \MT{Make sure to talk about it later in the context of our QDS - make a graph showing $g$ (or $L$?) under discrimination vs elimination.}
+An implementation of a variation of Dunjko's scheme is described in Ref.~\cite{Collins2014}. Collins \emph{et. al.} modify Dunjko's scheme in two key ways. Firstly, a QPSK alphabet Eq.~\ref{eqn:intro_qpsk} is used, rather than BPSK. This is in order to make the second modification: instead of using unambiguous state discrimination (USD) measurement, they perform unambiguous state \emph{elimination} (USE) measurement. If the measurement succeeds, rather than being able to say definitively which state was received, a recipient can say with certainty which state was \emph{not} received. %This measurement scheme is described further in Fig.~\ref{fig:USE}.  %can't really be bothered making it
+The main advantage of the USE measurement scheme is that the probability that the measurement fails is significantly smaller than for USD, and so the resulting QDS scheme gains a boost in efficiency. Indeed, if USE eliminates $N-1$ of $N$ possible states then one knows with certainty which state was sent, USD may be viewed as a special case of the more general USE measurement. The shift from state discrimination to state elimination allows for much greater efficiency in QDS schemes. %\MT{Make sure to talk about it later in the context of our QDS - make a graph showing $g$ (or $L$?) under discrimination vs elimination.}
+%TODO: make sure I can talk about it for the viva.
 
 %\begin{figure}[htp]
 %\centering
@@ -110,11 +110,13 @@ An implementation of a variation of Dunjko's scheme is described in Ref.~\cite{C
 
 Collins \emph{et. al.} estimate a signature length $L = 5.1 \times 10^{13}$ in order to sign a message. Notice the subtle shift between Refs.~\cite{Gottesman2001} and \cite{Andersson2006, Clarke2012, Dunjko2014, Collins2014}. While previously the number of recipients did not need to be determined until the Messaging stage, here it must be determined before Distribution. After the coherent states have passed through the multiport the number of recipients cannot be changed. 
 %\MT{I should note later that removing the multiport removes this restriction.} 
-Because of the physical requirements for the optical multiport, it will also be challenging (though possible) to generalize to more recipients, though note that for more than two recipients in Ref.~\cite{Dunjko2014} one may not use $USD$ measurement. \MT{why?}. Realistic implementation of the multiport also introduces noise and losses due to misalignment and instability, further reducing the efficiency of the protocol, and requires Bob and Charlie to be physically connected. In Ref.~\cite{Clarke2012, Collins2014}, for example Bob and Charlie are separated by $5$~m of optical fibre. 
+Because of the physical requirements for the optical multiport, it will also be challenging to generalize to more recipients. %, though note that for more than two signature states in Ref.~\cite{Dunjko2014} one may not use $USD$ measurement. \MT{why?}. 
+Realistic implementation of the multiport also introduces noise and losses due to misalignment and instability, further reducing the efficiency of the protocol, and requires Bob and Charlie to be physically connected. In Ref.~\cite{Clarke2012, Collins2014}, for example Bob and Charlie are separated by $5$~m of optical fibre. 
 
 The most difficult assumption which Refs.~\cite{Clarke2012, Dunjko2014, Collins2014} make, however, is that there should be no eavesdroppers on the quantum channels. This is a strong and impractical assumption, and one which subsequent papers endeavour to remove.
 
-\MT{TODO: mention somewhere how Dunjko2014 differs from Andersson2006}
+%\MT{TODO: mention somewhere how Dunjko2014 differs from Andersson2006} % Can't be bothered with this.
+% TODO: but I should be able to discuss it for the viva.
 
 \subsection{Removing multiport}
 %\subsection{Wallden2015 (+ implementation)}
@@ -123,7 +125,7 @@ The fact that the QDS schemes discussed above require dedicated hardware at the 
 
 To combat this, Wallden \emph{et. al.} \cite{Wallden2015} propose two QDS schemes specifically designed to run over the same hardware platform as QKD. In particular, they get rid of the multiport which was previously use to symmetrize Bob and Charlie's reduced output states. Their key insight is that rather than symmetrizing their states, it is sufficient to symmetrize their measurement outcomes. Therefore, a step is added to the distribution stage in which Bob and Charlie randomly swap half of their measurement outcomes over a secure classical channel. If Alice can gain no information about which outcomes were swapped then she cannot repudiate. 
 
-This protocol was implemented by Donaldson \emph{et. al.} in Ref.~\cite{Donaldson2016} in which a message is securely signed over distances $500$~m, $1000$~m, and $2000$~m, with no requirement on the physical separation between Bob and Charlie. The secure classical link may be realised via QKD, and so Refs.~\cite{Wallden2015, Donaldson2016} begin to explore the close connections between these two different quantum communication protocols. We explore this further in Chapter.~\MT{X}. Donaldson \emph{et. al.} achieve signature length $L = 1.93 \times 10^9$ using QPSK coherent states and USE measurement. This is a vast improvement over the $L = 5 \times 10^{13}$ required in Ref.~\cite{Collins2014} and means that secure quantum signatures may actually be both useful and practical. 
+This protocol was implemented by Donaldson \emph{et. al.} in Ref.~\cite{Donaldson2016} in which a message is securely signed over distances $500$~m, $1000$~m, and $2000$~m, with no requirement on the physical separation between Bob and Charlie. The secure classical link may be realised via QKD, and so Refs.~\cite{Wallden2015, Donaldson2016} begin to explore the close connections between these two different quantum communication protocols. We explore this further in Chapter~\ref{chapter:aqc}. Donaldson \emph{et. al.} achieve signature length $L = 1.93 \times 10^9$ using QPSK coherent states and USE measurement. This is a vast improvement over the $L = 5 \times 10^{13}$ required in Ref.~\cite{Collins2014} and means that secure quantum signatures may actually be both useful and practical. 
 
 \subsection{Allowing Eve}
 %\subsection{Amiri2016 (+ implementation)}
