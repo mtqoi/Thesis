@@ -99,13 +99,26 @@ It should still be explored whether there are any QSS protocols which outperform
 In the first sequential QSS protocol \cite{Zhang2005}, Zhang \emph{et. al.} propose a system in which Bob prepares a single photon state with his choice of polarization, and sends it to Charlie. Charlie performs a unitary operation, either the identity, a Hadamard gate or a bit-flip, on the photon and sends it to Alice, who stores the photon in a quantum memory. This process is repeated many times. Later, Alice will sample some of her stored photons for errors by asking Bob and Charlie to declare which state was sent and which operation was performed. On the remaining photons she performs her unitaries (either the identity or a bit-flip) to encode her secret. She then sends the photons back to Charlie. %\MT{how does the rest of the protocol run?}
 If Bob and Charlie collaborate they can deduce the correct basis in which to measure Alice's photon, and so recover her information.
 
-%Just as prepare-and-measure QKD allows Alice and Bob to mimic the measurement outcomes of a shared entangled state  under \MT{criterion} the scheme \cite{Zhang2005} allows players to receive the same measurement outcomes they would if they had shared a GHZ state. Secret sharing then may proceed in the usual way. \MT{talk about this.}
+
 
 Sequential protocols have the obvious advantage that large entangled states are not required. Even though Ref.~\cite{Zhang2005} proposes to use a quantum memory it is ultimately not necessary for the protocol, and the work by Schmid \emph{et. al.} demonstrates this \cite{Schmid2005} in a sequential QSS experiment. Their experiment, in which players perform operations on heralded single photons, allows for a secret to be shared among six players in a setup which is much more readily scalable to more players than the earlier QSS schemes requiring entanglement.
 
 \MT{Describe and appraise Schmid's protocol.}
 
-The sequential scheme, while secure against an Eve external to the protocol, is difficult to secure against dishonesty from one of the internal players \cite{Deng2005, Qin2006, He2007}. For example, Ref.~\ref{He2007} points out that the order in which recipients declare their information is of utmost importance, and this is adopted into the sequential protocol in Ref.~\cite{Schmid2007}. Unfortunately, the protocol remains insecure against a so-called Trojan Horse attack \cite{Deng2005}, in which an internal player to the protocol adds one mode of an entangled state to the single photon as it is being distributed. This entangled mode will undergo the same subsequent gates as the signal photon, and so the dishonest player can gain additional information. 
+Schmid's scheme relies on sequential interactions with a qubit state encoded into the polarization of a heralded single photon. Each player imposes a randomly chosen phase onto the state
+\begin{equation}
+\frac{\ket{0} + \ket{1}}{\sqrt{2}} \rightarrow \frac{\ket{0} + e^{i \phi_k} \ket{1}}{\sqrt{2}}
+\end{equation}
+and so at the end of the distribution the state is
+\begin{equation}
+\frac{\ket{0} + \exp\left(i \sum_{k}^N \phi_k\right)\ket{1}}{\sqrt{2}}.
+\end{equation}
+The final player measures in the $\ket{0} \pm \ket{1}$ basis. Collaboration of the first $N-1$ players allows them to infer, with certainty, the $N^{\text{th}}$ player's outcome.
+
+
+%Just as prepare-and-measure QKD allows Alice and Bob to mimic the measurement outcomes of a shared entangled state  under \MT{criterion} the scheme \cite{Zhang2005} allows players to receive the same measurement outcomes they would if they had shared a GHZ state. Secret sharing then may proceed in the usual way. \MT{talk about this.}
+
+The sequential scheme, while secure against an Eve external to the protocol, is difficult to secure against dishonesty from one of the internal players \cite{Deng2005, Qin2006, He2007}. For example, Ref.~\cite{He2007} points out that the order in which recipients declare their information is of utmost importance, and this is adopted into the sequential protocol in Ref.~\cite{Schmid2007}. Unfortunately, the protocol remains insecure against a so-called Trojan Horse attack \cite{Deng2005}, in which an internal player to the protocol adds one mode of an entangled state to the single photon as it is being distributed. This entangled mode will undergo the same subsequent gates as the signal photon, and so the dishonest player can gain additional information. 
 
 The Trojan Horse attack is guarded against in the recent work from Grice \emph{et. al.} \cite{Grice2019}. In their protocol for sequential QSS, each player creates a coherent state, chosen from a Gaussian modulation. These states are added to the initial coherent state as it travels, and the final state is heterodyned at the dealer Alice. With combined knowledge of the injected states the players are able to estimate Alice's measurement outcome. This protocol has the advantage of high tolerable losses, especially when compared to entanglement-based QSS. Crucially, the scheme is immune to Trojan Horse attacks since once a coherent state has been added to the total state, it only interacts with Alice's measurement apparatus and does not pass through the equipment of any other player, and a dishonest player cannot access other players' devices.
 
