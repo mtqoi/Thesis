@@ -76,7 +76,7 @@ with
 \end{align}
 
 \section{Attack EC}\label{appendix:ec_state}
-Entangling cloner attack EC is described in Sec.~\MT{X}. The total input state into the channel is
+Entangling cloner attack EC is described in Sec.~\ref{sec:qds_ec}. The total input state into the channel is
 
 \begin{equation}
 \rho_{\text{input}} = \frac{1}{4}\sum_k \dyad{\alpha_k}_A \otimes \dyad{\text{TMSV}}_B,
@@ -91,16 +91,16 @@ and Bob's two-mode squeezed vacuum state
 \ket{\text{TMSV}} = \frac{1}{\cosh{\zeta}}\sum_{n=0}^\infty \left(\tanh{\zeta}\right)^n \ket{n, n}_B.
 \end{equation}
 
-\noindent Enacting beamsplitter relation Eq.~\ref{eqn:intro_beamsplitter} on $\rho_{\text{input}}$ and heterodyning on Charlie's mode, we arrive at \MT{TODO: make equation look pretty.}
+\noindent Enacting beamsplitter relation Eq.~\ref{eqn:intro_beamsplitter} on $\rho_{\text{input}}$ and heterodyning on Charlie's mode, we arrive at %\MT{TODO: make equation look pretty.}
 
 \begin{align}\label{eqn:appendix_ec_state}
 &\tilde{\rho}_{\left. \mathbb{B} \given c\right.} = \sum_k\frac{e^{- \left|\alpha_k\right|^2}}{\cosh^2 \zeta}\frac{e^{-\left|c\right|^2}}{\pi} \sum_{n_1, m_1, n_2, m_2=0}^\infty \sum_{k_1, k_2 = 0}^{n_1, n_2} \sum_{l_1, l_2 = 0}^{m_1, m_2} \alpha^{n_1} \alpha^{* m_1} \left(\tanh{\zeta}\right)^{n_2 + m_2} \notag \\
 %
-&c^{k_1 + k_2} \left(c^*\right)^{l_1 + l_2} \sqrt{n_2! m_2!} \left(\sqrt{T}\right)^{k_1 + l_1} \left(\sqrt{1-T}\right)^{n_1 + m_1 - k_1 - l_1} \left(- \sqrt{1-T}\right)^{k_2 + l_2} \notag \\ %
-&\left( \sqrt{T}\right)^{n_2 + m_2 - k_2 - l_2}
+&\times c^{k_1 + k_2} \left(c^*\right)^{l_1 + l_2} \sqrt{n_2! m_2!} \left(\sqrt{T}\right)^{k_1 + l_1} \left(\sqrt{1-T}\right)^{n_1 + m_1 - k_1 - l_1} \left(- \sqrt{1-T}\right)^{k_2 + l_2} \notag \\ %
+&\times \left( \sqrt{T}\right)^{n_2 + m_2 - k_2 - l_2}
 \frac{\sqrt{\left(n_1 + n_2 - k_1 - k_2\right)!} \sqrt{\left(m_1 + m_2 - l_1 - l_2\right)!}}{k_1! k_2! l_1! l_2! \left(n_1 - k_1\right)! \left(n_2 - k_2\right)! \left(m_1 - l_1\right)! \left(m_2 - l_2\right)!} \notag \\
 %
-& \dyad{n_1 + n_2 - k_1 - k_2}{m_1 + m_2 - l_1 - l_2}\otimes \dyad{n_2}{m_2}.
+&\times \dyad{n_1 + n_2 - k_1 - k_2}{m_1 + m_2 - l_1 - l_2}\otimes \dyad{n_2}{m_2}.
 \end{align}
 
 To illustrate the power of the EC attack we examine several histograms of $\rho_{\left. \mathbb{B} \given c\right.}$ and show how the correlations between Bob's two modes give him additional information. \MT{TODO: make some nice histograms.}
