@@ -4,7 +4,7 @@
 
 %Note: after I have this section I can compare it to the Amiri2015 review paper and to Collins2018 progress report (and to Callum's thesis)
 
-\subsection*{Classical digital signatures}
+\subsection{Classical digital signatures}
 %\MT{Talk about digital signatures' use in modern infrastructure. Introduce the Lamport scheme.}
 
 Although encryption is perhaps the most well known cryptographic protocol, it is by no means the only important task which is accomplished daily by modern cryptography. Digital signatures for example are ubiquitous in our everyday information infrastructure and they are crucial to digital communication such as software distribution or financial transactions. In many countries, a digital signature is even legally meaningful.
@@ -15,23 +15,23 @@ One method which may be used to perform this task requires a symmetric (private-
 
 Such a scheme will accomplish all of the requirements of a digital signature, including transferability, but the requirement that all communication be mediated by arbiter David is a strong one, and David will become a bottleneck in this system.
 
-A more practical scheme uses asymmetric (public-key) cryptography, Fig.~\ref{fig:pubpriv}b. Assume that Alice has a private key, known only to her, while Bob possesses her public key, which is freely available to any interested party. Alice may sign her message by encrypting $m$ and send it to Bob. Bob decrypts using the public key, and he can freely read $m$ and be confident that it originated with Alice. Moreover, since Alice's public key is freely available her message $m$ is transferable. This system has the advantage of not requiring any trusted arbiter\footnote{Though in practice one will use a certificate authority to distribute the public keys} or bottleneck. The scheme described here was first invented by Diffie and Hellman in \MT{year}, \MT{cite}.
+A more practical scheme uses asymmetric (public-key) cryptography, Fig.~\ref{fig:pubpriv}b. Assume that Alice has a private key, known only to her, while Bob possesses her public key, which is freely available to any interested party. Alice may sign her message by encrypting $m$ and send it to Bob. Bob decrypts using the public key, and he can freely read $m$ and be confident that it originated with Alice. Moreover, since Alice's public key is freely available her message $m$ is transferable. This system has the advantage of not requiring any trusted arbiter\footnote{Though in practice one will use a certificate authority to distribute the public keys} or bottleneck. The scheme described here was first invented by Diffie and Hellman in $1976$ \cite{Hellman1976}.
 
-This idea was expanded upon by Lamport in \MT{year}. The signature scheme proposed by Lamport uses one-way functions. In Lamport's scheme, Alice wishes to send a one-bit message $m$ to Bob. For each $m$ she will create a random string $\theta_0$, $\theta_1$ and input them to her one-way function $f$. Alice then freely distributes $\left\{m, f\left(\theta_0\right), f\left(\theta_1\right)\right\}$. Since $f$ is one-way, a potential forger cannot discover Alice's $\theta_0$, $\theta_1$. When Alice wishes to send her message, she will declare $\left(m, \theta_m\right)$. Bob applies the function $f$ to $\theta_m$, and if the output agrees with Alice's earlier declaration he will accept $m$ as genuine. 
+This idea was expanded upon by Lamport in $1979$ \cite{Lamport1979}. The signature scheme proposed by Lamport uses one-way functions. In Lamport's scheme, Alice wishes to send a one-bit message $m$ to Bob. For each $m$ she will create a random string $\theta_0$, $\theta_1$ and input them to her one-way function $f$. Alice then freely distributes $\left\{m, f\left(\theta_0\right), f\left(\theta_1\right)\right\}$. Since $f$ is one-way, a potential forger cannot discover Alice's $\theta_0$, $\theta_1$. When Alice wishes to send her message, she will declare $\left(m, \theta_m\right)$. Bob applies the function $f$ to $\theta_m$, and if the output agrees with Alice's earlier declaration he will accept $m$ as genuine. 
 
-Lamport's scheme has the advantage that $m$ is visible to all and the scheme does not require encryption of the message. A drawback is that once the $\theta_m$ have been used they cannot be reused and must be discarded. We note also that this scheme is inherently very similar to hash-based signature schemes which Alice first applies a hash function $h$ \MT{cite} to $m$, and then signs $h\left(m\right)$ (e.g. via the Diffie-Hellman protocol described above) and distributes $m$ and her signed $h\left(m\right)$.
+Lamport's scheme has the advantage that $m$ is visible to all and the scheme does not require encryption of the message. A drawback is that once the $\theta_m$ have been used they cannot be reused and must be discarded. We note also that this scheme is inherently very similar to hash-based signature schemes which Alice first applies a hash function $h$ \cite{Schneier1996} to $m$, and then signs $h\left(m\right)$ (e.g. via the Diffie-Hellman protocol described above) and distributes $m$ and her signed $h\left(m\right)$.
 
 
 
-\subsection*{Quantum one-way function}
+\subsection{Quantum one-way function}
 %Talk about Gottesman and Chuang.
-Gottesman and Chuang \cite{Gottesman2001} generalized Lamport's scheme \MT{cite} in $2001$ to build the first Quantum Digital Signatures protocol. The key contribution of their scheme is to replace the one-way function in \MT{cite} with a so-called \emph{quantum one-way function}, thereby securing the signatures protocol against a quantum adversary.
+Gottesman and Chuang \cite{Gottesman2001} generalized Lamport's scheme \cite{Lamport1979} in $2001$ to build the first Quantum Digital Signatures protocol \cite{Gottesman2001}. The key contribution of their scheme is to replace the one-way function in Ref.~\cite{Lamport1979} with a so-called \emph{quantum one-way function}, thereby securing the signatures protocol against a quantum adversary.
 
 %\MT{TODO: chat more about quantum one-way function. Include the "figure" that I currently have in my historical introduction}
 
 A direct analogue of public-key cryptography, their protocol relies on the difficult task, described above in Fig.~\ref{fig:qutrapdoor}, of accurately distinguishing between non-orthogonal quantum states. Their security relies on the fact that performing measurement on a state of $n$~qubits can yield at most $n$~bits of information, and so the protocol in Ref.~\cite{Gottesman2001} is designed such that this is insufficient to distinguish between states.
 
-The key tool in the protocol is a quantum $SWAP$ test which probabilistically determines whether two states are identical. To perform this test, players prepare $\ket{f_x}, \ket{f_{x^\prime}}$ and an additional ancilla $\left(\ket{0} + \ket{1}\right)/\sqrt{2}$. Players perform a Fredkin gate \MT{cite} using the ancilla as a control, and then perform a Hadamard \MT{cite} on the ancilla. In other words, the $SWAP$ test performs the mapping
+The key tool in the protocol is a quantum $SWAP$ test which probabilistically determines whether two states are identical. To perform this test, players prepare $\ket{f_x}, \ket{f_{x^\prime}}$ and an additional ancilla $\left(\ket{0} + \ket{1}\right)/\sqrt{2}$. Players perform a Fredkin gate using the ancilla as a control, and then perform a Hadamard on the ancilla \cite{Nielsen2010, brendon_book}. In other words, the $SWAP$ test performs the mapping %TODO: make sure that I can talk about this for the viva
 \begin{equation}
 \ket{f_x}\ket{f_{x^\prime}}\frac{\left(\ket{0} + \ket{1}\right)}{\sqrt{2}} \mapsto \frac{\left(\ket{f_x}\ket{f_{x^\prime}} \pm \ket{f_{x^\prime}}\ket{f_x}\right)\ket{y_{\pm}}}{\sqrt{2}}
 \end{equation}
@@ -41,18 +41,18 @@ The probabilistic nature of this test will cause participants in the protocol to
 
 The protocol is a significant attempt to generalise and translate structures from the field of classical cryptography to the quantum realm, and it sets the pattern for all subsequent QDS protocols, and so it is worth examining the protocol in detail. Alice has a $1$~bit message $b$ which she would like to sign, and send to Bob and Charlie. In the Distribution state, for each $b$ Alice creates $M$ classical strings $k_m^i$, length $L$. Each classical string is mapped to a corresponding quantum state $\ket{k_m^i}$ of $n$~qubits which are chosen to be highly non-orthogonal. Two of each of these quantum states are sent to Bob and Charlie. The quantum states, $4M$ in total, are Alice's public keys which may be freely distributed--and they may even be given to a dishonest external party. The corresponding classical strings $k_m^i$ are Alice's private keys.
 
-Bob and Charlie each receive two of the $\ket{k_m^i}$. They each perform a $SWAP$ test between their two copies of the public key, to check whether individual copies are equivalent. Then, they should perform a $SWAP$ test between one of Bob's keys and one of Charlie's keys, to test whether they received identical keys to each other. If all $SWAP$ tests pass then the protocol continues to the next step, otherwise it aborts. Bob and Charlie should now store the quantum public keys which they hold.
+Bob and Charlie each receive two of the $\ket{k_m^i}$. They each perform a $SWAP$ test between their two copies of the public key, to check whether individual copies are equivalent.  Then, they should perform a $SWAP$ test between one of Bob's keys and one of Charlie's keys, to test whether they received identical keys to each other. If all $SWAP$ tests pass then the protocol continues to the next step, otherwise it aborts. Bob and Charlie should now store the quantum public keys which they hold. These two $SWAP$ tests guarantee security against repudiation, and prevent a dishonest Alice from later trying to deny having sent her message.
 
 Later, in the Messaging stage, Alice sends $\left(m, k_m^i\right)$. For each of the $M$ strings $k_m^i$, Bob creates $\ket{k_m^i}$ and performs a $SWAP$ test with his corresponding stored quantum state. If his test passes most of the time then he accepts the message as genuine and transferable, and passes $\left(m, k_m^i\right)$ to Charlie who performs similar tests. 
 
-Although laying the groundwork for practical QDS protocols, this original proposal cannot be implemented. The most pressing problem is the requirement for long-term quantum memory. State-of-the-art technology can store a quantum state for \MT{X}, and so long-term storage of many copies of quantum states with many qubits will be technologically challenging. Furthermore, the need for every party to be able to create and distribute the states and the multiple required $SWAP$ tests render this protocol impractical for implementation. 
+Although laying the groundwork for practical QDS protocols, this original proposal cannot be implemented. The most pressing problem is the requirement for long-term quantum memory. State-of-the-art technology can store a photonic state for $\mathcal{O}\left(1\right)$~$\mu$s \cite{Wang2019d}, and so long-term storage of many copies of quantum states with many qubits will be technologically challenging. Furthermore, the need for every party to be able to create and distribute the states and the multiple required $SWAP$ tests render this protocol impractical for implementation. 
 
-However, as we shall see, the structure of this protocol is very closely aligned to classical signatures protocols. Since the public keys are truly public (all of them can be handed to Eve). Furthermore, every recipient is given identical quantum public keys and so the number of recipients does not need to be fixed before the start of the protocol. These requirements are subtly changed in later--more practical--QDS protocols. \MT{make sure I talk about this later.}
+However, as we shall see, the structure of this protocol is very closely aligned to classical signatures protocols. Since the public keys are truly public (all of them can be handed to Eve). Furthermore, every recipient is given identical quantum public keys and so the number of recipients does not need to be fixed before the start of the protocol. These requirements are subtly changed in later--more practical--QDS protocols. %\MT{make sure I talk about this later.}
 
-\MT{Perhaps talk about repudiation somewhere in this section?}
+%\MT{Perhaps talk about repudiation somewhere in this section?}
 
 %\subsection{Andersson2006 (+ implementation)}
-\subsection*{QDS implementation}
+\subsection{QDS implementation}
 %Talk about Andersson2006 and Clarke2012
 A step forward to implementation of QDS occurs in Ref.~\cite{Andersson2006}, in which Andersson \emph{et. al.} replace the tricky to perform $SWAP$ test from Ref.~\cite{Gottesman2001} with a practical state comparison method. The qubits required previously are also replaced by coherent states (qumodes). Combined with the new state comparison scheme, the requirements for QDS have been reduced to just generation and distribution of coherent states and linear optics components (beamsplitters).
 
@@ -74,13 +74,14 @@ To allow both parties to perform comparisons, an optical multiport Fig.~\ref{fig
 
 Alice sends coherent states from her alphabet of possible coherent states, both to Bob and to Charlie, and keeps a record of which states she sent. Bob and Charlie feed their states through the shared multiport, thereby ensuring that Alice has sent them identical states (or symmetrizing them if she hasn't), and store their output states in quantum memory. Later, Alice sends the classical message, plus classical information describing which states she had previously sent. Bob and Charlie create the corresponding coherent states, and compare them via the method in Fig.~\ref{fig:andersson2006_state_comparison} with the states retrieved from quantum memory. If no clicks are recorded at the null ports, it is an indication that the message is genuine and the protocol passes.
 
-This protocol was implemented by Clarke \emph{et. al.} in Ref.~\cite{Clarke2012}, where an alphabet with $8$ phase-encoded coherent states was used, and signature lengths $L \sim $\MT{X} were obtained. \MT{I don't think they actually quote one, but I can estimate it from their $g$ value.} To get around the requirement for quantum memory, in Ref.~\cite{Clarke2012} the Messing and Distribution stages occur at the same time so the coherent state corresponding to the chosen private key may be interfered with the distributed quantum signatures. This prevents their scheme from being used in a realistic setting where the Distribution and Messaging stages can typically occur with a delay of days, weeks or even years.
+This protocol was implemented by Clarke \emph{et. al.} in Ref.~\cite{Clarke2012}, where an alphabet with $8$ phase-encoded coherent states was used, and signature lengths $L \sim 5 \times 10^6$ were obtained. To get around the requirement for quantum memory, in Ref.~\cite{Clarke2012} the Messing and Distribution stages occur at the same time so the coherent state corresponding to the chosen private key may be interfered with the distributed quantum signatures. This prevents their scheme from being used in a realistic setting where the Distribution and Messaging stages can typically occur with a delay of days, weeks or even years.
 
 
 
+\MT{----------}
 
 %\subsection{Dunjko2014 (+ implementation}
-\subsection*{Removing quantum memory}
+\subsection{Removing quantum memory}
 The requirement that recipients possess long-term and efficient quantum memory, needed for the above protocols, makes it impractical for realization. The removal of this requirement by Dunjko \emph{et. al.} \cite{Dunjko2014} was one of the major milestones towards a practical QDS which can be implemented. 
 
 The key insight of Ref.~\cite{Dunjko2014} was to effectively replace the quantum public key by a classical one, albeit one which relies on the distribution and measurement of non-orthogonal quantum states. This physical requirement is a practical one, relying on simply linear optics (beamsplitters) and photodetectors capable of distinguishing just between zero and nonzero photon numbers, such as avalanche photodiodes (APDs). The storage of classical public keys is clearly no restriction. 
@@ -115,7 +116,7 @@ The most difficult assumption which Refs.~\cite{Clarke2012, Dunjko2014, Collins2
 
 \MT{TODO: mention somewhere how Dunjko2014 differs from Andersson2006}
 
-\subsection*{Removing multiport}
+\subsection{Removing multiport}
 %\subsection{Wallden2015 (+ implementation)}
 
 The fact that the QDS schemes discussed above require dedicated hardware at the receivers--the optical multiport--makes implementation in real-world situations difficult. The multiport introduces losses and noise, and requires tricky synchronisation between Bob and Charlie in order to correctly interfere the states. The experiment in Ref.~\cite{Collins2014} therefore has Bob and Charlie only separated by $5$~m optical fibre. 
@@ -124,7 +125,7 @@ To combat this, Wallden \emph{et. al.} \cite{Wallden2015} propose two QDS scheme
 
 This protocol was implemented by Donaldson \emph{et. al.} in Ref.~\cite{Donaldson2016} in which a message is securely signed over distances $500$~m, $1000$~m, and $2000$~m, with no requirement on the physical separation between Bob and Charlie. The secure classical link may be realised via QKD, and so Refs.~\cite{Wallden2015, Donaldson2016} begin to explore the close connections between these two different quantum communication protocols. We explore this further in Chapter.~\MT{X}. Donaldson \emph{et. al.} achieve signature length $L = 1.93 \times 10^9$ using QPSK coherent states and USE measurement. This is a vast improvement over the $L = 5 \times 10^{13}$ required in Ref.~\cite{Collins2014} and means that secure quantum signatures may actually be both useful and practical. 
 
-\subsection*{Allowing Eve}
+\subsection{Allowing Eve}
 %\subsection{Amiri2016 (+ implementation)}
 All signature schemes considered so far have made the assumption that the quantum distribution channels are secure, that is, they may not be attacked or monitored by an eavesdropper, Eve. This is clearly an unrealistic and unphysical assumption, but was a sensible one while the pressing impracticalities of early QDS schemes (quantum memory, multiport, tricky state comparison tests) were overcome. The emphasis in earlier papers was on dishonesty internal to the protocol, i.e. which attacks can Bob or Charlie mount when they already hold perfect copies of the quantum public keys. However, in a realistic scenario it is clear that an eavesdropper \emph{could} attack the quantum channels as states are being distributed, and so it is important to consider whether this has any effect on QDS security.
 
@@ -147,7 +148,7 @@ An experimental implementation of a protocol which is similar to Ref.~\cite{Amir
 Finally, we note the recent work by An \emph{et. al.} \cite{An2019} which boasts an experiment with GHz clock rate based on Ref.~\cite{Amiri2016}, allowing for coherent forging attacks by Eve and requiring single-photon detectors at the receiver.
 
 
-\subsection*{Side-channel attacks}
+\subsection{Side-channel attacks}
 %\subsection{Puthoor2016 (+ implementation)}
 %\MT{Though first talk about side-channel attacks}
 It should be noted that "security" of a protocol is a theoretical statement, and not a physical one. A protocol is secure with respect to a model of how it operates in the real world, and whether a so-called unconditionally secure protocol can be broken in practice depends on how realistic or practical its underling modelling assumptions are. For example, although in many QKD protocols Eve is allowed to attack the quantum channels and eavesdrop on all communication, she is prevented from attacking the physical devices which are used to implement the protocol. 
@@ -190,7 +191,7 @@ There have been two main implementations of MDI-QDS. One experiment by Roberts \
 
 
 
-\subsection*{Installed fibers}
+\subsection{Installed fibers}
 There have been several experiments seeking to move secure QDS from the laboratory setting to a practical network of deployed fibers. The first demonstration of QDS over installed fibers allowed for a single-bit to be signed in approximately one second over $90$~km fiber, relying on a differential phase shift (DPS) quantum state distribution, Fig.~\ref{fig:collins2016_dps}.
 
 In this DPS-QDS protocol, \MT{describe how the protocol runs} 
@@ -219,7 +220,7 @@ Both of these schemes, although running over deployed fiber networks, require di
 
 %\MT{Where shall I talk about An2019?}
 
-\subsection*{Continuous-variables}
+\subsection{Continuous-variables}
 %\MT{Motivate CV and then talk about Croal2016. Goal of section is to convince the reader that CV QDS is a good direction to go in, and to motivate the rest of the chapter.}
 
 Despite the many recent advances in single-photon detection, and its use above in modern QDS progressing towards practical implementation, the protocols presented above still require a dedicated hardware platform. Deploying such a platform will be difficult and costly, especially if it requires new network infrastructure.
@@ -245,7 +246,7 @@ The CV quantum cryptographic platform typically boasts fast sending rates and re
 
 
 
-\subsection*{Other directions}
+\subsection{Other directions}
 %\MT{Talk about "classical" unconditionally secure signatures, and various extensions to the QDS schemes discussed above. I want the above narrative to be about the flow from impractical (Gottesman2016) to practical and good (my scheme, which I am about to present).}
 
 
