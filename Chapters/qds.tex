@@ -147,22 +147,23 @@ and recording the two $\phi_j$ which yield the smallest of these. This record of
 
 \begin{table*}
 \captionsetup{width=0.8\linewidth}
-\begin{tabular}{|c|c|c|}
+\centering \ra{1.75}
+\begin{tabular*}{0.8\linewidth}{@{\extracolsep{\stretch{1}}} c c c}
+
+\head{Element} & \head{QPSK elements} & \head{Heterodyne outcome} \\ 
 \hline 
-Element & QPSK elements & Heterodyne outcome \\ 
-\hline 
-$e_1$ & $\ket{- \alpha}, \ket{- i \alpha}$ & $\qout >0, \pout >0$ \\ 
+$e_1$ & $\ket{- \phantom{i}\alpha}, \ket{- i \alpha}$ & $\qout >0, \pout >0$ \\ 
 
-$e_2$ & $\ket{- i \alpha}, \ket{\alpha}$ & $\qout < 0, \pout > 0$ \\ 
+$e_2$ & $\ket{- i \alpha}, \ket{\phantom{-i}\alpha}$ & $\qout < 0, \pout > 0$ \\ 
 
-$e_3$ & $\ket{\alpha}, \ket{i \alpha}$ & $\qout < 0, \pout < 0 $ \\ 
+$e_3$ & $\ket{\phantom{-i}\alpha}, \ket{\phantom{-}i \alpha}$ & $\qout < 0, \pout < 0 $ \\ 
 
-$e_4$ & $\ket{i \alpha}, \ket{- \alpha}$ & $\qout > 0, \pout < 0$ \\ 
-\hline
-
-\end{tabular} 
+$e_4$ & $\ket{\phantom{-}i \alpha}, \ket{- \phantom{i} \alpha}$ & $\qout > 0, \pout < 0$ \\ 
+%\hline
+\end{tabular*} 
 \caption{\label{tab:elimsig} We denote possible eliminated signature elements as $e_1, e_2, e_3, e_4$, and display their corresponding states from QPSK and their requisite heterodyne measurement outcomes.}
 \end{table*}
+
 
 
 \paragraph{Step $4$. \emph{Symmetrization:}}
