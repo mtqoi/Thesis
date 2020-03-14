@@ -189,20 +189,12 @@ The first MDI QDS scheme is presented by Puthoor \emph{et. al.} in Ref.~\cite{Pu
 
 
 \subsection{Installed fibers}
-There have been several experiments seeking to move secure QDS from the laboratory setting to a practical network of deployed fibers. The first demonstration of QDS over installed fibers allowed for a single-bit to be signed in approximately one second over $90$~km fiber, relying on a differential phase shift (DPS) quantum state distribution.
+There have been several experiments seeking to move secure QDS from the laboratory setting to a practical network of deployed fibers. The first demonstration of QDS over installed fibers \cite{Collins2016} allowed for a single-bit to be signed in approximately one second over $90$~km fiber, relying on a differential phase shift (DPS) quantum state distribution \cite{Inoue2002}.
 
-In this DPS-QDS protocol, \MT{describe how the protocol runs} 
-
-Key to the long distances reached in this protocol is the move to telecom wavelengths $1550$~nm, allowing the use of very low loss fibers. 
-
-%\begin{figure}[htp]
-%\centering
-%\includegraphics{collins2016_dps.png}
-%\caption{\label{fig:collins2016_dps}}
-%\end{figure}
+In this DPS-QDS protocol, sequences of coherent state pulses are distributed with complex phase either $\alpha$ or $- \alpha$, and information is encoded in the phase different between subsequent pulses \cite{Inoue2015}. Key to the long distances reached in this protocol is the move to telecom wavelengths $1550$~nm, allowing the use of very low loss fibers. 
 
 
-H.-L. Yin \emph{et. al.} in a second implementation of MDI-QDS \cite{Yin2017} securely sign a message over a deployed fiber network in approx. $40$~hours using the protocol from Ref.~\cite{Puthoor2016}. Yin \emph{et. al.} note that a full parameter optimization was not performed. Regardless, there has been quick and marked progress from early QDS experiments, assuming quantum memories and tricky detection methods which were unique to QDS, to the recent experiments demonstrating unconditionally secure MDI-QDS over installed metropolitan fiber communication systems.
+H.-L. Yin \emph{et. al.} in a second implementation of MDI-QDS \cite{Yin2017} securely sign a message over a deployed fiber network in approximately $40$~hours using the protocol from Ref.~\cite{Puthoor2016}, although Yin \emph{et. al.} note that a full parameter optimization was not performed. Regardless, there has been quick and marked progress from early QDS experiments, assuming quantum memories and tricky detection methods which were unique to QDS, to the recent experiments demonstrating unconditionally secure MDI-QDS over installed metropolitan fiber communication systems.
 
 Both of these schemes, although running over deployed fiber networks, require difficult detection methods. Collins \emph{et. al.} \cite{Collins2016} rely on single-photon detectors, while Yin \emph{et. al.} \cite{Yin2017} is required to perform Bell measurements. Both of these require dedicated hardware not normally present in a standard deployed telecommunications network.
 
