@@ -72,7 +72,7 @@ where the notation $\dyad{\psi}$ denotes
 \begin{equation}
 \hat{r} \ket{r} = r \ket{r}
 \end{equation}
-with $r in \mathbb{C}$.
+with $r \in \mathbb{C}$.
 
 The basis we choose for vector $\ket{\psi}$ is not unique and we may similarly have expanded $\ket{\psi}$ in terms of eigenstates of $\hat{r}$,
 \begin{equation}
@@ -118,9 +118,98 @@ In the $\left\{\ket{0}, \ket{1}\right\}$ basis, the states $\rho_\phi$ and $\rho
 The density matrix $\rho$ will be our primary tool for describing a quantum state in this Thesis.
 
 \subsection{Wigner function}
+An equivalent description of the quantum state is to use a (\emph{quasi})-probability distribution known as the Wigner function. The Wigner function, $W\left(q, p\right)$ allows operator expectation values to be calculated and so can be thought of as an accurate description of the quantum state. We desire $W\left(q, p\right)$ to behave analogously to a joint probability distribution, and by analogy with a classical phase space picture in which the system is described in terms of position and canonical momentum, we introduce a quantum phase space. A phase space picture is not strictly necessary for the work in this Thesis, but the Wigner function provides a useful visualisation tool.
+
+One immediate observation is that the quantum phase space must behave qualitatively differently to the classical one. Because of Heisenberg's principle we cannot accurately define a joint probability distribution of position $q$ and momentum $p$, and this leads to interesting behaviours of the phase space distribution, such as becoming negative (for Wigner functions) or highly singular (for ``$P$-functions''). Indeed, one may even measure the ``quantumness'' of a given state by checking how pathological is the chosen quasi-probability distribution.
+
+We define the Wigner function corresponding to density operator $\hat{\rho}$ as \cite{Leonhardt2010}
+
+\begin{equation}
+W\left(q, p\right) = \frac{1}{2 \pi} \int\limits_{-\infty}^{\infty} \mathrm{d}x \; \exp\left(i p x\right) \mel{q - \frac{x}{2}}{\hat{\rho}}{q + \frac{x}{2}}.
+\end{equation}
+
+\MT{Look at q and p marginals.}
+
+\noindent A useful feature of the Wigner function is that traces over operators may be calculated as
+
+\begin{equation}\label{eqn:wigner_overlap}
+\tr\left[\hat{O}_1 \hat{O}_2\right] = 2\pi \int\limits_{-\infty}^\infty \int\limits_{-\infty}^{\infty} \mathrm{d}q \; \mathrm{d}p \; W_1\left(q, p\right) W_2\left(q, p\right)
+\end{equation}
+where $W_i\left(q, p\right)$ is the Wigner function corresponding to operator $\hat{O}_i$. Operator expectation values with respect a given state $\hat{\rho}$ may be calculated using Eq.~\ref{eqn:wigner_overlap}. 
+
+In the following sections we will see some examples of quantum states and their corresponding Wigner functions. 
+
+Finally, we must note that the Wigner function is not the only quasi-probability distribution which one could define on the phase space. It is a purely non-classical feature that there are multiple ways to consistently define a phase space description. Other common quasi-probability distributions are: the Hussimi $Q$ function \MT{cite} which is intimately related to Heterodyne measurement; Glauber-Sudarshan \MT{spelling} $P$ function which is often used to describe mixtures of coherent states and becomes highly singular in all other cases; and the positive-$P$ function which is a generalization to the $P$ function defined as non-diagonal in the coherent state basis, and which allows quantum effects such as squeezing to be described. One may also use these quasi-probability distributions to predict dynamics of the system using a Fokker-Planck equation \MT{cite}.
+
+\subsection{Fock states}
+Fock states (also called photon-number states) are defined as eigenstates of the photon-number operator $\hat{n} = \hat{a}^\dagger \hat{a}$:
+\begin{equation}
+\hat{n} \ket{n} = n \ket{n}.
+\end{equation}
+In other words, $\hat{n}$ measures the number of photons in $\ket{n}$. The states have perfectly defined photon-number and find many applications in quantum information processing. The creation and annihilation operators $\hat{a}^\dagger, \hat{a}$ act on $\ket{n}$ as 
+\begin{align*}
+\hat{a}\ket{n} &= \sqrt{n}\ket{n-1} \\
+\hat{a}^\dagger \ket{n} &= \sqrt{n+1} \ket{n=1}.
+\end{align*}
+The Fock states form an orthogonal basis for $\mathcal{H}$
+\begin{equation}
+\ip{m}{n} = \delta_{n, m}
+\end{equation}
+and so we will often seek an expansion of other states in the Fock-state basis. We will regularly choose to write our density matrix in a Fock state expansion as
+\begin{equation}
+\rho_{m, n} = \mel{m}{\hat{\rho}}{n}.
+\end{equation}
+
+\noindent Wigner functions corresponding to some example Fock states are displayed in Fig.~\ref{fig:intro_fock_wigner}.
+
+
+\begin{figure}[htp]
+\centering
+\includegraphics{intro/fock_wigner.png}
+\caption{\label{fig:intro_fock_wigner}}
+\end{figure}
+
+
+\subsection{Quadrature states}
+We define the eigenstates of quadrature operators $\hat{q}$ and $\hat{p}$ as
+\begin{equation}
+\hat{q}\ket{q} = q \ket{q} \qq{and} \hat{p}\ket{p} = p \ket{p}.
+\end{equation}
+These $\ket{q}, \ket{p}$ are known as quadrature states. Although they are not normalizable, the quadrature states are useful for describing ideal homodyne detection, Sec.~\ref{sec:intro_homodyne}. %We display approximations to Wigner functions of 
 
 \subsection{Coherent states}
+Coherent states\footnote{Also known as Glauber coherent states} are among the most important quantum states which we discuss in this Thesis. The coherent state $\ket{\alpha}$ is defined as the eigenstate of annihilation operator $\hat{a}$:
+\begin{equation}
+\hat{a}\ket{\alpha} = \alpha \ket{\alpha}.
+\end{equation}
+The coherent state has amplitude $\alpha \in \mathbb{C}$, and we display several examples of coherent state Wigner functions in Fig.~\ref{fig:intro_coherent_wigner}.
+
 \begin{figure}[htp]
+\centering
+\includegraphics{introduction/coherent_wigner.png}
+\caption{\label{fig:intro_coherent_wigner}}
+\end{figure}
+
+The coherent states are non-orthogonal
+\begin{equation}
+\ip{\alpha}{\beta} = \exp\left(- \frac{\left|\alpha\right|^2}{2} - \frac{\left|\beta\right|^2}{2} + \alpha^* \beta \right),
+\end{equation}
+where $\alpha^*$ denotes the complex conjugate of $\alpha$, and so we will regularly make use of an expansion of $\ket{\alpha}$ in the orthogonal Fock basis:
+\begin{equation}
+\ket{\alpha} = e^{-\frac{\left|\alpha\right|^2}{2}} \sum_{n=0} \frac{\alpha^n}{\sqrt{n!}} \ket{n}.
+\end{equation}
+
+\noindent In the first part of this Thesis we will consider several quantum cryptographic protocols involving distribution of coherent states. We will reglarly use an alphabet of coherent states known as the QPSK (Quadrature Phase-Shift Keying) alphabet, 
+
+\begin{equation}
+\qq*{QPSK alphabet:} \left\{\ket{\alpha}, \ket{i \alpha}, \ket{- \alpha}, \ket{- i \alpha}\right\}
+\end{equation}
+
+and we display a mixture over the QPSK alphabet in Fig.~\ref{fig:qpsk}. We will not explicitly distinguish between whether we refer to the set of quantum states $\left\{\ket{\alpha}, \ket{i \alpha}, \ket{- \alpha}, \ket{- i \alpha}\right\}$ or the corresponding set of phases $\left\{ \alpha, i \alpha, -\alpha, - i\alpha\right\}$ since it should always be obvious which is meant.
+
+
+\begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 \begin{subfigure}[b]{0.4\linewidth}
 \includegraphics[draft=false, width=\linewidth]{introduction/qpsk_1}
@@ -130,11 +219,18 @@ The density matrix $\rho$ will be our primary tool for describing a quantum stat
 \includegraphics[draft=false, width=\linewidth]{introduction/qpsk_2}
 \caption{}
 \end{subfigure}
-\caption{\label{fig:qpsk} The Wigner function for a mixture over $\mathcal{A}_4$ is a sum of individual Wigner functions for each of the coherent states. QPSK alphabet with (a) $\alpha=1.5$; (b) $\alpha=0.8$}
+\caption{\label{fig:qpsk} The Wigner function for a mixture over $\mathcal{A}_4$ is a sum of individual Wigner functions for each of the coherent states. QPSK alphabet with (a) $\alpha=1.5$; (b) $\alpha=0.8$ \MT{Beef up caption.}}
 \end{figure}
- In a quantum communications protocol, the alphabet states should be chosen with significant overlap.
 
+Finally, a generalization to QPSK is the so-called $N$PSK alphabet, in which $N$ coherent states are chosen. The states are again equally distributed around the origin of phase space, and we note that QPSK is the special case $N=4$. We display some examples in Fig.~\ref{fig:intro_npsk}.
 
+\begin{figure}[htp]
+\centering
+\includegraphics{intro/npsk.png}
+\caption{\label{fig:intro_npsk}}
+\end{figure}
+
+\FloatBarrier
 \subsection{Thermal states}
 \begin{figure}[htp]
 \centering
