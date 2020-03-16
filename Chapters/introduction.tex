@@ -18,8 +18,12 @@ This Thesis is structured as follows. In the remainder of this chapter we will i
 
 \section{Introduction to Quantum Optics}
 
+
+\FloatBarrier
 \subsection{Quantization of the electromagnetic field}
 
+
+\FloatBarrier
 \subsection{Single-mode operators}
 We have seen that the bosonic operators $\hat{a}, \hat{a}^\dagger$ create and destroy a quantum of energy in the light mode. These operators obey the bosonic commutation relation
 \begin{equation}
@@ -50,7 +54,9 @@ which can be shown to obey the commutator
 the right-hand side of which describes the energy of a simple harmonic oscillator. The position and momentum operators $\hat{x}, \hat{p}$ describe real and imaginary components of the complex phase $\hat{a}$ of the electric field.
 
 
-\subsection{State vectors and density matrices}
+
+\FloatBarrier
+\subsection{State vectors and density matrices}\label{sec:intro_state_vectors}
 An ideal quantum state is denoted in the so-called Dirac notation by $\ket{\psi}$. This state has been perfectly prepared with no noise, loss or additional uncertainty due to the preparation. The $\ket{\psi}$ is a vector living in a vector space denoted $\mathcal{H}$, which we call a Hilbert space. The space has dimension $\dims$ which we will typically take to be countably infinite, but there will be several points in this Thesis where we consider a finite $\dims$.
 
 Since $\ket{\psi}$ is a vector it can be written in terms of a set of basis vectors $\left\{\ket{e_j}\right\}_j$
@@ -117,6 +123,8 @@ In the $\left\{\ket{0}, \ket{1}\right\}$ basis, the states $\rho_\phi$ and $\rho
 
 The density matrix $\rho$ will be our primary tool for describing a quantum state in this Thesis.
 
+
+\FloatBarrier
 \subsection{Wigner function}
 An equivalent description of the quantum state is to use a (\emph{quasi})-probability distribution known as the Wigner function. The Wigner function, $W\left(q, p\right)$ allows operator expectation values to be calculated and so can be thought of as an accurate description of the quantum state. We desire $W\left(q, p\right)$ to behave analogously to a joint probability distribution, and by analogy with a classical phase space picture in which the system is described in terms of position and canonical momentum, we introduce a quantum phase space. A phase space picture is not strictly necessary for the work in this Thesis, but the Wigner function provides a useful visualisation tool.
 
@@ -141,6 +149,8 @@ In the following sections we will see some examples of quantum states and their 
 
 Finally, we must note that the Wigner function is not the only quasi-probability distribution which one could define on the phase space. It is a purely non-classical feature that there are multiple ways to consistently define a phase space description. Other common quasi-probability distributions are: the Hussimi $Q$ function \MT{cite} which is intimately related to Heterodyne measurement; Glauber-Sudarshan \MT{spelling} $P$ function which is often used to describe mixtures of coherent states and becomes highly singular in all other cases; and the positive-$P$ function which is a generalization to the $P$ function defined as non-diagonal in the coherent state basis, and which allows quantum effects such as squeezing to be described. One may also use these quasi-probability distributions to predict dynamics of the system using a Fokker-Planck equation \MT{cite}.
 
+
+\FloatBarrier
 \subsection{Fock states}
 Fock states (also called photon-number states) are defined as eigenstates of the photon-number operator $\hat{n} = \hat{a}^\dagger \hat{a}$:
 \begin{equation}
@@ -170,6 +180,8 @@ and so we will often seek an expansion of other states in the Fock-state basis. 
 \end{figure}
 
 
+
+\FloatBarrier
 \subsection{Quadrature states}
 We define the eigenstates of quadrature operators $\hat{q}$ and $\hat{p}$ as
 \begin{equation}
@@ -177,6 +189,9 @@ We define the eigenstates of quadrature operators $\hat{q}$ and $\hat{p}$ as
 \end{equation}
 These $\ket{q}, \ket{p}$ are known as quadrature states. Although they are not normalizable, the quadrature states are useful for describing ideal homodyne detection, Sec.~\ref{sec:intro_homodyne}. %We display approximations to Wigner functions of 
 
+
+
+\FloatBarrier
 \subsection{Coherent states}
 Coherent states\footnote{Also known as Glauber coherent states} are among the most important quantum states which we discuss in this Thesis. The coherent state $\ket{\alpha}$ is defined as the eigenstate of annihilation operator $\hat{a}$:
 \begin{equation}
@@ -195,7 +210,7 @@ The coherent states are non-orthogonal
 \ip{\alpha}{\beta} = \exp\left(- \frac{\left|\alpha\right|^2}{2} - \frac{\left|\beta\right|^2}{2} + \alpha^* \beta \right),
 \end{equation}
 where $\alpha^*$ denotes the complex conjugate of $\alpha$, and so we will regularly make use of an expansion of $\ket{\alpha}$ in the orthogonal Fock basis:
-\begin{equation}
+\begin{equation}\label{eqn:intro_coherent_fock}
 \ket{\alpha} = e^{-\frac{\left|\alpha\right|^2}{2}} \sum_{n=0} \frac{\alpha^n}{\sqrt{n!}} \ket{n}.
 \end{equation}
 
@@ -225,6 +240,7 @@ and we display a mixture over the QPSK alphabet in Fig.~\ref{fig:qpsk}. We will 
 Finally, a generalization to QPSK is the so-called $N$PSK alphabet, in which $N$ coherent states are chosen. The states are again equally distributed around the origin of phase space, and we note that QPSK is the special case $N=4$. We display some examples in Fig.~\ref{fig:intro_npsk}.
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 \includegraphics{intro/npsk.png}
 \caption{\label{fig:intro_npsk}}
@@ -232,49 +248,182 @@ Finally, a generalization to QPSK is the so-called $N$PSK alphabet, in which $N$
 
 \FloatBarrier
 \subsection{Thermal states}
+
+The thermal state is defined as
+\begin{equation}
+\rho_{\text{thermal}} = \left( 1 - e^{-\beta} \right) \sum_{n=0}^\infty e^{- n \beta} \dyad{n}
+\end{equation}
+with $\beta = \left( \hbar \omega \right)/\left(k_B T\right)$, for reduced planck's constant $\hbar$, angular frequency $\omega$, Boltzmann's constant $k_B$ and thermal equilibrium temperature $T$. The thermal state is a classical mixture of Fock states. Typically we will parametrise the thermal state using the thermal photon number $\bar{n}$ which is defined as 
+\begin{equation}
+\bar{n} = \frac{1}{e^\beta - 1}.
+\end{equation}
+We display the Wigner function of a thermal state in Fig.~\ref{fig:thermal_state}, where we have also displayed the vacuum state variance, for comparison.
+
+
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 \includegraphics[draft=false, width=0.4\linewidth]{introduction/thermal_state}
 \caption{\label{fig:thermal_state} The thermal state Wigner function is Gaussian, with variance greater than the vacuum state vacuum, depicted in orange.}
 \end{figure}
 \subsection{Squeezed states (quadrature)}
+\MT{introduce heisenberg before now. Talk about it in terms of phase space area. Show that coherent states are minimum uncertainty states. Introduce vacuum state in the coherent state section.}
+We have already encountered the Heisenberg relation which specifies the minimum phase space area which a state can occupy. The coherent state was a minimum uncertainty state and occupied the minimum possible area, while possessing symmetry in $\Delta q = \Delta p$. Of course, it is possible to satisfy the Heisenberg relation while also taking $\Delta q \ne \Delta p$, and this is precisely what (quadrature) squeezed states do. We display several examples of quadrature squeezed states in Fig.~\ref{fig:intro_quadrature_squeezed_wigner}. In the limit of infinite squeezing one obtains a state analogous to quadrature states $\ket{q}$ and $\ket{p}$.
 
-\subsection{Squeezed states (photon-number)}
-
-\subsection{Mixing, purity, and entanglement}
-
-\subsection{Two-mode squeezed vacuum (TMSV)}
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
+\centering
+\includegraphics{intro/quadrature_squeezed_wigner.png}
+\caption{\label{fig:intro_quadrature_squeezed_wigner}}
+\end{figure}
+
+\FloatBarrier
+\subsection{Squeezed states (photon-number)}
+We have seen that the coherent state $\ket{\alpha}$ may be expanded in Fock basis as Eq.~\ref{eqn:intro_coherent_fock}. From this equation it may be shown that the photon-number distribution of $\ket{\alpha}$ is 
+\begin{equation}
+\mathcal{P}_n\left[\ket{\alpha}\right] = \frac{\left|\alpha\right|^{2n}}{n!} e^{-\left|\alpha\right|^2}
+\end{equation}
+which obeys Poissonian statistics, i.e. its mean is equal to its variance. The thermal state can be shown to possess super-Poissonian photon statistics, with variance larger than its  mean. Conversely, a sub-Poissonian state has reduced photon-number variance, in particular a variance smaller than its mean. The Fock state, with zero photon-number variance, is the limiting example of a sub-Poissonian state.
+
+In addition to the quadrature squeezing discussed above, in which the variance in one quadrature was reduced at the expense of the other, we may think of a photon-number squeezed state in which the photon-number variance is reduced, at the expense of an increase in the phase variance. We display the Wigner functions of states with increasing levels of photon-number squeezing in Fig.~\ref{fig:intro_photon_number_squeezed_wigner}.
+
+\begin{figure}[htp]
+\centering
+\captionsetup{width=0.8\linewidth}
+\includegraphics{intro/photon_number_squeezed_wigner.png}
+\caption{\label{fig:intro_photon_number_squeezed_wigner}}
+\end{figure}
+
+
+
+%\FloatBarrier
+\subsection{Mixing, purity, and entanglement}
+%I need this section in order to introduce multiple modes, and trace operation.
+
+\subsubsection{Purity}
+We have already seen in Sec.~\ref{sec:intro_state_vectors} that the density matrix $\rho$ can encode two types of uncertainty, quantum and classical. The quantum uncertainty is related to superpositions of basis states and is insurmountable, while the classical uncertainty represents ignorance of which quantum state was prepared, and can in principle always be reduced. A state possessing only the first type of ignorance may in general be written as
+\begin{equation}\label{eqn:intro_rho_pure}
+\rho = \dyad{\psi} \qq{with} \ket{\psi} = \sum_n c_n \ket{n}
+\end{equation}
+where without loss of generality we have used the Fock basis, and the $c_n$ are complex coefficients. We call the the state Eq.~\ref{eqn:intro_rho_pure} a ``pure'' state. Any state which is not pure is ``mixed''. A state with only the second type of ignorance may in general be written as
+\begin{equation}\label{eqn:intro_rho_fully_mixed}
+\rho = \sum_n d_n \dyad{n}
+\end{equation}
+where without loss of generality we have used the Fock basis, and $d_n$ are real coefficients. The state Eq.~\ref{eqn:intro_rho_fully_mixed} is fully mixed.
+
+Given a density matrix $\rho$ it is time consuming and difficult to check by hand which of these forms it takes, and in most situations it will not fit neatly into either form. We therefore desire a function which will measure which type of ignorance the state possesses, and which may be easily computed on $\rho$. To do this, we first introduce the trace of $\rho$ as
+\begin{equation}
+\tr\left[\rho\right] := \sum_m \mel{m}{\rho}{m},
+\end{equation}
+where without loss of generality we have used the Fock basis, but we note that we may instead sum over any orthonormal basis for $\mathcal{H}$. It can easily be shown that the trace of a normalized quantum state must be $1$. We introduce the notion of \emph{purity} of a quantum state as a measure of how close to Eq.~\ref{eqn:intro_rho_pure} our state is. This may be quantified and measured by
+\begin{equation}\label{eqn:intro_purity}
+\tr\left[ \rho^2 \right]
+\end{equation}
+which we will simply call the purity. It can easily be shown that state Eq.~\ref{eqn:intro_rho_pure} as purity $1$ while state Eq.~\ref{eqn:intro_rho_fully_mixed} has purity $0$.
+
+\subsubsection{Entanglement}
+
+Let us now turn to consider two-mode quantum states. We have already seen that a single-mode quantum state exists as a vector on Hilbert space $\mathcal{H}$. For two modes, we introduce an additional Hilbert space and write $\mathcal{H}_{tot} = \mathcal{H}_1 \otimes \mathcal{H}_2$, where $\mathcal{H}_{1,2}$ are Hilbert spaces of the individual modes, $\otimes$ represents the tensor-product, and $\mathcal{H}_{tot}$ is the total Hilbert space. We may tensor product any two single-mode quantum states together to form a state on $\mathcal{H}_{tot}$, for example
+\begin{equation}\label{eqn:intro_separable_1}
+\ket{\alpha}_1 \otimes \ket{n}_2
+\end{equation}
+represents a state on $\mathcal{H}_{tot}$, consisting of a coherent state with amplitude $\alpha$ on $\mathcal{H}_1$, and an $n$ photon Fock state on $\mathcal{H}_2$. For convenience we will often write $\ket{\alpha, n}$ instead of $\ket{\alpha}_1 \otimes \ket{n}_2$.
+
+Now, there are many states which we can write in the form Eq.~\ref{eqn:intro_separable_1}, as a tensor product between two single-mode kets. The general form of this type of ``product-state'' is
+\begin{equation}
+\rho_{\text{product}} = \dyad{\Psi} \qq{with} \ket{\Psi} = \ket{\psi}_1 \otimes \ket{\phi}_2.
+\end{equation}
+A general ``separable state'' may be written
+\begin{equation}\label{eqn:intro_separable_2}
+\rho_{\text{separable}} = \sum_{i, j} c_{i, j} \dyad{\psi_i}_1 \otimes \dyad{\phi_j}_2,
+\end{equation}
+so-called because the total two-mode state can be separated out into distinct single-mode density operators of modes $1$ and $2$ individually. The separable state is a classical mixture of product states.
+
+Any state which cannot be written in the form Eq.~\ref{eqn:intro_separable_2} is known as a ``non-separable'' or ``entangled'' state. Entangled states cannot be written as a classical mixture over single-mode density operators, and so even full information about each individual mode is not sufficient to fully describe the total system.
+
+\subsubsection{Partial trace}
+Let $\rho = \sum_{i, j, k, l} c_{i, j, k, l} \ket{i, j}\bra{k, l}$ be a general two-mode density operator. We define the partial trace over mode $1$ as
+\begin{align*}
+\tr_1\left[\rho\right] = \sum_n \bra{n}\rho\ket{n} = \sum_n \bra{n} \left[\sum_{i, j, k, l} \left(\ket{i}\bra{j}\right) \otimes \left(\ket{j}\bra{l}\right) \right] \ket{n}& \\
+= \sum_n \sum_{i, j, k, l} c_{i, j, k, l} \left(\ip{n}{l} \ip{k}{n} \right) \ket{j}\bra{l}&,
+\end{align*}
+and the partial trace over mode $2$ is defined analogously.
+
+Defining $\rho_2 = \tr_1\left[\rho\right]$, it can be shown that if $\rho$ is separable, then $\rho_2$ must be pure, i.e. $\tr\left[\rho_2^2\right]=1$. Conversely, if $\tr\left[\rho_2^2\right] < 1$ then the total state $\rho$ must be entangled.
+
+
+
+
+
+
+
+\FloatBarrier
+\subsection{Two-mode squeezed vacuum (TMSV)}
+Each of the states we have seen so far are single-mode states. Here we meet our first two-mode state, the two-mode squeezed vacuum, written in a Fock-basis expansion as
+\begin{equation}
+\ket{TMSV} = \frac{1}{\cosh \zeta} \sum_n \left( \tanh \zeta \right)^n \ket{n, n}
+\end{equation}
+where $\ket{n, n} = \ket{n}_1 \otimes \ket{n}_2$, i.e. a tensor product between Fock states on modes $1$ and $2$. The parameter $\zeta$ controls the level of two-mode squeezing of the state, and thus parametrises both its energy and its level of entanglement. The reduced states of $\ket{TMSV}$ are thermal states with thermal photon number $\bar{n} = \sinh^2 \zeta$, which we display in Fig.\ref{fig:tmsv_wigner}. Remarkably, the state has strong quadrature correlations between each mode
+\begin{align*}
+q_1 &\sim q_2 \\
+p_1 &\sim - p_2
+\end{align*}
+where the position quadratures are correlated and the momentum quadratures are anticorrelated. We display histograms of quadrature measurements on $\ket{TMSV}$ in Fig.~\ref{fig:tmsv_histogram}. The correlations between modes make the two-mode squeezed vacuum one of the most useful resource states for quantum information processing, and we shall use it extensively in the first part of this Thesis since possession of one of its modes allows information about its second mode to be gained.
+
+
+\begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 \includegraphics[draft=false, width=0.8\linewidth]{introduction/tmsv_wigner}
 \caption{\label{fig:tmsv_wigner} Plots of the Wigner function for each reduced mode of the TMSV state. Locally the modes look like thermal states, see Fig.~\ref{fig:thermal_state}. The vacuum variance is depicted in orange.}
 \end{figure}
 
 \begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
 \centering
 \includegraphics[draft=false, width=0.8\linewidth]{introduction/tmsv_histogram}
 \caption{\label{fig:tmsv_histogram} \MT{caption for TMSV histogram}}
 \end{figure}
 
+
+\FloatBarrier
 \section{Quantum measurement}
 
+
+\FloatBarrier
 \subsection{POVMs}
 
+
+\FloatBarrier
 \subsection{Homodyne measurement}
 
+
+\FloatBarrier
 \subsection{Heterodyne measurement}
 
+
+\FloatBarrier
 \section{Modelling the quantum state}
 
+
+\FloatBarrier
 \subsection{Covariance matrix}
 
+
+\FloatBarrier
 \subsection{Beamsplitter relations}
 
+
+\FloatBarrier
 \subsection{Master equation}
 
 
+
+\FloatBarrier
 \section{Entropy and probability}
 
+
+\FloatBarrier
 \subsection{Hoeffding's inequalities}
 Let $\mathcal{X} = X_1, X_2, \dots, X_n$ be $n$ independent binary random variables. Let $\bar{\mathcal{X}}$ be their empirical mean \MT{define} and let $\mathbb{E}\left(\bar{\mathcal{X}}\right)$ be its expected value. Then $\forall \epsilon \ge 0$ we may bound the probability that the empirical mean $\bar{\mathcal{X}}$ differs from its expectation $\mathbb{E}\left(\bar{\mathcal{X}}\right)$ by the following inequalities
 
@@ -292,7 +441,11 @@ Let $\mathcal{X} = X_1, X_2, \dots, X_n$ be $n$ independent binary random variab
 \noindent These inequalities are known as Hoeffding's inequalities \MT{cite} and will provide a necessary tool for analysis of our Quantum Digital Signatures protocol.
 
 
+
+\FloatBarrier
 \subsection{Shannon entropy}
+
+\FloatBarrier
 \subsection{Binary entropy}
 \begin{figure}
 \centering
@@ -300,9 +453,15 @@ Let $\mathcal{X} = X_1, X_2, \dots, X_n$ be $n$ independent binary random variab
 \caption{\label{fig:binary_entropy}}
 \end{figure}
 
+
+\FloatBarrier
 \subsection{Mutual information}
 
+
+\FloatBarrier
 \subsection{Von Neumann entropy}
+
+\FloatBarrier
 \subsection{Holevo information}
 
 
