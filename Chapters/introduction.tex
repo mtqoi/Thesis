@@ -531,20 +531,91 @@ Let us introduce some additional tools which will help us to describe the quantu
 
 \FloatBarrier
 \subsection{Covariance matrix}
+Define a ``Gaussian'' state as one with a Gaussian Wigner function. We know that a Gaussian function can be entirely described by its first and second moments. The first moment is its mean, and the second moment is its (co)-variance. We introduce the ``covariance matrix'' of a multi-mode Gaussian state as a useful quantity containing all information about the state's second moments. It turns out that for a Gaussian state, the covariance matrix offers an equivalent description of the state to the Wigner function or density matrix descriptions. 
+
+
+Let the modes be labelled $1$ and $2$. Then the covariance matrix element $\sigma_{j, k}$ is constructed as
+
+\begin{equation}\label{eqn:intro_covariancematrix}
+\sigma_{j, k} = \frac{1}{2} \left[ \ev{d_j d_k} + \ev{d_k d_j}\right] - \ev{d_j} \ev{d_k}
+\end{equation}
+with vector $\overrightarrow{d} = \left[\hat{x}_1, \hat{p}_1, \hat{x}_2, \hat{p}_2 \right]$. The covariance matrix $\sigma$ is thus a $4 \times 4$ matrix. 
+
+A key feature of the covariance matrix is its ``symplectic eigenvalues,'' which are defined as the absolute values of the eigenspectrum of the matrix
+\begin{equation}
+i \Omega \sigma,
+\end{equation}
+where 
+\begin{equation}
+\Omega = \oplus_{k=1}^2 \bm{\omega}, \qq{and} \bm{\omega} = \pmqty{0 & 1 \\ -1 & 0}.
+\end{equation}
+
+\noindent The covariance matrix formalism is a fascinating and useful description for continuous variable quantum mechanics, and one which we sadly use only sparingly in this Thesis. The reader may be referred to classic texts such as Refs.~\ref{Weedbrook2012, Serafini2019} for further information.
 
 
 \FloatBarrier
 \subsection{Beamsplitter relations}
+The beamsplitter is one of the most important devices in quantum optics. On an ideal beamsplitter, two input quantum states interfere to produce two output states. The beamsplitter always requires four beams (two input and two output) and when used in this Thesis, the phrase ``a state is split on a beamsplitter'' should be understood to mean ``a state interferes with vacuum on a beamsplitter.''
+
+
+\begin{figure}[htp]
+\centering
+\captionsetup{width=0.8\linewidth}
+\includegraphics{intro/beamsplitter.png}
+\caption{\label{fig:intro_beamsplitter}}
+\end{figure}
+
+
+The beamsplitter relation which we will make extensive use of in this Thesis is
+\begin{equation}
+\pmqty{\hat{a}_3 \\ \hat{a}_4} = \pmqty{\tau & -\rho \\  \rho & \tau} \pmqty{\hat{a}_1 \\ \hat{a}_2}
+\end{equation}
+which transforms two input modes into two output modes as
+\begin{equation}
+\hat{a}_3 = \tau \hat{a}_1 - \rho \hat{a}_2 \qq{and} \hat{a}_4 = \rho \hat{a}_1 + \tau \hat{a}_2.
+\end{equation}
+
+\noindent To conserve energy we require $\tau^2 + \rho^2 = 1$. When used to model a quantum channel in the first part of this Thesis we will often speak of the ``transmission'' $T$ of the channel. This $T$ is related to $\tau$ as $\tau = \sqrt{T}$. 
+
+Finally, we will make extensive use of the following relation for the ouput of interference of two Fock states on a beamsplitter with $\tau = \sqrt{T}$ and $\rho  = \sqrt{1-T}$.
+
+\begin{align}\label{eqn:intro_beamsplitter_fock}
+&\ket{n_1, n_2}^\prime  = \frac{1}{\sqrt{n_1! n_2!}} \sum_{k_1, k_2=0}^{n_1, n_2} \pmqty{n_1 \\ k_1} \pmqty{n_2 \\ k_2} \left(\sqrt{T}\right)^{k_1} \left(\sqrt{1-T}\right)^{n_1 - k_1} \left(-\sqrt{1-T}\right)^{k_2} \notag \\
+%
+&\left(\sqrt{T}\right)^{n_2 - k_2} \sqrt{\left(k_1 + k_2\right)! \left(n_1 + n_2 - k_1 - k_2\right)!} \times \ket{k_1 + k_2, n_1 + n_2 - k_1 - k_2}.
+\end{align}
+
 
 
 \FloatBarrier
 \subsection{Master equation}
 
+We now introduce some formalisms which will account for dynamics of a quantum system described by density matrix $\rho$. In a closed system, in which $\rho$ is a (potentially large) density matrix describing all degrees of freedom, the evolution is entirely governed by the Von Neumann equation\footnote{$\hbar = 1$}
+
+\begin{equation}
+\ddt \rho = - i \left[\hat{H}, \rho \right],
+\end{equation}
+
+\noindent with $\hat{H}$ the ``Hamiltonian'' which controls the time-evolution of $\rho$. Although exact, the Von Neumann equation is often difficult to solve, especially in the case of very large $\rho$.
+
+There are many instances, however, where we do not care about modelling precise evolution of all degrees of freedom of $\rho$. One may think, perhaps, of a few quantum modes of interest which are weakly coupled to many more modes. We denote the interesting modes as ``system'' and the uninteresting ones as ``reservoir'', and write $\rho_S = \tr_R\left[\rho\right]$. In this case, instead of solving the Von Neumann equation we can model the evolution of $\rho_S$ using the ``Lindblad master equation'':
+
+\begin{equation}
+\ddt \rho_S = - i \left[ \hat{H}_S, \rho_S \right] + \gamma \mathcal{L}\left[\hat{A}\right] \rho_S,
+\end{equation}
+where $\hat{H}_S$ describes evolution of the system state only, $\gamma$ is the decay rate of $\rho_S$ into the reservoir, and 
+\begin{equation}\label{eqn:intro_lindblad}
+\mathcal{L}\left[\hat{A}\right] \rho_S = \hat{A} \rho_S \hat{A}^\dagger - \frac{1}{2} \hat{A}^\dagger \hat{A} \rho_S - \frac{1}{2} \rho_S \hat{A}^\dagger \hat{A}
+\end{equation}
+describes decay of $\rho_S$ into the reservoir. The term $\mathcal{L}\left[\hat{A}\right]$ is known as the Lindbladian, and $\hat{A}$ is the collapse operator which describes decay into the reservoir. The first term in Eq.~\ref{eqn:intro_lindblad} describes unitary (reversible) evolution of $\rho_S$, while the second term describes dissipative (irreversible) evolution.
+
+We will make use of the Lindblad master equation with several different collapse operators in Chapter~\ref{chapter:phog}. For derivation of the master equation, including a detailed accounting of the requisite assumptions we refer the reader to Refs.~\cite{Breuer2002, Carmichael1999}.
+
 
 
 \FloatBarrier
 \section{Entropy and probability}
-
+We will introduce and discuss some quantum entropies which we will use in the first part of this Thesis.
 
 \FloatBarrier
 \subsection{Hoeffding's inequalities}
@@ -567,6 +638,7 @@ Let $\mathcal{X} = X_1, X_2, \dots, X_n$ be $n$ independent binary random variab
 
 \FloatBarrier
 \subsection{Shannon entropy}
+Let $X$ be a random variable.
 
 \FloatBarrier
 \subsection{Binary entropy}
