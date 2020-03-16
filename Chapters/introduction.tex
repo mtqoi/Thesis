@@ -92,7 +92,7 @@ with $r \in \mathbb{C}$.
 
 The basis we choose for vector $\ket{\psi}$ is not unique and we may similarly have expanded $\ket{\psi}$ in terms of eigenstates of $\hat{r}$,
 \begin{equation}
-\ket{\psi} = \sum_j \dyad{r}{\psi} \ket{r}
+\ket{\psi} = \sum_j \dyad{r}{\psi}\ket{r}
 \end{equation}
 where the $\dyad{r}{\psi} \in \mathbb{C}$ is such that its square modulus $\left|\dyad{r}{\psi}\right|^2$ is the probability that a measurement of $r$ on $\ket{\psi}$ will give outcome $r$.
 
@@ -406,6 +406,45 @@ where the position quadratures are correlated and the momentum quadratures are a
 
 \FloatBarrier
 \section{Quantum measurement}
+We define a set of measurement operators $\left\{\hat{M}_j\right\}$ which may act on a quantum state $\ket{\psi}$. Each measurement operator corresponds to a different possible measurement outcome $j$. The probability that $j$ is observed after measurement on $\ket{\psi}$ is given by the overlap
+\begin{equation}
+\text{P}\left(j\right) = \bra{\psi}\hat{M}^\dagger_j \hat{M}_j\ket{\psi},
+\end{equation}
+while the state immediately after measuring $j$ is 
+\begin{equation}
+\ket{\psi^\prime} = \frac{\hat{M}_j \ket{\psi}}{\text{P}\left(j\right)}.
+\end{equation}
+The set $\left\{\hat{M}_j\right\}$ should allow for any possible outcome $j$, and so we require
+\begin{equation}
+\sum_j \hat{M}_j^\dagger \hat{M} = \mathds{1},
+\end{equation}
+which encodes the normalization requirement for a probability distribution
+\begin{equation}
+\sum_j \text{P}\left(j\right) = 1.
+\end{equation}
+
+\noindent We have seen for example the state $\ket{\psi} = \left(\alpha\ket{0}  + \beta\ket{1}\right)$ must give outcome $0$ with probability $\left|\alpha\right|^2$ and outcome $1$ with probability $\left|\beta\right|^2$, which leads us to identify the measurement operators $\hat{M}_0, \hat{M}_1$ in this case as
+\begin{align*}
+&\hat{M}_0 = \dyad{0} \\
+&\hat{M}_1 = \dyad{1}
+\end{align*}
+
+\noindent Measurement operators $\dyad{0}, \dyad{1}$ are known as ``projective measurements,'' and operators in this form are known as ``projectors.'' One can consider a more general form of measurement operator, which is known as a POVM (positive operator-valued measure).
+
+From a set of measurement operators $\left\{\hat{M}_j\right\}$, we define
+\begin{equation}
+\hat{E}_j = \hat{M}^\dagger_j \hat{M}_j,
+\end{equation}
+which satisfies
+\begin{equation}
+\sum_j \hat{E}_j = \mathds{1},
+\end{equation}
+and
+\begin{equation}
+\text{P}_j = \eval{\psi}{\hat{E}_j}.
+\end{equation}
+
+\noindent We refer to the $\hat{E}_j$ as POVM elements, while the full set $\left\{\hat{E}_j\right\}$ is known as a POVM.
 
 
 \FloatBarrier
