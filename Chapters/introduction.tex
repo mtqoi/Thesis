@@ -615,7 +615,7 @@ We will make use of the Lindblad master equation with several different collapse
 
 \FloatBarrier
 \section{Entropy and probability}
-We will introduce and discuss some quantum entropies which we will use in the first part of this Thesis.
+We will introduce and discuss some quantum entropies which we will use in the first part of this Thesis. Quantum entropies are a marvellous and interesting area of quantum information theory, and there are many interesting similarities with and departures from classical information theory. Below we summarise some of the key results which we will make use of in this Thesis, and the reader is referred to Refs.~\cite{Nielsen2010, Tomamichel2016, Wilde2015, Watrous2019} for further information.
 
 \FloatBarrier
 \subsection{Hoeffding's inequalities}
@@ -632,7 +632,7 @@ Let $\mathcal{X} = X_1, X_2, \dots, X_n$ be $n$ independent binary random variab
 
 
 
-\noindent These inequalities are known as Hoeffding's inequalities \MT{cite} and will provide a necessary tool for analysis of our Quantum Digital Signatures protocol.
+\noindent These inequalities are known as Hoeffding's inequalities \cite{Hoeffding1963} and will provide a necessary tool for analysis of our Quantum Digital Signatures protocol.
 
 
 
@@ -668,7 +668,7 @@ We define the joint entropy $\text{H}\left(X, Y\right)$ of two random variables 
 
 The conditional entropy of $X$, conditioned on $Y$ is
 \begin{equation}
-\text{H}\left(X \given Y\right) = \text{H}\left(X, Y\right) - \text{H}\left(Y\right)$
+\text{H}\left(X \given Y\right) = \text{H}\left(X, Y\right) - \text{H}\left(Y\right)
 \end{equation}
 which measures the average uncertainty we have about variable $X$ given that we know $Y$.
 
@@ -692,14 +692,25 @@ which may be equivalently calculated as
 \begin{equation}
 \text{S}\left[\rho\right] = - \sum_j \lambda_j \log \lambda_j,
 \end{equation}
-where $\lambda_j$ are the eigenvalues of $\rho$.
+where $\lambda_j$ are the eigenvalues of $\rho$. The Von Neumann entropy is always non-negative, and is zero when $\rho$ is pure.
+
+By analogy with the Shannon entropy we will additionally define the joint entropy of a composite system $\rho_{A, B}$ in the obvious way
+\begin{equation}
+\text{S}\left(\rho_{A, B}\right) = - \tr\left[\rho_{A, B} \log \rho_{A, B}\right].
+\end{equation}
+
+The conditional Von Neumann entropy between quantum systems $A$ and $B$ may then be defined
+\begin{equation}
+\text{S}\left(A \given B\right) = \text{S}\left(A, B\right) - \text{S}\left(B\right),
+\end{equation}
+where the Von Neumann entropy of a quantum system $A$ or $B$ should be understood as the entropy of the corresponding state $\rho_A$, $\rho_B$.
 
 
 \FloatBarrier
 \subsection{Holevo information}
 The Holevo information $\chi$ is an upper bound on the mutual information $I$, and plays a crucially important role in many areas of quantum information processing. 
 
-Introduce two players, Alice and Bob. Let Alice prepare a state $\rho_j$, $j = 1, 2, \dots, N$, with probability $p_1, p_2, \dots, p_N$. Bob wishes to distinguish whichof the $\rho_j$ Alice has prepared. 
+We introduce two players, Alice and Bob. Let Alice prepare a state $\rho_j$, $j = 1, 2, \dots, N$, with probability $p_1, p_2, \dots, p_N$. Bob wishes to distinguish whichof the $\rho_j$ Alice has prepared. 
 
 Bob may perform any measurement described by POVM elements $\left\{E_K\right\}$, and he receives a measurement outcome $K$. Then the mutual information $I\left(j : K\right)$ describes the knowledge of which $\rho_j$ was prepared, given Bob's measurement outcome $K$. The mutual information us upper bounded by the Holevo information
 
@@ -722,24 +733,18 @@ Throughout this Thesis we will refer to the first term in Eq.~\ref{eqn:intro_hol
 
 
 \FloatBarrier
-\subsection{Properties of the entropies}
-\MT{Introduce ``conditioning cannot increase entropy'' principle.}
+\subsection{Conditioning cannot increase entropy}
 
+A useful property of both Shannon and Von Neumann entropies is that ``conditioning cannot increase entropy.'' Quantitatively, we have for a quantum state $\rho_{A, B}$
 
-
-
-
-
-\iffalse
-%
-% NOTE: I can stick this in my intro chapter.
-%
-each received $\rho\left[\phi_{j, m}^{\left(B, C\right)}\right]$ and receives complex phase outcome $x_{B,C}\in\mathbb{C}$. In other words, they perform the POVM
 \begin{equation}
-E\left[x\right] := \otimes_{j=1}^L E_j\left[x\right] \qq{with} E_j\left[x\right] := \frac{1}{\sqrt{\pi}} \ket{x}_j\bra{x}_j
+\text{S}\left(A\right) \ge \text{S}\left( A \given B \right)
 \end{equation}
-with $x \in \mathbb{C}$. 
-\fi
+where the entropy of system $A$ should be understood as the entropy of $\rho_A = \tr_B\left[\rho_{A, B}\right]$. Similarly, for classical random variables $X, Y$:
+\begin{equation}
+\text{H}\left(X\right) \ge \text{H}\left(X \given Y\right).
+\end{equation}
+
 
 
 
