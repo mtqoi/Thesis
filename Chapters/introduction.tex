@@ -638,10 +638,23 @@ Let $\mathcal{X} = X_1, X_2, \dots, X_n$ be $n$ independent binary random variab
 
 \FloatBarrier
 \subsection{Shannon entropy}
-Let $X$ be a random variable.
+Let $X$ be a random variable, which takes values $X_1, X_2, \dots X_N$ with probability $\text{P}\left(X_1\right), \text{P}\left(X_2\right),\dots,\text{P}\left(X_N\right)$. The Shannon entropy associated with this variable is defined as 
+
+\begin{equation}
+H\left(X\right) = - \sum_{j=1}^N \text{P}\left(X_j\right) \log \text{P}\left(X_j\right).
+\end{equation}
+
+\noindent The Shannon entropy represents the degree of uncertainty which one possesses about the variable $X$. If the value of $X$ is known (minimum uncertainty) then\footnote{By convention we take $0 \log 0 = 0$.} $H\left(X\right) = 0$. Conversely, if all possible values of $X$ are equally likely (maximum uncertainty) then $H\left(X\right) = \log N$.
 
 \FloatBarrier
 \subsection{Binary entropy}
+Let $X$ be a binary random variable, which takes value $0$ with probability $p$ and value $1$ with probability $1-p$. Then the binary entropy of $X$ is defined as
+
+\begin{equation}
+\text{h}\left(X\right) = - x \log x - \left(1-x\right) \log \left(1-x\right).
+\end{equation}
+The binary entropy is a special case of the Shannon entropy for a binary random variable. We display the binary entropy $\text{h}\left(X\right)$ in Fig.~\ref{fig:binary_entropy}.
+
 \begin{figure}
 \centering
 \includegraphics{binary_entropy.png}
@@ -651,13 +664,66 @@ Let $X$ be a random variable.
 
 \FloatBarrier
 \subsection{Mutual information}
+We define the joint entropy $\text{H}\left(X, Y\right)$ of two random variables $X$ and $Y$ as the Shannon entropy of the joint probability distribution $\text{P}\left(X, Y\right)$. 
+
+The conditional entropy of $X$, conditioned on $Y$ is
+\begin{equation}
+\text{H}\left(X \given Y\right) = \text{H}\left(X, Y\right) - \text{H}\left(Y\right)$
+\end{equation}
+which measures the average uncertainty we have about variable $X$ given that we know $Y$.
+
+
+The mutual information between $X$ and $Y$ may then be defined as
+
+\begin{equation}
+I\left(X : Y\right) = \text{H}\left(X\right) - \text{H}\left(X \given Y\right),
+\end{equation}
+
+\noindent which is a measure of how much knowledge of one variable reduces uncertainty of the other variable. The mutual information is symmetric in its arguments.
 
 
 \FloatBarrier
 \subsection{Von Neumann entropy}
+The Von Neumann entropy of a quantum state $\rho$ is
+\begin{equation}
+\text{S}\left(\rho\right) = - \tr\left[\rho \log \rho \right],
+\end{equation}
+which may be equivalently calculated as
+\begin{equation}
+\text{S}\left[\rho\right] = - \sum_j \lambda_j \log \lambda_j,
+\end{equation}
+where $\lambda_j$ are the eigenvalues of $\rho$.
+
 
 \FloatBarrier
 \subsection{Holevo information}
+The Holevo information $\chi$ is an upper bound on the mutual information $I$, and plays a crucially important role in many areas of quantum information processing. 
+
+Introduce two players, Alice and Bob. Let Alice prepare a state $\rho_j$, $j = 1, 2, \dots, N$, with probability $p_1, p_2, \dots, p_N$. Bob wishes to distinguish whichof the $\rho_j$ Alice has prepared. 
+
+Bob may perform any measurement described by POVM elements $\left\{E_K\right\}$, and he receives a measurement outcome $K$. Then the mutual information $I\left(j : K\right)$ describes the knowledge of which $\rho_j$ was prepared, given Bob's measurement outcome $K$. The mutual information us upper bounded by the Holevo information
+
+\begin{equation}\label{eqn:intro_holevo_bound}
+I\left(j : K \right) \le \chi \left(j : K \right),
+\end{equation}
+with the Holevo information $\chi$ defined as
+
+\begin{equation}\label{eqn:intro_holevo}
+\chi\left(j : K\right)  = \text{S}\left(\rho\right) - \sum_j p_j \text{S}\left(\rho_j\right),
+\end{equation}
+with
+\begin{equation}
+\rho = \sum_j p_j \rho_j.
+\end{equation}
+
+\noindent For a pleasing proof that $I$ is bounded by $\chi$ we refer the reader to Ref.~\cite{Nielsen2010}. 
+
+Throughout this Thesis we will refer to the first term in Eq.~\ref{eqn:intro_holevo} as the \emph{a priori} entropy (with its corresponding \emph{a priori} state $\rho$), while we refer to the second term as the \emph{a  posteriori} entropy (with its corresponding \emph{a posteriori} state $\rho_j$). The bound in Eq.~\ref{eqn:intro_holevo_bound} will be used extensively in the cryptographic security proofs in the first part of this Thesis.
+
+
+\FloatBarrier
+\subsection{Properties of the entropies}
+\MT{Introduce ``conditioning cannot increase entropy'' principle.}
 
 
 
