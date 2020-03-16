@@ -47,15 +47,24 @@ which can be shown to obey the commutator
 \left[\hat{q}, \hat{p}\right] = i.
 \end{equation}
 
-\noindent The quadrature operators may be used to write the well known Heisenberg uncertainty principle 
+\noindent We can define the quadrature operator for a general quadrature $\hat{q}_\theta$ by
+\begin{equation}
+\hat{q}_\theta = \hat{q} \cos\theta  + \hat{p} \sin\theta ,
+\end{equation}
+and the regular operators $\hat{q}$, $\hat{p}$ are recovered as special cases with $\theta = 0$ and $\pi/2$, respectively.
+
+
+\noindent The quadrature operators $\hat{q}, \hat{p}$ may be used to write the well known Heisenberg uncertainty principle 
 \begin{equation}
 \text{Var}\left(\hat{q}\right)\text{Var}\left(\hat{p}\right) \ge 1/4, %note that this is 1/4 not 1/2, due to using variances (not standard deviations) on the LHS. c.f. Ulf eq 3.80 p54
 \end{equation} 
 where the variances in a general quantum state $\ket{\psi}$ are defined as
 \begin{align}
 \text{Var}\left(\hat{q}\right) &= \mel{\psi}{\hat{q}^2}{\psi} - \mel{\psi}{\hat{q}}{\psi} \notag \\
-\text{Var}\left(\hat{p}\right) &= \mel{\psi}{\hat{p}^2}{\psi} - \mel{\psi}{\hat{p}}{\psi}. 
+\text{Var}\left(\hat{p}\right) &= \mel{\psi}{\hat{p}^2}{\psi} - \mel{\psi}{\hat{p}}{\psi}.
 \end{align}
+This uncertainty principle implies that we cannot simultaneously measure $\hat{q}$ and $\hat{p}$ with arbitrary precision - in other words $q$ and $p$ are conjugate variables.
+
 
 \noindent The commutator Eq.~\ref{eqn:intro_quadrature_commutator} is equivalent to the commutator describing position and momentum of a quantum particle, and so we denote $\hat{x}$ as the position operator and $\hat{p}$ as the momentum operator. Indeed, it is easy to show that
 \begin{equation}
@@ -196,7 +205,7 @@ and so we will often seek an expansion of other states in the Fock-state basis. 
 \FloatBarrier
 \subsection{Quadrature states}
 We define the eigenstates of quadrature operators $\hat{q}$ and $\hat{p}$ as
-\begin{equation}
+\begin{equation}\label{eqn:intro_quadrature_state}
 \hat{q}\ket{q} = q \ket{q} \qq{and} \hat{p}\ket{p} = p \ket{p}.
 \end{equation}
 These $\ket{q}, \ket{p}$ are known as quadrature states. Although they are not normalizable, the quadrature states are useful for describing ideal homodyne detection, Sec.~\ref{sec:intro_homodyne}. %We display approximations to Wigner functions of 
@@ -447,20 +456,77 @@ and
 \noindent We refer to the $\hat{E}_j$ as POVM elements, while the full set $\left\{\hat{E}_j\right\}$ is known as a POVM.
 
 
-\FloatBarrier
-\subsection{POVMs}
-
 
 \FloatBarrier
 \subsection{Homodyne measurement}
+A homodyne detection scheme consists in measurement of quadrature operator $\hat{q}_\theta = \cos\theta \hat{q} + \sin\theta \hat{p}$, which gives outcome probabilities
+\begin{equation}
+\text{P}\left(q_\theta\right) = \ev{q_\theta}{\rho}
+\end{equation}
+where $\ket{q_\theta}$ is the eigenstate of $\hat{q}_\theta$, in the sense defined in Eq.~\ref{eqn:intro_quadrature_state}. A homodyne measurement must specify the quadrature $\hat{q}_\theta$ which is being measured. Then the set of operators $\dyad{q_\theta}$ form the homodyne POVM.
+
+Without loss of generality, consider just the position ($q$) and momentum ($p$) outcomes. The probability distributions $\text{P}\left(q\right), \text{P}\left(p\right)$ of homodyne measurement outcomes of state $\rho$ are equivalently given by marginal integrals of the Wigner function corresponding to $\rho$, over the conjugate quadrature:
+\begin{equation}
+\text{P}\left(q\right) = \int\limits_{-\infty}^\infty \mathrm{d}p \; W_\rho\left(q, p\right) \qq{and} \text{P}\left(p\right) = \int\limits_{-\infty}^\infty \mathrm{d}q \; W_\rho\left(q, p\right).
+\end{equation}
+
+\noindent In practice the homodyne POVM is realised by mixing $\rho$ with a strong coherent state $\ket{\alpha}$, $\left|\alpha\right| \gg 1$ (the so-called ``local oscillator'') on a balanced ($50/50$) beamsplitter, and subtracting the photocurrents from each output arm. We depict this process in Fig.~\ref{fig:intro_homodyne}. We assume in the ideal case that the photocurrents $I_1$ and $I_2$ are such that
+\begin{equation}
+I_1 \propto \hat{n}_1 \qq{and} I_2 \propto \hat{n}_2 \qq{with} \hat{n}_i = \hat{a}_i^\dagger \hat{a}_i,
+\end{equation}
+and that the local oscillator may be treated classically, so
+\begin{equation}
+\hat{a}_1 = \frac{1}{\sqrt{2}} \left(\hat{a} - \alpha_{LO}\right) \qq{and} \hat{a}_2 = \frac{1}{\sqrt{2}}\left(\hat{a} + \alpha_{LO}\right).
+\end{equation}
+Then the difference in photocurrents $I_2 - I_1$ is
+\begin{equation}
+I_2 - I_1 \sim \hat{n}_2 - \hat{n}_1 = \alpha_{LO}^* \hat{a} + \alpha_{LO}\hat{a},
+\end{equation}
+and so
+\begin{equation}
+I_2 - I_1 \sim \sqrt{2} \left|\alpha_{LO}\right| \hat{q}_\theta,
+\end{equation}
+where $\theta$ is the phase of the local oscillator $\ket{\alpha}$. Varying the phase $\theta$ thus allows any general quadrature $\hat{q}_\theta$ of $\rho$ to be measured. The prefactor $\sqrt{2}\left|\alpha_{LO}\right|$ does not affect our measurement, and may be taken into account by an appropriate rescaling of measurement outcomes.
+
+A more realistic treatment of homodyne detection, including discussion of the range of validity of the above expressions, may be found in Refs.~\cite{Leonhardt1997, Serafini2019}.
+
+
+\begin{figure}[htp]
+\centering
+\captionsetup{width=0.8\linewidth}
+\includegraphics{intro/homodyne.png}
+\caption{\label{fig:intro_homodyne}}
+\end{figure}
+
 
 
 \FloatBarrier
 \subsection{Heterodyne measurement}
+A heterodyne measurement scheme corresponds to the POVM
+\begin{equation}\label{eqn:intro_heterodyne_povm}
+\hat{\mathds{1}} = \frac{1}{\pi} \int\limits_{\alpha \in \mathbb{C}} \Diff2 \alpha \; \dyad{\alpha}.
+\end{equation}
+The measurement gives outcome $\alpha$ with probability $(1/\pi)\ev{\rho}{\alpha}$. This scheme may be realised as a ``double-homodyne'' protocol, Fig.~\ref{fig:intro_heterodyne} in which an input state $\rho$ is split on a balanced beamsplitter, and conjugate quadratures $\hat{q}_1$, $\hat{p}_2$ are measured on different output arms. It is clear that such a measurement is possible, and so the operators $\hat{q}_1$, $\hat{p}_2$ must commute. Simultaneous measurement of conjugate quadratures of the same quantum state $\rho$ is not allowed, and so the heterodyne measurement outcomes must the penalty of increased variance in $\text{P}\left(q\right)$, $\text{P}\left(p\right)$. Physically this arises from mixing with $\rho$ with vacuum on the first beamsplitter.
+
+\begin{figure}
+\centering
+\captionsetup{width=0.8\linewidth}
+\includegraphics{intro/heterodyne.png}
+\caption{\label{fig:intro_heterodyne}}
+\end{figure}
+
+In the case of heterodyne measurement outcome we have realistically measured $\hat{q}$ and $\hat{p}$ simultaneously, and so we can consistently define a joint probability distribution of the measurement outcomes. This function is known as the Hussimi $Q$ function and is a well-defined probability distribution on the phase space\footnote{Unlike others such as Wigner function or $P$ function, which we refer to only as quasi-probability distributions}. The Hussimi function corresponding to $\rho$ is thus
+\begin{equation}
+Q\left(q, p\right) = \frac{1}{\pi} \ev{\alpha}{\rho} \qq{with} \alpha = \frac{q + i p}{\sqrt{2}}.
+\end{equation}
+
+In the main body of the Thesis we will speak of the heterodyne measurement as effectively giving two outcomes, $\qout, \pout$, one from each homodyned arm. The $\alpha$ required for Eq.~\ref{eqn:intro_heterodyne_povm} are then given by $\alpha = \left(\qout + i \pout\right)/\sqrt{2}$.
+
 
 
 \FloatBarrier
 \section{Modelling the quantum state}
+Let us introduce some additional tools which will help us to describe the quantum state and its dynamics.
 
 
 \FloatBarrier
