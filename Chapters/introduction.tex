@@ -40,14 +40,24 @@ and we will show in the next section that $\hat{n}$ counts the number of photons
 We construct the following two operators
 
 \begin{equation}
-\hat{x} = \frac{\hat{a}^\dagger + \hat{a}}{\sqrt{2}} \qq{and} \hat{p} = i \frac{\hat{a}^\dagger - \hat{a}}{\sqrt{2}}
+\hat{q} = \frac{\hat{a}^\dagger + \hat{a}}{\sqrt{2}} \qq{and} \hat{p} = i \frac{\hat{a}^\dagger - \hat{a}}{\sqrt{2}}
 \end{equation}
 which can be shown to obey the commutator
-\begin{equation}
-\left[\hat{x}, \hat{p}\right] = i.
+\begin{equation}\label{eqn:intro_quadrature_commutator}
+\left[\hat{q}, \hat{p}\right] = i.
 \end{equation}
 
-\noindent This commutator is equivalent to the commutator describing position and momentum of a quantum particle, and so we denote $\hat{x}$ as the position operator and $\hat{p}$ as the momentum operator. Indeed, it is easy to show that
+\noindent The quadrature operators may be used to write the well known Heisenberg uncertainty principle 
+\begin{equation}
+\text{Var}\left(\hat{q}\right)\text{Var}\left(\hat{p}\right) \ge 1/4, %note that this is 1/4 not 1/2, due to using variances (not standard deviations) on the LHS. c.f. Ulf eq 3.80 p54
+\end{equation} 
+where the variances in a general quantum state $\ket{\psi}$ are defined as
+\begin{align}
+\text{Var}\left(\hat{q}\right) &= \mel{\psi}{\hat{q}^2}{\psi} - \mel{\psi}{\hat{q}}{\psi} \notag \\
+\text{Var}\left(\hat{p}\right) &= \mel{\psi}{\hat{p}^2}{\psi} - \mel{\psi}{\hat{p}}{\psi}. 
+\end{align}
+
+\noindent The commutator Eq.~\ref{eqn:intro_quadrature_commutator} is equivalent to the commutator describing position and momentum of a quantum particle, and so we denote $\hat{x}$ as the position operator and $\hat{p}$ as the momentum operator. Indeed, it is easy to show that
 \begin{equation}
 \hat{E} = \hat{n} + \frac{1}{2} = \frac{\hat{x}^2}{2} + \frac{\hat{p}^2}{2},
 \end{equation}
@@ -145,7 +155,9 @@ W\left(q, p\right) = \frac{1}{2 \pi} \int\limits_{-\infty}^{\infty} \mathrm{d}x 
 \end{equation}
 where $W_i\left(q, p\right)$ is the Wigner function corresponding to operator $\hat{O}_i$. Operator expectation values with respect a given state $\hat{\rho}$ may be calculated using Eq.~\ref{eqn:wigner_overlap}. 
 
-In the following sections we will see some examples of quantum states and their corresponding Wigner functions. 
+The well known Heisenberg uncertainty relation expresses itself in the Wigner function picture by imposing a minimum area which a quantum state must occupy. In the following sections we will see some examples of quantum states and their corresponding Wigner functions. 
+
+
 
 Finally, we must note that the Wigner function is not the only quasi-probability distribution which one could define on the phase space. It is a purely non-classical feature that there are multiple ways to consistently define a phase space description. Other common quasi-probability distributions are: the Hussimi $Q$ function \MT{cite} which is intimately related to Heterodyne measurement; Glauber-Sudarshan \MT{spelling} $P$ function which is often used to describe mixtures of coherent states and becomes highly singular in all other cases; and the positive-$P$ function which is a generalization to the $P$ function defined as non-diagonal in the coherent state basis, and which allows quantum effects such as squeezing to be described. One may also use these quasi-probability distributions to predict dynamics of the system using a Fokker-Planck equation \MT{cite}.
 
@@ -197,7 +209,7 @@ Coherent states\footnote{Also known as Glauber coherent states} are among the mo
 \begin{equation}
 \hat{a}\ket{\alpha} = \alpha \ket{\alpha}.
 \end{equation}
-The coherent state has amplitude $\alpha \in \mathbb{C}$, and we display several examples of coherent state Wigner functions in Fig.~\ref{fig:intro_coherent_wigner}.
+The coherent state has amplitude $\alpha \in \mathbb{C}$, and we display several examples of coherent state Wigner functions in Fig.~\ref{fig:intro_coherent_wigner}. It can additionally be shown that the area occupied by the coherent state is the smallest allowable area of phase space for a Wigner function to cover. In other words, the coherent state saturates the Heisenberg bound and is a minimum uncertainty state.
 
 \begin{figure}[htp]
 \centering
@@ -221,6 +233,12 @@ where $\alpha^*$ denotes the complex conjugate of $\alpha$, and so we will regul
 \end{equation}
 
 and we display a mixture over the QPSK alphabet in Fig.~\ref{fig:qpsk}. We will not explicitly distinguish between whether we refer to the set of quantum states $\left\{\ket{\alpha}, \ket{i \alpha}, \ket{- \alpha}, \ket{- i \alpha}\right\}$ or the corresponding set of phases $\left\{ \alpha, i \alpha, -\alpha, - i\alpha\right\}$ since it should always be obvious which is meant.
+
+Finally, we consider a special case of the coherent states, that with eigenvalue $0$
+\begin{equation}
+\hat{a} \ket{0} = 0 \ket{0}.
+\end{equation}
+\noindent This state is known as the ``vacuum'' state, and is a special example since $\ket{0}$ is also an eigenstate\footnote{It can also be viewed as a thermal state with $\bar{n}=0$.} of $\hat{n}$, and is thus a Fock state with a photon number $0$.
 
 
 \begin{figure}[htp]
