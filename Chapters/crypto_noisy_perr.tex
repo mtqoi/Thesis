@@ -74,7 +74,7 @@ W_1\left(q, p\right) =  \frac{1}{\pi \left[ 1 + \bar{n}\left(1-T\right)\right]} 
 
 \noindent and the second output mode is identical.
 
-Ideal homodyne measurement corresponds to projection onto a quadrature eigenstate, i.e. $\mel{q}{\rho}{q}$. It can be shown \cite{Leonhardt2010} that in terms of Wigner functions, the overlap between two operators is given by
+Ideal homodyne measurement corresponds to projection onto a quadrature eigenstate, i.e. $\mel{q}{\rho}{q}$ \cite{Weedbrook2012, Serafini2019}. It can be shown \cite{Leonhardt2010} that in terms of Wigner functions, the overlap between two operators is given by
 
 \begin{equation}
 \tr\left[\hat{F}_1 \hat{F}_2 \right] = 2 \pi \iint_{-\infty}^\infty \mathrm{d}q \; \mathrm{d}p \; W_1\left(q, p\right) W_2\left(q, p\right),
@@ -94,7 +94,7 @@ The probability of receiving homodyne outcome $x$ on $W_1$ is then
 %\text{P}\left(q_1\right) = \frac{1}{\pi \left[ 1 + \bar{n}\left(1-T\right)\right]} \exp\left[ - \frac{\left(q_1 - q_0 \sqrt{\frac{T}{2}}\right)^2}{1 + \bar{n}\left(1-T\right)}\right] \int\limits_{-\infty}^\infty \mathrm{d}p \; \exp\left[ - \frac{\left(p - p_0 \sqrt{\frac{T}{2}}\right)^2}{1 + \bar{n} \left(1-T\right)}\right]
 %\end{equation}
 
-\begin{equation}
+\begin{equation}\label{eqn:prob_homodyne_x}
 \text{P}\left(x\right) = \frac{1}{\sqrt{\pi \left[1 + \bar{n}\left(1-T\right)\right]}}\exp\left[- \frac{\left(x - q_0 \sqrt{\frac{T}{2}}\right)^2}{1 + \bar{n}\left(1-T\right)} \right].
 \end{equation}
 
@@ -111,11 +111,32 @@ The probability of receiving homodyne outcome $x$ on $W_1$ is then
 \end{equation}
 where we have used $\alpha = \left(q_0 + i p_0\right)/\sqrt{2}$.
 
-The equation~\ref{eqn:prob_noisy_output} is the probability of heterodyne measurement giving $z$, when an input coherent state $\alpha$ is distributed through a thermal noise channel, transmission $T$ and thermal photon number $\bar{n}$. Setting $\bar{n}=0$, Eq.~\ref{eqn:prob_noisy_output} reduces to the noiseless case which is used already in the Thesis body.
+The equation~\ref{eqn:prob_noisy_output} is the probability of heterodyne measurement giving $z$, when an input coherent state $\alpha$ is distributed through a thermal noise channel, transmission $T$ and thermal photon number $\bar{n}$. Setting $\bar{n}=0$, Eq.~\ref{eqn:prob_noisy_output} reduces to the noiseless case which is used already in the Thesis body. 
+
+For a QDS protocol the probability $\perr$ may be calculated via Eq.~\ref{eqn:prob_noisy_output} identically to the Thesis body.
 
 \paragraph{Excess noise}
 We define the excess noise $\xi$ as the measured variance of a state above the vacuum level. In Ch.~\ref{chapter:aqc} we defined it as
 
 \begin{equation}
-\xi = 
+\xi = \text{Var}\left(x\right) - \frac{1}{2},
 \end{equation}
+
+\noindent where clearly from Eq.~\ref{eqn:prob_homodyne_x} (setting $\bar{n}=0$) the vacuum variance is $1/2$. The variance in position homodyne measurement outcome is
+
+\begin{equation}
+\frac{1 + \bar{n}\left(1-T\right)}{2},
+\end{equation}
+
+\noindent and so excess noise in $q$, $\xi_q$, is
+\begin{equation}
+\frac{\bar{n}\left(1-T\right)}{2},
+\end{equation}
+
+\noindent with an equivalent expression for $\xi_p$. In Chs.~\ref{chapter:qds},~\ref{chapter:qss} we assume that $\xi_q = \xi_p$ and simply call the excess noise $\xi$,
+
+\begin{equation}\label{eqn:excess_noise}
+\xi = \frac{\bar{n}\left(1-T\right)}{2}.
+\end{equation}
+
+\noindent Finally, we note that $\xi$ depends both on $\bar{n}$ and $T$, and so for a given $\xi$ the allowable $\bar{n}$ varies with $T$, and so fixing $\bar{n}$ will give drastically different behaviour from fixing $\xi$.
