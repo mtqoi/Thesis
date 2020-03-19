@@ -13,7 +13,7 @@
 
 In this chapter we introduce and investigate a continuous-variable Quantum Secret Sharing (QSS) protocol, which allows for secure distribution of a classical secret among multiple potentially dishonest recipients. Crucially, recipients are forced to collaborate in order to reconstruct the secret, and a dishonest player should not be able to access the secret by themselves.
 
-We describe the protocol and its similarities and differences to recent QSS protocols from the literature in Sec.~\ref{sec:qss_our_protocol}, and then prove its security against several different attack strategies in Secs.~\ref{sec:qss_honest_recipients},~\ref{sec:qss_dishonest_recipient}. In Sec.~\ref{sec:qss_performance} we analyse the performance of our protocol. Although the QSS task has been around for many years, many of the existing protocols are not suitable for implementation, despite their high level of security. We investigate the implementation of our protocol in Chapter~\ref{chapter:aqc}.
+We describe the protocol and its similarities and differences to recent QSS protocols from the literature in Sec.~\ref{sec:qss_our_protocol}, and then prove its security against several different attack strategies in Secs.~\ref{sec:qss_honest_recipients},~\ref{sec:qss_dishonest_recipient}. In Sec.~\ref{sec:qss_performance} we analyse the performance of our protocol. Although the QSS task has been around for many years, many of the existing protocols are not suitable for implementation, despite their high level of security. We present the implementation of our protocol in Chapter~\ref{chapter:aqc}.
 
 \section{Our QSS protocol}\label{sec:qss_our_protocol}
 
@@ -24,7 +24,7 @@ Our Quantum Secret Sharing (QSS) scheme allows for Alice to distribute a classic
 \captionsetup{width=0.8\linewidth}
 \centering
 \includegraphics[draft=false, width=0.8\linewidth]{qss/qss_setup_cartoon}
-\caption{\label{fig:qss_structure} All quantum secret sharing schemes follow the same structure: Alice encrypts her classical secret $\sigma_A$ with secret key $K_A$, and broadcasts the resulting $\varsigma_A$. Shares of $K_A$ are distributed among recipients Bob and Charlie such that $K_B \oplus K_C = K_A$. Gray boxes denote honest players, while red denotes dishonest players. The half-red/half-gray boxes denote uncertainty about which player is dishonest. %say somewhere it's all classical?
+\caption{\label{fig:qss_structure} All quantum secret sharing schemes follow the same structure: Alice encrypts her classical secret $\sigma_A$ with secret key $K_A$, and broadcasts the resulting $\varsigma_A$. Shares of $K_A$ are distributed among recipients Bob and Charlie such that $K_B \oplus K_C = K_A$. Gray boxes denote honest players, while red denotes dishonest players. The half-red/half-gray boxes denote uncertainty about the honesty of a player. %say somewhere it's all classical?
 }
 \end{figure}
 
@@ -62,15 +62,15 @@ In our protocol, Bob and Charlie are chosen as the senders of the quantum states
 		\centering
 		\label{fig:qss_distribution_stage}
 		\includegraphics[draft=false, width=\linewidth]{qss/qss_distribution_stage}
-		
 	\end{subfigure}
+%	\vspace{3cm}%
 	\begin{subfigure}{0.8\linewidth}
 		\centering
 		\label{fig:qss_encryption_stage}
 		\includegraphics[draft=false, width=\linewidth]{qss/qss_encryption_stage}
 		
 	\end{subfigure}
-\caption{\label{fig:qss_protocol_cartoon} Distribution and Encryption stages of our QSS protocol. Alice (A) wishes to securely share her secret $\sigma_A$ amongst potentially dishonest recipients Bob (B) and Charlie (C). (a) Distribution stage. B and C send coherent states chosen from QPSK alphabet to Alice, who heterodynes and obtains outcomes $A_B, A_C$. Eve eavesdrops on the quantum channels in order to gain information about Alice's outcomes $A_B, A_C$. (b) Encryption stage. Alice forms variable $X_A$ using her chosen function $\mathcal{F}$ with her heterodyne measurement outcomes as input variables. She converts $X_A$ to a binary $\tilde{X}_A$ and encrypts the secret with it to reach $\varsigma_A = \sigma_A \oplus \tilde{X}_A$. The encrypted secret is then broadcast. Dishonest players are shown in red and honest players in gray. A combination of red and gray denotes uncertainty about which player is honest.
+\caption{\label{fig:qss_protocol_cartoon} Distribution and Encryption stages of our QSS protocol. Alice (A) wishes to securely share her secret $\sigma_A$ amongst potentially dishonest recipients Bob (B) and Charlie (C). (a) Distribution stage. B and C send coherent states chosen from QPSK alphabet to Alice, who heterodynes and obtains outcomes $A_B, A_C$. Eve eavesdrops on the quantum channels in order to gain information about Alice's outcomes $A_B, A_C$. (b) Encryption stage. Alice forms variable $X_A$ using her chosen function $\mathcal{F}$ with her heterodyne measurement outcomes as input variables. She converts $X_A$ to a binary $\tilde{X}_A$ and encrypts the secret with it to reach $\varsigma_A = \sigma_A \oplus \tilde{X}_A$. The encrypted secret is then broadcast. Dishonest players are shown in red and honest players in gray. A combination of red and gray denotes uncertainty about the honesty of a player.
 }
 \end{figure}
 
@@ -78,7 +78,7 @@ In our protocol, Bob and Charlie are chosen as the senders of the quantum states
 Our QSS protocol runs in three stages, a Distribution stage, an Encryption stage and, finally, a Decryption stage. Distribution and Encryption stages are displayed in Fig.~\ref{fig:qss_protocol_cartoon}. The Distribution stage, Fig.~\ref{fig:qss_distribution_stage}, involves distribution and measurement of quantum coherent states chosen from QPSK alphabet. At the end of Distribution, Alice will hold classical information which is correlated with both Bob and Charlie. In the Encryption stage, Fig.~\ref{fig:qss_encryption_stage}, Alice will combine her classical information and use it to encode her sensitive classical secret. The encoded secret is then distributed to Bob and Charlie, who decode it during Decryption. 
 
 
-\subsubsection*{Distribution stage, Fig.~\ref{fig:qss_distribution_stage}}
+\subsubsection*{Distribution stage, Fig.~\ref{fig:qss_protocol_cartoon}a}
 \paragraph{Step $1$}
 Alice wishes to share a classical secret, $\sigma_A$. Bob forms a classical random variable $X_B = \left\{\phi_B\right\}$, where the $\phi_B$ are one of four complex phases independently chosen from the QPSK alphabet. Phases $\phi_B$ are assumed to be chosen uniformly at random, but we relax this assumption in Chapter~\ref{chapter:aqc}. Charlie likewise forms classical random variable $X_C = \left\{\phi_C\right\}$.
 
@@ -90,11 +90,11 @@ Bob and Charlie form sequences of coherent states based on their random variable
 where $\rho\left[\phi_{\left(B, C\right)}\right]$ denotes a coherent state with phase $\phi_{\left(B, C\right)}$. These sequences of states are sent to Alice through quantum channels. %\MT{Talk later about the types of channels which these are.}. 
 Alice performs heterodyne detection on each of her received states and records her outcomes. We denote the strings of Alice's measurement outcomes as $A_B, A_C$, where $A_B$ corresponds to measurement outcomes on states sent by Bob, and $A_C$ corresponds to those on states sent by Charlie. Alice keeps the $A_B$ and $A_C$ separate and secret, and Bob and Charlie should retain their information $X_B, X_C$.
 
-\subsubsection*{Encryption stage, Fig.~\ref{fig:qss_encryption_stage}}
+\subsubsection*{Encryption stage, Fig.~\ref{fig:qss_protocol_cartoon}b}
 
-\paragraph{Step $3$} Alice creates a new string of complex variables
+\paragraph{Step $3$} Alice creates a new string of complex variables,
 \begin{equation}
-X_A = \mathcal{F}\left(A_B, A_C\right)
+X_A = \mathcal{F}\left(A_B, A_C\right),
 \end{equation}
 from her measurement outcomes. The function $\mathcal{F}$ is freely chosen by Alice to optimize security. In this Thesis we will pick a simple form for $\mathcal{F}$ which allows us to easily make concrete predictions about protocol security, although in general $\mathcal{F}$ may be as pathological as Alice desires.
 
@@ -111,7 +111,7 @@ from her measurement outcomes. The function $\mathcal{F}$ is freely chosen by Al
 
 \paragraph{Step $5$} Later, when Alice desires to allow Bob and Charlie access to $\sigma_A$, she broadcasts her choice of function $\mathcal{F}$, along with enough classical information to perform a reconciliation procedure between $X_A$ and $\mathcal{F}\left(X_B, X_C\right)$. This stage is similar to CV QKD and so we refer the reader to Refs.~\cite{Diamanti2015, Laudenbach2017}. Bob and Charlie contribute their information $X_B, X_C$ to form $\mathcal{F}\left(X_B, X_C\right)$ and reconcile it to $X_A$ and thus to $\tilde{X}_A$. They are now able to access Alice's original secret $\sigma_A$.
 
-Critical to the protocol is the fact that Alice forms a secret key based on a degree of freedom which is shared between Bob and Charlie. This forces collaboration. If either one of Bob or Charlie is dishonest, they are forced to work with an honest player and so our scheme has succeeded. In this way, our protocol is a natural extension of the protocol from Kogias \emph{et. al.} \cite{Kogias2017}, while having much simpler physical requirements.
+Critical to the protocol is the fact that Alice forms a secret key based on a degree of freedom which is shared between Bob and Charlie. This forces collaboration. If either one of Bob or Charlie is dishonest, they are forced to work with an honest player and so our scheme has succeeded. In this way, our protocol is a natural extension of the protocol from Kogias \emph{et. al.} \cite{Kogias2017}, while having much simpler physical requirements (e.g. no entanglement is required).
 
 
 
@@ -129,7 +129,7 @@ Fig.~\ref{fig:qss_honest_recipients}. In Sec.~\ref{sec:qss_dishonest_recipient} 
 \end{figure}
 
 
-The starting point for our security analysis is the following Devetak-Winter bound \cite{Devetak2004} for the asymptotic key rate under collective attack, Fig.~\ref{fig:types_of_attack_collective},
+The starting point for our security analysis is the following Devetak-Winter bound \cite{Devetak2004} for the asymptotic key rate under collective attack, Fig.~\ref{fig:types_of_attack_collective}:
 
 %\MT{should I motivate why this bound is helpful for us?}
 
@@ -148,7 +148,7 @@ We would like to calculate the lower bound for key rate given by Eq.~\ref{eqn:qs
 
 Using Eq.~\ref{eqn:intro_mutual_information}, the mutual information $\text{I}$ may be written as 
 \begin{equation}\label{eqn:qss_deriv_1}
-\text{I}\left(X_A : X_B, X_C\right) = \text{H}\left(X_B, X_C\right) - \text{H} \left(X_B, X_C \given X_A\right).
+\text{I}\left(X_A : X_B, X_C\right) = \text{H}\left(X_B, X_C\right) - \text{H} \left(X_B, X_C \given X_A\right),
 \end{equation}
 where the first term on the right hand side is the joint Shannon entropy of $X_B$ and $X_C$, and the second term is the conditional Shannon entropy of $X_B, X_C$ given $X_A$, Sec.~\ref{sec:intro_shannon_entropy}. Intuitively, this second term encodes the uncertainty one has about which $X_B, X_C$ were chosen, once Alice has formed $X_A$. The first term encodes the \emph{a priori} entropy about Bob and Charlie's choice of sent coherent states, and is purely a function of their sending probabilities.
 
@@ -216,12 +216,12 @@ We take
 \begin{equation}\label{eqn:qss_deriv_5}
 X_A = \mathcal{F}\left(A_B, A_C\right) = g A_B + h A_C,
 \end{equation}
-as in Eq.~\ref{eqn:qss_F_linear}, and so we rearrange
+as in Eq.~\ref{eqn:qss_F_linear}, and so we rearrange:
 \begin{equation}
 A_C = \frac{X_A - g A_B}{h}.
 \end{equation}
 
-\noindent Since our $F$ is not injective %(there are multiple $A_B, A_C$ which will give the same $X_A$)
+\noindent Since our $\mathcal{F}$ is not injective %(there are multiple $A_B, A_C$ which will give the same $X_A$)
 we must average over all of the possible ways to reach a given $X_A$. Therefore, once $X_A, g$ and $h$ are fixed, the choice of $A_B, A_C$ reduces to a one-variable problem. So
 
 \begin{equation}\label{eqn:qss_deriv_5_1}
@@ -235,11 +235,11 @@ Assuming that the two channels, one from Charlie$\rightarrow$Alice and one from 
 \end{equation}
 for the probabilities that Alice's heterodyne measurement outcomes are $A_B, A_C$, given that coherent states with phases $\phi_B, \phi_C$ are sent.
 
-Let us assume for now that each channel is noiseless but lossy. The probability that Alice measures a particular heterodyne outcome $a = \qout + i \pout$ when a coherent state of complex amplitude $\beta$ is sent through a lossy channel, transmittivity $T$, is (Sec.~\ref{sec:qss_perr}) %where do I actually derive this? I should put it in one place and then refer to it a bunch
+Let us assume for now that each channel is noiseless but lossy. The probability that Alice measures a particular heterodyne outcome $a = \qout + i \pout$ when a coherent state of complex amplitude $\beta$ is sent through a lossy channel, transmittivity $T$, is  %where do I actually derive this? I should put it in one place and then refer to it a bunch
 \begin{equation}\label{eqn:qss_channel_classical_prob}
 \text{P}\left(a \given \beta, T\right) = \frac{1}{\pi}\exp\left( - \left| a - \sqrt{T}\beta \right|^2\right)
 \end{equation}
-which we have used previously in Ch.~\ref{chapter:qds}. The required changes to include thermal noise of the channel can be readily made, Appendix.~\ref{appendix:qds_noisy_channel}.
+which we have used previously in Ch.~\ref{chapter:qds}. The required changes to include thermal noise of the channel can be readily made, Appendix.~\ref{appendix:noisy_perr}.
 
 The integral in Eq.~\ref{eqn:qss_deriv_5_1} may now be calculated analytically to reach 
 \begin{align}\label{eqn:qss_deriv_7}
@@ -272,7 +272,7 @@ with
 \end{equation}
 where $\beta, \gamma$ are the amplitudes of Bob's and Charlie's coherent state alphabets.
 
-We assume that the channel acts separately on each mode, and that modes $\rho_B$, $\rho_C$ undergo independent evolution. In other words, we assume that the channel has the following structure
+We assume that the channel acts separately on each mode, and that modes $\rho_B$, $\rho_C$ undergo independent evolution. In other words, we assume that the channel has the following structure:
 \begin{equation}\label{eqn:qss_channel}
 \Phi\left[\rho\right] = \Phi_B\left[\rho\right] \otimes \Phi_C\left[\rho\right]
 \end{equation}
@@ -401,7 +401,7 @@ where $\kappa_{\text{Eve, Charlie}}$ is calculated analogously to Eq.~\ref{eqn:q
 \section{Protocol performance}\label{sec:qss_performance}
 
 
-We plot the mutual information (Eq.~\ref{eqn:qss_deriv_1}) in Fig.~\ref{fig:qss_mutual_information}, taking honest recipients in (a) and dishonest recipients in (b). Coherent state amplitude $\alpha$ and channel transmission $T$ are varied. We here take Bob and Charlie as having equal amplitudes and channel transmissions, but in principle they can vary independently from one another. Unless $T=0$, the mutual information between Alice and Bob-Charlie always increases with $\alpha$ as the states at Alice become increasingly distinguishable. The mutual information with honest recipients is bounded by $4$, while in the case of dishonest recipients it is bounded by $2$. \MT{Statement comparing (a) and (b).}
+We plot the mutual information (Eq.~\ref{eqn:qss_deriv_1}) in Fig.~\ref{fig:qss_mutual_information}, taking honest recipients in (a) and dishonest recipients in (b). Coherent state amplitude $\alpha$ and channel transmission $T$ are varied. We here take Bob and Charlie's states as having equal amplitudes and channel transmissions, but in principle they can vary independently from one another. Unless $T=0$, the mutual information between Alice and Bob-Charlie always increases with $\alpha$ as the states at Alice become increasingly distinguishable. The mutual information with honest recipients is bounded by $4$, while in the case of dishonest recipients it is bounded by $2$. \MT{Statement comparing (a) and (b).}
 
 \begin{figure}[htp]
 \captionsetup{width=0.8\linewidth}
