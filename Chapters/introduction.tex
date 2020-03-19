@@ -60,8 +60,8 @@ and the regular operators $\hat{q}$, $\hat{p}$ are recovered as special cases wi
 \end{equation} 
 where the variances in a general quantum state $\ket{\psi}$ are defined as
 \begin{align}
-\text{Var}\left(\hat{q}\right) &= \mel{\psi}{\hat{q}^2}{\psi} - \mel{\psi}{\hat{q}}{\psi} \notag \\
-\text{Var}\left(\hat{p}\right) &= \mel{\psi}{\hat{p}^2}{\psi} - \mel{\psi}{\hat{p}}{\psi}.
+\text{Var}\left(\hat{q}\right) &= \mel{\psi}{\hat{q}^2}{\psi} - \mel{\psi}{\hat{q}}{\psi}^2 \notag \\
+\text{Var}\left(\hat{p}\right) &= \mel{\psi}{\hat{p}^2}{\psi} - \mel{\psi}{\hat{p}}{\psi}^2.
 \end{align}
 This uncertainty principle implies that we cannot simultaneously measure $\hat{q}$ and $\hat{p}$ with arbitrary precision - in other words $q$ and $p$ are conjugate variables.
 
@@ -617,6 +617,24 @@ We will make use of the Lindblad master equation with several different collapse
 \section{Entropy and probability}
 We will introduce and discuss some quantum entropies which we will use in the first part of this Thesis. Quantum entropies are a marvellous and interesting area of quantum information theory, and there are many interesting similarities with and departures from classical information theory. Below we summarise some of the key results which we will make use of in this Thesis, and the reader is referred to Refs.~\cite{Nielsen2010, Tomamichel2016, Wilde2015, Watrous2019} for further information.
 
+
+
+\FloatBarrier
+\subsection{Conditional probabilities}
+Let $X$ and $Y$ denote random variables, with their associated probability distributions $\text{P}\left(X\right), \text{P}\left(Y\right)$. The conditional probability of $X$ given $Y$, $\text{P}\left(X \given Y\right)$ measures the probability of event $X$, given prior knowledge of event $Y$. The probabilities $\text{P}\left(X\right)$, $\text{P}\left(Y\right)$ are known as the marginal probabilities, and are related to the conditional probability by summing over values of the prior 
+
+\begin{equation}
+\text{P}\left(X\right) = \sum_{Y=y} \text{P}\left(X \given Y\right) \text{P}\left(Y\right).
+\end{equation}
+
+Bayes' theorem may be used to relate conditional probabilities to each other:
+
+\begin{equation}\label{eqn:intro_bayes}
+\text{P}\left(X \given Y\right) = \text{P}\left(Y \given X\right) \frac{\text{P}\left(X\right)}{\text{P}\left(Y\right)},
+\end{equation}
+
+\noindent and we make extensive use of this formula in the first part of this Thesis.
+
 \FloatBarrier
 \subsection{Hoeffding's inequalities}
 Let $\mathcal{X} = X_1, X_2, \dots, X_n$ be $n$ independent binary random variables. Let $\bar{\mathcal{X}}$ be their empirical mean \MT{define} and let $\mathbb{E}\left(\bar{\mathcal{X}}\right)$ be its expected value. Then $\forall \epsilon \ge 0$ we may bound the probability that the empirical mean $\bar{\mathcal{X}}$ differs from its expectation $\mathbb{E}\left(\bar{\mathcal{X}}\right)$ by the following inequalities
@@ -672,8 +690,14 @@ The conditional entropy of $X$, conditioned on $Y$ is
 \end{equation}
 which measures the average uncertainty we have about variable $X$ given that we know $Y$.
 
+One may expand the conditional entropy as \cite{Wilde2013}
+\begin{equation}\label{eqn:intro_conditional_entropy_expansion}
+\text{H}\left(X \given Y\right) = \sum_{Y=y} \text{P}\left(Y=y\right) \text{H}\left( X \given Y=y \right),
+\end{equation}
+where the expansion is over particular outcomes of the prior variable. Equation~\ref{eqn:intro_conditional_entropy_expansion} admits a natural extension to the case when the prior variable is continuous rather than discrete, with $\sum_{y}$ replaced by $\int \mathrm{d}y$.
 
-The mutual information between $X$ and $Y$ may then be defined as
+
+The mutual information between $X$ and $Y$ may be defined as
 
 \begin{equation}\label{eqn:intro_mutual_information}
 I\left(X : Y\right) = \text{H}\left(X\right) - \text{H}\left(X \given Y\right),
