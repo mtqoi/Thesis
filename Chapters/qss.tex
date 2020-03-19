@@ -381,7 +381,7 @@ The final key rate is now
 \begin{equation}\label{eqn:qss_keyrate_dishonest_Bob}
 \kappa_{\text{Eve, Bob}} = \text{I}\left(X_A : X_B, X_C\right) - \chi\left(X_A : \mathbb{E} \mathbb{B}\right)
 \end{equation}
-with mutual information and Holevo information terms calculated as described above.
+with mutual information and Holevo information terms calculated as described above. In using Eq.~\ref{eqn:qss_keyrate_dishonest_Bob} we are treating Bob as a dishonest eavesdropper who collaborates with Eve. This key rate formula thus provides security against general collective eavesdropping strategies, provided the mutual information and Holevo information terms can be bounded. In this Chapter we will allow the same range of attacks as in Ch.~\ref{chapter:qds}. We discuss additional attack strategies unique to our QSS protocol in Sec.~\ref{sec:qss_outlook}. 
 
 
 %\MT{Make some graphs of things with dishonest Bob}
@@ -395,13 +395,13 @@ In order to take into account this uncertainty over which player is dishonest, F
 \begin{equation}\label{eqn:qss_key_rate_min}
 \kappa \ge \min \left\{\kappa_{\text{Eve, Bob}}, \kappa_{\text{Eve, Charlie}}\right\}
 \end{equation}
-where $\kappa_{\text{Eve, Charlie}}$ is calculated analogously to Eq.~\ref{eqn:qss_keyrate_dishonest_Bob}. \MT{Comment about why this works.}
+where $\kappa_{\text{Eve, Charlie}}$ is calculated analogously to Eq.~\ref{eqn:qss_keyrate_dishonest_Bob}. This expression makes explicit the close links between QSS and QKD, as explored further in Refs.~\cite{Kogias2017, Grice2019}. The work by Grice \cite{Grice2019} generalizes this expression to $N$ players, and directly comments that their setup can perform both QSS and $2$-party QKD with rate calculated analogously.
 
 
 \section{Protocol performance}\label{sec:qss_performance}
 
 
-We plot the mutual information (Eq.~\ref{eqn:qss_deriv_1}) in Fig.~\ref{fig:qss_mutual_information}, taking honest recipients in (a) and dishonest recipients in (b). Coherent state amplitude $\alpha$ and channel transmission $T$ are varied. We here take Bob and Charlie's states as having equal amplitudes and channel transmissions, but in principle they can vary independently from one another. Unless $T=0$, the mutual information between Alice and Bob-Charlie always increases with $\alpha$ as the states at Alice become increasingly distinguishable. The mutual information with honest recipients is bounded by $4$, while in the case of dishonest recipients it is bounded by $2$. \MT{Statement comparing (a) and (b).}
+We plot the mutual information (Eq.~\ref{eqn:qss_deriv_1}) in Fig.~\ref{fig:qss_mutual_information}, taking honest recipients in (a) and dishonest recipients in (b). Coherent state amplitude $\alpha$ and channel transmission $T$ are varied. We here take Bob and Charlie's states as having equal amplitudes and channel transmissions, but in principle they can vary independently from one another. Unless $T=0$, the mutual information between Alice and Bob-Charlie always increases with $\alpha$ as the states at Alice become increasingly distinguishable. The mutual information with honest recipients is bounded by $4$, while in the case of dishonest recipients it is bounded by $2$. 
 
 \begin{figure}[htp]
 \captionsetup{width=0.8\linewidth}
@@ -419,7 +419,7 @@ We plot the mutual information (Eq.~\ref{eqn:qss_deriv_1}) in Fig.~\ref{fig:qss_
 \caption{\label{fig:qss_mutual_information} Mutual information Eq.~\ref{eqn:qss_deriv_1} as it varies with coherent state amplitude $\alpha$ and channel transmission $T$. (a) Honest recipients. (b) Orange: dishonest recipients. Blue, clear: honest recipients, same surface as (a). In both figures we have taken linear $\mathcal{F}$, with parameters $g = h = 0.5$.}
 \end{figure}
 
-The Holevo information $\chi$ under identical conditions to Fig.~\ref{fig:qss_mutual_information} is plotted in Fig.~\ref{fig:qss_holevo_information}. We see that there is a clear maximum of $\chi$ at $T = 0.5$, which is when dishonest parties have maximum fidelity to Alice's received state. Our QSS protocol leverages the power of cryptographic protocols constructed in the reverse-reconciliation regime: that as $T < 0.5$ dishonest players receiving a greater share of the sent state, now have a much smaller overlap with the received state, and so $\chi$ begins to decrease again.
+The Holevo information $\chi$ under identical conditions to Fig.~\ref{fig:qss_mutual_information} is plotted in Fig.~\ref{fig:qss_holevo_information}. We see that there is a clear maximum of $\chi$ at $T = 0.5$, which is when dishonest parties have maximum fidelity to Alice's received state. Our QSS protocol leverages the power of cryptographic protocols constructed in the reverse-reconciliation regime. As $T < 0.5$, even though Eve receives a greater share of the sent state than Alice\footnote{This would be fatal for direct-reconciliation cryptography.}, the overlap between Eve's and Alice's states begins to decrease as $T$ decreases, meaning $\chi$ also decreases.
 
 Curiously, Fig.~\ref{fig:qss_holevo_information}b demonstrates a reduction in the Holevo information when Bob or Charlie is dishonest. Since Holevo information is directly related to the efficacy of an attack, this might suggest that dishonesty gives no advantage, and even makes things worse. We note however that the mutual information is also reduced in this case, and a consideration of the key rate in Fig.~\ref{fig:qss_keyrate} demonstrates that such dishonesty of Bob or Charlie does indeed yield a reduction in the key rate $\kappa$. %The reduction in $\chi$ is explained by noting that there is one fewer channel being attacked, and that the Holevo information represents the amount of information gained via an attack. %TODO: make sure I can talk about this for the viva.
 
