@@ -2,7 +2,7 @@
 
 
 \section{Introduction to Thesis}
-\MT{Statements about historical background of quantum optics/quantum information/quantum cryptography}
+%\MT{Statements about historical background of quantum optics/quantum information/quantum cryptography}
 
 This Thesis consists of two parts. In Part One, we consider several related cryptographic protocols which securely perform the tasks of Quantum Digital Signatures (QDS) and Quantum Secret Sharing (QSS). Our goals here are, firstly: to remove an assumption in continuous-variable (CV) QDS of secure quantum channels, and provide a security proof when an eavesdropping attack is permitted, and secondly: to demonstrate that several CV quantum cryptographic protocols may be run over identical hardware setups while the hardware at the quantum level is agnostic to the protocol being implemented. This so-called ``agile" system illustrates our translation of cryptographic agility from classical (conventional) cryptography to quantum cryptography, and allows for a move towards secure and practical quantum cryptosystems which can perform multiple tasks.
 
@@ -14,13 +14,80 @@ This Thesis is structured as follows. In the remainder of this chapter we will i
 
 \paragraph{Part Two:} In Chapter~\ref{chapter:phog} we motivate and introduce the PhoG device which will be the focus of the second half of this Thesis. We demonstrate that dissipation, far from being a hinderance to the desired evolution of our quantum system, is actually an asset and the main driver towards target nonclassicality. We introduce an exotic form of dissipation, called Nonlinear Coherent Loss, and show that in the ideal limit it will deterministically lead to single photons at the output. We then introduce progressively more complex models involving more bosonic system modes, and demonstrate that a realistic full multi-mode model of the system can be used to effectively simulate the Nonlinear Coherent Loss decay channel. Finally, we end the chapter by demonstrating that in addition to generating quasi-single-photon states, a slight modification to the PhoG device will lead to generation of entanglement at the output.
 
-\paragraph{Part Three:} We finish the Thesis with the inclusion of several appendices containing results which are used at multiple points throughout the Thesis. Appendix~\ref{appendix:cryptography_numerical_methods} contains the forms of quantum states which are used under various channel attacks in Chapter~\ref{chapter:qds}, and a description of how the states may be numerically modelled. Appendix~\ref{appendix:qds_larger_alphabets} contains a generalization to the QDS protocol from Chapter~\ref{chapter:qds} to allow for larger alphabets of coherent states. Appendix~\ref{appendix:qds_noisy_channel} contains results describing the output state of a channel in which an initial coherent state is mixed with thermal noise. This result is used multiple times throughout Part One. Appendix~\ref{appendix:adiabatic_elimination} provides a tool which is used multiple times in Chapter~\ref{chapter:phog} to reduce the complexity of a model by effectively ignoring a mode which reaches its steady state much quicker than the typical decay time of the system. Finally, in Appendix~\ref{appendix:phog_numerical_methods} we describe several numerical methods which may be applied to model the PhoG device. We compare several of them for speed, memory usage and accuracy, and then explicitly display several systems of coupled differential equations which approximate the PhoG device. Appendix~\ref{appendix:bibliography} contains the Bibliograpy.
+\paragraph{Part Three:} We finish the Thesis with the inclusion of several appendices containing results which are used at multiple points throughout the Thesis. Appendix~\ref{appendix:cryptography_numerical_methods} contains the forms of quantum states which are used under various channel attacks in Chapter~\ref{chapter:qds}, and a description of how the states may be numerically modelled. Appendix~\ref{appendix:qds_larger_alphabets} contains a generalization to the QDS protocol from Chapter~\ref{chapter:qds} to allow for larger alphabets of coherent states. Appendix~\ref{appendix:qds_noisy_channel} contains results describing the output state of a channel in which an initial coherent state is mixed with thermal noise. This result is used multiple times throughout Part One. Appendix~\ref{appendix:adiabatic_elimination} provides a tool which is used multiple times in Chapter~\ref{chapter:phog} to reduce the complexity of a model by effectively ignoring a mode which reaches its steady state much quicker than the typical decay time of the system. Finally, in Appendix~\ref{appendix:phog_numerical_methods} we describe several numerical methods which may be applied to model the PhoG device. We compare several of them for speed, memory usage and accuracy, and then explicitly display several systems of coupled differential equations which approximate the PhoG device. 
 
-\section{Introduction to Quantum Optics}
+\section{Introduction to Quantum Physics}
 
+
+%\FloatBarrier
+%\subsection{Quantization of the electromagnetic field}
 
 \FloatBarrier
-\subsection{Quantization of the electromagnetic field}
+\subsection{State vectors and density matrices}\label{sec:intro_state_vectors}
+An ideal quantum state is denoted in the so-called Dirac notation by $\ket{\psi}$. This state has been perfectly prepared with no noise, loss or additional uncertainty due to the preparation. The $\ket{\psi}$ is a vector living in a vector space denoted $\mathcal{H}$, which we call a Hilbert space. The space has dimension $\dims$ which we will typically take to be countably infinite, but there will be several points in this Thesis where we consider a finite $\dims$.
+
+Since $\ket{\psi}$ is a vector it can be written in terms of a set of basis vectors $\left\{\ket{e_j}\right\}_j$
+\begin{equation}
+\ket{\psi} = \sum_j c_j \ket{e_j}
+\end{equation}
+where the number of basis vectors typically equals $\dims$. 
+
+The state $\ket{\psi}$ should be normalized, that is
+\begin{equation}
+\dyad{\psi} = 1,
+\end{equation}
+where the notation $\dyad{\psi}$ denotes 
+\begin{equation}
+\sum_j \left|c_j\right|^2.
+\end{equation}
+
+\noindent We define an eigenstate of an arbitrary quantum operator $\hat{r}$ to be the state $\ket{r}$ such that
+\begin{equation}
+\hat{r} \ket{r} = r \ket{r}
+\end{equation}
+with $r \in \mathbb{C}$.
+
+The basis we choose for vector $\ket{\psi}$ is not unique and we may similarly have expanded $\ket{\psi}$ in terms of eigenstates of $\hat{r}$,
+\begin{equation}
+\ket{\psi} = \sum_j \ket{r}\ip{\psi}{r}
+\end{equation}
+where the $\dyad{r}{\psi} \in \mathbb{C}$ is such that its square modulus $\left|\dyad{r}{\psi}\right|^2$ is the probability that a measurement of $r$ on $\ket{\psi}$ will give outcome $r$.
+
+For convenience any basis vectors we use are chosen to be orthonormal to each other, that is
+\begin{equation}
+\dyad{\hat{e}_j}{\hat{e}_k} = \delta_{j, k}
+\end{equation}
+where $\delta_{j, k}$ is the Kronecker $\delta$ function.
+
+That a state $\ket{\psi}$ may be written as a sum of basis vectors corresponding to different measurement outcomes is a curious one, and a key feature of quantum mechanics known as the \emph{superposition principle}. A superposition state is one of the form
+\begin{equation}\label{eqn:intro_superposition}
+\ket{\psi} = \frac{\ket{0} + \ket{1}}{\sqrt{2}}
+\end{equation}
+where the constant factor $\mathcal{N}$ ensures normalization. We have chosen an abstract orthonormal basis set $\left\{ \ket{0}, \ket{1}\right\}$, and here $\dims=2$. The superposition state possesses a fundamental uncertainty about its measurement outcomes, that is to say, if many identical copies of $\ket{\psi}$ are created, and on each copy a measurement which distinguishes between $\ket{0}$ and $\ket{1}$ is performed, then the measurement will output $0$ half of the time, and $1$ the other half of the time. Such uncertainty is intrinsic to quantum mechanics and is unavoidable. However, it should be noted that unlike a classical uncertainty which one desires to reduce, this quantum uncertainty is highly desirable and forms the basis for many useful applications of quantum states.
+
+The density operator corresponding to a quantum state is
+\begin{equation}
+\hat{\rho} = \sum_{i, j} \rho_{i, j} \dyad{i}{j}
+\end{equation}
+where $\bra{i} \in \mathcal{H}^*$ is dual to $\ket{i}$. The matrix $\rho_{i, j}$ is referred to as the density matrix, though we shall often use the terms \emph{density operator} and \emph{density matrix} interchangably. As such, we will often neglect the hat above $\hat{\rho}$, and simply write $\rho$.
+
+The density operator description of a quantum state allows for a wider range of states to be described than the state vector description. Any state vector $\ket{\psi}$ can be described as a density operator. For example, the state $\ket{\psi}$ in Eq.~\ref{eqn:intro_superposition} may equivalently be described as 
+\begin{equation}
+\rho_\psi = \dyad{\psi}{\psi} = \frac{1}{2} \left(\dyad{0}{0} + \dyad{0}{1} + \dyad{1}{0} + \dyad{1}{1} \right).
+\end{equation}
+However, there are density operators which do not correspond to a state vector. For example, there exists no vector $\ket{\phi}$ such that
+\begin{equation}
+\rho_{\varphi} := \frac{\dyad{0}{0} + \dyad{1}{1}}{2} = \dyad{\phi}.
+\end{equation}
+The density operator formalism may be interpreted as encoding two distinct forms of uncertainty: quantum and classical. The quantum uncertainty arises from states which may be written as superposition state vector, while the classical uncertainty arises from states which cannot. We refer to the first type of summation as superposition, and the second type of summation as classical mixing. The classical mixing represents classical uncertainty about which state the system is in, and may in principle be removed simply by keeping more accurate records, or by building better equipment.
+
+In the $\left\{\ket{0}, \ket{1}\right\}$ basis, the states $\rho_\phi$ and $\rho_\varphi$ may be written as
+\begin{equation}
+\rho_\phi = \frac{1}{2}\pmqty{1 & 1 \\ 1 & 1} \qq{and} \rho_\varphi = \frac{1}{2}\pmqty{1 & 0 \\ 0  & 1}.
+\end{equation}
+
+\noindent The quantum nature of a state $\rho$ is therefore intimately connected to the off-diagonal elements of its density matrix. These off-diagonal elements may be referred to as \emph{coherences}. The density matrix $\rho$ will be our primary tool for describing a quantum state in this Thesis.
+
 
 
 \FloatBarrier
@@ -65,6 +132,7 @@ where the variances in a general quantum state $\ket{\psi}$ are defined as
 \end{align}
 This uncertainty principle implies that we cannot simultaneously measure $\hat{q}$ and $\hat{p}$ with arbitrary precision - in other words $q$ and $p$ are conjugate variables.
 
+The $\mel{\psi}{\hat{q}}{\psi}$ denote the expectation value of $\hat{q}$ in state $\ket{\psi}$. We may equivalently write this as $\ev{\hat{q}}_\psi$, or simply just $\ev{\hat{q}}$ when the corresponding state is obvious. The expectation value of an operator corresponds to the average measurement outcome when many measurements of that operator is performed on the given state.
 
 \noindent The commutator Eq.~\ref{eqn:intro_quadrature_commutator} is equivalent to the commutator describing position and momentum of a quantum particle, and so we denote $\hat{x}$ as the position operator and $\hat{p}$ as the momentum operator. Indeed, it is easy to show that
 \begin{equation}
@@ -74,78 +142,14 @@ the right-hand side of which describes the energy of a simple harmonic oscillato
 
 
 
-\FloatBarrier
-\subsection{State vectors and density matrices}\label{sec:intro_state_vectors}
-An ideal quantum state is denoted in the so-called Dirac notation by $\ket{\psi}$. This state has been perfectly prepared with no noise, loss or additional uncertainty due to the preparation. The $\ket{\psi}$ is a vector living in a vector space denoted $\mathcal{H}$, which we call a Hilbert space. The space has dimension $\dims$ which we will typically take to be countably infinite, but there will be several points in this Thesis where we consider a finite $\dims$.
 
-Since $\ket{\psi}$ is a vector it can be written in terms of a set of basis vectors $\left\{\ket{e_j}\right\}_j$
-\begin{equation}
-\ket{\psi} = \sum_j c_j \ket{e_j}
-\end{equation}
-where the number of basis vectors typically equals $\dims$. 
 
-The state $\ket{\psi}$ should be normalized, that is
-\begin{equation}
-\dyad{\psi} = 1,
-\end{equation}
-where the notation $\dyad{\psi}$ denotes 
-\begin{equation}
-\sum_j \left|c_j\right|^2.
-\end{equation}
 
-\noindent We define an eigenstate of an arbitrary quantum operator $\hat{r}$ to be the state $\ket{r}$ such that
-\begin{equation}
-\hat{r} \ket{r} = r \ket{r}
-\end{equation}
-with $r \in \mathbb{C}$.
-
-The basis we choose for vector $\ket{\psi}$ is not unique and we may similarly have expanded $\ket{\psi}$ in terms of eigenstates of $\hat{r}$,
-\begin{equation}
-\ket{\psi} = \sum_j \dyad{r}{\psi}\ket{r}
-\end{equation}
-where the $\dyad{r}{\psi} \in \mathbb{C}$ is such that its square modulus $\left|\dyad{r}{\psi}\right|^2$ is the probability that a measurement of $r$ on $\ket{\psi}$ will give outcome $r$.
-
-For convenience any basis vectors we use are chosen to be orthonormal to each other, that is
-\begin{equation}
-\dyad{\hat{e}_j}{\hat{e}_k} = \delta_{j, k}
-\end{equation}
-where $\delta_{j, k}$ is the Kronecker $\delta$ function.
-
-That a state $\ket{\psi}$ may be written as a sum of basis vectors corresponding to different measurement outcomes is a curious one, and a key feature of quantum mechanics known as the \emph{superposition principle}. A superposition state is one of the form
-\begin{equation}\label{eqn:intro_superposition}
-\ket{\psi} = \frac{\ket{0} + \ket{1}}{\sqrt{2}}
-\end{equation}
-where the constant factor $\mathcal{N}$ ensures normalization. We have chosen an abstract orthonormal basis set $\left\{ \ket{0}, \ket{1}\right\}$, and here $\dims=2$. The superposition state possesses a fundamental uncertainty about its measurement outcomes, that is to say, if many identical copies of $\ket{\psi}$ are created, and on each copy a measurement which distinguishes between $\ket{0}$ and $\ket{1}$ is performed, then the measurement will output $0$ half of the time, and $1$ the other half of the time. Such uncertainty is intrinsic to quantum mechanics and is unavoidable. However, it should be noted that unlike a classical uncertainty which one desires to reduce, this quantum uncertainty is highly desirable and forms the basis for many useful applications of quantum states.
-
-The density operator corresponding to a quantum state is
-\begin{equation}
-\hat{\rho} = \sum_{i, j} \rho_{i, j} \dyad{i}{j}
-\end{equation}
-where $\bra{i} \in \mathcal{H}^*$ is dual to $\ket{i}$. The matrix $\rho_{i, j}$ is referred to as the density matrix, though we shall often use the terms \emph{density operator} and \emph{density matrix} interchangably. As such, we will often neglect the hat above $\hat{\rho}$, and simply write $\rho$.
-
-The density operator description of a quantum state allows for a wider range of states to be described than the state vector description. Any state vector $\ket{\psi}$ can be described as a density operator. For example, the state $\ket{\psi}$ in Eq.~\ref{eqn:intro_superposition} may equivalently be described as 
-\begin{equation}
-\rho_\psi = \dyad{\psi}{\psi} = \frac{1}{2} \left(\dyad{0}{0} + \dyad{0}{1} + \dyad{1}{0} + \dyad{1}{1} \right).
-\end{equation}
-However, there are density operators which do not correspond to a state vector. For example, there exists no vector $\ket{\phi}$ such that
-\begin{equation}
-\rho_{\varphi} := \frac{\dyad{0}{0} + \dyad{1}{1}}{2} = \dyad{\phi}.
-\end{equation}
-The density operator formalism may be interpreted as encoding two distinct forms of uncertainty: quantum and classical. The quantum uncertainty arises from states which may be written as superposition state vector, while the classical uncertainty arises from states which cannot. We refer to the first type of summation as superposition, and the second type of summation as classical mixing. The classical mixing represents classical uncertainty about which state the system is in, and may in principle be removed simply by keeping more accurate records, or by building better equipment.
-
-In the $\left\{\ket{0}, \ket{1}\right\}$ basis, the states $\rho_\phi$ and $\rho_\varphi$ may be written as
-\begin{equation}
-\rho_\phi = \frac{1}{2}\pmqty{1 & 1 \\ 1 & 1} \qq{and} \rho_\varphi = \frac{1}{2}\pmqty{1 & 0 \\ 0  & 1}.
-\end{equation}
-
-\noindent The quantum nature of a state $\rho$ is therefore intimately connected to the off-diagonal elements of its density matrix. These off-diagonal elements may be referred to as \emph{coherences}. 
-
-The density matrix $\rho$ will be our primary tool for describing a quantum state in this Thesis.
 
 
 \FloatBarrier
 \subsection{Wigner function}
-An equivalent description of the quantum state is to use a (\emph{quasi})-probability distribution known as the Wigner function. The Wigner function, $W\left(q, p\right)$ allows operator expectation values to be calculated and so can be thought of as an accurate description of the quantum state. We desire $W\left(q, p\right)$ to behave analogously to a joint probability distribution, and by analogy with a classical phase space picture in which the system is described in terms of position and canonical momentum, we introduce a quantum phase space. A phase space picture is not strictly necessary for the work in this Thesis, but the Wigner function provides a useful visualisation tool.
+An equivalent description of a quantum state $\rho$ is to use a (\emph{quasi})-probability distribution known as the Wigner function. The Wigner function, $W\left(q, p\right)$ allows operator expectation values to be calculated and so can be thought of as an accurate description of the quantum state. We desire $W\left(q, p\right)$ to behave analogously to a joint probability distribution, and by analogy with a classical phase space picture in which the system is described in terms of position and canonical momentum, we introduce a quantum phase space. A phase space picture is not strictly necessary for the work in this Thesis, but the Wigner function provides a useful visualisation tool.
 
 One immediate observation is that the quantum phase space must behave qualitatively differently to the classical one. Because of Heisenberg's principle we cannot accurately define a joint probability distribution of position $q$ and momentum $p$, and this leads to interesting behaviours of the phase space distribution, such as becoming negative (for Wigner functions) or highly singular (for ``$P$-functions''). Indeed, one may even measure the ``quantumness'' of a given state by checking how pathological is the chosen quasi-probability distribution.
 
@@ -155,7 +159,11 @@ We define the Wigner function corresponding to density operator $\hat{\rho}$ as 
 W\left(q, p\right) = \frac{1}{2 \pi} \int\limits_{-\infty}^{\infty} \mathrm{d}x \; \exp\left(i p x\right) \mel{q - \frac{x}{2}}{\hat{\rho}}{q + \frac{x}{2}}.
 \end{equation}
 
-\MT{Look at q and p marginals.}
+The marginal distributions of $W$ are genuine probability distributions, and are given by tracing out the conjugate quadrature:
+
+\begin{equation}
+\text{P}\left(q\right) = \int\limits_{-\infty}^\infty \mathrm{d}p \; W\left(q, p\right) \qq{and} \text{P}\left(p\right) = \int\limits_{-\infty}^\infty \mathrm{d}q \; W\left(q, p\right).
+\end{equation}
 
 \noindent A useful feature of the Wigner function is that traces over operators may be calculated as
 
@@ -164,11 +172,11 @@ W\left(q, p\right) = \frac{1}{2 \pi} \int\limits_{-\infty}^{\infty} \mathrm{d}x 
 \end{equation}
 where $W_i\left(q, p\right)$ is the Wigner function corresponding to operator $\hat{O}_i$. Operator expectation values with respect a given state $\hat{\rho}$ may be calculated using Eq.~\ref{eqn:wigner_overlap}. 
 
-The well known Heisenberg uncertainty relation expresses itself in the Wigner function picture by imposing a minimum area which a quantum state must occupy. In the following sections we will see some examples of quantum states and their corresponding Wigner functions. 
+The well known Heisenberg uncertainty relation expresses itself in the Wigner function picture by imposing a minimum area which a quantum state must occupy. In the following sections we will see some examples of quantum states and their corresponding Wigner functions. In all plots of Wigner functions, the colour blue denotes $W\left(q, p\right) >0$ while red denotes $W \left(q, p\right) <0$. Negativity in the Wigner function is a clear sign that the underlying state is nonclassical\footnote{Indeed, the only pure quantum states with non-negative Wigner functions are those with Gaussian Wigner function, i.e. the Glauber coherent states and the quadrature squeezed states.}.
 
 
 
-Finally, we must note that the Wigner function is not the only quasi-probability distribution which one could define on the phase space. It is a purely non-classical feature that there are multiple ways to consistently define a phase space description. Other common quasi-probability distributions are: the Hussimi $Q$ function \MT{cite} which is intimately related to Heterodyne measurement; Glauber-Sudarshan \MT{spelling} $P$ function which is often used to describe mixtures of coherent states and becomes highly singular in all other cases; and the positive-$P$ function which is a generalization to the $P$ function defined as non-diagonal in the coherent state basis, and which allows quantum effects such as squeezing to be described. One may also use these quasi-probability distributions to predict dynamics of the system using a Fokker-Planck equation \MT{cite}.
+Finally, we must note that the Wigner function is not the only quasi-probability distribution which one could define on the phase space. It is a purely non-classical feature that there are multiple ways to consistently define a phase space description. Other common quasi-probability distributions are: the Hussimi $Q$ function \cite{Hussimi1940} which is intimately related to Heterodyne measurement; Glauber-Sudarshan \MT{spelling} \cite{Glauber1963} $P$ function which is often used to describe mixtures of coherent states and becomes highly singular in all other cases; and the positive-$P$ function which is a generalization to the $P$ function defined as non-diagonal in the coherent state basis, and which allows quantum effects such as squeezing to be described \cite{Walls_Millburn_textbok}. One may also use these quasi-probability distributions to predict dynamics of the system using a Fokker-Planck equation \cite{Carmichael1999}.
 
 
 \FloatBarrier
@@ -224,7 +232,7 @@ The coherent state has amplitude $\alpha \in \mathbb{C}$, and we display several
 \begin{figure}[htp]
 \centering
 \captionsetup{width=0.8\linewidth}
-\includegraphics[draft=false, width=0.8\linewidth]{introduction/coherent}
+\includegraphics[draft=false, width=0.5\linewidth]{introduction/coherent}
 \caption{\label{fig:intro_coherent_wigner} Wigner function for coherent state $\ket{\alpha}$ with $\alpha = 1 + 1i$.}
 \end{figure}
 
@@ -255,25 +263,25 @@ Finally, we consider a special case of the coherent states, that with eigenvalue
 \begin{figure}[htp]
 \captionsetup{width=0.8\linewidth}
 \centering
-\begin{subfigure}[b]{0.4\linewidth}
+\begin{subfigure}[b]{0.49\linewidth}
 \includegraphics[draft=false, width=\linewidth]{introduction/qpsk_1}
 \caption{}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\linewidth}
+\begin{subfigure}[b]{0.49\linewidth}
 \includegraphics[draft=false, width=\linewidth]{introduction/qpsk_2}
 \caption{}
 \end{subfigure}
-\caption{\label{fig:qpsk} The Wigner function for a mixture over $\mathcal{A}_4$ is a sum of individual Wigner functions for each of the coherent states. QPSK alphabet with (a) $\alpha=1.5$; (b) $\alpha=0.8$ \MT{Beef up caption.}}
+\caption{\label{fig:qpsk} The Wigner function for a mixture over $\mathcal{A}_4$ is a sum of individual Wigner functions for each of the coherent states. QPSK alphabet with (a) $\alpha=1.5$; (b) $\alpha=0.8$.}
 \end{figure}
 
 \begin{figure}[htp]
 \captionsetup{width=0.8\linewidth}
 \centering
-\begin{subfigure}[b]{0.4\linewidth}
+\begin{subfigure}[b]{0.49\linewidth}
 \includegraphics[draft=false, width=\linewidth]{introduction/8psk_1}
 \caption{}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\linewidth}
+\begin{subfigure}[b]{0.49\linewidth}
 \includegraphics[draft=false, width=\linewidth]{introduction/8psk_2}
 \caption{}
 \end{subfigure}
@@ -301,7 +309,7 @@ We display the Wigner function of a thermal state in Fig.~\ref{fig:thermal_state
 \begin{figure}[htp]
 \captionsetup{width=0.8\linewidth}
 \centering
-\includegraphics[draft=false, width=0.4\linewidth]{introduction/thermal_state}
+\includegraphics[draft=false, width=0.49\linewidth]{introduction/thermal_state}
 \caption{\label{fig:thermal_state} The thermal state Wigner function is Gaussian, with variance greater than the vacuum state vacuum, depicted in orange.}
 \end{figure}
 
@@ -318,7 +326,7 @@ Quadrature squeezing is generated by application of the squeezing operator
 \begin{figure}[htp]
 \captionsetup{width=0.8\linewidth}
 \centering
-\includegraphics[width=0.8\linewidth, draft=false]{introduction/squeeze}
+\includegraphics[width=\linewidth, draft=false]{introduction/squeeze}
 \caption{\label{fig:intro_quadrature_squeezed_wigner} Quadrature squeezed states. Squeezing operator $\hat{S}\left(\zeta\right)$ has been applied to vacuum. (a) $\zeta = 1.0$. (b) $\zeta = -1.0$. Orange circles denote vacuum variance. Squeezed states allow for reduced uncertainty in one quadrature, at the expense of increased uncertainty in the conjugate quadrature.}
 \end{figure}
 
@@ -335,7 +343,7 @@ In addition to the quadrature squeezing discussed above, in which the variance i
 \begin{figure}[htp]
 \centering
 \captionsetup{width=0.8\linewidth}
-\includegraphics[draft=false, width=0.6\linewidth]{introduction/photon_number_squeezed}
+\includegraphics[draft=false, width=0.5\linewidth]{introduction/photon_number_squeezed}
 \caption{\label{fig:intro_photon_number_squeezed_wigner} A photon-number squeezed state has reduced photon number uncertainty, at the expense of increased uncertainty in phase. In the limit of zero photon number uncertainty one obtains a Fock state, Fig.~\ref{fig:intro_fock_wigner}. This state is only slightly photon-number squeezed, but more closely represents a Fock state Wigner function than a quadrature squeezed state does. }
 \end{figure}
 
@@ -419,14 +427,14 @@ where the position quadratures are correlated and the momentum quadratures are a
 \begin{figure}[htp]
 \captionsetup{width=0.8\linewidth}
 \centering
-\includegraphics[draft=false, width=0.8\linewidth]{introduction/tmsv_wigner}
+\includegraphics[draft=false, width=\linewidth]{introduction/tmsv_wigner}
 \caption{\label{fig:tmsv_wigner} Wigner functions of reduced states of a TMSV with $\zeta = 0.65$. The corresponding quadrature wavefunctions are displayed in Fig.~\ref{fig:tmsv_histogram}. Locally the modes look like thermal states with $\bar{n} = 0.5$, c.f. Fig.~\ref{fig:thermal_state}. The vacuum variance is depicted in orange.}
 \end{figure}
 
 \begin{figure}[htp]
 \captionsetup{width=0.8\linewidth}
 \centering
-\includegraphics[draft=false, width=0.8\linewidth]{introduction/tmsv_histogram}
+\includegraphics[draft=false, width=\linewidth]{introduction/tmsv_histogram}
 \caption{\label{fig:tmsv_histogram} Quadrature wavefunction of the TMSV with $\zeta = 0.65$, with corresponding reduced state Wigner functions in Fig.~\ref{fig:tmsv_wigner}. (a) Position representation. (b) Momentum representation. We see that position quadratures are strongly correlated, $q_1 \sim q_2$, while momentum quadratures are strongly anticorrelated, $p_1 \sim - p_2$.}
 \end{figure}
 
@@ -467,7 +475,7 @@ The beamsplitter is one of the most important devices in quantum optics. On an i
 \begin{figure}[htp]
 \centering
 \captionsetup{width=0.8\linewidth}
-\includegraphics[width=0.6\linewidth, draft=false]{introduction/beamsplitter}
+\includegraphics[width=0.5\linewidth, draft=false]{introduction/beamsplitter}
 \caption{\label{fig:intro_beamsplitter} The beamsplitter transforms $\hat{a}_1, \hat{a}_2$ into $\hat{a}_3$, $\hat{a}_4$ via the matrix equation~\ref{eqn:intro_beamsplitter}.}
 \end{figure}
 
@@ -600,7 +608,7 @@ A more realistic treatment of homodyne detection, including discussion of the ra
 \begin{figure}[htp]
 \centering
 \captionsetup{width=0.8\linewidth}
-\includegraphics[draft=false, width=0.6\linewidth]{introduction/homodyne}
+\includegraphics[draft=false, width=0.5\linewidth]{introduction/homodyne}
 \caption{\label{fig:intro_homodyne} The homodyne detector mixes the mode to be measured, $\hat{a}_1$, with a strong local oscillator. The photocurrents are measured and subtracted $I_2 - I_1$, which gives measurement information about $\hat{q}_\theta$. The quadrature angle $\theta$ is controlled via the relative phase of the local oscillator.}
 \end{figure}
 
@@ -689,7 +697,7 @@ The binary entropy is a special case of the Shannon entropy for a binary random 
 \begin{figure}
 \centering
 \captionsetup{width=0.8\linewidth}
-\includegraphics[draft=false, width=0.8\linewidth]{introduction/binary_entropy}
+\includegraphics[draft=false, width=0.5\linewidth]{introduction/binary_entropy}
 \caption{\label{fig:binary_entropy} The binary entropy $\text{h}\left(x\right)$ is bounded by $\log 2$.}
 \end{figure}
 
