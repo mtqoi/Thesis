@@ -420,7 +420,7 @@ The probability $\perr$ corresponds to the probability that a heterodyne measure
 \end{equation}
 
 
-\noindent when the channel has transmittivity $T$. A heterodyne measurement on the output state yields $\left(\qout, \pout\right)$ which we write as $z = \qout + i \pout$. We receive $z$ with probability
+\noindent when the channel has transmission $T$. A heterodyne measurement on the output state yields $\left(\qout, \pout\right)$ which we write as $z = \qout + i \pout$. We receive $z$ with probability
 \begin{align}
 \text{P}\left(z\right) = \langle z | \sqrt{T}\alpha\rangle\langle\sqrt{T}\alpha|z\rangle = \left|\langle z | \sqrt{T} \alpha \rangle \right|^2& \notag \\
 = \frac{1}{\pi}\text{exp}\left( - \left| z - \sqrt{T}\alpha \right|^2 \right)&
@@ -439,7 +439,7 @@ Integrating, we arrive at
 \perr = \frac{1}{2}\text{erfc}\left(\sqrt{\frac{T}{2}}\alpha\right)
 \end{equation}
 
-\noindent which models the probability of honest mismatch over a lossy channel with transmittivity $T$. Probability $\perr$ is motivated in Fig.~\ref{fig:perr} which elucidates the above discussion, and explains why $\perr \ne 0$. An equivalent analysis when the channel contains thermal noise is discussed in Appendix~\ref{appendix:qds_thermal_channel}
+\noindent which models the probability of honest mismatch over a lossy channel with transmission $T$. Probability $\perr$ is motivated in Fig.~\ref{fig:perr} which elucidates the above discussion, and explains why $\perr \ne 0$. An equivalent analysis when the channel contains thermal noise is discussed in Appendix~\ref{appendix:qds_thermal_channel}
 
 \begin{figure}[htp]
 \captionsetup{width=0.8\linewidth}
@@ -621,7 +621,7 @@ In particular, we will study both a beamsplitter attack and an entangling cloner
 \caption{\label{fig:bs0_attack} Attack BS$0$. Bob replaces the channel with a lossless channel, plus a beamsplitter. By inputting vacuum $\dyad{0}$ into the beamsplitter, Bob mimics channel loss while imposing zero excess noise.}
 \end{figure}
 
-In its canonical form, the beamsplitter attack, Fig.~\ref{fig:bs0_attack}, allows Bob to replace a lossy channel, transmittivity $T$, with a corresponding lossless channel and beamsplitter. Bob inputs vacuum $\ket{0}$ into the unused input port. Bob receives his quantum system $\rho_B$ from the reflected output port, and from $\rho_B$ he will attempt to gain information about Charlie's measurement outcomes. Crucially, to honest players Alice and Charlie this attack is indistinguishable from simply having a lossy transmission channel, and so in analysis all channel loss must be attributed to the action of the dishonest Bob.  This attack cannot model any channel thermal noise, which should therefore be ignored in the analysis. A realistic channel will, however, impose noise onto Charlie's measurement outcomes, and below we describe some modificaions to the beamsplitter attack to include this.
+In its canonical form, the beamsplitter attack, Fig.~\ref{fig:bs0_attack}, allows Bob to replace a lossy channel, transmission $T$, with a corresponding lossless channel and beamsplitter. Bob inputs vacuum $\ket{0}$ into the unused input port. Bob receives his quantum system $\rho_B$ from the reflected output port, and from $\rho_B$ he will attempt to gain information about Charlie's measurement outcomes. Crucially, to honest players Alice and Charlie this attack is indistinguishable from simply having a lossy transmission channel, and so in analysis all channel loss must be attributed to the action of the dishonest Bob.  This attack cannot model any channel thermal noise, which should therefore be ignored in the analysis. A realistic channel will, however, impose noise onto Charlie's measurement outcomes, and below we describe some modificaions to the beamsplitter attack to include this.
 
 
 \subsubsection{BS$0$: $\xi = 0$}\label{sec:qds_bs0}
@@ -630,7 +630,7 @@ Attack BS$0$ is depicted in Fig.~\ref{fig:bs0_attack}. This attack is the canoni
 
 Consider a single input coherent state $\dyad{\alpha_k}$, with the $\alpha_k$ chosen uniformly at random from the QPSK alphabet ($k = 0,1,2,3$). Bob's attack effectively inputs the vacuum state $\dyad{0}$ into the second input port of the beamsplitter. We will calculate the Holevo information $\chi$, Eq.~\ref{eqn:intro_holevo}, of Bob's state conditioned on Charlie receiving a particular eliminated signature element after his heterodyne measurement.
 
-Using beamsplitter relation Eq.~\ref{eqn:intro_beamsplitter}, we see that a beamsplitter with transmittivity $T$ enacts the following transformation on the input state:
+Using beamsplitter relation Eq.~\ref{eqn:intro_beamsplitter}, we see that a beamsplitter with transmission $T$ enacts the following transformation on the input state:
 \begin{equation}\label{eqn:qds_coherent_state_beamsplitter}
 \dyad{\alpha_k}_A \otimes \dyad{0}_B \rightarrow \dyad{\sqrt{T} \alpha_k}_C \otimes \dyad{\sqrt{1-T}\alpha_k}_{B}.
 \end{equation}
@@ -706,7 +706,7 @@ and similarly for $p$ quadrature. In other words, the excess noise in the $q$ qu
 \end{equation}
 and should be attributed to the action of dishonest Bob. We will calculate Bob's Holevo information under this attack.
 
-We wish to mix a coherent state $\rho_{\alpha_k} = \dyad{\alpha_k}$ and a thermal state $\rho_{\text{thermal}}$ on a beamsplitter with transmittivity $T$. In Fock basis our states take the following form:
+We wish to mix a coherent state $\rho_{\alpha_k} = \dyad{\alpha_k}$ and a thermal state $\rho_{\text{thermal}}$ on a beamsplitter with transmission $T$. In Fock basis our states take the following form:
 
 \begin{align}
 &\rho_{\alpha_k} = e^{-\left|\alpha_k\right|^2} \sum_{n, m=0}^{\infty} \frac{\alpha_k^n \alpha_k^{* m}}{\sqrt{n! m!}} \dyad{n}{m} \notag \\
@@ -867,7 +867,7 @@ Our chosen $\rps$ is parametrized by two variables $\Delta_r, \Delta_\theta$ in 
 The crucial quantity which controls the security of our QDS protocol is $g_{\text{sec}} := \pe - \perr$, which describes how much more likely a dishonest player is to induce a mismatch than an honest player. We saw in Sec.~\ref{sec:qds_siglength} that our QDS protocol is secure provided that $g_{\text{sec}} > 0$, and that the signature length $L$ required to sign to a given level of security $\varepsilon_{\text{fail}}$ is directly controlled by $g_{\text{sec}}$. We therefore must consider how postselection affects $g_{\text{sec}}$. 
 
 Let us begin with the effect of postselection on $\perr = \perr\left(\Delta_r, \Delta_\theta\right)$. %\MT{I don't want to talk yet about calculating $\perr$ from data - that should wait until the agile chapter.} 
-Recall that when Alice sends state $\ket{\alpha}$ through a lossy but noiseless channel, transmittivity $T$, Charlie receives $c \in \mathbb{C}$ with probability
+Recall that when Alice sends state $\ket{\alpha}$ through a lossy but noiseless channel, transmission $T$, Charlie receives $c \in \mathbb{C}$ with probability
 
 \begin{equation}
 \text{P}\left(c \given \alpha, T\right) = \frac{1}{\pi} \exp\left( - \left| c - \sqrt{T}\alpha\right|^2\right).

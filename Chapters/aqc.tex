@@ -315,7 +315,7 @@ Finally, we note that under a beamsplitter attack BS$0$ Bob's \emph{a priori} st
 \begin{equation}\label{eqn:qdsb_apriori_state}
 \rho_B = \frac{1}{4}\sum_{k=0}^3 |\sqrt{1-T}\alpha_k\rangle\langle\sqrt{1-T}\alpha_k|
 \end{equation}
-when states $|\alpha_k\rangle$ from the QPSK alphabet are sent through lossy channel with transmittivity T. Bob's \emph{a posteriori} state is simply $\rho_{B}^k = |\sqrt{1-T}\alpha_k\rangle\langle \sqrt{1-T}\alpha_k|$, from which his Holevo information is calculated as
+when states $|\alpha_k\rangle$ from the QPSK alphabet are sent through lossy channel with transmission T. Bob's \emph{a posteriori} state is simply $\rho_{B}^k = |\sqrt{1-T}\alpha_k\rangle\langle \sqrt{1-T}\alpha_k|$, from which his Holevo information is calculated as
 
 \begin{equation}
 \chi = S\left(\rho_B\right) - \sum_{k=0}^3 p\left(k\right) S\left(\rho_E^k\right)
@@ -612,7 +612,7 @@ We calculate the parameters entering Tab.~\ref{table:aqc_data_parameters} direct
 \begin{equation}
 \alpha_{\text{Rx}} = \frac{\bar{x}_{\text{out}} + i \bar{p}_{\text{out}}}{\sqrt{2}}.
 \end{equation}
-From Tx to Rx, the distributed state has undergone two primary sources of loss: trusted loss and untrusted loss. Untrusted loss must be attributed to Eve, and is a combination of propagation losses in the fiber, and coupling losses into and out of the fiber. \MT{Check this. Have I received info from MPL at all ever?} We write this as a single number which corresponds to the loss of the channel (or channel transmittivity $T$), and is $-0.65$~dB for the $2$~km channel and $-4.75$~dB for the $20$~km channel. These values were given to us by our experimental collaborators and were measured using their proprietary methods. The trusted loss occurs in the detector Rx and an eavesdropper is assumed to not have access to this. The quoted value is $\approx 50\%$ loss due to Rx.
+From Tx to Rx, the distributed state has undergone two primary sources of loss: trusted loss and untrusted loss. Untrusted loss must be attributed to Eve, and is a combination of propagation losses in the fiber, and coupling losses into and out of the fiber. \MT{Check this. Have I received info from MPL at all ever?} We write this as a single number which corresponds to the loss of the channel (or channel transmission $T$), and is $-0.65$~dB for the $2$~km channel and $-4.75$~dB for the $20$~km channel. These values were given to us by our experimental collaborators and were measured using their proprietary methods. The trusted loss occurs in the detector Rx and an eavesdropper is assumed to not have access to this. The quoted value is $\approx 50\%$ loss due to Rx.
 
 The amplitude sent by Tx may then be calculated as
 \begin{equation}
