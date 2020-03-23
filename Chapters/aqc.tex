@@ -99,7 +99,7 @@ We will consider the following tasks:
 
 \textbf{QSS - quantum secret sharing}: allows for secure distribution of a classical secret among a conspiracy of potentially dishonest recipients.
 
-\textbf{QKD - quantum key distribution}: allows for secure key distribution of identical randomly-generated bits between players. These keys may them be used for encryption via one-time pad \cite{Bennet1984, Schneier1996}.
+\textbf{QKD - quantum key distribution}: allows for secure key distribution of identical randomly-generated bits between players. These keys may them be used for encryption via one-time pad \cite{Bennett1984, Schneier1996}.
 
 The tasks QDS and QSS are discussed in Chapters~\ref{chapter:qds},~\ref{chapter:qss} above, while the reader is referred to Refs.~\cite{Laudenbach2017, Scarani2009} for review of QKD. The tasks QDS and QSS are inherently multipartite, while QKD is inherently bipartite\footnote{Though note the existence of its multipartite generalization - quantum conferencing \cite{Ottaviani2017b, Ottaviani2019}}. In what follows we will use quantum networks with three players to allow for multipartite tasks, while also allowing for bipartite QKD to be performed.
 
@@ -367,7 +367,7 @@ To summarise, our first agile system, \systemB, is capable of performing the sec
 
 In addition to the first agile system described above, which is capable of performing both QDS and QSS tasks, we here introduce and demonstrate a second agile system, \systemF, which runs in the $f$-configuration Fig.~\ref{fig:agile_tasks}. Here, Alice is the sender of quantum states, while Bob and Charlie are the recipients. This system is capable of performing both QDS and QKD tasks.
 
-The QKD protocol contained in \systemF \; already exists in the literature \cite{Leverrier2011a, Papanastasiou2018} and has been an active direction of research for many years. Its inclusion here illustrates that pre-existing protocols may be interpreted through an agile lens. We denote the QKD protocol QKD-$f$. The QDS protocol in $f$-configuration was analysed above in Chapter~\ref{chapter:qds}, and here we rename it as QDS-$f$.
+The QKD protocol contained in \systemF \; already exists in the literature \cite{Leverrier2011, Papanastasiou2018} and has been an active direction of research for many years. Its inclusion here illustrates that pre-existing protocols may be interpreted through an agile lens. We denote the QKD protocol QKD-$f$. The QDS protocol in $f$-configuration was analysed above in Chapter~\ref{chapter:qds}, and here we rename it as QDS-$f$.
 
 Let us briefly consider each protocol in turn.
 
@@ -376,9 +376,9 @@ We bring the QDS protocol considered in Chapter~\ref{chapter:qds} into the syste
 
 
 \subsection{Protocol QKD-$f$}
-QKD using heterodyne detection of a discrete-modulated alphabet of coherent states has long been proposed and analysed, owing to its ease of implementation and high compatibility with installed telecommunications infrastructure \cite{Leverrier2011a, Papanastasiou2018, Zhao2009, Bradler2017, Ghorai2019, Lin2019}. Despite its practical ease of use, theoretical work has lagged behind other CV QKD protocols, which rely on a Gaussian modulation of coherent states. Unlike DV systems, CV systems live in an infinite dimensional Hilbert space and so many of the computational methods available for QKD with single-photons are not immediately transferable \cite{Tomamichel2012}, and unlike Gaussian-modulated CV systems, coherent states with a discrete-modulation cannot be reduced to calculations on the finite-sized covariance matrix.  %TODO: ensure that different modulations are discussed in the intro chapter.
+QKD using heterodyne detection of a discrete-modulated alphabet of coherent states has long been proposed and analysed, owing to its ease of implementation and high compatibility with installed telecommunications infrastructure \cite{Leverrier2011, Papanastasiou2018, Zhao2009, Bradler2017, Ghorai2019, Lin2019}. Despite its practical ease of use, theoretical work has lagged behind other CV QKD protocols, which rely on a Gaussian modulation of coherent states. Unlike DV systems, CV systems live in an infinite dimensional Hilbert space and so many of the computational methods available for QKD with single-photons are not immediately transferable \cite{Tomamichel2012a}, and unlike Gaussian-modulated CV systems, coherent states with a discrete-modulation cannot be reduced to calculations on the finite-sized covariance matrix.  %TODO: ensure that different modulations are discussed in the intro chapter.
 
-Attempts to prove security of discete-modulated CV QKD protocols have made simplifying assumptions in either of these directions. For example, in Refs.~\cite{Leverrier2011a, Ghorai2019, Lin2019} it is assumed that since the amplitude $\alpha$ of coherent states in the chosen QPSK alphabet is small the \emph{a priori} states in the protocol are approximately Gaussian. This allows covariance-matrix based methods to be used for the analysis. This assumption is only strictly true in the limit $\alpha \rightarrow 0$, and it is as yet unproven whether an attack could exploit higher order statistical moments of the \emph{a priori} state which are not captured by the covariance matrix.
+Attempts to prove security of discete-modulated CV QKD protocols have made simplifying assumptions in either of these directions. For example, in Refs.~\cite{Leverrier2011, Ghorai2019, Lin2019} it is assumed that since the amplitude $\alpha$ of coherent states in the chosen QPSK alphabet is small the \emph{a priori} states in the protocol are approximately Gaussian. This allows covariance-matrix based methods to be used for the analysis. This assumption is only strictly true in the limit $\alpha \rightarrow 0$, and it is as yet unproven whether an attack could exploit higher order statistical moments of the \emph{a priori} state which are not captured by the covariance matrix.
 
 %Another direction has been to truncate the size of hilbert space \cite{Ghorai2019, Lin2019, Papanastasiou2018}. This is perhaps a reasonable approach, since one can sensibly bound the dimension of an incoming quantum state by assuming that its energy is upper-bounded
 
@@ -437,7 +437,7 @@ Eve's \emph{a priori} entropy is
 \begin{equation}\label{eqn:qkdf_apriori_entropy}
 S_{\text{apriori}} = S\left[\, \int\limits_{b \in \mathbb{C}} \Diff2 b \; \text{P}\left(b\right) \rho_{\left. E \given b \right.}\right],
 \end{equation}
-from which the Holevo information $\chi$ may be calculated. Attacks BS$1$, BS$2$ and EC may be implemented following an identical analysis to this section. The performance of protocol QKD-$f$ is discussed at length in Ref.~\cite{Papanstasiou2018} and so we refer the reader there. 
+from which the Holevo information $\chi$ may be calculated. Attacks BS$1$, BS$2$ and EC may be implemented following an identical analysis to this section. The performance of protocol QKD-$f$ is discussed at length in Ref.~\cite{Papanastasiou2018} and so we refer the reader there. 
 
 
 
