@@ -3,7 +3,7 @@
 \section{Truncation}
 In this Appendix we display the full form of the quantum states which are used in Chapter.~\ref{chapter:qds} to analyse eavesdropping attacks. Each state is calculated as described in Sec.~\ref{sec:qds_attack_analysis}, and is conditioned on the honest player possessing $c = \qout + i \pout \in \mathbb{C}$, for heterodyne outcomes $\qout, \pout$.
 
-We denote each state as $\tilde{\rho}_{\left. \mathbb{B} \given c\right.}$, where $\mathbb{B}$ denotes that the state belongs to dishonest Bob, while $\left. \mathbb{B} \given c \right.$ makes explicit that this state depends on $c$. Since each state $\tilde{\rho}_{\left. \mathbb{B} \given c\right.}$ is a conditional quantum state \cite{Nielsen2010}, they have norm $\tr{\tilde{\rho}_{\left. \mathbb{B} \given c\right.}}\le 1$. The $\tr{\tilde{\rho}_{\left. \mathbb{B} \given c\right.}} = \text{P}\left(c\right)$ is the probability that Charlie measures $c$. The tilde denotes that the state is sub-normalized, and we will define the normalized state as
+We denote each state as $\tilde{\rho}_{\left. \mathbb{B} \given c\right.}$, where $\mathbb{B}$ denotes that the state belongs to dishonest Bob, while $\left. \mathbb{B} \given c \right.$ makes explicit that this state depends on $c$. Since each state $\tilde{\rho}_{\left. \mathbb{B} \given c\right.}$ is a conditional quantum state \cite{Nielsen2010}, they have norm $\tr\left[\tilde{\rho}_{\left. \mathbb{B} \given c\right.}\right]\le 1$. The $\tr\left[\tilde{\rho}_{\left. \mathbb{B} \given c\right.}\right] = \text{P}\left(c\right)$ is the probability that Charlie measures $c$. The tilde denotes that the state is sub-normalized, and we will define the normalized state as
 
 \begin{equation}
 \rho_{\left. \mathbb{B} \given c \right.} := \frac{\tilde{\rho}_{\left. \mathbb{B} \given c\right.}}{\text{P}\left(c\right)}.
@@ -36,7 +36,7 @@ where
 \end{equation}
 is Alice's input coherent state, with $\alpha_k$ chosen from the QPSK alphabet. 
 
-Enacting beamsplitter relation Eq.~\ref{eqn:intro_beamsplitter} on $\rho_{\text{input}}$ and performing heterodyne detection on Charlie's mode, we arrive at
+Enacting beamsplitter relation Eq.~\ref{eqn:intro_beamsplitter_fock} on $\rho_{\text{input}}$ and performing heterodyne detection on Charlie's mode, we arrive at
 
 \begin{align}
 \tilde{\rho}_{\left. \mathbb{B} \given c \right.} = \sum_k \frac{1}{\pi} e^{-\left|\alpha_k\right|^2}  e^{-\left|c\right|^2} \sum_{n, m = 0}^\infty \sum_{k, l = 0}^{n, m} \frac{\alpha^n \alpha^{* m}}{\sqrt{k! \left(n - k\right)!}} \frac{c^k c^{* l}}{\sqrt{k! l!}}& \notag \\
@@ -61,7 +61,7 @@ with
 
 
 
-\noindent Enacting beamsplitter relation Eq.~\ref{eqn:intro_beampslitter} on $\rho_{\text{input}}$ and heterodyning on Charlie's mode we arrive at %\MT{ TODO: compare this to my MMA file for consistency} - it matches my mma file nicely 
+\noindent Enacting beamsplitter relation Eq.~\ref{eqn:intro_beamsplitter_fock} on $\rho_{\text{input}}$ and heterodyning on Charlie's mode we arrive at %\MT{ TODO: compare this to my MMA file for consistency} - it matches my mma file nicely 
 
 \begin{align}\label{eqn:appendix_bs1_state}
 %
@@ -103,7 +103,7 @@ and Bob's two-mode squeezed vacuum state
 &\times \dyad{n_1 + n_2 - k_1 - k_2}{m_1 + m_2 - l_1 - l_2}\otimes \dyad{n_2}{m_2}.
 \end{align}
 
-To illustrate the power of the EC attack we examine several histograms of $\rho_{\left. \mathbb{B} \given c\right.}$ and show how the correlations between Bob's two modes give him additional information. \MT{TODO: make some nice histograms.}
+%To illustrate the power of the EC attack we examine several histograms of $\rho_{\left. \mathbb{B} \given c\right.}$ and show how the correlations between Bob's two modes give him additional information. \MT{TODO: make some nice histograms.}
 
 
 

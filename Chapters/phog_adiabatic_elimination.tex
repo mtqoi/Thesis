@@ -6,16 +6,18 @@
 
 \chapter{PhoG: Adiabatic elimination}\label{appendix:adiabatic_elimination}
 
-In this appendix we will derive Eq.~\ref{eqn:adiabatic_elimination} which is used in Sec.~\ref{sec:phog_three_mode_model} to simplify the analytical description of a multi-mode bosonic system when one of the modes takes its steady-state. Our analysis will use notation following Ref.~\cite{Shchesnovich2011}. Consider a system involving a highly lossy bosonic mode, $c$. We assume that $c$ decays into a Markovian reservoir with decay rate $\gamma$, and that the system contains additional modes with possible losses, couplings and nonlinearities. 
+In this appendix we will derive Eq.~\ref{eqn:adiabatic_elimination} which is used in Sec.~\ref{sec:phog_three_mode_model} to simplify the analytical description of a multi-mode bosonic system when one of the modes takes its steady-state. Our analysis will use notation following Ref.~\cite{Shchesnovich2011}. 
+
+Consider a system involving a highly lossy bosonic mode, $c$. We assume that $c$ decays into a Markovian reservoir with decay rate $\gamma$, and that the system contains additional modes with possible losses, couplings and nonlinearities. 
 
 After $t \gg 1/\gamma$ the mode $c$ is empty, and it is assumed that this timescale is much faster than all other timescales in the system. Then, for $t \gg 1/\gamma$ the mode $c$ can be assumed to be in its steady-state and so, for example, $\ddt \hat{c} = 0$. This will be used in order to simplify the description of our original system.
 
 The Lindblad master equation for our entire system is
 
 \begin{equation}
-\ddt \rho = - i \left[ \hat{H}, \rho \right] + \gamma \mathcal{L}\left[\hat{c}\right] \rho + \Gamma_j\mathcal{L}\left[f\left(\hat{a}_j\right]\right) \rho
+\ddt \rho = - i \left[ \hat{H}, \rho \right] + \gamma \mathcal{L}\left[\hat{c}\right] \rho + \Gamma_j\mathcal{L}\left[f\left(\hat{a}_j\right)\right] \rho
 \end{equation}
-where $\rho$ is the density matrix describing the entire system and $\hat{H}$ is the system's Hamiltonian, on which we will later derive some restrictions. The term proportional to  $\gamma$ denotes strong loss of mode $c$ into the reservoir, and the term in $\Gamma$ denotes potential other sources of loss which do not affect $c$. Where convenient we shall ignore terms in $\Gamma_j$ until the very last step, since they do not affect our analysis and will always be present.
+where $\rho$ is the density matrix describing the entire system and $\hat{H}$ is the system's Hamiltonian, on which we will later derive some restrictions. The term proportional to  $\gamma$ denotes strong loss of mode $c$ into the reservoir, and the term in $\Gamma$ denotes potential other sources of loss which do not affect $c$. We shall ignore terms in $\Gamma_j$ until the very last step, since they do not affect our analysis and will always be present.
 
 It is easiest to proceed in Heisenberg picture, and so we transform to the adjoint master equation \cite{Breuer2002} which describes the evolution of an arbitrary operator $\hat{A}$
 
@@ -26,11 +28,9 @@ and expand $\hat{H}$ and $\hat{A}$ in terms of normal-ordered powers of creation
 \begin{align}
 &\hat{H} = \sum_{p, q = 0}^{\infty} \hat{H}^{\left(p, q\right)} \left(\hat{c}^\dagger\right)^p \hat{c}^q \label{eqn:appendix_phog_H_expand}  \\
 %
-&\hat{A} = \sum_{p, q = 0}^{\infty} \hat{A}^{\left(p, q\right)}\left(t\right) \left(\hat{c}^\dagger \right)^p. \hat{c}^q \label{eqn:appendix_phog_A_expand}
+&\hat{A} = \sum_{p, q = 0}^{\infty} \hat{A}^{\left(p, q\right)}\left(t\right) \left(\hat{c}^\dagger \right)^p \hat{c}^q \label{eqn:appendix_phog_A_expand}
 \end{align}
-Operators $\hat{H}^{\left(p, q\right)}, \hat{A}^{\left(p, q\right)}$ are, in general, operators acting on the remaining modes of the system.
-
-Let us take Eqs.~\ref{eqn:appendix_phog_H_expand},~\ref{eqn:appendix_phog_A_expand} and substitute into Eq.~\ref{eqn:appendix_phog_adjoint_start}. Grouping terms in $\hat{c}^\dagger, \hat{c}$ we see that 
+Operators $\hat{H}^{\left(p, q\right)}, \hat{A}^{\left(p, q\right)}$ are, in general, operators acting on the remaining modes of the system. Let us take Eqs.~\ref{eqn:appendix_phog_H_expand},~\ref{eqn:appendix_phog_A_expand} and substitute into Eq.~\ref{eqn:appendix_phog_adjoint_start}. Grouping terms in $\hat{c}^\dagger, \hat{c}$ we see that 
 
 \begin{align}
 \ddt A^{\left(m, n\right)}\left(t\right) c^{\dagger m} c^n = i \sum_{p, q, k, l} \left(H^{\left(k, l\right)} A^{\left(p, q\right)}\left(t\right) c^{\dagger k} c^{l} c^{\dagger p} c^q - A^{\left(p, q\right)}\left(t\right) H^{\left(k, l\right)} c^{\dagger p} c^q c^{\dagger k} c^l\right)& \notag \\
