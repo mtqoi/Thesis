@@ -751,7 +751,7 @@ H\left(X\right) = - \sum_{j=1}^N \text{P}\left(X_j\right) \log \text{P}\left(X_j
 \subsection{Binary entropy}
 Let $X$ be a binary random variable, which takes value $0$ with probability $p$ and value $1$ with probability $1-p$. Then the binary entropy of $X$ is defined as
 
-\begin{equation}
+\begin{equation}\label{eqn:intro_binary_entropy}
 \text{h}\left(X\right) = - x \log x - \left(1-x\right) \log \left(1-x\right).
 \end{equation}
 The binary entropy is a special case of the Shannon entropy for a binary random variable. We display the binary entropy $\text{h}\left(X\right)$ in Fig.~\ref{fig:binary_entropy}.
@@ -815,7 +815,7 @@ where the Von Neumann entropy of a quantum system $A$ or $B$ should be understoo
 
 
 \FloatBarrier
-\subsection{Holevo information}
+\subsection{Holevo information}\label{sec:intro_holevo}
 The Holevo information $\chi$ is an upper bound on the mutual information $I$, and plays a crucially important role in many areas of quantum information processing. 
 
 We introduce two players, Alice and Bob. Let Alice prepare a state $\rho_j$, $j = 1, 2, \dots, N$, with probability $p_1, p_2, \dots, p_N$. Bob wishes to distinguish which of the $\rho_j$ Alice has prepared. 
