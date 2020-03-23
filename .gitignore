@@ -48,3 +48,9 @@ Images/SciencePlots-master/*
 *.xml
 *.gz
 /sandbox-blx.bib
+
+
+# Joblib stuff
+*/cache/*
+Images/introduction/__pycache__/*
+Images/introduction/cache/*
