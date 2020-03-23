@@ -697,7 +697,7 @@ We calculate and plot $\chi$ under attack BS$0$ in Fig.~\ref{fig:qds_holevo_comp
 Next, let us consider a modification to attack BS$0$ which will allow us to model lossy channels which also induce excess noise in Charlie's measurement outcomes. In the first modification, denoted BS$1$ and displayed in Fig.~\ref{fig:bs1_attack}, Bob inputs a thermal state $\rho_{\text{thermal}}$, Eq.~\ref{eqn:intro_thermal}, into the second input port of the beamsplitter. This will induce excess noise $\xi > 0$ in Charlie's measurement outcomes consistent with the thermal channel noise,
 where we define the excess noise in Charlie's $q$ quadrature, when coherent state $\ket{\alpha_k}$ was sent, as
 \begin{equation}
-\xi_q = \frac{\text{Var}\left(\qout \given \alpha_k\right)} - \frac{1}{2},
+\xi_q = \text{Var}\left(\qout \given \alpha_k\right) - \frac{1}{2},
 \end{equation}
 and similarly for $p$ quadrature. In other words, the excess noise in the $q$ quadrature is defined as the quadrature variance above the vacuum variance, and similarly for $p$. The total excess noise $\xi$ is then taken to be
 \begin{equation}
@@ -717,7 +717,7 @@ We wish to mix a coherent state $\rho_{\alpha_k} = \dyad{\alpha_k}$ and a therma
 \rho_{\text{input}} = \rho_{\alpha_k} \otimes \rho_{\text{thermal}}.
 \end{equation}
 
-\noindent Enacting beamsplitter relation Eq.~\ref{eqn:intro_beampslitter_fock} on $\rho_{\text{input}}$, and heterodyning on Charlie's mode, we arrive at Bob's conditional output state $\rho_{\left. B \given z_C \right.}$. The state is displayed in full in Eq.~\ref{eqn:appendix_bs1_state}, Appendix.~\ref{appendix:bs1}.
+\noindent Enacting beamsplitter relation Eq.~\ref{eqn:intro_beamsplitter_fock} on $\rho_{\text{input}}$, and heterodyning on Charlie's mode, we arrive at Bob's conditional output state $\rho_{\left. B \given z_C \right.}$. The state is displayed in full in Eq.~\ref{eqn:appendix_bs1_state}, Appendix.~\ref{appendix:bs1}.
 
 
 
