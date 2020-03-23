@@ -4,7 +4,7 @@ In this Appendix we will demonstrate how channel thermal noise affects honest pl
 
 In Appendix~\ref{appendix:crypto_numerical_methods} we introduce an expansion of the coherent state in Fock basis, and use it to demonstrate that enacting a beamsplitter on a coherent state gives a product of coherent states at output. It turns out to be analytically tricky to perform similar operations in the presence of thermal noise (though it is entirely numerically feasible). 
 
-Our main tool will be the Wigner function representation of the quantum states. We will introduce various quantities and relations as we need them, but the reader is referred to Refs.~\cite{Leonhardt2010, Serafini2019, brendon_book} for a more thorough discussion of where such quantities come from. Our strategy is to mix a coherent state with a thermal state on a beamsplitter, which will model the channel. We will then heterodyne on the output in order to give a final expression for the measurement outcomes.
+Our main tool will be the Wigner function representation of the quantum states. We will introduce various quantities and relations as we need them, but the reader is referred to Refs.~\cite{Leonhardt2010, Serafini2017, brendon_book} for a more thorough discussion of where such quantities come from. Our strategy is to mix a coherent state with a thermal state on a beamsplitter, which will model the channel. We will then heterodyne on the output in order to give a final expression for the measurement outcomes.
 
 
 \paragraph{Modelling the channel}
@@ -74,7 +74,7 @@ W_1\left(q, p\right) =  \frac{1}{\pi \left[ 1 + \bar{n}\left(1-T\right)\right]} 
 
 \noindent and the second output mode is identical.
 
-Ideal homodyne measurement corresponds to projection onto a quadrature eigenstate, i.e. $\mel{q}{\rho}{q}$ \cite{Weedbrook2012, Serafini2019}. It can be shown \cite{Leonhardt2010} that in terms of Wigner functions, the overlap between two operators is given by
+Ideal homodyne measurement corresponds to projection onto a quadrature eigenstate, i.e. $\mel{q}{\rho}{q}$ \cite{Weedbrook2012, Serafini2017}. It can be shown \cite{Leonhardt2010} that in terms of Wigner functions, the overlap between two operators is given by
 
 \begin{equation}
 \tr\left[\hat{F}_1 \hat{F}_2 \right] = 2 \pi \iint_{-\infty}^\infty \mathrm{d}q \; \mathrm{d}p \; W_1\left(q, p\right) W_2\left(q, p\right),
