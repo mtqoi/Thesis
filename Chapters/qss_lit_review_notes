@@ -57,7 +57,7 @@ Wei2016 (published in 2018) (don't need to monitor signal disturbance. Based on 
 Lu2017a (d-level quantum system. Allows for different access structures)
 Asouden2017a (noisy environments)
 Lu2018 (uses quantum fourier transform and generalized pauli operators. I think this paper is unfair on Schmid)
-Grice2019 (claims to be immune to trojan-horse attacks, but I'm not so sure. Uses ideas from Kogias2017 for its security proof)
+Grice2019 (claims to be immune to trojan-horse attacks, but I'm not so sure. Uses ideas from Kogias2017 for its security proof)	
 Deng2005 (points out trojan-horse attack on Schmid. Proposes a solution)
 Qin2006 (points out another type of attack on Schmid. Proposes a solution)
 
