@@ -510,7 +510,7 @@ Let us introduce some additional tools which will help us to describe the quantu
 
 \FloatBarrier
 \subsection{Covariance matrix}
-We define a ``Gaussian'' state as one with a Gaussian Wigner function. A Gaussian function can be entirely described by its first and second moments; the first moment is its mean, and the second moment is its (co)-variance. We introduce the ``covariance matrix'' of a multi-mode Gaussian state as a quantity which contains all information about the state's second moments. Then, for a Gaussian state, the covariance matrix offers an equivalent description of the state to the Wigner function or density matrix descriptions. 
+We define a ``Gaussian'' state as one with a Gaussian Wigner function. A Gaussian function can be entirely described by its first and second moments; the first moment is its mean, and the second moment is its (co)-variance. We introduce the ``covariance matrix'' of a multi-mode Gaussian state as a quantity which contains all information about the state's second moments. Then, for a Gaussian state, the covariance matrix offers a description of the quantum state which is equivalent to the Wigner function or density matrix descriptions. 
 
 
 Let two modes be labelled $1$ and $2$. Then the covariance matrix element $\sigma_{j, k}$ is constructed as
@@ -518,7 +518,7 @@ Let two modes be labelled $1$ and $2$. Then the covariance matrix element $\sigm
 \begin{equation}\label{eqn:intro_covariancematrix}
 \sigma_{j, k} = \frac{1}{2} \left[ \ev{d_j d_k} + \ev{d_k d_j}\right] - \ev{d_j} \ev{d_k}
 \end{equation}
-with vector $\overrightarrow{d} = \left[\hat{x}_1, \hat{p}_1, \hat{x}_2, \hat{p}_2 \right]$, with the natural generalization to $N$ modes. The covariance matrix $\sigma$ is thus a $4 \times 4$ (or $2 N \times 2 N$) matrix . 
+where vector $\overrightarrow{d} = \left[\hat{x}_1, \hat{p}_1, \hat{x}_2, \hat{p}_2 \right]$, with the natural generalization to $N$ modes. The covariance matrix $\sigma$ is thus a $4 \times 4$ (or $2 N \times 2 N$) matrix . 
 
 A key quantity of the covariance matrix is its ``symplectic eigenvalues,'' which are defined as the absolute values of the eigenspectrum of the matrix
 \begin{equation}
@@ -545,7 +545,7 @@ The beamsplitter is one of the most important devices in quantum optics. On an i
 \end{figure}
 
 
-The beamsplitter transformation which we will make extensive use of in this Thesis is
+The beamsplitter transformation which we will make use of in this Thesis is
 \begin{equation}\label{eqn:intro_beamsplitter}
 \pmqty{\hat{a}_3 \\ \hat{a}_4} = \pmqty{\tau & -\rho \\  \rho & \tau} \pmqty{\hat{a}_1 \\ \hat{a}_2},
 \end{equation}
@@ -575,9 +575,9 @@ We now introduce some formalisms which will account for dynamics of a quantum sy
 \ddt \rho = - i \left[\hat{H}, \rho \right],
 \end{equation}
 
-\noindent with $\hat{H}$ the ``Hamiltonian'' which controls the time-evolution of $\rho$. Although exact, the Von Neumann equation is often difficult to solve, especially in the case of very large $\rho$.
+\noindent with $\hat{H}$ the Hamiltonian which controls the time-evolution of $\rho$. Although exact, the Von Neumann equation is often difficult to solve, especially in the case of very large $\rho$.
 
-There are many instances, however, where we do not care about modelling precise evolution of all degrees of freedom of $\rho$. One may think, perhaps, of a few quantum modes of interest which are weakly coupled to many more modes. We denote the interesting modes as ``system'' and the uninteresting ones as ``reservoir'', and write $\rho_S = \tr_R\left[\rho\right]$. In this case, instead of solving the Von Neumann equation we can model the evolution of $\rho_S$ using the ``Lindblad master equation'':
+There are many instances, however, where we do not care about modelling precise evolution of all degrees of freedom of $\rho$. One may think, perhaps, of a few quantum modes of interest which are weakly coupled to many more modes. We denote the interesting modes as ``system'' and the uninteresting ones as ``reservoir'', and write $\rho_S = \tr_R\left[\rho\right]$. In this case, instead of solving the Von Neumann equation we can model the evolution of $\rho_S$ using the Lindblad master equation:
 
 \begin{equation}\label{eqn:intro_lindblad}
 \ddt \rho_S = - i \left[ \hat{H}_S, \rho_S \right] + \gamma \mathcal{L}\left[\hat{A}\right] \rho_S,
@@ -594,7 +594,7 @@ We will make use of the Lindblad master equation with several different collapse
 
 \FloatBarrier
 \section{Quantum measurement}
-We define a set of measurement operators $\left\{\hat{M}_j\right\}$ which may act on a quantum state $\ket{\psi}$. Each measurement operator corresponds to a different possible measurement outcome $j$. The probability that $j$ is observed after measurement on $\ket{\psi}$ is given by the overlap
+We define a set of measurement operators $\left\{\hat{M}_j\right\}$ which act on a quantum state $\ket{\psi}$, each measurement operator corresponding to a different possible measurement outcome $j$. The probability that $j$ is observed after measurement on $\ket{\psi}$ is given by the overlap
 \begin{equation}
 \text{P}\left(j\right) = \bra{\psi}\hat{M}^\dagger_j \hat{M}_j\ket{\psi},
 \end{equation}
@@ -606,7 +606,7 @@ The set $\left\{\hat{M}_j\right\}$ should allow for any possible outcome $j$, an
 \begin{equation}
 \sum_j \hat{M}_j^\dagger \hat{M} = \mathds{1},
 \end{equation}
-which encodes the normalization requirement for a probability distribution
+which encodes the normalization requirement for the probability distribution
 \begin{equation}
 \sum_j \text{P}\left(j\right) = 1.
 \end{equation}
@@ -640,14 +640,15 @@ A homodyne detection scheme consists in measurement of quadrature operator $\hat
 \begin{equation}
 \text{P}\left(q_\theta\right) = \ev{\rho}{q_\theta}
 \end{equation}
-where $\ket{q_\theta}$ is the eigenstate of $\hat{q}_\theta$, in the sense defined in Eq.~\ref{eqn:intro_quadrature_state}. A homodyne measurement must specify the quadrature $\hat{q}_\theta$ which is being measured, then the set of operators $\dyad{q_\theta}$ form the homodyne POVM.
+where $\ket{q_\theta}$ is the eigenstate of $\hat{q}_\theta$ (c.f. Eq.~\ref{eqn:intro_quadrature_state}).% A homodyne measurement must specify the quadrature $\hat{q}_\theta$ which is being measured, then 
+The set of operators $\dyad{q_\theta}$ form the homodyne POVM.
 
 %Without loss of generality, consider just the position ($q$) and momentum ($p$) outcomes. The probability distributions $\text{P}\left(q\right), \text{P}\left(p\right)$ of homodyne measurement outcomes of state $\rho$ are equivalently given by marginal integrals of the Wigner function corresponding to $\rho$, over the conjugate quadrature:
 %\begin{equation}
 %\text{P}\left(q\right) = \int\limits_{-\infty}^\infty \mathrm{d}p \; W_\rho\left(q, p\right) \qq{and} \text{P}\left(p\right) = \int\limits_{-\infty}^\infty \mathrm{d}q \; W_\rho\left(q, p\right).
 %\end{equation}
 
-\noindent In practice the homodyne POVM is realised by mixing $\rho$ with a strong coherent state $\ket{\alpha}$, $\left|\alpha\right| \gg 1$ (the so-called ``local oscillator''), on a balanced ($50/50$) beamsplitter, and subtracting the photocurrents from each output arm. We depict this process in Fig.~\ref{fig:intro_homodyne}. We assume in the ideal case that the photocurrents $I_1$ and $I_2$ are such that
+In practice the homodyne POVM is realised by mixing $\rho$ with a strong coherent state $\ket{\alpha}$, $\left|\alpha\right| \gg 1$ (the so-called ``local oscillator''), on a balanced ($50/50$) beamsplitter, and subtracting the measured photocurrents at output arm from each other. We depict this process in Fig.~\ref{fig:intro_homodyne}. We assume in the ideal case that the photocurrents $I_1$ and $I_2$ are such that
 \begin{equation}
 I_1 \propto \hat{n}_1 \qq{and} I_2 \propto \hat{n}_2 \qq{with} \hat{n}_i = \hat{a}_i^\dagger \hat{a}_i,
 \end{equation}
@@ -686,7 +687,7 @@ A heterodyne measurement scheme corresponds to the POVM
 The measurement gives outcome $\alpha$ with probability $(1/2\pi)\ev{\rho}{\alpha}$. This scheme may be realised as a ``double-homodyne'' protocol, in which an input state $\rho$ is split on a balanced beamsplitter, and conjugate quadratures $\hat{q}_1$, $\hat{p}_2$ are measured on different output arms. Since they operate on different modes, the operators $\hat{q}_1$, $\hat{p}_2$ must commute. Simultaneous measurement of conjugate quadratures on the \emph{same} mode cannot be performed with arbitrary accuracy, and so the heterodyne measurement outcomes must pay the penalty of increased variance in $\text{P}\left(q\right)$, $\text{P}\left(p\right)$. Physically this arises from mixing with $\rho$ with vacuum on the first beamsplitter.
 
 
-The heterodyne detector allows us to consistently define a joint probability distribution of the measurement outcomes $q_1$, $p_2$. This function is known as the Hussimi $Q$ function and is a well-defined probability distribution on the phase space\footnote{Unlike others such as Wigner function or $P$ function, which we refer to only as quasi-probability distributions}. The Hussimi function corresponding to $\rho$ is thus
+The heterodyne detector allows us to consistently define a joint probability distribution of the measurement outcomes $q_1$, $p_2$. This function is known as the Hussimi $Q$ function and is a well-defined probability distribution on the phase space\footnote{Unlike others such as Wigner function or $P$ function, which we refer to only as \emph{quasi}-probability distributions}. The Hussimi function corresponding to $\rho$ is thus
 \begin{equation}
 Q\left(q, p\right) = \frac{1}{2\pi} \ev{\rho}{\alpha} \qq{with} \alpha = \frac{q + i p}{\sqrt{2}}.
 \end{equation}
@@ -699,7 +700,7 @@ Q\left(q, p\right) = \frac{1}{2\pi} \ev{\rho}{\alpha} \qq{with} \alpha = \frac{q
 
 \FloatBarrier
 \section{Entropy and probability}
-We will introduce and discuss some quantum entropies which we will use in the first part of this Thesis. Quantum entropies are a marvellous and interesting area of quantum information theory, and there are many interesting similarities with and departures from classical information theory. Below we summarise some of the key results which we will make use of in this Thesis, and the reader is referred to Refs.~\cite{Nielsen2010, Tomamichel2016, Wilde2015, Watrous2019} for further information.
+We will introduce and discuss some quantum entropies which are used in the first part of this Thesis. Quantum entropies are a marvellous and interesting area of quantum information theory, and there are many interesting similarities with and departures from classical information theory. Below we summarise some of the key results which we will make use of in this Thesis, and the reader is referred to Refs.~\cite{Nielsen2010, Tomamichel2016, Wilde2015, Watrous2019} for further information.
 
 
 
@@ -708,7 +709,7 @@ We will introduce and discuss some quantum entropies which we will use in the fi
 Let $X$ and $Y$ denote random variables, with their associated probability distributions $\text{P}\left(X\right), \text{P}\left(Y\right)$. The conditional probability of $X$ given $Y$, $\text{P}\left(X \given Y\right)$ measures the probability of event $X$, given prior knowledge of event $Y$. The probabilities $\text{P}\left(X\right)$, $\text{P}\left(Y\right)$ are known as the marginal probabilities, and are related to the conditional probability by summing over values of the prior $Y$:
 
 \begin{equation}
-\text{P}\left(X\right) = \sum_{Y=y} \text{P}\left(X \given Y\right) \text{P}\left(Y\right).
+\text{P}\left(X\right) = \sum_{Y=y} \text{P}\left(X \given Y=y\right) \text{P}\left(Y=y\right).
 \end{equation}
 
 \noindent Bayes' theorem may be used to relate conditional probabilities to each other:
@@ -755,7 +756,7 @@ Let $X$ be a binary random variable, which takes value $0$ with probability $p$ 
 \end{equation}
 The binary entropy is a special case of the Shannon entropy for a binary random variable. We display the binary entropy $\text{h}\left(X\right)$ in Fig.~\ref{fig:binary_entropy}.
 
-\begin{figure}
+\begin{figure}[htp]
 \centering
 \captionsetup{width=0.8\linewidth}
 \includegraphics[draft=false, width=0.5\linewidth]{introduction/binary_entropy}
@@ -817,7 +818,7 @@ where the Von Neumann entropy of a quantum system $A$ or $B$ should be understoo
 \subsection{Holevo information}
 The Holevo information $\chi$ is an upper bound on the mutual information $I$, and plays a crucially important role in many areas of quantum information processing. 
 
-We introduce two players, Alice and Bob. Let Alice prepare a state $\rho_j$, $j = 1, 2, \dots, N$, with probability $p_1, p_2, \dots, p_N$. Bob wishes to distinguish whichof the $\rho_j$ Alice has prepared. 
+We introduce two players, Alice and Bob. Let Alice prepare a state $\rho_j$, $j = 1, 2, \dots, N$, with probability $p_1, p_2, \dots, p_N$. Bob wishes to distinguish which of the $\rho_j$ Alice has prepared. 
 
 Bob may perform any measurement described by POVM elements $\left\{E_K\right\}$, and he receives a measurement outcome $K$. Then the mutual information $I\left(j : K\right)$ describes the knowledge of which $\rho_j$ was prepared, given Bob's measurement outcome $K$. The mutual information us upper bounded by the Holevo information
 
@@ -842,7 +843,7 @@ Throughout this Thesis we will refer to the first term in Eq.~\ref{eqn:intro_hol
 \FloatBarrier
 \subsection{Conditioning cannot increase entropy}
 
-A useful property of both Shannon and Von Neumann entropies is that ``conditioning cannot increase entropy.'' Quantitatively, we have for a quantum state $\rho_{A, B}$
+A useful property of both Shannon and Von Neumann entropies is that ``conditioning cannot increase entropy.'' This directly encodes the intuition that gaining more information about a system cannot lead to increased uncertainty - at worst it will leave the uncertainty in our knowledge unchanged. Quantitatively, we have for a quantum state $\rho_{A, B}$
 
 \begin{equation}
 \text{S}\left(A\right) \ge \text{S}\left( A \given B \right),
