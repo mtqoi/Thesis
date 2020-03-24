@@ -6,7 +6,7 @@
 
 This Thesis consists of two halves. In the first half, we consider several related cryptographic protocols which securely perform the tasks of Quantum Digital Signatures (QDS) and Quantum Secret Sharing (QSS). Our goals here are, firstly: to remove an assumption of secure quantum channels from continuous-variable (CV) QDS, and provide a security proof when an eavesdropping attack is permitted; and secondly: to demonstrate that several CV quantum cryptographic protocols may be performed over identical hardware setups, while the hardware at the quantum level is agnostic to the protocol being implemented. This so-called ``agile" approach illustrates a translation of cryptographic agility from classical (conventional) cryptography to quantum cryptography, and allows for a move towards secure and practical quantum cryptosystems which can perform multiple tasks.
 
-In the second half we consider the task of quantum state generation. We design and analyse a system which is capable to deterministically produce highly non-classical states at the output, from a coherent state input. Using methods from the fields of nonlinear pulse propagation in fibers and of open quantum systems, we analytically and numerically analyse a large multimode system and reduce it, step-by-step, to a single-mode system which is much more numerically tangible. The system, which we denote PhoG (\underline{Pho}ton \underline{G}un), when implemented will provide a practical and cheap source of nonclassicality for quantum enhanced imaging and metrology, and may even improve the performance of quantum cryptographic systems.
+In the second half we consider the task of quantum state generation. We design and analyse a system which is capable to deterministically produce highly non-classical states at the output, from a coherent state input. Using methods from the fields of nonlinear pulse propagation in fibers and of open quantum systems, we analytically and numerically analyse a large multimode system and reduce it, step-by-step, to a single-mode system which is much more numerically tangible. The device, which we denote PhoG (\underline{Pho}ton \underline{G}un), will soon be implemented in a waveguide array structure and will provide a practical and cheap source of nonclassicality for quantum enhanced imaging and metrology, and may even improve the performance of quantum cryptographic systems. We focus on quantum correlation flow and coherent signal propagation in this network.
 
 
 
@@ -65,13 +65,13 @@ The basis we choose for vector $\ket{\psi}$ is not unique and we may similarly h
 \end{equation}
 where the $\ip{r}{\psi} \in \mathbb{C}$ is such that its square modulus $\left|\ip{r}{\psi}\right|^2$ is the probability that a measurement of $r$ on $\ket{\psi}$ will give outcome $r$.
 
-For convenience any basis vectors we use are chosen to be orthonormal to each other, that is
+For convenience any basis vectors we use are chosen to be orthonormal, that is
 \begin{equation}
 \ip{\hat{e}_j}{\hat{e}_k} = \delta_{j, k}
 \end{equation}
 where $\delta_{j, k}$ is the Kronecker $\delta$ function.
 
-The fact that a state $\ket{\psi}$ may be written as a sum of basis vectors corresponding to different measurement outcomes is a curious one, and is a key feature of quantum mechanics known as the \emph{superposition principle}. A superposition state is one of the form
+The fact that a state $\ket{\psi}$ may be written as a sum of basis vectors corresponding to different possible measurement outcomes is a curious one, and is a key feature of quantum mechanics known as the \emph{superposition principle}. A superposition state is one of the form
 \begin{equation}\label{eqn:intro_superposition}
 \ket{\psi} = \frac{\ket{0} + \ket{1}}{\sqrt{2}}
 \end{equation}
@@ -189,7 +189,7 @@ which are known as the ``quadrature operators'', and can be shown to obey the co
 \hat{q}_\theta = \hat{q} \cos\theta  + \hat{p} \sin\theta ,
 \end{equation}
 and the operators $\hat{q}$, $\hat{p}$ are recovered as special cases with $\theta = 0$ and $\pi/2$, respectively. The quadrature operators $\hat{q}, \hat{p}$ may be used to write the well known Heisenberg uncertainty principle as
-\begin{equation}
+\begin{equation}\label{eqn:intro_uncertainty}
 \text{Var}\left(\hat{q}\right)\text{Var}\left(\hat{p}\right) \ge 1/4, %note that this is 1/4 not 1/2, due to using variances (not standard deviations) on the LHS. c.f. Ulf eq 3.80 p54
 \end{equation} 
 where the variances in a general quantum state $\ket{\psi}$ are defined as
@@ -197,7 +197,7 @@ where the variances in a general quantum state $\ket{\psi}$ are defined as
 \text{Var}\left(\hat{q}\right) &= \mel{\psi}{\hat{q}^2}{\psi} - \mel{\psi}{\hat{q}}{\psi}^2, \notag \\
 \text{Var}\left(\hat{p}\right) &= \mel{\psi}{\hat{p}^2}{\psi} - \mel{\psi}{\hat{p}}{\psi}^2.
 \end{align}
-This uncertainty principle implies that we cannot simultaneously measure $\hat{q}$ and $\hat{p}$ with arbitrary precision - in other words $q$ and $p$ are conjugate variables.
+The uncertainty principle Eq.~\ref{eqn:intro_uncertainty} implies that we cannot simultaneously measure $\hat{q}$ and $\hat{p}$ with arbitrary precision - in other words $q$ and $p$ are conjugate variables.
 
 The $\mel{\psi}{\hat{q}}{\psi}$ denote the expectation value of $\hat{q}$ in state $\ket{\psi}$. We may equivalently write this as $\ev{\hat{q}}_\psi$, or simply just $\ev{\hat{q}}$ when the corresponding state is obvious. The expectation value of an operator corresponds to the average measurement outcome when many measurements of that operator is performed on the given state.
 
@@ -205,7 +205,7 @@ The commutator Eq.~\ref{eqn:intro_quadrature_commutator} is equivalent to the co
 \begin{equation}
 \hat{H} = \frac{\hat{q}^2}{2} + \frac{\hat{p}^2}{2} = \hat{n} + \frac{1}{2} ,
 \end{equation}
-the middle terms of which describes the energy of a simple harmonic oscillator. The position and momentum operators $\hat{x}, \hat{p}$ describe real and imaginary components of the complex phase $\hat{a}$ of the electric field.
+the middle terms of which describes the energy of a simple harmonic oscillator (with $\hbar = 1$). The position and momentum operators $\hat{x}, \hat{p}$ describe real and imaginary components of the complex phase $\hat{a}$ of the electric field.
 
 
 
@@ -240,7 +240,7 @@ The Heisenberg uncertainty relation further expresses itself in the Wigner funct
 
 
 
-Finally, we must note that the Wigner function is not the only quasi-probability distribution which one could define on the phase space, and because in general quantum operators do not commute there are multiple ways to consistently define a phase space description. Other common quasi-probability distributions are: the Hussimi $Q$ function \cite{Husimi1940}, which is intimately related to Heterodyne measurement; Glauber-Sudarshan \cite{Glauber1963} $P$ function, which is often used to describe mixtures of coherent states and becomes highly singular in all other cases; and the positive-$P$ function, which is a generalization to the $P$ function and is defined to be non-diagonal in the coherent state basis, and which allows quantum effects such as squeezing to be described \cite{Walls_Millburn_Textbook}. One may also use these quasi-probability distributions to predict dynamics of the system using a Fokker-Planck diffusion equation \cite{Carmichael1999}, analogously to a classical stochastic process.
+Finally, we must note that the Wigner function is not the only quasi-probability distribution which one could define on the phase space, and because in general quantum operators do not commute there are multiple ways to consistently define a phase space description. Other common quasi-probability distributions are: the Hussimi $Q$ function \cite{Husimi1940}, which is intimately related to heterodyne measurement; Glauber-Sudarshan \cite{Glauber1963} $P$ function, which is often used to describe mixtures of coherent states and becomes highly singular in all other cases; and the positive-$P$ function, which is a generalization to the $P$ function and is defined to be non-diagonal in the coherent state basis, and which allows quantum effects such as squeezing to be described \cite{Walls_Millburn_Textbook}. One may also use these quasi-probability distributions to predict dynamics of the system using a Fokker-Planck diffusion equation \cite{Carmichael1999}, analogously to a classical stochastic process.
 
 We use the Wigner function in Appendix~\ref{appendix:noisy_perr} to simplify a calculation which is analytically difficult in the density matrix picture, and the Wigner functions offer an excellent visualization tool in the following few sections.
 
@@ -253,7 +253,7 @@ Fock states (also called photon-number states) are defined as eigenstates of the
 \end{equation}
 In other words, $\hat{n}$ measures the number of photons in $\ket{n}$. The states have perfectly defined photon-number and find many applications in quantum information processing \cite{Bennett1984, Adami1999}. The creation and annihilation operators $\hat{a}^\dagger, \hat{a}$ act on $\ket{n}$ as 
 \begin{align*}
-\hat{a}\ket{n} &= \sqrt{n}\ket{n-1} \\
+\hat{a}\ket{n} &= \sqrt{n}\ket{n-1}, \\
 \hat{a}^\dagger \ket{n} &= \sqrt{n+1} \ket{n=1}.
 \end{align*}
 The Fock states form an orthogonal basis for $\mathcal{H}$
@@ -283,7 +283,7 @@ We define the eigenstates of quadrature operators $\hat{q}$ and $\hat{p}$ as
 \begin{equation}\label{eqn:intro_quadrature_state}
 \hat{q}\ket{q} = q \ket{q} \qq{and} \hat{p}\ket{p} = p \ket{p}.
 \end{equation}
-These $\ket{q}, \ket{p}$ are known as quadrature states. Although they are not normalizable, the quadrature states are useful for describing ideal homodyne detection, Sec.~\ref{sec:intro_homodyne}, and are required for the definition of the Wigner function in Eq.~\ref{eqn:intro_wigners_formula}.
+These $\ket{q}, \ket{p}$ are known as quadrature states. Although they are not normalizable, the quadrature states are a useful tool in quantum optics. For example, we will use them to describe ideal homodyne detection, Sec.~\ref{sec:intro_homodyne}, and are also required for the definition of the Wigner function in Eq.~\ref{eqn:intro_wigners_formula}.
 
 
 \FloatBarrier
@@ -301,7 +301,7 @@ This coherent state has amplitude $\alpha \in \mathbb{C}$, and we display an exa
 \caption{\label{fig:intro_coherent_wigner} Wigner function for coherent state $\ket{\alpha}$ with $\alpha = 1 + 1i$.}
 \end{figure}
 
-\noindent The coherent states are non-orthogonal,
+\noindent The coherent states are non-orthogonal:
 \begin{equation}
 \ip{\alpha}{\beta} = \exp\left(- \frac{\left|\alpha\right|^2}{2} - \frac{\left|\beta\right|^2}{2} + \alpha^* \beta \right),
 \end{equation}
@@ -310,13 +310,13 @@ where $\alpha^*$ denotes the complex conjugate of $\alpha$, and so we will regul
 \ket{\alpha} = e^{-\frac{\left|\alpha\right|^2}{2}} \sum_{n=0} \frac{\alpha^n}{\sqrt{n!}} \ket{n}.
 \end{equation}
 
-\noindent In the first part of this Thesis we will consider several quantum cryptographic protocols involving distribution of coherent states. We will reglarly use an alphabet of coherent states known as the QPSK (Quadrature Phase-Shift Keying) alphabet, 
+\noindent In the first part of this Thesis we will consider several quantum cryptographic protocols involving distribution of coherent states. We will regularly use an alphabet of coherent states known as the QPSK (Quadrature Phase-Shift Keying) alphabet, 
 
 \begin{equation}
 \qq*{QPSK alphabet:} \left\{\ket{\alpha}, \ket{i \alpha}, \ket{- \alpha}, \ket{- i \alpha}\right\},
 \end{equation}
 
-\noindent and we display a mixture over the QPSK alphabet in Fig.~\ref{fig:qpsk}. We will not explicitly distinguish between whether we refer to the set of quantum states $\left\{\ket{\alpha}, \ket{i \alpha}, \ket{- \alpha}, \ket{- i \alpha}\right\}$ or the corresponding set of phases $\left\{ \alpha, i \alpha, -\alpha, - i\alpha\right\}$, since it should always be obvious which is meant.
+\noindent and we display a mixture over the QPSK alphabet in Fig.~\ref{fig:qpsk}. We will not explicitly distinguish between whether we refer to the set of quantum states $\left\{\ket{\alpha}, \ket{i \alpha}, \ket{- \alpha}, \ket{- i \alpha}\right\}$ or the corresponding set of complex amplitudes $\left\{ \alpha, i \alpha, -\alpha, - i\alpha\right\}$, since it should always be obvious which is meant.
 
 A special case of the coherent states, that with eigenvalue $0$,
 \begin{equation}
@@ -364,7 +364,7 @@ The thermal state is defined as
 \begin{equation}\label{eqn:intro_thermal}
 \rho_{\text{thermal}} = \left( 1 - e^{-\beta} \right) \sum_{n=0}^\infty e^{- n \beta} \dyad{n},
 \end{equation}
-with $\beta = \left( \hbar \omega \right)/\left(k_B T\right)$, reduced planck's constant $\hbar$, angular frequency $\omega$, Boltzmann's constant $k_B$ and thermal equilibrium temperature $T$. As we see from the form of Eq.~\ref{eqn:intro_thermal}, the thermal state is a classical mixture of Fock states (c.f. Eq.~\ref{eqn:intro_mixture}. Typically we will parametrise the thermal state using the thermal photon number $\bar{n}$, which is defined as 
+with $\beta = \left( \hbar \omega \right)/\left(k_B T\right)$, reduced Planck's constant $\hbar$, angular frequency $\omega$, Boltzmann's constant $k_B$ and thermal equilibrium temperature $T$. As we see from the form of Eq.~\ref{eqn:intro_thermal}, the thermal state is a classical mixture of Fock states (c.f. Eq.~\ref{eqn:intro_mixture}. Typically we will parametrise the thermal state using the average thermal photon number $\bar{n}$, which is defined as 
 \begin{equation}
 \bar{n} = \frac{1}{e^\beta - 1},
 \end{equation}
@@ -429,7 +429,7 @@ where without loss of generality we have used the Fock basis, and the $c_n$ are 
 \begin{equation}\label{eqn:intro_rho_fully_mixed}
 \rho = \sum_n d_n \dyad{n}
 \end{equation}
-where without loss of generality we have used the Fock basis, and $d_n$ are real coefficients. The state Eq.~\ref{eqn:intro_rho_fully_mixed} only has diagonal elements in its density matrix, and is fully mixed.
+where without loss of generality we have used the Fock basis, and $d_n$ are real coefficients. The state Eq.~\ref{eqn:intro_rho_fully_mixed} only has diagonal elements in its density matrix, and if there are two or more nonzero $d_n$, then the state is fully mixed.
 
 Given a density matrix $\rho$, it is time consuming and difficult to check by hand which of these forms it takes, and in most situations it will not fit neatly into either form. We therefore desire a function which will identify and quantify which type of ignorance the state possesses, and which may be easily computed on $\rho$. To do this, we first introduce the trace of $\rho$ as
 \begin{equation}
@@ -457,7 +457,7 @@ A general ``separable state'' may be written
 \begin{equation}\label{eqn:intro_separable_2}
 \rho_{\text{separable}} = \sum_{i, j} c_{i, j} \dyad{\psi_i}_1 \otimes \dyad{\phi_j}_2,
 \end{equation}
-so-called because the total two-mode state can be separated out into distinct single-mode density operators of modes $1$ and $2$ individually. The separable state may be interpreted as a classical mixture of product states.
+called ``separable'' because the total two-mode state can be separated out into distinct single-mode density operators of modes $1$ and $2$ individually. The separable state may be interpreted as a classical mixture of product states.
 
 Any state which cannot be written in the form Eq.~\ref{eqn:intro_separable_2} is known as a ``non-separable'' or ``entangled'' state. Entangled states cannot be written as a classical mixture over single-mode density operators, and so even full information about each individual mode is not sufficient to fully describe the total system. Such a remarkable feature is one of the key departures of the quantum world from the classical one, and entanglement is itself a fundamental resource to accomplish quantum tasks \cite{Horodecki2009b, Eisert2003}.
 
@@ -477,7 +477,7 @@ The partial trace over mode $2$ is defined analogously. Defining $\rho_2 = \tr_1
 
 \FloatBarrier
 \subsection{Two-mode squeezed vacuum (TMSV)}
-Each of the states we have seen so far are single-mode states. Here we meet our first two-mode state, the two-mode squeezed vacuum, which is written in a Fock-basis expansion as
+Each of the states we have seen so far are single-mode states. Here we meet our first specific example of a two-mode state, the two-mode squeezed vacuum, which is written in a Fock-basis expansion as
 \begin{equation}\label{eqn:intro_tmsv}
 \ket{TMSV} = \frac{1}{\cosh \zeta} \sum_n \left( \tanh \zeta \right)^n \ket{n, n}.
 \end{equation}
@@ -556,28 +556,29 @@ which transforms two input modes into two output modes as
 
 \noindent To conserve energy we require $\tau^2 + \rho^2 = 1$. When used to model a quantum channel in the first part of this Thesis we will often speak of the ``transmission'' $T$ of the channel. This $T$ is related to $\tau$ as $\tau = \sqrt{T}$. 
 
-Finally, we will make extensive use of the following relation for the output of interference of two Fock states on a beamsplitter with $\tau = \sqrt{T}$ and $\rho  = \sqrt{1-T}$ \cite{Leonhardt2010}:
+Finally, we will make extensive use of the following relation, which describes the output state when two input Fock states interfere on the beamsplitter. As in Ref.~\cite{Leonhardt2010} we take $\tau$ and $\rho$ to be real, such that $\tau = \sqrt{T}$ and $\rho = \sqrt{1-T}$, with $0 \le T \le 1$. The two-mode output state is:
 
 \begin{align}\label{eqn:intro_beamsplitter_fock}
 &\ket{n_1, n_2}^\prime  = \frac{1}{\sqrt{n_1! n_2!}} \sum_{k_1, k_2=0}^{n_1, n_2} \pmqty{n_1 \\ k_1} \pmqty{n_2 \\ k_2} \left(\sqrt{T}\right)^{k_1} \left(\sqrt{1-T}\right)^{n_1 - k_1} \left(-\sqrt{1-T}\right)^{k_2} \notag \\
 %
 &\left(\sqrt{T}\right)^{n_2 - k_2} \sqrt{\left(k_1 + k_2\right)! \left(n_1 + n_2 - k_1 - k_2\right)!} \times \ket{k_1 + k_2, n_1 + n_2 - k_1 - k_2}.
 \end{align}
+We later identify $T$ with channel transmission.
 
 
 
 \FloatBarrier
 \subsection{Master equation}
 
-We now introduce some formalisms which will account for dynamics of a quantum system described by density matrix $\rho$. In a closed system, in which $\rho$ is a (potentially large) density matrix describing all degrees of freedom, the evolution is entirely governed by the Von Neumann equation\footnote{$\hbar = 1$}
+We now introduce some formalisms which will account for dynamics of a quantum system described by density matrix $\rho$. In a closed system, in which $\rho$ is a (potentially large) density matrix describing all degrees of freedom, the evolution is entirely governed by the von Neumann equation\footnote{$\hbar = 1$}
 
 \begin{equation}
 \ddt \rho = - i \left[\hat{H}, \rho \right],
 \end{equation}
 
-\noindent with $\hat{H}$ the Hamiltonian which controls the time-evolution of $\rho$. Although exact, the Von Neumann equation is often difficult to solve, especially in the case of very large $\rho$.
+\noindent with $\hat{H}$ the Hamiltonian which controls the time-evolution of $\rho$. Although exact, the von Neumann equation is often difficult to solve, especially in the case of very large $\rho$.
 
-There are many instances, however, where we do not care about modelling precise evolution of all degrees of freedom of $\rho$. One may think, perhaps, of a few quantum modes of interest which are weakly coupled to many more modes. We denote the interesting modes as ``system'' and the uninteresting ones as ``reservoir'', and write $\rho_S = \tr_R\left[\rho\right]$. In this case, instead of solving the Von Neumann equation we can model the evolution of $\rho_S$ using the Lindblad master equation:
+There are many instances, however, where we do not care about modelling precise evolution of all degrees of freedom of $\rho$. One may think, perhaps, of a few quantum modes of interest which are weakly coupled to many more modes. We denote the interesting modes as ``system'' and the uninteresting ones as ``reservoir'', and write $\rho_S = \tr_R\left[\rho\right]$. In this case, instead of solving the von Neumann equation we can model the evolution of $\rho_S$ using the Lindblad master equation:
 
 \begin{equation}\label{eqn:intro_lindblad}
 \ddt \rho_S = - i \left[ \hat{H}_S, \rho_S \right] + \gamma \mathcal{L}\left[\hat{A}\right] \rho_S,
@@ -636,7 +637,7 @@ and
 
 \FloatBarrier
 \subsection{Homodyne measurement}\label{sec:intro_homodyne}
-A homodyne detection scheme consists in measurement of quadrature operator $\hat{q}_\theta = \cos\theta \hat{q} + \sin\theta \hat{p}$, which gives outcome probabilities
+Homodyne measurement is a frequently used technique for measuring the quadrature components of the quantum state. A homodyne detection scheme consists in measurement of quadrature operator $\hat{q}_\theta = \cos\theta \hat{q} + \sin\theta \hat{p}$, which gives outcome probabilities
 \begin{equation}
 \text{P}\left(q_\theta\right) = \ev{\rho}{q_\theta}
 \end{equation}
@@ -724,7 +725,7 @@ Let $\mathcal{X} = X_1, X_2, \dots, X_n$ be $n$ independent binary random variab
 
 \begin{align}
 \label{eqn:hoeffding1}
-\text{P}\left(\bar{\mathcal{X}} - \mathbb{E}\left(\bar{\mathcal{X}}\right) \ge \epsilon\right) &\le \text{exp}\left(- 2 \epsilon^2 n\right) \\
+\text{P}\left(\bar{\mathcal{X}} - \mathbb{E}\left(\bar{\mathcal{X}}\right) \ge \epsilon\right) &\le \text{exp}\left(- 2 \epsilon^2 n\right), \\
 \label{eqn:hoeffding2}
 \text{P}\left(\mathbb{E}\left(\bar{\mathcal{X}}\right) - \bar{\mathcal{X}} \ge \epsilon\right) &\le \text{exp}\left(- 2 \epsilon^2 n\right).
 \end{align}
@@ -785,12 +786,12 @@ The mutual information between $X$ and $Y$ may be defined as
 I\left(X : Y\right) = \text{H}\left(X\right) - \text{H}\left(X \given Y\right),
 \end{equation}
 
-\noindent which is a measure of how much knowledge of one variable reduces uncertainty of the other variable. The mutual information is symmetric in its arguments.
+\noindent which is a measure of how much knowledge of one variable reduces uncertainty about the other variable. The mutual information is symmetric in its arguments.
 
 
 \FloatBarrier
 \subsection{Von Neumann entropy}
-The Von Neumann entropy of a quantum state $\rho$ is
+The von Neumann entropy of a quantum state $\rho$ is
 \begin{equation}
 \text{S}\left(\rho\right) = - \tr\left[\rho \log \rho \right],
 \end{equation}
@@ -798,18 +799,18 @@ which may be equivalently calculated as
 \begin{equation}\label{eqn:intro_von_neumann}
 \text{S}\left[\rho\right] = - \sum_j \lambda_j \log \lambda_j,
 \end{equation}
-where $\lambda_j$ are the eigenvalues of $\rho$. The Von Neumann entropy is always non-negative, and is zero when $\rho$ is pure.
+where $\lambda_j$ are the eigenvalues of $\rho$. The von Neumann entropy is always non-negative, and is zero when $\rho$ is pure.
 
 By analogy with the Shannon entropy we will additionally define the joint entropy of a composite system $\rho_{A, B}$ in the obvious way
 \begin{equation}
 \text{S}\left(\rho_{A, B}\right) = - \tr\left[\rho_{A, B} \log \rho_{A, B}\right].
 \end{equation}
 
-\noindent The conditional Von Neumann entropy between quantum systems $A$ and $B$ may then be defined
+\noindent The conditional von Neumann entropy between quantum systems $A$ and $B$ may then be defined
 \begin{equation}
 \text{S}\left(A \given B\right) = \text{S}\left(A, B\right) - \text{S}\left(B\right),
 \end{equation}
-where the Von Neumann entropy of a quantum system $A$ or $B$ should be understood as the entropy of the corresponding state $\rho_A$, $\rho_B$.
+where the von Neumann entropy of a quantum system $A$ or $B$ should be understood as the entropy of the corresponding state $\rho_A$, $\rho_B$.
 
 
 \FloatBarrier
@@ -818,7 +819,7 @@ The Holevo information $\chi$ is an upper bound on the mutual information $I$, a
 
 We introduce two players, Alice and Bob. Let Alice prepare a state $\rho_j$, $j = 1, 2, \dots, N$, with probability $p_1, p_2, \dots, p_N$. Bob wishes to distinguish which of the $\rho_j$ Alice has prepared. 
 
-Bob may perform any measurement described by POVM elements $\left\{E_K\right\}$, and he receives a measurement outcome $K$. Then the mutual information $I\left(j : K\right)$ describes the knowledge of which $\rho_j$ was prepared, given Bob's measurement outcome $K$. The mutual information us upper bounded by the Holevo information
+Bob may perform any measurement described by POVM elements $\left\{E_K\right\}$, and he receives a measurement outcome $K$. Then the mutual information $I\left(j : K\right)$ describes the knowledge of which $\rho_j$ was prepared, given Bob's measurement outcome $K$. The mutual information is upper bounded by the Holevo information
 
 \begin{equation}\label{eqn:intro_holevo_bound}
 I\left(j : K \right) \le \chi \left(j : K \right),
@@ -841,7 +842,7 @@ Throughout this Thesis we will refer to the first term in Eq.~\ref{eqn:intro_hol
 \FloatBarrier
 \subsection{Conditioning cannot increase entropy}
 
-A useful property of both Shannon and Von Neumann entropies is that ``conditioning cannot increase entropy.'' This directly encodes the intuition that gaining more information about a system cannot lead to increased uncertainty - at worst it will leave the uncertainty in our knowledge unchanged. Quantitatively, we have for a quantum state $\rho_{A, B}$
+A useful property of both Shannon and von Neumann entropies is that ``conditioning cannot increase entropy.'' This directly encodes the intuition that gaining more information about a system cannot lead to increased uncertainty - at worst it will leave the uncertainty in our knowledge unchanged. Quantitatively, we have for a quantum state $\rho_{A, B}$
 
 \begin{equation}
 \text{S}\left(A\right) \ge \text{S}\left( A \given B \right),
@@ -851,6 +852,14 @@ where the entropy of system $A$ should be understood as the entropy of $\rho_A =
 \text{H}\left(X\right) \ge \text{H}\left(X \given Y\right).
 \end{equation}
 
+
+\FloatBarrier
+\subsection{Chain rule for entropies}
+
+
+\FloatBarrier
+\section{Summary}
+\MT{Add a quick summary sentence to ensure that the chapter does not have such an abrupt stop.
 
 
 
