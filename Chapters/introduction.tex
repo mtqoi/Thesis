@@ -6,9 +6,9 @@
 
 This Thesis consists of two halves. In the first half, we consider several related cryptographic protocols which securely perform the tasks of Quantum Digital Signatures (QDS) and Quantum Secret Sharing (QSS). Our goals here are, firstly: to remove an assumption of secure quantum channels from continuous-variable (CV) QDS, and provide a security proof when an eavesdropping attack is permitted; and secondly: to demonstrate that several CV quantum cryptographic protocols may be performed over identical hardware setups, while the hardware at the quantum level is agnostic to the protocol being implemented. This so-called ``agile" approach illustrates a translation of cryptographic agility from classical (conventional) cryptography to quantum cryptography, and allows for a move towards secure and practical quantum cryptosystems which can perform multiple tasks.
 
-In the second half we consider the task of quantum state generation. We design and analyse a system which is capable to deterministically produce highly non-classical states at the output, from a coherent state input. Using methods from the fields of nonlinear pulse propagation in fibers and of open quantum systems, we analytically and numerically analyse a large multimode system and reduce it, step-by-step, to a single-mode system which is much more numerically tangible. The device, which we denote PhoG (\underline{Pho}ton \underline{G}un), will soon be implemented in a waveguide array structure and will provide a practical and cheap source of nonclassicality for quantum enhanced imaging and metrology, and may even improve the performance of quantum cryptographic systems. We focus on quantum correlation flow and coherent signal propagation in this network.
+In the second half we consider the task of quantum state generation. We design and analyse a system which is capable to deterministically produce highly non-classical states at the output, from a coherent state input. Using methods from the fields of nonlinear pulse propagation in fibers and of open quantum systems, we analytically and numerically analyse a large multimode system and reduce it, step-by-step, to a single-mode system which is much more numerically tangible. The device, which we denote PhoG (\underline{Pho}ton \underline{G}un), will soon be implemented in a waveguide array structure and will provide a practical and cheap source of nonclassicality for quantum enhanced imaging and metrology, and may even improve the performance of quantum cryptographic systems. 
 
-
+The two halves of this thesis can be interpreted as studying different aspects of quantum networked systems, in which both the individual systems, and the geometry of coupling between them, play an important role. The first half considers quantum communications networks and cryptographic tasks which are inherently multipartite. By studying the simplest networks of just three players (in two different configurations) we move towards cryptosystems which can be implemented entirely agnostic to the network structure. In the second half we consider large structures of waveguide arrays, where the dynamics are intimately connected to the underlying geometry. We focus on quantum correlation flow and coherent signal propagation in this device of connected bosonic modes, which will soon be created in laser-inscribed waveguides.
 
 \subsection*{Detailed overview}
 
@@ -57,7 +57,7 @@ The notation $\ip{\psi}$ means
 \begin{equation}
 \hat{r} \ket{r} = r \ket{r}
 \end{equation}
-with eigenvalue s$r \in \mathbb{C}$.
+with eigenvalue $r \in \mathbb{C}$.
 
 The basis we choose for vector $\ket{\psi}$ is not unique and we may similarly have expanded $\ket{\psi}$ in terms of eigenstates of $\hat{r}$, as
 \begin{equation}
@@ -75,15 +75,19 @@ The fact that a state $\ket{\psi}$ may be written as a sum of basis vectors corr
 \begin{equation}\label{eqn:intro_superposition}
 \ket{\psi} = \frac{\ket{0} + \ket{1}}{\sqrt{2}}
 \end{equation}
-where the constant factor $1/\sqrt{2}$ ensures normalization. We have chosen an abstract orthonormal basis set $\left\{ \ket{0}, \ket{1}\right\}$, and here $\dims=2$. The superposition state possesses a fundamental uncertainty about its measurement outcomes, that is to say, if many identical copies of $\ket{\psi}$ are created, and on each copy a measurement which distinguishes between $\ket{0}$ and $\ket{1}$ is performed, then the measurement will output $0$ half of the time, and $1$ the other half of the time. Such uncertainty is intrinsic to quantum mechanics and is unavoidable. However, unlike a classical uncertainty which one aims to reduce, this quantum uncertainty is highly desirable and forms the basis for many applications of quantum states.
+where the constant factor $1/\sqrt{2}$ ensures normalization. We have chosen an abstract orthonormal basis set $\left\{ \ket{0}, \ket{1}\right\}$, and here $\dims=2$. The superposition state possesses a fundamental uncertainty about its measurement outcomes, that is to say, if many identical copies of $\ket{\psi}$ are created, and on each copy a measurement which distinguishes between $\ket{0}$ and $\ket{1}$ is performed, then the measurement will output $0$ half of the time, and $1$ the other half of the time. If, however, we are able to perform a measurement which distinguishes between $\left(\ket{0} \pm \ket{1}\right)/\sqrt{2}$, then we will find the output $\left(\ket{0} + \ket[1}\right)/sqrt{2}$ $100\%$ of the time. This is markedly different from a statistical mixture, involving classical ignorance about whether the state is $\ket{0}$ or $\ket{1}$. 
+
+
+% Such uncertainty is intrinsic to quantum mechanics and is unavoidable. However, unlike a classical uncertainty which one aims to reduce, this quantum uncertainty is highly desirable and forms the basis for many applications of quantum states.
 
 The density operator corresponding to a quantum state is
 \begin{equation}
-\hat{\rho} = \sum_{i, j} \rho_{i, j} \dyad{i}{j}
+\hat{\rho} = \sum_{i, j} p_{i, j} \dyad{i}{j}
 \end{equation}
-where $\bra{i} \in \mathcal{H}^*$ is dual to $\ket{i}$ ($\mathcal{H}^*$ is the dual space to $\mathcal{H}$). The matrix $\rho_{i, j}$ is referred to as the density matrix, though we shall often use the terms \emph{density operator} and \emph{density matrix} interchangably. As such, we will often neglect the hat above $\hat{\rho}$, and simply write $\rho$.
+where $\bra{i} \in \mathcal{H}^*$ is dual to $\ket{i}$ ($\mathcal{H}^*$ is the dual space to $\mathcal{H}$). %The matrix $p_{i, j}$ is referred to as the density matrix, though we shall often use the terms \emph{density operator} and \emph{density matrix} interchangably. As such, we will often neglect the hat above $\hat{\rho}$, and simply write $\rho$.
+Since We shall often use the terms \emph{density operator} and \emph{density matrix} interchangeably.
 
-The density operator description of a quantum state allows for a wider range of states to be described than in the state vector description. Any state vector $\ket{\psi}$ can be described as a density operator. For example, the state $\ket{\psi}$ in Eq.~\ref{eqn:intro_superposition} may equivalently be described as 
+Any state vector $\ket{\psi}$ can be described as a density operator. For example, the state $\ket{\psi}$ in Eq.~\ref{eqn:intro_superposition} may equivalently be described as 
 \begin{equation}
 \rho_\psi = \dyad{\psi}{\psi} = \frac{1}{2} \left(\dyad{0}{0} + \dyad{0}{1} + \dyad{1}{0} + \dyad{1}{1} \right).
 \end{equation}
@@ -91,7 +95,7 @@ However, there are density operators which do not correspond to a state vector. 
 \begin{equation}\label{eqn:intro_mixture}
 \rho_{\varphi} := \frac{\dyad{0}{0} + \dyad{1}{1}}{2} = \dyad{\phi}.
 \end{equation}
-The density operator formalism may be interpreted as encoding two distinct forms of uncertainty: quantum and classical. The quantum uncertainty arises from states which may be written as superposition state vectors, while the classical uncertainty arises from states which cannot. We refer to the first type of summation as superposition, and the second type of summation as classical mixing. The classical mixing represents classical uncertainty about which state the system is in, and may in principle be removed by building better equipment.
+The density operator formalism may be interpreted as encoding two distinct forms of uncertainty: quantum and classical. The quantum uncertainty arises from states which may be written as superposition state vectors, while the classical uncertainty arises from states which cannot. We refer to the first type of summation as superposition, and the second type of summation as classical mixing (or a statistical mixture). The classical mixing represents classical uncertainty about which state the system is in, and may in principle be removed by building better equipment.
 
 In the $\left\{\ket{0}, \ket{1}\right\}$ basis, these states $\rho_\psi$ and $\rho_\varphi$ may be written as
 \begin{equation}
@@ -183,6 +187,10 @@ which are known as the ``quadrature operators'', and can be shown to obey the co
 \begin{equation}\label{eqn:intro_quadrature_commutator}
 \left[\hat{q}, \hat{p}\right] = i.
 \end{equation}
+The quadrature operators $\hat{q}$ and $\hat{p}$ correspond to field amplitudes which are $\pi/2$ out of phase with each other. The annihilation operator can then be written
+\begin{equation}
+\hat{a} = \frac{\hat{q} + i \hat{p}}{\sqrt{2}}.
+\end{equation}
 
 \noindent The quadrature operator for a general quadrature $\hat{q}_\theta$ is given by
 \begin{equation}
@@ -201,11 +209,11 @@ The uncertainty principle Eq.~\ref{eqn:intro_uncertainty} implies that we cannot
 
 The $\mel{\psi}{\hat{q}}{\psi}$ denote the expectation value of $\hat{q}$ in state $\ket{\psi}$. We may equivalently write this as $\ev{\hat{q}}_\psi$, or simply just $\ev{\hat{q}}$ when the corresponding state is obvious. The expectation value of an operator corresponds to the average measurement outcome when many measurements of that operator is performed on the given state.
 
-The commutator Eq.~\ref{eqn:intro_quadrature_commutator} is equivalent to the commutator between operators which describe position and momentum of a quantum particle, and so we identify $\hat{q}$ as the position operator and $\hat{p}$ as the momentum operator. Indeed, it is easy to show from the definitions that
+The commutator Eq.~\ref{eqn:intro_quadrature_commutator} is equivalent to the commutator between operators which describe position and momentum of a quantum particle, and so we identify $\hat{q}$ as the position operator and $\hat{p}$ as the momentum operator (thus corroborating Eq.~\ref{eqn:intro_uncertainty}). Indeed, it is easy to show from the definitions that
 \begin{equation}
 \hat{H} = \frac{\hat{q}^2}{2} + \frac{\hat{p}^2}{2} = \hat{n} + \frac{1}{2} ,
 \end{equation}
-the middle terms of which describes the energy of a simple harmonic oscillator (with $\hbar = 1$). The position and momentum operators $\hat{x}, \hat{p}$ describe real and imaginary components of the complex phase $\hat{a}$ of the electric field.
+the middle terms of which describes the energy of a simple harmonic oscillator (with $\hbar = 1$).
 
 
 
@@ -213,9 +221,9 @@ the middle terms of which describes the energy of a simple harmonic oscillator (
 
 \FloatBarrier
 \subsection{Wigner function}
-An equivalent way to describe the quantum state $\rho$ is to use a (\emph{quasi})-probability distribution known as the Wigner function. The Wigner function, $W\left(q, p\right)$, allows operator expectation values to be calculated using an averaging method similar to classical mechanics in phase-space. For this reason, we desire $W\left(q, p\right)$ to behave analogously to a joint probability distribution, by analogy with a classical phase space picture in which the system is described in terms of position and momentum. We thus introduce a \emph{quantum} phase space. 
+An equivalent way to describe the quantum state $\rho$ is to use a (\emph{quasi})-probability distribution known as the Wigner function. The Wigner function, $W\left(q, p\right)$, allows operator expectation values to be calculated using an averaging method similar to classical mechanics in phase space. %For this reason, we desire $W\left(q, p\right)$ to behave analogously to a joint probability distribution, by analogy with a classical phase space picture in which the system is described in terms of position and momentum. We thus introduce a \emph{quantum} phase space. 
 
-One immediate observation is that the quantum phase space must behave qualitatively very differently to the classical one. Because of Heisenberg's principle, we cannot accurately define a joint probability distribution of position $q$ and momentum $p$ as this would require precise knowledge of both quantities. This leads to interesting behaviours of the phase space ``probability'' distribution, such as becoming negative (for Wigner functions) or highly singular (for ``$P$-functions''). Indeed, one may even measure the ``quantumness'' of a given state by checking for these properties.
+One immediate observation is that a \emph{quantum phase space} must behave qualitatively very differently to the classical one. Because of Heisenberg's principle, we cannot accurately define a joint probability distribution of position $q$ and momentum $p$ as this would require precise knowledge of both quantities. This leads to interesting behaviours of the phase space ``probability'' distribution, such as becoming negative (for Wigner functions) or highly singular (for ``$P$-functions''). Indeed, one may even measure the ``quantumness'' of a given state by checking for these properties.
 
 We define the Wigner function corresponding to density operator $\hat{\rho}$ as \cite{Leonhardt2010}
 
@@ -767,7 +775,7 @@ The binary entropy is a special case of the Shannon entropy for a binary random 
 We define the joint entropy $\text{H}\left(X, Y\right)$ of two random variables $X$ and $Y$ as the Shannon entropy of the joint probability distribution $\text{P}\left(X, Y\right)$. 
 
 The conditional entropy of $X$, conditioned on $Y$, is
-\begin{equation}
+\begin{equation}\label{eqn:intro_definition_conditional_entropy}
 \text{H}\left(X \given Y\right) = \text{H}\left(X, Y\right) - \text{H}\left(Y\right)
 \end{equation}
 which measures the average uncertainty we have about variable $X$ given that we know $Y$.
@@ -853,13 +861,26 @@ where the entropy of system $A$ should be understood as the entropy of $\rho_A =
 
 
 \FloatBarrier
-\subsection{Chain rule for entropies}
+\subsection{Chain rule for conditional Shannon entropy}
 
+Let $X_1, \dots, X_n$ and $Y$ be random variables. Then \cite{Nielsen2010, Wilde2013}
+\begin{equation}\label{eqn:intro_chain_rule}
+\text{H}\left(X_1, \dots, X_n \given Y\right) = \sum_{i=1}^n \text{H}\left(X_i \given Y, X_1, \dots, X_{i-1}\right).
+\end{equation}
+
+\noindent This property is known as the conditional Shannon entropy \emph{chain rule} and is readily proven by induction (see e.g. Ref.~\cite{Nielsen2010}) using Eq.~\ref{eqn:intro_definition_conditional_entropy}.
 
 \FloatBarrier
 \section{Summary}
-\MT{Add a quick summary sentence to ensure that the chapter does not have such an abrupt stop.
+\MT{Add a quick summary sentence to ensure that the chapter does not have such an abrupt stop.}
 
+
+
+In this chapter we have provided a brief overview of several key concepts and tools which underpin this Thesis. Additional material which is required will be introduced as it is used. We have introduced the density matrix formalism and discussed how it relates to other methods for describing quantum states of light, such as the Wigner function and the covariance matrix. Although in this Thesis we work primarily in terms of the density matrix, the Wigner function has provided us with a useful visualization tool in this Chapter. Furthermore, the Wigner function simplifies calculations in Appendix~\ref{appendix:noisy_perr} which are in principle possible, but difficult in general, using density matrices. The covariance matrix is another useful tool which warrants extensive study in its own right. We use the covariance matrix only in Chapter~\ref{chapter:phog} to measure the Gaussian entanglement properties of a state. The Wigner function representation for a multimode quantum state is intertwined with the covariance matrix description, and we refer the reader to Ref.~\cite{Serafini2017} for an excellent discussion of how to move between the two pictures.
+
+In the first half of this Thesis, Chapters~\ref{chapter:qds}-\ref{chapter:aqc}, we will use the density matrix description, along with the beamsplitter relation for input fock states in order to model the passage of a quantum state through a channel. In the cryptographic protocols discussed there, a malevolent party is assumed to replace the channel with an ideal beamsplitter, and they have control over the second input port, and receive the reflected output state. We model this interaction, and then use the entropies introduced above to bound the ability of a dishonest player to break the protocol.
+
+In the second half of this Thesis we will examine in depth the dynamics of a coherent state in several different scenarios. Our key tool here will be the Lindblad equation which describes the evolution of our density matrix. When possible we draw conclusions analytically, but our main techniques will be the numerical methods discussed at length in Appendix~\ref{appendix:phog_numerical_methods}. These allow us to gain an understanding of the state evolution, sometimes even if computational constraints prevent us from accessing the full density matrix. 
 
 
 
