@@ -14,7 +14,7 @@ These protocols are then investigated in an experiment (Sec.~\ref{sec:aqc_experi
 % Review some things from my previous two literature reviews
 We have observed over the past two chapters, and in our overview of quantum cryptography in Chapter~\ref{chapter:crypto_intro}, that several quantum cryptographic protocols are intimately related. We have seen close connections between QKD and QSS, and noted that QSS may be interpreted simply as QKD performed between one player (dealer) and several players (recipients of the secret). We have also remarked that the secret sharing task may be performed pseudo-classically, by first encrypting channels using QKD and then using an unconditionally secure classical secret sharing protocol, of which there are many \cite{Shamir1979, Blakley1979, Schneier1996}. It was noted in Refs.~\cite{Hillery1999, Chen2005a, Wu2016, Ottaviani2017b} that QSS is related to quantum conferencing, and often the same hardware setup may be used to perform both tasks. And in Ref.~\cite{Grice2019} it was explicitly demonstrated that a sequential round-robin QSS protocol can also be used to perform QKD between any two players. 
 
-Moving to the QDS literature, ever since discovery of practical QDS requiring neither quantum memory, entanglement, nor an optical multiport it has been accepted that there are close links between QDS and QKD. Reference~\cite{Wallden2015} explicitly builds a QDS protocol to use QKD hardware, while Ref.~\cite{Roberts2017} realises a setup which can, with minimal hardware modification, perform either QDS or QKD with additional MDI\footnote{Measurement Device Independent, Ch.~\ref{chapter:crypto_intro}.} capabilities. References~\cite{Collins2016, Yin2017, Yin2017c, An2019, Roberts2017} remark that QDS differs from QKD only in the classical postprocessing, and Ref.~\cite{Wei2018} designs a QSS scheme using the same principles as differential-phase-shift based QKD \cite{Sasaki2014}. Indeed, many QDS papers even build their security proofs on techniques designed first for QKD \cite{Kogias2017, Grice2019, Wei2018, Grice2015, Armstrong2015}.
+Moving to the QDS literature, ever since discovery of practical QDS requiring neither quantum memory, entanglement, nor an optical multiport it has been accepted that there are close links between QDS and QKD. Reference~\cite{Wallden2015} explicitly builds a QDS protocol to use QKD hardware, while Ref.~\cite{Roberts2017} realises a setup which can, with minimal hardware modification, perform either QDS or QKD with additional MDI\footnote{Measurement Device Independent, Ch.~\ref{chapter:crypto_intro}.} capabilities. References~\cite{Collins2016, Yin2017, Yin2017c, An2019, Roberts2017} remark that QDS differs from QKD only in the classical postprocessing, and Ref.~\cite{Wei2018} designs a quantum secret sharing scheme using the same principles as differential-phase-shift based QKD \cite{Sasaki2014}. Indeed, many QDS papers even build their security proofs on techniques designed first for QKD \cite{Kogias2017, Grice2019, Wei2018, Grice2015, Armstrong2015}.
 
 %We therefore might ask 
 
@@ -40,7 +40,7 @@ The replacement of a newly-insecure cryptosystem is difficult, expensive and tim
 
 \subsection{(Quantum) crypto-agility}
 
-One of the main ideas of crypto-agility is the existence of a middleware which interacts both with the software application layer (user) and the underlying cypto-core (algorithm). This is accomplished in Ref.~\cite{Sullivan2009}, for example, by ensuring that written code is kept as abstract as possible without hard-coding the secure protocols which are used. This allows for flexible switching between underlying algorithms, and keeps the top-level code agnostic as to which secure algorithms are being used. When the security of the underlying algorithm is weakened it becomes easy to simply replace the algorithm with a new or modified one, without changes to the rest of the computational architecture. Failures to allow a system to respond to new cryptographic threats like this can be at best embarrassing, and at worst costly or life-threatening \cite{Schneier2016, Schneier2017}. The key idea of crypto-agility is depicted in Fig.~\ref{fig:agility}a. 
+One of the main ideas of crypto-agility is the existence of a middleware which interacts both with the software application layer (user) and the underlying cypto-core (algorithm). This is accomplished in Ref.~\cite{Sullivan2009}, for example, by ensuring that written code is kept as abstract as possible without hard-coding the secure protocols which are used. This allows for flexible switching between underlying algorithms, and keeps the top-level code agnostic as to which secure algorithms are being used. When the security of the underlying algorithm is weakened it becomes easy to simply replace the algorithm with a new or modified one, without changes to the rest of the architecture. Failures to allow a system to respond to new cryptographic threats like this can be at best embarrassing, and at worst costly or life-threatening \cite{Schneier2016, Schneier2017}. The key idea of classical crypto-agility is depicted in Fig.~\ref{fig:agility}a. 
 
 
 \begin{figure}[htp]
@@ -79,7 +79,7 @@ In Fig.~\ref{fig:big_agile} we present an example of an agile quantum communicat
 \section{CV agile quantum systems}
 %Make sure to acknowledge that this text is very similar to Richter2020 Section 3. Which is fine, since I wrote it and it wasn't edited by coauthors. 
 
-To illustrate the above discussion, in this section we will introduce and analyse two quantum systems which are capable to implement multiple protocols over the same hardware setups. Within an agile system, the protocols differ only at the level of classical postprocessing. Our hardware setup is explicitly designed with question Q$2$ in mind, and with a desire for compatibility with currently deployed network architecture. The systems therefore are fully continuous-variable, and rely on distribution of phase-modulated QPSK coherent states and their heterodyne phase detection \cite{Agrawal2008}. This renders each system highly compatible with deployed telecommunications infrastructure, and paves the way to an integration between our agile systems into deployed communication links which can run with up to $100$~GHz sending rate \cite{Khan2015, Khan2016}. In Sec.~\ref{sec:aqc_experiment} we describe and analyse an experimental implementation of the agile systems discussed here.
+To illustrate the above discussion, in this section we will introduce and analyse two quantum systems which are capable to implement multiple protocols over the same hardware setups. Within an agile system, the protocols differ only at the level of classical postprocessing. Our hardware setup is explicitly designed with question Q$2$ in mind. The systems therefore are fully continuous-variable, and rely on distribution of phase-modulated QPSK coherent states and their heterodyne phase detection \cite{Agrawal2008}. This renders each system highly compatible with deployed telecommunications infrastructure, and paves the way to an integration between our agile systems into deployed communication links which can run with up to $100$~GHz sending rate \cite{Khan2015, Khan2016}. In Sec.~\ref{sec:aqc_experiment} we describe and analyse an experimental implementation of the agile systems discussed here.
 
 We will consider the following tasks:
 
@@ -89,7 +89,7 @@ We will consider the following tasks:
 
 \textbf{QKD - quantum key distribution}: allows for secure key distribution of identical randomly-generated bits between players. These keys may them be used for encryption via one-time pad \cite{Bennett1984, Schneier1996}.
 
-The tasks QDS and QSS are discussed in Chapters~\ref{chapter:qds},~\ref{chapter:qss} above, while the reader is referred to Refs.~\cite{Laudenbach2017, Scarani2009} for review of QKD. The tasks QDS and QSS are inherently multipartite, while QKD is inherently bipartite\footnote{Though note the existence of its multipartite generalization - quantum conferencing \cite{Ottaviani2017b, Ottaviani2019}}. In what follows we will use quantum networks with three players to allow for multipartite tasks, while also allowing for bipartite QKD to be performed.
+The tasks QDS and QSS are discussed in Chapters~\ref{chapter:qds},~\ref{chapter:qss} above, while the reader is referred to Refs.~\cite{Laudenbach2017, Scarani2009} for reviews of QKD. The tasks QDS and QSS are inherently multipartite, while QKD is inherently bipartite\footnote{Though note the existence of its multipartite generalization - quantum conferencing \cite{Ottaviani2017b, Ottaviani2019}}. In what follows we will use quantum networks with three players to allow for multipartite tasks, while also allowing for bipartite QKD to be performed.
 
 \begin{figure}[htp]
 \captionsetup{width=0.8\linewidth}
@@ -199,7 +199,7 @@ provided that $s_B \le s_C$. The probability $\varepsilon_{\text{repudiation}}$ 
 p = \frac{s_B + s_C}{2}.
 \end{equation}
 
-\noindent Finally we arrive at,
+\noindent Finally we arrive at
 \begin{equation}\label{eqn:aqc_repudiation}
 \varepsilon_{\text{repudiation}} \le 2 \; \exp\left( - \frac{\left[s_C - s_B\right]^2}{4}L\right),
 \end{equation}
@@ -214,7 +214,7 @@ The robustness of the protocol depends only on parameters $s_B$ and $\perr$. Usi
 provided that $\perr \le s_B$. The probability $\perr$ of honest mismatch may be modelled as in Sec.~\ref{sec:qds_modelling_perr}, and does not change here.
 
 \subsection{Security against forgery}
-Since Bob already knows half of Charlie's signature elements (those which Bob himself forwarded) and since $s_B \le s_C$ the most dangerous forger is a dishonest Bob. He is therefore assumed to be the eavesdropper on Charlie's distribution of quantum states, and tries to gain information about the $L/2$ signature elements which Charlie generated himself.
+Since Bob already knows half of Charlie's signature elements (those which Bob himself forwarded) and since $s_B \le s_C$, the most dangerous forger is a dishonest Bob. He is therefore assumed to be the eavesdropper on Charlie's distribution of quantum states, and tries to gain information about the $L/2$ signature elements which Charlie generated himself.
 
 Using Hoeffding's inequalities Eq.~\ref{eqn:qds_hoeffding1} as in Sec.~\ref{sec:qds_security_forgery} we see that at a forging attack succeeds with probability 
 \begin{equation}\label{eqn:aqc_forgery}
@@ -238,7 +238,7 @@ We define an error variable $\mathcal{E}$ such that
 0 & \text{otherwise}
 \end{cases}
 \end{equation*}
-which measures whether a mismatch has occurred between $\mathcal{F}_j$ and $\mathcal{G}_j$. Then $\pe \equiv \text{P}\left(\mathcal{E}_j = 1\right)$, and the Shannon entropy $\text{H}\left(\mathcal{E}_j\right) = \text{h}\left(\pe\right)$ is the binary entropy, since $\left|\mathcal{E}_j\right| = 2$. 
+which measures whether a mismatch has occurred between $\mathcal{F}_j$ and $\mathcal{G}_j$ (c.f. Eq.~\ref{eqn:error_qds}). The $\mathcal{F}$ is Charlie's list of phases, while $\mathcal{G}$ is the declared eliminated signature. Then $\pe \equiv \text{P}\left(\mathcal{E}_j = 1\right)$, and the Shannon entropy $\text{H}\left(\mathcal{E}_j\right) = \text{h}\left(\pe\right)$ is the binary entropy, since $\left|\mathcal{E}_j\right| = 2$. 
 
 Now, consider the conditional entropy $\text{H}\left(\mathcal{E}_j, b_j^1, b_j^2 \given c_j\right)$. Via the chain rule for conditional entropies,
 
@@ -295,7 +295,7 @@ Once $\pe$ and $\perr$ are bounded for the protocol, the probability $\varepsilo
 
 \noindent when $\perr< s_B < s_C < \pe$.
 
-\subsubsection{Calculating Holevo}
+\subsubsection{Calculating Holevo information}
 
 Finally, we note that under a beamsplitter attack BS$0$ Bob's \emph{a priori} state is
 \begin{equation}\label{eqn:qdsb_apriori_state}
@@ -313,7 +313,7 @@ with $S$ the von Neumann entropy. Under attack BS$0$ state $\rho_B^k$ is pure an
 \subsection{QDS-$b$ postselection}
 Let us apply the postselection technique described in Sec.~\ref{sec:qds_postselection} to protocol QDS-$b$. We shall see that while previously postselection was mainly used to improve efficiency of the protocol over parameters in which it was already secure, here it is absolutely necessary in order to sign a message for even short distances. We define the region $\rps\left(\Delta_r, \Delta_\theta\right)$, as in Fig.~\ref{fig:rps}, and allow honest recipients to only accept $x \in \mathbb{C} \setminus \rps$. 
 
-The crucial quantity to consider is $g_{\text{sec}} := \pe - \perr$, measuring the advantage which and honest player has over a dishonest one. The protocol is secure provided that $g_{\text{sec}} > 0$, Eq.~\ref{eqn:aqc_qdsb_efail}. For protocol QDS-$b$, the probability $\pe$ does not depend on Alice's heterodyne measurement, since a dishonest player attacks the sender of the quantum states. Therefore, $\pe$ is unaffected by postselection.
+The crucial quantity to consider is $g_{\text{sec}} := \pe - \perr$, measuring the advantage which an honest player has over a dishonest one. The protocol is secure provided that $g_{\text{sec}} > 0$, Eq.~\ref{eqn:aqc_qdsb_efail}. For protocol QDS-$b$, the probability $\pe$ does not depend on Alice's heterodyne measurement, since a dishonest player attacks the sender of the quantum states. Therefore, $\pe$ is unaffected by postselection.
 
 Probability $\perr$ on the other hand is strongly affected by our choice of $\rps$. Given the probability $\text{P}\left(r e^{i \theta} \given \alpha, T\right)$ to obtain complex outcome $r e^{i \theta}$ when state $\ket{\alpha}$ is sent through a noiseless channel with transmission $T$, we see that when no postselection is used
 \begin{equation}
@@ -328,7 +328,7 @@ Probability $\perr$ on the other hand is strongly affected by our choice of $\rp
 &\left. + \int\limits_{\theta = \pi + \Delta_\theta}^{3\pi/2 - \Delta_\theta} \mathrm{d}\theta \text{P}\left(r e^{i \theta}\given \alpha, T\right)\right].
 \end{align}
 
-\noindent Finally, we note that just as in Sec.~\ref{sec:qds_postselection}, we must rescale our figure of merit to
+\noindent Finally, we note that, just as in Sec.~\ref{sec:qds_postselection}, we must rescale our figure of merit to
 \begin{equation}
 \tilde{L} = \frac{L}{\mathcal{N}},
 \end{equation}
@@ -338,7 +338,7 @@ where normalization factor $\mathcal{N}$ is calculated in the usual way. Since $
 
 
 
-\subsection{QDS-$b$ performance}
+\subsection{QDS-$b$ performance}\label{sec:qdsb_performance}
 
 We plot signature length as it varies with $T$ under protocol QDS-$b$ in Fig.~\ref{fig:aqc_qdsb_lengths}. At each $T$ we have optimized over coherent state amplitude $\alpha$ and postselection parameter\footnote{As in Ch.~\ref{chapter:qds}, choosing $\Delta_\theta>0$ worsened performance.} $\Delta_r$, and the resulting signature lengths are displayed as the solid lines in Fig.~\ref{fig:aqc_qdsb_lengths}. Black: BS$0$ attack, Red: EC attack with constant $\bar{n}=0.02$. Non-solid lines are specific choices of $\alpha$ which are close to optimal only at specific $T$. We see that choosing an $\alpha$ which is not optimal for a given channel transmission can drastically affect the signature length, and for some transmissions can even result in an increase similar to allowing a different class of attack. Since in a practical realization of the protocol, $\Delta_r$ may feasibly be chosen after the distribution of quantum states, we have optimized over $\Delta_r$ at each point in the figure.
 
@@ -353,7 +353,7 @@ To summarise, our first agile system, \systemB, is capable of performing the sec
 
 \section{Agile system \systemF}\label{sec:aqc_systemf}
 
-In addition to the first agile system described above, which is capable of performing both QDS and QSS tasks, we here introduce and demonstrate a second agile system, \systemF, which runs in the $f$-configuration Fig.~\ref{fig:agile_tasks}. Here, Alice is the sender of quantum states, while Bob and Charlie are the recipients. This system is capable of performing both QDS and QKD tasks.
+In addition to the first agile system described above, which is capable of performing both QDS and QSS tasks, we here introduce and demonstrate a second agile system, \systemF, which runs in the $f$-configuration, Fig.~\ref{fig:agile_tasks}. Here, Alice is the sender of quantum states, while Bob and Charlie are the recipients. This system is capable of performing both QDS and QKD tasks.
 
 The QKD protocol contained in \systemF \; already exists in the literature \cite{Leverrier2011, Papanastasiou2018} and has been an active direction of research for many years. Its inclusion here illustrates that pre-existing protocols may be interpreted through an agile lens. We denote the QKD protocol QKD-$f$. The QDS protocol in $f$-configuration was analysed above in Chapter~\ref{chapter:qds}, and here we rename it as QDS-$f$.
 
@@ -366,7 +366,7 @@ We bring the QDS protocol considered in Chapter~\ref{chapter:qds} into the syste
 \subsection{Protocol QKD-$f$}
 QKD using heterodyne detection of a discrete-modulated alphabet of coherent states has long been proposed and analysed, owing to its ease of implementation and high compatibility with installed telecommunications infrastructure \cite{Leverrier2011, Papanastasiou2018, Zhao2009, Bradler2018, Ghorai2019, Lin2019}. Despite its practical ease of use, theoretical work has lagged behind other CV QKD protocols, which rely on a Gaussian modulation of coherent states. Unlike DV systems, CV systems live in an infinite dimensional Hilbert space and so many of the computational methods available for QKD with single-photons are not immediately transferable \cite{Tomamichel2012a}, and unlike Gaussian-modulated CV systems, coherent states with a discrete-modulation cannot be reduced to calculations on the finite-sized covariance matrix.  %TODO: ensure that different modulations are discussed in the intro chapter.
 
-Attempts to prove security of discete-modulated CV QKD protocols have made simplifying assumptions in either of these directions. For example, in Refs.~\cite{Leverrier2011, Ghorai2019, Lin2019} it is assumed that since the amplitude $\alpha$ of coherent states in the chosen QPSK alphabet is small the \emph{a priori} states in the protocol are approximately Gaussian. This allows covariance-matrix based methods to be used for the analysis. This assumption is only strictly true in the limit $\alpha \rightarrow 0$, and it is as yet unproven whether an attack could exploit higher order statistical moments of the \emph{a priori} state which are not captured by the covariance matrix.
+Attempts to prove security of discete-modulated CV QKD protocols have made simplifying assumptions in either of these directions. For example, in Refs.~\cite{Leverrier2011, Ghorai2019, Lin2019} it is assumed that since the amplitude $\alpha$ of coherent states in the chosen QPSK alphabet is small, the \emph{a priori} states in the protocol are approximately Gaussian. This allows covariance-matrix based methods to be used for the analysis. This assumption is only strictly true in the limit $\alpha \rightarrow 0$, and it is as yet unproven whether an attack could exploit higher order statistical moments of the \emph{a priori} state which are not captured by the covariance matrix.
 
 %Another direction has been to truncate the size of hilbert space \cite{Ghorai2019, Lin2019, Papanastasiou2018}. This is perhaps a reasonable approach, since one can sensibly bound the dimension of an incoming quantum state by assuming that its energy is upper-bounded
 
@@ -391,7 +391,7 @@ The mutual information I is calculated in a similar fashion to the protocol QSS-
 \text{I}\left(X_A : X_B\right) = \text{H}\left(X_A\right) - \text{H}\left(X_A \given X_B\right).
 \end{equation}
 
-\noindent The Shannon entropy of Alice's variable is equal to $\sum_{X_A=a} - \text{P}\left(a\right) \log \text{P}\left(a\right)$ and is equal to $2$ in the ideal case. .
+\noindent The Shannon entropy of Alice's variable is equal to $\sum_{X_A=a} - \text{P}\left(a\right) \log \text{P}\left(a\right)$ and is equal to $2$ in the ideal case.
 
 We may expand the conditional entropy in Eq.~\ref{eqn:qkdf_deriv_1} as
 \begin{equation}\label{eqn:qkdf_deriv_2}
@@ -413,7 +413,7 @@ When a coherent state $\alpha_k$ is chosen uniformly at random, the two-mode out
 \begin{equation}\label{eqn:qkdf_eve_conditional}
 \rho_{\left. E \given b\right.} = \frac{1}{4} \frac{1}{\text{P}\left(b\right)} \sum_{\alpha_k} \text{P}\left(b \given \alpha_k, T\right) \times \dyad{\sqrt{1-T}\alpha_k}_E
 \end{equation}
-when $\text{P}\left(b\right) = \sum_{\alpha_k}\text{P}\left(b \given \alpha_k, T\right)$ denotes the total probability that Bob measures $b$. Eve's \emph{a posteriori} entropy is then
+where $\text{P}\left(b\right) = \sum_{\alpha_k}\text{P}\left(b \given \alpha_k, T\right)$ denotes the total probability that Bob measures $b$. Eve's \emph{a posteriori} entropy is then
 
 \begin{equation}\label{eqn:qkdf_aposteriori_entropy}
 S_{\text{aposteriori}} = \int\limits_{b \in \mathbb{C}} \Diff2 b \; \text{P}\left(b\right) S\left(\rho_{\left. E \given b \right.}\right),
@@ -463,7 +463,7 @@ The Tx and Rx modules were connected by either a $2$~km or $20$~km SMF-$28$ opti
 \clearpage
 \section{Data analysis}
 In this section we will analyse the data which was obtained in the experiment detailed in the previous section. Our starting point is the signal data points\footnote{Green in Fig.~\ref{fig:aqc_experimental_trace}} which we received from MPL. In Sec.~\ref{sec:aqc_protocol_modifications} we will examine how the cryptographic protocols detailed above may be altered to more closely match the realistic data which includes experimental imperfections. %The ideal figures of merit obtained previously should be interpreted as upper bounds to protocol performance.
-In Sec.~\ref{eqn:aqc_received_data} we will closely examine the data which we have received from MPL and which forms the basis for our demonstration of two quantum agile systems. We will demonstrate how it may be used to estimate protocol performance and figures of merit\footnote{Of which the ideal figures of merit obtained in previous chapters are an upper bound}, and then discuss how how the experiment provides an agile interpretation.
+In Sec.~\ref{eqn:aqc_received_data} we will closely examine the data which we have received from MPL and which forms the basis for our demonstration of two quantum agile systems. We will demonstrate how it may be used to estimate protocol performance and figures of merit\footnote{Of which the ideal figures of merit obtained in previous chapters are an upper bound}, and then discuss how the experiment provides an agile interpretation.
 
 %\MT{Do some quick analysis of the data here, since I will want to refer to it in the Protocol modifications section.}
 
@@ -483,18 +483,18 @@ Throughout this Thesis it has been assumed that an ideal QPSK alphabet has been 
 \subsubsection{QDS-$b$}
 In QDS-$b$ the key parameter to calculate is $g_{\text{sec}} = \pe - \perr$, which is related to the signature length figure of merit via Eq.~\ref{eqn:aqc_qdsb_efail}. Bob's mismatch probability $\pe$ is made more realistic by changing several steps in the derivation of Holevo information $\chi$. 
 
-For example, under attack BS$0$ we update Bob's \emph{a priori} state, c.f. Eq.~\ref{eqn:qdsb_apriori_state} to be
+For example, under attack BS$0$ we update Bob's \emph{a priori} state, c.f. Eq.~\ref{eqn:qdsb_apriori_state}, to be
 \begin{equation}
 \rho_B = \sum_{\alpha_k} \text{P}\left(\alpha_k\right) \dyad{\sqrt{1-T} \alpha_k}
 \end{equation}
 where the amplitudes $\alpha_k$ and sending probabilities $\text{P}\left(\alpha_k\right)$ are directly derived from the received data. Bob's \emph{a posteriori} states 
 
 \begin{equation}
-\rho_B^k = \dyad{\sqrt{1-T}\alpha_k},
+\rho_B^k = \dyad{\sqrt{1-T}\alpha_k}
 \end{equation} 
 and \emph{a posteriori} entropy
 \begin{equation}
-\sum_{\alpha_k}\text{P}\left(\alpha_k\right) S\left(\rho_B^k\right),
+\sum_{\alpha_k}\text{P}\left(\alpha_k\right) S\left(\rho_B^k\right)
 \end{equation}
 now also depend on the measured data. For attacks BS$1$ and EC, they must be calculated without the simplifications afforded by ideal sending probabilities and equal $\left|\alpha_k\right|$'s. For attack BS$0$ Bob's \emph{a posteriori} entropy vanishes identically because his state is pure.
 
@@ -532,7 +532,7 @@ from which Holevo information $\chi$ is calculated.
 \subsubsection{QDS-$f$}
 Protocol QDS-$f$ requires us to recalculate $g_{\text{sec}} = \pe - \perr$ with these experimental imperfections. Probability $\perr$ may be estimated directly from data and is equivalent to the analysis performed above for QDS-$b$.
 
-Probability $\pe$ requires us to reconsider certain steps in the calculation of Holevo information $\chi$. We consider attack BS$0$, and other attacks follow suit. After the channel, the state held by Charlie and dishonest Bob is, c.f. Eq.~\ref{eqn:qds_after_channel},
+Probability $\pe$ requires us to reconsider certain steps in the calculation of Holevo information $\chi$. We consider attack BS$0$, and other attacks follow similarly. After the channel, the state held by Charlie and dishonest Bob is, c.f. Eq.~\ref{eqn:qds_after_channel},
 
 \begin{equation}
 \sum_{\alpha_k} \text{P}\left(\alpha_k\right)  \left[ \dyad{\sqrt{T}\alpha_k}_C \otimes \dyad{\sqrt{1-T}\alpha_k}_B\right],
@@ -658,7 +658,7 @@ To illustrate our received data, we plot the first $10,000$ elements of raw data
 \caption{\label{fig:aqc_scatter} Datasets received from experimental collaborators, corresponding to $x_{\text{out}}$ and $p_{\text{out}}$ phase measurement outcomes when (a) state $\ket{\alpha}$ was sent, run~$1$ and (b) states $\ket{\alpha}$, $\ket{i \alpha}$, $\ket{- \alpha}$, $\ket{- i \alpha}$ were sent, run~$1$. We plot only the first $100,000$ points, for illustrative convenience. (b) At the amplitudes chosen, our QPSK alphabet is overlapping and highly non-orthogonal.}
 \end{figure}
 
-In Fig.~\ref{fig:aqc_elimsig} we demonstrate for protocols QDS-$f$ and QDS-$b$ how $\perr$ may be calculated on a particular dataset. Having isolated the elements for which a particular alphabet state was sent, the data is partitioned into groups which will induce a mismatch. In this case, $\ket{\alpha}$ was sent and so data with $x_{\text{received}} \ge 0$ will not induce a mismatch, while data with $x_{\text{received}}<0$ will. The mismatch probability $\perr$ is then calculated as
+In Fig.~\ref{fig:aqc_elimsig} we demonstrate for protocols QDS-$f$ and QDS-$b$ how $\perr$ may be calculated on a particular dataset. Having isolated the elements for which a particular alphabet state was sent, the data is partitioned into groups which will induce a mismatch or not. In this case, $\ket{\alpha}$ was sent and so data with $x_{\text{received}} \ge 0$ will not induce a mismatch, while data with $x_{\text{received}}<0$ will. The mismatch probability $\perr$ is then calculated as
 \begin{equation}\label{eqn:aqc_data_perr}
 \perr = \frac{\text{Number of data points which cause a mismatch}}{\text{Total number of data points}},
 \end{equation}
@@ -671,7 +671,7 @@ where the numerator is calculated including all four of the distributed QPSK sta
 \caption{\label{fig:aqc_elimsig} Illustration of received data points, coloured by whether they induce a mismatch in protocols QDS-$f$ and QDS-$b$. State $\ket{\alpha}$ was sent, and data is taken from run~$1$. Blue: data points will not cause $\ket{\alpha}$ to be eliminated, and so do not cause a mismatch. Red: data points will cause $\ket{\alpha}$ to be eliminated, and so a mismatch occurs. For convenience we display only the first $100,000$ data points.}
 \end{figure}
 
-In protocols QDS-$f$ and QDS-$b$ we also discussed the possibility to postselect on measurement outcomes, by ignoring datapoints which fall within $\rps$. As was discussed in their respective sections we take $\rps\left(\Delta_r\right)$, and display examples of postselected data sets in Fig.~\ref{fig:aqc_ps}. Data corresponding to distributed $\ket{\alpha}$ are displayed in Fig.~\ref{fig:aqc_ps}a, while data for all elements of QPSK are displayed in Fig.~\ref{fig:aqc_ps}b. For illustrative convenience we display only the first $10,000$ elements. We may calculate $\perr$ in an identical way to that discussed above, simply starting from the postselected data in order to reduce $\perr$ and increase the advantage gained by an honest player.
+In protocols QDS-$f$ and QDS-$b$ we also discussed the possibility to postselect on measurement outcomes, by ignoring datapoints which fall within $\rps$. As was discussed in their respective sections, we take $\rps\left(\Delta_r\right)$ and display examples of postselected data sets in Fig.~\ref{fig:aqc_ps}. Data corresponding to distributed $\ket{\alpha}$ are displayed in Fig.~\ref{fig:aqc_ps}a, while data for all elements of QPSK are displayed in Fig.~\ref{fig:aqc_ps}b. For illustrative convenience we display only the first $10,000$ elements. We may calculate $\perr$ in an identical way to that discussed above, simply starting from the postselected data in order to reduce $\perr$ and increase the advantage gained by an honest player.
 
 \begin{figure}[htp]
 \captionsetup{width=0.8\linewidth}
@@ -746,13 +746,11 @@ We see that over metropolitan distances of up to several kilometers, which are f
 Solid (red), dashed (blue), dot-dashed (orange) and dotted (green) lines correspond to performance deduced by parameters from experimental runs $1$, $2$, $3$ and $4$, respectively. The vertical grid line depicts the loss level over experimental channel $A$ ($0.65$~dB loss).}
 \end{figure} %Make sure that channel A is described somewhere.
 
-More realistic signature lengths may be calculated by taking into account in the estimate of $\pe$ the actual amplitudes and sending probabilities which Tx sent (Sec.~\ref{sec:aqc_protocol_modifications}), rather than their average, and additionally by measuring $\perr$ directly from the output of Rx. The $\perr$ calculated in this way automatically takes into account all sources of trusted detector loss and noise which will increase $\perr$. The actual measured $L$ will be larger than those displayed in Fig.~\ref{fig:aqc_qdsb}. 
+We have so far not taken into account in the estimates of $\pe$ and $\perr$ the actual amplitudes and sending probabilities which Tx sent. These may be included using the changes outlined in Sec.~\ref{sec:aqc_protocol_modifications}. We may make our result more accurate still by measuring $\perr$ directly from the output of Rx. The $\perr$ calculated in this way automatically takes into account all sources of trusted detector loss and noise which will increase $\perr$. For example, for experimental run~$1$ over the $2$~km channel (Channel A), a signature length of $5.7 \times 10^6$ is required to sign a single bit, Tab.~\ref{tab:lengths}, which is an increase in signature length over Fig.~\ref{fig:aqc_qdsb}. However, even at $20$~km protocol QDS-$b$ could still be made secure by choosing a postselection region with $\Delta_r \ggg 1$, but for loss levels larger than $\sim 2$~dB the required signature length becomes impractically large.
 
-For example, for experimental run~$1$ over the $2$~km channel (Channel A), a signature length of $5.7 \times 10^6$ is required to sign a single bit, Tab.~\ref{tab:lengths}. However, even at $20$~km protocol QDS-$b$ could still be made secure by choosing a postselection region with $\Delta_r \ggg 1$, but for loss levels larger than $\sim 2$~dB the required signature length becomes impractically large.
+For our secret sharing protocol QSS-$b$, Fig.~\ref{fig:aqc_qssb}, the Holevo information is calculated by estimating channel transmission $T$ and excess noise $\xi$ from the data and assuming that the dishonest players perform beamsplitter attack BS$2$ (Sec.~\ref{sec:qds_attack_analysis}). Results in Fig.~\reF{fig:aqc_qssb} use the ideal analysis identically to Ch.~\ref{chapter:qss}. We may calculate more realistic maximum key rates by using the modifications from Sec.~\ref{sec:aqc_protocol_modifications} with experimental parameters in Tab.~\ref{table:aqc_data_parameters}, to include non-uniform coherent state amplitudes and sending probabilities. We display these key rates in Tab.~\ref{tab:lengths}.
 
-For our secret sharing protocol QSS-$b$, Fig.~\ref{fig:aqc_qssb}, the Holevo information is calculated by estimating channel transmission $T$ and excess noise $\xi$ from the data and assuming that the dishonest players perform beamsplitter attack BS$2$ (Sec.~\ref{sec:qds_attack_analysis}). The mutual information is obtained by calculating the probability $p\left(x \given \alpha_k\right)$ of measuring $x$ at the output when coherent state $\alpha_k$ was sent.% noting again that the realistic non-identical amplitudes and sending probabilities of the implemented QPSK alphabet may be readily included.
-
-Maximum QSS key rates, calculated from measured experimental parameters Tab.~\ref{table:aqc_data_parameters} with modifications from Sec.~\ref{sec:aqc_protocol_modifications}, are displayed in Tab.~\ref{tab:lengths}. We see that twice the key rate, $2 \kappa$ is greater than the comparable key rate $\kappa$ for QKD-$f$ (remembering that one channel use is defined differently between QKD and QSS). In other words, QSS-$b$ outperforms pairwise QKD by consuming fewer quantum resources to obtain an equivalent key rate. We have observed therefore that a ``direct'' QSS can outperform the classical unconditionally secure secret sharing mediated by QKD. This is thus another case where our agile framework is preferable to the QKD-assisted crypto-agility.
+Notably, we see that twice the key rate, $2 \kappa$ is greater than the comparable key rate $\kappa$ for QKD-$f$ (remembering that one channel use is defined differently between QKD and QSS). In other words, QSS-$b$ outperforms pairwise QKD by consuming fewer quantum resources to obtain an equivalent key rate. We have observed therefore that a ``direct'' QSS can outperform the classical unconditionally secure secret sharing mediated by QKD. This is thus another case where our agile framework is preferable to the QKD-assisted crypto-agility.
 
 \begin{figure}[htp]
 \captionsetup{width=0.8\linewidth}
@@ -761,8 +759,11 @@ Maximum QSS key rates, calculated from measured experimental parameters Tab.~\re
 \caption{\label{fig:aqc_qssb} Maximum attainable key rates for protocol QSS-$b$. Dishonest Eve performs attack BS$2$, and either Bob or Charlie are also dishonest. The key rate is robust to variations in $\alpha$, and remains large even for our $20$~km channel. Solid (red), dashed (blue), dot-dashed (orange) and dotted (green) lines correspond to the ideal performance deduced by parameters from experimental runs $1$, $2$, $3$ and $4$, respectively. Vertical grid lines depict loss levels over experimental channels $A$ and $B$, corresponding to fiber lengths $2$~km ($0.65$~dB loss) and $20$~km ($4.75$~dB loss)}
 \end{figure}
 
+We have investigated performance of the first agile system \systemB \; which is capable of performing quantum digital signatures (QDS) and quantum secret sharing (QSS) tasks. Specifically, we have analysed the same experimental datasets under the two different protocols, demonstrating that they only differ at the level of classical postprocessing. Of particular note is that our QSS protocol outperforms qCSS while requiring identical resources in terms of hardware (for QPSK-based QKD) and quantum channels, while being secure against equivalent attacks.
+
+
 \subsubsection{Second agile system \systemF}
-For the second agile system, \systemF, Tx plays the role of Alice while Rx plays either Bob or Charlie. The performance under protocol QDS-$f$ is displayed in Fig.~\ref{fig:aqc_qdsf} under attack BS$2$. The excess noise and detector efficiency from the experiment are included, and $\pe$ and $\perr$ are calculated using analogous methods to QDS-$b$, above. We see than in the ideal analysis of Fig~\ref{fig:aqc_qdsf} (using models from Ch.~\ref{chapter:qds}) the protocol QDS-$f$ allows for very small signature lengths $\mathcal{O}\left(10^4\right)$ at $2$~km, while at $20$~km the predicted lengths are still very modest at $\mathcal{O}\left(10^6\right)$.
+For the second agile system, \systemF, Tx plays the role of Alice while Rx plays either Bob or Charlie. The performance under protocol QDS-$f$ is displayed in Fig.~\ref{fig:aqc_qdsf} under attack BS$2$. The excess noise and detector efficiency from the experiment are included, and $\pe$ and $\perr$ are calculated using analogous methods to QDS-$b$, above. We see than in the ideal analysis of Fig~\ref{fig:aqc_qdsf} (using ideal models from Ch.~\ref{chapter:qds}) the protocol QDS-$f$ allows for very small signature lengths $\mathcal{O}\left(10^4\right)$ at $2$~km, while at $20$~km the predicted lengths are still very modest at $\mathcal{O}\left(10^6\right)$.
 
 \begin{figure}[htp]
 \captionsetup{width=0.8\linewidth}
@@ -771,9 +772,9 @@ For the second agile system, \systemF, Tx plays the role of Alice while Rx plays
 \caption{\label{fig:aqc_qdsf} Signature lengths required to sign a single bit in protocol QDS-$b$, under attack BS$2$. The signature lengths at $20$~km (Channel B) remain feasible under both ideal (above) and experimental (Tab.~\ref{tab:lengths} realizations. At $2$~km (Channel A) the protocol requires small signature lengths and is thus the fastest QDS protocol over comparable distances, Fig.~\ref{fig:aqc_star}. Solid (red), dashed (blue), dot-dashed (orange) and dotted (green) lines correspond to experiments $1$, $2$, $3$ and $4$, respectively. Vertical grid lines depict loss levels over implemented channels $A$ and $B$, corresponding to fiber lengths $2$~km ($0.65$~dB loss) and $20$~km ($4.75$~dB loss), respectively.}
 \end{figure}
 
-For small channel loss the required $L$ is roughly invariant over a broad range of $\alpha$, $\xi$, which suggests that QDS-$f$ is robust to experimental differences. Thus, it is easier to implement on an agile system alongside further alternative cryptographic protocols which may require a more restrictive choice of $\alpha$. For large channel loss however, the choice of $\alpha$ becomes increasingly important, but using for example the mean $\alpha = 0.55$ and $\xi = 2.1\%$ from experimental run~$3$, QDS-$f$ is predicted to remain secure een down to $20$~dB loss with still-feasible signature lengths $\mathcal{O}\left(10^9\right)$. On our system this would allow a one-bit message to be signed in approximately one second.
+For small channel loss the required $L$ is roughly invariant over a broad range of $\alpha$, $\xi$, which suggests that QDS-$f$ is robust to experimental differences. Thus, it is easier to implement on an agile system alongside further alternative cryptographic protocols which may require a more restrictive choice of $\alpha$. For large channel loss however, the choice of $\alpha$ becomes increasingly important, but using for example the mean $\alpha = 0.55$ and $\xi = 2.1\%$ from experimental run~$3$, QDS-$f$ is predicted to remain secure even down to $20$~dB loss with still-feasible signature lengths $\mathcal{O}\left(10^9\right)$. On our system this would allow a one-bit message to be signed in approximately one second.
 
-A more realistic signature length may be calculated by using the $\perr$ directly from Rx output, which includes all noise sources and detector inefficiencies, and using the models from Sec.~\ref{sec:aqc_protocol_modifications}. This results in the signature lengths which are displayed in Tab.~\ref{tab:lengths}. Crucially, they remain highly feasible over the metropolitan distances where continuous-variable cryptography is expected to be effective. Of particular note is the $L = 47,887$ required to securely sign a $1$~bit message over $2$~km fiber, which to our knowledge makes QDS~$f$ the fastest ever demonstration of a QDS protocol, requiring just $0.047$~ms to sign a message at our $1$~GHz sending rate, Fig.~\ref{fig:aqc_star}.
+A more realistic signature length may be calculated by using the $\perr$ directly from Rx output, which includes all noise sources and detector inefficiencies, and by using the models from Sec.~\ref{sec:aqc_protocol_modifications} to take into account realistic coherent state amplitudes and sending probabilities. This results in larger signature lengths which are displayed in Tab.~\ref{tab:lengths}. Crucially, they remain highly feasible over the metropolitan distances where continuous-variable cryptography is expected to be effective. Of particular note is the $L = 47,887$ required to securely sign a $1$~bit message over $2$~km fiber, which to our knowledge makes QDS~$f$ the fastest ever demonstration of a QDS protocol, requiring just $0.047$~ms to sign a message at our $1$~GHz sending rate, Fig.~\ref{fig:aqc_star}.
 
 \begin{figure}[htp]
 \captionsetup{width=0.8\linewidth}
@@ -792,6 +793,8 @@ The calculated maximum secure key rates under protocol QKD-$f$ are plotted in Fi
 \caption{\label{fig:aqc_qkdf} Calculated maximum attainable key rates for protocol QKD-$f$. The predicted key rates agree with Ref.~\cite{Papanastasiou2018} over equivalent parameters, while the key rates displayed here are close to optimal. Vertical grid lines denote loss levels over experimental channels $A$ and $B$, corresponding to fiber lengths $2$~km ($0.65$~dB loss) and $20$~km ($4.75$~dB loss), respectively. Solid (red), dashed (blue), dot-dashed (orange) and dotted (green) lines correspond to experimental runs $1$, $2$, $3$ and $4$, respectively.}
 \end{figure}
 
+
+Our second agile system \systemF \; is able to perform QDS and QKD tasks which differ only in classical postprocessing. Our key figure of merit for this system is the smallest time, $0.047$~ms, to sign a $1$~bit message over $2$~km. This time is much smaller than for comparable protocols, and is due in part to the technological maturity and speed of our CV experiment, and in part to the fact that for QDS-$f$ Alice uses different sequences of coherent states for each recipient (c.f. Ch.~\ref{chapter:qds}). Our inclusion of protocol QKD-$f$ which exists already in the literature, and which has been extensively analysed \cite{Leverrier2011, Papanastasiou2018, Ghorai2019, Lim2019}, demonstrates that existing protocols may be united in an agile platform.
 
 
 \FloatBarrier
