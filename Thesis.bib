@@ -37,15 +37,7 @@ volume = {8},
 year = {2017}
 }
 @article{Scarani2009,
-abstract = {Quantum key distribution (QKD) is the first quantum information task to reach the level of mature technology, already fit for commercialization. It aims at the creation of a secret key between authorized partners connected by a quantum channel and a classical authenticated channel. The security of the key can in principle be guaranteed without putting any restriction on the eavesdropper's power. The first two sections provide a concise up-to-date review of QKD, biased toward the practical side. The rest of the paper presents the essential theoretical tools that have been developed to assess the security of the main experimental platforms (discrete variables, continuous variables and distributed-phase-reference protocols).},
-archivePrefix = {arXiv},
-arxivId = {0802.4155},
 author = {Scarani, Valerio and Bechmann-Pasquinucci, Helle and Cerf, Nicolas J. and Du{\v{s}}ek, Miloslav and L{\"{u}}tkenhaus, Norbert and Peev, Momtchil},
-doi = {10.1103/RevModPhys.81.1301},
-eprint = {0802.4155},
-file = {:C$\backslash$:/Users/MatthewThornton/Documents/Mendeley Desktop/The security of practical quantum key distribution.pdf:pdf},
-isbn = {0034-6861},
-issn = {00346861},
 journal = {Rev. Mod. Phys.},
 number = {3},
 pages = {1301},
@@ -53,7 +45,7 @@ title = {{The security of practical quantum key distribution}},
 volume = {81},
 year = {2009}
 }
-@misc{Schneier2016,
+@online{Schneier2016,
 author = {Schneier, Bruce},
 title = {{Real-world security and the internet of things}},
 url = {https://www.schneier.com/blog/archives/2016/07/real-world{\_}secu.html},
@@ -95,16 +87,8 @@ volume = {89},
 year = {2002}
 }
 @inproceedings{Murali2019,
-abstract = {A massive gap exists between current quantum computing (QC) prototypes, and the size and scale required for many proposed QC algorithms. Current QC implementations are prone to noise and variability which affect their reliability, and yet with less than 80 quantum bits (qubits) total, they are too resource-constrained to implement error correction. The term Noisy Intermediate-Scale Quantum (NISQ) refers to these current and near-term systems of 1000 qubits or less. Given NISQ's severe resource constraints, low reliability, and high variability in physical characteristics such as coherence time or error rates, it is of pressing importance to map computations onto them in ways that use resources efficiently and maximize the likelihood of successful runs. This paper proposes and evaluates backend compiler approaches to map and optimize high-level QC programs to execute with high reliability on NISQ systems with diverse hardware characteristics. Our techniques all start from an LLVM intermediate representation of the quantum program (such as would be generated from high-level QC languages like Scaffold) and generate QC executables runnable on the IBM Q public QC machine. We then use this framework to implement and evaluate several optimal and heuristic mapping methods. These methods vary in how they account for the availability of dynamic machine calibration data, the relative importance of various noise parameters, the different possible routing strategies, and the relative importance of compile-time scalability versus runtime success. Using realsystem measurements, we show that fine grained spatial and temporal variations in hardware parameters can be exploited to obtain an average 2.9x (and up to 18x) improvement in program success rate over the industry standard IBM Qiskit compiler. Despite small qubit counts, NISQ systems will soon be large enough to demonstrate "quantum supremacy," i.e., an advantage over classical computing. Tools like ours provide significant improvements in program reliability and execution time, and offer high leverage in accelerating progress towards quantum supremacy.},
-archivePrefix = {arXiv},
-arxivId = {1901.11054},
 author = {Murali, Prakash and Baker, Jonathan M. and Abhari, Ali Javadi and Chong, Frederic T. and Martonosi, Margaret},
-booktitle = {ASPLOS '19 Proc. Twenty-Fourth Int. Conf. Archit. Support Program. Lang. Oper. Syste},
-doi = {10.1145/3297858.3304075},
-eprint = {1901.11054},
-file = {:C$\backslash$:/Users/MatthewThornton/Documents/Mendeley Desktop/Murali et al. - 2019 - Noise-Adaptive Compiler Mappings for Noisy Intermediate-Scale Quantum Computers.pdf:pdf},
-isbn = {9781450362405},
-keywords = {noise-adaptive compilation,qubit mapping},
+booktitle = {ASPLOS '19: Proceedings of the Twenty-Fourth International conference on Architectural Support for Programming Languages and Operating Systems},
 pages = {1015},
 title = {{Noise-Adaptive Compiler Mappings for Noisy Intermediate-Scale Quantum Computers}},
 year = {2019}
@@ -165,16 +149,10 @@ volume = {44},
 year = {2011}
 }
 @article{Sasaki2014,
-abstract = {Quantum cryptography exploits the fundamental laws of quantum mechanics to provide a secure way to exchange private information. Such an exchange requires a common random bit sequence, called a key, to be shared secretly between the sender and the receiver. The basic idea behind quantum key distribution (QKD) has widely been understood as the property that any attempt to distinguish encoded quantum states causes a disturbance in the signal. As a result, implementation of a QKD protocol involves an estimation of the experimental parameters influenced by the eavesdropper's intervention, which is achieved by randomly sampling the signal. If the estimation of many parameters with high precision is required, the portion of the signal that is sacrificed increases, thus decreasing the efficiency of the protocol. Here we propose a QKD protocol based on an entirely different principle. The sender encodes a bit sequence onto non-orthogonal quantum states and the receiver randomly dictates how a single bit should be calculated from the sequence. The eavesdropper, who is unable to learn the whole of the sequence, cannot guess the bit value correctly. An achievable rate of secure key distribution is calculated by considering complementary choices between quantum measurements of two conjugate observables. We found that a practical implementation using a laser pulse train achieves a key rate comparable to a decoy-state QKD protocol, an often-used technique for lasers. It also has a better tolerance of bit errors and of finite-sized-key effects. We anticipate that this finding will give new insight into how the probabilistic nature of quantum mechanics can be related to secure communication, and will facilitate the simple and efficient use of conventional lasers for QKD. {\textcopyright} 2014 Macmillan Publishers Limited. All rights reserved.},
 author = {Sasaki, Toshihiko and Yamamoto, Yoshihisa and Koashi, Masato},
-doi = {10.1038/nature13303},
-file = {:C$\backslash$:/Users/MatthewThornton/Documents/Mendeley Desktop/Sasaki, Yamamoto, Koashi - 2014 - Practical quantum key distribution protocol without monitoring signal disturbance.pdf:pdf},
-issn = {14764687},
 journal = {Nature},
 pages = {475},
-publisher = {Nature Publishing Group},
 title = {{Practical quantum key distribution protocol without monitoring signal disturbance}},
-url = {http://dx.doi.org/10.1038/nature13303},
 volume = {509},
 year = {2014}
 }
@@ -296,11 +274,7 @@ eprinttype = {arxiv},
 year = {2013}
 }
 @article{Grice2015,
-abstract = {{\textcopyright} 2015 OSA. We present and demonstrate a novel protocol for distributing secret keys between two and only two parties based on N-party single-qubit Quantum Secret Sharing (QSS). We demonstrate our new protocol with N = 3 parties using phase-encoded photons. We show that any two out of N parties can build a secret key based on partial information from each other and with collaboration from the remaining N-2 parties. Our implementation allows for an accessible transition between N-party QSS and arbitrary two party QKD without modification of hardware. In addition, our approach significantly reduces the number of resources such as single photon detectors, lasers and dark fiber connections needed to implement QKD.},
 author = {Grice, W. P. and Evans, P. G. and Lawrie, B. and Legr{\'{e}}, M. and Lougovski, P. and Ray, W. and Williams, B. P. and Qi, B. and Smith, A. M.},
-doi = {10.1364/oe.23.007300},
-file = {:C$\backslash$:/Users/MatthewThornton/Documents/Mendeley Desktop/Grice et al. - 2015 - Two-Party secret key distribution via a modified quantum secret sharing protocol.pdf:pdf},
-issn = {1094-4087},
 journal = {Opt. Express},
 number = {6},
 pages = {7300},
@@ -409,8 +383,7 @@ journal = {Technical Report SRI-CSL-98, SRI International Computer Science Labor
 booktitle = {{Constructing digital signatures from a one-way function}},
 year = {1979}
 }
-@misc{qiskit,
-author = {Team, Qiskit Development},
+@online{qiskit,
 title = {{Qiskit API Documentation}},
 url = {https://qiskit.org/documentation/index.html},
 urldate = {2020-02-13},
@@ -440,16 +413,13 @@ url = {http://arxiv.org/abs/1806.01000{\%}0Ahttp://dx.doi.org/10.1117/12.2309928
 year = {2018}
 }
 @article{Richter2020,
-abstract = {Agile cryptography allows for a resource-efficient swap of a cryptographic core in case the security of an underlying classical cryptographic algorithm becomes compromised. In this paper, we suggest how this principle can be applied to the field of quantum cryptography. We explicitly demonstrate two quantum cryptographic protocols: quantum digital signatures (QDS) and quantum secret sharing (QSS), on the same hardware sender and receiver platform, with protocols only differing in their classical post-processing. The system is also suitable for quantum key distribution (QKD) and is highly compatible with deployed telecommunication infrastructures, since it uses standard quadrature phase shift keying (QPSK) encoding and heterodyne detection. For the first time, QDS protocols are modified to allow for postselection at the receiver, enhancing protocol performance. The cryptographic primitives QDS and QSS are inherently multipartite and we prove that they are secure not only when a player internal to the task is dishonest, but also when (external) eavesdropping on the quantum channel is allowed. In the first proof-of-principle demonstration of an agile quantum communication system, the quantum states were distributed at GHz rates. This allows for a one-bit message to be securely signed using our QDS protocols in less than {\$}0.05{\$}{\~{}}ms over a {\$}2{\$}{\~{}}km fiber link and in less than {\$}0.2{\$}{\~{}}s over a {\$}20{\$}{\~{}}km fiber link. To our knowledge, this also marks the first demonstration of a continuous-variable direct QSS protocol.},
-archivePrefix = {arXiv},
 arxivId = {2001.10089[quant-ph]},
 author = {Richter, Stefan and Thornton, Matthew and Khan, Imran and Scott, Hamish and Jaksch, Kevin and Vogl, Ulrich and Stiller, Birgit and Leuchs, Gerd and Marquardt, Chrisoph and Korolkova, Natalia},
-eprint = {2001.10089[quant-ph]},
-file = {:C$\backslash$:/Users/MatthewThornton/Documents/Mendeley Desktop/Richter et al. - 2020 - Agile quantum communication signatures and secrets.pdf:pdf},
-pages = {1--14},
 title = {{Agile quantum communication: signatures and secrets}},
-url = {http://arxiv.org/abs/2001.10089},
-year = {2020}
+year = {2020},
+eprint = {2001.10089},
+primaryclass = {[quant-ph]},
+eprinttype = {arxiv}
 }
 @article{Pirandola2015a,
 author = {Pirandola, Stefano and Ottaviani, Carlo and Spedalieri, Gaetana and Weedbrook, Christian and Braunstein, Samuel L. and Lloyd, Seth and Gehring, Tobias and Jacobsen, Christian S. and Andersen, Ulrik L.},
@@ -531,9 +501,7 @@ title = {{Laser damage creates backdoors in quantum communications}},
 year = {2016}
 }
 @article{ETSI004,
-author = {Distribution, ETSI Industry Specification Group Quantum Key},
-journal = {ETSI Gr. Specif.},
-month = {dec},
+journal = {ETSI Industry Specification Group Quantum Key Distribution; ETSI Group Specification},
 title = {{Quantum Key Distribution (QKD); Application Interface}},
 year = {2010}
 }
@@ -996,9 +964,7 @@ volume = {41},
 year = {2016}
 }
 @article{ETSI014,
-author = {Distribution, ETSI Industry Specification Group Quantum Key},
-journal = {ETSI Gr. Specif.},
-month = {feb},
+journal = {ETSI Industry Specification Group Quantum Key Distribution; ETSI Group Specification},
 title = {{Quantum Key Distribution (QKD); Protocol and data format of REST-based key delivery API}},
 year = {2019}
 }
@@ -1022,16 +988,10 @@ title = {{Applications of Nonlinear Fiber Optics}},
 year = {2008}
 }
 @article{Killoran2018,
-abstract = {We introduce Strawberry Fields, an open-source quantum programming architecture for light-based quantum computers. Built in Python, Strawberry Fields is a full-stack library for design, simulation, optimization, and quantum machine learning of continuous-variable circuits. The platform consists of three main components: (i) an API for quantum programming based on an easy-to-use language named Blackbird; (ii) a suite of three virtual quantum computer backends, built in NumPy and Tensorflow, each targeting specialized uses; and (iii) an engine which can compile Blackbird programs on various backends, including the three built-in simulators, and -- in the near future -- photonic quantum information processors. The library also contains examples of several paradigmatic algorithms, including teleportation, (Gaussian) boson sampling, instantaneous quantum polynomial, Hamiltonian simulation, and variational quantum circuit optimization.},
-archivePrefix = {arXiv},
-arxivId = {1804.03159},
 author = {Killoran, Nathan and Izaac, Josh and Quesada, Nicol{\'{a}}s and Bergholm, Ville and Amy, Matthew and Weedbrook, Christian},
-eprint = {1804.03159},
-file = {:C$\backslash$:/Users/MatthewThornton/Documents/Mendeley Desktop/Strawberry Fields A Software Platform for Photonic Quantum Computing.pdf:pdf},
 journal = {Quantum},
 pages = {129},
 title = {{Strawberry Fields: A Software Platform for Photonic Quantum Computing}},
-url = {http://arxiv.org/abs/1804.03159},
 volume = {3},
 year = {2019}
 }
@@ -1045,8 +1005,7 @@ year = {2014}
 }
 @article{Khan2016,
 author = {Khan, Imran and Stiller, Birgit and Jaksch, Kevin and G{\"{u}}nthner, Kevin and Peuntinger, Christian and Geyer-Ramsteck, Jonas and Elser, Dominique and Pacher, Christoph and Marquardt, Christoph and Leuchs, Gerd},
-journal = {Poster QCrypt Conf. Washington, USA},
-month = {sep},
+journal = {Poster QCrypt Conference Washington, USA},
 title = {{Continuous-variable quantum communication at 10 GHz and compatible with telecom networks}},
 year = {2016}
 }
@@ -1757,8 +1716,7 @@ year = {2011}
 }
 @article{Khan2015,
 author = {Khan, Imran and Stiller, Birgit and Jaksch, Kevin and Jain, Nitin and Peuntinger, Christian and G{\"{u}}nthner, Kevin and R{\"{o}}thlingsh{\"{o}}fer, Tobias and Elser, Dominique and Marquardt, Christoph and Leuchs, Gerd},
-journal = {Poster QCrypt Conf. Tokyo, Japan},
-month = {sep},
+journal = {Poster QCrypt Conference Tokyo, Japan},
 title = {{Towards continuous-variable quantum key distribution at GHz rates}},
 year = {2015}
 }
@@ -2668,17 +2626,9 @@ title = {{The theory of quantum information}},
 year = {2018}
 }
 @article{Wei2018,
-abstract = {Secret sharing, in which a dealer wants to split a secret in such a way that any unauthorized subsets of parties are unable to reconstruct it, plays a key role in cryptography. The security of quantum protocols for the task is guaranteed by the fact that Eve's any strategies to obtain secret information from encoded quantum states should cause a disturbance in the signal. Here, we propose a quantum secret sharing (classical information) scheme for N parties which is no longer needed to monitor signal disturbance. Comparing to existing qudit-based schemes, this scheme has obvious advantages in feasibility and scalability. Our work paves a novel way for quantum secret sharing.},
 author = {Wei, Kejin and Yang, Xiuqing and Zhu, Changhua and Yin, Zhen Qiang},
-doi = {10.1007/s11128-018-1987-6},
-file = {:C$\backslash$:/Users/MatthewThornton/Documents/Mendeley Desktop/Wei et al. - 2018 - Quantum secret sharing without monitoring signal disturbance.pdf:pdf},
-issn = {15700755},
 journal = {Quantum Inf. Process.},
-keywords = {Quantum cryptography,Quantum key distribution,Quantum secret sharing},
-pages = {230},
-publisher = {Springer US},
 title = {{Quantum secret sharing without monitoring signal disturbance}},
-url = {https://doi.org/10.1007/s11128-018-1987-6},
 volume = {17},
 year = {2018}
 }
@@ -3109,7 +3059,7 @@ publisher = {John Wiley {\&} Sons},
 title = {{Applied cryptography: Protocols, algorithm, and source code in C}},
 year = {1996}
 }
-@misc{Schneier2017,
+@online{Schneier2017,
 author = {Schneier, Bruce},
 title = {{Security and the internet of things}},
 url = {https://www.schneier.com/blog/archives/2017/02/security{\_}and{\_}th.html},
