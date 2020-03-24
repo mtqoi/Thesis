@@ -117,7 +117,7 @@ We compare the speed of the direct integration and QMC approaches to solve Eq.~\
 
 \clearpage
 \section{Mean-field single-mode model}\label{appendix:single_mode_mean_field}
-Applying the mean-field approximation discussed in Sec.~\ref{sec:meanfield}to the single-mode PhoG model Eq.~\ref{eqn:phog_single_mode_deriv}, we arrive at the following equation for first-order expectation $\ev{s_-}$:
+Applying the mean-field approximation discussed in Sec.~\ref{sec:meanfield} to the single-mode PhoG model Eq.~\ref{eqn:phog_single_mode_deriv}, we arrive at the following equation for first-order expectation $\ev{s_-}$:
 
 \begin{align}
 &\ddt \ev{s_-} = - \frac{\gamma_1}{2} \ev{s_-} - i \varsigma_1 \ev{s_-} - i \varsigma_3 \ev{s_-} - 2 i \varsigma_1 \ev*{s_-^\dagger} \ev{s_-} \ev{s_-}  \notag \\
@@ -195,7 +195,7 @@ By applying the linearization approximations derived in Sec.~\ref{sec:linearizat
 with $n_- = s_-^\dagger s_-$. This system is solved numerically for $\langle s_- \rangle$, $\langle s_-^\dagger \rangle$, $\langle s_-^2\rangle$, $\langle s_-^{\dagger 2}\rangle$, $\langle n_-\rangle$ and the results are shown as dashed lines in Fig.~\ref{fig:phog_single_mode_linearization} of the main Thesis.
 
 \section{Mean-field multi-mode model}\label{appendix:mean_field}
-Applying the mean-field approximation outlined in Sec.~\ref{sec:meanfield} to the multi-mode PhoG model Eq.~\ref{eqn:phog_multi_mode}, we arrive at the following system of equations for first-order expectations. The system may be readily solved.
+Applying the mean-field approximation outlined in Sec.~\ref{sec:meanfield} to the multi-mode PhoG model Eq.~\ref{eqn:phog_multi_mode}, we arrive at the following system of equations for first-order expectations.
 
 \begin{align}
 &\ddt \ev{a} = - i g_a \ev{c_0} + i U \ev*{a^\dagger} \ev{a} \ev{a} - \frac{\gamma}{2} \ev{a}, \notag \\
@@ -208,7 +208,7 @@ Applying the mean-field approximation outlined in Sec.~\ref{sec:meanfield} to th
 %
 &\ddt \ev{c_N} = - i g_c \ev{c_{N-1}} + i U \ev*{c_N^\dagger}\ev{c_N} \ev{c_N} - \frac{\gamma}{2} \ev{c_N}.
 \end{align}
-
+The system may be readily solved.
 
 \section{Linearized multi-mode model}\label{appendix:multi_mode_linear}
 We will derive a linearized and closed system of coupled differential equations capable of modelling the multi-mode PhoG device. In fact, our equations will be capable of modelling any collection of coupled modes with on-site Kerr nonlinearity and Markovian reservoirs. Our starting Lindblad equation is (c.f. Eq.~\ref{eqn:phog_multi_mode}):
@@ -222,7 +222,7 @@ where we here take $\hat{H} = \hat{H}^{\text{Coupling}} + \hat{H}^{\text{Kerr}}$
 %
 &\hat{H}^{\text{Coupling}} = \sum_{k, l} \mathcal{G}_{k, l}\left(\hat{a}_k^\dagger \hat{a}_l + \hat{a}_l^\dagger \hat{a}_k \right).
 \end{align}
-We have introduced a ``coupling matrix" $\mathcal{G}$ which contains all information relating to the linear coupling between modes of our system. Coupling matrix element $\mathcal{G}_{j, p}$ denotes the coupling strength between modes $j$ and $p$, and $\mathcal{G}_{j, p} = 0$ if the modes are not coupled to each other, which is the case for most pairs $\left(j, p\right)$. We display some example coupling matrices below.
+We have introduced a ``coupling matrix" $\mathcal{G}$ which contains all information relating to the linear coupling between modes of our system. Coupling matrix element $\mathcal{G}_{j, p}$ denotes the coupling strength between modes $j$ and $p$, and $\mathcal{G}_{j, p} = 0$ if the modes are not coupled to each other, which is the case for most pairs $\left(j, p\right)$. We display some examples of coupling matrices below.
 \subsection{Example coupling matrices $\mathcal{G}$}
 \begin{figure}[htp]
 \captionsetup{width=0.8\linewidth}
