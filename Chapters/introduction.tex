@@ -26,9 +26,9 @@ In this Thesis we are primarily interested in the quantum properties of single- 
 
 We introduce a third description of the quantum state which captures the second moments (co-variances) of multi-mode states, the so-called covariance matrix. This allows for a complete description of properties of a state which is Gaussian in phase-space, otherwise it offers a partial description which is nonetheless useful. 
 
-Evolution of the quantum state is described by the Von Neumann equation (no dissipation) or the Lindblad master equation (including dissipation). The latter allows for us to model the dynamics of a few modes chosen from much larger multi-mode system, provided that the two are weakly coupled and the larger system (environment/reservoir) is effectively unchanged by the system evolution. 
+Evolution of the quantum state is described by the von Neumann equation (no dissipation) or the Lindblad master equation (including dissipation). The latter allows for us to model the dynamics of a few modes chosen from much larger multi-mode system, provided that the two are weakly coupled and the larger system (environment/reservoir) is effectively unchanged by the system evolution. 
 
-Finally, we display several select entropic and probabilistic relations and quantities which we use in this Thesis. In particular, the notion of conditional probability, and the intimately related Bayes' theorem, will prove useful both as helpful quantities in their own right, and as foundational building blocks for conditional classical and quantum entropies. 
+Finally, we display several selected entropic and probabilistic relations and quantities which we use in this Thesis. In particular, the notion of conditional probability, and the intimately related Bayes' theorem, will prove useful both as helpful quantities in their own right, and as foundational building blocks for conditional classical and quantum entropies. 
 
 
 
@@ -38,7 +38,7 @@ Finally, we display several select entropic and probabilistic relations and quan
 \subsection{State vectors and density matrices}\label{sec:intro_state_vectors}
 An ideal quantum state is denoted in the Dirac notation by $\ket{\psi}$. This state has been perfectly prepared with no noise, loss, or additional uncertainty due to the preparation. The $\ket{\psi}$ is a vector living in a vector space denoted $\mathcal{H}$, which we call a Hilbert space. The space has dimension $\dims$, typically taken to be countably infinite, but there will be several points in this Thesis where we consider a finite $\dims$.
 
-Since $\ket{\psi}$ is a vector it can be written in terms of a set $\left\{\ket{e_j}\right\}_j$ of basis vectors,
+Since $\ket{\psi}$ is a vector it can be written in terms of a set $\left\{\ket{e_j}\right\}$ of basis vectors,
 \begin{equation}
 \ket{\psi} = \sum_j c_j \ket{e_j},
 \end{equation}
@@ -46,9 +46,9 @@ where the number of basis vectors typically equals $\dims$.
 
 The state $\ket{\psi}$ should be normalized, that is
 \begin{equation}
-\ip{\psi} = 1,
+\ip{\psi} = 1.
 \end{equation}
-where the notation $\ip{\psi}$ denotes 
+The notation $\ip{\psi}$ means 
 \begin{equation}
 \sum_j \left|c_j\right|^2.
 \end{equation}
@@ -122,9 +122,9 @@ In the absence of currents or charge, classical electromagnetic fields obey Maxw
 
 \noindent By analogy with the classical vector potential, let us introduce the quantum vector potential $\hat{\bm{A}}$, and impose
 \begin{equation}
-\hat{\bm{E}} = - \frac{\partial \hat{\bm{A}}}{\partial t}, \qq{}  \hat{\bm{B}} = \nabla \times \hat{\bm{A}}, \qq{and} \nabla \cdot \hat{\bm{a}} = 0.
+\hat{\bm{E}} = - \frac{\partial \hat{\bm{A}}}{\partial t}, \qq{}  \hat{\bm{B}} = \nabla \times \hat{\bm{A}}, \qq{and} \nabla \cdot \hat{\bm{A}} = 0.
 \end{equation}
-As in classical electromagnetism, the first two of these requirements automatically imply that the first two of Maxwell's equations are satisfied, while the third requirement (``coulomb gauge'') is merely a convenient choice which immediately satisfies the third Maxwell equation\footnote{Since light in linear media behaves as $\hat{\bm{D}} = \epsilon_0 \epsilon \hat{\bm{E}}$, where $\epsilon_0$ is the vacuum permittivity and $\epsilon$ is the electric permittivity of the medium in question. The other ``constitutive equation'' is $\hat{\bm{H}} = \mu_0^{-1} \mu^{-1} \hat{\bm{B}}$, for medium permeability $\mu$ and vacuum permeability $\mu_0$.} The final Maxwell equation is then equivalent to the following wave equation
+As in classical electromagnetism, the first two of these requirements automatically imply that the first two of Maxwell's equations are satisfied, while the third requirement (``coulomb gauge'') is merely a convenient choice which immediately satisfies the third Maxwell equation\footnote{Since light in linear media behaves as $\hat{\bm{D}} = \epsilon_0 \epsilon \hat{\bm{E}}$, where $\epsilon_0$ is the vacuum permittivity and $\epsilon$ is the electric permittivity of the medium in question. The other ``constitutive equation'' is $\hat{\bm{H}} = \mu_0^{-1} \mu^{-1} \hat{\bm{B}}$, for medium permeability $\mu$ and vacuum permeability $\mu_0$.}. The final Maxwell equation is then equivalent to the following wave equation
 
 \begin{equation}\label{eqn:intro_wave}
 \epsilon^{-1} \mu^{-1} \nabla \times \nabla \times \hat{\bm{A}} = - c^{-2} \frac{\partial^2 \hat{\bm{A}}}{\partial t^2}.
@@ -155,7 +155,7 @@ where we have used the commutator $\left[ \hat{a}_j \hat{a}_k^\dagger \right] = 
 
 We have effectively split the full quantum description of light into two parts, classical and quantum. The classical quantities $\bm{A}_j\left(\overrightarrow{r}, t\right)$ fully describe all wave properties of the light, while the quantum operators $\hat{a}_j$ describe the quanta present in a single mode. For this Thesis we will focus on these quantum systems and ignore the wave nature of light. That is to say, we will regard the mode operators $\hat{a}_j$ as accurately describing the full system, irrelevant of its classical properties. This proves to be a helpful distinction as it allows for us to make general quantum statements which are true for any bosonic system of quantum modes, regardless of their physical implementation.
 
-In Sec.~\ref{sec:phog_outlook} we will briefly return to the classical $\bm{A}\left(\overrightarrow{r}, t\right)$ in a $1+1$D system (one spatial dimension plus time). The $A\left(z, t\right)$ are discussed there in the context of light pulse propagation in waveguides where, with physical implementation in mind, we must pay great attention to the wave properties. We discuss there some methods to efficiently model such classical behaviour, and then mention as outlook several strategies which may be used to model the full propagation of a quantum pulse, in which the classical wave impacts the properties of the quantum modes.
+In Sec.~\ref{sec:phog_outlook} we will briefly return to the classical $\bm{A}\left(\overrightarrow{r}, t\right)$ in a $1+1$D system (one spatial dimension plus time). The $A\left(z, t\right)$ are discussed there in the context of light pulse propagation in waveguides where, with physical implementation in mind, we must pay great attention to the wave properties. We discuss there some methods to efficiently model such classical behaviour, and then mention as outlook several strategies which may be used to model the full propagation of a quantum pulse, taking into account both classical and quantum effects.
 
 For a more detailed discussion of the derivation presented here, we refer the reader to the textbooks Refs.~\cite{Leonhardt2010, Walls_Millburn_Textbook, Gerry_Knight_Textbook}.
 
@@ -256,9 +256,9 @@ In other words, $\hat{n}$ measures the number of photons in $\ket{n}$. The state
 \hat{a}\ket{n} &= \sqrt{n}\ket{n-1}, \\
 \hat{a}^\dagger \ket{n} &= \sqrt{n+1} \ket{n=1}.
 \end{align*}
-The Fock states form an orthogonal basis for $\mathcal{H}$
+The Fock states form an orthogonal basis for $\mathcal{H}$:
 \begin{equation}
-\ip{m}{n} = \delta_{n, m}
+\ip{m}{n} = \delta_{n, m},
 \end{equation}
 and so we will often seek an expansion of other states in the Fock-state basis. In particular, our density matrix $\rho$ is written in a Fock state expansion as
 \begin{equation}
@@ -364,7 +364,7 @@ The thermal state is defined as
 \begin{equation}\label{eqn:intro_thermal}
 \rho_{\text{thermal}} = \left( 1 - e^{-\beta} \right) \sum_{n=0}^\infty e^{- n \beta} \dyad{n},
 \end{equation}
-with $\beta = \left( \hbar \omega \right)/\left(k_B T\right)$, reduced Planck's constant $\hbar$, angular frequency $\omega$, Boltzmann's constant $k_B$ and thermal equilibrium temperature $T$. As we see from the form of Eq.~\ref{eqn:intro_thermal}, the thermal state is a classical mixture of Fock states (c.f. Eq.~\ref{eqn:intro_mixture}. Typically we will parametrise the thermal state using the average thermal photon number $\bar{n}$, which is defined as 
+with $\beta = \left( \hbar \omega \right)/\left(k_B T\right)$, reduced Planck's constant $\hbar$, angular frequency $\omega$, Boltzmann's constant $k_B$ and thermal equilibrium temperature $T$. As we see from the form of Eq.~\ref{eqn:intro_thermal}, the thermal state is a classical mixture of Fock states (c.f. Eq.~\ref{eqn:intro_mixture}). Typically we will parametrise the thermal state using the average thermal photon number $\bar{n}$, which is defined as 
 \begin{equation}
 \bar{n} = \frac{1}{e^\beta - 1},
 \end{equation}
@@ -554,8 +554,7 @@ which transforms two input modes into two output modes as
 \hat{a}_3 = \tau \hat{a}_1 - \rho \hat{a}_2 \qq{and} \hat{a}_4 = \rho \hat{a}_1 + \tau \hat{a}_2.
 \end{equation}
 
-\noindent To conserve energy we require $\tau^2 + \rho^2 = 1$. When used to model a quantum channel in the first part of this Thesis we will often speak of the ``transmission'' $T$ of the channel. This $T$ is related to $\tau$ as $\tau = \sqrt{T}$. 
-
+\noindent To conserve energy we require $\tau^2 + \rho^2 = 1$, and since we have assumed that both $\tau$ and $\rho$ are real. %TODO: for the viva, make sure that I can justify this and say what effect it will have.
 Finally, we will make extensive use of the following relation, which describes the output state when two input Fock states interfere on the beamsplitter. As in Ref.~\cite{Leonhardt2010} we take $\tau$ and $\rho$ to be real, such that $\tau = \sqrt{T}$ and $\rho = \sqrt{1-T}$, with $0 \le T \le 1$. The two-mode output state is:
 
 \begin{align}\label{eqn:intro_beamsplitter_fock}
@@ -767,7 +766,7 @@ The binary entropy is a special case of the Shannon entropy for a binary random 
 \subsection{Mutual information}
 We define the joint entropy $\text{H}\left(X, Y\right)$ of two random variables $X$ and $Y$ as the Shannon entropy of the joint probability distribution $\text{P}\left(X, Y\right)$. 
 
-The conditional entropy of $X$, conditioned on $Y$ is
+The conditional entropy of $X$, conditioned on $Y$, is
 \begin{equation}
 \text{H}\left(X \given Y\right) = \text{H}\left(X, Y\right) - \text{H}\left(Y\right)
 \end{equation}
