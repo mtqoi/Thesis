@@ -14,7 +14,7 @@ For example, Alice wishes to distribute a secret $m$ between four players, such 
 \begin{equation}
 \left( a x^2 + b x + m \right) \qq{modulo} p.
 \end{equation}
-Prime $p$ should be chosen larger than any of the coefficients $a, b$ or $m$. Alice then evaluates this polynomial at four different points $x$, and sends the outcomes to each player. These points will be referred to as ``shares". %https://crypto.stackexchange.com/questions/9295/why-does-shamirs-secret-sharing-scheme-need-a-finite-field explains why a finite field is needed.
+Prime $p$ should be chosen larger than any of the coefficients $a, b$ or $m$. Alice then evaluates this polynomial at four different points $x$, and sends the outcomes to each player. These points will be referred to as ``shares''. %https://crypto.stackexchange.com/questions/9295/why-does-shamirs-secret-sharing-scheme-need-a-finite-field explains why a finite field is needed.
 % It does need to be a field (integers aren't). Also it being finite means we can actually do the protocol.
 
 The polynomial has three unknown coefficients, $a$, $b$ and $m$, and so any three players can combine their shares to create three equations, which may be solved for each unknown. Any fewer shares will yield an underdefined system which cannot be solved. An attempt to guess the final share will show that any message $m$ can be the secret, and so such a guessing attempt is useless.
