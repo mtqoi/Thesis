@@ -277,51 +277,64 @@ We have introduced a ``coupling matrix" $\mathcal{G}$ which contains all informa
 \subsection{Linearized equations}
 Letting $n, m \in \left[1, N+2\right], n \ne m$, we derive a closed system of coupled differential equations for first- and second-order expectations
 
+%\begin{adjustwidth}{left amount}{right amount}
+
 \begingroup
 \allowdisplaybreaks
 \begin{align}\label{eqn:linearsystem}
 % an
 \partial_t\langle\hat{a}_n\rangle &= \left(- i \omega_n - \frac{\Gamma_n}{2}\right)\langle\hat{a}_n\rangle - 2 i U \langle\hat{a}_n\rangle\langle\hat{a}_n^\dagger\hat{a}_n\rangle - i U \langle\hat{a}_n^\dagger\rangle\langle\hat{a}_n\hat{a}_n\rangle + 2 i U \langle\hat{a}_n^\dagger\rangle \langle\hat{a}_n\rangle\langle\hat{a}_n\rangle \notag \\
-&- \sum_{j=1}^N i \mathcal{G}_{n, j} \langle\hat{a}_j\rangle, \notag \\
+&- \sum_{j=1}^N i \mathcal{G}_{n, j} \langle\hat{a}_j\rangle, \notag \\[18pt]
 %
 %
 % adn
 \partial_t\langle\hat{a}_n^\dagger\rangle &= \left(+ i \omega_n - \frac{\Gamma_n}{2} \right) \langle\hat{a}_n^\dagger\rangle + 2 i U \langle\hat{a}_n^\dagger\rangle\langle\hat{a}_n^\dagger\hat{a}_n\rangle + i U \langle\hat{a}_n\rangle\langle\hat{a}_n^\dagger\hat{a}_n^\dagger\rangle - 2 i U\langle\hat{a}_n^\dagger\rangle\langle\hat{a}_n^\dagger\rangle\langle\hat{a}_n\rangle \notag \\
-&+ \sum_{j=1}^N i \mathcal{G}_{n,j}\langle\hat{a}_j^\dagger\rangle, \notag \\
+&+ \sum_{j=1}^N i \mathcal{G}_{n,j}\langle\hat{a}_j^\dagger\rangle, \notag \\[18pt]
 %
 %
 % anan
 \partial_t\langle\hat{a}_n\hat{a}_n\rangle &= \left( - 2 i \omega_n - \Gamma_n\right) \langle\hat{a}_n\hat{a}_n\rangle - 6 i U \langle\hat{a}_n^\dagger \hat{a}_n\rangle \langle\hat{a}_n\hat{a}_n\rangle + 4 i U \langle\hat{a}_n^\dagger\rangle \langle\hat{a}_n\rangle \langle\hat{a}_n\rangle\langle\hat{a}_n\rangle - i U \langle \hat{a}_n\hat{a}_n\rangle \notag \\
-&- \sum_{j=1}^N 2 i \mathcal{G}_{n, j}\langle\hat{a}_n\hat{a}_j\rangle,  \notag \\
+&- \sum_{j=1}^N 2 i \mathcal{G}_{n, j}\langle\hat{a}_n\hat{a}_j\rangle,  \notag \\[18pt]
 %
 %
 % adnan
-\partial_t \langle\hat{a}_n^\dagger\hat{a}_n\rangle &= - \Gamma_n\langle\hat{a}_n^\dagger\hat{a}_n\rangle + \Gamma_n \bar{n}_{th}^{\left(n\right)} + \sum_{j=1}^N i \mathcal{G}_{n, j}\left(\langle\hat{a}_j^\dagger\hat{a}_n\rangle - \langle\hat{a}_n^\dagger\hat{a}_j\rangle\right), \notag \\ 
+\partial_t \langle\hat{a}_n^\dagger\hat{a}_n\rangle &= - \Gamma_n\langle\hat{a}_n^\dagger\hat{a}_n\rangle + \Gamma_n \bar{n}_{th}^{\left(n\right)} + \sum_{j=1}^N i \mathcal{G}_{n, j}\left(\langle\hat{a}_j^\dagger\hat{a}_n\rangle - \langle\hat{a}_n^\dagger\hat{a}_j\rangle\right), \notag \\[18pt] 
 %
 %
 %
 %
 % adnadn
 \partial_t\langle\hat{a}_n^\dagger\hat{a}_n^\dagger\rangle &= \left(2 i \omega_n - \Gamma_n  \right) \langle\hat{a}_n^\dagger\hat{a}_n^\dagger\rangle + 6 i U \langle\hat{a}_n^\dagger\hat{a}_n^\dagger\rangle\langle\hat{a}_n^\dagger \hat{a}_n\rangle - 4 i U \langle\hat{a}_n^\dagger\rangle\langle\hat{a}_n^\dagger\rangle\langle\hat{a}_n^\dagger\rangle\langle\hat{a}_n\rangle + i U \langle\hat{a}_n\hat{a}^\dagger_n\rangle  \notag \\
-&+ \sum_{j=1}^N 2 i \mathcal{G}_{n, j} \langle\hat{a}_n^\dagger\hat{a}_j^\dagger\rangle, \notag \\
+&+ \sum_{j=1}^N 2 i \mathcal{G}_{n, j} \langle\hat{a}_n^\dagger\hat{a}_j^\dagger\rangle, \notag \\[18pt]
 %
 %
 % anam
 \partial_t\langle\hat{a}_n\hat{a}_m\rangle &= \left(i\left(\omega_n + \omega_m\right) - \frac{\Gamma_n + \Gamma_m}{2}\right)\langle\hat{a}_n\hat{a}_m\rangle - 2 i U \langle\hat{a}_n^\dagger\hat{a}_n\rangle \langle\hat{a}_n\hat{a}_m\rangle - i U \langle\hat{a}_n^\dagger\hat{a}_m\rangle \langle\hat{a}_n\hat{a}_n\rangle \notag \\
-& - 2 i U \langle\hat{a}_m^\dagger\hat{a}_m\rangle\langle\hat{a}_n\hat{a}_m\rangle - i U \langle\hat{a}_m^\dagger\hat{a}_n\rangle\langle\hat{a}_m\hat{a}_m\rangle + 2 i U \langle\hat{a}_n^\dagger\rangle \langle\hat{a}_n\rangle \langle\hat{a}_n\rangle \langle\hat{a}_m\rangle + 2 i U \langle\hat{a}_n\rangle \langle\hat{a}_m^\dagger\rangle \langle\hat{a}_m\rangle\langle\hat{a}_m\rangle \notag \\
-& - \sum_{j=1}^N i \mathcal{G}_{n, j}\langle\hat{a}_j\hat{a}_m\rangle - \sum_{q=1}^N i \mathcal{G}_{m, q} \langle\hat{a}_n\hat{a}_q\rangle, \notag \\
+& - 2 i U \langle\hat{a}_m^\dagger\hat{a}_m\rangle\langle\hat{a}_n\hat{a}_m\rangle - i U \langle\hat{a}_m^\dagger\hat{a}_n\rangle\langle\hat{a}_m\hat{a}_m\rangle + 2 i U \langle\hat{a}_n^\dagger\rangle \langle\hat{a}_n\rangle \langle\hat{a}_n\rangle \langle\hat{a}_m\rangle \notag \\
+&+ 2 i U \langle\hat{a}_n\rangle \langle\hat{a}_m^\dagger\rangle \langle\hat{a}_m\rangle\langle\hat{a}_m\rangle %\notag \\
+ - \sum_{j=1}^N i \mathcal{G}_{n, j}\langle\hat{a}_j\hat{a}_m\rangle - \sum_{q=1}^N i \mathcal{G}_{m, q} \langle\hat{a}_n\hat{a}_q\rangle, \notag \\[18pt]
 %
 %
 % adnam
 \partial_t\langle\hat{a}_n^\dagger\hat{a}_m\rangle &= \left(i\left(\omega_n - \omega_m\right) - \frac{\Gamma_n + \Gamma_m}{2}\right)\langle\hat{a}_n^\dagger\hat{a}_m\rangle + 2 i U \langle\hat{a}_n^\dagger\hat{a}_m \rangle \langle\hat{a}_n^\dagger \hat{a}_n\rangle + i U \langle \hat{a}_n^\dagger \hat{a}_n^\dagger\rangle\langle\hat{a}_n\hat{a}_m\rangle \notag \\
-& - 2 i U \langle\hat{a}_n^\dagger \hat{a}_m \rangle \langle \hat{a}_m^\dagger \hat{a}_m\rangle - i U \langle\hat{a}_n^\dagger \hat{a}_m^\dagger\rangle \langle\hat{a}_m\hat{a}_m\rangle - 2 i U \langle\hat{a}_n^\dagger\rangle \langle\hat{a}_n^\dagger\rangle \langle\hat{a}_n\rangle \langle\hat{a}_m\rangle + 2 i U \langle\hat{a}_n^\dagger \rangle \langle \hat{a}_m^\dagger \rangle \langle \hat{a}_m\rangle \langle\hat{a}_m\rangle \notag \\
-& + \sum_{j=1}^N i \mathcal{G}_{n, j}\langle\hat{a}_j^\dagger\hat{a}_m\rangle - \sum_{q=1}^N i \mathcal{G}_{m, q}\langle \hat{a}_n^\dagger \hat{a}_q\rangle,  \notag \\
+& - 2 i U \langle\hat{a}_n^\dagger \hat{a}_m \rangle \langle \hat{a}_m^\dagger \hat{a}_m\rangle - i U \langle\hat{a}_n^\dagger \hat{a}_m^\dagger\rangle \langle\hat{a}_m\hat{a}_m\rangle - 2 i U \langle\hat{a}_n^\dagger\rangle \langle\hat{a}_n^\dagger\rangle \langle\hat{a}_n\rangle \langle\hat{a}_m\rangle \notag \\
+&+ 2 i U \langle\hat{a}_n^\dagger \rangle \langle \hat{a}_m^\dagger \rangle \langle \hat{a}_m\rangle \langle\hat{a}_m\rangle % \notag \\
+ + \sum_{j=1}^N i \mathcal{G}_{n, j}\langle\hat{a}_j^\dagger\hat{a}_m\rangle - \sum_{q=1}^N i \mathcal{G}_{m, q}\langle \hat{a}_n^\dagger \hat{a}_q\rangle,  \notag %\\[18pt]
 %
-%
+\end{align}
+\begin{adjustwidth}{-3cm}{0cm}
+\begin{align}
 % adnadm
 \partial_t\langle\hat{a}_n^\dagger\hat{a}_m^\dagger\rangle &= \left(i \left(\omega_n + \omega_m\right) - \frac{\Gamma_n + \Gamma_m}{2}\right) \langle \hat{a}_n^\dagger \hat{a}_m^\dagger\rangle + 2 i U \langle\hat{a}_n^\dagger \hat{a}_m^\dagger\rangle \langle \hat{a}_n^\dagger \hat{a}_n\rangle + i U \langle \hat{a}_n^\dagger \hat{a}_n^\dagger \rangle \langle \hat{a}_m^\dagger \hat{a}_n\rangle \notag \\
-&+ 2 i U \langle\hat{a}_n^\dagger \hat{a}_m^\dagger \rangle \langle \hat{a}_m^\dagger \hat{a}_m\rangle + i U \langle \hat{a}_n^\dagger \hat{a}_m\rangle \langle \hat{a}_m^\dagger \hat{a}_m^\dagger \rangle - 2 i U \langle\hat{a}_n^\dagger \rangle \langle \hat{a}_n^\dagger \rangle \langle \hat{a}_n \rangle \langle \hat{a}_m^\dagger\rangle - 2 i U \langle \hat{a}_n^\dagger \rangle \langle \hat{a}_m^\dagger \rangle \langle \hat{a}_m^\dagger \rangle \langle \hat{a}_m\rangle \notag \\
-& + \sum_{j=1}^N i \mathcal{G}_{n, j} \langle\hat{a}_j^\dagger \hat{a}_m^\dagger\rangle + \sum_{q=1}^N i \mathcal{G}_{m, q} \langle\hat{a}_n^\dagger \hat{a}_q^\dagger\rangle.
+&+ 2 i U \langle\hat{a}_n^\dagger \hat{a}_m^\dagger \rangle \langle \hat{a}_m^\dagger \hat{a}_m\rangle + i U \langle \hat{a}_n^\dagger \hat{a}_m\rangle \langle \hat{a}_m^\dagger \hat{a}_m^\dagger \rangle - 2 i U \langle\hat{a}_n^\dagger \rangle \langle \hat{a}_n^\dagger \rangle \langle \hat{a}_n \rangle \langle \hat{a}_m^\dagger\rangle \notag \\
+&- 2 i U \langle \hat{a}_n^\dagger \rangle \langle \hat{a}_m^\dagger \rangle \langle \hat{a}_m^\dagger \rangle \langle \hat{a}_m\rangle %\notag \\
+ + \sum_{j=1}^N i \mathcal{G}_{n, j} \langle\hat{a}_j^\dagger \hat{a}_m^\dagger\rangle + \sum_{q=1}^N i \mathcal{G}_{m, q} \langle\hat{a}_n^\dagger \hat{a}_q^\dagger\rangle.
 \end{align} 
+\end{adjustwidth}
 \endgroup
+
+%
+%\begin{adjustwidth}{left amount}{right amount}
+%\lipsum[2]
+%\end{adjustwidth}
 
