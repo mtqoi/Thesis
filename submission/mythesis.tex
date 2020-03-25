@@ -49,7 +49,7 @@
 
 
 \pagestyle{plain}
-\currentpdfbookmark{\contentsname}{toc}
+\currentpdfbookmark{\contentsname}{Contents}
 \tableofcontents
 \cleardoublepage
 
@@ -73,7 +73,7 @@
 \part{PhoG: generation of sub-Poissonian light}
 \include{chapters/phog}
 
-
+\part{Appendices}
 \appendix
 \include{chapters/crypto_noisy_perr}
 \include{chapters/crypto_numerical_methods}
@@ -82,7 +82,8 @@
 \include{chapters/phog_numerical_methods}
 
 
-\printbibliography
+\printbibliography[heading=bibintoc]
+
 
 \end{document}
 

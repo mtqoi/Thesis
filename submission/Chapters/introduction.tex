@@ -4,7 +4,7 @@
 \section{Introduction to Thesis}
 %\MT{Statements about historical background of quantum optics/quantum information/quantum cryptography}
 
-This Thesis consists of two halves. In the first half, we consider several related cryptographic protocols which securely perform the tasks of Quantum Digital Signatures (QDS) and Quantum Secret Sharing (QSS). Our goals here are, firstly: to remove an assumption of secure quantum channels from continuous-variable (CV) QDS, and provide a security proof when an eavesdropping attack is permitted; and secondly: to demonstrate that several CV quantum cryptographic protocols may be performed over identical hardware setups, while the hardware at the quantum level is agnostic to the protocol being implemented. This so-called ``agile" approach illustrates a translation of cryptographic agility from classical (conventional) cryptography to quantum cryptography, and allows for a move towards secure and practical quantum cryptosystems which can perform multiple tasks.
+This Thesis consists of two halves. In the first half, we consider several related cryptographic protocols which securely perform the tasks of Quantum Digital Signatures (QDS) and Quantum Secret Sharing (QSS). Our goals here are, firstly: to remove an assumption of secure quantum channels from continuous-variable (CV) QDS, and provide a security proof when an eavesdropping attack is permitted; and secondly: to demonstrate that several CV quantum cryptographic protocols may be performed over identical hardware setups, while the hardware at the quantum level is agnostic to the protocol being implemented. This so-called ``agile'' approach illustrates a translation of cryptographic agility from classical (conventional) cryptography to quantum cryptography, and allows for a move towards secure and practical quantum cryptosystems which can perform multiple tasks.
 
 In the second half we consider the task of quantum state generation. We design and analyse a system which is capable to deterministically produce highly non-classical states at the output, from a coherent state input. Using methods from the fields of nonlinear pulse propagation in fibers and of open quantum systems, we analytically and numerically analyse a large multimode system and reduce it, step-by-step, to a single-mode system which is much more numerically tangible. The device, which we denote PhoG (\underline{Pho}ton \underline{G}un), will soon be implemented in a waveguide array structure and will provide a practical and cheap source of nonclassicality for quantum enhanced imaging and metrology, and may even improve the performance of quantum cryptographic systems. 
 
@@ -14,7 +14,7 @@ The two halves of this thesis can be interpreted as studying different aspects o
 
 This Thesis is structured as follows. In the remainder of this Chapter we will introduce and outline several of the theoretical and analytical tools which we make extensive use of in the rest of the Thesis. We will show how the electromagnetic field may be quantized, discuss several common and useful quantum states of the field, and examine one method for their description and visualization. In Chapter~\ref{chapter:crypto_intro} we outline some of the developments in conventional cryptography which underpin our modern communications infrastructure, and discuss how two cryptographic tasks -- digital signatures and secret sharing -- may be translated to the quantum realm. In particular we will look at several recent and historic attempts to build such quantum protocols.
 
-\paragraph{Part One:} In Chapter~\ref{chapter:qds} we introduce our own QDS protocol, and prove its security against several classes of attack. We show that ours is the first CV QDS protocol to allow for an eavesdropper on the channels, and we show that despite this we attain very short signature lengths over practical distances. In Chapter~\ref{chapter:qss} we introduce our QSS protocol, prove its security, and analyse its performance. Crucially, unlike several recent QSS protocols, our protocol does not require generation and distribution of large-scale entangled states, nor does it require dedicated hardware for a sequential ``round-robin" style of approach. In the last chapter of Part One, Chapter~\ref{chapter:aqc}, we introduce and discuss the concept of quantum cryptographic agility, and demonstrate how it may apply to the protocols discussed in earlier chapters. We additionally introduce a new QDS protocol which runs in a modified configuration, and discuss how a quantum key distribution (QKD) protocol which already exists in the literature may be adopted into our agile system. We finish with a figure-of-merit graph which demonstrates that our QDS scheme, in addition to being practical and compatible with commercial telecommunications hardware, is also the fastest QDS protocol over comparable distances. 
+\paragraph{Part One:} In Chapter~\ref{chapter:qds} we introduce our own QDS protocol, and prove its security against several classes of attack. We show that ours is the first CV QDS protocol to allow for an eavesdropper on the channels, and we show that despite this we attain very short signature lengths over practical distances. In Chapter~\ref{chapter:qss} we introduce our QSS protocol, prove its security, and analyse its performance. Crucially, unlike several recent QSS protocols, our protocol does not require generation and distribution of large-scale entangled states, nor does it require dedicated hardware for a sequential ``round-robin'' style of approach. In the last chapter of Part One, Chapter~\ref{chapter:aqc}, we introduce and discuss the concept of quantum cryptographic agility, and demonstrate how it may apply to the protocols discussed in earlier chapters. We additionally introduce a new QDS protocol which runs in a modified configuration, and discuss how a quantum key distribution (QKD) protocol which already exists in the literature may be adopted into our agile system. We finish with a figure-of-merit graph which demonstrates that our QDS scheme, in addition to being practical and compatible with commercial telecommunications hardware, is also the fastest QDS protocol over comparable distances. 
 
 \paragraph{Part Two:} In Chapter~\ref{chapter:phog} we motivate and introduce the PhoG device which will be the focus of the second half of this Thesis. We demonstrate that dissipation, far from being a hindrance to the desired evolution of our quantum system, is actually an asset and the main driver towards target nonclassicality. We introduce an exotic form of dissipation, called Nonlinear Coherent Loss, and show that in the ideal limit it will deterministically lead to single photons at the output. We then introduce progressively more complex models involving additional bosonic system modes, and demonstrate that a realistic full multi-mode model of the system can be used to effectively simulate the Nonlinear Coherent Loss decay channel. Finally, we end the chapter by demonstrating that in addition to generating highly sub-Poissonian states, a slight modification to the PhoG device will lead to generation of entanglement at the output.
 
@@ -276,10 +276,18 @@ and so we will often seek an expansion of other states in the Fock-state basis. 
 \noindent Wigner functions corresponding to some example Fock states are displayed in Fig.~\ref{fig:intro_fock_wigner}.
 
 
+
 \begin{figure}[htp]
 \centering
 \captionsetup{width=0.8\linewidth}
-\includegraphics[draft=false, width=\linewidth]{introduction/fock_wigner}
+	\begin{subfigure}{0.49\linewidth}
+		\centering
+		\includegraphics[draft=false, width=\linewidth]{introduction/fock_wigner_1}
+	\end{subfigure}
+	\begin{subfigure}{0.49\linewidth}
+		\centering
+		\includegraphics[draft=false, width=\linewidth]{introduction/fock_wigner_2}
+	\end{subfigure}
 \caption{\label{fig:intro_fock_wigner} Wigner functions for Fock states $\ket{1}$ and $\ket{2}$. Blue signifies that the Wigner function is positive, while red signifies that the Wigner function is negative. }
 \end{figure}
 
@@ -396,12 +404,20 @@ Quadrature squeezing is generated by application of the squeezing operator
 \hat{S}\left(\zeta\right) = \exp \left(\frac{\zeta}{2} \left(\hat{a}^2 - \hat{a}^{\dagger 2}\right) \right),
 \end{equation}
 
-\noindent which may be realised for example by degenerate parametric amplification \cite{Boyd2008}.
+\noindent which may be realised, for example, by degenerate parametric amplification \cite{Boyd2008}.
+
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
 \centering
-\includegraphics[width=\linewidth, draft=false]{introduction/squeeze}
+\captionsetup{width=0.8\linewidth}
+	\begin{subfigure}{0.49\linewidth}
+		\centering
+		\includegraphics[draft=false, width=\linewidth]{introduction/squeeze_1}
+	\end{subfigure}
+	\begin{subfigure}{0.49\linewidth}
+		\centering
+		\includegraphics[draft=false, width=\linewidth]{introduction/squeeze_2}
+	\end{subfigure}
 \caption{\label{fig:intro_quadrature_squeezed_wigner} Quadrature squeezed states. Squeezing operator $\hat{S}\left(\zeta\right)$ has been applied to vacuum. (a) $\zeta = 1.0$. (b) $\zeta = -1.0$. Orange circles denote vacuum variance. Squeezed states allow for reduced uncertainty in one quadrature, at the expense of increased uncertainty in the conjugate quadrature.}
 \end{figure}
 
@@ -497,12 +513,21 @@ p_1 &\sim - p_2,
 where the position quadratures are correlated and the momentum quadratures are anticorrelated. We explicitly show this in the two-mode squeezed vacuum wavefunction in Fig.~\ref{fig:tmsv_histogram}. The correlations between modes are a direct consequence of entanglement, making the two-mode squeezed vacuum a canonical resource state for quantum information processing. We shall use the TMSV extensively in the first part of this Thesis, since possession of one of its modes allows information about its second mode to be gained.
 
 
+
 \begin{figure}[htp]
 \captionsetup{width=0.8\linewidth}
 \centering
-\includegraphics[draft=false, width=\linewidth]{introduction/tmsv_wigner}
+	\begin{subfigure}{0.49\linewidth}
+		\centering
+		\includegraphics[draft=false, width=\linewidth]{introduction/tmsv_wigner_1}
+	\end{subfigure}
+	\begin{subfigure}{0.49\linewidth}
+		\centering
+		\includegraphics[draft=false, width=\linewidth]{introduction/tmsv_wigner_2}
+	\end{subfigure}
 \caption{\label{fig:tmsv_wigner} Wigner functions of reduced states of a TMSV with $\zeta = 0.65$. The corresponding quadrature wavefunctions are displayed in Fig.~\ref{fig:tmsv_histogram}. Locally the modes look like thermal states with $\bar{n} = 0.5$, c.f. Fig.~\ref{fig:thermal_state}. The vacuum variance is depicted in orange.}
 \end{figure}
+
 
 \begin{figure}[htp]
 \captionsetup{width=0.8\linewidth}
@@ -872,6 +897,7 @@ Let $X_1, \dots, X_n$ and $Y$ be random variables. Then \cite{Nielsen2010, Wilde
 
 \FloatBarrier
 \section{Summary}
+\MT{Add a quick summary sentence to ensure that the chapter does not have such an abrupt stop.}
 
 
 
