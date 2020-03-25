@@ -1,0 +1,72 @@
+Planning EB QSS lit review. Let's group together papers by key message.
+
+
+
+
+EB QSS is possible:
+Hillery1999, Karlsson1999, Cleve1999, Gottesman1999
+
+
+Generalizing GHZ protocols:
+Markham2008a (generalizes to graph states)
+Keet2010 (generalizes to qudit graph states)
+Lau2013 (generalizes to CV cluster states)
+Armstrong2015 (links with QKD, links with steering)
+Ottaviani2017b (links with quantum conferencing. Star-network. MDI)
+Kogias2017 (unconditional security. CV)
+	Xiang2017 (links with steering. optimal states)
+	Xiang2018 (might allow the requisite entangled state to be distributed)
+Chen2017b (based on BPB state)
+Choi2017 (allows players to check whether a key has been distilled)
+Xiao2004 (more players than HBB. More efficient)
+Wu2016 (CV GHZ state for conferencing and qss. MDI)
+
+Making EB QSS more practical:
+Chen2005a (allows noisy ghz states)
+Chen2005b (experiment with multipartite entanglement)
+Lau2013 (generalizes to CV cluster states)
+Williams2019 (polarization-entangled photon pairs)
+Zhang2005b (uses bell-pairs instead of multipartite entanglement)
+Karlsson1999 (uses bell-pairs instead of multipartite entanglement)
+
+Experimental EB QSS:
+Gartner2007 (QSS requiring four-photon entanglement)
+Bell2014 (5-qubit graph state)
+Tittel2001 (PM version of HBB using entangled PDC photons)
+Chen2005b (experiment with multipartite entanglement)
+
+
+
+Planning sequential QSS lit review. Let's group together papers by message.
+
+Sequential QSS is also possible, and may be preferable to EBQSS:
+Zhang2005a (QSS using only single photons. Entanglement unnecessary.)
+Schmid2005 (Sequential QSS + experiment for 6 parties. No quantum memory required. Uses heralded single photons.)
+Schmid2007 (comment in response to the comment about the security of their scheme. One must be very careful to consider the flow of classical information in one of these protocols.)
+
+
+Implementation of sequential QSS:
+Schmid2005
+Bogdanski2009 (QSS over telecom fiber network. Makes QSS very practical)
+Hai-Qiang2013a (implementation over 50km fiber. Implementation of Schmid2005)
+Wei2013 (same as Hai-Qiang2013a. I think they are identical papers)
+Grice2019 (CV scheme with same principles as Schmid. Gaussian modulated coherent states)
+
+Improvements to sequential QSS:
+Wei2016 (published in 2018) (don't need to monitor signal disturbance. Based on RR DPS QKD)
+Lu2017a (d-level quantum system. Allows for different access structures)
+Asouden2017a (noisy environments)
+Lu2018 (uses quantum fourier transform and generalized pauli operators. I think this paper is unfair on Schmid)
+Grice2019 (claims to be immune to trojan-horse attacks, but I'm not so sure. Uses ideas from Kogias2017 for its security proof)	
+Deng2005 (points out trojan-horse attack on Schmid. Proposes a solution)
+Qin2006 (points out another type of attack on Schmid. Proposes a solution)
+
+Links with other protocols:
+Wei2016 (based on RR DPS QKD)
+Grice2019 (can allow 2-QKD between any two parties)
+Grice2015 (allows for transition between N-party QSS and 2-party QKD without changing hardware. Same quantum steps between protocols but different classical postprocesing steps.)
+
+Problems with sequential QSS:
+Schmid2007 (and the paper it responds to)
+Deng2005
+Qin2006

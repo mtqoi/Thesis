@@ -82,3 +82,7 @@ Images/introduction/cache/*
 /styles/cleanthesis/README.md
 /styles/cleanthesis/VERSION
 /styles/cleanthesis-incl-example_v0.4.0.zip
+
+submission/Images/*
+submission/styles/*
+submission/FrontBackmatter/*

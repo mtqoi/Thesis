@@ -1,0 +1,318 @@
+
+\PassOptionsToPackage{utf8}{inputenc}
+  \usepackage{inputenc}
+
+\PassOptionsToPackage{T1}{fontenc} % T2A for cyrillics
+  \usepackage{fontenc}
+
+
+
+\PassOptionsToPackage{
+  drafting=false,    % print version information on the bottom of the pages
+  tocaligned=false, % the left column of the toc will be aligned (no indentation)
+  dottedtoc=false,  % page numbers in ToC flushed right
+  eulerchapternumbers=true, % use AMS Euler for chapter font (otherwise Palatino)
+  linedheaders=false,       % chaper headers will have line above and beneath
+  floatperchapter=true,     % numbering per chapter for all floats (i.e., Figure 1.1)
+  eulermath=true,  % use awesome Euler fonts for mathematical formulae (only with pdfLaTeX)
+  beramono=true,    % toggle a nice monospaced font (w/ bold)
+  palatino=true,    % deactivate standard font for loading another one, see the last section at the end of this file for suggestions
+  style=classicthesis % classicthesis, arsclassica
+}{classicthesis}
+
+
+% ****************************************************************************************************
+% 2. Personal data and user ad-hoc commands (insert your own data here)
+% ****************************************************************************************************
+%\newcommand{\Title}{Thesis draft - selected chapters\xspace}
+\title{Thesis draft}
+\newcommand{\myTitle}{Thesis draft - selected chapters\xspace}
+%\newcommand{\mySubtitle}{An Homage to The Elements of Typographic Style\xspace}
+%\newcommand{\myDegree}{Doktor-Ingfenieur (Dr.-Ing.)\xspace}
+\newcommand{\myName}{Matthew Thornton\xspace}
+\newcommand{\myProf}{Natalia Korolkova\xspace}
+%\newcommand{\myOtherProf}{Put name here\xspace}
+%\newcommand{\mySupervisor}{Put name here\xspace}
+\newcommand{\myFaculty}{Put data here\xspace}
+\newcommand{\myDepartment}{School of Physics and Astronomy\xspace}
+\newcommand{\myUni}{University of St Andrews\xspace}
+\newcommand{\myLocation}{St Andrews\xspace}
+\newcommand{\myTime}{March 2020\xspace}
+\newcommand{\myVersion}{\classicthesis}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[draft]{graphicx}
+%\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{physics}
+%\usepackage[noBBpl]{mathpazo}
+%\usepackage{geometry} \geometry{ a4paper, total={170mm,257mm}, left=20mm, top=20mm,}
+%\usepackage{geometry} \geometry{ a4paper, total={170mm,257mm}, left=30mm, right=30mm,}
+\usepackage[space]{grffile}
+\usepackage{amssymb}
+\usepackage{hyperref}	
+\usepackage[stable]{footmisc}
+\usepackage[nottoc,numbib]{tocbibind}
+\usepackage{dsfont}
+\usepackage{framed}
+%\usepackage[font=small,labelfont=bf]{caption}
+\usepackage[font=small]{caption}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage{bm}
+\usepackage{siunitx}
+\usepackage{floatrow}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{siunitx}
+\usepackage{braket}
+\usepackage[nolist]{acronym}
+\usepackage{multirow}
+\usepackage{etoolbox}
+\usepackage[para]{threeparttable}
+\usepackage{placeins}
+\usepackage{bm}
+\AtBeginDocument{\DeclareUnicodeCharacter{00B4}{'}}
+%\usepackage{xcolor}
+
+\newcommand{\highlight}[1]{%
+  \colorbox{green!30}{$\displaystyle#1$}}
+\usepackage{newfloat}
+%\DeclareFloatingEnvironment[placement={!ht},name=List]{mylist}
+\DeclareFloatingEnvironment[placement={h!},name=List]{mylist}
+
+\newcommand{\eff}{\text{eff}}
+\newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
+\newcommand{\ncl}{\hat{a}\left(\hat{a}^\dagger \hat{a} - 1\right)}
+\newcommand{\gncl}{\gamma_{\text{NCL}}}
+\newcommand{\hc}{\text{h. c.}}
+%\newcommand{\d}{\delta}
+\newcommand*\erfc{\text{erfc}}
+\newcommand{\perr}{\text{p}_{\text{err}}}
+\newcommand{\perrps}{\perr\left(\Delta_r, \Delta_\theta\right)}
+\newcommand{\pe}{\text{p}_{\text{e}}}
+\newcommand{\given}{\; \middle| \;}
+\newcommand{\cond}{\; | \;}
+\newcommand{\tmsv}{\rho_{\text{TMSV}}}
+\newcommand{\rps}{\mathcal{R}_{\text{PS}}}
+\newcommand{{\systemB}}{QDS-$b$-QSS-$b$-CV-QPSK}
+\newcommand{{\systemF}}{QDS-$f$-QKD-$f$-CV-QPSK}
+\newcommand{\ddt}[1][]{\frac{\mathrm{d}#1}{\mathrm{d}t}}
+\newcommand{\ddtau}[1][]{\frac{\mathrm{d}#1}{\mathrm{d}\tau}}
+%\newcommand{\tr}[1][]{\text{Tr}\left[#1\right]}
+\newcommand{\dims}{\left|\mathcal{H}\right|}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}	
+\newcommand{\head}[1]{\multicolumn{1}{c}{#1}}
+\newcommand{\enot}[2]{{#1}\!\times\!10^{#2}}
+\newcommand{\qout}{q_{\text{out}}}
+\newcommand{\pout}{p_{\text{out}}}
+
+
+\usepackage[
+    backend=bibtex8,
+    style=ieee,
+    citestyle=numeric-comp,
+    sortlocale=de_DE,
+%    natbib=true,
+    url=false, 
+    doi=false,
+    eprint=false,
+    isbn=false
+]{biblatex}
+%\bibliography{Thesis}
+%\usepackage{biblatex}
+
+
+\DeclareGraphicsExtensions{.png, .pdf,.jpg}
+
+
+
+
+\usepackage{color} 
+\def\red#1{\textcolor{red}{#1}}
+\def\blue#1{\textcolor{blue}{#1}}
+\def\MT#1{\textcolor{magenta}{#1}}
+\def\cyan#1{\textcolor{cyan}{#1}}
+
+\graphicspath{ {images/} }
+
+\setcounter{tocdepth}{1} % Show sections
+%\setcounter{tocdepth}{2} % + subsections
+%\setcounter{tocdepth}{3} % + subsubsections
+%\setcounter{tocdepth}{4} % + paragraphs
+%\setcounter{tocdepth}{5} % + subparagraphs
+
+
+
+
+
+
+
+
+
+
+
+
+% ********************************************************************
+% Setup, finetuning, and useful commands
+% ********************************************************************
+\providecommand{\mLyX}{L\kern-.1667em\lower.25em\hbox{Y}\kern-.125emX\@}
+\newcommand{\ie}{i.\,e.}
+\newcommand{\Ie}{I.\,e.}
+\newcommand{\eg}{e.\,g.}
+\newcommand{\Eg}{E.\,g.}
+% ****************************************************************************************************
+
+
+% ****************************************************************************************************
+% 3. Loading some handy packages
+% ****************************************************************************************************
+% ********************************************************************
+% Packages with options that might require adjustments
+% ********************************************************************
+\PassOptionsToPackage{ngerman,american, english}{babel} % change this to your language(s), main language last
+% Spanish languages need extra options in order to work with this template
+%\PassOptionsToPackage{spanish,es-lcroman}{babel}
+    \usepackage{babel}
+
+\usepackage{csquotes}
+\PassOptionsToPackage{%
+  %backend=biber,bibencoding=utf8, %instead of bibtex
+  backend=bibtex8,bibencoding=ascii,%
+  language=auto,%
+  style=numeric-comp,%
+  %style=authoryear-comp, % Author 1999, 2010
+  %bibstyle=authoryear,dashed=false, % dashed: substitute rep. author with ---
+  sorting=nyt, % name, year, title
+  maxbibnames=10, % default: 3, et al.
+  %backref=true,%
+  natbib=true % natbib compatibility mode (\citep and \citet still work)
+}{biblatex}
+    \usepackage{biblatex}
+
+\PassOptionsToPackage{fleqn}{amsmath}       % math environments and more by the AMS
+  \usepackage{amsmath}
+
+% ********************************************************************
+% General useful packages
+% ********************************************************************
+\usepackage{graphicx} %
+\usepackage{scrhack} % fix warnings when using KOMA with listings package
+\usepackage{xspace} % to get the spacing after macros right
+\PassOptionsToPackage{printonlyused,smaller}{acronym}
+  \usepackage{acronym} % nice macros for handling all acronyms in the thesis
+  %\renewcommand{\bflabel}[1]{{#1}\hfill} % fix the list of acronyms --> no longer working
+  %\renewcommand*{\acsfont}[1]{\textsc{#1}}
+  %\renewcommand*{\aclabelfont}[1]{\acsfont{#1}}
+  %\def\bflabel#1{{#1\hfill}}
+  \def\bflabel#1{{\acsfont{#1}\hfill}}
+  \def\aclabelfont#1{\acsfont{#1}}
+% ****************************************************************************************************
+%\usepackage{pgfplots} % External TikZ/PGF support (thanks to Andreas Nautsch)
+%\usetikzlibrary{external}
+%\tikzexternalize[mode=list and make, prefix=ext-tikz/]
+% ****************************************************************************************************
+
+
+% ****************************************************************************************************
+% 4. Setup floats: tables, (sub)figures, and captions
+% ****************************************************************************************************
+\usepackage{tabularx} % better tables
+  \setlength{\extrarowheight}{3pt} % increase table row height
+\newcommand{\tableheadline}[1]{\multicolumn{1}{l}{\spacedlowsmallcaps{#1}}}
+\newcommand{\myfloatalign}{\centering} % to be used with each float for alignment
+%\usepackage{subfig}
+% ****************************************************************************************************
+
+
+% ****************************************************************************************************
+% 5. Setup code listings
+% ****************************************************************************************************
+\usepackage{listings}
+%\lstset{emph={trueIndex,root},emphstyle=\color{BlueViolet}}%\underbar} % for special keywords
+\lstset{language=[LaTeX]Tex,%C++,
+  morekeywords={PassOptionsToPackage,selectlanguage},
+  keywordstyle=\color{RoyalBlue},%\bfseries,
+  basicstyle=\small\ttfamily,
+  %identifierstyle=\color{NavyBlue},
+  commentstyle=\color{Green}\ttfamily,
+  stringstyle=\rmfamily,
+  numbers=none,%left,%
+  numberstyle=\scriptsize,%\tiny
+  stepnumber=5,
+  numbersep=8pt,
+  showstringspaces=false,
+  breaklines=true,
+  %frameround=ftff,
+  %frame=single,
+  belowcaptionskip=.75\baselineskip
+  %frame=L
+}
+% ****************************************************************************************************
+
+
+
+
+% ****************************************************************************************************
+% 6. Last calls before the bar closes
+% ****************************************************************************************************
+% ********************************************************************
+% Her Majesty herself
+% ********************************************************************
+\usepackage{classicthesis}
+
+
+% ********************************************************************
+% Fine-tune hyperreferences (hyperref should be called last)
+% ********************************************************************
+\hypersetup{%
+  %draft, % hyperref's draft mode, for printing see below
+  colorlinks=true, linktocpage=true, pdfstartpage=3, pdfstartview=FitV,%
+  % uncomment the following line if you want to have black links (e.g., for printing)
+  %colorlinks=false, linktocpage=false, pdfstartpage=3, pdfstartview=FitV, pdfborder={0 0 0},%
+  breaklinks=true, pageanchor=true,%
+  pdfpagemode=UseNone, %
+  % pdfpagemode=UseOutlines,%
+  plainpages=false, bookmarksnumbered, bookmarksopen=true, bookmarksopenlevel=1,%
+  hypertexnames=true, pdfhighlight=/O,%nesting=true,%frenchlinks,%
+  urlcolor=CTurl, linkcolor=CTlink, citecolor=CTcitation, %pagecolor=RoyalBlue,%
+  %urlcolor=Black, linkcolor=Black, citecolor=Black, %pagecolor=Black,%
+  pdftitle={\myTitle},%
+  pdfauthor={\textcopyright\ \myName, \myUni, \myFaculty},%
+  pdfsubject={},%
+  pdfkeywords={},%
+  pdfcreator={pdfLaTeX},%
+  pdfproducer={LaTeX with hyperref and classicthesis}%
+}
+
+
+% ********************************************************************
+% Setup autoreferences (hyperref and babel)
+% ********************************************************************
+% There are some issues regarding autorefnames
+% http://www.tex.ac.uk/cgi-bin/texfaq2html?label=latexwords
+% you have to redefine the macros for the
+% language you use, e.g., american, ngerman
+% (as chosen when loading babel/AtBeginDocument)
+% ********************************************************************
+\makeatletter
+\@ifpackageloaded{babel}%
+  {%
+    \addto\extrasamerican{%
+      \renewcommand*{\figureautorefname}{Figure}%
+      \renewcommand*{\tableautorefname}{Table}%
+      \renewcommand*{\partautorefname}{Part}%
+      \renewcommand*{\chapterautorefname}{Chapter}%
+      \renewcommand*{\sectionautorefname}{Section}%
+      \renewcommand*{\subsectionautorefname}{Section}%
+      \renewcommand*{\subsubsectionautorefname}{Section}%
+    }%
+      % Fix to getting autorefs for subfigures right (thanks to Belinda Vogt for changing the definition)
+      \providecommand{\subfigureautorefname}{\figureautorefname}%
+    }{\relax}
+\makeatother
+
+
+

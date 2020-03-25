@@ -1,0 +1,102 @@
+%
+% Q: do I need to reference Shchesnovich2011? Or other places?
+%
+%
+
+
+\chapter{PhoG: Adiabatic elimination}\label{appendix:adiabatic_elimination}
+
+In this appendix we will derive Eq.~\ref{eqn:adiabatic_elimination} which is used in Sec.~\ref{sec:phog_three_mode_model} to simplify the analytical description of a multi-mode bosonic system when one of the modes takes its steady-state. Our analysis will use notation following Ref.~\cite{Shchesnovich2011}. 
+
+Consider a system involving a highly lossy bosonic mode, $c$. We assume that $c$ decays into a Markovian reservoir with decay rate $\gamma$, and that the system contains additional modes with possible losses, couplings and nonlinearities. 
+
+After $t \gg 1/\gamma$ the mode $c$ is empty, and it is assumed that this timescale is much faster than all other timescales in the system. Then, for $t \gg 1/\gamma$ the mode $c$ can be assumed to be in its steady-state and so, for example, $\ddt \hat{c} = 0$. This will be used in order to simplify the description of our original system.
+
+The Lindblad master equation for our entire system is
+
+\begin{equation}
+\ddt \rho = - i \left[ \hat{H}, \rho \right] + \gamma \mathcal{L}\left[\hat{c}\right] \rho + \Gamma_j\mathcal{L}\left[f\left(\hat{a}_j\right)\right] \rho,
+\end{equation}
+where $\rho$ is the density matrix describing the entire system and $\hat{H}$ is the system's Hamiltonian, on which we will later derive some restrictions. The term proportional to  $\gamma$ denotes strong loss of mode $c$ into the reservoir, and the term in $\Gamma$ denotes potential other sources of loss which do not affect $c$. We shall ignore terms in $\Gamma_j$ until the very last step, since they do not affect our analysis and will always be present.
+
+It is easiest to proceed in Heisenberg picture, and so we transform to the adjoint master equation \cite{Breuer2002} which describes the evolution of an arbitrary operator $\hat{A}$
+
+\begin{equation}\label{eqn:appendix_phog_adjoint_start}
+\ddt \hat{A} = i \left[ \hat{H}, \hat{A} \right] + \gamma \mathcal{L}\left[\hat{c}^\dagger \right] \hat{A} + \Gamma_j \mathcal{L} \left[ f\left(\hat{a}_j\right)^\dagger\right] \hat{A},
+\end{equation}
+and expand $\hat{H}$ and $\hat{A}$ in terms of normal-ordered powers of creation and annihilation operators of the lossy mode
+\begin{align}
+&\hat{H} = \sum_{p, q = 0}^{\infty} \hat{H}^{\left(p, q\right)} \left(\hat{c}^\dagger\right)^p \hat{c}^q, \label{eqn:appendix_phog_H_expand}  \\
+%
+&\hat{A} = \sum_{p, q = 0}^{\infty} \hat{A}^{\left(p, q\right)}\left(t\right) \left(\hat{c}^\dagger \right)^p \hat{c}^q . \label{eqn:appendix_phog_A_expand}
+\end{align}
+Operators $\hat{H}^{\left(p, q\right)}, \hat{A}^{\left(p, q\right)}$ are, in general, operators acting on the remaining modes of the system. Let us take Eqs.~\ref{eqn:appendix_phog_H_expand},~\ref{eqn:appendix_phog_A_expand} and substitute into Eq.~\ref{eqn:appendix_phog_adjoint_start}. Grouping terms in $\hat{c}^\dagger, \hat{c}$ we see that 
+
+\begin{align}
+\ddt A^{\left(m, n\right)}\left(t\right) c^{\dagger m} c^n = i \sum_{p, q, k, l} \left(H^{\left(k, l\right)} A^{\left(p, q\right)}\left(t\right) c^{\dagger k} c^{l} c^{\dagger p} c^q - A^{\left(p, q\right)}\left(t\right) H^{\left(k, l\right)} c^{\dagger p} c^q c^{\dagger k} c^l\right)& \notag \\
+%
++ \qq{terms in $\gamma$, $\Gamma$.}&
+\end{align}
+We have dropped hats from operators for ease of notation. Relabelling dummy indices,
+\begin{equation}\label{eqn:appendix_phog_Apq}
+\ddt A^{\left(p, q\right)}\left(t\right) c^{\dagger p} c^q = i \sum_{p, q, k, l} F\left(p, q, k, l; t\right) c^{\dagger p} c^{q} c^{\dagger k} c^l + \qq{terms in $\gamma$, $\Gamma$},
+\end{equation}
+where
+\begin{equation}
+F\left(p, q, k, l; t\right) = H^{\left(k, l\right)} A^{\left(p, q\right)}\left(t\right) - A^{\left(p, q\right)}\left(t\right) H^{\left(k, l\right)}. \notag
+\end{equation}
+
+\noindent The differential equation for $A^{\left(0, 0\right)}$ is such that there are no operators in mode $c$ remaining on the right hand side of Eq.~\ref{eqn:appendix_phog_Apq}. Clearly this occurs when $p=q=k=l=0$. It can also occur for other values of $p, q, k, l$, owing to constant terms appearing via the commutators of $\hat{c}$ operators. Additionally, since the Lindblad operator $\mathcal{L}$ is second-order in $\hat{c}$ we can see immediately that there will be no terms proportional to $\gamma$ in the equation for $A^{\left(0, 0\right)}$. 
+
+Writing Eq.~\ref{eqn:appendix_phog_Apq} in normal order using the commutator,
+\begin{equation}
+\ddt A^{\left(p, q\right)}\left(t\right) c^{p, \dagger} c^q = i \sum_{p, q, k, l}\left( F\left( p, q, k, l;t\right) c^{\dagger p} c^{\dagger k} c^q c^l + F\left(p, q, k, l;t\right)  \left[ c^{q}, c^{\dagger k}\right] c^{\dagger p} c^l \right),
+\end{equation}
+we observe that additional contributions to $A^{\left(0, 0\right)}$ are possible when $p=0, l=0$ but $q, k \ne 0$ provided that the commutator $\left[ c^q, c^{\dagger k}\right]$ contains a constant term. We observe
+
+\begin{align}\label{eqn:phog_appendix_commutator}
+\left[ c, c^\dagger \right] &= 1, \notag \\
+%
+\left[ c^2, c^{\dagger 2} \right] &= 4 c^\dagger c + 2, \notag \\
+%
+\left[ c^3, c^{\dagger 3} \right] &= 9 c^\dagger c^\dagger c c + 18 c^\dagger c + 6 ,\notag \\
+%
+&\vdots
+\end{align}
+while commutators with $q \ne k$ cannot give a constant term. 
+
+For ease, and because the largest terms considered in Ch.~\ref{chapter:phog} are of the form $c^\dagger c^\dagger c c$ we will restrict ourselves to $0 \le q, k \le 2$. This gives
+
+\begin{equation}
+\ddt A^{\left(0, 0\right)}\left(t\right) = i \left( \left[ H^{\left(0, 0\right)}, A^{\left(0, 0\right)}\right] + F\left(0, 1, 1, 0\right) + 2 F\left(0, 2, 2, 0\right)\right), \notag
+\end{equation}
+and so 
+\begin{align}\label{eqn:ddt_a00}
+\ddt A^{\left(0, 0\right)}\left(t\right) = i  &\left(\left[ H^{\left(0, 0\right)}, A^{\left(0, 0\right)}\right] + H^{\left(0, 1\right)} A^{\left(1, 0\right)} - A^{\left(0, 1\right)} H^{\left(1, 0\right)} \right. \notag \\
+%
+&+\left. 2 H^{\left(0, 2\right)} A^{\left(2, 0\right)} - 2 A^{\left(0, 2\right)} H^{\left(2, 0\right)} \right).
+\end{align}
+
+\noindent Let us return to Eq.~\ref{eqn:appendix_phog_adjoint_start} and substitute Eq.~\ref{eqn:appendix_phog_A_expand} into the $\gamma$ term. By rearranging into normal order we arrive at
+\begin{equation}
+\gamma \mathcal{L}\left[\hat{c}^\dagger\right] \hat{A} \rightarrow - \gamma \sum_{p, q}\frac{\left(p + q\right)}{2} \hat{A}^{\left(p, q\right)} \hat{c}^{\dagger p} \hat{c}^q,
+\end{equation} %TODO: make sure that I know how to do this for the viva.
+and so for $t \gg 1/\gamma$ we may approximate the evolution of $\hat{A}^{\left(p, q\right)}$ by
+\begin{equation}
+\ddt A^{\left(p, q\right)} \approx i \left[ H^{\left(p, q\right)}, A^{\left(0, 0\right)}\right] - \frac{\gamma \left(p + q\right)}{2} A^{\left(p, q\right)},
+\end{equation}
+since $A^{\left(p, q\right)}$ is dominated by the decay. Assuming that $t$ is such that $A^{\left(p, q\right)}$ has reached its steady-state we set $\ddt A^{\left(p, q\right)} = 0$ and so
+\begin{equation}
+A^{\left(p, q\right)} \left(t\right) \approx \frac{2 i}{\gamma \left(p + q\right)} \left[H^{\left(p, q\right)}, A^{\left(0, 0\right)}\left(t\right)\right],
+\end{equation}
+provided that $p \ne 0$ or $q \ne 0$. By substituting this equation for $A^{\left(p, q\right)}$ into Eq.~\ref{eqn:ddt_a00}, we finally arrive at
+
+\begin{equation}
+\ddt A^{\left(0, 0\right)} = i \left[ H^{\left(0, 0\right)}, A^{\left(0, 0\right)}\right] + \frac{4}{\gamma} \sum_{p = {1, 2}} \mathcal{L}\left[ H^{\left(0, p\right)} \right] A^{\left(0, 0\right)} + \Gamma_j \mathcal{L}\left[a_j\right] \rho. %Can I just stick the extra loss term here? Is it affected by the adiabatic elimination at all?
+\end{equation}
+Transforming back to our master equation in Lindblad form,
+\begin{equation}\label{eqn:adiabatic_elimination}
+\ddt \rho = - i \left[ H^{\left(0, 0\right)}, \rho\right] + \frac{4}{\gamma} \sum_{p = 1, 2} \mathcal{L} \left[H^{\left(0, p\right)\dagger}\right] \rho + \Gamma_j \mathcal{L}\left[a_j\right] \rho.
+\end{equation}
+This Eq.~\ref{eqn:adiabatic_elimination} is our key equation for performing the adiabatic elimination of the highly lossy mode\footnote{Mode $\hat{c}$ in Chapter~\ref{chapter:phog}.}. The recipe to apply it to a general system is to identify the $H^{\left(0, 0\right)}$ and $H^{\left(0, p\right)}$ terms, which can take arbitrary form, and then substitute them into Eq.~\ref{eqn:adiabatic_elimination}. The only requirement for the use of Eq.~\ref{eqn:adiabatic_elimination} is that $\hat{H}$ must have its largest term in lossy mode $c$ of the form $\hat{c}^\dagger \hat{c}^\dagger \hat{c} \hat{c}$, i.e. two creation and two annihilation operators. More general forms of Eq.~\ref{eqn:adiabatic_elimination} may be considered by continuing our analysis to higher-order commutators $\left[ \hat{c}^n, \hat{c}^{\dagger n}\right]$ which has constant term $n!$, allowing for different maximum combinations of $\hat{c}$ operators 
+

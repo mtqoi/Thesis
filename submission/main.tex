@@ -1,0 +1,163 @@
+%\documentclass[12pt]{report}
+\documentclass{book}
+\usepackage[utf8]{inputenc}
+\usepackage[draft]{graphicx}
+%\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage[noBBpl]{mathpazo}
+%\usepackage{geometry} \geometry{ a4paper, total={170mm,257mm}, left=20mm, top=20mm,}
+%\usepackage{geometry} \geometry{ a4paper, total={170mm,257mm}, left=30mm, right=30mm,}
+\usepackage[space]{grffile}
+\usepackage{amssymb}
+\usepackage{hyperref}	
+\usepackage[stable]{footmisc}
+\usepackage[nottoc,numbib]{tocbibind}
+\usepackage{dsfont}
+\usepackage{framed}
+%\usepackage[font=small,labelfont=bf]{caption}
+\usepackage[font=small]{caption}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage{bm}
+\usepackage{siunitx}
+\usepackage{floatrow}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{siunitx}
+\usepackage{braket}
+\usepackage[nolist]{acronym}
+\usepackage{multirow}
+\usepackage{etoolbox}
+\usepackage[para]{threeparttable}
+\usepackage{placeins}
+\usepackage{bm}
+
+\AtBeginDocument{\DeclareUnicodeCharacter{00B4}{'}}
+
+
+\usepackage{xcolor}
+
+\newcommand{\highlight}[1]{%
+  \colorbox{green!30}{$\displaystyle#1$}}
+
+
+\usepackage{newfloat}
+%\DeclareFloatingEnvironment[placement={!ht},name=List]{mylist}
+\DeclareFloatingEnvironment[placement={h!},name=List]{mylist}
+
+\newcommand{\eff}{\text{eff}}
+\newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
+\newcommand{\ncl}{\hat{a}\left(\hat{a}^\dagger \hat{a} - 1\right)}
+\newcommand{\gncl}{\gamma_{\text{NCL}}}
+\newcommand{\hc}{\text{h. c.}}
+%\newcommand{\d}{\delta}
+\newcommand*\erfc{\text{erfc}}
+\newcommand{\perr}{\text{p}_{\text{err}}}
+\newcommand{\perrps}{\perr\left(\Delta_r, \Delta_\theta\right)}
+\newcommand{\pe}{\text{p}_{\text{e}}}
+\newcommand{\given}{\; \middle| \;}
+\newcommand{\cond}{\; | \;}
+\newcommand{\tmsv}{\rho_{\text{TMSV}}}
+\newcommand{\rps}{\mathcal{R}_{\text{PS}}}
+\newcommand{{\systemB}}{QDS-$b$-QSS-$b$-CV-QPSK}
+\newcommand{{\systemF}}{QDS-$f$-QKD-$f$-CV-QPSK}
+\newcommand{\ddt}[1][]{\frac{\mathrm{d}#1}{\mathrm{d}t}}
+\newcommand{\ddtau}[1][]{\frac{\mathrm{d}#1}{\mathrm{d}\tau}}
+%\newcommand{\tr}[1][]{\text{Tr}\left[#1\right]}
+\newcommand{\dims}{\left|\mathcal{H}\right|}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}	
+\newcommand{\head}[1]{\multicolumn{1}{c}{#1}}
+\newcommand{\enot}[2]{{#1}\!\times\!10^{#2}}
+\newcommand{\qout}{q_{\text{out}}}
+\newcommand{\pout}{p_{\text{out}}}
+
+
+
+\includeonly{
+	chapters/introduction,
+	chapters/crypto_intro,
+	chapters/qds,
+	chapters/qss,
+	chapters/aqc,
+	chapters/phog,
+	chapters/crypto_noisy_perr,
+	chapters/phog_adiabatic_elimination,
+	chapters/phog_numerical_methods,
+	chapters/crypto_numerical_methods,
+	chapters/crypto_larger_alphabets
+}
+
+
+\usepackage[
+    backend=bibtex8,
+    style=phys,
+    citestyle=numeric-comp,
+    sortlocale=de_DE,
+%    natbib=true,
+    url=false, 
+    doi=false,
+    eprint=true,
+    isbn=false
+]{biblatex}
+%\bibliography{Thesis}
+%\usepackage{biblatex}
+\addbibresource{Thesis.bib}
+
+
+%\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\DeclareGraphicsExtensions{.png, .pdf,.jpg}
+
+
+\usepackage{color} 
+\def\red#1{\textcolor{red}{#1}}
+\def\blue#1{\textcolor{blue}{#1}}
+\def\MT#1{\textcolor{magenta}{#1}}
+\def\cyan#1{\textcolor{cyan}{#1}}
+
+\graphicspath{ {images/} }
+
+\setcounter{tocdepth}{1} % Show sections
+%\setcounter{tocdepth}{2} % + subsections
+%\setcounter{tocdepth}{3} % + subsubsections
+%\setcounter{tocdepth}{4} % + paragraphs
+%\setcounter{tocdepth}{5} % + subparagraphs
+
+\title{Agile quantum cryptography and non-classical state generation}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+
+
+%\listoffigures
+\include{chapters/introduction}
+\part{Agile cryptography: signatures and secrets}
+\include{chapters/crypto_intro}
+\include{chapters/qds}
+\include{chapters/qss}
+\include{chapters/aqc}
+\part{PhoG: generation of sub-Poissonian light}
+\include{chapters/phog}
+
+%\bibliographystyle{unsrt} 
+%\bibliographystyle{plain}
+%\bibliography{Thesis}
+
+
+\appendix
+\part{Appendices}
+\include{chapters/crypto_noisy_perr}
+\include{chapters/crypto_numerical_methods}
+\include{chapters/crypto_larger_alphabets}
+\include{chapters/phog_adiabatic_elimination}
+\include{chapters/phog_numerical_methods}
+
+\newpage
+\printbibliography[heading=bibintoc]
+
+
+\end{document}

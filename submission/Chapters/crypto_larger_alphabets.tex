@@ -1,0 +1,59 @@
+\chapter{Cryptography: larger QDS alphabets}\label{appendix:qds_larger_alphabets}
+
+In this appendix we will demonstrate how the QDS protocol discussed in Chapter~\ref{chapter:qds} may be modified to allow for a general $N$PSK alphabet of $N$ coherent states equally distributed around the origin of phase space. We display an example of an $N$PSK alphabet in Fig.~\ref{fig:intro_npsk}. For reasons which will become clear, we are forced to take $N = 2 k, k \in \mathbb{N}$. The QPSK alphabet used throughout this Thesis is simply an $N$PSK alphabet with $N=4$.
+
+
+
+During the protocol with $N$PSK alphabet, Bob and Charlie eliminate precisely $N/2$ coherent states to form their eliminated signature, using the same strategy as in Fig.~\ref{fig:elimsig}. This means for example that the integration limits used for a particular eliminated signature element should vary. Besides this, the running of the protocol remains identical.
+
+As before, our starting point is the entropy $\text{H}\left( \mathcal{E}_j, y_1^j, \dots, y_{N/2}^j \given \phi_j \right)$ (c.f. Eq.~\ref{eqn:qds_starting_point}). We use the chain rule for conditional entropies twice, giving
+
+\begin{equation}
+\text{H}\left(y_1^j, \dots, y_{N/2}^j \given \phi_j\right) = \text{H}\left(y_1^j, \dots, y_{N/2}^j \given \mathcal{E}_j, \phi_j \right) + \text{H}\left(\mathcal{E}_j \given \phi_j\right)
+\end{equation}
+
+\noindent once we have taken into account that $\text{H}\left(\mathcal{E}_j \given y_1^j, \dots, y_{N/2}^j, \phi_j \right)=0$. Using $\text{H}\left(\mathcal{E}_j \given \phi_j \right) \le \text{h}\left(\pe\right)$ and the fact that Bob and Charlie eliminate exactly $N/2$ out of $N$ possible alphabet states, we arrive at
+
+\begin{equation}
+\text{H}\left(y_1^j, \dots, y_{N/2}^j \given \phi_j\right) \le \text{H}\left(y_1^j, \dots, y_{N/2}^j\given \mathcal{E}_j = 0, \phi_j\right) + \text{h}\left(\pe\right),
+\end{equation}
+and therefore
+\begin{align}
+\text{H}&\left(y_1^j, \dots, y_{N/2}^j\right) - \chi\left(y_1^j, \dots, y_{N/2}^j : \phi_j\right) \notag \\
+%
+& \le \text{H}\left(y_1^j, \dots, y_{N/2}^j \given \mathcal{E}_j, \phi_j\right) + \text{h}\left(\pe\right).
+\end{align}
+
+\noindent To complete our proof we simply observe
+
+\begin{align}
+&\text{H}\left(y_1^j, \dots, y_{N/2}^j \right) = \log2 \left( N \times \frac{N}{2}!\right), \notag \\
+%
+&\text{H}\left(y_1^j, \dots, y_{N/2}^j \given \mathcal{E}_j, \phi_j\right) = \log2 \left( \frac{N}{2} \times \frac{N}{2}!\right)
+\end{align}
+where we have taken into account the ability to relabel elements $y_n^j$ of the eliminated signature. The equation
+\begin{equation}
+\text{h}\left(\pe\right) \ge 1 - \chi\left(y_1^j, \dots, y_{N/2}^j : \phi_j\right)
+\end{equation} 
+follows immediately (c.f. Eq.~\ref{eqn:qds_hpe}).
+
+The quantities used to calculate the Holevo information $\chi\left(y_1^j, \dots, y_{N/2}^j : \phi_j\right)$ must also be altered to reflect the $N$PSK alphabet. Alice's input state into the channel becomes
+
+\begin{equation}
+\frac{1}{N} \sum_{k=0}^{N-1} \dyad{\alpha_k}_A,
+\end{equation}
+from which all other quantities may be calculated.
+
+We display the signature length $L$ under several different $N$PSK alphabets in Fig.~\ref{fig:appendix_npsk_length}. At each channel transmission $T$ the signature length has been optimized over $\alpha$. Choosing an alphabet size larger than $N=4$ decreases the optimal $\alpha_{\text{opt}}$ while slightly increasing the required signature length $L$. As the alphabet size increases it becomes closer to a Gaussian distribution, and so the beamsplitter and entangling-cloner attacks become increasingly optimal. The largest jump in protocol efficiency occurs from $N=2$ to $N=4$.
+
+\begin{figure}[htp]
+\captionsetup{width=0.8\linewidth}
+\centering
+\includegraphics[draft=false, width=0.7\linewidth]{qds/appendix_npsk_length}
+\caption{\label{fig:appendix_npsk_length} Signature length $L$ under QDS protocol discussed in Chapter~\ref{chapter:qds} under BS$0$ attack. At each $T$, length $L$ has been optimized over amplitude $\left|\alpha\right|$ of the alphabet. We have considered $N$PSK alphabets with $N = 2$, $4$, $6$, $8$. Dot-dashed: $N=2$. Black, solid: $N = 4$. Dashed: $N = 6$. Gray, solid: $N = 8$. Inset: the corresponding optimal $\alpha_{\text{opt}}$. } %created in "Creating graphs for paper.nb" from my PRA paper folder.
+\end{figure}
+
+
+
+
+%Q: do I want an "elimination figure" to show how the construction of an eliminated signature varies?
