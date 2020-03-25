@@ -11,10 +11,12 @@
 
 
 \includeonly{
-%	chapters/introduction,
+	Frontmatter/Publications,
+	Frontmatter/collaboration,
+	chapters/introduction,
 %	chapters/crypto_intro,
-	chapters/qds,
-	chapters/qss,
+%	chapters/qds,
+%	chapters/qss,
 %	chapters/aqc,
 %	chapters/phog,
 %	chapters/crypto_noisy_perr,
@@ -42,13 +44,30 @@
 % Frontmatter
 %*******************************************************
 
+
+
 \pagenumbering{roman}
 \pagestyle{empty}
-\maketitle
+%\maketitle
+\includepdf{Frontmatter/title_page.pdf}
 \cleardoublepage
+
+%\setcounter{tocdepth}{-1}
+
 
 
 \pagestyle{plain}
+\setcounter{page}{1}
+\addcontentsline{toc}{chapter}{Declarations} 
+\includepdf[page=-]{Frontmatter/declaration.pdf}
+
+\cleardoublepage
+
+\include{Frontmatter/Publications}
+\include{Frontmatter/collaboration}
+
+
+\cleardoublepage
 \currentpdfbookmark{\contentsname}{Contents}
 \tableofcontents
 \cleardoublepage
@@ -59,11 +78,11 @@
 %*******************************************************
 
 
-\pagenumbering{arabic}
+\pagenumbering{arabic} 
 \setcounter{page}{1}
 \pagestyle{scrheadings}
 
-
+\setcounter{tocdepth}{1}
 \include{chapters/introduction}
 \part{Agile cryptography: signatures and secrets}
 \include{chapters/crypto_intro}
@@ -80,6 +99,8 @@
 \include{chapters/crypto_larger_alphabets}
 \include{chapters/phog_adiabatic_elimination}
 \include{chapters/phog_numerical_methods}
+
+
 
 
 \printbibliography[heading=bibintoc]
