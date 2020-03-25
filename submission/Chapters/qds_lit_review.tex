@@ -56,7 +56,7 @@ However, the structure of this protocol is very closely aligned to classical sig
 A step forward to practical implementation of QDS occurs in Ref.~\cite{Andersson2006}, in which Andersson \emph{et. al.} replace the tricky to perform $SWAP$ test from Ref.~\cite{Gottesman2001} with a practical state comparison method. The previously required entangled qubits are also replaced by coherent states. The requirements for QDS have thus been reduced to the generation, distribution and storage of coherent states, with only beamsplitters and photon detectors required at the recipient. 
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 \includegraphics[draft=false, width=0.8\linewidth]{qds/andersson2006_state_comparison}
 \caption{\label{fig:andersson2006_state_comparison} Non-destructive comparison method from Ref.~\cite{Andersson2006}. The coherent states interfere on a balanced beamsplitter. Assuming an ideal detector, the absence of a detector click implies that $\alpha = \beta$. Otherwise, a click implies $\alpha \ne \beta$. A second balanced beamsplitter may be used to transform $\ket{\left(\alpha+\beta\right)/\sqrt{2}}\otimes\ket{0}\rightarrow\ket{\alpha}\ket{\beta}$, and hence this state comparison is non-destructive.}
@@ -65,7 +65,7 @@ A step forward to practical implementation of QDS occurs in Ref.~\cite{Andersson
 The key step, comparison of coherent states, is displayed pictorially in Fig.~\ref{fig:andersson2006_state_comparison}. If the photodetector clicks it is a strong indication\footnote{It is a certain indication, in the ideal limit.} that $\alpha \ne \beta$. Furthermore this comparison is non-destructive, and simply by placing another beamsplitter in the path of the lower beam, with vacuum input to the second input port, one recovers $\ket{\alpha}\ket{\beta}$. Otherwise, for $\alpha \ne \beta$ the output states of the second beamsplitter are symmetrized and now identical to each other. This practical state comparison forms the building-block for their QDS protocol. 
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 \includegraphics[draft=false, width=0.8\linewidth]{qds/andersson2006_multiport}
 \caption{\label{fig:andersson2006_multiport} Multiport used in Ref.~\cite{Andersson2006} which guards against a cheating Alice. The multiport symmetrizes Bob and Charlie's states so they always receive identical $\ket{\left(\alpha+\beta\right)/\sqrt{2}}$ at their signal outputs. By placing a photodetector at the null-ports Bob and Charlie can test whether $\ket{\left(\alpha-\beta\right)/\sqrt{2}} = \ket{0}$. In the ideal scenario, a detector click implies that $\alpha\ne\beta$, while its absence implies that $\alpha = \beta$. }

@@ -17,7 +17,7 @@ Our Quantum Secret Sharing (QSS) scheme allows for Alice to distribute a classic
 
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 \includegraphics[draft=false, width=0.8\linewidth]{qss/qss_setup_cartoon}
 \caption{\label{fig:qss_structure} All quantum secret sharing schemes follow the same structure: Alice encrypts her classical secret $\sigma_A$ with secret key $K_A$, and broadcasts the resulting $\varsigma_A$. Shares of $K_A$ are distributed among recipients Bob and Charlie such that $K_B \oplus K_C = K_A$. Gray boxes denote honest players, while red denotes dishonest players. The half-red/half-gray boxes denote uncertainty about the honesty of a player. %say somewhere it's all classical?
@@ -52,7 +52,7 @@ In our protocol, Bob and Charlie are chosen as the senders of the quantum states
 } and its characterisation. A dishonest internal player will be forced to collaborate with Eve to attack the honest player's quantum channel, but by our choice of alphabet, this will not succeed. Since Alice will decide on the eventual shared key our protocol is analogous to a reverse-reconciliation (RR) QKD system, and so we may similarly expect the performance benefits of RR QKD at high loss. Indeed, we may interpret the entire QSS protocol as effectively a QKD protocol between Alice (dealer) and several recipient players.
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 	\begin{subfigure}{0.8\linewidth}
 		\centering
@@ -118,7 +118,7 @@ The QSS protocol presented above must be secure against both the actions of an e
 Fig.~\ref{fig:qss_honest_recipients}. In Sec.~\ref{sec:qss_dishonest_recipient} we will begin to allow for dishonesty in recipients Bob and Charlie.
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 \includegraphics[draft=false, width=0.8\linewidth]{qss/qss_honest_recipients}
 \caption{\label{fig:qss_honest_recipients} Alice distributes her secret $\sigma_A$ to Bob and Charlie who are assumed honest. Dishonest Eve will try to attack the protocol and gain information about $\sigma_A$. Gray: honest. Red: dishonest. See Fig.~\ref{fig:qss_structure} for further information.}
@@ -278,7 +278,7 @@ where $\Phi_{B, C}$ denote the lossy channels described by attack BS$0$, Sec.~\r
 Physically $\Phi$ corresponds to the case where Eve performs separate beamsplitter attacks on each channel and retains two output modes $\mathbb{E}_{B, C}$, Fig.~\ref{fig:qss_bs0_attack}.
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 \includegraphics[draft=false, width=0.8\linewidth]{qss/qss_bs0}
 \caption{\label{fig:qss_bs0_attack} We model the channel $\Phi$ as two independent beamsplitter attacks of type BS$0$, Sec.~\ref{sec:qds_bs0}. This preserves the tensor-product structure of $\rho_{\text{before}}$.}
@@ -340,7 +340,7 @@ Of course, if Alice only had to guard against an external Eve, and both Bob and 
 Let us translate the analysis from Sec.~\ref{sec:qss_honest_recipients} to the case where either Bob or Charlie is dishonest, but Alice does not know which one, Fig.~\ref{fig:qss_structure}. Including a dishonest recipient in the above security proof requires us to re-calculate several quantities. For concreteness we will first assume that Bob is dishonest and Charlie is honest, Fig.~\ref{fig:qss_dishonest_Bob}, and we will allow Bob to collaborate with Eve. Later we will discuss how to account for the fact that we do not know \emph{which} player is dishonest.
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 \includegraphics[draft=false, width=0.8\linewidth]{qss/qss_dishonest_Bob}
 \caption{\label{fig:qss_dishonest_Bob} A dishonest Bob gains an advantage since he knows which coherent state he chose to send to Alice. He may additionally choose to collaborate with Eve in order to gain information about Alice's measurement on Charlie's state. c.f. Fig.~\ref{fig:qss_structure}.}
@@ -401,7 +401,7 @@ where $\kappa_{\text{Eve, Charlie}}$ is calculated analogously to Eq.~\ref{eqn:q
 We plot the mutual information (Eq.~\ref{eqn:qss_deriv_1}) in Fig.~\ref{fig:qss_mutual_information}, taking honest recipients in (a) and dishonest recipients in (b). Coherent state amplitude $\alpha$ and channel transmission $T$ are varied. We here take Bob and Charlie's states as having equal amplitudes and channel transmissions, but in principle they can vary independently from one another. Unless $T=0$, the mutual information between Alice and Bob-Charlie always increases with $\alpha$ as the states at Alice become increasingly distinguishable. The mutual information with honest recipients is bounded by $4$, while in the case of dishonest recipients it is bounded by $2$. 
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 	\begin{subfigure}{0.49\linewidth}
 	\centering
@@ -421,7 +421,7 @@ The Holevo information $\chi$ under identical conditions to Fig.~\ref{fig:qss_mu
 Curiously, Fig.~\ref{fig:qss_holevo_information}\extrafig{b} demonstrates a reduction in the Holevo information when Bob or Charlie is dishonest. Since Holevo information is directly related to the efficacy of an attack, this might suggest that dishonesty gives no advantage, and even makes things worse. We note however that the mutual information is also reduced in this case, and a consideration of the key rate in Fig.~\ref{fig:qss_keyrate} demonstrates that such dishonesty of Bob or Charlie does indeed yield a marked reduction in the key rate $\kappa$. %The reduction in $\chi$ is explained by noting that there is one fewer channel being attacked, and that the Holevo information represents the amount of information gained via an attack. %TODO: make sure I can talk about this for the viva.
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 	\begin{subfigure}{0.49\linewidth}
 	\centering
@@ -443,7 +443,7 @@ We see that a symmetric choice $g = h = 0.5$ is clearly optimal when both Bob an
 
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 	\begin{subfigure}{0.7\linewidth}
 	\centering
@@ -463,7 +463,7 @@ Allowing for Bob and Charlie to experience different loss levels, or use differe
 
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 	\begin{subfigure}{0.7\linewidth}
 	\centering

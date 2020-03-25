@@ -28,7 +28,7 @@ Our signature scheme is displayed pictorially in Fig.~\ref{fig:qds_cartoon}. Ali
 
 
 \begin{mylist}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \begin{framed}
 \begin{enumerate}
 \item\emph{Security against forgery}, Fig.~\ref{fig:attacks_forgery}. Neither a dishonest recipient ($B$ or $C$), nor an external fourth party (Eve, $E$), should be able to alter $m$ and have it accepted as genuine by an honest recipient. The signature scheme should ensure that $m$ is the message which Alice sent.
@@ -55,7 +55,7 @@ For our scheme involving three parties, requirements $3$ and $4$ are equivalent.
 A digital signature scheme which rejects all messages trivially fulfills requirements $1-4$, and so in order to get a useful digital signature scheme we must also impose requirement $5$.
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 	\begin{subfigure}{\linewidth}
 		\centering
@@ -81,7 +81,7 @@ A digital signature scheme which rejects all messages trivially fulfills require
 We here present a continuous-variable (CV) QDS protocol based on the quadrature phase-shift keying (QPSK) alphabet of coherent states, Fig.~\ref{fig:qpsk}. For the first time in a continuous-variables QDS protocol, our protocol takes into account insecure quantum distribution channels and permits the presence of an eavesdropper. Surprisingly, the same step of the protocol which ensures security against eavesdropping also makes the protocol efficient in its use of quantum resources. We shall see later in Sec.~\ref{sec:qds_protocol_performance} that we outperform recent comparable QDS protocols.
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 \includegraphics[draft=false, width=\linewidth]{qds/qds_setup}
 \caption{\label{fig:qds_setup} Setup of the QDS protocol considered in this chapter. Alice (A) wishes to securely sign a $1$~bit message $m$. Alice distributes quantum coherent states $\ket{\phi_j^{\left(B, C\right)}}$ along insecure quantum distribution channels (solid lines) during the Distribution stage. Bob and Charlie swap eliminated signature elements via their securely encrypted classical channel (dotted lines). During the Messaging stage Alice sends $\Sigma$, containing her message $m$ and her corresponding signature $\sigma_m$ along a classical broadcast channel (dot-dashed line). Inset: QPSK alphabet.}
@@ -126,7 +126,7 @@ p\left(\phi_j \given x_j\right) \qq{for each phase} \phi_j \in \text{QPSK},
 and recording the two $\phi_j$ which yield the smallest of these. This record of $\phi_j$ forms the $j^{\text{th}}$ element of their eliminated signatures. We note that the $\phi_j$ comprising the eliminated signature element will always be adjacent in phase space, and an example of this elimination procedure is displayed in Fig.~\ref{fig:elimsig}. We denote Bob and Charlie's total eliminated signatures at this stage as $X_m^{\left(B, C\right)}$. Each is of length $L$ and they will later be compared to Alice's private key in order to test the validity of the message. We display the possible eliminated signature elements and their requisite heterodyne outcomes in Tab.~\ref{tab:elimsig}.
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 \includegraphics[draft=false, width=\linewidth]{qds/elimsig}
 \caption{\label{fig:elimsig} Bob and Charlie each perform heterodyne measurement on their received coherent states, and obtain $\left(\qout, \pout\right)$. We define $z = \qout + i \pout$, which is the dark gray circle in (a). From their $z$, Bob and Charlie then record the two states from QPSK which are least likely to have been sent by Alice, (b). We display the possible eliminated signature elements and their requisite heterodyne outcomes in Tab.~\ref{tab:elimsig}.}
@@ -134,7 +134,7 @@ and recording the two $\phi_j$ which yield the smallest of these. This record of
 
 
 \begin{table*}
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering \ra{1.75}
 \begin{tabular*}{\linewidth}{@{\extracolsep{\stretch{1}}} c c c}
 
@@ -192,7 +192,7 @@ The key parameters for the Messaging stage are $s_B, s_C$ which may be freely ch
 \subsection{Counting mismatches}\label{sec:qds_mismatches}
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 \includegraphics[draft=false, width=\linewidth]{qds/mismatch1}
 \caption{\label{fig:qds_mismatches} A mismatch occurs when an honest party eliminates the state which Alice claims to have sent. (a, d) Alice sends coherent state $\ket{\alpha}$. (b, e) Bob (Charlie) heterodynes and receives $\left(\qout, \pout\right)$. We define $z = \qout + i \pout$. Even when all players are honest there is some probability of measuring $\qout < 0$, Sec.~\ref{sec:qds_modelling_perr}. (c) The eliminated signature element consists of $\ket{- \alpha}, \ket{- i \alpha}$ so there is no mismatch. (f) The eliminated signature element consists of $\ket{\alpha}, \ket{i \alpha}$ and so there is a mismatch.}
@@ -430,7 +430,7 @@ Integrating, we arrive at
 \noindent which models the probability of honest mismatch over a lossy channel with transmission $T$. Probability $\perr$ is motivated in Fig.~\ref{fig:perr} which elucidates the above discussion, and explains why $\perr \ne 0$. An equivalent analysis when the channel contains thermal noise is discussed in Appendix~\ref{appendix:noisy_perr}.
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 \includegraphics[draft=false, width=0.8\linewidth]{qds/perrnonzero}
 \caption{\label{fig:perr} Histogram of possible heterodyne outcomes. A coherent state $\ket{\alpha}$ with $\alpha>0$ has nonzero probability to give the measurement outcome $\qout < 0$. In other words, $\perr > 0$ always, and $\perr \rightarrow 0$ only as $\alpha \rightarrow \infty$. The blue region corresponds to measurement outcomes which will not give a mismatch, while the pink region corresponds to measurement outcomes which will yield a mismatch. This histogram is equivalent to the Hussimi $Q$ function \cite{Leonhardt2010} of the received coherent state, and is thus also Gaussian.}
@@ -573,7 +573,7 @@ In an individual attack, Fig.~\ref{fig:types_of_attack_individual}, Bob interact
 
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 	\begin{subfigure}{\linewidth}
 		\centering
@@ -601,7 +601,7 @@ In particular, we will study both a beamsplitter attack and an entangling cloner
 \subsection{Beamsplitter attack}
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 \includegraphics[draft=False,width=0.8\linewidth]{qds/BS0}
 \caption{\label{fig:bs0_attack} Attack BS$0$. Bob replaces the channel with a lossless channel, plus a beamsplitter. By inputting vacuum $\dyad{0}$ into the beamsplitter, Bob mimics channel loss while imposing zero excess noise.}
@@ -635,7 +635,7 @@ Here $\text{P}\left(z_C \given \alpha_k, T\right) = \left| \langle z_C | \sqrt{T
 Recall that the eliminated signature element held by Charlie is determined entirely by his heterodyne outcome $z_C$, Fig.~\ref{fig:qds_elimsig2}. Since Holevo information $\chi$ is defined in terms of Charlie's eliminated signature element rather than heterodyne measurement outcome, and since many outcomes $z_C$ will return the same eliminated signature element, we must now mix $\rho_{\left. B \given z_C \right.}$ over entire quadrants in phase-space.
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 \includegraphics[draft=false, width=0.98\linewidth]{qds/elimsig2}
 \caption{\label{fig:qds_elimsig2} Multiple heterodyne outcomes give rise to the same eliminated signature element. (a) A particular eliminated signature element. (b) All possible heterodyne outcomes consistent with (a).}
@@ -737,7 +737,7 @@ since the polar integral forces $k=l$. The Holevo information may now be calcula
 
 \subsection{Entangling-cloner attack}\label{sec:qds_ec}
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 \includegraphics[draft=False, width=0.8\linewidth]{qds/EC}
 \caption{\label{fig:ec_attack} EC attack. Locally, one mode of the TMSV looks like $\rho_{\text{thermal}}$ and so allows channel excess noise to be emulated. Bob can exploit correlations in noise between his two mode output state $\rho_{B_1^\prime, B_2}$ to gain additional information.}
@@ -790,7 +790,7 @@ while $\bar{n}$ is related to the squeezing parameter $\zeta$ of the input TMSV 
 \end{equation}
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 	\begin{subfigure}{0.7\linewidth}
 		\centering
@@ -843,7 +843,7 @@ For now, we will apply postselection to the protocol outlined in this chapter. T
 We define a region $\rps \in \mathbb{C}$, Fig.~\ref{fig:rps}. Honest recipients will only accept measurement outcomes $\left(\qout, \pout\right)$ with $c := \qout + i \pout \in \mathbb{C}\setminus\rps$. We may then vary $\rps$ in order to increase the range of channel parameters for which the QDS protocol is secure, and to minimize signature length $L$.
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 \includegraphics[draft=false, width=0.7\linewidth]{qds/rps2}
 \caption{\label{fig:rps} The postselection region $\rps$, gray, is parametrized by $\Delta_r, \Delta_\theta$ in polar coordinates. Participants will only accept measurement outcomes $c \in \mathbb{C} \setminus \rps$. }
@@ -923,7 +923,7 @@ We have now included the effects of $\rps$ on $g_{\text{sec}}$, and so the perfo
 
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 	\begin{subfigure}{0.7\linewidth}
 		\centering
@@ -956,7 +956,7 @@ We plot $\mathcal{N}$ in Fig.~\ref{fig:psnorm}, and figure of merit $\tilde{L}$ 
 
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 \begin{subfigure}{0.4\linewidth}
 \includegraphics[draft=false, width=\linewidth]{qds/psnorm1}
@@ -971,7 +971,7 @@ We plot $\mathcal{N}$ in Fig.~\ref{fig:psnorm}, and figure of merit $\tilde{L}$ 
 \end{figure}
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 	\begin{subfigure}{0.7\linewidth}
 		\centering
@@ -1000,7 +1000,7 @@ Let us apply the analysis performed in the previous few sections and calculate o
 
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 \includegraphics[width=0.7\linewidth, draft=false]{qds/QDSf_nonoptimal_L}
 \caption{\label{fig:qds_nonoptimal_L} Signature lengths $L$ varying with channel transmission $T$ for attacks BS$0$ (black) and EC (red). Solid: $\alpha=0.5$. Dashed: $\alpha=0.8$. Dotted: $\alpha=0.2$. Entangling cloner attack has excess noise $\xi = 0.1\%$ at all T. A non-optimal choice of $\alpha$ can lead to much larger signature lengths. No postselection is used.}
@@ -1012,7 +1012,7 @@ Even when attack BS$0$ is used and $\xi=0\%$, a sub-optimal choice of coherent s
 We also compare our current protocol to a recent CV QDS protocol \cite{Croal2016} which did not allow for the presence of an eavesdropper on the quantum channels. The security parameter under Ref.~\cite{Croal2016} is displayed as red, dot-dashed lines in Fig.~\ref{fig:qds_gsec_croal} at $T=0.47$ (top) and $T=0.19$ (bottom). We see that for larger $T$, and almost all $\alpha$ at smaller $T$, our current protocol outperforms Ref.~\cite{Croal2016}, despite our relaxing the requirement of secure quantum channels. This surprising improvement in performance comes directly from the fact that in the current protocol, Alice distributes different signatures to each recipient, whereas in Ref.~\cite{Croal2016} she distributed identical signatures.
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 \includegraphics[width=0.7\linewidth, draft=false]{qds/Thornton2019_croal_comparisons}
 \caption{\label{fig:qds_gsec_croal} Security parameter $g_{\text{sec}}$ under attack BS$0$ as it varies with $\alpha$ for $T = 0.61$, $0.47$, $0.19$, $0.11$, $0.01$ (solid, black, top to bottom). The optimal $\alpha$ which should be chosen to maximize $g_{\text{sec}}$ (minimize L) decreases as $T$ decreases. Horizontal gridlines denote $\mathcal{O}\left(L\right)$ starting from $L \sim 10^5$ at $g_{\text{sec}} = 0.038$ (top), with $L$ increasing by a factor of $10$ at subsequent lower gridlines. Red, dot-dashed: $g_{\text{sec}}$ calculated via the protocol described in Ref.~\cite{Croal2016} for $T=0.19$ and $T=0.47$.}
@@ -1022,7 +1022,7 @@ We optimize over $\alpha$ and postselection region $\Delta_r$ in Fig.~\ref{fig:q
 
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 \includegraphics[width=0.7\linewidth, draft=false]{qds/QDSf_optimal_L}
 \caption{\label{fig:qds_optimal_L} Signature lengths under protocols BS$0$ (blue, solid), BS$2$ (orange, dashed) and EC (red, solid). At each point $L$ is optimized over $\alpha$ and postselection parameter $\Delta_r$. EC attack with $\xi = 0.1\%$.}
@@ -1033,7 +1033,7 @@ Finally, in Appendix~\ref{appendix:qds_larger_alphabets} we extend the protocol 
 Surprisingly, although for larger alphabets the optimal $\alpha$ is decreased, the minimal $L$ is slightly increased. As has been found elsewhere \cite{Leverrier2011}, the biggest leap in behaviour should occur between $2 \rightarrow 4$, and indeed this is what we see\footnote{Noting that for the case $N=2$ we no longer need to think about an eliminated signature and we may simply consider optimal guessing probabilities.}. As $N$ increases, with $\alpha \ll 1$ we tend closer towards a Gaussian mixture of coherent states (c.f. Fig.~\ref{fig:intro_npsk}\extrafig{b}). We may therefore reasonably expect the attack strategies BS$0$ and EC to become increasingly optimal in this Gaussian limit, which explains the slight increase in $L$ for larger alphabets.
 
 \begin{figure}[htp]
-\captionsetup{width=0.8\linewidth}
+\captionsetup{width=\linewidth}
 \centering
 \includegraphics[width=0.7\linewidth, draft=false]{qds/appendix_npsk_length}
 \caption{\label{fig:qds_npsk_length_body} Signature length $L$ under attack BS$0$. At each $T$, length $L$ has been optimized over amplitude $\left|\alpha\right|$ of the alphabet. We have considered $N$PSK alphabets with $N = 2$, $4$, $6$, $8$. Dot-dashed: $N=2$. Black, solid: $N = 4$. Dashed: $N = 6$. Gray, solid: $N = 8$. Inset: the corresponding optimal $\alpha_{\text{opt}}$. } %created in "Creating graphs for paper.nb" from my PRA paper folder.
