@@ -33,7 +33,8 @@ and expand $\hat{H}$ and $\hat{A}$ in terms of normal-ordered powers of creation
 Operators $\hat{H}^{\left(p, q\right)}, \hat{A}^{\left(p, q\right)}$ are, in general, operators acting on the remaining modes of the system. Let us take Eqs.~\ref{eqn:appendix_phog_H_expand},~\ref{eqn:appendix_phog_A_expand} and substitute into Eq.~\ref{eqn:appendix_phog_adjoint_start}. Grouping terms in $\hat{c}^\dagger, \hat{c}$ we see that 
 
 \begin{align}
-\ddt A^{\left(m, n\right)}\left(t\right) c^{\dagger m} c^n = i \sum_{p, q, k, l} \left(H^{\left(k, l\right)} A^{\left(p, q\right)}\left(t\right) c^{\dagger k} c^{l} c^{\dagger p} c^q - A^{\left(p, q\right)}\left(t\right) H^{\left(k, l\right)} c^{\dagger p} c^q c^{\dagger k} c^l\right)& \notag \\
+\ddt A^{\left(m, n\right)}\left(t\right) c^{\dagger m} c^n = i \sum_{p, q, k, l} &\left(H^{\left(k, l\right)} A^{\left(p, q\right)}\left(t\right) c^{\dagger k} c^{l} c^{\dagger p} c^q \right. \notag \\
+&\left.- A^{\left(p, q\right)}\left(t\right) H^{\left(k, l\right)} c^{\dagger p} c^q c^{\dagger k} c^l\right)
 %
 + \qq{terms in $\gamma$, $\Gamma$.}&
 \end{align}
@@ -49,9 +50,10 @@ F\left(p, q, k, l; t\right) = H^{\left(k, l\right)} A^{\left(p, q\right)}\left(t
 \noindent The differential equation for $A^{\left(0, 0\right)}$ is such that there are no operators in mode $c$ remaining on the right hand side of Eq.~\ref{eqn:appendix_phog_Apq}. Clearly this occurs when $p=q=k=l=0$. It can also occur for other values of $p, q, k, l$, owing to constant terms appearing via the commutators of $\hat{c}$ operators. Additionally, since the Lindblad operator $\mathcal{L}$ is second-order in $\hat{c}$ we can see immediately that there will be no terms proportional to $\gamma$ in the equation for $A^{\left(0, 0\right)}$. 
 
 Writing Eq.~\ref{eqn:appendix_phog_Apq} in normal order using the commutator,
-\begin{equation}
-\ddt A^{\left(p, q\right)}\left(t\right) c^{p, \dagger} c^q = i \sum_{p, q, k, l}\left( F\left( p, q, k, l;t\right) c^{\dagger p} c^{\dagger k} c^q c^l + F\left(p, q, k, l;t\right)  \left[ c^{q}, c^{\dagger k}\right] c^{\dagger p} c^l \right),
-\end{equation}
+\begin{align}
+\ddt A^{\left(p, q\right)}\left(t\right) c^{p, \dagger} c^q = i \sum_{p, q, k, l} &\left( F\left( p, q, k, l;t\right) c^{\dagger p} c^{\dagger k} c^q c^l \right. \notag \\
+&\left.+ F\left(p, q, k, l;t\right)  \left[ c^{q}, c^{\dagger k}\right] c^{\dagger p} c^l \right),
+\end{align}
 we observe that additional contributions to $A^{\left(0, 0\right)}$ are possible when $p=0, l=0$ but $q, k \ne 0$ provided that the commutator $\left[ c^q, c^{\dagger k}\right]$ contains a constant term. We observe
 
 \begin{align}\label{eqn:phog_appendix_commutator}

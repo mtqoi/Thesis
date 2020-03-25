@@ -74,7 +74,7 @@ In our protocol, Bob and Charlie are chosen as the senders of the quantum states
 Our QSS protocol runs in three stages, a Distribution stage, an Encryption stage and, finally, a Decryption stage. Distribution and Encryption stages are displayed in Fig.~\ref{fig:qss_protocol_cartoon}. The Distribution stage, Fig.~\ref{fig:qss_protocol_cartoon}\extrafig{a}, involves distribution and measurement of quantum coherent states chosen from QPSK alphabet. At the end of Distribution, Alice will hold classical information which is correlated with both Bob and Charlie. In the Encryption stage, Fig.~\ref{fig:qss_protocol_cartoon}\extrafig{b}, Alice will combine her classical information and use it to encode her sensitive classical secret. The encoded secret is then distributed to Bob and Charlie, who decode it during Decryption. 
 
 
-\subsubsection*{Distribution stage, Fig.~\ref{fig:qss_protocol_cartoon}}
+\subsubsection*{Distribution stage, Fig.~\ref{fig:qss_protocol_cartoon}\extrafig{a}}
 \paragraph{Step $1$}
 Alice wishes to share a classical secret, $\sigma_A$. Bob forms a classical random variable $X_B = \left\{\phi_B\right\}$, where the $\phi_B$ are one of four complex phases independently chosen from the QPSK alphabet. Phases $\phi_B$ are assumed to be chosen uniformly at random, but we relax this assumption in Chapter~\ref{chapter:aqc}. Charlie likewise forms classical random variable $X_C = \left\{\phi_C\right\}$.
 
@@ -86,7 +86,7 @@ Bob and Charlie form sequences of coherent states based on their random variable
 where $\rho\left[\phi_{\left(B, C\right)}\right]$ denotes a coherent state with phase $\phi_{\left(B, C\right)}$. These sequences of states are sent to Alice through quantum channels. %\MT{Talk later about the types of channels which these are.}. 
 Alice performs heterodyne detection on each of her received states and records her outcomes. We denote the strings of Alice's measurement outcomes as $A_B, A_C$, where $A_B$ corresponds to measurement outcomes on states sent by Bob, and $A_C$ corresponds to those on states sent by Charlie. Alice keeps the $A_B$ and $A_C$ separate and secret, and Bob and Charlie should retain their information $X_B, X_C$.
 
-\subsubsection*{Encryption stage, Fig.~\ref{fig:qss_protocol_cartoon}b}
+\subsubsection*{Encryption stage, Fig.~\ref{fig:qss_protocol_cartoon}\extrafig{b}}
 
 \paragraph{Step $3$} Alice creates a new string of complex variables,
 \begin{equation}
@@ -220,9 +220,10 @@ A_C = \frac{X_A - g A_B}{h}.
 \noindent Since our $\mathcal{F}$ is not injective %(there are multiple $A_B, A_C$ which will give the same $X_A$)
 we must average over all of the possible ways to reach a given $X_A$. Therefore, once $X_A, g$ and $h$ are fixed, the choice of $A_B, A_C$ reduces to a one-variable problem. So
 
-\begin{equation}\label{eqn:qss_deriv_5_1}
-\text{P}\left(X_A \given X_B=\phi_B, X_C=\phi_C\right) = \int\limits_{A_B \in \mathbb{C}} \Diff2 A_B \; \text{P}\left(A_B , \frac{X_A - g A_B}{h} \given X_B=\phi_B, X_C=\phi_C\right),
-\end{equation}
+\begin{align}\label{eqn:qss_deriv_5_1}
+\text{P}\left(X_A \given X_B=\phi_B, X_C=\phi_C\right) = &\int\limits_{A_B \in \mathbb{C}} \Diff2 A_B \; \notag \\
+&\text{P}\left(A_B , \frac{X_A - g A_B}{h} \given X_B=\phi_B, X_C=\phi_C\right),
+\end{align}
 which may be calculated once we know how the channel acts on input states\footnote{Note that an analogous expression would be reached by rearranging Eq.~\ref{eqn:qss_deriv_5} as $A_B = \left(X_A - h A_C\right)/g$, but it will make no difference to the resulting quantities which we derive from Eq.~\ref{eqn:qss_deriv_5_1}}.
 
 Assuming that the two channels, one from Charlie$\rightarrow$Alice and one from Bob$\rightarrow$Alice, are independent\footnote{We shall see later what this means for their combined action on an input quantum state} from each other allows us to write

@@ -154,7 +154,7 @@ $e_4$ & $\ket{\phantom{-}i \alpha}, \ket{- \phantom{i} \alpha}$ & $\qout > 0, \p
 
 
 
-\paragraph{Step $4$. \emph{Symmetrization:}}
+\paragraph{Step $4$ \emph{Symmetrization:}}
 Bob and Charlie now swap a random $L/2$ elements of their $X_m^{\left(B, C\right)}$ over their encrypted classical channel. Signature elements which have been forwarded by a player will no longer be used by him in the protocol. We denote these resulting strings as $Y_m^{\left(B, C\right)}$. By using an encrypted classical channel the positions and values of swapped elements are kept secret from Alice, which will ensure that the information which Bob and Charlie each hold is symmetric from Alice's point of view \cite{Dunjko2014, Wallden2015}. 
 
 In other words, at the end of Step~$3$, having sent the state $\ket{\phi_{j, m}^B}\bra{\phi_{j, m}^B}$ to Bob, Alice knows that Bob holds the corresponding eliminated signature element $X_{j, m}^B$, even though she doesn't know its value. Since Alice knows which state she sent to Bob, she may gain an advantage in trying to guess $X_{j, m}$. At the end of Step~$4$ however, Alice does not know whether it is Bob or Charlie who holds $X_{j, m}^B$. This uncertainty will prove crucial for preventing successful repudiation.
@@ -488,7 +488,7 @@ Because $\mathcal{E}_j$ can take one of two values, the Shannon entropy $\text{H
 
 Now, consider the conditional entropy
 \begin{equation}\label{eqn:qds_starting_point}
-\text{H}\left(\mathcal{E}_j, y_1^j, y_2^j \given \phi_j\right)
+\text{H}\left(\mathcal{E}_j, y_1^j, y_2^j \given \phi_j\right),
 \end{equation}
 which is related to the uncertainty about whether a mismatch has occurred under Bob's declaration $\phi_j$. Using the chain rule for conditional entropies, Eq.~\ref{eqn:intro_chain_rule}, we may write
 \begin{equation}\label{eqn:qds_pe_deriv_1}
@@ -506,7 +506,7 @@ Since an element $\mathcal{E}_j$ is uniquely determined once $\phi_j, y_1^j, y_2
 \text{H}\left( \mathcal{E}_j, y_1^j, y_2^j \given \phi_j \right) &=
 \text{H}\left(y_1^j, y_2^j \given \mathcal{E}_j, \phi_j\right) + \text{H}\left(\mathcal{E}_j \given \phi_j\right) \notag \\
 &\le \text{H}\left(y_1^j, y_2^j \given \mathcal{E}_j, \phi_j\right) + \text{H}\left(\mathcal{E}_j\right) \notag \\
-&= \text{H}\left(y_1^j, y_2^j \given \mathcal{E}_j, \phi_j\right) + \text{h}\left(\pe\right)
+&= \text{H}\left(y_1^j, y_2^j \given \mathcal{E}_j, \phi_j\right) + \text{h}\left(\pe\right),
 \end{align}
 where the inequality follows because conditioning cannot increase entropy.
 
@@ -515,7 +515,7 @@ Combining Eqs.~\ref{eqn:qds_pe_deriv_1} and \ref{eqn:qds_pe_deriv_2},
 \begin{align}\label{eqn:qds_pe_deriv_3}
 \text{H}\left(y_1^j, y_2^j \given \phi_j\right) &\le \text{H}\left(y_1^j, y_2^j \given \mathcal{E}_j, \phi_j\right) + \text{h}\left(\pe\right) \notag \\
 &= \text{P}\left(\mathcal{E}_j=0\right) \text{H}\left(y_1^j, y_2^j \given \mathcal{E}_j=0, \phi_j\right) \notag \\
-&+ \text{P}\left(\mathcal{E}_j=1\right) \text{H}\left(y_1^j, y_2^j \given \mathcal{E}_j=1, \phi_j\right) + \text{h}\left(\pe\right)
+&+ \text{P}\left(\mathcal{E}_j=1\right) \text{H}\left(y_1^j, y_2^j \given \mathcal{E}_j=1, \phi_j\right) + \text{h}\left(\pe\right),
 \end{align}
 with
 \begin{equation}
@@ -553,7 +553,7 @@ and so Eq.~\ref{eqn:qds_pe_deriv_3} becomes
 
 \noindent Finally, combining Eqs.~\ref{eqn:qds_pe_deriv_4} and \ref{eqn:qds_pe_deriv_6}, we arrive at
 \begin{equation}\label{eqn:qds_hpe}
-\text{h}\left(\pe\right) \ge 1 - \chi \left(y_1^j, y_2^j : \phi_j\right)
+\text{h}\left(\pe\right) \ge 1 - \chi \left(y_1^j, y_2^j : \phi_j\right),
 \end{equation}
 which is one of the key results for this chapter, and a key result of Ref.~\cite{Thornton2019}. %Because we have used the Holevo information, we automatically include dishonest Bob's optimal POVM and classical strategy. 
 
@@ -808,7 +808,7 @@ while $\bar{n}$ is related to the squeezing parameter $\zeta$ of the input TMSV 
 Since under attack BS$1$ Bob performs worse than BS$0$, we are led to consider an attack which can be considered mid-way between the power of BS$0$ and EC. We modify the attack by imposing that the channel excess noise should \emph{only} affect honest players. That is, the presence of $\xi$ causes $\perr$ to increase, but Holevo information and therefore $\pe$ should both be unaffected. We call this attack BS$2$. While strictly this attack is physically inconsistent, and therefore impossible for Bob to perform, it is more pessimistic for honest players than either BS$0$ or BS$1$ and so the security bounds it gives are also safe bounds on both of those attacks. Indeed, since an analytic expression for Bob's states under attack BS$0$ is readily attainable without resort to the numerical methods required for BS$1$ (Appendix~\ref{appendix:crypto_numerical_methods}), in some circumstances it may even be computationally preferable to assume attack BS$2$. The Holevo information is given by using Eqs.~\ref{eqn:qds_aposterioristate} and \ref{eqn:qds_aprioristate} in the usual way, while $\perr$ is given in Appendix~\ref{appendix:noisy_perr}.
 
 
-\clearpage
+\FloatBarrier
 \section{Signature length $L$}\label{sec:qds_siglength}
 %\MT{better segue}
 We have proven protocol security against both repudiation (Sec.~\ref{sec:qds_security_repudiation}) and forgery (Sec.~\ref{sec:qds_security_forgery}). and we have shown that our QDS protocol is robust (Sec.~\ref{sec:qds_security_robustness}). Additionally, we have demonstrated how a forging Bob's probability $\pe$ to introduce a mismatch into his signature is related to the Holevo information $\chi$ of his quantum system (Sec.~\ref{sec:qds_bounding_pe}) and have explicitly analysed several attacks which he may perform which mimic different channel conditions (Sec.~\ref{sec:qds_attack_analysis}). We are now in a position to calculate the total probability that our QDS protocol fails to meet the security requirements outlined in List.~\ref{list:qds_requirements}. We shall see that the total failure probability decays exponentially, and so our protocol is secure.
@@ -1039,7 +1039,7 @@ Surprisingly, although for larger alphabets the optimal $\alpha$ is decreased, t
 \caption{\label{fig:qds_npsk_length_body} Signature length $L$ under attack BS$0$. At each $T$, length $L$ has been optimized over amplitude $\left|\alpha\right|$ of the alphabet. We have considered $N$PSK alphabets with $N = 2$, $4$, $6$, $8$. Dot-dashed: $N=2$. Black, solid: $N = 4$. Dashed: $N = 6$. Gray, solid: $N = 8$. Inset: the corresponding optimal $\alpha_{\text{opt}}$. } %created in "Creating graphs for paper.nb" from my PRA paper folder.
 \end{figure}
 
-\clearpage
+\FloatBarrier
 \section{Outlook}
 Quantum digital signatures, which use quantum resources to allow for secure authentication of a classical message, have only recently been proven secure against a quantum eavesdropper on the channels \cite{Amiri2016, Puthoor2016, Yin2016}. In this Chapter, we have progressed continuous-variables QDS by providing security against an eavesdropper performing one of several beamsplitter attacks, or an entangling-cloner attack, on the quantum channels. Surprisingly, short signature signature lengths are sufficient to perform secure QDS over metropolitan distances, and we require even shorter signatures than a comparable scheme in Ref.~\cite{Croal2016} which assumed secure quantum channels. Our security proof has enabled us also to take into account the fact that for each eliminated signature element there are multiple ``correct'' declarations which a dishonest player can make.
 

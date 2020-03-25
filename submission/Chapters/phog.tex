@@ -43,7 +43,7 @@ The recent work by Mukherjee \emph{et. al.} \cite{Mukherjee2017} implements a ch
 In this Chapter, our aim is to take the CDP platform, which consists of linear coupling and strong dissipation in an integrated waveguide network, and add nonlinear effects. We shall see that adding the Kerr nonlinearity, present in $\chi^{\left(3\right)}$ glasses for example, allows our CDP network to function as a deterministic generator of highly desirable quantum properties such as entanglement, photon-number squeezing and, in the ideal limit, single-photons. Our system, which we call a PhoG (\underline{Pho}ton \underline{G}un) device, is thus a passive\footnote{In the sense that it requires no driving.} system which is able to create highly non-classical output from a coherent state input.
 
 
-Our ultimate goal in this chapter is to model a full PhoG system consisting of a network of integrated waveguides, laser-inscribed into IG$2$ glass \cite{ig2}, Fig.~\ref{fig:phog_models}~\MakeUppercase{\romannumeral 5}. The network geometry which we build up to is displayed in Fig.~\ref{fig:phog_models}~\MakeUppercase{\romannumeral 4}, and consists of two ``signal'' modes (pink) coupled to each other only vicariously via a long ``tail'' structure (blue) of further modes. This tail effectively simulates a reservoir over short times. In order to gain traction and insight into our system we will initially consider simpler models of increasing complexity (Fig.~\ref{fig:phog_models}, \MakeUppercase{\romannumeral 1}, \MakeUppercase{\romannumeral 2}, \MakeUppercase{\romannumeral 3}), which each explicitly consider a Markovian reservoir $R$. We will explore key effects first under the single-mode model (\MakeUppercase{\romannumeral 1}, Sec.~\ref{sec:phog_single_mode_model}) which relies on an exotic form of loss called Nonlinear Coherent Loss (NCL). This single-mode model will prove illustrative, and is a foundational building block to which we will compare our more complicated models.
+Our ultimate goal in this chapter is to model a full PhoG system consisting of a network of integrated waveguides, laser-inscribed into IG$2$ glass \cite{ig2}, Fig.~\ref{fig:phog_models}~\MakeUppercase{\romannumeral 5}. The network geometry which we build up to is displayed in Fig.~\ref{fig:phog_models}~\extrafig{\MakeUppercase{\romannumeral 4}}, and consists of two ``signal'' modes (pink) coupled to each other only vicariously via a long ``tail'' structure (blue) of further modes. This tail effectively simulates a reservoir over short times. In order to gain traction and insight into our system we will initially consider simpler models of increasing complexity (Fig.~\ref{fig:phog_models}, \extrafig{\MakeUppercase{\romannumeral 1}}, \extrafig{\MakeUppercase{\romannumeral 2}}, \extrafig{\MakeUppercase{\romannumeral 3}}), which each explicitly consider a Markovian reservoir $R$. We will explore key effects first under the single-mode model (Fig.~\ref{fig:phog_models}~\extrafig{\MakeUppercase{\romannumeral 1}}, Sec.~\ref{sec:phog_single_mode_model}) which relies on an exotic form of loss called Nonlinear Coherent Loss (NCL). This single-mode model will prove illustrative, and is a foundational building block to which we will compare our more complicated models.
 
 
 After demonstrating that the single-mode model with NCL suitably allows for our desired states at the output, we will then show how this model may be simulated using standard linear loss, linear coupling between modes, and Kerr nonlinearity, Sec.~\ref{sec:phog_three_mode_model}. The presence of linear loss on additional modes of the system will cause our ideal single-photon output state to decay to vacuum. Despite this, strongly photon-number squeezed light is still attainable if we restrict ourselves to short evolution times. 
@@ -66,7 +66,7 @@ Throughout the Chapter we will indicate when either of these methods has been us
 \end{figure}
 
 
-Consider the single-mode model displayed in Fig.~\ref{fig:phog_single_mode} (c.f. Fig.~\ref{fig:phog_models}~\MakeUppercase{\romannumeral 1}), which consists of a single bosonic mode, $a$, decaying into a reservoir $R$ via operator $\hat{A}$. The annihilation (creation) operator for mode $a$ is $\hat{a} \left(\hat{a}^\dagger\right)$, and the density matrix\footnote{As discussed in Sec.~\ref{sec:intro_state_vectors}, the density operator $\hat{\rho}$ is completely described by its equivalent density matrix $\rho$, and so we will not distinguish between $\hat{\rho}$ and $\rho$. It should be understood that the state $\rho$ is an operator which admits a matrix representation. This will prove useful for modelling, Appendix~\ref{appendix:phog_numerical_methods}.} containing all information about the state of the mode is $\hat{\rho}_a$. This model will prove illustrative of several principles which we will develop throughout the chapter. 
+Consider the single-mode model displayed in Fig.~\ref{fig:phog_single_mode} (c.f. Fig.~\ref{fig:phog_models}~\extrafig{\MakeUppercase{\romannumeral 1}}), which consists of a single bosonic mode, $a$, decaying into a reservoir $R$ via operator $\hat{A}$. The annihilation (creation) operator for mode $a$ is $\hat{a} \left(\hat{a}^\dagger\right)$, and the density matrix\footnote{As discussed in Sec.~\ref{sec:intro_state_vectors}, the density operator $\hat{\rho}$ is completely described by its equivalent density matrix $\rho$, and so we will not distinguish between $\hat{\rho}$ and $\rho$. It should be understood that the state $\rho$ is an operator which admits a matrix representation. This will prove useful for modelling, Appendix~\ref{appendix:phog_numerical_methods}.} containing all information about the state of the mode is $\hat{\rho}_a$. This model will prove illustrative of several principles which we will develop throughout the chapter. 
 
 Assuming that reservoir $R$ is Markovian, the evolution of mode $a$ is given by the following quantum master equation in Lindblad form \cite{Carmichael1999a, Breuer2002}:
 
@@ -197,7 +197,7 @@ We plot the evolution of fidelities between $\rho_a\left(t\right)$ evolving with
 \end{figure}
 \fi
 
-\clearpage
+\FloatBarrier
 \subsection{$\hat{A} = \hat{a}\left(\hat{a}^\dagger \hat{a} - 1\right)$}\label{sec:A_ncl}
 We have seen that the choice of $\hat{A}$ can give drastically different steady states of $\rho_a$,  from the uninteresting vacuum to the highly quantum phase-state. We therefore wish to consider which choices for $\hat{A}$ will drive an initially coherent state to a Fock state $\dyad{n}$. 
 
@@ -489,9 +489,10 @@ We may reduce the complexity of Eq.~\ref{eqn:phog_lindblad_three_mode_model} by 
 &H^{\left(0, 2\right)} = 0,
 \end{align}
 and so, substituting into Eq.~\ref{eqn:adiabatic_elimination}, we arrive at
-\begin{equation}\label{eqn:phog_two_mode_model_deriv}
-\ddt \rho_2 = - i \left[\frac{U}{2} \sum_{x \in \left\{a, b\right\}} x^{\dagger 2} x^2, \rho_2\right] + \frac{4 G^2}{\gamma_c} \mathcal{L}\left[\frac{g_a a + g_b b}{G} \right]\rho_2 + \gamma_1 \left(\mathcal{L}\left[a\right] + \mathcal{L}\left[b\right]\right)\rho_2,
-\end{equation}
+\begin{align}\label{eqn:phog_two_mode_model_deriv}
+\ddt \rho_2 = - i \left[\frac{U}{2} \sum_{x \in \left\{a, b\right\}} x^{\dagger 2} x^2, \rho_2\right] &+ \frac{4 G^2}{\gamma_c} \mathcal{L}\left[\frac{g_a a + g_b b}{G} \right]\rho_2 \notag \\
+&+ \gamma_1 \left(\mathcal{L}\left[a\right] + \mathcal{L}\left[b\right]\right)\rho_2,
+\end{align}
 where $G = \sqrt{g_a^2 + g_b^2}$. The three-mode model has been reduced to a two-mode system involving only modes $a, b$. Introducing the following collective symmetric and antisymmetric modes
 
 \begin{align}\label{eqn:phog_rotation}
@@ -873,9 +874,10 @@ In future work, we desire to undertake further modelling of the realistic multim
 We have recently begun some preliminary work on this question% and believe we have good evidence that NCL will be evidenced even in such a system when the pulse envelope is directly modelled. 
 . In particular, we have begun investigating the spectral and temporal properties of a pulse in a system identical to the multi-mode one, Sec.~\ref{sec:phog_multi_mode}, including chromatic dispersion, self-phase modulation and self-steepening. We solve the so-called nonlinear Schr{\"o}dinger equation (NLSE):
 
-\begin{equation}\label{eqn:phog_nlse}
-\frac{\partial A_j}{\partial z} + i \beta_1 \frac{\partial A_j}{\partial \tau} _ i \frac{\beta_2}{2} \frac{\partial^2 A_j}{\partial \tau^2} - \frac{\beta_3}{6} \frac{\partial^3 A_j}{\partial \tau^3} + \frac{\gamma_1}{2} = i \gamma_{NL} \left( 1 + \frac{i}{\omega_0} \frac{\partial}{\partial \tau}\right)\left|A_j\right|^2 A_j - i g_{j, k} A_k
-\end{equation}
+\begin{align}\label{eqn:phog_nlse}
+\frac{\partial A_j}{\partial z} + i \beta_1 \frac{\partial A_j}{\partial \tau} _ i \frac{\beta_2}{2} \frac{\partial^2 A_j}{\partial \tau^2} - \frac{\beta_3}{6} \frac{\partial^3 A_j}{\partial \tau^3} + \frac{\gamma_1}{2} = &i \gamma_{NL} \left( 1 + \frac{i}{\omega_0} \frac{\partial}{\partial \tau}\right)\left|A_j\right|^2 A_j \notag \\
+&- i g_{j, k} A_k
+\end{align}
 where $A_j\left(z, \tau\right)$ is the pulse envelope in the $j^{\text{th}}$ waveguide, $\gamma_1$ is the linear loss parameter, $\gamma_{NL}$ is the nonlinearity parameter given by
 \begin{equation}
 \gamma_{NL} = \frac{n_2 \omega_0}{c A_{\text{eff}}},

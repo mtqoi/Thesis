@@ -12,9 +12,9 @@ The two halves of this thesis can be interpreted as studying different aspects o
 
 \subsection*{Detailed overview}
 
-This Thesis is structured as follows. In the remainder of this Chapter we will introduce and outline several of the theoretical and analytical tools which we make extensive use of in the rest of the Thesis. We will show how the electromagnetic field may be quantized, discuss several common and useful quantum states of the field, and examine one method for their description and visualization. In Chapter~\ref{chapter:crypto_intro} we outline some of the developments in conventional cryptography which underpin our modern communications infrastructure, and discuss how two cryptographic tasks -- digital signatures and secret sharing -- may be translated to the quantum realm. In particular we will look at several recent and historic attempts to build such quantum protocols.
+This Thesis is structured as follows. In the remainder of this Chapter we will introduce and outline several of the theoretical and analytical tools which we make extensive use of in the rest of the Thesis. We will show how the electromagnetic field may be quantized, discuss several common and useful quantum states of the field, and examine some methods for their description and visualization. In Chapter~\ref{chapter:crypto_intro} we outline some of the developments in conventional cryptography which underpin our modern communications infrastructure, and discuss how two cryptographic tasks -- digital signatures and secret sharing -- may be translated to the quantum realm. In particular we will look at several recent and historic attempts to build such quantum protocols.
 
-\paragraph{Part One:} In Chapter~\ref{chapter:qds} we introduce our own QDS protocol, and prove its security against several classes of attack. We show that ours is the first CV QDS protocol to allow for an eavesdropper on the channels, and we show that despite this we attain very short signature lengths over practical distances. In Chapter~\ref{chapter:qss} we introduce our QSS protocol, prove its security, and analyse its performance. Crucially, unlike several recent QSS protocols, our protocol does not require generation and distribution of large-scale entangled states, nor does it require dedicated hardware for a sequential ``round-robin'' style of approach. In the last chapter of Part One, Chapter~\ref{chapter:aqc}, we introduce and discuss the concept of quantum cryptographic agility, and demonstrate how it may apply to the protocols discussed in earlier chapters. We additionally introduce a new QDS protocol which runs in a modified configuration, and discuss how a quantum key distribution (QKD) protocol which already exists in the literature may be adopted into our agile system. We finish with a figure-of-merit graph which demonstrates that our QDS scheme, in addition to being practical and compatible with commercial telecommunications hardware, is also the fastest QDS protocol over comparable distances. 
+\paragraph{Part One:} In Chapter~\ref{chapter:qds} we introduce our own QDS protocol, and prove its security against several classes of attack. Ours is the first CV QDS protocol to allow for an eavesdropper on the channels, and we show that despite this we attain very short signature lengths over practical distances. In Chapter~\ref{chapter:qss} we introduce our QSS protocol, prove its security, and analyse its performance. Crucially, unlike several recent QSS protocols, our protocol does not require generation and distribution of large-scale entangled states, nor does it require dedicated hardware for a sequential ``round-robin'' style of approach. In the last chapter of Part One, Chapter~\ref{chapter:aqc}, we introduce and discuss the concept of quantum cryptographic agility, and demonstrate how it may apply to the protocols discussed in earlier chapters. We additionally introduce a new QDS protocol which runs in a modified configuration, and discuss how a quantum key distribution (QKD) protocol which already exists in the literature may be adopted into our agile system. We finish with a figure-of-merit graph which demonstrates that our QDS scheme, in addition to being practical and compatible with commercial telecommunications hardware, is also the fastest QDS protocol over comparable distances. 
 
 \paragraph{Part Two:} In Chapter~\ref{chapter:phog} we motivate and introduce the PhoG device which will be the focus of the second half of this Thesis. We demonstrate that dissipation, far from being a hindrance to the desired evolution of our quantum system, is actually an asset and the main driver towards target nonclassicality. We introduce an exotic form of dissipation, called Nonlinear Coherent Loss, and show that in the ideal limit it will deterministically lead to single photons at the output. We then introduce progressively more complex models involving additional bosonic system modes, and demonstrate that a realistic full multi-mode model of the system can be used to effectively simulate the Nonlinear Coherent Loss decay channel. Finally, we end the chapter by demonstrating that in addition to generating highly sub-Poissonian states, a slight modification to the PhoG device will lead to generation of entanglement at the output.
 
@@ -85,7 +85,7 @@ The density operator corresponding to a quantum state is
 \hat{\rho} = \sum_{i, j} p_{i, j} \dyad{i}{j}
 \end{equation}
 where $\bra{i} \in \mathcal{H}^*$ is dual to $\ket{i}$ ($\mathcal{H}^*$ is the dual space to $\mathcal{H}$). %The matrix $p_{i, j}$ is referred to as the density matrix, though we shall often use the terms \emph{density operator} and \emph{density matrix} interchangably. As such, we will often neglect the hat above $\hat{\rho}$, and simply write $\rho$.
-Since We shall often use the terms \emph{density operator} and \emph{density matrix} interchangeably.
+We shall often use the terms \emph{density operator} and \emph{density matrix} interchangeably.
 
 Any state vector $\ket{\psi}$ can be described as a density operator. For example, the state $\ket{\psi}$ in Eq.~\ref{eqn:intro_superposition} may equivalently be described as 
 \begin{equation}
@@ -102,7 +102,7 @@ In the $\left\{\ket{0}, \ket{1}\right\}$ basis, these states $\rho_\psi$ and $\r
 \rho_\psi = \frac{1}{2}\pmqty{1 & 1 \\ 1 & 1} \qq{and} \rho_\varphi = \frac{1}{2}\pmqty{1 & 0 \\ 0  & 1}.
 \end{equation}
 
-\noindent The quantum nature of a state $\rho$ is therefore intimately connected to the off-diagonal elements of its density matrix. These off-diagonal elements may be referred to as \emph{coherences}. The density matrix $\rho$ will be our primary tool for describing a quantum state in this Thesis.
+\noindent The quantum nature of a state $\rho$ is therefore intimately connected to the off-diagonal elements of its density matrix, which are often referred to as \emph{coherences}. The density matrix $\rho$ will be our primary tool for describing a quantum state in this Thesis.
 
 %\FloatBarrier
 %\subsection{Quantum optics}
@@ -115,7 +115,7 @@ In the $\left\{\ket{0}, \ket{1}\right\}$ basis, these states $\rho_\psi$ and $\r
 In the absence of currents or charge, classical electromagnetic fields obey Maxwell's equations:
 
 \begin{equation}
-\nabla \cdot \bm{B} =0,\qq{} \nabla \times \bm{E} = - \frac{\partial \bm{B}}{\partial t},\qq{} \nabla \cdot \bm{D} = 0 \qq{and} \nabla \times \bm{H} = \frac{\partial \bm{D}}{\partial t}.
+\nabla \cdot \bm{B} =0,\qq{} \nabla \times \bm{E} = - \frac{\partial \bm{B}}{\partial t},\qq{} \nabla \cdot \bm{D} = 0 \qq{and} \nabla \times \bm{H} = \frac{\partial \bm{D}}{\partial t}. \notag
 \end{equation}
 
 \noindent We may quantize these electric and magnetic fields by replacing the vectors $\bm{B}, \bm{E}, \bm{D}, \bm{H}$ with the corresponding operators $\hat{\bm{B}}, \hat{\bm{E}}, \hat{\bm{D}}, \hat{\bm{H}}$, and imposing that the classical fields should be regarded as expected values of these quantum operators:
@@ -128,26 +128,28 @@ In the absence of currents or charge, classical electromagnetic fields obey Maxw
 \begin{equation}
 \hat{\bm{E}} = - \frac{\partial \hat{\bm{A}}}{\partial t}, \qq{}  \hat{\bm{B}} = \nabla \times \hat{\bm{A}}, \qq{and} \nabla \cdot \hat{\bm{A}} = 0.
 \end{equation}
-As in classical electromagnetism, the first two of these requirements automatically imply that the first two of Maxwell's equations are satisfied, while the third requirement (``coulomb gauge'') is merely a convenient choice which immediately satisfies the third Maxwell equation\footnote{Since light in linear media behaves as $\hat{\bm{D}} = \epsilon_0 \epsilon \hat{\bm{E}}$, where $\epsilon_0$ is the vacuum permittivity and $\epsilon$ is the electric permittivity of the medium in question. The other ``constitutive equation'' is $\hat{\bm{H}} = \mu_0^{-1} \mu^{-1} \hat{\bm{B}}$, for medium permeability $\mu$ and vacuum permeability $\mu_0$.}. The final Maxwell equation is then equivalent to the following wave equation
+As in classical electromagnetism, the first two of these requirements automatically imply that the first two of Maxwell's equations are satisfied, while the third requirement (``coulomb gauge'') is merely a convenient choice which immediately satisfies the third Maxwell equation\footnote{Since light in linear media behaves as $\hat{\bm{D}} = \epsilon_0 \epsilon \hat{\bm{E}}$, where $\epsilon_0$ is the vacuum permittivity and $\epsilon$ is the electric permittivity of the medium in question. The other ``constitutive equation'' is $\hat{\bm{H}} = \mu_0^{-1} \mu^{-1} \hat{\bm{B}}$, for permeability $\mu$ of the medium, and vacuum permeability $\mu_0$.}. The final Maxwell equation is then equivalent to the following wave equation
 
 \begin{equation}\label{eqn:intro_wave}
 \epsilon^{-1} \mu^{-1} \nabla \times \nabla \times \hat{\bm{A}} = - c^{-2} \frac{\partial^2 \hat{\bm{A}}}{\partial t^2}.
 \end{equation}
 
-\noindent These equations contain all of the same information as Maxwell's equations, just involving the quantized vector potential. This $\hat{\bm{A}}$ contains all information about our light wave. The Hamiltonian of our electromagnetic field takes the same form as the classical total energy, i.e.
+\noindent These equations contain all of the same information as Maxwell's equations, just involving the quantized vector potential. This $\hat{\bm{A}}$ contains all information about our light wave. 
+
+The Hamiltonian of our electromagnetic field takes the same form as the classical total energy, i.e.
 \begin{equation}\label{eqn:intro_hamiltonian}
 \hat{H} = \int_V \Diff3 V \; \frac{\hat{\bm{E}} \cdot \hat{\bm{D}} + \hat{\bm{B}} \cdot \hat{\bm{H}}}{2}.
 \end{equation}
 
 
-\noindent The electromagnetic wave equation, Eq.~\ref{eqn:intro_wave} is a linear differential equation, and so obeys the superposition principle. Let us define a set of monochromatic classical waves
+\noindent The electromagnetic wave equation, Eq.~\ref{eqn:intro_wave}, is a linear differential equation, and so we may sum any two solutions together to form a new solution. Let us define a set of monochromatic classical waves
 \begin{equation}
 \bm{A}_j\left(\overrightarrow{r}, t\right) = \bm{A}_j\left(\overrightarrow{r}\right) \exp^{-i \omega_j t}
 \end{equation}
 oscillating at frequency $\omega_j$. We have assumed that the temporal and spatial aspects of the wave can be separated, and let the vector $\bm{A}_j\left(\overrightarrow{r}\right)$ contain all spatial information. %The $\bm{A}_j$ form an orthonormal basis set.
-Let us expand the quantum vector potential $\hat{\bm{A}}$ as
+We expand the quantum vector potential $\hat{\bm{A}}$ as
 \begin{equation}
-\hat{\bm{A}}\left(\overrightarrow{r}, t\right) = \sum_k \left[ \bm{A}_j\left(\overrightarrow{r}, t\right) \hat{a}_j + \bm{A}_j^* \left(\overrightarrow{r}, t\right) \hat{a}_j^\dagger\right]
+\hat{\bm{A}}\left(\overrightarrow{r}, t\right) = \sum_k \left[ \bm{A}_j\left(\overrightarrow{r}, t\right) \hat{a}_j + \bm{A}_j^* \left(\overrightarrow{r}, t\right) \hat{a}_j^\dagger\right],
 \end{equation}
 where we have introduced single-mode quantum operators $\hat{a}_j, \hat{a}_j^\dagger$.
 
@@ -157,7 +159,7 @@ Substituting this $\hat{\bm{A}}\left(\overrightarrow{r}, t\right)$, expanded in 
 \end{equation}
 where we have used the commutator $\left[ \hat{a}_j \hat{a}_k^\dagger \right] = \delta_{j, k}$. We are thus led to identify the $\hat{a}_j, \hat{a}_j^\dagger$ as the raising and lowering operators of a simple harmonic oscillator which obeys the Hamiltonian Eq.~\ref{eqn:intro_hamiltonian_2}. 
 
-We have effectively split the full quantum description of light into two parts, classical and quantum. The classical quantities $\bm{A}_j\left(\overrightarrow{r}, t\right)$ fully describe all wave properties of the light, while the quantum operators $\hat{a}_j$ describe the quanta present in a single mode. For this Thesis we will focus on these quantum systems and ignore the wave nature of light. That is to say, we will regard the mode operators $\hat{a}_j$ as accurately describing the full system, irrelevant of its classical properties. This proves to be a helpful distinction as it allows for us to make general quantum statements which are true for any bosonic system of quantum modes, regardless of their physical implementation.
+We have effectively split the full quantum description of light into two parts, classical and quantum. The classical quantities $\bm{A}_j\left(\overrightarrow{r}, t\right)$ fully describe all wave properties of the light, while the quantum operators $\hat{a}_j$ describe the quanta present in a single mode. For this Thesis we will focus on these quantum systems and ignore the wave nature of light. That is to say, we will regard the mode operators $\hat{a}_j$ as accurately describing the full system of interest, irrelevant of its classical properties. This proves to be a helpful distinction as it allows for us to make general quantum statements which are true for any bosonic system of quantum modes, regardless of their physical implementation.
 
 In Sec.~\ref{sec:phog_outlook} we will briefly return to the classical $\bm{A}\left(\overrightarrow{r}, t\right)$ in a $1+1$D system (one spatial dimension plus time). The $A\left(z, t\right)$ are discussed there in the context of light pulse propagation in waveguides where, with physical implementation in mind, we must pay great attention to the wave properties. We discuss there some methods to efficiently model such classical behaviour, and then mention as outlook several strategies which may be used to model the full propagation of a quantum pulse, taking into account both classical and quantum effects.
 
@@ -181,7 +183,7 @@ which counts the number of photons in our mode.
 We may construct the following two operators
 
 \begin{equation}\label{eqn:intro_quadrature}
-\hat{q} = \frac{\hat{a}^\dagger + \hat{a}}{\sqrt{2}} \qq{and} \hat{p} = i \frac{\hat{a}^\dagger - \hat{a}}{\sqrt{2}}
+\hat{q} = \frac{\hat{a}^\dagger + \hat{a}}{\sqrt{2}} \qq{and} \hat{p} = i \frac{\hat{a}^\dagger - \hat{a}}{\sqrt{2}},
 \end{equation}
 which are known as the ``quadrature operators'', and can be shown to obey the commutator
 \begin{equation}\label{eqn:intro_quadrature_commutator}
@@ -244,7 +246,7 @@ W\left(q, p\right) = \frac{1}{2 \pi} \int\limits_{-\infty}^{\infty} \mathrm{d}x 
 \end{equation}
 where $W_i\left(q, p\right)$ is the Wigner function corresponding to operator $\hat{O}_i$. Operator expectation values with respect a given state $\hat{\rho}$ may be calculated using Eq.~\ref{eqn:wigner_overlap}. 
 
-The Heisenberg uncertainty relation further expresses itself in the Wigner function picture by imposing a minimum area which a quantum state must occupy. In the following sections we will see some examples of quantum states and their corresponding Wigner functions. In all plots of Wigner functions, the colour blue denotes $W\left(q, p\right) >0$ while red denotes $W \left(q, p\right) <0$. Negativity (red, in this Thesis) in the Wigner function is a clear sign that the underlying state is nonclassical\footnote{Indeed, the only pure quantum states with non-negative Wigner functions are those with Gaussian Wigner function, i.e. the Glauber coherent states and the quadrature squeezed states.}.
+The Heisenberg uncertainty relation further expresses itself in the Wigner function picture by imposing a minimum area which a quantum state must occupy. In the following sections we will see some examples of quantum states and their corresponding Wigner functions. In all plots of Wigner functions, the colour blue denotes $W\left(q, p\right) >0$ while red denotes $W \left(q, p\right) <0$. Negativity (red, in this Thesis) of the Wigner function is a clear sign that the underlying state is nonclassical\footnote{Indeed, the only pure quantum states with non-negative Wigner functions are those with Gaussian Wigner function, i.e. the Glauber coherent states and the quadrature squeezed states.}.
 
 
 
@@ -299,7 +301,7 @@ We define the eigenstates of quadrature operators $\hat{q}$ and $\hat{p}$ as
 \begin{equation}\label{eqn:intro_quadrature_state}
 \hat{q}\ket{q} = q \ket{q} \qq{and} \hat{p}\ket{p} = p \ket{p}.
 \end{equation}
-These $\ket{q}, \ket{p}$ are known as quadrature states. Although they are not normalizable, the quadrature states are a useful tool in quantum optics. For example, we will use them to describe ideal homodyne detection, Sec.~\ref{sec:intro_homodyne}, and are also required for the definition of the Wigner function in Eq.~\ref{eqn:intro_wigners_formula}.
+These $\ket{q}, \ket{p}$ are known as quadrature states. Although they are not normalizable, the quadrature states are a useful tool in quantum optics. For example, we will use them to describe ideal homodyne detection, Sec.~\ref{sec:intro_homodyne}, and they are also required for the definition of the Wigner function in Eq.~\ref{eqn:intro_wigners_formula}.
 
 
 \FloatBarrier
@@ -334,7 +336,7 @@ where $\alpha^*$ denotes the complex conjugate of $\alpha$, and so we will regul
 
 \noindent and we display a mixture over the QPSK alphabet in Fig.~\ref{fig:qpsk}. We will not explicitly distinguish between whether we refer to the set of quantum states $\left\{\ket{\alpha}, \ket{i \alpha}, \ket{- \alpha}, \ket{- i \alpha}\right\}$ or the corresponding set of complex amplitudes $\left\{ \alpha, i \alpha, -\alpha, - i\alpha\right\}$, since it should always be obvious which is meant.
 
-A special case of the coherent states, that with eigenvalue $0$,
+A special case of the coherent states is that with eigenvalue $0$,
 \begin{equation}
 \hat{a} \ket{0} = 0 \ket{0}.
 \end{equation}
@@ -380,7 +382,7 @@ The thermal state is defined as
 \begin{equation}\label{eqn:intro_thermal}
 \rho_{\text{thermal}} = \left( 1 - e^{-\beta} \right) \sum_{n=0}^\infty e^{- n \beta} \dyad{n},
 \end{equation}
-with $\beta = \left( \hbar \omega \right)/\left(k_B T\right)$, reduced Planck's constant $\hbar$, angular frequency $\omega$, Boltzmann's constant $k_B$ and thermal equilibrium temperature $T$. As we see from the form of Eq.~\ref{eqn:intro_thermal}, the thermal state is a classical mixture of Fock states (c.f. Eq.~\ref{eqn:intro_mixture}). Typically we will parametrise the thermal state using the average thermal photon number $\bar{n}$, which is defined as 
+with $\beta = \left( \hbar \omega \right)/\left(k_B T\right)$, reduced Planck's constant $\hbar$, angular frequency $\omega$, Boltzmann's constant $k_B$ and thermal equilibrium temperature $T$. As we see from the form of Eq.~\ref{eqn:intro_thermal}, the thermal state is a classical mixture of Fock states (c.f. Eq.~\ref{eqn:intro_mixture}). Typically we will parametrise the thermal state using the average thermal photon number $\bar{n}$, defined as 
 \begin{equation}
 \bar{n} = \frac{1}{e^\beta - 1},
 \end{equation}
@@ -397,7 +399,7 @@ which measures the average number of photons in the thermal state. We display th
 \FloatBarrier
 \subsection{Squeezed states (quadrature)}
 
-We have already encountered the Heisenberg relation, which imposes a minimum phase space area which a state can occupy. The coherent state was a minimum uncertainty state and so occupied the minimum possible area while possessing symmetry: $\text{Var}\left( \hat{q}\right) = \text{Var}\left(\hat{p}\right)$. Of course, it is possible to satisfy the Heisenberg relation while also taking $\Delta q \ne \Delta p$, and this is precisely what (quadrature) squeezed states do. We display some examples of quadrature squeezed states in Fig.~\ref{fig:intro_quadrature_squeezed_wigner}. In the limit of infinite squeezing one obtains quadrature states $\ket{q}$ and $\ket{p}$.
+We have already encountered the Heisenberg relation, which imposes a minimum phase space area which a state can occupy. The coherent state was a minimum uncertainty state and so occupied the minimum possible area while possessing symmetry: $\text{Var}\left( \hat{q}\right) = \text{Var}\left(\hat{p}\right)$. Of course, it is possible to satisfy the Heisenberg relation while also taking $\text{Var}\left(\hat{q}\right) \ne \text{Var}\left(\hat{p}\right)$, and this is precisely what (quadrature) squeezed states do. We display some examples of quadrature squeezed states in Fig.~\ref{fig:intro_quadrature_squeezed_wigner}. In the limit of infinite squeezing one obtains quadrature states $\ket{q}$ and $\ket{p}$.
 
 Quadrature squeezing is generated by application of the squeezing operator
 \begin{equation}
@@ -453,7 +455,7 @@ where without loss of generality we have used the Fock basis, and the $c_n$ are 
 \begin{equation}\label{eqn:intro_rho_fully_mixed}
 \rho = \sum_n d_n \dyad{n}
 \end{equation}
-where without loss of generality we have used the Fock basis, and $d_n$ are real coefficients. The state Eq.~\ref{eqn:intro_rho_fully_mixed} only has diagonal elements in its density matrix, and if there are two or more nonzero $d_n$, then the state is fully mixed.
+where without loss of generality we have used the Fock basis, and $d_n$ are real coefficients. The state Eq.~\ref{eqn:intro_rho_fully_mixed} only has diagonal elements in its density matrix, and if there are two or more nonzero $d_n$ then the state is fully mixed.
 
 Given a density matrix $\rho$, it is time consuming and difficult to check by hand which of these forms it takes, and in most situations it will not fit neatly into either form. We therefore desire a function which will identify and quantify which type of ignorance the state possesses, and which may be easily computed on $\rho$. To do this, we first introduce the trace of $\rho$ as
 \begin{equation}
@@ -587,8 +589,8 @@ which transforms two input modes into two output modes as
 \hat{a}_3 = \tau \hat{a}_1 - \rho \hat{a}_2 \qq{and} \hat{a}_4 = \rho \hat{a}_1 + \tau \hat{a}_2.
 \end{equation}
 
-\noindent To conserve energy we require $\tau^2 + \rho^2 = 1$, and since we have assumed that both $\tau$ and $\rho$ are real. %TODO: for the viva, make sure that I can justify this and say what effect it will have.
-Finally, we will make extensive use of the following relation, which describes the output state when two input Fock states interfere on the beamsplitter. As in Ref.~\cite{Leonhardt2010} we take $\tau$ and $\rho$ to be real, such that $\tau = \sqrt{T}$ and $\rho = \sqrt{1-T}$, with $0 \le T \le 1$. The two-mode output state is:
+\noindent To conserve energy we require $\left|\tau\right|^2 + \left|\rho\right|^2 = 1$. %TODO: for the viva, make sure that I can justify this and say what effect it will have.
+Finally, we will make extensive use of the following relation, which describes the output state when two input Fock states interfere on the beamsplitter. As in Ref.~\cite{Leonhardt2010} we take $\tau$ and $\rho$ to be real\footnote{Reflectivity coefficient $\rho$ has no relation to density operator $\hat{\rho}$.}, such that $\tau = \sqrt{T}$ and $\rho = \sqrt{1-T}$, with $0 \le T \le 1$. The two-mode output state is:
 
 \begin{align}\label{eqn:intro_beamsplitter_fock}
 &\ket{n_1, n_2}^\prime  = \frac{1}{\sqrt{n_1! n_2!}} \sum_{k_1, k_2=0}^{n_1, n_2} \pmqty{n_1 \\ k_1} \pmqty{n_2 \\ k_2} \left(\sqrt{T}\right)^{k_1} \left(\sqrt{1-T}\right)^{n_1 - k_1} \left(-\sqrt{1-T}\right)^{k_2} \notag \\
@@ -673,7 +675,7 @@ Homodyne measurement is a frequently used technique for measuring the quadrature
 \begin{equation}
 \text{P}\left(q_\theta\right) = \ev{\rho}{q_\theta}
 \end{equation}
-where $\ket{q_\theta}$ is the eigenstate of $\hat{q}_\theta$ (c.f. Eq.~\ref{eqn:intro_quadrature_state}).% A homodyne measurement must specify the quadrature $\hat{q}_\theta$ which is being measured, then 
+where $\ket{q_\theta}$ is the eigenstate of $\hat{q}_\theta$ (c.f. Eq.~\ref{eqn:intro_quadrature_state}). % A homodyne measurement must specify the quadrature $\hat{q}_\theta$ which is being measured, then 
 The set of operators $\dyad{q_\theta}$ form the homodyne POVM.
 
 %Without loss of generality, consider just the position ($q$) and momentum ($p$) outcomes. The probability distributions $\text{P}\left(q\right), \text{P}\left(p\right)$ of homodyne measurement outcomes of state $\rho$ are equivalently given by marginal integrals of the Wigner function corresponding to $\rho$, over the conjugate quadrature:
@@ -681,7 +683,7 @@ The set of operators $\dyad{q_\theta}$ form the homodyne POVM.
 %\text{P}\left(q\right) = \int\limits_{-\infty}^\infty \mathrm{d}p \; W_\rho\left(q, p\right) \qq{and} \text{P}\left(p\right) = \int\limits_{-\infty}^\infty \mathrm{d}q \; W_\rho\left(q, p\right).
 %\end{equation}
 
-In practice the homodyne POVM is realised by mixing $\rho$ with a strong coherent state $\ket{\alpha}$, $\left|\alpha\right| \gg 1$ (the so-called ``local oscillator''), on a balanced ($50/50$) beamsplitter, and subtracting the measured photocurrents at output arm from each other. We depict this process in Fig.~\ref{fig:intro_homodyne}. We assume in the ideal case that the photocurrents $I_1$ and $I_2$ are such that
+In practice the homodyne POVM is realised by mixing $\rho$ with a strong coherent state $\ket{\alpha}$, $\left|\alpha\right| \gg 1$ (the so-called ``local oscillator''), on a balanced ($50/50$) beamsplitter, and subtracting the measured photocurrents at the output arms from each other. We depict this process in Fig.~\ref{fig:intro_homodyne}. We assume in the ideal case that the photocurrents $I_1$ and $I_2$ are such that
 \begin{equation}
 I_1 \propto \hat{n}_1 \qq{and} I_2 \propto \hat{n}_2 \qq{with} \hat{n}_i = \hat{a}_i^\dagger \hat{a}_i,
 \end{equation}
@@ -801,7 +803,7 @@ We define the joint entropy $\text{H}\left(X, Y\right)$ of two random variables 
 
 The conditional entropy of $X$, conditioned on $Y$, is
 \begin{equation}\label{eqn:intro_definition_conditional_entropy}
-\text{H}\left(X \given Y\right) = \text{H}\left(X, Y\right) - \text{H}\left(Y\right)
+\text{H}\left(X \given Y\right) = \text{H}\left(X, Y\right) - \text{H}\left(Y\right),
 \end{equation}
 which measures the average uncertainty we have about variable $X$ given that we know $Y$.
 
@@ -829,7 +831,7 @@ The von Neumann entropy of a quantum state $\rho$ is
 \end{equation}
 which may be equivalently calculated as
 \begin{equation}\label{eqn:intro_von_neumann}
-\text{S}\left[\rho\right] = - \sum_j \lambda_j \log \lambda_j,
+\text{S}\left(\rho\right) = - \sum_j \lambda_j \log \lambda_j,
 \end{equation}
 where $\lambda_j$ are the eigenvalues of $\rho$. The von Neumann entropy is always non-negative, and is zero when $\rho$ is pure.
 
@@ -838,7 +840,7 @@ By analogy with the Shannon entropy we will additionally define the joint entrop
 \text{S}\left(\rho_{A, B}\right) = - \tr\left[\rho_{A, B} \log \rho_{A, B}\right].
 \end{equation}
 
-\noindent The conditional von Neumann entropy between quantum systems $A$ and $B$ may then be defined
+\noindent The conditional von Neumann entropy between quantum systems $A$ and $B$ may then be defined:
 \begin{equation}
 \text{S}\left(A \given B\right) = \text{S}\left(A, B\right) - \text{S}\left(B\right),
 \end{equation}
@@ -902,7 +904,7 @@ Let $X_1, \dots, X_n$ and $Y$ be random variables. Then \cite{Nielsen2010, Wilde
 
 In this chapter we have provided a brief overview of several key concepts and tools which underpin this Thesis. Additional material which is required will be introduced as it is used. We have introduced the density matrix formalism and discussed how it relates to other methods for describing quantum states of light, such as the Wigner function and the covariance matrix. Although in this Thesis we work primarily in terms of the density matrix, the Wigner function has provided us with a useful visualization tool in this Chapter. Furthermore, the Wigner function simplifies calculations in Appendix~\ref{appendix:noisy_perr} which are in principle possible, but difficult in general, using density matrices. The covariance matrix is another useful tool which warrants extensive study in its own right. We use the covariance matrix only in Chapter~\ref{chapter:phog} to measure the Gaussian entanglement properties of a state. The Wigner function representation for a multimode quantum state is intertwined with the covariance matrix description, and we refer the reader to Ref.~\cite{Serafini2017} for an excellent discussion of how to move between the two pictures.
 
-In the first half of this Thesis, Chapters~\ref{chapter:qds}-\ref{chapter:aqc}, we will use the density matrix description, along with the beamsplitter relation for input fock states in order to model the passage of a quantum state through a channel. In the cryptographic protocols discussed there, a malevolent party is assumed to replace the channel with an ideal beamsplitter, and they have control over the second input port, and receive the reflected output state. We model this interaction, and then use the entropies introduced above to bound the ability of a dishonest player to break the protocol.
+In the first half of this Thesis, Chapters~\ref{chapter:qds}-\ref{chapter:aqc}, we will use the density matrix description, along with the beamsplitter relation for input fock states, in order to model the passage of a quantum state through a channel. In the cryptographic protocols discussed there, a malevolent party is assumed to replace the channel with an ideal beamsplitter. They have control over the second input port, and receive the reflected output state. We model this interaction and then use the entropies introduced above to bound the ability of a dishonest player to break the protocol.
 
 In the second half of this Thesis we will examine in depth the dynamics of a coherent state in several different scenarios. Our key tool here will be the Lindblad equation which describes the evolution of our density matrix. When possible we draw conclusions analytically, but our main techniques will be the numerical methods discussed at length in Appendix~\ref{appendix:phog_numerical_methods}. These allow us to gain an understanding of the state evolution, sometimes even if computational constraints prevent us from accessing the full density matrix. 
 
