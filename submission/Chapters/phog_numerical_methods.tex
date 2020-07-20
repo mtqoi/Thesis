@@ -18,7 +18,7 @@ It should be noted that such an approach will only ever give an approximation to
 \begin{equation}\label{eqn:appendix_coherent}
 \ket{\alpha} = e^{-\frac{\left|\alpha\right|^2}{2}}\sum_{n=0}^\infty \frac{\alpha^n}{\sqrt{n!}}\ket{n}
 \end{equation}
-where $\ket{n}$ is the $n$-photon Fock state. %TODO: Ensure that Fock state is in the introduction
+where $\ket{n}$ is the $n$-photon Fock state. 
 The sum in Eq.~\ref{eqn:appendix_coherent} runs from zero to infinity and so the required Hilbert space size is countably infinite. However, for any given $\alpha$, is is possible to find $N$ such that the state
 \begin{equation}\label{eqn:appendix_coherent_state_truncated}
 \ket{\psi} = e^{-\frac{\left|\alpha\right|^2}{2}}\sum_{n=0}^N \frac{\alpha^n}{\sqrt{n!}}\ket{n}
@@ -72,7 +72,7 @@ The above procedure is repeated many times, and observables should be averaged\f
 \begin{align}
 \dyad{\psi}\left(t + \Delta t\right)  = \Delta P \dyad{\psi_{\text{Jump}}} + \left(1 - \Delta P\right) \dyad{\psi_{\text{No Jump}}}
 \end{align}
-The state $\ket{\psi_{\text{Jump}}}$ is given by Eq.~\ref{eqn:appendix_jump}, while $\ket{\psi_{\text{No Jump}}}$ is found by explicitly enacting the non-Hermitian effective Hamiltonian on $\ket{\psi}$ for $\Delta t$. By substituting in our expressions and allowing $\Delta t \rightarrow 0$, this reduces to a Lindblad equation of our original form. %TODO: make sure that I can do this for the viva.
+The state $\ket{\psi_{\text{Jump}}}$ is given by Eq.~\ref{eqn:appendix_jump}, while $\ket{\psi_{\text{No Jump}}}$ is found by explicitly enacting the non-Hermitian effective Hamiltonian on $\ket{\psi}$ for $\Delta t$. By substituting in our expressions and allowing $\Delta t \rightarrow 0$, this reduces to a Lindblad equation of our original form.
 
 
 

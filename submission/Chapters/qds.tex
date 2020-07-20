@@ -1,6 +1,3 @@
-%
-% TODO:
-%% - add figures of histograms of EC attack
 
 \chapter{Quantum digital signatures}\label{chapter:qds}
 %Goal of chapter: introduce our QDS protocol and prove its security in different contexts using several methods.
@@ -764,8 +761,7 @@ Let us analyse the EC attack. Alice creates the coherent state $\dyad*{\alpha_k}
 
 \noindent where we have explicitly separated in square brackets the two modes which will interfere on the beamsplitter.
 
-The beamsplitter mixes $\dyad{n_1, n_2}{m_1, m_2}$ via Eq.~\ref{eqn:intro_beamsplitter}, and gives an entangled three-mode state at the output. Charlie heterodynes on his mode and receives outcome $z_C$, and we arrive at Bob's conditional two-mode output state $\rho_{\left. B \given z_C\right.}$, which we display fully in Eq.~\ref{eqn:appendix_ec_state}, Appendix.~\ref{appendix:ec_state}. %A histogram of Bob's conditional two-mode state is displayed in Fig.~\ref{fig:appendix_qds_ec_histogram} where we see that his state depends heavily on Charlie's outcome $c$.  TODO: Put this sentence and the figure in the appendix
-
+The beamsplitter mixes $\dyad{n_1, n_2}{m_1, m_2}$ via Eq.~\ref{eqn:intro_beamsplitter}, and gives an entangled three-mode state at the output. Charlie heterodynes on his mode and receives outcome $z_C$, and we arrive at Bob's conditional two-mode output state $\rho_{\left. B \given z_C\right.}$, which we display fully in Eq.~\ref{eqn:appendix_ec_state}, Appendix.~\ref{appendix:ec_state}. 
 Once again the state is readily integrated in $z_C$, either over the entire complex plane or a single quadrant, and we may simply substitute Eqs.~\ref{eqn:qds_bs1_deriv_3},~\ref{eqn:qds_bs1_deriv_4} into Eq.~\ref{eqn:appendix_ec_state} to reach the \emph{a posteriori} and \emph{a priori} states, respectively.
 
 The \emph{a priori} state is automatically normalized by virtue of the integration over $\mathbb{C}$, while the \emph{a posteriori} state is normalized by multiplying by $\mathcal{N}\left(e_1 \given \xi \right)$, defined as 
@@ -936,9 +932,7 @@ We have now included the effects of $\rps$ on $g_{\text{sec}}$, and so the perfo
 		\includegraphics[draft=false, width=\linewidth]{qds/rps_varying_gsec_2}
 	\end{subfigure}
 \caption{\label{fig:qds_gsec_varying_rps} The efficacy of postselection depends strongly both on attack type and parameters $\alpha, T$. Solid: $\Delta_\theta = 0$. Dashed: $\Delta_\theta = 0.3$. Green: BS$0$. Orange: BS$1$.  Red: EC. (a) $\alpha = 0.5, T=0.5$ and (b) $\alpha = 0.2, T=0.5$. In both graphs attacks BS$1$ and EC have excess noise $\xi = 0.1\%$.  }
-%Calculations/Cryptography/2020-02-11_gsec_varying_rps
-%Technically, blue is BS0 and Green is BS2, but they are basically overlapping and I am trying to downplay attack BS2.
-%This caption originally said that \xi=0.001% but I have changed it because I think it was wrong. TODO: check
+
 \end{figure}
 
 

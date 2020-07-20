@@ -30,13 +30,13 @@ Q1:\emph{ given a particular hardware setup, which quantum protocols can I perfo
 Q2:\emph{ given a deployed network architecture, which quantum protocols can I perform with minimal disruption?}
 \\
 \\
-\noindent Both of these questions will have deep impacts on the success of a future large-scale quantum network. %\MT{Chat more about the networks. Mention DV over installed fibers results from recent years. (Did they require dedicated hardware?)} TODO: do I care about this anymore?
+\noindent Both of these questions will have deep impacts on the success of a future large-scale quantum network. 
 
 We have already even seen several quantum routes to perform the same task. For example, by utilizing prior QKD between all players it is possible to perform digital signatures \cite{Wallden2015, Amiri2016a} or secret sharing \cite{Shamir1979, Blakley1979, Schneier1996} using unconditionally secure classical algorithms, and indeed this may sometimes be preferable to protocols requiring large entangled states \cite{Gottesman2001, Hillery1999}. Alternatively, in a distributed quantum computing setup which can easily generate and distribute entanglement, protocols such as Refs.~\cite{Bell2014, Kogias2017} may be advantageous if they take advantage of already accessible hardware, for example as an additional security layer for a distributed quantum computation. The comparison between the many different routes to the same task is rarely straightforward and is often more involved than a simple comparison of key rates.
 
 In addition to considering the performance of unconditionally secure protocols, the questions Q1 and Q2 push us to consider practical quantum cryptographic protocols which may perform well but not yet offer full unconditional security against an infinitely powerful eavesdropper. This may particularly be the case as new side-channel attacks are designed and discovered in existing quantum cryptographic protocols. Indeed, throughout the history of \emph{classical} cryptography, development of new cryptosystems have often occurred in response to the breaking of a system which was previously believed secure. Perhaps cynically, one could even view cryptographic history has a ``cat-and-mouse'' race between cryptographers and cryptanalysists.%: cryptographers trying to develop new protocols and harden their security; cryptanalysts endeavouring to secretly break them and intercept their messages. 
 
-The replacement of a newly-insecure cryptosystem is difficult, expensive and time-consuming. In response to this problem in conventional (classical) cryptography there has recently been a push towards so-called \emph{crypographic aglity} (crypto-agility) \cite{Sullivan2009, Chen2016} with a key motivator being the threat of quantum computers. %\MT{I want to mention somewhere the google chrome trial.} %TODO: mention somewhere the google chrome trial
+The replacement of a newly-insecure cryptosystem is difficult, expensive and time-consuming. In response to this problem in conventional (classical) cryptography there has recently been a push towards so-called \emph{crypographic aglity} (crypto-agility) \cite{Sullivan2009, Chen2016} with a key motivator being the threat of quantum computers. 
 
 \subsection{(Quantum) crypto-agility}
 
@@ -287,7 +287,7 @@ Now, consider the conditional entropy $\text{H}\left(\mathcal{E}_j, b_j^1, b_j^2
 \text{h}\left(\pe\right) \ge 1 - \chi\left(b_j^1, b_j^2 : c_j\right).
 \end{equation}
 
-\noindent Surprisingly this equation has similar form to Eq.~\ref{eqn:qds_hpe}, but with a Holevo information calculated differently, as shown below. %TODO: add a comment about how the Holevo information here is different.
+\noindent Surprisingly this equation has similar form to Eq.~\ref{eqn:qds_hpe}, but with a Holevo information calculated differently, as shown below. 
 
 
 Once $\pe$ and $\perr$ are bounded for the protocol, the probability $\varepsilon_{fail}$ that the protocol fails can be found. For concreteness, we assign equal probability to the failure of the protocol either by allowing a forging or repudiation attack, or by aborting when all players are honest, that is
@@ -373,7 +373,7 @@ We bring the QDS protocol considered in Chapter~\ref{chapter:qds} into the syste
 
 
 \subsection{Protocol QKD-$f$}
-QKD using heterodyne detection of a discrete-modulated alphabet of coherent states has long been proposed and analysed, owing to its ease of implementation and high compatibility with installed telecommunications infrastructure \cite{Leverrier2011, Papanastasiou2018, Zhao2009, Bradler2018, Ghorai2019, Lin2019}. Despite its practical ease of use, theoretical work has lagged behind other CV QKD protocols, which rely on a Gaussian modulation of coherent states. Unlike DV systems, CV systems live in an infinite dimensional Hilbert space and so many of the computational methods available for QKD with single-photons are not immediately transferable \cite{Tomamichel2012a}, and unlike Gaussian-modulated CV systems, coherent states with a discrete-modulation cannot be reduced to calculations on the finite-sized covariance matrix.  %TODO: ensure that different modulations are discussed in the intro chapter.
+QKD using heterodyne detection of a discrete-modulated alphabet of coherent states has long been proposed and analysed, owing to its ease of implementation and high compatibility with installed telecommunications infrastructure \cite{Leverrier2011, Papanastasiou2018, Zhao2009, Bradler2018, Ghorai2019, Lin2019}. Despite its practical ease of use, theoretical work has lagged behind other CV QKD protocols, which rely on a Gaussian modulation of coherent states. Unlike DV systems, CV systems live in an infinite dimensional Hilbert space and so many of the computational methods available for QKD with single-photons are not immediately transferable \cite{Tomamichel2012a}, and unlike Gaussian-modulated CV systems, coherent states with a discrete-modulation cannot be reduced to calculations on the finite-sized covariance matrix.  
 
 Attempts to prove security of discete-modulated CV QKD protocols have made simplifying assumptions in either of these directions. For example, in Refs.~\cite{Leverrier2011, Ghorai2019, Lin2019} it is assumed that since the amplitude $\alpha$ of coherent states in the chosen QPSK alphabet is small, the \emph{a priori} states in the protocol are approximately Gaussian. This allows covariance-matrix based methods to be used for the analysis. This assumption is only strictly true in the limit $\alpha \rightarrow 0$, and it is as yet unproven whether an attack could exploit higher order statistical moments of the \emph{a priori} state which are not captured by the covariance matrix.
 

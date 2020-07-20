@@ -1,9 +1,3 @@
-%%
-%
-% TODO:
-% - understand the mapping from complex values to binary (for viva)
-% - some more remarks about the running of the protocol?
-
 \chapter{Quantum secret sharing}\label{chapter:qss}
 
 
@@ -48,7 +42,8 @@ Other options for distribution of a secret using quantum resources are discussed
 
 We here propose a QSS protocol which will perform the task of quantum secret sharing without requiring the distribution of highly entangled states between players \cite{Kogias2017} and without requiring a dedicated hardware or network setup \cite{Grice2019}. Instead, we rely on distribution of QPSK alphabet and heterodyne detection. Our QSS protocol guards against eavesdropping by choosing a QPSK alphabet with small coherent state amplitude $\alpha$. This ensures that Eve cannot accurately guess Alice's heterodyne outcomes. The protocol also guards against the internal dishonesty of Bob or Charlie by ensuring that the key $K_A$, which Alice will use to encrypt her secret, is a function of \emph{both} Bob and Charlie's information.
 
-In our protocol, Bob and Charlie are chosen as the senders of the quantum states. This has advantage in that we may fully trust Alice's heterodyne detection\footnote{Note that permitting Bob or Charlie to perform the heterodyne detection implicitly places trust in their heterodyning beamsplitter \cite{Walk2016a}. %TODO: make sure that I can talk about this for the viva
+In our protocol, Bob and Charlie are chosen as the senders of the quantum states. This has advantage in that we may fully trust Alice's heterodyne detection\footnote{Note that permitting Bob or Charlie to perform the heterodyne detection implicitly places trust in their heterodyning beamsplitter \cite{Walk2016a}. 
+
 } and its characterisation. A dishonest internal player will be forced to collaborate with Eve to attack the honest player's quantum channel, but by our choice of alphabet, this will not succeed. Since Alice will decide on the eventual shared key our protocol is analogous to a reverse-reconciliation (RR) QKD system, and so we may similarly expect the performance benefits of RR QKD at high loss. Indeed, we may interpret the entire QSS protocol as effectively a QKD protocol between Alice (dealer) and several recipient players.
 
 \begin{figure}[htp]
@@ -156,7 +151,7 @@ where $\phi_B, \phi_C$ are individual instances of variables $X_B, X_C$. We take
 \begin{equation}\label{eqn:qss_deriv_3}
 \text{P}\left(\phi_B, \phi_C\right) = \text{P}\left(\phi_B\right)\times \text{P}\left(\phi_C\right) = \frac{1}{16},
 \end{equation}
-and so $\text{H}\left(X_B, X_C\right) = 4$. %TODO: check this
+and so $\text{H}\left(X_B, X_C\right) = 4$. 
 
 Expanding the conditional entropy in terms of particular outcomes for $X_A$, via Eq.~\ref{eqn:intro_conditional_entropy_expansion}%\cite{Wilde2013}, 
 , we reach
@@ -334,7 +329,7 @@ To proceed, we take $X_A = g A_B + h A_C$ as usual, with $g, h$ fixed, and write
 
 \section{Security against a dishonest player}\label{sec:qss_dishonest_recipient}
 %\MT{Talk about guarding against a dishonest Bob/Charlie.}
-Of course, if Alice only had to guard against an external Eve, and both Bob and Charlie could be assumed honest, then the QSS task becomes much easier. She could, for example, simply send the same information to each recipient. Or send her secret just to the recipient she is interested in, with no need to ``split'' it or share it. The task of secret sharing, however, assumes dishonest recipients. In this section we will adapt the analysis of Sec.~\ref{sec:qss_honest_recipients} to this case. Our method will be to take the final key rate as the minimum of key rates under dishonest Bob and dishonest Charlie, which therefore secures against both possibilities \cite{Kogias2017, Grice2019}. %TODO: make sure I can talk about this for the viva.
+Of course, if Alice only had to guard against an external Eve, and both Bob and Charlie could be assumed honest, then the QSS task becomes much easier. She could, for example, simply send the same information to each recipient. Or send her secret just to the recipient she is interested in, with no need to ``split'' it or share it. The task of secret sharing, however, assumes dishonest recipients. In this section we will adapt the analysis of Sec.~\ref{sec:qss_honest_recipients} to this case. Our method will be to take the final key rate as the minimum of key rates under dishonest Bob and dishonest Charlie, which therefore secures against both possibilities \cite{Kogias2017, Grice2019}. 
 
 \subsection{Dishonest Bob}
 Let us translate the analysis from Sec.~\ref{sec:qss_honest_recipients} to the case where either Bob or Charlie is dishonest, but Alice does not know which one, Fig.~\ref{fig:qss_structure}. Including a dishonest recipient in the above security proof requires us to re-calculate several quantities. For concreteness we will first assume that Bob is dishonest and Charlie is honest, Fig.~\ref{fig:qss_dishonest_Bob}, and we will allow Bob to collaborate with Eve. Later we will discuss how to account for the fact that we do not know \emph{which} player is dishonest.
@@ -418,7 +413,7 @@ We plot the mutual information (Eq.~\ref{eqn:qss_deriv_1}) in Fig.~\ref{fig:qss_
 
 The Holevo information $\chi$ under identical conditions to Fig.~\ref{fig:qss_mutual_information} is plotted in Fig.~\ref{fig:qss_holevo_information}. We see that there is a clear maximum of $\chi$ at $T = 0.5$, which is when dishonest parties have maximum fidelity to Alice's received state. Our QSS protocol leverages the power of cryptographic protocols constructed in the reverse-reconciliation regime. As $T < 0.5$, even though Eve receives a greater share of the sent state than Alice\footnote{This would be fatal for direct-reconciliation cryptography.}, the overlap between Eve's and Alice's states begins to decrease as $T$ decreases, meaning $\chi$ also decreases.
 
-Curiously, Fig.~\ref{fig:qss_holevo_information}\extrafig{b} demonstrates a reduction in the Holevo information when Bob or Charlie is dishonest. Since Holevo information is directly related to the efficacy of an attack, this might suggest that dishonesty gives no advantage, and even makes things worse. We note however that the mutual information is also reduced in this case, and a consideration of the key rate in Fig.~\ref{fig:qss_keyrate} demonstrates that such dishonesty of Bob or Charlie does indeed yield a marked reduction in the key rate $\kappa$. %The reduction in $\chi$ is explained by noting that there is one fewer channel being attacked, and that the Holevo information represents the amount of information gained via an attack. %TODO: make sure I can talk about this for the viva.
+Curiously, Fig.~\ref{fig:qss_holevo_information}\extrafig{b} demonstrates a reduction in the Holevo information when Bob or Charlie is dishonest. Since Holevo information is directly related to the efficacy of an attack, this might suggest that dishonesty gives no advantage, and even makes things worse. We note however that the mutual information is also reduced in this case, and a consideration of the key rate in Fig.~\ref{fig:qss_keyrate} demonstrates that such dishonesty of Bob or Charlie does indeed yield a marked reduction in the key rate $\kappa$. %The reduction in $\chi$ is explained by noting that there is one fewer channel being attacked, and that the Holevo information represents the amount of information gained via an attack. 
 
 \begin{figure}[htp]
 \captionsetup{width=\linewidth}
