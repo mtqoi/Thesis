@@ -181,15 +181,15 @@ which counts the number of photons in our mode.
 We may construct the following two operators
 
 \begin{equation}\label{eqn:intro_quadrature}
-\hat{q} = \frac{\hat{a}^\dagger + \hat{a}}{\sqrt{2}} \qq{and} \hat{p} = i \frac{\hat{a}^\dagger - \hat{a}}{\sqrt{2}}
+\hat{q} = \sqrt{\frac{\hbar}{2 \omega}}\left(\hat{a}^\dagger + \hat{a}\right) \qq{and} \hat{p} = i \sqrt{\frac{\hbar \omega}{2}}\left(\hat{a}^\dagger - \hat{a}\right)
 \end{equation}
 which are known as the ``quadrature operators'', and can be shown to obey the commutator
 \begin{equation}\label{eqn:intro_quadrature_commutator}
-\left[\hat{q}, \hat{p}\right] = i.
+\left[\hat{q}, \hat{p}\right] = i \hbar.
 \end{equation}
 The quadrature operators $\hat{q}$ and $\hat{p}$ correspond to field amplitudes which are $\pi/2$ out of phase with each other. The annihilation operator can then be written
 \begin{equation}
-\hat{a} = \frac{\hat{q} + i \hat{p}}{\sqrt{2}}.
+\hat{a} = \frac{1}{\sqrt{2 \hbar \omega}} \left(\omega\hat{q} + i \hat{p}\right).
 \end{equation}
 
 \noindent The quadrature operator for a general quadrature $\hat{q}_\theta$ is given by
@@ -198,7 +198,7 @@ The quadrature operators $\hat{q}$ and $\hat{p}$ correspond to field amplitudes 
 \end{equation}
 and the operators $\hat{q}$, $\hat{p}$ are recovered as special cases with $\theta = 0$ and $\pi/2$, respectively. The quadrature operators $\hat{q}, \hat{p}$ may be used to write the well known Heisenberg uncertainty principle as
 \begin{equation}\label{eqn:intro_uncertainty}
-\text{Var}\left(\hat{q}\right)\text{Var}\left(\hat{p}\right) \ge 1/4, %note that this is 1/4 not 1/2, due to using variances (not standard deviations) on the LHS. c.f. Ulf eq 3.80 p54
+\text{Var}\left(\hat{q}\right)\text{Var}\left(\hat{p}\right) \ge \hbar^2/4, %note that this is 1/4 not 1/2, due to using variances (not standard deviations) on the LHS. c.f. Ulf eq 3.80 p54
 \end{equation} 
 where the variances in a general quantum state $\ket{\psi}$ are defined as
 \begin{align}
@@ -211,9 +211,9 @@ The $\mel{\psi}{\hat{q}}{\psi}$ denote the expectation value of $\hat{q}$ in sta
 
 The commutator Eq.~\ref{eqn:intro_quadrature_commutator} is equivalent to the commutator between operators which describe position and momentum of a quantum particle, and so we identify $\hat{q}$ as the position operator and $\hat{p}$ as the momentum operator (thus corroborating Eq.~\ref{eqn:intro_uncertainty}). Indeed, it is easy to show from the definitions that
 \begin{equation}
-\hat{H} = \frac{\hat{q}^2}{2} + \frac{\hat{p}^2}{2} = \hat{n} + \frac{1}{2} ,
+\hat{H} = \omega^2 \frac{\hat{q}^2}{2} + \frac{\hat{p}^2}{2} = \hbar \omega \left(\hat{n} + \frac{1}{2}\right) ,
 \end{equation}
-the middle terms of which describes the energy of a simple harmonic oscillator (with $\hbar = 1$).
+the middle terms of which describes the energy of a simple harmonic oscillator in what follows we will set $\hbar=1$ for convenience.
 
 
 
@@ -489,9 +489,12 @@ Any state which cannot be written in the form Eq.~\ref{eqn:intro_separable_2} is
 Let $\rho = \sum_{i, j, k, l} c_{i, j, k, l} \ket{i, j}\bra{k, l}$ be a general two-mode density operator. We define the partial trace over mode $1$ as
 \begin{align*}
 \tr_1\left[\rho\right] = \sum_n \bra{n}\rho\ket{n} = \sum_n \bra{n} \left[\sum_{i, j, k, l} \left(\ket{i}\bra{j}\right) \otimes \left(\ket{j}\bra{l}\right) \right] \ket{n}& \\
-= \sum_n \sum_{i, j, k, l} c_{i, j, k, l} \left(\ip{n}{l} \ip{k}{n} \right) \ket{j}\bra{l}&.
+= \sum_n \sum_{i, j, k, l} c_{i, j, k, l} \left(\ip{n}{l} \ip{k}{n} \right) \ket{j}\bra{l}& \\
+=: \rho_2&.
 \end{align*}
-The partial trace over mode $2$ is defined analogously. Defining $\rho_2 = \tr_1\left[\rho\right]$, it can be shown that if $\rho$ is separable, then $\rho_2$ must be pure, i.e. $\tr\left[\rho_2^2\right]=1$. Conversely, if $\tr\left[\rho_2^2\right] < 1$ then the total state $\rho$ must be entangled.
+The partial trace over mode $2$ (yielding state $\rho_1$) is defined analogously. 
+
+In the specific case that the total state $\rho$ is pure, it can be shown that if $\rho$ is separable, then $\rho_2$ must be pure, i.e. $\tr\left[\rho_2^2\right]=1$. Conversely, if $\tr\left[\rho_2^2\right] < 1$ then the total state $\rho$ must be entangled.
 
 
 
@@ -633,7 +636,7 @@ We define a set of measurement operators $\left\{\hat{M}_j\right\}$ which act on
 \end{equation}
 while the state immediately after measuring $j$ is 
 \begin{equation}
-\ket{\psi^\prime} = \frac{\hat{M}_j \ket{\psi}}{\text{P}\left(j\right)}.
+\ket{\psi^\prime} = \frac{\hat{M}_j \ket{\psi}}{\sqrt{\text{P}\left(j\right)}}.
 \end{equation}
 The set $\left\{\hat{M}_j\right\}$ should allow for any possible outcome $j$, and so we require
 \begin{equation}
@@ -713,7 +716,7 @@ where $\theta$ is the phase of the local oscillator $\ket{\alpha}$. Varying the 
 \subsection{Heterodyne measurement}\label{sec:intro_heterodyne}
 A heterodyne measurement scheme corresponds to the POVM
 \begin{equation}\label{eqn:intro_heterodyne_povm}
-\hat{\mathds{1}} = \frac{1}{2\pi} \int\limits_{\alpha \in \mathbb{C}} \Diff2 \alpha \; \dyad{\alpha}.
+\hat{\mathds{1}} = \frac{1}{\pi} \int\limits_{\alpha \in \mathbb{C}} \Diff2 \alpha \; \dyad{\alpha}.
 \end{equation}
 The measurement gives outcome $\alpha$ with probability $(1/2\pi)\ev{\rho}{\alpha}$. This scheme may be realised as a ``double-homodyne'' protocol, in which an input state $\rho$ is split on a balanced beamsplitter, and conjugate quadratures $\hat{q}_1$, $\hat{p}_2$ are measured on different output arms. Since they operate on different modes, the operators $\hat{q}_1$, $\hat{p}_2$ must commute. Simultaneous measurement of conjugate quadratures on the \emph{same} mode cannot be performed with arbitrary accuracy, and so the heterodyne measurement outcomes must pay the penalty of increased variance in $\text{P}\left(q\right)$, $\text{P}\left(p\right)$. Physically this arises from mixing with $\rho$ with vacuum on the first beamsplitter.
 
