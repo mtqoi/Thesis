@@ -554,7 +554,7 @@ and so Eq.~\ref{eqn:qds_pe_deriv_3} becomes
 \end{equation}
 which is one of the key results for this chapter, and a key result of Ref.~\cite{Thornton2019}. %Because we have used the Holevo information, we automatically include dishonest Bob's optimal POVM and classical strategy. 
 
-In order to use the bound Eq.~\ref{eqn:qds_hpe} we must calculating forging Bob's Holevo information $\chi$, Eq.~\ref{eqn:intro_holevo}. Since binary entropy $\text{h}\left(\pe\right)$ is monotone for $\pe \le 1/2$, Fig.~\ref{fig:binary_entropy}, we conclude that a lower bound for $\text{h}\left(\pe\right)$ also gives us a lower bound for $\pe$. Equation~\ref{eqn:qds_hpe} therefore fully quantifies the best mismatch probability which Bob can attain from an optimal measurement on his quantum system, combined with an optimal classical strategy. We may solve this equation for a lower bound on $\pe$ one Bob's Holevo information $\chi$ is quantified. We do this under several important classes of eavesdropping attack in the following Section,~\ref{sec:qds_attack_analysis}.
+In order to use the bound Eq.~\ref{eqn:qds_hpe} we must calculate forging Bob's Holevo information $\chi$, Eq.~\ref{eqn:intro_holevo}. Since binary entropy $\text{h}\left(\pe\right)$ is monotone for $\pe \le 1/2$, Fig.~\ref{fig:binary_entropy}, we conclude that a lower bound for $\text{h}\left(\pe\right)$ also gives us a lower bound for $\pe$. Equation~\ref{eqn:qds_hpe} therefore fully quantifies the best mismatch probability which Bob can attain from an optimal measurement on his quantum system, combined with an optimal classical strategy. We may solve this equation for a lower bound on $\pe$ one Bob's Holevo information $\chi$ is quantified. We do this under several important classes of eavesdropping attack in the following Section,~\ref{sec:qds_attack_analysis}.
 
 
 \section{Attack analysis}\label{sec:qds_attack_analysis}
@@ -689,7 +689,7 @@ and similarly for $p$ quadrature. In other words, the excess noise in the $q$ qu
 \end{equation}
 and should be attributed to the action of dishonest Bob. We will calculate Bob's Holevo information under this attack.
 
-We wish to mix a coherent state $\rho_{\alpha_k} = \dyad{\alpha_k}$ and a thermal state $\rho_{\text{thermal}}$ on a beamsplitter with transmission $T$. In Fock basis our states take the following form:
+We wish to mix a coherent state $\rho_{\alpha_k} = \dyad{\alpha_k}$ and a thermal state $\rho_{\text{thermal}}$ on a beamsplitter with transmission $T$. In the Fock basis our states take the following form:
 
 \begin{align}
 &\rho_{\alpha_k} = e^{-\left|\alpha_k\right|^2} \sum_{n, m=0}^{\infty} \frac{\alpha_k^n \alpha_k^{* m}}{\sqrt{n! m!}} \dyad{n}{m} \notag \\
@@ -987,7 +987,7 @@ Since the figures of merit $\tilde{L}$ (with postselection)and $L$ (without post
 
 %\clearpage
 \section{Protocol performance}\label{sec:qds_protocol_performance}
-Let us apply the analysis performed in the previous few sections and calculate our main figure of merit, the signature length $L$, under several different attacks. We plot the signature length $L$ required to sign a $1$~bit message under attacks BS$0$ (black) and EC (red) in Fig.~\ref{fig:qds_nonoptimal_L}, for several different $\alpha$. An entangling cloner attack with $\xi = 0.1\%$ has vastly increased signature length for $\alpha=0.2$ (dotted), while for larger $\alpha=0.5, 0.8$, entangling-cloner causes the signature length to by more modest amounts when compared to BS$0$. Note that in Fig.~\ref{fig:qds_nonoptimal_L} the transmissions $T$ at which the lines stop should be interpreted as being close to the smallest $T$ attainable before $L$ begins to diverge, and signing a message becomes impractical (in the case of BS$0$) or impossible (in the case of EC). 
+Let us apply the analysis performed in the previous few sections and calculate our main figure of merit, the signature length $L$, under several different attacks. We plot the signature length $L$ required to sign a $1$~bit message under attacks BS$0$ (black) and EC (red) in Fig.~\ref{fig:qds_nonoptimal_L}, for several different $\alpha$. An entangling cloner attack with $\xi = 0.1\%$ has vastly increased signature length for $\alpha=0.2$ (dotted), while for larger $\alpha=0.5, 0.8$, entangling-cloner causes the signature length to increase by more modest amounts when compared to BS$0$. Note that in Fig.~\ref{fig:qds_nonoptimal_L} the transmissions $T$ at which the lines stop should be interpreted as being close to the smallest $T$ attainable before $L$ begins to diverge, and signing a message becomes impractical (in the case of BS$0$) or impossible (in the case of EC). 
 
 
 
