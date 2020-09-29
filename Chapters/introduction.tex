@@ -714,12 +714,12 @@ A heterodyne measurement scheme corresponds to the POVM
 \begin{equation}\label{eqn:intro_heterodyne_povm}
 \hat{\mathds{1}} = \frac{1}{\pi} \int\limits_{\alpha \in \mathbb{C}} \Diff2 \alpha \; \dyad{\alpha}.
 \end{equation}
-The measurement gives outcome $\alpha$ with probability $(1/2\pi)\ev{\rho}{\alpha}$. This scheme may be realised as a ``double-homodyne'' protocol, in which an input state $\rho$ is split on a balanced beamsplitter, and conjugate quadratures $\hat{q}_1$, $\hat{p}_2$ are measured on different output arms. Since they operate on different modes, the operators $\hat{q}_1$, $\hat{p}_2$ must commute. Simultaneous measurement of conjugate quadratures on the \emph{same} mode cannot be performed with arbitrary accuracy, and so the heterodyne measurement outcomes must pay the penalty of increased variance in $\text{P}\left(q\right)$, $\text{P}\left(p\right)$. Physically this arises from mixing with $\rho$ with vacuum on the first beamsplitter.
+The measurement gives outcome $\alpha$ with probability $(1/\pi)\ev{\rho}{\alpha}$. This scheme may be realised as a ``double-homodyne'' protocol, in which an input state $\rho$ is split on a balanced beamsplitter, and conjugate quadratures $\hat{q}_1$, $\hat{p}_2$ are measured on different output arms. Since they operate on different modes, the operators $\hat{q}_1$, $\hat{p}_2$ must commute. Simultaneous measurement of conjugate quadratures on the \emph{same} mode cannot be performed with arbitrary accuracy, and so the heterodyne measurement outcomes must pay the penalty of increased variance in $\text{P}\left(q\right)$, $\text{P}\left(p\right)$. Physically this arises from mixing with $\rho$ with vacuum on the first beamsplitter.
 
 
 The heterodyne detector allows us to consistently define a joint probability distribution of the measurement outcomes $q_1$, $p_2$. This function is known as the Hussimi $Q$ function and is a well-defined probability distribution on the phase space\footnote{Unlike others such as Wigner function or $P$ function, which we refer to only as \emph{quasi}-probability distributions}. The Hussimi function corresponding to $\rho$ is thus
 \begin{equation}
-Q\left(q, p\right) = \frac{1}{2\pi} \ev{\rho}{\alpha} \qq{with} \alpha = \frac{q + i p}{\sqrt{2}}.
+Q\left(q, p\right) = \frac{1}{\pi} \ev{\rho}{\alpha} \qq{with} \alpha = \frac{q + i p}{\sqrt{2}}.
 \end{equation}
 
 \noindent In the main body of the Thesis we will speak of the heterodyne measurement as effectively giving two outcomes, $\qout, \pout$, one from each homodyned arm. The $\alpha$ required for Eq.~\ref{eqn:intro_heterodyne_povm} are then given by $\alpha = \left(\qout + i \pout\right)/\sqrt{2}$.
