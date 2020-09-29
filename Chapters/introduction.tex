@@ -640,34 +640,30 @@ while the state immediately after measuring $j$ is
 \end{equation}
 The set $\left\{\hat{M}_j\right\}$ should allow for any possible outcome $j$, and so we require
 \begin{equation}
-\sum_j \hat{M}_j^\dagger \hat{M} = \mathds{1},
+\sum_j \hat{M}_j^\dagger \hat{M}_j = \mathds{1},
 \end{equation}
 which encodes the normalization requirement for the probability distribution
 \begin{equation}
 \sum_j \text{P}\left(j\right) = 1.
 \end{equation}
 
-\noindent For example, the state $\ket{\psi} = \left(\alpha\ket{0}  + \beta\ket{1}\right)$ must give outcome $0$ with probability $\left|\alpha\right|^2$ and outcome $1$ with probability $\left|\beta\right|^2$, which leads us to identify the measurement operators $\hat{M}_0, \hat{M}_1$ in this case as
+Let us identify $\hat{M}_j^\dagger \hat{M}_j$ with an operator $hat{E}_j$, which we shall refer to as a ``POVM" element. The set $\left\{\hat{E}_j\right\}$ is known as a ``POVM''\footnote{Which stands for \emph{positive operator valued measure}, for historical reasons.} \cite{Nielsen2010}. The POVM measurement formalism allows for a convenient description of quantum measurement statistics, as
+\begin{equation}
+\text{P}\left(j\right) = \langle\psi|\hat{E}_j|\psi\rangle
+\end{equation}
+with no reference to the post-measurement state. 
+
+To illustrate the advantage of the POVM formalism, let us briefly consider an example, which we will revisit in later chapters. Suppose that Alice sends Bob one of two quantum states, either $\ket{\psi_1} = \ket{0}$ or $\ket{\psi_2} = \left(\alpha \ket{0} + \beta \ket{1}\right)$, with $\alpha^2 + \beta^2 = 1$. We assume that $\alpha, \beta \in \mathbb{R}$ for simplicity. Bob wishes to perform some measurement on his received state to determine whether he received $\ket{\psi_1}$ or $\ket{\psi_2}$. To do so, let Bob construct the following POVM:
+
 \begin{align*}
-&\hat{M}_0 = \dyad{0} \\
-&\hat{M}_1 = \dyad{1}.
+\hat{E}_1 &:= \frac{\sqrt{2}}{\alpha + \sqrt{2}}\ket{1}\bra{1} \\
+\hat{E}_2 &:= \frac{\sqrt{2} \alpha^2}{\left(\sqrt{2} + \alpha\right)\left(\alpha^2 + \beta^2\right)}\left(- \frac{\beta}{\alpha}\ket{0} + \ket{1}\right)\left(- \frac{\beta}{\alpha} \bra{0} + \bra{1}\right) \\
+\hat{E}_3 &:= \mathds{1} - \hat{E}_1 - \hat{E}_2.
 \end{align*}
 
-\noindent Measurement operators $\dyad{0}, \dyad{1}$ are known as ``projective measurements,'' and operators in this form are known as ``projectors.'' One can consider a more general form of measurement operator, which is known as a POVM (positive operator-valued measure). From a set of measurement operators $\left\{\hat{M}_j\right\}$, we define
-\begin{equation}
-\hat{E}_j = \hat{M}^\dagger_j \hat{M}_j,
-\end{equation}
-which satisfies
-\begin{equation}
-\sum_j \hat{E}_j = \mathds{1},
-\end{equation}
-and
-\begin{equation}
-\text{P}_j = \ev{\hat{E}_j}{\psi}.
-\end{equation}
+\noindent One can readily check that if Bob performs $\left\{\hat{E}_1, \hat{E}_2, \hat{E}_3\right\}$ on state $\ket{\psi_1}$, there is zero chance he will record outcome $E_1$. Therefore, if Bob receives outcome $E_1$ he knows with certainty that Alice sent him $\ket{\psi_2}$. Likewise, if Bob receives outcome $E_2$ then he knows with certainty that Alice sent $\ket{\psi_1}$. However, should Bob receive $E_3$ then he gains no information about the state which Alice sent.
 
-\noindent We refer to the $\hat{E}_j$ as POVM elements, while the full set $\left\{\hat{E}_j\right\}$ is known as a POVM.
-
+The POVM $\left\{\hat{E}_1, \hat{E}_2, \hat{E}_3\right\}$ thus performs an \emph{unambiguous discrimination} between the non-orthogonal states $\ket{\psi_1}$ and $\ket{\psi_2}$, and Bob will never misidentify the state which Alice sent. This comes at a cost: sometimes Bob gains no information at all. Designing POVMs and measurement schemes to optimally distinguish between a known set of states is a difficult problem which has received considerable attention over the years. We will revisit this question in Chapters~\ref{chapter:qds} and \ref{chapter:qss} in the context of quantum cryptography, where bounding a malicious party's ability to distinguish between quantum states is of critical importance.
 
 
 \FloatBarrier
