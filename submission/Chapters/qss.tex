@@ -14,7 +14,7 @@ Our Quantum Secret Sharing (QSS) scheme allows for Alice to distribute a classic
 \captionsetup{width=\linewidth}
 \centering
 \includegraphics[draft=false, width=0.8\linewidth]{qss/qss_setup_cartoon}
-\caption{\label{fig:qss_structure} All quantum secret sharing schemes follow the same structure: Alice encrypts her classical secret $\sigma_A$ with secret key $K_A$, and broadcasts the resulting $\varsigma_A$. Shares of $K_A$ are distributed among recipients Bob and Charlie such that $K_B \oplus K_C = K_A$. Gray boxes denote honest players, while red denotes dishonest players. The half-red/half-gray boxes denote uncertainty about the honesty of a player. %say somewhere it's all classical?
+\caption{\label{fig:qss_structure} All quantum secret sharing schemes follow the same structure: Alice encrypts her classical secret $\sigma_A$ with secret key $K_A$, and broadcasts the resulting $\Upsilon_A$. Shares of $K_A$ are distributed among recipients Bob and Charlie such that $K_B \oplus K_C = K_A$. Gray boxes denote honest players, while red denotes dishonest players. The half-red/half-gray boxes denote uncertainty about the honesty of a player. %say somewhere it's all classical?
 }
 \end{figure}
 
@@ -23,7 +23,7 @@ Our Quantum Secret Sharing (QSS) scheme allows for Alice to distribute a classic
 All QSS protocols follow essentially the same structure, Fig.~\ref{fig:qss_structure}:
 \begin{enumerate}
 \item Alice (A) uses quantum resources to distribute shares of classical key $K_A$ among recipients Bob (B) and Charlie (C). These shares are labelled $K_B, K_C$ and are such that $K_A = K_B \oplus K_C$.
-\item Alice encrypts her secret $\varsigma_A = K_A \oplus \sigma_A$ and makes the encrypted secret $\varsigma_A$ publicly known.
+\item Alice encrypts her secret $\Upsilon_A = K_A \oplus \sigma_A$ and makes the encrypted secret $\Upsilon_A$ publicly known.
 \end{enumerate}
 The $\oplus$ operation corresponds to bitwise addition (XOR) of binary strings. Provided that $K_A, K_B, K_C$ and $\sigma_A$ are the same length, the above secret sharing operation is provably unconditionally secure\footnote{Much like the One Time Pad \cite{Schneier1996}.} provided that key shares $K_B, K_C$ are securely distributed \cite{Schneier1996}.
 
@@ -61,7 +61,7 @@ In our protocol, Bob and Charlie are chosen as the senders of the quantum states
 		\includegraphics[draft=false, width=\linewidth]{qss/qss_encryption_stage}
 		
 	\end{subfigure}
-\caption{\label{fig:qss_protocol_cartoon} Distribution and Encryption stages of our QSS protocol. Alice (A) wishes to securely share her secret $\sigma_A$ amongst potentially dishonest recipients Bob (B) and Charlie (C). (a) Distribution stage. B and C send coherent states chosen from QPSK alphabet to Alice, who heterodynes and obtains outcomes $A_B, A_C$. Eve eavesdrops on the quantum channels in order to gain information about Alice's outcomes $A_B, A_C$. (b) Encryption stage. Alice forms variable $X_A$ using her chosen function $\mathcal{F}$ with her heterodyne measurement outcomes as input variables. She converts $X_A$ to a binary $\tilde{X}_A$ and encrypts the secret with it to reach $\varsigma_A = \sigma_A \oplus \tilde{X}_A$. The encrypted secret is then broadcast. Dishonest players are shown in red and honest players in gray. A combination of red and gray denotes uncertainty about the honesty of a player.
+\caption{\label{fig:qss_protocol_cartoon} Distribution and Encryption stages of our QSS protocol. Alice (A) wishes to securely share her secret $\sigma_A$ amongst potentially dishonest recipients Bob (B) and Charlie (C). (a) Distribution stage. B and C send coherent states chosen from QPSK alphabet to Alice, who heterodynes and obtains outcomes $A_B, A_C$. Eve eavesdrops on the quantum channels in order to gain information about Alice's outcomes $A_B, A_C$. (b) Encryption stage. Alice forms variable $X_A$ using her chosen function $\mathcal{F}$ with her heterodyne measurement outcomes as input variables. She converts $X_A$ to a binary $\tilde{X}_A$ and encrypts the secret with it to reach $\Upsilon_A = \sigma_A \oplus \tilde{X}_A$. The encrypted secret is then broadcast. Dishonest players are shown in red and honest players in gray. A combination of red and gray denotes uncertainty about the honesty of a player.
 }
 \end{figure}
 
@@ -93,10 +93,10 @@ from her measurement outcomes. The function $\mathcal{F}$ is freely chosen by Al
 \paragraph{Step $4$} Alice now holds random variable $X_A$ of complex variables, which depends on both Bob and Charlie's choices $X_B, X_C$. Alice maps her string of complex variables onto a binary random variable $X_A \mapsto \tilde{X}_A$ \cite{Diamanti2015}, and uses $\tilde{X}_A$ to encode $\sigma_A$ via an XOR operation. For notational ease we shall write this combined step in terms of an encryption function $\text{Enc}$:  % I should probably talk about this later at some point?
 
 \begin{equation}
-\varsigma_A = \text{Enc}\left(\sigma_A, X_A\right),
+\Upsilon_A = \text{Enc}\left(\sigma_A, X_A\right),
 \end{equation} %Make sure I can talk about this function and the binary encoding for the viva.
 
-\noindent which should be known to all players at the start of the protocol. Alice distributes $\varsigma_A$ to Bob and Charlie, who are unable to access $\sigma_A$ since they do not yet know $X_A$.
+\noindent which should be known to all players at the start of the protocol. Alice distributes $\Upsilon_A$ to Bob and Charlie, who are unable to access $\sigma_A$ since they do not yet know $X_A$.
 
 \subsubsection*{Decryption stage}
 
