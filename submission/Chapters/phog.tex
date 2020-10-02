@@ -146,9 +146,9 @@ which gives the evolution of photon number expectation as
 \ddt \langle \hat{a}^\dagger \hat{a}\rangle = - 2 \gamma \langle \hat{a}^\dagger \hat{a}^\dagger \hat{a}\hat{a}\rangle.
 \end{equation}
 
-\noindent This equation does not take a closed form, and so we cannot yet directly calculate $\langle \hat{a}^\dagger \hat{a}\rangle\left(t\right)$. Similarly, equations for evolution of $\langle\hat{a}\rangle\left(t\right)$ require terms to the third power in $\hat{a}, \hat{a}^\dagger$, and so are also not yet closed.  We will encounter techniques later in Sec.~\ref{sec:linearization} which allow us to deal with this.
+\noindent This equation does not take a closed form, and so we cannot yet directly calculate $\langle \hat{a}^\dagger \hat{a}\rangle\left(t\right)$ \cite{Shen1967}. Similarly, equations for evolution of $\langle\hat{a}\rangle\left(t\right)$ require terms to the third power in $\hat{a}, \hat{a}^\dagger$, and so are also not yet closed.  We will encounter some linearization techniques later in Sec.~\ref{sec:linearization} which allow us to deal with this.
 
-For now, let us try to deduce the steady-state of Eq.~\ref{eqn:phog_lindblad_two_photon_loss}. We observe that once again the vacuum $\dyad{0}$ must be a steady state, since then $\ddt \rho_a=0$. Surprisingly we now also have the single-photon state $\dyad{1}$, and states of the form $\dyad{0}{1}, \dyad{1}{0}$ as steady states, since these also have $\ddt \rho_a=0$. The general steady-state should be a mixture of these, and takes the form
+For now, let us try to deduce the steady-state of Eq.~\ref{eqn:phog_lindblad_two_photon_loss} when we begin with coherent state $\ket{\alpha}$. We observe that once again the vacuum $\dyad{0}$ must be a steady state, since then $\ddt \rho_a=0$. Surprisingly we now also have the single-photon state $\dyad{1}$, and states of the form $\dyad{0}{1}, \dyad{1}{0}$ as steady states, since these also have $\ddt \rho_a=0$. The general steady-state should be a mixture of these, and takes the form
 \begin{align}\label{eqn:phog_phase_state}
 &\rho_{\text{steady}} = c_1 \dyad{\psi} + c_2 \dyad{0} + c_3 \dyad{1} \notag \\
 %
@@ -157,8 +157,59 @@ For now, let us try to deduce the steady-state of Eq.~\ref{eqn:phog_lindblad_two
 
 \noindent The state $\ket{\psi}$ is a so-called \emph{phase-state}, and it has long been known that two-photon absorption will lead to a phase state \cite{Ezaki1999} (plus additional mixing \cite{Alexanian2000, Ezaki2000} which reduces purity). The phase $\phi$ is related to the phase of the initial coherent state. 
 
+It turns out that a full analytic solution of the master equation \ref{equation:phog_lindblad_two_photon_loss} is possible \cite{Simaan1975, Simaan1976, Ezaki1999, Ezaki2000} when, instead of calculating the evolution of expectations $\langle \hat{a}\rangle, a\langle \hat{a}^\dagger \hat{a}\rangle$, we focus on direct solution in terms of $\rho_{n, m} = \langle m | \rho | n \rangle$. This is the approach taken by Simaan and Loudon in Refs.~\cite{Simaan1975, Simaan1976}, and picked up again by the Yamamoto group in Ref.~\cite{Ezaki1999}. 
+
+In the Fock basis, Eq.~\ref{eqn:phog_lindblad_two_photon_loss} may be rewritten as
+
+\begin{align}\label{eqn:phog_two_photon_absorption_fock}
+\ddt \rho_{n, m} = &\gamma \left[\left(n+1\right)\left(n+2\right)\left(m+1\right)\left(m+2\right)\right]^{1/2} \rho_{n+2, m+2} \notag \\
+&- \frac{\gamma}{2}\left[n\left(n-1\right) + m \left(m-1\right)\right] \rho_{n, m}
+\end{align}
+for all $n, m$. 
+
+The derivation relies on the fact that the two-photon absorption operator $\hat{a}^2$ partitions the full Hilbert space into two separate subspaces, depending on whether the state contains an odd or an even number of photons. In other words, odd Fock basis elements couple only to odd Fock basis elements, and likewise for even Fock basis elements. 
+
+Operator $\hat{a}^2$ corresponds to photon subtracton, and can act on every $\ket{n}$ \emph{except} $\ket{0}$ and $\ket{1}$: we have already seen that these must correspond to the steady state of the system. Considering only diagonal elements $\rho_{n, n}$, and noting that Eq.~\ref{eqn:phog_two_photon_absorption_fock} couples diagonal elements only to diagonal elements, we deduce that 
+
+\begin{align}
+&\rho_{0, 0}\left(t\rightarrow \infty\right) = \sum_{n \text{ even}} \rho_{n, n}\left(t=0\right) \notag \\
+&\rho_{1, 1}\left(t\rightarrow \infty\right) = \sum_{n \text{ odd}} \rho_{n, n}\left(t=0\right) \notag
+\end{align}
+
+\noindent Indeed, this is true more generally than just Eq.~\ref{eqn:phog_lindblad_two_photon_loss}, and also occurs for dissipative coupling via $\hat{a}^2$ to a reservoir at finite temperature in which pairs of photons can be absorbed from the bath into system $\rho_a$ \cite{Simaan1975}. When the initial state $\rho_a\left(t=0\right)$ is a bright coherent state $\ket{\alpha}\bra{\alpha}$ with $\alpha = \left|\alpha\right|^2 e^{i \phi}$ both $\rho_{0, 0}$ and $\rho_{1,1}$ take the steady-state value $0.5$.
+
+What about the coherences $\rho_{0,1}, \rho_{1, 0}$? Let us return to Eq.~\ref{eqn:phog_two_photon_absorption_fock} and apply an argument described in Ref.~\cite{Simaan1978}. Let us rewrite $\rho_{n, m} \left(t\right) = \rho_{n, n+\mu}\left(t\right)$ where $\mu \in \mathbb{N}>0$ measures the distance between the matrix element and the diagonal\footnote{For elements on the other side of the diagonal, i.e. those requiring $m < n$, we note that $\rho_{n, n-\mu}$ is the complex conjugate of $\rho_{n, n+\mu}$}. Because the dissipation operator $\hat{a}^2$ can only subtract two photons at a time, $\mu$ is preserved during the evolution which we can see if we let
+\begin{equation}
+\rho_{n, n+\mu}\left(t\right) = \frac{n!}{\left(n + \mu\right)!}^{1/2}\Theta_n\left(\mu, t\right)
+\end{equation}
+where the prefactor has been chosen to cancel with terms from Eq.~\cite{eqn:phog_two_photon_absorption_fock}, and so
+\begin{align}
+\ddt \Theta_n\left(\mu, t\right) = &\gamma\left(n+1\right)\left(n+2\right)\Theta_{n+2}\left(\mu, t\right) \notag \\ &-\gamma\left[n \left(n-1\right) + \mu n + \frac{1}{2}\mu \left(\mu - 1\right)\right] \Theta_n\left(\mu, t\right).
+\end{align}
+and in the steady state we may set the left hand side of this equation to zero. We have seen already that in the steady state the only nonzero coherence element must be $\Theta_0\left(1, \infty\right)$. In this case we may derive
+\begin{equation}
+\ddt \sum_{n \text{ even}} = \left[\frac{n!}{2^n \left(\left(\frac{1}{2}n\right)!\right)^2} \right] \Theta_n\left(1, t\right) = 0,
+\end{equation}
+so this weighted sum of elements $1$ photon above the diagonal is unchanged by $\hat{a}^2$. Therefore, our nonzero coherence in the steady state may be written as
+\begin{equation}\label{eqn:phog_two_photon_coherence_steady_state}
+\Theta_n\left(1, \infty\right) = \sum_{n \text{ even}}  \left[\frac{n!}{2^n \left(\left(\frac{1}{2}n\right)!\right)^2} \right] \Theta_n\left(1, 0\right).
+\end{equation}
+Considering again the specific example of a coherent state input, Eq.~\ref{eqn:phog_two_photon_coherence_steady_state} simplifies to
+\begin{equation}\label{eqn:phog_two_photon_coherence_steady_state2}
+\rho_{0, 1}\left(\infty\right) = \left|\alpha\right|^2 \exp\left(- \left|\alpha\right|^2 - i \phi\right) I_0\left(\left|\alpha\right|^2\right)
+\end{equation}
+where $I_0\left(x\right)$ is the modified Bessel function of the first kind \cite{mathworld_bessel}. In the limit of a bright coherent state input, Eq.~\ref{eqn:phog_two_photon_coherence_steady_state2} reduces to \cite{Simaan1978, Ezaki2000}
+\begin{equation}
+\rho_{0, 1}\left(\infty\right) = \frac{\exp\left(- i \phi\right)}{\sqrt{2 \pi}} 
+\end{equation}
+which is $\approx 0.399$ for $\alpha \in \mathbb{R}$. For an input $\alpha = 3.0$, we arrive at $\rho_{0, 1} \rightarrow 0.405$.
+
+
+
+
+
 In Fig.~\ref{fig:phog_lindblad_two_photon_loss}\extrafig{a} we plot the evolution of $\langle \hat{a}^\dagger \hat{a}\rangle, \langle \hat{x}\rangle, \langle \hat{p}\rangle$ and the quadrature variances. The photon number expectation no longer decays to zero as it did for $\hat{A}=\hat{a}$. %rather it decays to 0.5.
- In Fig.~\ref{fig:phog_lindblad_two_photon_loss}\extrafig{b} we observe the fidelity between $\rho_a\left(t\right)$ and the final steady-state increases to $1$, and the coefficients of the steady state $\rho_{\text{steady}}$ are $c_1 = 0.810$, $c_2 = c_3 = 0.095$. We see therefore that two-photon loss operator induces a high degree of non-classicality in the system. We shall revisit this decay operator $\hat{a}^2$ in Sec.~\ref{sec:phog_entanglement} where we will demonstrate that it is even capable of producing entanglement between spatially separated modes of a larger system.
+ In Fig.~\ref{fig:phog_lindblad_two_photon_loss}\extrafig{b} we observe the fidelity between $\rho_a\left(t\right)$ and the final steady-state increases to $1$, and the coefficients of the steady state $\rho_{\text{steady}}$ in Eq.~\ref{eqn:phog_phase_state} are $c_1 = 0.810$, $c_2 = c_3 = 0.095$, or in other words $\rho_{0,0} = \rho_{1,1} = 0.5$ and $\rho_{0,1} = \rho_{1,0} = 0.405$. This agrees with the analytical derivation based on Refs.~\cite{Simaan1975, Simaan1978, Ezaki1999, Ezaki2000}. Our numerics confirm, therefore, that two-photon loss operator induces a high degree of non-classicality in the system. We shall revisit this decay operator $\hat{a}^2$ in Sec.~\ref{sec:phog_entanglement} where we will demonstrate that it is even capable of producing entanglement between spatially separated modes of a larger system.
 
 
 \begin{figure}[htp]
