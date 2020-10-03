@@ -96,7 +96,7 @@ We will consider the following tasks:
 
 \textbf{QSS - quantum secret sharing}: allows for secure distribution of a classical secret among a conspiracy of potentially dishonest recipients.
 
-\textbf{QKD - quantum key distribution}: allows for secure key distribution of identical randomly-generated bits between players. These keys may them be used for encryption via one-time pad \cite{Bennett1984, Schneier1996}.
+\textbf{QKD - quantum key distribution}: allows for secure key distribution of identical randomly-generated bits between players. These keys may then be used for encryption via one-time pad \cite{Bennett1984, Schneier1996}.
 
 The tasks QDS and QSS are discussed in Chapters~\ref{chapter:qds},~\ref{chapter:qss} above, while the reader is referred to Refs.~\cite{Laudenbach2017, Scarani2009} for reviews of QKD. The tasks QDS and QSS are inherently multipartite, while QKD is inherently bipartite\footnote{Though note the existence of its multipartite generalization - quantum conferencing \cite{Ottaviani2017b, Ottaviani2019}}. In what follows we will use quantum networks with three players to allow for multipartite tasks, while also allowing for bipartite QKD to be performed.
 
@@ -225,7 +225,7 @@ provided that $\perr \le s_B$. The probability $\perr$ of honest mismatch may be
 \subsection{Security against forgery}
 Since Bob already knows half of Charlie's signature elements (those which Bob himself forwarded) and since $s_B \le s_C$, the most dangerous forger is a dishonest Bob. He is therefore assumed to be the eavesdropper on Charlie's distribution of quantum states, and tries to gain information about the $L/2$ signature elements which Charlie generated himself.
 
-Using Hoeffding's inequalities Eq.~\ref{eqn:qds_hoeffding1} as in Sec.~\ref{sec:qds_security_forgery} we see that at a forging attack succeeds with probability 
+Using Hoeffding's inequalities Eq.~\ref{eqn:qds_hoeffding1} as in Sec.~\ref{sec:qds_security_forgery} we see that a forging attack succeeds with probability 
 \begin{equation}\label{eqn:aqc_forgery}
 \varepsilon_{\text{forgery}} \le 2 \; \exp\left( - \left[ \pe - s_C\right]^2 \frac{L}{2} \right)
 \end{equation}
@@ -265,7 +265,7 @@ Now, consider the conditional entropy $\text{H}\left(\mathcal{E}_j, b_j^1, b_j^2
 \noindent since conditioning can never increase entropy. Therefore, by expanding the variable $\mathcal{E}_j$,
 
 \begin{align*}
-\text{H}\left(b_j^1, b_j^2 \given c_j\right) \le \left(1 - p_e\right) &\text{H}\left(b_j^1, b_j^2 \given \mathcal{E}_j = 0, c_j\right) \\ + &\pe \; \text{H}\left(b_j^1, b_j^2 \given \mathcal{E}_j=1, c_j\right) + \text{h}\left(\pe\right).
+\text{H}\left(b_j^1, b_j^2 \given c_j\right) \le \left(1 - p_e\right)& \text{H}\left(b_j^1, b_j^2 \given \mathcal{E}_j = 0, c_j\right) \\ + &\pe \; \text{H}\left(b_j^1, b_j^2 \given \mathcal{E}_j=1, c_j\right) + \text{h}\left(\pe\right).
 \end{align*}
 
 \noindent Now, $\text{H}\left(b_j^1, b_j^2 \given \mathcal{E}_j=0, c_j\right) \le \log_2\left(2\right) = 1$, and similarly for $\mathcal{E}_j=1$, and so
@@ -455,7 +455,7 @@ An experiment which investigates the above two agile systems was performed at th
 \subsubsection{Receiver module (Rx):}
 Module Rx interferes the received states with the shared local oscillator using the integrated Kylia COH$24$-X $90\si{\degree}$s. The two modules use a shared local oscillator which provides a frame of reference against which heterodyne phase measurement is performed using two balanced optical receivers (Discovery DSC-R$412$) with analog $3$~dB bandwidth of $20$~GHz. In principle the Tx and Rx modules do not need to share a local oscillator and bright phase-reference pulses\footnote{Though note that this may open up additional security issues \cite{Ren2019}.} could instead be used \cite{Huang2015}.
 
-Outputs from the optical receivers are digitized using a digital sampling oscilloscope (Tektronix DPO$77002$SX) with a sampling rate of $25$~GS/s. Proprietary digital signal processing (DSP) algorithms, designed by MPL, are applied to the quadrature time traces. The DSP consists of a high-pass filter which eliminates low-frequency noise contributions to the signal. Finally, a phase-recovery step is performed using phase-reference states which originally had amplitude $\alpha^\prime$. %The signal states carrying quantum information which may now be used for a quantum communications task are those which originally had amplitude $\alpha$.
+Outputs from the optical receivers are digitized using a digital sampling oscilloscope (Tektronix DPO$77002$SX) with a sampling rate of $25$~GS/s. Proprietary digital signal processing (DSP) algorithms, designed by MPL, are applied to the quadrature time traces. The DSP includes a high-pass filter which eliminates low-frequency noise contributions to the signal. Finally, a phase-recovery step is performed using phase-reference states which originally had amplitude $\alpha^\prime$. %The signal states carrying quantum information which may now be used for a quantum communications task are those which originally had amplitude $\alpha$.
 
 The Tx and Rx modules were connected by either a $2$~km or $20$~km SMF-$28$ optical fiber link which contributes to a total loss of $0.65$~dB or $4.75$~dB, respectively. This implements the realistic metropolitan distances over which the CV platform is expected to be effective. Experiments were performed for several different signal state modulation amplitudes $\alpha$. For each run of the experiment a total of $1.92\times 10^6$ states were sent in frames of $64$ which consisted of four bright reference pulses ($\alpha^\prime$) followed by $60$ signal pulses ($\alpha$). After the DSP step there remained information on $1.54 \times 10^6$ states. An example of some raw output data is displayed in Fig.~\ref{fig:aqc_experimental_trace}. The top of the figure displays raw time trace data, while the bottom displays data after the DSP.
 
@@ -505,7 +505,7 @@ and \emph{a posteriori} entropy
 \begin{equation}
 \sum_{\alpha_k}\text{P}\left(\alpha_k\right) S\left(\rho_B^k\right)
 \end{equation}
-now also depend on the measured data. For attacks BS$1$ and EC, they must be calculated without the simplifications afforded by ideal sending probabilities and equal $\left|\alpha_k\right|$'s. For attack BS$0$ Bob's \emph{a posteriori} entropy vanishes identically because his state is pure.
+now also depend on the measured data. For attacks BS$1$ and EC, they must be calculated without the simplifications afforded by ideal sending probabilities and equal $\left|\alpha_k\right|$'s. For attack BS$0$ Bob's \emph{a posteriori} entropy vanishes identically because his state is assumed pure.
 
 The honest mismatch probability $\perr$ may be measured directly from the data by observing the probability that a state is eliminated. We demonstrate this in Sec.~\ref{sec:aqc_performance}.
 
@@ -533,7 +533,7 @@ The initial states Eq.~\ref{eqn:qss_initial_states} should be updated to
 \end{equation}
 and therefore Eq.~\ref{eqn:qss_deriv_8} becomes
 \begin{align}
-&\rho_{\left.\mathbb{E} \given X_A, A_B\right.} = \frac{1}{\pi^2}\sum_{k, k^\prime=0}^3 \text{P}\left(b, c\right) \text{P}_B\left(A_B \given \beta_k, T_B\right) \text{P}C\left(\frac{X_A - g A_B}{h} \given \gamma_{k^\prime}, T_C\right) \notag \\
+&\rho_{\left.\mathbb{E} \given X_A, A_B\right.} = \frac{1}{\pi^2}\sum_{k, k^\prime=0}^3 \text{P}\left(b, c\right) \text{P}_B\left(A_B \given \beta_k, T_B\right) \text{P}_C\left(\frac{X_A - g A_B}{h} \given \gamma_{k^\prime}, T_C\right) \notag \\
 &\dyad{\sqrt{1-T_B}\beta_k}_{\mathbb{E}_B} \otimes \dyad{\sqrt{1-T_C} \gamma_{k^\prime}}_{\mathbb{E}_C}
 \end{align}
 from which Holevo information $\chi$ is calculated.
@@ -585,7 +585,7 @@ Eve's \emph{a posteriori} and \emph{a priori} entropies are calculated identical
 
 %\clearpage
 \subsection{Received data}\label{sec:aqc_received_data}
-From our experimental collaborators at MPL we received four datasets output from the experiment detailed in Sec.~\ref{sec:aqc_experiment}. Figure~\ref{fig:aqc_experimental_trace} displays raw data before and after the action of the experimental collaborators' proprietary digital signal processing (DSP) algorithm. The data we have received is of the form of bottom figure of Fig.~\ref{fig:aqc_experimental_trace}, and we received only the signal data (green circles) once the phase-reference data (red circles) was removed. Each of the received datasets consisted of $1.54\times10^6$ elements of pairs of measured phase outcomes $\left(x_{\text{out}}, p_{\text{out}}\right)$, along with information about which element from the QPSK alphabet Alice sent. The received datasets have parameters detailed in Tab.~\ref{table:aqc_data_parameters}.
+From our experimental collaborators at MPL we received four datasets output from the experiment detailed in Sec.~\ref{sec:aqc_experiment}. Figure~\ref{fig:aqc_experimental_trace} displays raw data before and after the action of the experimental collaborators' proprietary digital signal processing (DSP) algorithm. The data we have received is of the form of bottom figure of Fig.~\ref{fig:aqc_experimental_trace}, and we received only the signal data (green circles) once the phase-reference data (red circles) were removed. Each of the received datasets consisted of $1.54\times10^6$ elements of pairs of measured phase outcomes $\left(x_{\text{out}}, p_{\text{out}}\right)$, along with information about which element from the QPSK alphabet Alice sent. The received datasets have parameters detailed in Tab.~\ref{table:aqc_data_parameters}.
 
 
 
@@ -648,7 +648,7 @@ and similarly for $p$. The contribution $\text{Var}\left(x\right)_{\text{trusted
 
 
 
-To illustrate our received data, we plot the first $10,000$ elements of raw data for run~$1$ in Fig.~\ref{fig:aqc_scatter}. In (a) we display data corresponding to the input state $\ket{\alpha}$ with $\alpha=0.615$, and in (b) we display data corresponding to the entire QPSK alphabet, which is highly non-orthogonal.
+To illustrate our received data, we plot the first $100,000$ elements of raw data for run~$1$ in Fig.~\ref{fig:aqc_scatter}. In (a) we display data corresponding to the input state $\ket{\alpha}$ with $\alpha=0.615$, and in (b) we display data corresponding to the entire QPSK alphabet, which is highly non-orthogonal.
 
 
 
@@ -680,7 +680,7 @@ where the numerator is calculated including all four of the distributed QPSK sta
 \caption{\label{fig:aqc_elimsig} Illustration of received data points, coloured by whether they induce a mismatch in protocols QDS-$f$ and QDS-$b$. State $\ket{\alpha}$ was sent, and data is taken from run~$1$. Blue: data points will not cause $\ket{\alpha}$ to be eliminated, and so do not cause a mismatch. Red: data points will cause $\ket{\alpha}$ to be eliminated, and so a mismatch occurs. For convenience we display only the first $100,000$ data points.}
 \end{figure}
 
-In protocols QDS-$f$ and QDS-$b$ we also discussed the possibility to postselect on measurement outcomes, by ignoring datapoints which fall within $\rps$. As was discussed in their respective sections, we take $\rps\left(\Delta_r\right)$ and display examples of postselected data sets in Fig.~\ref{fig:aqc_ps}. Data corresponding to distributed $\ket{\alpha}$ are displayed in Fig.~\ref{fig:aqc_ps}\extrafig{a}, while data for all elements of QPSK are displayed in Fig.~\ref{fig:aqc_ps}\extrafig{b}. For illustrative convenience we display only the first $10,000$ elements. We may calculate $\perr$ in an identical way to that discussed above, simply starting from the postselected data in order to reduce $\perr$ and increase the advantage gained by an honest player.
+In protocols QDS-$f$ and QDS-$b$ we also discussed the possibility to postselect on measurement outcomes, by ignoring datapoints which fall within $\rps$. As was discussed in their respective sections, we take $\rps\left(\Delta_r\right)$ and display examples of postselected data sets in Fig.~\ref{fig:aqc_ps}. Data corresponding to distributed $\ket{\alpha}$ are displayed in Fig.~\ref{fig:aqc_ps}\extrafig{a}, while data for all elements of QPSK are displayed in Fig.~\ref{fig:aqc_ps}\extrafig{b}. For illustrative convenience we display only the first $100,000$ elements. We may calculate $\perr$ in an identical way to that discussed above, simply starting from the postselected data in order to reduce $\perr$ and increase the advantage gained by an honest player.
 
 \begin{figure}[htp]
 \captionsetup{width=\linewidth}
@@ -745,7 +745,7 @@ In the first agile system, \systemB, the sender module Tx is understood to play 
 
 For QDS-$b$ we allow dishonest Bob to perform the entangling cloner attack, and we estimate $\pe$ using the models in Sec.~\ref{sec:qds_attack_analysis},~\ref{sec:aqc_systemb} once $\alpha$ and the worst-case excess noise $\xi$ have been estimated from data. These ideal signature lengths for QDS-$b$ are displayed in Fig.~\ref{fig:aqc_qdsb}. The point at which run~$1$ (red) intersects the vertical gridline ($2$~km fiber length) corresponds to a point at which we have data. Other points in Fig.~\ref{fig:aqc_qdsb} are calculated by varying $T$ in our model.
 
-We see that over metropolitan distances of up to several kilometers, which are favourable to the CV platform, the protocol QDS-$b$ obtains modest signature lengths $\mathcal{O}\left(10^6\right)$. At these short distances however the excess noise $\xi$ has strong impact on the required signature lengths.
+We see that over metropolitan distances of up to several kilometers, which are favourable to the CV platform, the protocol QDS-$b$ obtains modest signature lengths $\mathcal{O}\left(10^6\right)$. Even at these short distances however the excess noise $\xi$ has strong impact on the required signature lengths.
 
 \begin{figure}[htp]
 \captionsetup{width=\linewidth}
@@ -778,7 +778,7 @@ For the second agile system, \systemF, Tx plays the role of Alice while Rx plays
 \captionsetup{width=\linewidth}
 \centering
 \includegraphics[width=0.7\linewidth, draft=false]{aqc/qdsf}
-\caption{\label{fig:aqc_qdsf} Signature lengths required to sign a single bit in protocol QDS-$b$, under attack BS$2$. The signature lengths at $20$~km (Channel B) remain feasible under both ideal (above) and experimental (Tab.~\ref{tab:lengths} realizations. At $2$~km (Channel A) the protocol requires small signature lengths and is thus the fastest QDS protocol over comparable distances, Fig.~\ref{fig:aqc_star}. Solid (red), dashed (blue), dot-dashed (orange) and dotted (green) lines correspond to experiments $1$, $2$, $3$ and $4$, respectively. Vertical grid lines depict loss levels over implemented channels $A$ and $B$, corresponding to fiber lengths $2$~km ($0.65$~dB loss) and $20$~km ($4.75$~dB loss), respectively.}
+\caption{\label{fig:aqc_qdsf} Signature lengths required to sign a single bit in protocol QDS-$b$, under attack BS$2$. The signature lengths at $20$~km (Channel B) remain feasible under both ideal (above) and experimental (Tab.~\ref{tab:lengths}) realizations. At $2$~km (Channel A) the protocol requires small signature lengths and is thus the fastest QDS protocol over comparable distances, Fig.~\ref{fig:aqc_star}. Solid (red), dashed (blue), dot-dashed (orange) and dotted (green) lines correspond to experiments $1$, $2$, $3$ and $4$, respectively. Vertical grid lines depict loss levels over implemented channels $A$ and $B$, corresponding to fiber lengths $2$~km ($0.65$~dB loss) and $20$~km ($4.75$~dB loss), respectively.}
 \end{figure}
 
 For small channel loss the required $L$ is roughly invariant over a broad range of $\alpha$, $\xi$, which suggests that QDS-$f$ is robust to experimental differences. Thus, it is easier to implement on an agile system alongside further alternative cryptographic protocols which may require a more restrictive choice of $\alpha$. For large channel loss however, the choice of $\alpha$ becomes increasingly important, but using for example the mean $\alpha = 0.55$ and $\xi = 2.1\%$ from experimental run~$3$, QDS-$f$ is predicted to remain secure even down to $20$~dB loss with still-feasible signature lengths $\mathcal{O}\left(10^9\right)$. On our system this would allow a one-bit message to be signed in approximately one second.

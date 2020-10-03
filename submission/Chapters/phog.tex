@@ -549,9 +549,9 @@ and so, substituting into Eq.~\ref{eqn:adiabatic_elimination}, we arrive at
 where $G = \sqrt{g_a^2 + g_b^2}$. The three-mode model has been reduced to a two-mode system involving only modes $a, b$. Introducing the following collective symmetric and antisymmetric modes
 
 \begin{align}\label{eqn:phog_rotation}
-\hat{s}_+ &= \frac{1}{G} \left(g_a \hat{a} + g_b \hat{b}\right) \qq{symmetric},  \notag \\
+\hat{s}_+ &= \frac{1}{G} \left(g_a \hat{a} + g_b \hat{b}\right) \qq{symmetric,}  \notag \\
 %
-\hat{s}_- &= \frac{1}{G} \left(g_a \hat{b} - g_b \hat{a}\right) \qq{antisymmetric},
+\hat{s}_- &= \frac{1}{G} \left(g_a \hat{b} - g_b \hat{a}\right) \qq{antisymmetric,}
 \end{align}
 and rewriting Eq.~\ref{eqn:phog_two_mode_model_deriv} in terms of these new modes we arrive at the final equation for our two-mode model
 \begin{equation}\label{eqn:phog_lindblad_two_mode_model}
@@ -672,7 +672,7 @@ In order to proceed, we must consider two new things: (i) realistic glass parame
 
 We will derive realistic parameters in this section, and they will be used in Sec.~\ref{sec:phog_multi_mode} to show that the desired signature behaviours are still observed. These order-of-magnitude calculations are intended to illustrate feasibility of our device in real glass, but ideally the parameters must be measured experimentally on the device itself \cite{Wang2014}.
 
-The important quantity to estimate is the Kerr nonlinearity parameter $U$ which is used in our Hamiltonians. To do so, we will follow the analyses put forth in Refs.~\cite{Drummond1980, Imoto1985, Kitagawa1986}, and assume that a pulse of finite length $L_\eff$ propagates through a waveguide with $L$, such that $L \gg L_\eff$. The waveguide in $\chi^{\left(3\right)}$ glass is assumed\footnote{We will briefly discuss relaxation of these conditions in Sec.~\ref{sec:phog_outlook}.} to have no dispersion and the pulse shape does not change. We consider only the changes of the quantum state of the pulse caused by nonlinearity, linear loss and nonlinear phase changes. 
+The important quantity to estimate is the Kerr nonlinearity parameter $U$ which is used in our Hamiltonians. To do so, we will follow the analyses put forth in Refs.~\cite{Drummond1980, Imoto1985, Kitagawa1986}, and assume that a pulse of finite length $L_\eff$ propagates through a waveguide with length $L$, such that $L \gg L_\eff$. The waveguide in $\chi^{\left(3\right)}$ glass is assumed\footnote{We will briefly discuss relaxation of these conditions in Sec.~\ref{sec:phog_outlook}.} to have no dispersion and the pulse shape does not change. We consider only the changes of the quantum state of the pulse caused by nonlinearity, linear loss and nonlinear phase changes. 
 
 The Kerr nonlinearity parameter may be written as 
 \begin{equation}
@@ -680,7 +680,7 @@ U = 2 \hbar \frac{\omega^2}{V_\eff} \frac{n_2}{n_\eff},
 \end{equation}
 which is derived e.g. in Refs.~\cite{Imoto1985, Kitagawa1986, Drummond1980} either in terms of nonlinear refractive index parameter $n_2$ or third-order susceptibility $\chi^{\left(3\right)}$. $V_\eff$ is the effective mode volume which we take to be $V_\eff \sim A_\eff L_\eff$, with $A_\eff$ the transverse mode area. We take the effective refractive index of the waveguide mode to be $n_\eff \approx 2.5$ which is typical for IG$2$ glass \cite{ig2}. IG$2$ also has $n_2 \sim 3 \times 10^{-18} \text{W}^{-1} \text{m}^2$ \cite{Demetriou2017, Wang2014}. %\MT{comment about suitability of each of these assumptions. How much are the numbers likely to vary in the final device?} 
 
-The effective mode area is uncertain, and so as an upper bound we take $A_\eff$ to be the area of the waveguide which is on the order of $10^{-12}\text{m}^2$ as in Ref.~\cite{Mukherjee2017} for similar laser-inscribed waveguides  capable of supporting large pulse energies. Taking for example $A_\eff = 120\times10^{-12} \text{m}^2$, for a $100$~fs pulse at $1064$~nm we calculate $U \approx 8.5\times 10^{-8}$. We may reasonably expect the final values of $U$ to even increase in a finished device owing to reduction in $A_\eff$ (e.g. in Ref.~\cite{Mukherjee2017} the waveguides are approximately $4 \mu\text{m} \times 4 \mu\text{m}$.) Evolution under this $U = 8.5\times10^{-8}$ is modelled in Sec.~\ref{sec:phog_multi_mode}. We should stress however that the specific value of $U$ must be measured on a final physical device, and the values in this section are order-of-magnitude estimates only.
+The effective mode area is yet uncertain and for implementation must be measured on the realistic device. For an upper bound we take $A_\eff$ to be the area of the waveguide which is on the order of $10^{-12}\text{m}^2$ as in Ref.~\cite{Mukherjee2017} for similar laser-inscribed waveguides  capable of supporting large pulse energies. Taking for example $A_\eff = 120\times10^{-12} \text{m}^2$, for a $100$~fs pulse at $1064$~nm we calculate $U \approx 8.5\times 10^{-8}$. We may reasonably expect the final values of $U$ to even increase in a finished device owing to reduction in $A_\eff$ (e.g. in Ref.~\cite{Mukherjee2017} the waveguides are approximately $4 \mu\text{m} \times 4 \mu\text{m}$.) Evolution under this $U = 8.5\times10^{-8}$ is modelled in Sec.~\ref{sec:phog_multi_mode}. We should stress however that the specific value of $U$ must be measured on a final physical device, and the values in this section are order-of-magnitude estimates only.
 
 %\MT{Calculation of $\gamma_1$? Calculation of approximate coupling constants?}
 %\MT{Units of U?}
@@ -705,7 +705,7 @@ with $\hat{H} = \hat{H}^{\text{int}} + \hat{H}^{\text{Kerr}}$, and
 %
 &\hat{H}^{\text{Kerr}} = \frac{U}{2} \sum_{x \in \left\{a, b, c_j\right\}} \hat{x}^\dagger \hat{x}^\dagger \hat{x} \hat{x}, \qq{} j = 0, 1, \dots, N.
 \end{align}
-The Kerr nonlinearity constant is $U$, total number of tail modes is $N$, and coupling constants are $g_a, g_b, g_c$. We cannot hope to numerically simulate Eq.~\ref{eqn:phog_multi_mode} over the necessary parameter regimes of large input $\alpha$ and large number of modes\footnote{Even taking each mode as a qubit cannot help, as the total Hilbert space size is $2^{N}$ which remains intractable for $N$ large.}. For the multi-mode model the only decay route into a Markovian reservoir is via linear loss $\gamma_1$ which we take to affect every mode independently. We thus require the tail to be long enough that state which has initially decayed into the tail cannot return to the signal modes over the timescales of interest. This traps us in the unfortunate scenario of having to make predictions of the behaviour of a large number of coupled modes, with strong nonlinearity and a necessarily large Hilbert space size of each mode. 
+The Kerr nonlinearity constant is $U$, total number of tail modes is $N$, and coupling constants are $g_a, g_b, g_c$. We cannot hope to numerically simulate Eq.~\ref{eqn:phog_multi_mode} over the necessary parameter regimes of large input $\alpha$ and large number of modes\footnote{Even taking each mode as a qubit cannot help, as the total Hilbert space size is $2^{N}$ which remains intractable for $N$ large.}. For the multi-mode model the only decay route into a Markovian reservoir is via linear loss $\gamma_1$ which we take to affect every mode independently. We require the tail to be long enough that state which has initially decayed into the tail cannot return to the signal modes over the timescales of interest. This traps us in the unfortunate scenario of having to make predictions of the behaviour of a large number of coupled modes, with strong nonlinearity and a necessarily large Hilbert space size of each mode. 
 
 \begin{figure}[htp]
 \captionsetup{width=\linewidth}

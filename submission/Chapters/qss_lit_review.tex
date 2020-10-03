@@ -68,7 +68,7 @@ Both the protocols from Hillery \cite{Hillery1999} and Karlsson \cite{Karlsson19
 
 Chen \emph{et. al.} \cite{Chen2005a} modify the Hillery's protocol \cite{Hillery1999} to allow for an imperfect distribution of entangled state. By proposing a method for entanglement distillation on a multipartite state, which can be used before a cryptographic protocol, Chen effectively reduces the extreme resource requirement of protocols like Ref.~\cite{Hillery1999}. The resource state used does not even need to violate a Bell inequality.
 
-An important generalization of the Hillery's scheme allows for analysis of the optimal entangled states required to share a secret between more than three players. While one option would be to simply replace the resource state with the N-partite GHZ state
+An important generalization of Hillery's scheme allows for analysis of the optimal entangled states required to share a secret between more than three players. While one option would be to simply replace the resource state with the N-partite GHZ state
 
 \begin{equation}
 \ket{N-GHZ} = \frac{1}{\sqrt{2}}\left(\ket{000\dots0} + \ket{111\dots1} \right)
@@ -93,7 +93,7 @@ There are strong links between QSS and quantum conferencing \cite{Wu2016, Ottavi
 %\MT{Still got some papers I need to talk about.}
 
 \subsection{Sequential QSS}
-The above protocols which implement QSS using entangled resource states offer an advanced level of security and neatly demonstrate the important role of entanglement in quantum communication. However, it is hard to see how they will be preferable to qCSS which can offer equivalent levels of security for the same task, but without the problems associated with generation and distribution of large entangled states. An entanglement-based scheme may even be fine if the number of players is small -- for example the scheme \cite{Karlsson1999} relyies only on Bell-pairs, but they cannot be easily scaled to many parties. We note that qCSS scales much more favourably as the number of required quantum channels is linear in the total number of players.
+The above protocols which implement QSS using entangled resource states offer an advanced level of security and neatly demonstrate the important role of entanglement in quantum communication. However, it is hard to see how they will be preferable to qCSS which can offer equivalent levels of security for the same task, but without the problems associated with generation and distribution of large entangled states. An entanglement-based scheme may even be fine if the number of players is small -- for example the scheme \cite{Karlsson1999} relies only on Bell-pairs, but they cannot be easily scaled to many parties. We note that qCSS scales much more favourably as the number of required quantum channels is linear in the total number of players.
 
 It should still be explored whether there are any QSS protocols which outperform qCSS. One promising direction is that of sequential\footnote{Sometimes referred to as entanglement-free QSS.} QSS in which the QSS task is fulfilled by sharing of a single quantum system between multiple players.
 

@@ -3,7 +3,7 @@
 %Goal of chapter: introduce our QDS protocol and prove its security in different contexts using several methods.
 
 
-In this chapter we introduce and investigate a continuous-variable Quantum Digital Signatures (QDS) protocol, which allows for secure authentication of classical messages even against a quantum adversary. We describe the protocol and its similarities and differences to recent QDS protocols from the literature in Sec.~\ref{sec:qds_protocol}, and then prove its security against several different attack strategies in Secs.~\ref{sec:qds_security_repudiation}-\ref{sec:qds_attack_analysis}. It is only recently that QDS protocols in the discrete-variable regime have been proven secure against and eavesdropping attack on the quantum channels \cite{Amiri2016, Yin2016}, and the work in this chapter marks the first time that continuous-variable QDS is proven secure against an eavesdropper. Finally, in Secs.~\ref{sec:qds_siglength}-\ref{sec:qds_protocol_performance} we analyse the performance of our protocol, including a postselection technique to improve performance, and demonstrate that a remarkably small number of quantum states are required to securely sign a message. Our protocol is implemented in Chapter~\ref{chapter:aqc}.
+In this chapter we introduce and investigate a continuous-variable Quantum Digital Signatures (QDS) protocol, which allows for secure authentication of classical messages even against a quantum adversary. We describe the protocol and its similarities and differences to recent QDS protocols from the literature in Sec.~\ref{sec:qds_protocol}, and then prove its security against several different attack strategies in Secs.~\ref{sec:qds_security_repudiation}-\ref{sec:qds_attack_analysis}. It is only recently that QDS protocols in the discrete-variable regime have been proven secure against an eavesdropping attack on the quantum channels \cite{Amiri2016, Yin2016}, and the work in this chapter marks the first time that continuous-variable QDS is proven secure against an eavesdropper. Finally, in Secs.~\ref{sec:qds_siglength}-\ref{sec:qds_protocol_performance} we analyse the performance of our protocol, including a postselection technique to improve performance, and demonstrate that a remarkably small number of quantum states are required to securely sign a message. Our protocol is implemented in Chapter~\ref{chapter:aqc}.
 
 \section{Our QDS protocol}\label{sec:qds_protocol}
 
@@ -98,7 +98,7 @@ Alice wishes to send a signed $1$ bit message $m$ to Bob and Charlie. For each p
 \begin{equation}
 \Phi_m^{\left(B, C\right)} = \left\{ \phi_{j, m}^{\left(B, C\right)}\right\}_{j=1}^{L}
 \end{equation}
-which are of length $j$. The $\phi_{j}$ are complex phases chosen uniformly at random from the QPSK alphabet. The strings $\Phi_m^{\left(B, C\right)}$ may be interpreted as Alice's \emph{private key}. The signature length $L \in \mathbb{N}$ is chosen to ensure the desired level of security.
+which are of length $L$. The $\phi_{j}$ are complex phases chosen uniformly at random from the QPSK alphabet. The strings $\Phi_m^{\left(B, C\right)}$ may be interpreted as Alice's \emph{private key}. The signature length $L \in \mathbb{N}$ is chosen to ensure the desired level of security.
 
 \paragraph{Step $2$.} Corresponding to each private key, Alice forms the following quantum states
 \begin{equation}\label{eqn:QDS_publickey}
@@ -249,7 +249,7 @@ Alice may even choose them to be zero
 
 %After Symmetrization, Bob and Charlie each possess an eliminated signature in two halves, each of length $L/2$, consisting either of elements which they received directly from Alice, or of elements which they received during this step. 
 
-Alice succeeds in her repudiation attack if Bob accepts both of his halves as genuine, while Charlie rejects at least one of his halves as fake. Let $E_A, E_B$ denote the events that Bob accepts on the first or second half of his eliminated signature, respectively, and let $E_C, E_C$ denote the events that Charlie rejects on the first or second half of his eliminated signature, respectively. Then a successful repudiation attack occurs when
+Alice succeeds in her repudiation attack if Bob accepts both of his halves as genuine, while Charlie rejects at least one of his halves as fake. Let $E_A, E_B$ denote the events that Bob accepts on the first or second half of his eliminated signature, respectively, and let $E_C, E_D$ denote the events that Charlie rejects on the first or second half of his eliminated signature, respectively. Then a successful repudiation attack occurs when
 
 \begin{equation}
 \left(E_A \qq{and} E_B \right) \qq{and} \left( E_C \qq{or} E_D\right) \notag
@@ -435,7 +435,7 @@ Integrating, we arrive at
 
 
 \section{Security against forgery}\label{sec:qds_security_forgery}
-We now turn to consider security against forgery, List.~\ref{list:qds_requirements}~requirement $1$, Fig.~\ref{fig:attacks_forgery}. In a forging attack, a dishonest player (or a fourth party, Eve) will declare some fake $m^\prime$ with the aim that it should be accepted by honest players as being genuine and having originated with Alice. % In this attack we consider two possibilities, either that an honest Alice's $\Sigma$ has been intercepted and altered (interferance in Step $5$); or that honest Alice has completed distribution of quantum states, Step $3$, but has not yet sent $\Sigma$. As should be clear from the following discussion 
+We now turn to consider security against forgery, List.~\ref{list:qds_requirements}~requirement $1$, Fig.~\ref{fig:attacks_forgery}. In a forging attack, a dishonest player (or a fourth party, Eve) will declare some fake message $m^\prime$ with the aim that it should be accepted by honest players as being genuine and having originated with Alice. % In this attack we consider two possibilities, either that an honest Alice's $\Sigma$ has been intercepted and altered (interferance in Step $5$); or that honest Alice has completed distribution of quantum states, Step $3$, but has not yet sent $\Sigma$. As should be clear from the following discussion 
 We will not consider the possibility that a dishonest player is impersonating Alice from the beginning of the protocol (see Sec.~\ref{sec:qds_goals} for brief discussion). The fake message $m^\prime$ will have an appended signature $\tau_{m^\prime}$ consisting of declared coherent state phases. Message $m^\prime$ will be accepted if $\tau_{m^\prime}$ has sufficiently few mismatches with respect to an honest player's eliminated signature. 
 
 %Since Bob already knows $L/2$ of Charlie's elements, precisely those $Z_m^C$ which originated with Bob,
@@ -713,7 +713,7 @@ We wish to mix a coherent state $\rho_{\alpha_k} = \dyad{\alpha_k}$ and a therma
 
 Now, to reach the \emph{a posteriori} state under this attack we will integrate this $\rho_{\left. B \given z_C \right.}$ over all $z_C \in \mathbb{C}$ consistent with a particular eliminated signature element. Mathematically, this corresponds to simply integrating scalar terms involving $z_C$ in Eq.~\ref{eqn:appendix_bs1_state}, noting that the integration operation commutes with the rest of the state. Writing $z = z_C$ for convenience, the required integration is
 
-\begin{equation}
+\begin{equation}\label{eqn:ibs1}
 \text{I}_{\text{BS}1} = \int\limits_{\qout>0, \pout>0} \Diff2 c \; z^k z^{* l} e^{ - \left| z \right|^2}
 \end{equation}
 
@@ -727,7 +727,7 @@ The integration is best performed in polar coordinates since the radial and angu
 \frac{-i}{k-l}\left(-1 + e^{i \frac{\pi}{2}\left(k-l\right)}\right)\frac{1}{2}\Gamma\left(\frac{1}{2}\left(k + l + 2\right) \right) & \text{if } k \ne l
 \end{cases}
 \end{equation}
-with $\Gamma$ the gamma function \cite{mathworld_gamma}. Indeed, the radial component of the integrand of Eq.~\ref{eqn:qds_bs1_deriv_3} is a standard integral for $\Gamma$. The final \emph{a posteriori} state is now accessible by substituting Eq.~\ref{eqn:qds_bs1_deriv_3} into Eq.~\ref{eqn:appendix_bs1_state}.
+with $\Gamma$ the gamma function \cite{mathworld_gamma}. Indeed, the radial component of the integrand of Eq.~\ref{eqn:ibs1} is a standard integral for $\Gamma$. The final \emph{a posteriori} state is now accessible by substituting Eq.~\ref{eqn:qds_bs1_deriv_3} into Eq.~\ref{eqn:appendix_bs1_state}.
 
 The \emph{a priori} state is calculated likewise, but the limits of integration should be extended to the entire complex plane. In this case,
 \begin{equation}\label{eqn:qds_bs1_deriv_4}
@@ -987,7 +987,7 @@ We plot $\mathcal{N}$ in Fig.~\ref{fig:psnorm}, and figure of merit $\tilde{L}$ 
 %Calculations/Cryptography/2020-02-12_L_varying_rps.nb
 \end{figure}
 
-Since the figures of merit $\tilde{L}$ (with postselection)and $L$ (without postselection) qualitatively measure the same thing -- how many states must Alice send in order to sign a $1$~bit message -- they may be directly compared. For the remainder of this Thesis, then, we will not distinguish between $\tilde{L}$ and $L$. It should be understood that when postselection is used we are using the rescaled $\tilde{L}$, while when postselection is not use we are using $L$. Furthermore, since $\Delta_\theta > 0$ causes $\tilde{L}$ to increase we will take the optimal $\Delta_\theta=0$ always from now on, and only allow $\Delta_r$ to vary. It will be made clear in what follows whether the postselection technique has been used and the choice of $\Delta_r$.
+Since the figures of merit $\tilde{L}$ (with postselection) and $L$ (without postselection) measure the same thing -- how many states must Alice send in order to sign a $1$~bit message -- they may be directly compared. For the remainder of this Thesis, then, we will not distinguish between $\tilde{L}$ and $L$. It should be understood that when postselection is used we are using the rescaled $\tilde{L}$, while when postselection is not use we are using $L$. Furthermore, since $\Delta_\theta > 0$ causes $\tilde{L}$ to increase we will take the optimal $\Delta_\theta=0$ always from now on, and only allow $\Delta_r$ to vary. It will be made clear in what follows whether the postselection technique has been used and the choice of $\Delta_r$.
 
 
 
@@ -1007,7 +1007,7 @@ Let us apply the analysis performed in the previous few sections and calculate o
 \end{figure}
 
 
-Even when attack BS$0$ is used and $\xi=0\%$, a sub-optimal choice of coherent state amplitude $\alpha$ can drastically worsen the performance of the protocol. To investigate optimal amplitudes, we plot the security parameter $g_{\text{sec}}$ varying with $\alpha$ under attack BS$0$ in Fig.~\ref{fig:qds_gsec_croal}. We observe that the optimal $\alpha$ decreases with increasing loss (smaller $T$). Intuitively, at $T=1.0$ Eve gains no information and so one should pick $\alpha \gg 1$ so as to minimize mismatch rate between honest players. 
+Even when attack BS$0$ is used and $\xi=0\%$, a sub-optimal choice of coherent state amplitude $\alpha$ can drastically worsen the performance of the protocol. To investigate optimal amplitudes, we plot the security parameter $g_{\text{sec}}$ varying with $\alpha$ under attack BS$0$ in Fig.~\ref{fig:qds_gsec_croal}. We observe that the optimal $\alpha$ decreases with increasing loss (smaller $T$). Intuitively, at $T=1.0$ Eve gains no information and so one should pick $\alpha \gg 1$ so as to minimize the mismatch rate between honest players. 
 
 We also compare our current protocol to a recent CV QDS protocol \cite{Croal2016} which did not allow for the presence of an eavesdropper on the quantum channels. The security parameter under Ref.~\cite{Croal2016} is displayed as red, dot-dashed lines in Fig.~\ref{fig:qds_gsec_croal} at $T=0.47$ (top) and $T=0.19$ (bottom). We see that for larger $T$, and almost all $\alpha$ at smaller $T$, our current protocol outperforms Ref.~\cite{Croal2016}, despite our relaxing the requirement of secure quantum channels. This surprising improvement in performance comes directly from the fact that in the current protocol, Alice distributes different signatures to each recipient, whereas in Ref.~\cite{Croal2016} she distributed identical signatures.
 
