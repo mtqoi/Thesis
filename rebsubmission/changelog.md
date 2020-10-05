@@ -1,4 +1,5 @@
 # MThornton Thesis CHANGELOG: 5th October 2020
+All page references are with respect to 100001979_DIFF.pdf
 
 ## Summary of changes
 - Included the four new additions recommended by examiners SMB and BWL.
@@ -11,6 +12,7 @@
 - Fixed the smaller issues noted during the viva, including correct normalization factors etc.
 - Several other typographical and grammatical errors fixed, including error in appearance of `\varsigma`. It has been changed to `\Upsilon` everywhere.
 - Minor language corrections and changes.
+- Fixed url access dates in biblography (error in convention MM/DD/YY vs DD/MM/YY)
 
 
 ### Recommendation 1: discussion of classical cryptography
