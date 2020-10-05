@@ -1,0 +1,108 @@
+\chapter{Introduction to quantum cryptography}\label{chapter:crypto_intro}
+
+\section{Conventional (classical) cryptography}
+
+Cryptography is a field probably as old as civilization itself. For as long as communication has existed, so too has the desire to keep information hidden. Both the Greeks and the Romans are known to have used ciphers to encrypt messages \cite{Singh2000}. A cipher, after applied to a message, allows the encrypted message to be freely transmitted and intercepted without an adverse party interpreting its meaning. The intended recipients, however, can undo the effects of the cipher and read the original message. 
+
+One famous example is the Caesar cipher. In the Caesar cipher, each element of the alphabet which makes up the message (``plain'') is assigned a new symbol (``cipher''). Typically this is done by shifting the alphabet by a known quantity, Fig.~\ref{fig:caesar}. The plaintext message is encoded with the cipher, replacing letters from the plain with letters fromt he cipher. This encoded message is known as ``ciphertext'' and now may be freely distributed. At face value, the ciphertext is unreadable to anyone without access to the cipher.
+
+\begin{figure}[htp]
+\centering
+\captionsetup{width=\linewidth}
+\begin{framed}
+\begin{align*}
+\text{Plain:} &\text{  \code{ABCDEFGHIJKLMNOPQRSTUVWXYZ}} \\
+\text{Cipher:} &\text{  \code{FGHIJKLMNOPQRSTUVWXYZABCDE}} \\
+\text{Plaintext:} &\text{  I like physics} \\
+\text{Ciphertext:} &\text{  N qnpj umdxnhx}
+\end{align*}
+\end{framed}
+\caption{\label{fig:caesar} The cipher alphabet is formed of the plain alphabet shifted $5$ elements to the left. Knowledge of the cipher allows the plaintext message to be recovered.}
+\end{figure} %TODO: change this to Hello to Jason Isaacs, or similar.
+%TODO: put Hello to Jason, or similar, in my acknowledgements. It'll be banter.
+
+
+Cryptanalysis -- the art and science of breaking cryptographic systems -- has existed for as long as cryptography, and history of cryptographic development can be viewed as an arms-race between cryptographers and cryptanalysts. The cryptographers, which we canonically call Alice and Bob, continually invent new schemes to perform their secure communication task. The cryptanalyst, which we canonically call Eve, continually tries to break these schemes in order to interfere in Alice and Bob's communication and obtain their messages. For example, the Caesar cipher can be broken by trying all possible shifts of the alphabet and checking which give a sensible message at the output. Against a more general cipher, Eve can perform a statistical analysis on the ciphertext, provided that she knows the language of the message. In English, for example, Eve knows that ``e'' is the most frequently occurring letter, and so the most common letter in the ciphertext is likely to decode to ``e''.
+
+There are two important strands of cryptography: private-key and public-key crytography, Fig.~\ref{fig:pubpriv}. In private-key cryptography (also known as \emph{symmetric} cryptography), Alice and Bob share some secret information which they will use to perform a task, and without which an eavesdropper cannot break the system. An important example of private-key cryptography is encryption, with the cipher $\mathcal{K}$ used to encrypt and decrypt messages. Any party with $\mathcal{K}$ can freely encypt or decrypt any piece of information, while any party lacking knowledge of $\mathcal{K}$ cannot. %A relevant example of this type of cryptosystem is the one-time pad (OTP) which is discussed above.
+
+%\MT{Perhaps some discussion about how $\mathcal{K}$ can be distributed and attacked}
+
+%\MT{I should have a discussion at some point about how public- and private- key cryptography relate to each other and how they are both used in modern infrastructure}
+
+The second strand is public-key cryptography (also known as \emph{asymmetric} cryptography) \cite{Diffie1976}. Here, there are several pieces of information required to run a protocol. %Alice is assumed to hold a key $\mathcal{E}$ (her ``private key'') while Bob holds a key $\mathcal{D}$ (Alice's ``public-key''). $\mathcal{D}$ is assumed to be publicly known. Alice may encrypt a message using $\mathcal{E}$ and send it to Bob, who can decrypt it using $\mathcal{D}$.  %\MT{Include more examples of this thing actually being used in practice}
+Alice possesses two keys, one public and one private. The public key can be deduced from the private key, but it should not be possible to deduce the private key from the public key. If Alice encrypts a message with her private key, then anyone can decrypt it with her public key\footnote{And thus prove that it was indeed Alice who sent the message. This is an example of message authentication in a public-key cryptosystem.}. A public-key cryptosystem can also be used to send encrypted messages. Alice encrypts her message using Bob's public key, and sends it to Bob, who can then decrypt it using his private key.
+
+\begin{figure}[htp]
+\centering
+\captionsetup{width=\linewidth}
+\begin{framed}
+\begin{subfigure}{0.4\textwidth}
+\begin{align*}
+m \mapsto \text{Encrypt}_\mathcal{K}\left(m\right) \\
+\text{Decrypt}_\mathcal{K}\left[E_\mathcal{K}\left(m\right)\right] \mapsto m
+\end{align*}
+\caption{}
+\end{subfigure}
+\begin{subfigure}{0.4\textwidth}
+\begin{align*}
+m \mapsto \text{Encrypt}_\mathcal{E}\left(m\right) \\
+\text{Decrypt}_\mathcal{D}\left[\text{Encrypt}_\mathcal{E}\left(m\right)\right] \mapsto m
+\end{align*}
+\caption{}
+\end{subfigure}
+\caption{(a) Private-key encryption. The same key $\mathcal{K}$ allows Alice to encrypt and Bob to decrypt message $m$. (b) Public-key encryption. Alice and Bob use different keys, $\mathcal{E}$ and $\mathcal{D}$ to encrypt and decrypt $m$. The key $\mathcal{E}$ can be public knowledge without affecting the security of the key $\mathcal{D}$.}
+\label{fig:pubpriv}
+\end{framed}
+\end{figure}
+
+Crucially, given knowledge of $\mathcal{D}$ it should be easy to derive $\mathcal{E}$. The converse should not be true, and the publicly available $\mathcal{E}$ should give no knowledge of $\mathcal{D}$. %If $\mathcal{E}$ is unique to Alice, then a successful decryption using $\mathcal{D}$ proves sufficient to prove Alice's identity.%\footnote{One may be tempted to build a digital signatures protocol on this exchange, but \MT{explain why it is a bad idea, with reference to Simmons}.}
+
+The function $f: \mathcal{D} \mapsto \mathcal{E}$ is sometimes referred to as a ``trapdoor'' or ``one-way'' function. Function $f$ is typically based on a mathematical problem which is deemed to be computationally hard, that is, even the most powerful computers cannot hope to solve it in a feasible amount of time. Typically the time taken to solve scales exponentially in the size of the key. Examples of hard problems include factoring a large integer into primes or the discrete logarithm problem, which underly the commonly used RSA  and Diffie-Hellman protocols \cite{Rivest1978, Diffie1976, Schneier1996}. This type of security, relying on assumptions about computing power, is known as \emph{computational} security. In principle these cryptosystems could be broken with a sufficiently powerful computer, or with algorithmic advances.
+
+It has been shown, however, that while these problems are hard for a classical computer, there exist algorithms for a future quantum computer which can break them. The most well known of these is Shor's algorithm \cite{Shor1997},  which provides an exponential speedup in the ability to split an integer into its prime factors. %nstead of taking an exponential number of steps in the length of the integer, the quantum computer will take a number of steps which is only polynomial in integer length. 
+The existence of such algorithms which successfully solve the hard problems poses a threat to many commonly used cryptosystems %such as RSA, DSA and ECDHE 
+\cite{Rivest1978, Schneier1996, Amiri2015, Nielsen2010, Shor1997}. One must therefore carefully consider how to respond to this threat posed by quantum computers. 
+
+One solution will be to switch the underlying hard problem to a different class of problems, which even a quantum computer cannot solve. This is the approach adopted by the Post-Quantum Cryptography (PQC) community, whose aim is to design protocols based on problems for which no good quantum algorithm is yet known \cite{Bernstein2017, Chen2016, Gagliardoni2017a, Bernstein2009, Alagic2019, Chrome2016}. However, it is still an open question which problems a quantum computer can hope to solve%\footnote{It is even not yet known whether they can solve a larger class of problems than a classical computer}
+, and so a premature implementation of a secure system based on a PQC hard-problem, may still be threatened by a quantum computer as new algorithms are developed. 
+
+%In any case, it is clear that the currently implemented cryptographic systems must either be strengthened or replaced, and this may prove challenging. We will briefly discuss some of the challenges, and a possible solution which has gained traction among the conventional cryptography community in recent years, in Chapter~\ref{chapter:aqc}
+
+The second solution to the threat posed by quantum computers is to begin to adopt cryptosystems which are provably secure against a quantum computer. There exist classical protocols for which this is possible \cite{Shamir1979, Blakley1979}, and we will discuss some of them in Sec.~\ref{sec:qss_lit_review}. However for many applications classical cryptography does not allow for such provably secure systems without an initial face-to-face interaction\footnote{To facilitate, for example, the sharing of large, random, secure keys.}, and so one must move to the quantum realm.
+
+Quantum cryptography bases its security not on the assumption of a mathematical problem's difficulty, but on physical laws. Instead of aiming for computational security (albeit security against a quantum computer), quantum cryptography aims to build the stronger \emph{unconditionally secure} (or \emph{information-theoretically secure}) protocols, which cannot be broken even in principle. By basing security on physical laws quantum cryptography requires the sharing of physical systems between players, and we shall see in the remainder of this Thesis that quantum light is a natural object with which to perform such cryptographic tasks. 
+
+One may think of the advantage provided by quantum cryptography in terms of the one-way functions discussed earlier, Fig.~\ref{fig:qutrapdoor}. While the classical one-way functions are only computationally hard, the quantum analogue of the one-way function is provably impossible to invert. For example, if the unknown quantum states are chosen to be non-orthogonal then it is impossible to perfectly determine the classical information which they encode \cite{Nielsen2010, brendon_book}. Any malevolent party attempting to gain information will not do so perfectly, and will thus leave a detectable trace.
+
+\begin{figure}[h!]
+\centering
+\captionsetup{width=\linewidth}
+\begin{framed}
+\begin{subfigure}{0.49\linewidth}
+\begin{align*}
+x_i &\mapsto f\left(x_i\right) \qq{easy} \\
+f\left(x_i\right) &\mapsto x_i \qq{hard}
+\end{align*}
+\caption{}
+\end{subfigure}
+\begin{subfigure}{0.49\linewidth}
+\begin{align*}
+x_i &\mapsto \ket{x_i} \qq{easy}\\
+\ket{x_i} &\mapsto x_i \qq{impossible}
+\end{align*}
+\caption{}
+\end{subfigure}
+\caption{(a) A classical one-way function $f$ is easy to perform but computationally difficult to invert. $f$ is typically based on a hard problem. (b) A quantum one-way function. If the quantum states $\ket{x_i}$ are chosen to be non-orthogonal then it is impossible to perfectly determine the classical information $x$, given a quantum state $\ket{x}$. This forms the basis for quantum cryptosystems, whose security is guaranteed by the no-cloning theorem \cite{Nielsen2010, brendon_book}}
+\label{fig:qutrapdoor}
+\end{framed}
+\end{figure}
+
+%\clearpage
+\input{chapters/qds_lit_review}
+
+
+
+\input{chapters/qss_lit_review}
+
+

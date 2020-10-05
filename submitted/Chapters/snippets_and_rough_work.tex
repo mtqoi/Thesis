@@ -1,0 +1,14 @@
+\subsection{Entangling-cloner attack}
+More powerful than the beamsplitter attack is the entangling cloner attack, Fig.~\MT{X}, which gives Bob considerably more power to exploit both the loss and the noise of the channel. This attack therefore is naturally suited to the realistic case of nonzero excess noise $\xi$, while for $\xi \rightarrow 0$ it reduces back to the beamsplitter attack.
+
+
+% Stuff to include in a QSS outlook/future work section
+\section{Outlook}
+\MT{this section should be somewhere else, perhaps in an "outlook" section?}
+The classical post-processing of the above protocol is inherently very similar to Ref.~\cite{Kogias2017}, in which a secret key is generated between Alice and a shared Bob-Charlie degree of freedom via incompatible homodyne measurements on a tripartite entangled state. We expect that our protocol will be secure against a more restricted set of attacks, but over a wider range of channel parameters, for several reasons. 
+
+Ref.~\cite{Kogias2017} has potentially dishonest players Bob and Charlie performing homodyne measurements on incompatible observables (i.e. switching between $q$ and $p$ quadratures). No assumptions are made about the measurement devices used and they are each treated as a "black-box". Security comes inherently because of a Heisenberg-type relation between incompatible observables, and the security proof relies on an Entropic Uncertainty Relation (EUR). These EURs have had success elsewhere in quantum cryptography \MT{cite}. However, since we desire to use heterodyne detection we are forced to adopt a different approach and explicitly model the states' evolution and measurement during the protocol. We note that this matches the current state-of-the-art of QPSK-based QKD, but can be improved in future work.
+
+We have assumed that a dishonest Bob or Charlie still sends a state from the QPSK alphabet. It is yet unclear whether they could gain an advantage by sending something exotic and potentially highly entangled, perhaps in order to force Alice to reach a certain key $X_A$. This should be explored and potentially relaxed in future work. We anticipate that applying methods from quantum bit commitment might prove fruitful here. 
+
+Finally, we note that our assumption that the channel between Alice and Bob-Charlie takes a tensor-product structure is perhaps a strong one and should be relaxed. A potential strategy of a dishonest player could be to exploit properties of a general channel which maps a two-mode input state to a two-mode output state at Alice, though potentially allowing a dishonest player many output ancilla modes correlated with Alice. Such a strategy will be restricted by the conditions that the reduced state of an honest player should be a coherent state. Similarly it will require that Alice's measurement outcomes don't look errant, though this should be quantified.
