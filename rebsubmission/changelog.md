@@ -1,5 +1,5 @@
 # MThornton Thesis CHANGELOG: 5th October 2020
-All page references are with respect to 100001979_DIFF.pdf
+All page references are with respect to 100001979_corrections_DIFF.pdf
 
 ## Summary of changes
 - Included the four new additions recommended by examiners SMB and BWL.
@@ -20,18 +20,18 @@ Additional high-level discussion of Diffie Hellman key exchange, including an il
 I considered adding a similar discussion of RSA, but decided against it because it would distract from the section's narrative flow and make the chapter even longer.
 
 ### Recommendation 2: discussion of different methods that the eavesdropper can use
-Example of an unambiguous discrimination POVM added to section 1.4 (p22).
-Discussion of eavesdropping measurement strategies added to section 3.6 (p86), including short discussion of unambiguous measurements and minimum error measurements, and a mention of minimum cost measurements.
+Example of an unambiguous discrimination POVM added to section 1.4 (p22-4).
+Discussion of eavesdropping measurement strategies added to section 3.6 (p86-8), including short discussion of unambiguous measurements and minimum error measurements, and a mention of minimum cost measurements.
 Inclusion of several new references.
 Place our attack analysis strategy in context and provide motivation for the information-theoretic approach which we choose.
 
 ### Recommendation 3: connection between QSS and twin-field QKD
-Introduced twin-field QKD in section 2.2.10 (p52), with its ability to allow QKD over longer channels.
+Introduced twin-field QKD in section 2.2.10 (p52-4), with its ability to allow QKD over longer channels.
 Included several new references including twin-field QDS, which appeared on the arXiv only a few hours before my original Thesis submission (and therefore I was unaware).
 Added twin-field QKD illustration figure, Figure 2.6 (p53).
-Added discussion of the relationship between twin-field QKD and our QSS protocol to section 4.5 (p128). Discussion of the relative trust assumptions made by each protocol and the potential for a new QSS protocol relying on the same QPSK twin-field QKD setup as Barnett JOSAB (2019) paper.
+Added discussion of the relationship between twin-field QKD and our QSS protocol to section 4.5 (p128-9). Discussion of the relative trust assumptions made by each protocol and the potential for a new QSS protocol relying on the same QPSK twin-field QKD setup as Barnett JOSAB (2019) paper.
 
 ### Recommendation 4: provide context for twin-photon absorption
-Additional context given in section 6.2.2 (p179) referencing the classic papers on two-photon absorption in atomic gases at resonance.
+Additional context given in section 6.2.2 (p179-81) referencing the classic papers on two-photon absorption in atomic gases at resonance.
 Added additional analytics and argumentation following the method of Simaan and Loudon J. Phys. Math. A (1975) and (1978) for the density matrix elements in Fock basis under two-photon absorption. 
 Demonstration of agreement between the new analytics and the numerics which oriignally appeared in this section.
