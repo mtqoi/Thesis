@@ -1,0 +1,134 @@
+\section{How to share a secret}\label{sec:qss_lit_review}
+A secret sharing scheme allows for secure splitting and distribution of classical information among multiple recipients, an unknown subset of whom may be dishonest. The canonical example of such a scheme is that of a bank. The head of the bank, Alice, wishes to distribute keys to the vault between several potentially untrusted deputies. If the deputies work together and use their keys simultaneously they are able to access the vault, but any nefarious deputies working alone should not be able to gain access.
+
+
+%\MT{Make sure to cite the paper "how to share a secret" and talk about its title}.
+
+
+\subsection{Classical secret sharing}\label{sec:qss_qcss}
+Although many existing classical secret-sharing schemes are already information-theoretically secure \cite{Shamir1979, Blakley1979}, they may encounter problems when distributing  shares of the secret across insecure channels. This is analogous to the classical unconditionally secure signature schemes \cite{Wallden2015, Amiri2016a} discussed in Sec.~\ref{sec:lit_review_qds}, which implicitly required an underlying QKD encryption. Thus we may ask whether it is more or less resource-efficient to first run pairwise QKD between players, or to run a ``direct''-QSS scheme without first distilling pairwise secret keys. We should expect interesting parallels between QSS and QKD, since intuitively they are very similar, both effectively performing encryption of classical messages.
+
+Let us consider some examples. Alice wishes to share a secret, $m$, between $n$ players, such that any $k \le n$ of them can access $m$. The general framework for this is called an $\left(n, k\right)$-threshold scheme, where of the $n$ players any subset of $k$ players can reconstruct the secret. An information-theoretically secure threshold sharing scheme was designed by Shamir in Ref.~\cite{Shamir1979}. Shamir's scheme relies on polynomial equations over finite fields, and is provably secure even against an adversary with infinite computing power. 
+
+For example, Alice wishes to distribute a secret $m$ between four players, such that any three of them can access $m$. Alice generates a prime number $p$, and the polynomial 
+\begin{equation}
+\left( a x^2 + b x + m \right) \qq{modulo} p.
+\end{equation}
+Prime $p$ should be chosen larger than any of the coefficients $a, b$ or $m$. Alice then evaluates this polynomial at four different points $x$, and sends the outcomes to each player. These points will be referred to as ``shares''. %https://crypto.stackexchange.com/questions/9295/why-does-shamirs-secret-sharing-scheme-need-a-finite-field explains why a finite field is needed.
+% It does need to be a field (integers aren't). Also it being finite means we can actually do the protocol.
+
+The polynomial has three unknown coefficients, $a$, $b$ and $m$, and so any three players can combine their shares to create three equations, which may be solved for each unknown. Any fewer shares will yield an underdefined system which cannot be solved. An attempt to guess the final share will show that any message $m$ can be the secret, and so such a guessing attempt is useless.
+
+Another threshold secret sharing scheme was built on similar principles by Blakley \cite{Blakley1979}. In this scheme, the message $m$ is defined as a point in a large $k$ dimensional space. Each share is then a hyperplane in a $k-1$~dimensional space, which includes the point $m$. It therefore requires the intersection of all $k$ hyperplanes to reveal $m$. For example, if Alice again wishes to share a secret between four players, such that three of them are able to access $m$, then each share is a two-dimensional plane. The intersection of any two planes is a one-dimensional line containing $m$, and the third plane is required to reduce this line to the point $m$.
+
+While both of these schemes are information-theoretically secure once the shares have been distributed (assuming that each share is securely stored and cannot be stolen), the main issue arises when considering how the shares can be distributed in the first place. If a malevolent party can access the shares during distribution then they can reconstruct the secret. In implementation, Shamir's and Blakley's schemes are therefore only as secure as the underlying encryption which is used to share the shares.
+
+%\subsection*{Early quantum secret sharing}
+%\MT{Gottesman1999, Karlsson1999, Hillery1999, Cleve1999}
+%
+%\MT{distinguish between secret sharing and state sharing}
+
+\subsection{Quantum secret sharing}
+We therefore wish to investigate whether the task of secret sharing can be made secure using quantum resources. It is important to notice that the translation from classical secret sharing to quantum secret sharing is not straightforward, and there are at least three directions which one can pursue:
+
+\begin{itemize}
+\item quantum-assisted classical secret sharing (qCSS): encrypt a classical secret sharing protocol \cite{Shamir1979, Blakley1979} using quantum resources. For example, perform pairwise QKD between Alice and each recipient, then encrypt the shares of the classical secret sharing protocol. This is analogous to the classical unconditionally secure schemes discussed earlier.
+\item quantum secret sharing (QSS): use quantum states to securely distribute shares of a classical secret.
+\item quantum state sharing (QStS): securely distribute shares of a quantum state.
+\end{itemize}
+
+Quantum state sharing is an important and exciting research direction in its own right and helps to establish the close links between quantum secret sharing, QKD and quantum teleportation \cite{Braunstein1998, Hillery1999, Markham2008}. Despite the fact that both QSS and QStS are natural extensions of classical secret sharing to the quantum realm, and despite the fact that early work \cite{Hillery1999} proposes related protocols for each task, it should be understood that they are distinct quantum tasks with different goals and hardware requirements. For the rest of this Thesis we will restrict ourselves to QSS. In what follows we will only refer to the first two options as ``quantum secret sharing'', while the third option we shall refer to as ``quantum state sharing''.
+
+\subsection{Entanglement-based QSS}
+
+
+All three directions, qCSS, QSS and QStS, are discussed at length in the pioneering work by Hillery \emph{et. al.} \cite{Hillery1999}. They propose the use of a GHZ resource state
+\begin{equation}
+\ket{GHZ} = \frac{1}{\sqrt{2}} \left(\ket{000} + \ket{111} \right)
+\end{equation}
+shared between three players, which can be used to distribute shares of a classical secret. Collaborating recipients can recover the secret while a dishonest subset of players cannot. Alternatively, the GHZ resource state may be used to distribute shares of a quantum state (for QStS), such that collaborating players may reconstruct the original quantum state while a dishonest subset of players can gain no information.
+
+For QSS, each player chooses independently and at random to measure their state in either $x$ or $y$ basis:
+\begin{align}
+&\ket{\pm x} = \frac{1}{\sqrt{2}} \left( \ket{0} \pm \ket{1}\right), \notag \\
+%
+&\ket{\pm y} = \frac{1}{\sqrt{2}} \left( \ket{0} \pm i \ket{1} \right). \notag
+\end{align}
+If, for example, all three players measure in the $x$ basis, then Charlie can infer from his measurement outcome whether Alice and Bob's measurements are correlated or anticorrelated. By collaborating, then, Bob and Charlie can accurately infer Alice's bit. In fact, whenever Alice and Bob measure in the same basis, Charlie must measure in $x$ in order to gain information. Conversely, if Alice and Bob measure in opposite bases then Charlie must measure in $y$, otherwise he gains no information. We see, then, that since each player randomly chooses which basis to measure, $50\%$ of the resource GHZ states will yield no information, and are effectively discarded.
+
+Despite its high resource requirement, and despite the fact that $50\%$ of the resource states are wasted, Hillery's protocol has influenced the direction of all subsequent QSS protocols, and the paper was instrumental in demonstrating that multipartite entanglement is an important resource for quantum communication protocols. 
+%\MT{Should I talk somewhere about qCSS in HBB paper?}
+Multipartite entanglement is difficult to create and manipulate, and will degrade quickly as it is distributed over a quantum channel exposed to realistic loss or noise. However, just as QKD has an equivalence between entanglement-based and prepare-and-measure versions \cite{Grosshans2003, Laudenbach2017}, it should be expected that the requirement of large multipartite state in Ref.~\cite{Hillery1999} can likewise be reduced \cite{Karlsson1999, Tittel2001, Zhang2005b, Williams2019}. 
+
+To accomplish this, Karlsson \emph{et. al.} \cite{Karlsson1999} propose an entanglement-based QSS scheme which, rather than relying on creation and distribution of the GHZ state, relies on distribution of \emph{pairs} of entangled qubits in a Bell state. This configuration allows for correlations between players to be established identically to Hillery's scheme, but with more readily accessible resources. Recipients Bob and Charlie can determine with certainty which Bell state Alice sent, which allows Alice to establish a key with Bob/Charlie, and which may subsequently be used to encrypt a message. %\MT{demonstrate that it can give the same measurement outcomes as HBB with GHZ.}
+
+This protocol drastically reduces the resource requirements for experimental QSS, but the resulting protocol is still tricky to implement. The protocol requires Bell states and superpositions of Bell states, which will degrade over a realistic channel.  The protocol also introduces a fundamental asymmetry into QSS at the quantum level. While in Hillery's protocol protocol any of the three players can be chosen as dealer even after the GHZ state has been distributed, for Ref.~\cite{Karlsson1999} it is established at the time of quantum state distribution that Alice is dealer. % which may make the protocol require bespoke hardware.
+
+Both the protocols from Hillery \cite{Hillery1999} and Karlsson \cite{Karlsson1999} assume perfect state creation and noiseless and lossless quantum channels. This is an unrealistic assumption and one which must be relaxed before entanglement-based QSS can be implemented securely. 
+
+Chen \emph{et. al.} \cite{Chen2005a} modify the Hillery's protocol \cite{Hillery1999} to allow for an imperfect distribution of entangled state. By proposing a method for entanglement distillation on a multipartite state, which can be used before a cryptographic protocol, Chen effectively reduces the extreme resource requirement of protocols like Ref.~\cite{Hillery1999}. The resource state used does not even need to violate a Bell inequality.
+
+An important generalization of Hillery's scheme allows for analysis of the optimal entangled states required to share a secret between more than three players. While one option would be to simply replace the resource state with the N-partite GHZ state
+
+\begin{equation}
+\ket{N-GHZ} = \frac{1}{\sqrt{2}}\left(\ket{000\dots0} + \ket{111\dots1} \right)
+\end{equation}
+
+\noindent another option is to generalize to graph states \cite{Markham2008, Keet2010, Lau2013, Wu2016}, under which the tasks qCSS, QSS, QStS and entanglement-based QKD may be united and described within the same framework. %A graph state is a special type of multipartite entangled state.
+One advantage of using such a state is that it can allow for QSS to be completed without collaboration from all recipients, which may help practical QSS to be robust and prevent against denial-of-service attacks from a dishonest internal player\footnote{Though we note that even QKD is susceptible to denial-of-service attack where Eve simply destroys the quantum (or classical) channels between Alice and Bob.}.
+
+There have been several attempts to prove security of entanglement-based QSS. As we have seen, security proofs based on highly-entangled GHZ states or graph states become insecure once realistic channel parameters are considered, even though they offer unconditional security in the ideal limit. One way to tackle this is to borrow tools from entanglement-based QKD. Kogias \emph{et. al.} \cite{Kogias2017} use similar analysis to so-called one-sided device-independent ($1$sDI) QKD \cite{Walk2016a, Armstrong2015} in order to prove QSS security while modelling channel effects on their CV resource state.
+
+Key to Kogias' protocol is the assumption that neither the measurement device of Bob, nor of Charlie, should be trusted. Rather, each player is assumed to possess a black-box which can output one of two measurement outcomes, corresponding in the honest case to homodyne measurement in either $x$ or $p$ quadrature. Protocol security is based on monogamy of entanglement and employs an entropic uncertainty relation which makes no assumption about the action of a dishonest player. To our knowledge Ref.~\cite{Kogias2017} marked the first full security proof of QSS, against all forms of dishonesty and all types of attack over realistic channels. It was later shown that the resource required for entanglement-based QSS is two-way steering of the shared state \cite{Xiang2017}, where the optimal Gaussian resource states for a given energy were also considered. 
+
+The links between QSS and $1$sDI QKD considered in Ref.~\cite{Kogias2017} hint at an interesting direction for exploration: what is the relationship between QSS and other quantum communication protocols? It was already shown in Ref.~\cite{Markham2008} that qCSS, QSS and QStS may be united under the same framework using graph states, while even in Hillery's original work \cite{Hillery1999} the links between qCSS and QSS were acknowledged. Additionally it can be shown \cite{Hillery1999} that a QStS protocol may be readily constructed from a teleportation protocol plus QSS (or qCSS or QKD) scheme if Alice teleports a quantum state to Bob, but sends the classical information required for state reconstruction to Charlie.
+
+There are strong links between QSS and quantum conferencing \cite{Wu2016, Ottaviani2017b} which is a natural multipartite generalization of QKD in which $N$ players receive identical keys. Indeed, as shown in Refs.~\cite{Wu2016, Ottaviani2017b} the same resource states and network configurations may be readily used for both QSS and quantum conferencing. It is an open question however whether these additional tasks have the same optimal requirements \cite{Kogias2017, Xiang2017} on the resource state as QSS. %, or whether the optimal resource state for one protocol remains optimal for another protocol. 
+
+
+%\MT{Add some more detail to this section. Add some examples of states and the transformations on them, and how they are used for QSS. Add some pictures too.}
+
+%\MT{Add some chat about experimental implementations of EBQSS.}
+
+%\MT{Still got some papers I need to talk about.}
+
+\subsection{Sequential QSS}
+The above protocols which implement QSS using entangled resource states offer an advanced level of security and neatly demonstrate the important role of entanglement in quantum communication. However, it is hard to see how they will be preferable to qCSS which can offer equivalent levels of security for the same task, but without the problems associated with generation and distribution of large entangled states. An entanglement-based scheme may even be fine if the number of players is small -- for example the scheme \cite{Karlsson1999} relies only on Bell-pairs, but they cannot be easily scaled to many parties. We note that qCSS scales much more favourably as the number of required quantum channels is linear in the total number of players.
+
+It should still be explored whether there are any QSS protocols which outperform qCSS. One promising direction is that of sequential\footnote{Sometimes referred to as entanglement-free QSS.} QSS in which the QSS task is fulfilled by sharing of a single quantum system between multiple players.
+
+In the first sequential QSS protocol \cite{Zhang2005}, Zhang \emph{et. al.} propose a system in which Bob prepares a single photon state with his choice of polarization and sends it to Charlie. Charlie performs a unitary operation, either the identity, a Hadamard gate or a bit-flip, on the photon and sends it to Alice who stores the photon in a quantum memory. This process is repeated many times. Later, Alice will sample some of her stored photons for errors by asking Bob and Charlie to declare which state was sent and which operation was performed. She then performs the claimed operation, and measures the claimed basis, in order to check for errors.
+
+On the remaining photons Alice performs her unitaries (either the identity or a bit-flip) to encode her secret. She then sends the photons back to Charlie. %\MT{how does the rest of the protocol run?}
+If Bob and Charlie collaborate they can deduce the correct basis in which to measure Alice's photon, and so recover her information.
+
+
+
+Sequential protocols have the obvious advantage that large entangled states are not required. Even though Ref.~\cite{Zhang2005} proposes to use a quantum memory it is ultimately not necessary for the protocol, and the work by Schmid \emph{et. al.} demonstrates this in a sequential QSS experiment \cite{Schmid2005}. Their experiment, in which players perform operations on heralded single photons, allows for a secret to be shared among six players in a setup which is much more readily scalable to more players than the earlier QSS schemes requiring entanglement.
+
+Schmid's scheme relies on sequential interactions with a qubit state encoded into the polarization of a heralded single photon. Each player imposes a randomly chosen phase onto the state
+\begin{equation}
+\frac{\ket{0} + \ket{1}}{\sqrt{2}} \rightarrow \frac{\ket{0} + e^{i \phi_k} \ket{1}}{\sqrt{2}}
+\end{equation}
+and so at the end of the distribution the state is
+\begin{equation}
+\frac{\ket{0} + \exp\left(i \sum_{k}^N \phi_k\right)\ket{1}}{\sqrt{2}}.
+\end{equation}
+The final player measures in the $\ket{0} \pm \ket{1}$ basis. Collaboration of the first $N-1$ players allows them to infer, with certainty, the $N^{\text{th}}$ player's outcome.
+
+
+%Just as prepare-and-measure QKD allows Alice and Bob to mimic the measurement outcomes of a shared entangled state  under \MT{criterion} the scheme \cite{Zhang2005} allows players to receive the same measurement outcomes they would if they had shared a GHZ state. Secret sharing then may proceed in the usual way. \MT{talk about this.}
+
+This sequential scheme, while secure against an Eve external to the protocol, is difficult to secure against dishonesty from one of the internal players \cite{Deng2005, Qin2006, He2007}. For example, Ref.~\cite{He2007} points out that the order in which recipients declare their information is of utmost importance, and this is adopted into the sequential protocol in Ref.~\cite{Schmid2007}. Unfortunately, the protocol remains insecure against a so-called Trojan Horse attack \cite{Deng2005}, in which an internal player to the protocol adds one mode of an entangled state to the single photon as it is being distributed. This entangled mode will undergo the same subsequent gates as the signal photon, granting the dishonest player additional information. 
+
+The Trojan Horse attack is guarded against in the recent work from Grice \emph{et. al.} \cite{Grice2019}. In their protocol for sequential QSS, each player creates a coherent state which is chosen from a Gaussian modulation. These states are added to the initial coherent state as it travels, and the final state is heterodyned by the dealer, Alice. With combined knowledge of their injected states, the players are able to estimate Alice's measurement outcome. This protocol has the advantage of high tolerable losses, especially when compared to entanglement-based QSS. Crucially, the scheme is immune to Trojan Horse attacks since once a coherent state has been added to the total state, it only interacts with Alice's measurement apparatus and does not pass through the equipment of any other player. Additionally a dishonest player cannot access other players' devices.
+
+Owing to its simplicity of implementation QSS has been performed in many experiments \cite{Schmid2005, Hai-Qiang2013a} including those explicitly using telecom fiber networks \cite{Bogdanski2009}. This latter work, Ref.~\cite{Bogdanski2009}, demonstrates QSS in two experiments between three players and four players using phase encoding of single qubits. Their implementation uses a Sagnac interferometer, with light travelling in two directions around a loop. The light is at standard telecom wavelengths $1550$~nm and channel lengths are between $50$ and $70$~km, rendering secure QSS eminently practical.
+
+
+\subsection{Summary}
+Quantum Secret Sharing has been an intense field of active research for the quantum communications community for the last two decades. Entanglement-based QSS boasts a high level of provable security against both internal and external dishonesty. While there have been some proof-of-principle demonstrations of these QSS schemes \cite{Gaertner2007, Bell2014, Tittel2001, Chen2005b} the style of protocol is still far off routine and practical implementation.
+
+In contrast, sequential QSS involving sharing of a single quantum system is much more practical for implementation, and has been demonstrated in realistic settings with many players \cite{Schmid2005, Bogdanski2009, Hai-Qiang2013a}. However, these protocols face difficulty against a dishonest player internal to the protocol, which is precisely the context which secret sharing should guard against. Moreover, even though these schemes do not require generation or distribution of entangled states, they still require a dedicated hardware setup in order to distribute the quantum state and perform sequential measurements. To our knowledge, the most plausible protocol in terms of both its security and practicality, that of Grice \emph{et. al.} \cite{Grice2019}, is yet to be implemented. 
+
+It is therefore yet unclear whether these quantum secret sharing protocols will give an advantage over the quantum-mediated qCSS protocols which we have discussed in Sec.~\ref{sec:qss_qcss}. The underlying quantum encryption algorithm, QKD, boasts advanced security proofs and intensely researched hardware, and any proposed QSS scheme must be benchmarked against a QKD-based classical protocol which performs the same task.

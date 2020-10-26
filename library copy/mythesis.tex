@@ -1,0 +1,116 @@
+\RequirePackage{silence} % :-\
+    \WarningFilter{scrreprt}{Usage of package `titlesec'}
+    %\WarningFilter{scrreprt}{Activating an ugly workaround}
+    \WarningFilter{titlesec}{Non standard sectioning command detected}
+\documentclass[ twoside,openright,titlepage,numbers=noenddot,%1headlines,
+                headinclude,footinclude,cleardoublepage=empty,abstract=on,
+                BCOR=5mm,paper=a4,fontsize=11pt
+                ]{scrreprt}
+
+\input{mythesis-config}
+
+
+\includeonly{
+	Frontmatter/Publications,
+	Frontmatter/collaboration,
+	Frontmatter/abstract,
+	chapters/introduction,
+	chapters/crypto_intro,
+	chapters/qds,
+	chapters/qss,
+	chapters/aqc,
+	chapters/phog,
+	chapters/crypto_noisy_perr,
+	chapters/crypto_numerical_methods,
+	chapters/crypto_larger_alphabets,
+	chapters/phog_adiabatic_elimination,
+	chapters/phog_numerical_methods,
+}
+
+\usepackage{changepage}
+
+
+\addbibresource{Thesis.bib}
+
+
+% ********************************************************************
+% GO!GO!GO! MOVE IT!
+%*******************************************************
+\begin{document}
+\frenchspacing
+\raggedbottom
+\selectlanguage{english} % american ngerman
+
+%********************************************************************
+% Frontmatter
+%*******************************************************
+
+
+
+\pagenumbering{roman}
+\pagestyle{empty}
+%\maketitle
+\includepdf{Frontmatter/title_page.pdf}
+\cleardoublepage
+
+%\setcounter{tocdepth}{-1}
+
+
+
+\pagestyle{plain}
+\setcounter{page}{1}
+\addcontentsline{toc}{chapter}{Declarations} 
+\includepdf[page=-]{Frontmatter/declarations.pdf}
+
+\cleardoublepage
+
+\include{Frontmatter/Publications}
+\include{Frontmatter/collaboration}
+\include{Frontmatter/abstract}
+
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Acknowledgements} 
+\includepdf{Frontmatter/acknowledgements.pdf}
+
+
+\cleardoublepage
+\currentpdfbookmark{\contentsname}{Contents}
+\tableofcontents
+\cleardoublepage
+
+
+%********************************************************************
+% Mainmatter
+%*******************************************************
+
+
+\pagenumbering{arabic} 
+\setcounter{page}{1}
+\pagestyle{scrheadings}
+
+\setcounter{tocdepth}{1}
+\include{chapters/introduction}
+\part{Agile cryptography: signatures and secrets}
+\include{chapters/crypto_intro}
+\include{chapters/qds}
+\include{chapters/qss}
+\include{chapters/aqc}
+\part{PhoG: generation of sub-Poissonian light}
+\include{chapters/phog}
+
+\part{Appendices}
+\appendix
+\include{chapters/crypto_noisy_perr}
+\include{chapters/crypto_numerical_methods}
+\include{chapters/crypto_larger_alphabets}
+\include{chapters/phog_adiabatic_elimination}
+\include{chapters/phog_numerical_methods}
+
+
+
+
+\printbibliography[heading=bibintoc]
+
+
+\end{document}
+

@@ -1,0 +1,143 @@
+\chapter{Cryptography: thermal noise channel}\label{appendix:noisy_perr}
+
+In this Appendix we will demonstrate how channel thermal noise affects honest players' measurement outcomes. This will allow us to give an expression for the excess noise $\xi$ as it is modelled in this Thesis.
+
+In Appendix~\ref{appendix:crypto_numerical_methods} we introduce an expansion of the coherent state in Fock basis, and use it to demonstrate that enacting a beamsplitter on a coherent state gives a product of coherent states at output. It turns out to be analytically tricky to perform similar operations in the presence of thermal noise (though it is entirely numerically feasible). 
+
+Our main tool will be the Wigner function representation of the quantum states. We will introduce various quantities and relations as we need them, but the reader is referred to Refs.~\cite{Leonhardt2010, Serafini2017, brendon_book} for a more thorough discussion of where such quantities come from. Our strategy is to mix a coherent state with a thermal state on a beamsplitter, which will model the channel. We will then heterodyne on the output in order to give a final expression for the measurement outcomes.
+
+
+\paragraph{Modelling the channel}
+
+A coherent state $\ket{\alpha}$ with complex amplitude $\alpha = \left(q_0 + i p_0\right)/\sqrt{2}$ has Wigner function
+
+\begin{equation}
+W_{coh}\left(q, p\right) = \frac{1}{\pi} \exp\left[- \left(q - q_0\right)^2 - \left(p - p_0\right)^2 \right],
+\end{equation}
+
+\noindent while a thermal state $\rho_{\text{thermal}}$ with thermal photon number $\bar{n}$ has Wigner function
+
+\begin{equation}
+W_{thermal}\left(q, p\right) = \frac{1}{\pi\left(2 \bar{n} + 1 \right)}\exp\left[- \frac{q^2 + p^2}{2 \bar{n} + 1} \right].
+\end{equation}
+
+\noindent The total input Wigner function to the beamsplitter is therefore
+
+\begin{equation}
+W_{input}\left(q_1, p_1 ; q_2, p_2\right) = W_{coh}\left(q_1, p_1\right) W_{thermal}\left(q_2, p_2\right).
+\end{equation}
+
+\noindent The output Wigner function from the beamsplitter is \cite{Leonhardt2010}
+\begin{equation}
+W_{output}\left(q_1, p_1 ; q_2, p_2\right) = W_{input}\left(q_1^\prime, p_1^\prime ; q_2^\prime, p_2^\prime \right)
+\end{equation}
+where the primed quantities are
+
+\begin{equation}
+\pmqty{q_1^\prime \\ q_2^\prime} = \pmqty{\tau & \rho \\ - \rho & \tau} \pmqty{q_1 \\ q_2} \qq{and} \pmqty{p_1^\prime \\ p_2^\prime} = \pmqty{\tau & \rho \\ - \rho & \tau} \pmqty{p_1 \\ p_2}.
+\end{equation}
+
+\noindent In other words, the beamsplitter simply enacts a rotation on the quadrature variables, and the output Wigner function takes the same form as the input Wigner function in the rotated quadratures. We have $\tau = \sqrt{T}$ and $\rho = \sqrt{1-T}$ where $T$ is the channel transmission.
+
+Our output Wigner function is
+
+\begin{align}
+W_{output}\left(q_1, p_1; q_2, p_2\right) &= \frac{1}{\pi^2 \left(2 \bar{n}+1\right)} \exp\left[ \left(-1 + T  - \frac{T}{2 \bar{n} 
++1}\right) \left(q_2 - \delta\right)^2 \right]   \notag \\
+%
+&\times \exp\left[B_{q_2} \right] \times \qq{terms in $p$,}
+\end{align}
+where $\delta$ takes a complicated form (not shown) in terms of $T$, $q_0$, $q_1$ and $\bar{n}$, and 
+\begin{equation}
+B_{q_2} = -\frac{\left(q_1 - q_0 \sqrt{T}\right)^2}{1 + 2 \bar{n} \left(1-T\right)}.
+\end{equation}
+
+\noindent In the protocols discussed in the main Thesis body, the transmitted state is given to the honest player, while the dishonest player receives the reflected state. Tracing out the reflected state (mode $2$) we arrive at
+
+\begin{equation}
+W_{honest}\left(q, p\right) = \frac{1}{\pi \left[ 1 + 2 \bar{n} \left(1-T\right)\right]} \exp\left[ - \frac{\left(q - q_0 \sqrt{T}\right)^2}{1 + 2 \bar{n}\left(1-T\right)} - \frac{\left(p - p_0 \sqrt{T}\right)^2}{1 + 2 \bar{n} \left(1-T\right)} \right],
+\end{equation}
+
+\noindent as the state held by the honest player after the thermal channel.
+
+\paragraph{Heterodyne measurement}
+
+The honest player performs heterodyne measurement on their state. As we saw in Sec.~\ref{sec:intro_heterodyne}, heterodyne measurement corresponds to projection onto a coherent state \cite{Serafini2017, Weedbrook2012}. It will be illustrative to show that this is equivalent to a ``double-homodyne'' setup.
+
+To perform the double-homodyne measurement, the state will be split at on a balanced beamsplitter. Homodyne detection in $q$ is performed on one output arm, while homodyne detection in $p$ is performed on the other output arm.
+
+The calculation proceeds identically to the previous section: rotation of quadrature variables then tracing out the unwanted mode. The first output mode from the balanced beamsplitter is then given by
+
+\begin{equation}
+W_1\left(q, p\right) =  \frac{1}{\pi \left[ 1 + \bar{n}\left(1-T\right)\right]} \exp\left[- \frac{\left(q - q_0 \sqrt{\frac{T}{2}}\right)^2}{1 + \bar{n}\left(1-T\right)} - \frac{\left(p - p_0 \sqrt{\frac{T}{2}}\right)^2}{1 + \bar{n}\left(1-T\right)} \right],
+\end{equation}
+
+\noindent and the second output mode is identical.
+
+Ideal homodyne measurement corresponds to projection onto a quadrature eigenstate, i.e. $\mel{q}{\rho}{q}$ \cite{Weedbrook2012, Serafini2017}. It can be shown \cite{Leonhardt2010} that in terms of Wigner functions, the overlap between two operators is given by
+
+\begin{equation}
+\tr\left[\hat{F}_1 \hat{F}_2 \right] = 2 \pi \iint_{-\infty}^\infty \mathrm{d}q \; \mathrm{d}p \; W_1\left(q, p\right) W_2\left(q, p\right),
+\end{equation}
+where the $\hat{F}_1, \hat{F}_2$ are arbitrary operators, and their corresponding Wigner functions are $W_1, W_2$.
+
+The Wigner function corresponding to quadrature eigenstate $\ket{q_1}$ is
+
+\begin{equation}
+W_{\ket{q_1}}\left(q, p\right) = \frac{1}{2 \pi} e^{2 i p\left(q_1 - q\right)} \delta\left(q_1 - q\right)
+\end{equation}
+where $\delta\left(q_1 - q\right)$ is the Dirac delta function, and the overall Wigner function is derived by substituting $\rho = \dyad{q_1}$ into Wigner's formula Eq.~\ref{eqn:intro_wigners_formula} and using $\ip{q}{q^\prime} = \delta\left(q - q^\prime\right)$.
+
+The probability to receive homodyne outcome $q_{out}=x$ on $W_1$ is then 
+
+%\begin{equation}
+%\text{P}\left(q_1\right) = \frac{1}{\pi \left[ 1 + \bar{n}\left(1-T\right)\right]} \exp\left[ - \frac{\left(q_1 - q_0 \sqrt{\frac{T}{2}}\right)^2}{1 + \bar{n}\left(1-T\right)}\right] \int\limits_{-\infty}^\infty \mathrm{d}p \; \exp\left[ - \frac{\left(p - p_0 \sqrt{\frac{T}{2}}\right)^2}{1 + \bar{n} \left(1-T\right)}\right]
+%\end{equation}
+
+\begin{equation}\label{eqn:prob_homodyne_x}
+\text{P}\left(x\right) = \tr\left[ \dyad{x} \rho \right] = \frac{1}{\sqrt{\pi \left[1 + \bar{n}\left(1-T\right)\right]}}\exp\left[- \frac{\left(x - q_0 \sqrt{\frac{T}{2}}\right)^2}{1 + \bar{n}\left(1-T\right)} \right].
+\end{equation}
+
+\noindent Similarly, the probability to measure $y$ on the other output mode is
+
+\begin{equation}
+\text{P}\left(y\right) = \tr\left[ \dyad{y} \rho \right]= \frac{1}{\sqrt{\pi \left[1 + \bar{n}\left(1-T\right)\right]}}\exp\left[- \frac{\left(y - p_0 \sqrt{\frac{T}{2}}\right)^2}{1 + \bar{n}\left(1-T\right)} \right].
+\end{equation}
+
+\noindent Defining the complex variable $z = x + i y$, and noting that $\text{P}\left(z\right) = \text{P}\left(x\right)\text{P}\left(y\right)$, we arrive at 
+
+\begin{equation}\label{eqn:prob_noisy_output}
+\text{P}\left(z\right) = \frac{1}{\pi \left[1 + \bar{n}\left(1-T\right)\right]} \exp\left[- \frac{\left| z - \sqrt{T} \alpha \right|^2}{1 + \bar{n}\left(1-T\right)} \right],
+\end{equation}
+where we have used $\alpha = \left(q_0 + i p_0\right)/\sqrt{2}$.
+
+The equation~\ref{eqn:prob_noisy_output} is the probability of heterodyne measurement giving $z$, when an input coherent state $\alpha$ is distributed through a thermal noise channel, transmission $T$ and thermal photon number $\bar{n}$. Setting $\bar{n}=0$, Eq.~\ref{eqn:prob_noisy_output} reduces to the noiseless case which is used already in the Thesis body. 
+
+For a QDS protocol the probability $\perr$ may be calculated via Eq.~\ref{eqn:prob_noisy_output} identically to the Thesis body.
+
+\subsubsection{Excess noise}
+
+We define the excess noise $\xi$ as the measured variance of a state above the vacuum level. In Ch.~\ref{chapter:aqc} we defined it as
+
+\begin{equation}
+\xi = \text{Var}\left(x\right) - \frac{1}{2},
+\end{equation}
+
+\noindent where clearly from Eq.~\ref{eqn:prob_homodyne_x} (setting $\bar{n}=0$) the vacuum variance is $1/2$. The variance in position homodyne measurement outcome is
+
+\begin{equation}
+\frac{1 + \bar{n}\left(1-T\right)}{2},
+\end{equation}
+
+\noindent and so excess noise in $q$ is
+\begin{equation}
+\xi_q = \frac{\bar{n}\left(1-T\right)}{2},
+\end{equation}
+
+\noindent with an equivalent expression for $\xi_p$. In Chs.~\ref{chapter:qds},~\ref{chapter:qss} we assume that $\xi_q = \xi_p$ and simply call the excess noise $\xi$,
+
+\begin{equation}\label{eqn:excess_noise}
+\xi = \frac{\bar{n}\left(1-T\right)}{2}.
+\end{equation}
+
+\noindent Finally, we note that $\xi$ depends both on $\bar{n}$ and $T$. For a given $\xi$ the corresponding $\bar{n}$ varies with $T$, and fixing $\bar{n}$ will give drastically different behaviour from fixing $\xi$. Thus, we are careful to distinguish between channels for which $\bar{n}$ is fixed and those for which $\xi$ is fixed.
